@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="41px" height="44px" viewBox="0 0 41 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>Group 11</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Product-Details-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1_Faraday" transform="translate(-900.000000, -736.000000)" stroke="#231F20" stroke-width="1.5">
+            <g id="Group-13" transform="translate(887.000000, 191.000000)">
+                <g id="Group-11" transform="translate(14.000000, 546.000000)">
+                    <polyline id="Stroke-1" points="28 33.4710714 30.6684935 36 35 30"></polyline>
+                    <polyline id="Stroke-2" points="22.6109804 39 0 39 0 0 31 0 31 18.532903"></polyline>
+                    <line x1="4" y1="7" x2="27" y2="7" id="Stroke-4"></line>
+                    <path d="M31.7091127,41.8281509 C40.2646146,37.4389263 39.0796868,29.1307798 38.7613193,27.5304664 C38.729367,27.3703548 38.5953986,27.2608048 38.4383321,27.2543842 C34.2502785,27.0750111 31.9042909,22.6681301 31.2159703,21.1432577 C31.1293528,20.9522474 30.8702701,20.9522474 30.7840376,21.1432577 C30.0957169,22.6681301 27.7497294,27.0750111 23.5612907,27.2543842 C23.4046093,27.2608048 23.2702559,27.3703548 23.2386886,27.5304664 C22.9203211,29.1307798 21.7353933,37.4389263 30.2905101,41.8281509 C30.7370716,42.057283 31.2629362,42.057283 31.7091127,41.8281509 Z" id="Stroke-9"></path>
+                    <line x1="4" y1="11" x2="22" y2="11" id="Stroke-5"></line>
+                    <line x1="4" y1="15" x2="24" y2="15" id="Stroke-8"></line>
+                    <line x1="4" y1="19" x2="17" y2="19" id="Stroke-7"></line>
+                    <line x1="4" y1="23" x2="22" y2="23" id="Stroke-6"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

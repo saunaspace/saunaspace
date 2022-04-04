@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="48px" viewBox="0 0 36 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>dls-icon-location-filled</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons-and-Glyphs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ICONS/MEMBERSHIP/dls-icon-location-filled" transform="translate(-6.000000, 0.000000)">
+            <g id="05-membership/dls-icon-location-filled">
+                <g id="dls-icon-location-filled">
+                    <rect id="bounding" x="0" y="0" width="48" height="48"></rect>
+                    <path d="M24,0 C14.07477,0 6,8.1972 6,18.272949 C6,27.513609 20.07526,44.945007 21.68018,46.902221 C22.25,47.597111 23.10132,48 24,48 C24.898621,48 25.749941,47.597111 26.319759,46.902222 C27.92474,44.945011 42,27.513611 42,18.272949 C42,8.1972 33.925228,0 24,0 Z M24,24 C20.691589,24 18,21.308411 18,18 C18,14.691589 20.691589,12 24,12 C27.308411,12 30,14.691589 30,18 C30,21.308411 27.308411,24 24,24 Z" fill="#FFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
