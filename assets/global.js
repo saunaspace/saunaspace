@@ -893,3 +893,121 @@ class VariantRadios extends VariantSelects {
 }
 
 customElements.define('variant-radios', VariantRadios);
+
+var navOpen=false
+var currentNavOpen="";
+var isIE11=false;
+var cartOpen=false
+
+if(navigator.userAgent.indexOf('MSIE')!==-1
+|| navigator.appVersion.indexOf('Trident/') > -1){
+  isIE11=true;
+}
+
+$(".nav-right").on("click",function() {
+	closeMegaNav();
+	if(cartOpen) {
+		$(".nav-full-cart").addClass("hideMe");
+		$(".overlay").addClass("hideMe");
+		cartOpen=false
+	} else {
+		$(".nav-full-cart").removeClass("hideMe");
+		$(".overlay").removeClass("hideMe");
+		cartOpen=true
+	}
+});
+
+$(".overlay").on("click",function() {
+	closeMegaNav();
+	$(".nav-full-cart").addClass("hideMe");
+	cartOpen=false
+});
+
+//opens or closes the mega-nav
+$(".nav-link").on("click",function() {
+	var n=$(this).attr("id");
+	$(".nav-full-cart").addClass("hideMe");
+	$(".mega-nav").addClass("hideMe");
+	if(currentNavOpen==n) {
+		closeMegaNav();
+		$(".overlay").addClass("hideMe");
+	} else {
+		$(".overlay").removeClass("hideMe");
+		currentNavOpen=n;
+		navOpen=true;
+		$(".nav-close").addClass("hideMe");
+		$(".nav-arrow").removeClass("hideMe");
+		$("#" + n + " .nav-close").removeClass("hideMe");
+		$("#" + n + " .nav-arrow").addClass("hideMe");
+		$("." + n + "MN").removeClass("hideMe");
+	}
+});
+
+//close the mega-nav when clicking on the hamburger to reveal util-nav on mobile
+$(".nav-head-close, #ham").on("click",function() {
+	closeMegaNav();
+});
+
+function closeMegaNav() {
+		$(".overlay").addClass("hideMe");
+		$(".mega-nav").addClass("hideMe");
+		$(".nav-close").addClass("hideMe");
+		$(".nav-arrow").removeClass("hideMe");
+		currentNavOpen="";
+		navOpen=false;
+}
+
+var currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+function scrollReviews(v) {
+	tileSize=406; //includes right margin
+	numTiles=parseInt(currentReviewsCarouselWidth / tileSize);
+	timeToScroll=numTiles * 200;
+	moveAmt=numTiles * tileSize  * v;
+	$(".review-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
+
+"use strict";
+
+const el = document.querySelector(".navBG");
+const observer = new IntersectionObserver(([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1), {
+  threshold: [1]
+});
+observer.observe(el);
+
+window.addEventListener("resize", function() {
+	currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
+	currentThumbsCarouselWidth=$(".product-thumbs").width() + 20;
+	currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+});
+
+$(".cc").on("click",function() {
+	whichProduct=$(this).attr("data-productID")
+	whichProductCode=$(this).attr("data-productCode")
+	whichColor=$(this).attr("data-colorCode")
+	tileLink=whichProductCode;
+	baseURL=$("#" + tileLink).attr("data-url")
+	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
+	
+	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
+	$(this).addClass("color-choice-on");
+	$(".img" + whichProduct).attr("src","/img/products/" + whichProductCode + "-" + whichColor + "-tile.jpg");
+	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
+});
+
+$(".ccrp").on("click",function() {
+	whichProduct=$(this).attr("data-productID");
+	whichProductCode=$(this).attr("data-productCode");
+	whichColor=$(this).attr("data-colorCode");
+	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
+	$(this).addClass("color-choice-on");
+	$(".img" + whichProduct).attr("src","/img/products/" + whichProductCode + "-" + whichColor + "-tile.jpg");
+	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
+	tileLink="rp" + whichProductCode;
+	baseURL=$("#" + tileLink).attr("data-url");
+	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
+});

@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
+    "theme_name": "SaunaSpace",
     "theme_version": "4.0.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https:\/\/help.shopify.com\/en\/manual\/online-store\/themes",
-    "theme_support_url": "https:\/\/support.shopify.com\/"
+    "theme_author": "SEO Succor",
+    "theme_documentation_url": "https:\/\/seosuccor.com",
+    "theme_support_url": "https:\/\/seosuccor.com"
   },
   {
     "name": "t:settings_schema.colors.name",

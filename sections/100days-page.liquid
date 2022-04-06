@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+
+<div class="photo-headerBG" style="background-image:url({{ '100-day-home-trial-hero.jpg' | asset_url }}); background-position: 50% 0; ">
+    <div class="ph-width">
+        <div class="ph-text">
+            <cms id='cms0'>
+<h1>100-Day Home Trial</h1>
+<p class="etica">Discover if SaunaSpace is right for you with our stress-free home trial. No obligations. Just full-body rejuvenation.</p>
+</cms cms0>
+        </div>
+    </div>
+</div>
+
+<section>
+    <h2 class="h2Spacing">How It Works</h2>
+    <div class="trial-cols">
+        <div class="trial-col">
+            <img src="{{ 'trial-order.svg' | asset_url }}" alt="" />
+            <cms id='cms1a'>
+
+
+<div class="trial-head">Order</div>
+<p>Your trial period starts on the day of delivery.</p>
+</cms cms1a>
+        </div>
+        <div class="trial-col">
+            <img src="{{ 'trial-explore.svg' | asset_url }}" alt="" />
+            <cms id='cms1b'>
+            <div class="trial-head">Explore</div>
+            <p>Enjoy the relaxation and power of infrared sauna therapy at home.</p>
+            </cms cms1b>
+        </div>
+        <div class="trial-col">
+            <img src="{{ 'trial-return.svg' | asset_url }}" alt="" />
+            <cms id='cms1c'>
+
+
+
+<div class="trial-head">Decide</div>
+<p>Make it your own, or if it’s not for you, send it back for free.*</p>
+</cms cms1c>
+        </div>
+    </div>
+</section>
+
+<div class="tanBG">
+    <section>
+        <div class="side-by-side">
+            <div class="sbs-img"><img src="{{ '100-day-home-trial.jpg' | asset_url }}" alt="" /></div>
+            <div class="sbs-text sbs-text-left">
+                <cms id='cms1'>
+
+
+
+<h2>Home Trial Guidelines</h2>
+<p><strong>Which products apply?</strong></p>
+<p>We’re so confident in our products that we offer a 100-day home trial on almost everything we make, down to the bulbs.</p>
+<ul>
+<li>Faraday Infrared Sauna</li>
+<li>Luminati Infrared Sauna</li>
+<li>Shower Sauna Conversion Kit</li>
+<li>Tungsten Infrared Sauna Panel</li>
+<li>Photon Infrared Therapy Light</li>
+<li>Tungsten Pedestal</li>
+<li>Sauna Stool</li>
+<li>Sauna Enclosure Kit</li>
+<li>Photon Desk Arm</li>
+<li>Photon Soft Case</li>
+<li>Sauna Cover Set</li>
+<li>EMF Shield</li>
+<li>ThermaLight® Bulb</li>
+</ul>
+<p><strong>How do I make a return?</strong></p>
+<p> Email us at <a href="mailto:hello@sauna.space">hello@sauna.space</a> with your order number and the item(s) you’re returning.&nbsp;</p><p>*For full details, see our <a href="shipping-and-returns.html">shipping and returns</a> policy.</p>
+</cms cms1>
+            </div>
+        </div>
+    <p class="fineprint">*Free returns for orders over $200 in the contiguous US and Canada.</div>
+    </section>
+</div>
+
+<section>
+    <h2>Feel the #Saunaspace Love</h2>
+    <div class="yotpo yotpo-pictures-widget" data-gallery-id="5fff1136f22b21000f2f93bd"></div>
+</section>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}
