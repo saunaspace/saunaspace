@@ -8,7 +8,7 @@ function getFocusableElements(container) {
 
 document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
   summary.setAttribute('role', 'button');
-  summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'));
+  summary.setAttribute('aria-expanded', 'false');
 
   if(summary.nextElementSibling.getAttribute('id')) {
     summary.setAttribute('aria-controls', summary.nextElementSibling.id);
@@ -313,7 +313,6 @@ class MenuDrawer extends HTMLElement {
   onSummaryClick(event) {
     const summaryElement = event.currentTarget;
     const detailsElement = summaryElement.parentNode;
-    const parentMenuElement = detailsElement.closest('.has-submenu');
     const isOpen = detailsElement.hasAttribute('open');
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -329,7 +328,6 @@ class MenuDrawer extends HTMLElement {
       setTimeout(() => {
         detailsElement.classList.add('menu-opening');
         summaryElement.setAttribute('aria-expanded', true);
-        parentMenuElement && parentMenuElement.classList.add('submenu-open');
         !reducedMotion || reducedMotion.matches ? addTrapFocus() : summaryElement.nextElementSibling.addEventListener('transitionend', addTrapFocus);
       }, 100);
     }
@@ -348,12 +346,9 @@ class MenuDrawer extends HTMLElement {
     if (event === undefined) return;
 
     this.mainDetailsToggle.classList.remove('menu-opening');
-    this.mainDetailsToggle.querySelectorAll('details').forEach(details => {
+    this.mainDetailsToggle.querySelectorAll('details').forEach(details =>  {
       details.removeAttribute('open');
       details.classList.remove('menu-opening');
-    });
-    this.mainDetailsToggle.querySelectorAll('.submenu-open').forEach(submenu => {
-      submenu.classList.remove('submenu-open');
     });
     document.body.classList.remove(`overflow-hidden-${this.dataset.breakpoint}`);
     removeTrapFocus(elementToFocus);
@@ -372,8 +367,6 @@ class MenuDrawer extends HTMLElement {
   }
 
   closeSubmenu(detailsElement) {
-    const parentMenuElement = detailsElement.closest('.submenu-open');
-    parentMenuElement && parentMenuElement.classList.remove('submenu-open');
     detailsElement.classList.remove('menu-opening');
     detailsElement.querySelector('summary').setAttribute('aria-expanded', false);
     removeTrapFocus(detailsElement.querySelector('summary'));
@@ -439,7 +432,7 @@ class ModalDialog extends HTMLElement {
     super();
     this.querySelector('[id^="ModalClose-"]').addEventListener(
       'click',
-      this.hide.bind(this, false)
+      this.hide.bind(this)
     );
     this.addEventListener('keyup', (event) => {
       if (event.code.toUpperCase() === 'ESCAPE') this.hide();
@@ -450,7 +443,7 @@ class ModalDialog extends HTMLElement {
       });
     } else {
       this.addEventListener('click', (event) => {
-        if (event.target === this) this.hide();
+        if (event.target.nodeName === 'MODAL-DIALOG') this.hide();
       });
     }
   }
@@ -473,7 +466,6 @@ class ModalDialog extends HTMLElement {
 
   hide() {
     document.body.classList.remove('overflow-hidden');
-    document.body.dispatchEvent(new CustomEvent('modalClosed'));
     this.removeAttribute('open');
     removeTrapFocus(this.openedBy);
     window.pauseAllMedia();
@@ -545,7 +537,7 @@ class SliderComponent extends HTMLElement {
     this.sliderItemsToShow = Array.from(this.sliderItems).filter(element => element.clientWidth > 0);
     if (this.sliderItemsToShow.length < 2) return;
     this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
-    this.slidesPerPage = Math.floor((this.slider.clientWidth - this.sliderItemsToShow[0].offsetLeft) / this.sliderItemOffset);
+    this.slidesPerPage = Math.floor(this.slider.clientWidth / this.sliderItemOffset);
     this.totalPages = this.sliderItemsToShow.length - this.slidesPerPage + 1;
     this.update();
   }
@@ -573,7 +565,7 @@ class SliderComponent extends HTMLElement {
 
     if (this.enableSliderLooping) return;
 
-    if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
+    if (this.isSlideVisible(this.sliderItemsToShow[0])) {
       this.prevButton.setAttribute('disabled', 'disabled');
     } else {
       this.prevButton.removeAttribute('disabled');
@@ -788,7 +780,6 @@ class VariantSelects extends HTMLElement {
     mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true);
 
     const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
-    if (!modalContent) return;
     const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
     modalContent.prepend(newMediaModal);
   }
@@ -800,12 +791,12 @@ class VariantSelects extends HTMLElement {
 
   updateShareUrl() {
     const shareButton = document.getElementById(`Share-${this.dataset.section}`);
-    if (!shareButton || !shareButton.updateUrl) return;
+    if (!shareButton) return;
     shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
   updateVariantInput() {
-    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`);
+    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment`);
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
       input.value = this.currentVariant.id;
@@ -834,12 +825,14 @@ class VariantSelects extends HTMLElement {
   }
 
   renderProductInfo() {
-    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`)
+    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
       .then((response) => response.text())
       .then((responseText) => {
+        const id = `price-${this.dataset.section}`;
         const html = new DOMParser().parseFromString(responseText, 'text/html')
-        const destination = document.getElementById(`price-${this.dataset.section}`);
-        const source = html.getElementById(`price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`);
+        const destination = document.getElementById(id);
+        const source = html.getElementById(id);
+
         if (source && destination) destination.innerHTML = source.innerHTML;
 
         const price = document.getElementById(`price-${this.dataset.section}`);
@@ -854,6 +847,7 @@ class VariantSelects extends HTMLElement {
     if (!productForm) return;
     const addButton = productForm.querySelector('[name="add"]');
     const addButtonText = productForm.querySelector('[name="add"] > span');
+
     if (!addButton) return;
 
     if (disable) {
@@ -899,180 +893,3 @@ class VariantRadios extends VariantSelects {
 }
 
 customElements.define('variant-radios', VariantRadios);
-
-
-var navOpen=false
-var currentNavOpen="";
-var isIE11=false;
-var cartOpen=false
-
-if(navigator.userAgent.indexOf('MSIE')!==-1
-|| navigator.appVersion.indexOf('Trident/') > -1){
-  isIE11=true;
-}
-
-$(".nav-right").on("click",function() {
-	closeMegaNav();
-	if(cartOpen) {
-		$(".nav-full-cart").addClass("hideMe");
-		$(".overlay").addClass("hideMe");
-		cartOpen=false
-	} else {
-		$(".nav-full-cart").removeClass("hideMe");
-		$(".overlay").removeClass("hideMe");
-		cartOpen=true
-	}
-});
-
-$(".overlay").on("click",function() {
-	closeMegaNav();
-	$(".nav-full-cart").addClass("hideMe");
-	cartOpen=false
-});
-
-//opens or closes the mega-nav
-$(".nav-link").on("click",function() {
-	var n=$(this).attr("id");
-	$(".nav-full-cart").addClass("hideMe");
-	$(".mega-nav").addClass("hideMe");
-	if(currentNavOpen==n) {
-		closeMegaNav();
-		$(".overlay").addClass("hideMe");
-	} else {
-		$(".overlay").removeClass("hideMe");
-		currentNavOpen=n;
-		navOpen=true;
-		$(".nav-close").addClass("hideMe");
-		$(".nav-arrow").removeClass("hideMe");
-		$("#" + n + " .nav-close").removeClass("hideMe");
-		$("#" + n + " .nav-arrow").addClass("hideMe");
-		$("." + n + "MN").removeClass("hideMe");
-	}
-});
-
-//close the mega-nav when clicking on the hamburger to reveal util-nav on mobile
-$(".nav-head-close, #ham").on("click",function() {
-	closeMegaNav();
-});
-
-function closeMegaNav() {
-		$(".overlay").addClass("hideMe");
-		$(".mega-nav").addClass("hideMe");
-		$(".nav-close").addClass("hideMe");
-		$(".nav-arrow").removeClass("hideMe");
-		currentNavOpen="";
-		navOpen=false;
-}
-
-var currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
-function scrollReviews(v) {
-	tileSize=406; //includes right margin
-	numTiles=parseInt(currentReviewsCarouselWidth / tileSize);
-	timeToScroll=numTiles * 200;
-	moveAmt=numTiles * tileSize  * v;
-	$(".review-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
-}
-
-function createObserver(o) {
-	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
-	window['observer' + o].observe(eval(o));
-}
-
-"use strict";
-
-const el = document.querySelector(".navBG");
-const observer = new IntersectionObserver(([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1), {
-  threshold: [1]
-});
-observer.observe(el);
-
-window.addEventListener("resize", function() {
-	currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
-	currentThumbsCarouselWidth=$(".product-thumbs").width() + 20;
-	currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
-});
-
-$(".cc").on("click",function() {
-	whichProduct=$(this).attr("data-productID")
-	whichProductCode=$(this).attr("data-productCode")
-	whichColor=$(this).attr("data-colorCode")
-	tileLink=whichProductCode;
-	baseURL=$("#" + tileLink).attr("data-url")
-	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
-	
-	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
-	$(this).addClass("color-choice-on");
-	$(".img" + whichProduct).attr("src","/img/products/" + whichProductCode + "-" + whichColor + "-tile.jpg");
-	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
-});
-
-$(".ccrp").on("click",function() {
-	whichProduct=$(this).attr("data-productID");
-	whichProductCode=$(this).attr("data-productCode");
-	whichColor=$(this).attr("data-colorCode");
-	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
-	$(this).addClass("color-choice-on");
-	$(".img" + whichProduct).attr("src","/img/products/" + whichProductCode + "-" + whichColor + "-tile.jpg");
-	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
-	tileLink="rp" + whichProductCode;
-	baseURL=$("#" + tileLink).attr("data-url");
-	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
-});
-
-
-
-
-// Toggles the "dark" class
-function toggleDarkMode(state) {
-  document.documentElement.classList.toggle("dark", state);
-  darkModeState = state;
-  if(state) {
-  	$(".goDark").html("Light Mode");
-  } else {
-  	$(".goDark").html("Dark Mode");
-  } 
-  $.post("/res/setDarkMode.asp",{darkmode:state});
-}
-
-// Sets localStorage state
-function setDarkModeLocalStorage(state) {
-  localStorage.setItem("dark", state);
-  $.post("/res/setDarkMode.asp",{darkmode:state});
-}
-
-var preferenceSet=false;
-
-// Initial setting
-if(localStorage.getItem("dark") === "true") {
-	toggleDarkMode(true);
-	preferenceSet=true;
-}
-
-if(localStorage.getItem("dark") === "false") {
-	toggleDarkMode(false);
-	preferenceSet=true;
-} 
-
-if(useDark.matches && !preferenceSet) {
-	console.log("system")
-	toggleDarkMode(true);
-}
-
-
-
-// Listen for changes in the OS settings.
-// Note: the arrow function shorthand works only in modern browsers, 
-// for older browsers define the function using the function keyword.
-useDark.addListener((evt) => toggleDarkMode(evt.matches));
-
-// Toggles the "dark" class on click and sets localStorage state
-
-buttons.forEach(function(b) {
-	b.addEventListener("click", () => {
-	  darkModeState = !darkModeState;
-
-	  toggleDarkMode(darkModeState);
-	  setDarkModeLocalStorage(darkModeState);
-	});
-});
-

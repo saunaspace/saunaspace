@@ -4,8 +4,8 @@
     "theme_name": "Dawn",
     "theme_version": "4.0.0",
     "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_documentation_url": "https:\/\/help.shopify.com\/en\/manual\/online-store\/themes",
+    "theme_support_url": "https:\/\/support.shopify.com\/"
   },
   {
     "name": "t:settings_schema.colors.name",
@@ -490,27 +490,27 @@
         "options": [
           {
             "value": "accent-1",
-            "label": "t:sections.all.colors.accent_1.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__1.label"
           },
           {
             "value": "accent-2",
-            "label": "t:sections.all.colors.accent_2.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__2.label"
           },
           {
             "value": "background-1",
-            "label": "t:sections.all.colors.background_1.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__3.label"
           },
           {
             "value": "background-2",
-            "label": "t:sections.all.colors.background_2.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__4.label"
           },
           {
             "value": "inverse",
-            "label": "t:sections.all.colors.inverse.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__5.label"
           }
         ],
         "default": "background-2",
-        "label": "t:sections.all.colors.label"
+        "label": "t:settings_schema.global.settings.color_scheme.label"
       },
       {
         "type": "header",
@@ -961,15 +961,15 @@
         "options": [
           {
             "value": "accent-1",
-            "label": "t:sections.all.colors.accent_1.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__1.label"
           },
           {
             "value": "accent-2",
-            "label": "t:sections.all.colors.accent_2.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__2.label"
           },
           {
             "value": "background-2",
-            "label": "t:sections.all.colors.background_2.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__4.label"
           }
         ],
         "default": "accent-2",
@@ -981,11 +981,11 @@
         "options": [
           {
             "value": "background-1",
-            "label": "t:sections.all.colors.background_1.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__3.label"
           },
           {
             "value": "inverse",
-            "label": "t:sections.all.colors.inverse.label"
+            "label": "t:settings_schema.global.settings.color_scheme.options__5.label"
           }
         ],
         "default": "inverse",
@@ -1002,11 +1002,11 @@
         "options": [
           {
             "value": "accent-1",
-            "label": "t:sections.all.colors.accent_1.label"
+            "label": "t:settings_schema.styles.settings.accent_icons.options__1.label"
           },
           {
             "value": "accent-2",
-            "label": "t:sections.all.colors.accent_2.label"
+            "label": "t:settings_schema.styles.settings.accent_icons.options__2.label"
           },
           {
             "value": "outline-button",
