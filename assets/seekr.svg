@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="23px" viewBox="0 0 20 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>Group 21</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Product-Details-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1_Faraday" transform="translate(-348.000000, -1005.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Group-21" transform="translate(347.063825, 1006.000000)">
+                <polyline id="Path-4" points="7.26832808 1.74316406 10.9361748 0 14.5855888 1.74316406"></polyline>
+                <line x1="10.9361748" y1="-7.13003197e-15" x2="10.9361748" y2="4.42907715" id="Path-5"></line>
+                <polyline id="Path-4" transform="translate(10.926958, 20.128418) scale(1, -1) translate(-10.926958, -20.128418) " points="7.26832808 21 10.9361748 19.2568359 14.5855888 21"></polyline>
+                <line x1="10.9361748" y1="16.5709229" x2="10.9361748" y2="21" id="Path-5" transform="translate(10.936175, 18.785461) scale(1, -1) translate(-10.936175, -18.785461) "></line>
+                <polyline id="Path-4-Copy" transform="translate(19.213719, 5.434093) rotate(62.000000) translate(-19.213719, -5.434093) " points="15.5550888 6.30567461 19.2229355 4.56251055 22.8723495 6.30567461"></polyline>
+                <line x1="18.0322857" y1="3.85817143" x2="18.0322857" y2="8.28724858" id="Path-5-Copy" transform="translate(18.032286, 6.072710) rotate(62.000000) translate(-18.032286, -6.072710) "></line>
+                <polyline id="Path-4-Copy" transform="translate(19.213719, 15.751821) scale(1, -1) rotate(62.000000) translate(-19.213719, -15.751821) " points="15.5550888 16.6234025 19.2229355 14.8802385 22.8723495 16.6234025"></polyline>
+                <line x1="18.0322857" y1="12.8986645" x2="18.0322857" y2="17.3277417" id="Path-5-Copy" transform="translate(18.032286, 15.113203) scale(1, -1) rotate(62.000000) translate(-18.032286, -15.113203) "></line>
+                <polyline id="Path-4-Copy" transform="translate(2.658630, 5.434093) scale(-1, 1) rotate(62.000000) translate(-2.658630, -5.434093) " points="-1 6.30567461 2.66784668 4.56251055 6.31726074 6.30567461"></polyline>
+                <line x1="3.84006382" y1="3.85817143" x2="3.84006382" y2="8.28724858" id="Path-5-Copy" transform="translate(3.840064, 6.072710) scale(-1, 1) rotate(62.000000) translate(-3.840064, -6.072710) "></line>
+                <polyline id="Path-4-Copy" transform="translate(2.658630, 15.565907) scale(-1, -1) rotate(62.000000) translate(-2.658630, -15.565907) " points="-1 16.4374895 2.66784668 14.6943254 6.31726074 16.4374895"></polyline>
+                <line x1="3.84006382" y1="12.7127514" x2="3.84006382" y2="17.1418286" id="Path-5-Copy" transform="translate(3.840064, 14.927290) scale(-1, -1) rotate(62.000000) translate(-3.840064, -14.927290) "></line>
+                <polyline id="Path-6" points="7.26832808 8 10.9361748 9.76513672 14.5855888 8"></polyline>
+                <line x1="10.9361748" y1="9.76513672" x2="10.9361748" y2="13.5438232" id="Path-7"></line>
+            </g>
+        </g>
+    </g>
+</svg>

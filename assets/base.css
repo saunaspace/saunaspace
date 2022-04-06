@@ -2891,7 +2891,7 @@ body {
 	font-size: 1.6rem;
 }
 
-section {
+section:not(.shopify-section) {
 	width: 90%;
 	max-width: 1200px;
 	margin: 0 auto;
