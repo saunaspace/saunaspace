@@ -17,7 +17,7 @@
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
-
+    <link rel="stylesheet" href="https://use.typekit.net/hre6bsr.css">
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -250,7 +250,7 @@
       {{ "accessibility.skip_to_text" | t }}
     </a>
 
-    {% section 'announcement-bar' %}
+    {% comment %} {% section 'announcement-bar' %} {% endcomment %}
     {% section 'header' %}
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
@@ -293,5 +293,73 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+
+<script>
+  //https://www.ditdot.hr/en/dark-mode-website-tutorial
+  let darkModeState = false;
+  
+  const buttons = document.querySelectorAll(".goDark");
+  
+  // MediaQueryList object
+  const useDark = window.matchMedia("(prefers-color-scheme: dark)");
+  
+  
+  // Toggles the "dark" class
+  function toggleDarkMode(state) {
+    document.documentElement.classList.toggle("dark", state);
+    darkModeState = state;
+    if(state) {
+      $(".goDark").html("Light Mode");
+    } else {
+      $(".goDark").html("Dark Mode");
+    } 
+    $.post("/res/setDarkMode.asp",{darkmode:state});
+  }
+  
+  // Sets localStorage state
+  function setDarkModeLocalStorage(state) {
+    localStorage.setItem("dark", state);
+    $.post("/res/setDarkMode.asp",{darkmode:state});
+  }
+  
+  var preferenceSet=false;
+  
+  // Initial setting
+  if(localStorage.getItem("dark") === "true") {
+    toggleDarkMode(true);
+    preferenceSet=true;
+  }
+  
+  if(localStorage.getItem("dark") === "false") {
+    toggleDarkMode(false);
+    preferenceSet=true;
+  } 
+  
+  if(useDark.matches && !preferenceSet) {
+    console.log("system")
+    toggleDarkMode(true);
+  }
+  
+  
+  
+  // Listen for changes in the OS settings.
+  // Note: the arrow function shorthand works only in modern browsers, 
+  // for older browsers define the function using the function keyword.
+  useDark.addListener((evt) => toggleDarkMode(evt.matches));
+  
+  // Toggles the "dark" class on click and sets localStorage state
+  
+  buttons.forEach(function(b) {
+    b.addEventListener("click", () => {
+      darkModeState = !darkModeState;
+  
+      toggleDarkMode(darkModeState);
+      setDarkModeLocalStorage(darkModeState);
+    });
+  });
+  
+  
+  </script>
   </body>
 </html>

@@ -1,0 +1,15 @@
+{
+    "sections": {
+      "main": {
+        "type": "refurb-page",
+        "settings": {
+          "padding_top": 28,
+          "padding_bottom": 28
+        }
+      }
+    },
+    "order": [
+      "main"
+    ]
+  }
+  
