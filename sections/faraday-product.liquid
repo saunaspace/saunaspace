@@ -986,6 +986,427 @@
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {% endif %}
 
+<script src="../../js/select2.min.js"></script>
+
+<script>
+$(document).ready(function() {
+	$(".select-icons").select2({
+		templateResult: formatPlug,
+		minimumResultsForSearch: Infinity
+	});
+	$(".product-info-details a").removeAttr('target');
+	
+	$(".pid-col-text a").each(function() {
+		if($(this).attr("href").indexOf(".pdf") > 0) {
+			$(this).attr({"target":"_blank"});
+		}
+	});
+	
+});
+
+
+
+var shopifySKU="SF001BNA00N";
+var priceDisplay=""; //this is the VALUE that is shown. There's also a function displayPrice() that is used to display this intelligently (to account for sale/Compare At pricing)
+var whichUPC="810018190125";
+var theQty=0;
+var theOOS="continue";
+$(".theUPC").html(whichUPC);
+updateATC($("#plugChoice"));
+if(shopifySKU) {
+	displayPrice(5499.99,5499.99);
+}
+
+$(".oos-fineprint").removeClass("hideMe");
+
+	$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
+	$(".preorder-box").removeClass("hideMe");
+	//$(".op-30day-box").addClass("hideMe");
+
+
+
+$(".product-info-tab").on("click",function() {
+	$(".product-info-tab").removeClass("product-info-tab-on");
+	$(this).addClass("product-info-tab-on");
+	$(".product-info-details").addClass("hideMe");
+	var whichTab=$(this).attr("data-tab");
+	$("#pid-" + whichTab).removeClass("hideMe");
+});
+
+//swapping out tiles in related products based on color choices is in global.js.
+
+
+
+$(".pot-col-100").on("click",function() {
+	$(this).addClass("hideMe");
+	$(".pot-col").removeClass("hideMe");
+});
+
+var scsChecked="standard";
+function updateSaunaCoverSetSKU(v) {
+	if(scsChecked=='standard' || scsChecked=='shielded') {
+		if(v=='standard') { shopifySKU=shopifySKU.replace("ES","SD"); }
+		if(v=='shielded') { shopifySKU=shopifySKU.replace("SD","ES"); }
+		if(v=='upgrade') {
+			shopifySKU="C0CE" + shopifySKU.substr(6,2) + "0000N"
+		}
+	}
+	
+	if(scsChecked=='upgrade') {
+		if(v=='standard') { shopifySKU="C0CSSD" + shopifySKU.substr(4,2) + "00N" }
+		if(v=='shielded') { shopifySKU="C0CSES" + shopifySKU.substr(4,2) + "00N" }
+	}
+	
+	
+		//after the SKU is changed, need to get the productID and pcolorID so that the right thing can be added to the cart
+		$.ajax({ type: "POST",   
+		 url: "/res/getNewProductID.asp?shopifySKU=" + shopifySKU,   
+		 async: false,
+		 success : function(newProductInfo)
+		 {
+			npiArr=newProductInfo.split("|")
+			$(".atc").attr("data-pcolorID",npiArr[0])
+			$(".atc").attr("data-productID",npiArr[1])
+			$(".atc").attr("data-shopifySKU",shopifySKU);
+			$(".theUPC").html(npiArr[4]);
+			$(".theQty").html(npiArr[5]);
+			$(".theOOS").html(npiArr[6]);
+			displayPrice(npiArr[3],npiArr[2]);
+		 }
+	});
+	$(".theSKU").html(shopifySKU);
+	scsChecked=v;
+};
+
+function addEMFShield(cb) {
+	if($(cb).is(":checked")) {
+		shopifySKU=shopifySKU.replace("SD","ES");
+	} else {
+		shopifySKU=shopifySKU.replace("ES","SD");
+	}
+	//after the SKU is changed, need to get the productID and pcolorID so that the right thing can be added to the cart
+	//console.log("addEMFShield - " + shopifySKU)
+	$.ajax({ type: "POST",   
+		 url: "/res/getNewProductID.asp?shopifySKU=" + shopifySKU,   
+		 async: false,
+		 success : function(newProductInfo)
+		 {
+			npiArr=newProductInfo.split("|")
+			$(".atc").attr("data-pcolorID",npiArr[0])
+			$(".atc").attr("data-productID",npiArr[1])
+			$(".atc").attr("data-shopifySKU",shopifySKU);
+			$(".theUPC").html(npiArr[4]);
+			$(".theQty").html(npiArr[5]);
+			$(".theOOS").html(npiArr[6]);
+			displayPrice(npiArr[3],npiArr[2]);
+		 }
+	});
+	$(".theSKU").html(shopifySKU);
+}
+
+function formatPlug (plug) {
+  if (!plug.id) {
+    return plug.text;
+  }
+  var plugPath='';
+  if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
+  if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
+  if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
+  if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
+  if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  var $plug = $(
+    '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
+  );
+  return $plug;
+};
+
+function updateATC(p) {
+	var plugID=$(p).find(':selected').attr('data-plugID');
+	var plugCode=$(p).find(':selected').attr('data-plugCode');
+
+	
+		shopifySKU=$(".color-choice-on").attr("data-colorPlugSKU" + plugCode);
+		whichUPC=$(".color-choice-on").attr("data-colorPlugUPC" + plugCode);
+	
+	
+
+	$(".atc").attr("data-shopifySKU",shopifySKU);
+	$(".atc").attr("data-plugID",plugID);
+	$(".theSKU").html(shopifySKU);
+	$(".theUPC").html(whichUPC);
+	$(".theQty").html(theQty);
+	$(".theOOS").html(theOOS);
+}
+
+var colorHash=(window.location.hash).replace("#","");
+if(colorHash=="") { 
+	colorHash="natural"
+}
+
+
+	whichCC=$(".cc[data-colorCode=" + colorHash + "]");
+	if($(whichCC).hasClass("colorNotAvailable")) {
+		loadGallery(whichCC,"outOfStockClass");
+	} else {
+		loadGallery(whichCC);
+	}
+
+	
+function loadGallery(cc,oos) {
+	
+	$(".pc").removeClass("color-choice-on").addClass("color-choice-off");
+	$(cc).addClass("color-choice-on");
+	$(".color, .sac-color").html($(cc).attr("data-color"));
+	whichColorCode=$(cc).attr("data-colorCode");
+	whichColorOrderProcessing=$(cc).attr("data-colorOrderProcessing");
+		if(whichColorOrderProcessing != '') { 
+			$("#orderProcessing").html(whichColorOrderProcessing);
+		} else {
+			$("#orderProcessing").html("1–3 days");
+		}
+	whichColorSKU=$(cc).attr("data-colorSKU");
+	whichColorUPC=$(cc).attr("data-colorUPC");
+	var plugCode=$("#plugChoice").find(':selected').attr('data-plugCode');
+	whichColorPlugSKU=$(cc).attr("data-colorPlugSKU" + plugCode);
+	whichColorPlugUPC=$(cc).attr("data-colorPlugUPC" + plugCode);	
+	whichColorID=$(cc).attr("data-colorID");
+	stockInfoArr=$(cc).attr("data-stock").split("|");  //[0]=quantity, [1]=deny or continue, [2]=track quantity
+	$("#theGallery").load("/res/getGallery.asp",{hasColors:1,productCode:'faraday-infrared-sauna',firstColorCode:whichColorCode});
+	$(".atc-box, .op-30day-box").removeClass("outOfStockClass").addClass(oos);
+	//console.log(stockInfoArr[1],stockInfoArr[0])
+	$(".oos-fineprint").removeClass("hideMe");
+	if(oos=="outOfStockClass" || (stockInfoArr[1]=='deny' && stockInfoArr[0]<=0)) {
+		$("#sacText").html("Out of Stock").addClass("sac-text-disabled");
+		$(".oos-fineprint").addClass("hideMe");
+	} else {
+		$("#sacText").html("Add to Cart").removeClass("sac-text-disabled");
+	}
+	
+if((stockInfoArr[1]=='continue' && stockInfoArr[0]<=0)) {
+	$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
+	$(".preorder-box").removeClass("hideMe");
+	//$(".op-30day-box").addClass("hideMe");
+} else {
+	$(".atcMain, #sacText").html("Add to Cart");
+	$(".preorder-box").addClass("hideMe");
+	$(".op-30day-box").removeClass("hideMe");
+}
+	
+	if(whichColorSKU !='') {
+		shopifySKU=whichColorSKU;
+		$(".atc").attr("data-shopifySKU",shopifySKU);
+		var saunaCoverSet=$("input[name=ownShield]:checked").val();
+		
+		
+			
+		$(".theSKU").html(shopifySKU);
+		$(".theUPC").html(whichColorUPC);
+	}
+
+	if(typeof whichColorPlugSKU !== "undefined") {
+		$(".theSKU").html(whichColorPlugSKU);
+		$(".theUPC").html(whichColorPlugUPC);
+		$(".theQty").html(stockInfoArr[0]);
+		$(".theOOS").html(stockInfoArr[1]);
+		shopifySKU=whichColorPlugSKU;
+	}
+
+	$(".atc").attr("data-shopifySKU",shopifySKU);
+	
+		$(".atc").attr("data-pcolorID",whichColorID);
+	
+
+	displayPrice($(cc).attr("data-colorCompareAtPrice"),$(cc).attr("data-colorPrice"))
+	//window.location.hash=whichColorCode;  //commented because otherwise back button breaks/only changes hash
+}
+
+var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
+function scrollRelated(v) {
+	tileSize=295; //includes right margin
+	numTiles=parseInt(currentRelatedCarouselWidth / tileSize);
+	timeToScroll=numTiles * 200;
+	moveAmt=numTiles * tileSize  * v;
+	$(".related-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+//currentThumbsCarouselWidth is in getGallery.asp
+function scrollGallery(v) {
+	tileSize=145; //includes right margin
+	numTiles=parseInt(currentThumbsCarouselWidth / tileSize);
+	timeToScroll=numTiles * 100;
+	moveAmt=numTiles * tileSize  * v;
+	$(".product-thumbs").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+function showGalleryHero(n,colorCode) {
+	if(colorCode==0) {
+		$("#galleryHero").attr({"src":"/img/products/faraday-infrared-sauna-gallery-" + n + ".jpg"});
+	} else {
+		$("#galleryHero").attr({"src":"/img/products/faraday-infrared-sauna-" + colorCode + "-gallery-" + n + ".jpg"});
+	}
+}
+
+function sizeChosen() {
+	var customSizeCode=$("#customSize option:selected").attr("data-customSizeCode");
+	$("#theGallery").load("/res/getGallery.asp",{hasSizes:1,productCode:'faraday-infrared-sauna',customSizeCode:customSizeCode});
+	var pcsID=$("#customSize option:selected").attr("data-pcsID");
+	var price=$("#customSize option:selected").attr("data-price");
+	var compareAtPrice=$("#customSize option:selected").attr("data-compareAtPrice");
+	var customSizeSKU=$("#customSize option:selected").attr("data-customSizeSKU");
+	var customSizeUPC=$("#customSize option:selected").attr("data-customSizeUPC");
+	var customSizeStockArr=$("#customSize option:selected").attr("data-customSizeStock").split("|");
+	var customSizeOrderProcessing=$("#customSize option:selected").attr("data-customSizeOrderProcessing");
+		if(customSizeOrderProcessing != '') { 
+			$("#orderProcessing").html(customSizeOrderProcessing);
+		} else {
+			$("#orderProcessing").html("1–3 days");
+		}
+	shopifySKU=$("#customSize option:selected").attr("data-shopifySKU");
+	if(price=="0") { 
+		$("#sacText").addClass("hideMe");
+	} else {
+		$("#sacText").removeClass("hideMe");
+	}
+	displayPrice(compareAtPrice,price)
+	$(".product-price").html(priceDisplay);
+	$(".sac-price").html(price);
+	$(".atc").attr("data-shopifySKU",shopifySKU);
+	$(".atc").attr("data-pcsID",pcsID);
+	$(".theSKU").html(shopifySKU);
+	$(".theUPC").html(customSizeUPC);
+	$(".theQty").html(customSizeStockArr[0]);
+	$(".theOOS").html(customSizeStockArr[1]);
+	$(".atc-box").removeClass("outOfStockClass");
+	$(".oos-fineprint").removeClass("hideMe");
+	if(customSizeStockArr[0]<=0 && customSizeStockArr[1]=='deny') {
+		$(".atc-box").addClass("outOfStockClass");
+		$(".oos-fineprint").addClass("hideMe");
+	}
+	if(customSizeStockArr[0]<=0 && customSizeStockArr[1]=='continue') {
+		$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
+		$(".preorder-box").removeClass("hideMe");
+		//$(".op-30day-box").addClass("hideMe");
+	}
+	if(customSizeStockArr[0] > 0) {
+		$(".atcMain, #sacText").html("Add to Cart");
+		$(".preorder-box").addClass("hideMe");
+		$(".op-30day-box").removeClass("hideMe");
+	}
+}
+
+
+$(".atc").on("click",function() {
+	
+	shopifySKU=$(this).attr("data-shopifySKU");
+	pColorID=$(this).attr("data-pcolorID");
+	pcsID=$(this).attr("data-pcsID");
+	plugID=$(this).attr("data-plugID");
+	productID=$(this).attr("data-productID");
+	fbPrice=$(this).attr("data-fbPrice");
+	console.log("AddToCart - " + parseInt(fbPrice),shopifySKU)
+	console.log("----------- CART ---------");
+	console.log("ShopifySKU: " + shopifySKU);
+	console.log("FBPrice: " + fbPrice);
+	console.log("productID: " + productID);
+	console.log("pColorID: " + pColorID);
+	console.log("plugID: " + plugID);
+	console.log("pcsID: " + pcsID);
+
+	fbq('track', 'AddToCart',
+	  {
+		value:  parseInt(fbPrice),
+		currency: 'USD',
+		content_type: 'product', 
+		content_ids: shopifySKU
+	  }
+	);	
+
+	console.log("------------------------");
+	$(".nav-right").load("/res/getCart.asp",{action:"add",productID:productID,pColorID:pColorID,plugID:plugID,pcsID:pcsID,shopifySKU:shopifySKU,redir:'/products/infrared-saunas/faraday-infrared-sauna'});
+	$(".overlay").removeClass("hideMe");
+	cartOpen=true;
+	if(window.matchMedia('(max-width: 750px)').matches) {
+		$('html,body').animate({
+		   scrollTop: $("#topNavBG").offset().top
+		},100);
+	}
+	
+	//https://support.justuno.com/tracking-visitor-carts-conversions-past-orders
+	window.juapp=window.juapp||function(){(window.juapp.q=window.juapp.q||[]).push(arguments)}
+	juapp(
+	'cartItemAdd',
+	{
+	productid:'2105477365849',
+	quantity:1
+	}
+	);
+	
+});
+
+function potMore(f) {
+	$(".pot-col").addClass("hideMe");
+	$("#" + f + "Col").removeClass("hideMe");
+}
+
+function displayPrice(c,p) {
+	c=parseFloat(c);
+	p=parseFloat(p);
+	if(p < c) {
+		priceDisplay="<div class='two-prices'>$" + p.toLocaleString() + " <span>$" + c.toLocaleString() + "</span></div>"
+	} else {
+		priceDisplay="$" + p.toLocaleString();
+	}
+	$(".price").html(priceDisplay);
+	$(".sac-price").html("$" + c.toLocaleString());
+	$(".atc").attr("data-fbPrice",p);
+	
+	console.log("ViewContent - " + p,shopifySKU)
+	fbq('track', 'ViewContent',
+	  {
+		value:  parseInt(p),
+		currency: 'USD',
+		content_type: 'product', 
+		content_ids: shopifySKU
+	  }
+	);	
+	
+}
+
+let options = {
+	root: null,
+	rootMargin: '-20px 0px 0px 0px', 
+	threshold: 1.0 
+};
+
+const stickyAddToCart = document.querySelector('.atcMain');
+if(window.matchMedia('(min-width: 750px)').matches) {
+	createObserver('stickyAddToCart');
+}
+
+function onChangestickyAddToCart(changes, observerstickyAddToCart) {
+		changes.forEach(change => { if (change.intersectionRatio >= 1) {
+			$(".stickyBG").removeClass("stickyBG-visible");
+			//console.log("hidden")
+		} else {
+			//console.log("visible")
+			$(".stickyBG").addClass("stickyBG-visible");
+		}
+	});
+}
+
+
+	function updateUC(p) {
+		ucArr=["/img/targeted-therapy-light.jpg","/img/targeted-therapy-desk-arm.jpg","/img/targeted-therapy-case.jpg","/img/targeted-therapy-sauna-supreme.jpg","/img/targeted-therapy-better-night-light.jpg"]
+		$(".build-panels p").addClass("hideMe");
+		$("#bp" + p).find("p").removeClass("hideMe");
+		$("#bpImg").attr("src",ucArr[p-1]);
+	}
+</script>
+
+
+<script src="../../js/lite-yt-embed.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
