@@ -986,7 +986,7 @@
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {% endif %}
 
-<script src="../../js/select2.min.js"></script>
+<script src="{{ 'select2.min.js' | asset_url }}"></script>
 
 <script>
 $(document).ready(function() {
@@ -1406,7 +1406,7 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 </script>
 
 
-<script src="../../js/lite-yt-embed.js"></script>
+<script src="{{ 'lite-yt-embed.js' | asset_url }}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
