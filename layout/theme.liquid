@@ -314,13 +314,13 @@
     } else {
       $(".goDark").html("Dark Mode");
     } 
-    $.post("/res/setDarkMode.asp",{darkmode:state});
+    {% comment %} $.post("/res/setDarkMode.asp",{darkmode:state}); {% endcomment %}
   }
   
   // Sets localStorage state
   function setDarkModeLocalStorage(state) {
     localStorage.setItem("dark", state);
-    $.post("/res/setDarkMode.asp",{darkmode:state});
+    {% comment %} $.post("/res/setDarkMode.asp",{darkmode:state}); {% endcomment %}
   }
   
   var preferenceSet=false;

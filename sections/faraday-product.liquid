@@ -51,8 +51,213 @@
 <section class="page-width section-{{ section.id }}-padding">
   <div class="product product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
+        <div class="product-gallery">
+            <div id="theGallery" class="spinner"></div>
+            
+            
+        </div><!--product-gallery-->
+        
       <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
         <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+<style>
+     .slider-container {
+margin: 0 auto;
+width: 100%;
+overflow: auto;
+display: flex;
+flex-flow: column wrap;
+align-items: center;
+position: relative;
+}
+
+.large-image {
+width: 100%;
+position: relative;
+overflow:hidden;
+}
+
+
+.large-image-item {
+max-width: 100%;
+min-width: 50%;
+max-height: 100%;
+padding: 0;
+}
+
+.large-image-item:not(:first-child){
+display: none !important;
+}
+
+ul {
+padding-inline-start: 0px !important;
+}
+
+slider-component {
+position: relative;
+display: block;
+width:100%;
+}
+
+.slider__slide {
+scroll-snap-align: start;
+flex-shrink: 0;
+}
+
+.product-slider-box {
+flex-wrap: inherit;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+scroll-behavior: smooth;
+-webkit-overflow-scrolling: touch;
+margin-bottom: 1rem;
+width: 100%;
+display: flex;
+}
+
+.product-slider {
+height: 100%;
+width: 23%;
+display: inline-block;
+}
+
+.product-slider:not(:first-child){
+margin-left: 1rem;
+}
+
+.slide-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.slider {
+scrollbar-color: rgb(var(--color-foreground)) rgba(var(--color-foreground), 0.04);
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+height: 0.4rem;
+width: 0.4rem;
+display: none;
+}
+
+.no-js .slider {
+-ms-overflow-style: auto;
+scrollbar-width: auto;
+}
+
+.no-js .slider::-webkit-scrollbar {
+display: initial;
+}
+
+.slider::-webkit-scrollbar-thumb {
+background-color: rgb(var(--color-foreground));
+border-radius: 0.4rem;
+border: 0;
+}
+
+.slider::-webkit-scrollbar-track {
+background: rgba(var(--color-foreground), 0.04);
+border-radius: 0.4rem;
+}
+
+.slider-counter {
+margin: 0 1.2rem;
+}
+
+.slider-buttons {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.slider-button {
+color: rgba(var(--color-foreground), 0.75);
+background: transparent;
+border: none;
+cursor: pointer;
+width: 44px;
+height: 44px;
+}
+
+.slider-button:not([disabled]):hover {
+color: rgb(var(--color-foreground));
+}
+
+.slider-button .icon {
+height: 0.6rem;
+}
+
+.slider-button[disabled] .icon {
+color: rgba(var(--color-foreground), 0.3);
+}
+
+.slider-button--next .icon {
+margin-right: -0.2rem;
+transform: rotate(-90deg) translateX(0.15rem);
+}
+
+.slider-button--prev .icon {
+margin-left: -0.2rem;
+transform: rotate(90deg) translateX(-0.15rem);
+}
+
+.slider-button--next:not([disabled]):hover .icon {
+transform: rotate(-90deg) translateX(0.15rem) scale(1.07);
+}
+
+.slider-button--prev:not([disabled]):hover .icon {
+transform: rotate(90deg) translateX(-0.15rem) scale(1.07);
+}
+
+/* video button when image is a video type */
+.video-btn {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+.v-btn {
+top: 2% !important;
+left: 2% !important;
+}
+
+.hide-modal modal-opener {
+display: none;
+}
+
+.active-thumb {
+opacity: 1 !important;
+border: solid 2px var(--gradient-base-accent-1);
+box-sizing: border-box;
+}
+
+.slide-image {
+opacity: .5;
+
+}</style>
+
+         <script>
+
+window.onload = (event) => {
+document.querySelector("li:nth-child(1) > img").classList.add('active-thumb');
+};
+
+   function newLargeImage(x) {
+      let clickedImage = x.dataset.mediaId;
+      const newImage = document.querySelector(`[data-media-id="${clickedImage}"]`);
+      const parentData = newImage.parentElement;
+
+      parentData.prepend(newImage);
+      newImage.style.display = "block";
+
+document.querySelectorAll('.slide-image')
+.forEach(thumb => thumb. classList.remove('active-thumb'));
+const sliderComp = document.querySelector("slider-component");
+document.querySelector(`[data-media-id="${clickedImage}"] > img`).classList.add('active-thumb');
+};
+</script>
         <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
           <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
             {{ "accessibility.skip_to_product_info" | t }}
@@ -115,7 +320,71 @@
           </button>
         {%- endif -%}
         {%- if media_count > 1 and section.settings.gallery_layout != 'stacked' or section.settings.mobile_thumbnails == 'show' -%}
-          <slider-component id="GalleryThumbnails-{{ section.id }}" class="thumbnail-slider slider-mobile-gutter{% if section.settings.mobile_thumbnails == 'hide' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}">
+
+<div class="slider-container" >
+ <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
+{{ "accessibility.skip_to_product_info" | t }}
+</a>
+ <ul class="large-image" id="large-image">
+{%- for media in product.media -%}
+<li class="large-image-item product__media-item grid__item slider__slide
+{% if media.media_type != 'image' %} hide-modal {% endif %}"
+data-media-id="{{ section.id }}-{{ media.id }}">
+{% render 'product-thumbnail', media: media, position: forloop.index, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true %}
+</li>
+{%- endfor -%}
+ </ul>
+
+<slider-component >
+<ul class="product-slider-box slider" role="list">
+
+{%- assign variant_images = product.images| where: 'attached_to_variant?', true | map: 'src' -%}
+
+{%- for media in product.media -%}
+ <li class="product-slider slider__slide" onclick="newLargeImage(this)" data-media-id="{{ section.id }}-{{ media.id }}"
+
+{% if section.settings.hide_variants and variant_images contains media.src %} style="display: none;" {% endif %}>
+
+{% if media.media_type == 'video' %}
+<div class="video-btn" style="display: block" >
+ <span class="product__media-icon motion-reduce v-btn" aria-hidden="true">
+{%- liquid
+case media.media_type
+when 'video' or 'external_video'
+render 'icon-play'
+when 'model'
+render 'icon-3d-model'
+else
+render 'icon-zoom'
+endcase
+-%}
+ </span>
+ <img class="slide-image"
+src="{{ media.preview_image | img_url: 'large' }}"
+alt="{{media.alt }}">
+</div>
+{% else %}
+ <img class="slide-image"
+src="{{ media.preview_image | img_url: 'large' }}"
+alt="{{ media.alt}}">
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+<div class="slider-buttons {% if product.media.size < 5 %}hidden{% endif %}" style="display: flex">
+<button type="button" class="slider-button slider-button--prev bigger-slider" name="previous" aria-label="{{ 'accessibility.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+  <div class="slider-counter caption">
+<span class="slider-counter--current">1</span>
+<span aria-hidden="true"> / </span>
+<span class="visually-hidden">{{ 'accessibility.of' | t }}</span>
+<span class="slider-counter--total">{% if section.settings.hide_variants %}{{ product.media.size | minus: variant_images.size | plus: 1 }}{% else %}{{ product.media.size }}{% endif %}</span>
+  </div>
+ <button type="button" class="slider-button slider-button--next bigger-slider" name="next" aria-label="{{ 'accessibility.next_slide' | t }}">{% render 'icon-caret' %}</button>
+ </div>
+</slider-component>
+</div>
+
+          {% comment %} <slider-component id="GalleryThumbnails-{{ section.id }}" class="thumbnail-slider slider-mobile-gutter{% if section.settings.mobile_thumbnails == 'hide' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}">
             <button type="button" class="slider-button slider-button--prev{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
             <ul id="Slider-Thumbnails-{{ section.id }}" class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}">
               {%- if featured_media != null -%}
@@ -196,7 +465,7 @@
               {%- endfor -%}
             </ul>
             <button type="button" class="slider-button slider-button--next{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="next" aria-label="{{ 'general.slider.next_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
-          </slider-component>
+          </slider-component> {% endcomment %}
         {%- endif -%}
       </media-gallery>
     </div>
@@ -709,7 +978,7 @@
         <div class="tcw-text">
             <cms id='cms4'>
     
-    <h2 class="alignLeft">No One Does Infrared Like Us</h2>
+    <h2 class="alignLeft">No One Does Infrared LikeUs</h2>
     <p>We’ve spent years crafting the perfect hand-blown sauna bulb. We mimic the best of the sun—with none of the harmful UV—to create full-spectrum infrared therapy that is truly one of a kind.</p>
     <a href="../../how-do-infrared-saunas-work.html" class="bold-link arrow-link">See How it Works</a>
     </cms cms4>
@@ -1337,7 +1606,10 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 		$("#bpImg").attr("src",ucArr[p-1]);
 	}
 </script>
-
+<script>
+	var currentThumbsCarouselWidth=$(".product-thumbs").width() + 20;
+	$("#theGallery").removeClass("spinner");
+</script>
 
 <script src="{{ 'lite-yt-embed.js' | asset_url }}"></script>
 
