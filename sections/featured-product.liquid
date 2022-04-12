@@ -773,3 +773,13 @@
   ]
 }
 {% endschema %}
+{% if product %}
+<script class="gpo-featured-product">
+  window.Globo = window.Globo || {}
+  Globo.Options = Globo.Options || {}
+  Globo.Options.featuredProduct = {{ product | json }} || null
+  Globo.Options.featuredProduct.collections = {{ product.collections | map: 'id' | json }}
+</script>
+{% endif %}
+
+<!-- GPO installed -->
