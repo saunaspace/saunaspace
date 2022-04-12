@@ -4226,13 +4226,13 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		transition: opacity 1s;
 	}
 
-.product-text {
+/* .product-text {
 	width: 35%;
 	margin-left: 40px;
 	flex-shrink: 0;
 	text-align: center;
 	max-width: 420px;
-}
+} */
 
 	.product-text h1, .product-name-mobile { color: #000; text-transform: none; font-size: 3.2rem; font-weight: 700; margin-bottom: 1em; }
 		.product-name-mobile { display: none; text-align: center; margin: .5em 0 0 0; padding: 0 1em; }

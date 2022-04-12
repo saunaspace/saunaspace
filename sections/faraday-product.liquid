@@ -1,0 +1,1747 @@
+{% comment %}theme-check-disable TemplateLength{% endcomment %}
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+{%- if first_3d_model -%}
+  {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+  <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
+  <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+<div class="free-shippingBG">
+    <section class="free-shipping">Free shipping and returns in the contiguous US and Canada on orders over $200.</section>
+</div>
+
+
+<div class="stickyBG">
+<div class="sticky-add-to-cart">
+    <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
+    <div class="sac-wrap">
+        <div class="sac-price etica">$5,499.99</div>
+        <a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
+    </div>
+</div>
+</div>
+
+<h1 class="product-name-mobile">Faraday Infrared Sauna</h1>
+
+<section class="page-width section-{{ section.id }}-padding">
+  <div class="product product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="grid__item product__media-wrapper">
+        <div class="product-gallery">
+            <div id="theGallery" class="spinner"></div>
+            
+            
+        </div><!--product-gallery-->
+        
+      <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
+        <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+
+
+           <slider-component id="GalleryThumbnails-{{ section.id }}" class="thumbnail-slider slider-mobile-gutter{% if section.settings.mobile_thumbnails == 'hide' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}">
+            <button type="button" class="slider-button slider-button--prev{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
+            <ul id="Slider-Thumbnails-{{ section.id }}" class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}">
+              {%- if featured_media != null -%}
+                {%- capture media_index -%}
+                  {%- if featured_media.media_type == 'model' -%}{%- increment model_index -%}
+                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment video_index -%}
+                  {%- elsif featured_media.media_type == 'image'%}{%- increment image_index -%}
+                  {%- endif -%}
+                {%- endcapture -%}
+                {%- assign media_index = media_index | plus: 1 -%}
+                <li id="Slide-Thumbnails-{{ section.id }}-0" class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains featured_media.src %} thumbnail-list_item--variant{% endif %}" data-target="{{ section.id }}-{{ featured_media.id }}" data-media-position="{{ media_index }}">
+                  <button class="thumbnail global-media-settings global-media-settings--no-shadow {% if featured_media.preview_image.aspect_ratio > 1 %}thumbnail--wide{% else %}thumbnail--narrow{% endif %}"
+                    aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+                    aria-current="true"
+                    aria-controls="GalleryViewer-{{ section.id }}"
+                    aria-describedby="Thumbnail-{{ section.id }}-0"
+                  >
+                    <img id="Thumbnail-{{ section.id }}-0" srcset="{% if featured_media.preview_image.width >= 54 %}{{ featured_media.preview_image | image_url: width: 54 }} 54w,{% endif %}
+                      {% if featured_media.preview_image.width >= 74 %}{{ featured_media.preview_image | image_url: width: 74 }} 74w,{% endif %}
+                      {% if featured_media.preview_image.width >= 104 %}{{ featured_media.preview_image | image_url: width: 104 }} 104w,{% endif %}
+                      {% if featured_media.preview_image.width >= 162 %}{{ featured_media.preview_image | image_url: width: 162 }} 162w,{% endif %}
+                      {% if featured_media.preview_image.width >= 208 %}{{ featured_media.preview_image | image_url: width: 208 }} 208w,{% endif %}
+                      {% if featured_media.preview_image.width >= 324 %}{{ featured_media.preview_image | image_url: width: 324 }} 324w,{% endif %}
+                      {% if featured_media.preview_image.width >= 416 %}{{ featured_media.preview_image | image_url: width: 416 }} 416w,{% endif %},
+                      {{ featured_media.preview_image | image_url }} {{ media.preview_image.width }}w"
+                      src="{{ featured_media | image_url: width: 416 }}"
+                      sizes="(min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4), (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4), (min-width: 750px) calc((100vw - 15rem) / 8), calc((100vw - 14rem) / 3)"
+                      alt="{{ featured_media.alt | escape }}"
+                      height="208"
+                      width="208"
+                      loading="lazy"
+                    >
+                  </button>
+                </li>
+              {%- endif -%}
+              {%- for media in product.media -%}
+                {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+                  {%- capture media_index -%}
+                    {%- if media.media_type == 'model' -%}{%- increment model_index -%}
+                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{%- increment video_index -%}
+                    {%- elsif media.media_type == 'image'%}{%- increment image_index -%}
+                    {%- endif -%}
+                  {%- endcapture -%}
+                  {%- assign media_index = media_index | plus: 1 -%}
+                   <li id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}" class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains media.src %} thumbnail-list_item--variant{% endif %}" data-target="{{ section.id }}-{{ media.id }}"  data-media-position="{{ media_index }}">
+                    {%- if media.media_type == 'model' -%}
+                      <span class="thumbnail__badge" aria-hidden="true">
+                        {%- render 'icon-3d-model' -%}
+                      </span>
+                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
+                      <span class="thumbnail__badge" aria-hidden="true">
+                        {%- render 'icon-play' -%}
+                      </span>
+                    {%- endif -%}
+                    <button class="thumbnail global-media-settings global-media-settings--no-shadow {% if media.preview_image.aspect_ratio > 1 %}thumbnail--wide{% else %}thumbnail--narrow{% endif %}"
+                      aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+                      {% if media == product.selected_or_first_available_variant.featured_media or product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} aria-current="true"{% endif %}
+                      aria-controls="GalleryViewer-{{ section.id }}"
+                      aria-describedby="Thumbnail-{{ section.id }}-{{ forloop.index }}"
+                    >
+                      <img id="Thumbnail-{{ section.id }}-{{ forloop.index }}"
+                        srcset="{% if media.preview_image.width >= 59 %}{{ media.preview_image | image_url: width: 59 }} 59x,{% endif %}
+                                {% if media.preview_image.width >= 118 %}{{ media.preview_image | image_url: width: 118 }} 118w,{% endif %}
+                                {% if media.preview_image.width >= 84 %}{{ media.preview_image | image_url: width: 84 }} 84w,{% endif %}
+                                {% if media.preview_image.width >= 168 %}{{ media.preview_image | image_url: width: 168 }} 168w,{% endif %}
+                                {% if media.preview_image.width >= 130 %}{{ media.preview_image | image_url: width: 130 }} 130w,{% endif %}
+                                {% if media.preview_image.width >= 260 %}{{ media.preview_image | image_url: width: 260 }} 260w{% endif %}"
+                        src="{{ media | image_url: width: 84, height: 84 }}"
+                        sizes="(min-width: 1200px) calc((1200px - 19.5rem) / 12), (min-width: 750px) calc((100vw - 16.5rem) / 8), calc((100vw - 8rem) / 5)"
+                        alt="{{ media.alt | escape }}"
+                        height="200"
+                        width="200"
+                        loading="lazy"
+                      >
+                    </button>
+                  </li>
+                {%- endunless -%}
+              {%- endfor -%}
+            </ul>
+            <button type="button" class="slider-button slider-button--next{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="next" aria-label="{{ 'general.slider.next_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
+          </slider-component>
+        {%- endif -%}
+      </media-gallery>
+    </div>
+    <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+      <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
+        {%- assign product_form_id = 'product-form-' | append: section.id -%}
+        <div class="stickyBG">
+            <div class="sticky-add-to-cart">
+                <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
+                <div class="sac-wrap">
+                    <div class="sac-price etica">$5,499.99</div>
+                    <a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
+                </div>
+            </div>
+            </div>
+            <div class="product-text">
+                <div class="yotpo bottomLine" data-product-id="2105477365849" data-url="index.html"></div>
+                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">Faraday Infrared Sauna</h1>
+                
+                    <div class="product-price etica price"></div>
+                    <p>price varies by color</p>
+                    {% comment %} <div class="product-color etica"><span>Color:</span><span class="color">Natural</span></div>
+                    <div class="color-choices">
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c1 color-choice-off  " data-stock="0|continue|1" data-colorCompareAtPrice="5499.99" data-colorPrice="5499.99" data-color="Natural" data-colorCode="natural" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BNA00N" data-colorPlugSKUUK="SF002GNA00N" data-colorPlugSKUEU="SF002FNA00N" data-colorPlugSKUSW="SF002JNA00N" data-colorPlugSKUAU="SF002ZNA00N" data-colorPlugSKUBR="SF002NNA00N" data-colorPlugSKUIN="SF002MNA00N" data-colorPlugUPCUS="810018190125" data-colorPlugUPCUK="810018190170" data-colorPlugUPCEU="810018190224" data-colorPlugUPCSW="810018190279" data-colorPlugUPCAU="810018190323" data-colorPlugUPCBR="810018190422" data-colorPlugUPCIN="810018190378" data-colorID="1" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'contact-phone.svg' | asset_url }}natural.jpg)"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c2 color-choice-off   cna-dark" data-stock="0|continue|1" data-colorCompareAtPrice="5699.99" data-colorPrice="5699.99" data-color="Indigo" data-colorCode="indigo" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BND00N" data-colorPlugSKUUK="SF002GND00N" data-colorPlugSKUEU="SF002FND00N" data-colorPlugSKUSW="SF002JND00N" data-colorPlugSKUAU="SF002ZND00N" data-colorPlugSKUBR="SF002NND00N" data-colorPlugSKUIN="SF002MND00N" data-colorPlugUPCUS="810018190132" data-colorPlugUPCUK="810018190187" data-colorPlugUPCEU="810018190231" data-colorPlugUPCSW="810018190286" data-colorPlugUPCAU="810018190330" data-colorPlugUPCBR="810018190439" data-colorPlugUPCIN="810018190385" data-colorID="2" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'contact-phone.svg' | asset_url }}indigo.jpg)"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c3 color-choice-off   cna-dark" data-stock="0|continue|1" data-colorCompareAtPrice="5699.99" data-colorPrice="5699.99" data-color="Dark Chocolate" data-colorCode="dark-chocolate" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BDC00N" data-colorPlugSKUUK="SF002GDC00N" data-colorPlugSKUEU="SF002FDC00N" data-colorPlugSKUSW="SF002JDC00N" data-colorPlugSKUAU="SF002ZDC00N" data-colorPlugSKUBR="SF002NDC00N" data-colorPlugSKUIN="SF002MDC00N" data-colorPlugUPCUS="810018190149" data-colorPlugUPCUK="810018190194" data-colorPlugUPCEU="810018190248" data-colorPlugUPCSW="810018190293" data-colorPlugUPCAU="810018190347" data-colorPlugUPCBR="810018190446" data-colorPlugUPCIN="810018190392" data-colorID="3" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'contact-phone.svg' | asset_url }}dark-chocolate.jpg)"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c4 color-choice-off  " data-stock="1|continue|1" data-colorCompareAtPrice="5699.99" data-colorPrice="5699.99" data-color="Stone" data-colorCode="stone" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BST00N" data-colorPlugSKUUK="SF002GST00N" data-colorPlugSKUEU="SF002FST00N" data-colorPlugSKUSW="SF002JST00N" data-colorPlugSKUAU="SF002ZST00N" data-colorPlugSKUBR="SF002NST00N" data-colorPlugSKUIN="SF002MST00N" data-colorPlugUPCUS="810018190156" data-colorPlugUPCUK="810018190200" data-colorPlugUPCEU="810018190255" data-colorPlugUPCSW="810018190309" data-colorPlugUPCAU="810018190354" data-colorPlugUPCBR="810018190453" data-colorPlugUPCIN="810018190408" data-colorID="4" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'contact-phone.svg' | asset_url }}stone.jpg)"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c5 color-choice-off  " data-stock="1|continue|1" data-colorCompareAtPrice="5999.99" data-colorPrice="5999.99" data-color="Hand-Dyed Turmeric" data-colorCode="turmeric" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BTU00N" data-colorPlugSKUUK="SF002GTU00N" data-colorPlugSKUEU="SF002FTU00N" data-colorPlugSKUSW="SF002JTU00N" data-colorPlugSKUAU="SF002ZTU00N" data-colorPlugSKUBR="SF002NTU00N" data-colorPlugSKUIN="SF002MTU00N" data-colorPlugUPCUS="810018190163" data-colorPlugUPCUK="810018190217" data-colorPlugUPCEU="810018190262" data-colorPlugUPCSW="810018190316" data-colorPlugUPCAU="810018190361" data-colorPlugUPCBR="810018190460" data-colorPlugUPCIN="810018190415" data-colorID="5" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'contact-phone.svg' | asset_url }}turmeric.jpg)"></div></div>
+                    
+                    </div><!--color-choices-->
+            
+                    <div class="product-plug">
+                        <p>Select your plug type:</p>
+                        <select class="select-icons" onChange="updateATC(this)" id="plugChoice">
+                            
+                            <option value="US" data-plugID="1" data-plugCode="US">US Plug (Standard)</option>
+                            
+                            <option value="UK" data-plugID="2" data-plugCode="UK">UK Plug Adapter</option>
+                            
+                            <option value="EU" data-plugID="3" data-plugCode="EU">EURO Plug Adapter</option>
+                            
+                            <option value="SW" data-plugID="4" data-plugCode="SW">Swiss Plug Adapter</option>
+                            
+                            <option value="AU" data-plugID="5" data-plugCode="AU">AU/NZ Plug Adapter</option>
+                            
+                            <option value="BR" data-plugID="6" data-plugCode="BR">Brazil Plug Adapter</option>
+                            
+                            <option value="IN" data-plugID="7" data-plugCode="IN">India Plug Adapter</option>
+                            
+                        </select> {% endcomment %}
+                    </div>
+                
+                
+                    </div><!--product-text-->
+            <h1 class="product-name-mobile">Faraday Infrared Sauna</h1>
+            {%- when 'buy_buttons' -%}
+            <div {{ block.shopify_attributes }}>
+              <product-form class="product-form">
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                    <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                    <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                    <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                    <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                  </svg>
+                  <span class="product-form__error-message"></span>
+                </div>
+
+                {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+                  <div class="product-form__buttons">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="product-form__submit btn atc button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                    >
+                        <span>
+                          {%- if product.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </span>
+                        <div class="loading-overlay__spinner hidden">
+                          <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                          </svg>
+                        </div>
+                    </button>
+                    {%- if block.settings.show_dynamic_checkout -%}
+                      {{ form | payment_button }}
+                    {%- endif -%}
+                  </div>
+                {%- endform -%}
+              </product-form>
+
+              {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+              {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+              <pickup-availability class="product__pickup-availabilities no-js-hidden"
+                {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %} available{% endif %}
+                data-root-url="{{ routes.root_url }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                data-has-only-default-variant="{{ product.has_only_default_variant }}"
+              >
+                <template>
+                  <pickup-availability-preview class="pickup-availability-preview">
+                    {% render 'icon-unavailable' %}
+                    <div class="pickup-availability-info">
+                      <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                      <button class="pickup-availability-button link link--text underlined-link">{{ 'products.product.pickup_availability.refresh' | t }}</button>
+                    </div>
+                  </pickup-availability-preview>
+                </template>
+              </pickup-availability>
+            </div>
+
+            <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+          {%- when 'title' -%}
+            <h1 class="product__title" {{ block.shopify_attributes }}>
+              {{ product.title | escape }}
+            </h1>
+          {%- when 'price' -%}
+            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+            </div>
+            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+              <div class="product__tax caption rte">
+                {%- if shop.taxes_included -%}
+                  {{ 'products.product.include_taxes' | t }}
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            <div {{ block.shopify_attributes }}>
+              {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                {{ form | payment_terms }}
+              {%- endform -%}
+            </div>
+            <div class="atc-box">
+                <a href="javascript:void(0)" class="btn atcMain atc" data-productID="1" data-fbPrice="5499.99" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-plugID="1" data-pcsID="">Add to Cart</a>
+                <p class="debug">
+                    <strong>syProductID:</strong>2105477365849<br />
+                    <strong>SKU: </strong><span class="theSKU"></span> / <strong>UPC: </strong><span class="theUPC"></span><br />
+                    <strong>Qty: </strong><span class="theQty"></span> / <strong>Sell Out Of Stock: </strong><span class="theOOS"></span>
+                </p>
+                <div class="atc-outOfStock">
+                    
+                        <p><strong>Sorry, this item is out of stock.</strong></p>
+                    <p>Please select a different color.</p>
+                </div>
+            </div>
+            
+            
+    
+            <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
+                <div class="op-30day">This item is currently out of stock but we are making more. You can pre-order this and we will ship as soon as it is ready.</div>
+            </div>
+            
+            <div class="op-30day-box">
+                
+                    <div class="op-30day">
+                        <div style="width: 100%;"><strong>Order Processing:</strong> <span id="orderProcessing">1–3 days</span>.</div>
+                    </div>
+                    <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
+                
+            </div>
+            
+    
+            
+            <div class="warranty-trial">
+                <div class="pwt product-warranty">10-year Warranty</div><div class="pwt product-trial">100-day Trial</div>
+            </div>
+            
+            
+            <div class="pay-over-time">
+                <div class="pot-head">Pay Over Time</div>
+                <div class="pot-col">
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="60" alt="SplitIt" />
+                    <span data-ml="splitItSummary"><p>Monthly payments using your credit card. 0% interest.</p></span>
+                    <a href="javascript:void(0)" onClick="potMore('splitit')">Learn More</a>
+                </div>
+                <div class="pot-divider"></div>
+                <div class="pot-col">
+                    <img src="{{ 'bread.png' | asset_url }}" width="60" alt="Bread Financing" />
+                    <span data-ml="breadSummary"><p>Simple loan with monthly payments as low as 0% APR for 6 months.*</p></span>
+                    <a href="javascript:void(0)" onClick="potMore('bread')">Learn More</a>
+                </div>
+                <div class="pot-col-100 hideMe" id="splititCol">
+                    <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15"  /></a>
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" />
+                    <span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
+                    <p class="fineprint">You can choose this option at checkout.</p>
+                </div>
+                <div class="pot-col-100 hideMe" id="breadCol">
+                    <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" /></a>
+                    <img src="{{ 'bread.png' | asset_url }}" width="70" alt="Bread Financing" />
+                    <span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
+                    <p class="fineprint">Check your eligibility in minutes at checkout.</p>
+                </div>
+            </div>
+            <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;"><strong>SKU: </strong><span class="theSKU"></span>&nbsp;&nbsp;<strong>UPC: </strong><span class="theUPC"></span></p>
+          {%- when 'custom_liquid' -%}
+            {{ block.settings.custom_liquid }}
+          
+          {%- when 'quantity_selector' -%}
+            <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
+              <label class="form__label" for="Quantity-{{ section.id }}">
+                {{ 'products.product.quantity.label' | t }}
+              </label>
+
+              <quantity-input class="quantity">
+                <button class="quantity__button no-js-hidden" name="minus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                  {% render 'icon-minus' %}
+                </button>
+                <input class="quantity__input"
+                    type="number"
+                    name="quantity"
+                    id="Quantity-{{ section.id }}"
+                    min="1"
+                    value="1"
+                    form="{{ product_form_id }}"
+                  >
+                <button class="quantity__button no-js-hidden" name="plus" type="button">
+                  <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                  {% render 'icon-plus' %}
+                </button>
+              </quantity-input>
+            </div>
+          {%- when 'popup' -%}
+              <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
+                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.text | default: block.settings.page.title }}</button>
+              </modal-opener>
+              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
+          {%- when 'variant_picker' -%}
+            {%- unless product.has_only_default_variant -%}
+              {% comment %} {%- if block.settings.picker_type == 'button' -%}
+                <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                      <fieldset class="js product-form__input">
+                        <legend class="form__label">{{ option.name }}</legend>
+                        {%- for value in option.values -%}
+                          <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                name="{{ option.name }}"
+                                value="{{ value | escape }}"
+                                form="{{ product_form_id }}"
+                                {% if option.selected_value == value %}checked{% endif %}
+                          >
+                          <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                            {{ value }}
+                          </label>
+                        {%- endfor -%}
+                      </fieldset>
+                  {%- endfor -%}
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-radios>
+              {%- else -%} {% endcomment %}
+                <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    <div class="product-form__input product-form__input--dropdown">
+                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+                      <div class="select">
+                        <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                          class="select__select"
+                          name="options[{{ option.name | escape }}]"
+                          form="{{ product_form_id }}"
+                        >
+                          {%- for value in option.values -%}
+                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                              {{ value }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                        {% render 'icon-caret' %}
+                      </div>
+                    </div>
+                  {%- endfor -%}
+
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-selects>
+              {% comment %} {%- endif -%} {% endcomment %}
+            {%- endunless -%}
+
+            <noscript class="product-form__noscript-wrapper-{{ section.id }}">
+              <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+                <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+                <div class="select">
+                  <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                        {% if variant.available == false %}disabled{% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+              </div>
+            </noscript>
+          
+          {%- when 'rating' -%}
+            {%- if product.metafields.reviews.rating.value != blank -%}
+              {% liquid
+               assign rating_decimal = 0
+               assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+               if decimal >= 0.3 and decimal <= 0.7
+                assign rating_decimal = 0.5
+              elsif decimal > 0.7
+                assign rating_decimal = 1
+               endif
+              %}
+              <div class="rating" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}">
+                <span aria-hidden="true" class="rating-star color-icon-{{ settings.accent_icons }}" style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"></span>
+              </div>
+              <p class="rating-text caption">
+                <span aria-hidden="true">{{ product.metafields.reviews.rating.value }} / {{ product.metafields.reviews.rating.value.scale_max }}</span>
+              </p>
+              <p class="rating-count caption">
+                <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+                <span class="visually-hidden">{{ product.metafields.reviews.rating_count }} {{ "accessibility.total_reviews" | t }}</span>
+              </p>
+            {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+
+<div class="tanBG noMargin">
+    <div class="product-info-tabs">
+        <a href="javascript:void(0)" class="product-info-tab product-info-tab-on" data-tab="overview">Overview</a>
+        <a href="javascript:void(0)" class="product-info-tab" data-tab="whatsIncluded">What’s Included</a><a href="javascript:void(0)" class="product-info-tab" data-tab="materials">Materials</a><a href="javascript:void(0)" class="product-info-tab" data-tab="specs">Specifications</a><a href="javascript:void(0)" class="product-info-tab" data-tab="instructions">Instructions</a>
+    </div>
+    
+    <div class="product-info-details" id="pid-overview">
+    <section>
+        <div class="pid-cols">
+            <div class="pid-col-text"><p><strong>Experience the ultimate escape with the Faraday sauna.</strong></p><p>Its exclusive shield uses a blend of silver and organic cotton to block more than 99% of common electromagnetic fields for a deeper sense of peace and rejuvenation. Our full-spectrum ThermaLight® infrared therapy helps you sweat faster, more efficiently, and at lower temperatures compared to other saunas.&nbsp;</p><p>With four levels of intensity and adjustable height, the sauna panel lets you completely tailor your session to your preferences.</p><ul><li>Blocks virtually all environmental EMFs</li><li>Compact and portable</li><li>Hypoallergenic</li><li>Tool-free assembly</li><li>Wheelchair accessible</li><li>Machine-washable cover and shield</li><li>Minimalist design</li></ul></div>
+            <div class="pid-col-img">
+                <img src="{{ 'faraday-infrared-sauna-overview.jpg' | asset_url }}" alt="" />
+            </div>
+        </div>
+    </section>
+    </div>
+    
+    
+    <div class="product-info-details hideMe" id="pid-whatsIncluded">
+    <section>
+        <div class="wis">
+            
+                <div class="wi" style="background-image: url('{{ 'tungsten-sauna-panel-wi.jpg' | asset_url }}');">
+                    <h3>Tungsten Infrared Sauna Panel</h3>
+                    <p>Four 250 W full-spectrum infrared ThermaLight® on a solid American basswood mount with carrying handle. Stainless steel guards protect from heat and electromagnetic fields.
+    </p>
+                </div>
+            
+                <div class="wi" style="background-image: url('{{ 'portable-enclosure-wi.jpg' | asset_url }}');">
+                    <h3>Portable Sauna Enclosure</h3>
+                    <p>Two layers of organic cotton canvas, American basswood frame, and easy-insert connectors. </p>
+                </div>
+            
+                <div class="wi" style="background-image: url('{{ 'bamboo-grounding-mat-wi.jpg' | asset_url }}');">
+                    <h3>Bamboo Grounding Mat</h3>
+                    <p>One organic, unvarnished bamboo grounding mat and three-foot grounding cable to protect from wired electric field voltage.</p>
+                </div>
+            
+                <div class="wi" style="background-image: url('{{ 'emf-shield-wi.jpg' | asset_url }}');">
+                    <h3>EMF Shield</h3>
+                    <p>Our proprietary machine-washable shield with grounding cable. </p>
+                </div>
+            
+                <div class="wi" style="background-image: url('{{ 'sauna-stool-wi.jpg' | asset_url }}');">
+                    <h3>Sauna Stool</h3>
+                    <p>One ergonomic stool made of American basswood.</p>
+                </div>
+            
+                <div class="wi" style="background-image: url('{{ 'saunaspace-exfoliating-brush-wi.jpg' | asset_url }}');">
+                    <h3>SaunaSpace Exfoliating Brush</h3>
+                    <p>One exfoliating brush made of bamboo with stiff bristles for invigorating exfoliation.</p>
+                </div>
+            
+                <div class="wi" style="background-image: url('{{ 'headsuphealth-wi.jpg' | asset_url }}');">
+                    <h3>Heads Up App</h3>
+                    <p>Track your results with a 3 months complimentary App access, customized for your SaunaSpace experience.</p>
+                </div>
+            
+                <div class="hasBoxes">
+                    <h3>Number of Boxes</h3>
+                    Your Faraday Infrared Sauna will ship in <strong>3</strong> boxes.
+                    
+                        <p class="fineprint" style="margin-top: .5em;">Box 1: 27 x 26 x 11 in, 27 lb (69 x 66 x 28 cm, 12.2 kg)<br>Box 2: 37 x 17 x 11 in, 42 lb (94 x 43 x 28 cm, 19 kg)<br>Box 3: 19 x 18 x 6 in, 11 lb (48 x 46 x 15 cm, 5 kg)</p>
+                    
+                </div>
+            
+        </div>
+    </section>
+    </div>
+    
+    <div class="product-info-details hideMe" id="pid-materials">
+    <section>
+        <div class="pid-cols">
+            <div class="pid-col-text"><h2>Natural. Hypoallergenic. Sustainable.</h2><h3>North American basswood</h3><p>Sustainably harvested and crafted without chemicals or oils.</p><h3>Stainless steel</h3><p>Untreated, USA-manufactured guards free of powder coating.</p><h3>Organic bamboo</h3><p>Heat-treated for durability. Unvarnished and chemical-free.</p><h3>Organic canvas</h3><p>GOTS-certified 100% cotton canvas. Durable, machine-washable construction.</p><h3>Organic cotton and silver</h3><p>Our cutting-edge shielding fabric is machine washable and free of aluminum and nickel.</p></div>
+            <div class="pid-col-img">
+                <img src="{{ 'faraday-infrared-sauna-materials.jpg' | asset_url }}" alt="" />
+            </div>
+        </div>
+    </section>
+    </div>
+    
+    <div class="product-info-details hideMe" id="pid-specs">
+    <section>
+        <div class="pid-cols">
+            <div class="pid-col-text pid-specs">
+                <p><strong>Weight</strong></p><p>Total: 52.7 lb (23.9 kg)</p><p>Tungsten Sauna Panel: 11.4 lb (5.2 kg)</p><p>Frame Poles: 6.6 lb (3 kg)</p><p>Grounding Mat: 3.4 lb (1.5 kg)</p><p>Sauna Stool: 8.5 lb (3.9 kg)</p><p>Cover Set: 21 lb (9.5 kg)</p><p>EMF Shield Cover: 1.8 lb (0.8 kg)</p><p><br></p><p><strong>Assembled dimensions</strong></p><p>Entrance width: 52 in (132 cm)</p><p>Rear width: 24 in (61 cm)</p><p>Depth: 52 in (132 cm)</p><p>Height: 63 in (160 cm)</p><p><br></p><p><strong>Tungsten Sauna Panel dimensions</strong></p><p>Width: 23.75 in (60.3 cm)</p><p>Height: 23.5 in (59.7 cm)</p><p>Depth: 9 in (22.9 cm)</p><p><br></p><p><strong>Sauna Stool dimensions</strong></p><p>Height: 18 in (46 cm)</p><p>Seat width: 14 in (36 cm)</p><p>Leg width: 16 in (41 cm)</p><p><br></p><p><strong>Electrical info</strong></p><p>Wattage: 250 W</p><p>Input voltage and frequency: 120 V at 50–60 Hz, 240 V at 50–60 Hz</p><p><br></p><p><strong>Approvals</strong></p><p>All electrical parts UL-listed</p><p>CE-certified</p>
+                <!-- <p><strong>SKU:</strong> <span class="theSKU"></span><br /><strong>UPC:</strong> <span class="theUPC"></span></p> -->
+            </div>
+            <div class="pid-col-img">
+                <img src="{{ 'faraday-infrared-sauna-specifications.jpg' | asset_url }}" alt="" />
+            </div>
+        </div>
+    </section>
+    </div>
+    
+    <div class="product-info-details hideMe" id="pid-instructions">
+    <section>
+        <div class="pid-cols">
+            <div class="pid-col-text"><h2>Installation Locations</h2><p>The Faraday can be installed in any temperature- and humidity-controlled indoor space. Do not install your Faraday in a garage, enclosed porch, or other space subject to outdoor humidity.</p><p>Can be installed on any indoor flooring: wood, laminate, tile, synthetic. Heat from sauna does not heat up surroundings to any significant degree. The enclosure’s untreated dual-layer cover protects materials outside the sauna and prevents off-gassing.</p><p><a href="../../downloads/SaunaSpace_Sauna_Operation_Manual_Rev_21CE0126.pdf" target="_blank">Faraday Product Manual</a></p></div>
+            <div class="pid-col-img">
+                
+            </div>
+        </div>
+    </section>
+    </div>
+    
+    
+    </div>
+    
+    <div class="maroonBG">
+    <div class="top-features">
+        
+        <div class="top-feature">
+            <img src="{{ 'emf-protection.svg' | asset_url }}" alt="" />
+            <div class="tf-title etica">EMF Protection</div>
+            <p>Block out environmental stressors and disconnect from the world.</p>
+        </div>
+        
+        <div class="top-feature">
+            <img src="{{ 'faster-sessions.svg' | asset_url }}" alt="" />
+            <div class="tf-title etica">Faster Sessions</div>
+            <p>Full-spectrum infrared therapy helps you sweat faster and better than traditional saunas.</p>
+        </div>
+        
+        <div class="top-feature">
+            <img src="{{ 'portability.svg' | asset_url }}" alt="" />
+            <div class="tf-title etica">Portability</div>
+            <p>Save space with a compact sauna that stows away in minutes.</p>
+        </div>
+        
+        <div class="top-feature">
+            <img src="{{ 'built-to-last.svg' | asset_url }}" alt="" />
+            <div class="tf-title etica">Built-to-Last</div>
+            <p>Make a smart investment in a sauna made with quality materials.</p>
+        </div>
+        
+    </div>
+    </div>
+    
+    <div class="oc2"  style="background-image: url({{ 'faraday-infrared-sauna-emfBlocking.jpg' | asset_url }});">
+        <div class="oc-text oc-text-extra-padding" style="background-image:url({{ 'emf-blocking-badge-faded.svg' | asset_url }});">
+            <cms id='cms1'>
+    
+    <h2 class="alignLeft">The World’s Only EMF-Blocking Sauna</h2>
+    <p>Your environment is probably more stressful than you realize. That’s why our unique shielding fabric—made of silver and organic cotton—blocks electromagnetic fields from electricity, Wi-Fi, Bluetooth, cell signals and more so your body and mind can maximize the benefits of your full-spectrum infrared sauna. Third-party lab testing confirms the SaunaSpace EMF shield is up to 70x more effective than the competition.</p>
+    <div class="btnBox"><a href="../../what-are-electromagnetic-fields-emfs.html" class="btn btn-outline">Learn More</a></div>
+    </cms cms1>
+        </div>
+    </div>
+    
+    <div class="two-cols two-cols-wide">
+    <div class="col">
+        <img src="{{ 'health-benefits-thermalight.jpg' | asset_url }}" alt="Thermalight bulb" />
+    </div>
+    <div class="col">
+        <div class="tcw-text">
+            <cms id='cms4'>
+    
+    <h2 class="alignLeft">No One Does Infrared LikeUs</h2>
+    <p>We’ve spent years crafting the perfect hand-blown sauna bulb. We mimic the best of the sun—with none of the harmful UV—to create full-spectrum infrared therapy that is truly one of a kind.</p>
+    <a href="../../how-do-infrared-saunas-work.html" class="bold-link arrow-link">See How it Works</a>
+    </cms cms4>
+        </div>
+    </div>
+    </div>
+    
+    <div class="related-products">
+    
+    <h2>You may also like</h2>
+    
+    
+        <div class="rc-arrows">
+            <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onClick="scrollRelated(1);" />
+            <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onClick="scrollRelated(-1);" />
+            <div class="review-carousel related-carousel">
+            <!--the include below is looking for rsRP -->
+            
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../sauna-components/sauna-stool.html" ><img src="{{ 'sauna-stool-tile.jpg' | asset_url }}" alt="Sauna Stool" class="pt-img" /></a>
+                        <a href="../sauna-components/sauna-stool.html" class="pt-name">Sauna Stool</a>
+                    
+                        <p class="pt-price etica price8">$249.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../targeted-therapy/photon-infrared-therapy-light.html" ><img src="{{ 'photon-infrared-therapy-light-tile.jpg' | asset_url }}" alt="Photon Infrared Therapy Light" class="pt-img" /></a>
+                        <a href="../targeted-therapy/photon-infrared-therapy-light.html" class="pt-name">Photon Infrared Therapy Light</a>
+                    
+                        <p class="pt-price etica price3">$349.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../merchandise/infini-tee.html" ><img src="{{ 'infini-tee-tile.jpg' | asset_url }}" alt="Infini Tee" class="pt-img" /></a>
+                        <a href="../merchandise/infini-tee.html" class="pt-name">Infini Tee</a>
+                    
+                            <p class="pt-price etica">From: $24.99</p>
+                        
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../merchandise/saunaspace-bath-towel.html" ><img src="{{ 'saunaspace-bath-towel-tile.jpg' | asset_url }}" alt="SaunaSpace Bath Towel" class="pt-img" /></a>
+                        <a href="../merchandise/saunaspace-bath-towel.html" class="pt-name">SaunaSpace Bath Towel</a>
+                    
+                        <p class="pt-price etica price24">$29.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../products-we-love/its-easy-being-green-book.html" ><img src="{{ 'its-easy-being-green-book-tile.jpg' | asset_url }}" alt="It’s Easy Being Green: How Conscious Consumers and Ecopreneurs Can Save the World" class="pt-img" /></a>
+                        <a href="../products-we-love/its-easy-being-green-book.html" class="pt-name">It’s Easy Being Green: How Conscious Consumers and Ecopreneurs Can Save the World</a>
+                    
+                        <p class="noMargin">Aviva Peltin</p>
+                    
+                        <p class="pt-price etica price45">$16.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../replacement-bulbs/thermalight-infrared-bulb.html" ><img src="{{ 'thermalight-infrared-bulb-tile.jpg' | asset_url }}" alt="ThermaLight Infrared Bulb" class="pt-img" /></a>
+                        <a href="../replacement-bulbs/thermalight-infrared-bulb.html" class="pt-name">ThermaLight Infrared Bulb</a>
+                    
+                            <p class="pt-price etica">From: $89.99</p>
+                        
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../merchandise/saunaspace-sticker.html" ><img src="{{ 'saunaspace-sticker-tile.jpg' | asset_url }}" alt="SaunaSpace Sticker" class="pt-img" /></a>
+                        <a href="../merchandise/saunaspace-sticker.html" class="pt-name">SaunaSpace Sticker</a>
+                    
+                        <p class="pt-price etica price27">$4.99</p>
+                    
+                </div>
+    
+    
+            </div>
+        </div>
+                    
+    </div>
+    
+    
+    
+    <section class="reviews">
+    <h2>Reviews and Questions</h2>
+    
+    <div class="yotpo yotpo-main-widget" 
+        data-product-id="2105477365849"
+        data-name="Faraday+Infrared+Sauna"
+        data-url="https%3A%2F%2Fsauna%2Espace%2FpcatCode%2Ffaraday%2Dinfrared%2Dsauna"
+        data-image-url="https%3A%2F%2Fsauna%2Espace%2Fimg%2Fproducts%2Ffaraday%2Dinfrared%2Dsauna%2Dnatural%2Dgallery%2D01%2Ejpg"
+        data-price="5499.99"
+        data-currency="USD"
+        data-description="The+ultimate+sauna%3A+full%2Dspectrum+infrared%2C+light+therapy%2C+sustainable+materials%2C+compact%2C+portable%2C+and+the+world%27s+only+EMF%2Dblocking+sauna+shield%2E"></div>
+    </section>
+    
+    <div class="divider"></div>
+    
+    <section>
+    <h2>Feel the #Saunaspace Love</h2>
+    <div class="yotpo yotpo-pictures-widget" data-gallery-id="616f0941238de41916812c43"></div>
+    </section>
+    
+
+  <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
+    <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
+      <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+
+      <div class="product-media-modal__content" role="document" aria-label="{{ 'products.modal.label' | t }}" tabindex="0">
+        {%- liquid
+          if product.selected_or_first_available_variant.featured_media != null
+            assign media = product.selected_or_first_available_variant.featured_media
+            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
+          endif
+        -%}
+
+        {%- for media in product.media -%}
+          {%- liquid
+            if section.settings.hide_variants and variant_images contains media.src
+              assign variant_image = true
+            else
+              assign variant_image = false
+            endif
+
+            unless media.id == product.selected_or_first_available_variant.featured_media.id
+              render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image
+            endunless
+          -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </product-modal>
+
+  {% assign popups = section.blocks | where: "type", "popup" %}
+  {%- for block in popups -%}
+    <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+      <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+        <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+        <div class="product-popup-modal__content-info">
+          <h1 class="h2">{{ block.settings.page.title }}</h1>
+          {{ block.settings.page.content }}
+        </div>
+      </div>
+    </modal-dialog>
+  {%- endfor -%}
+</section>
+
+{% javascript %}
+  class ProductModal extends ModalDialog {
+    constructor() {
+      super();
+    }
+
+    hide() {
+      super.hide();
+    }
+
+    show(opener) {
+      super.show(opener);
+      this.showActiveMedia();
+    }
+
+    showActiveMedia() {
+      this.querySelectorAll(`[data-media-id]:not([data-media-id="${this.openedBy.getAttribute("data-media-id")}"])`).forEach((element) => {
+          element.classList.remove('active');
+        }
+      )
+      const activeMedia = this.querySelector(`[data-media-id="${this.openedBy.getAttribute("data-media-id")}"]`);
+      const activeMediaTemplate = activeMedia.querySelector('template');
+      const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null;
+      activeMedia.classList.add('active');
+      activeMedia.scrollIntoView();
+
+      const container = this.querySelector('[role="document"]');
+      container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
+
+      if (activeMedia.nodeName == 'DEFERRED-MEDIA' && activeMediaContent && activeMediaContent.querySelector('.js-youtube'))
+        activeMedia.loadContent();
+    }
+  }
+
+  if (!customElements.get('product-modal')) customElements.define('product-modal', ProductModal);
+{% endjavascript %}
+
+{% if product.media.size > 0 %}
+  <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
+<script src="{{ 'select2.min.js' | asset_url }}" async></script>
+
+<script>
+$(document).ready(function() {
+	$(".select-icons").select2({
+		templateResult: formatPlug,
+		minimumResultsForSearch: Infinity
+	});
+	$(".product-info-details a").removeAttr('target');
+	
+	$(".pid-col-text a").each(function() {
+		if($(this).attr("href").indexOf(".pdf") > 0) {
+			$(this).attr({"target":"_blank"});
+		}
+	});
+	
+});
+
+
+
+var shopifySKU="SF001BNA00N";
+var priceDisplay=""; //this is the VALUE that is shown. There's also a function displayPrice() that is used to display this intelligently (to account for sale/Compare At pricing)
+var whichUPC="810018190125";
+var theQty=0;
+var theOOS="continue";
+$(".theUPC").html(whichUPC);
+updateATC($("#plugChoice"));
+if(shopifySKU) {
+	displayPrice(5499.99,5499.99);
+}
+
+$(".oos-fineprint").removeClass("hideMe");
+
+	$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
+	$(".preorder-box").removeClass("hideMe");
+	//$(".op-30day-box").addClass("hideMe");
+
+
+
+$(".product-info-tab").on("click",function() {
+	$(".product-info-tab").removeClass("product-info-tab-on");
+	$(this).addClass("product-info-tab-on");
+	$(".product-info-details").addClass("hideMe");
+	var whichTab=$(this).attr("data-tab");
+	$("#pid-" + whichTab).removeClass("hideMe");
+});
+
+//swapping out tiles in related products based on color choices is in global.js.
+
+
+
+$(".pot-col-100").on("click",function() {
+	$(this).addClass("hideMe");
+	$(".pot-col").removeClass("hideMe");
+});
+
+var scsChecked="standard";
+function updateSaunaCoverSetSKU(v) {
+	if(scsChecked=='standard' || scsChecked=='shielded') {
+		if(v=='standard') { shopifySKU=shopifySKU.replace("ES","SD"); }
+		if(v=='shielded') { shopifySKU=shopifySKU.replace("SD","ES"); }
+		if(v=='upgrade') {
+			shopifySKU="C0CE" + shopifySKU.substr(6,2) + "0000N"
+		}
+	}
+	
+	if(scsChecked=='upgrade') {
+		if(v=='standard') { shopifySKU="C0CSSD" + shopifySKU.substr(4,2) + "00N" }
+		if(v=='shielded') { shopifySKU="C0CSES" + shopifySKU.substr(4,2) + "00N" }
+	}
+	
+	
+		//after the SKU is changed, need to get the productID and pcolorID so that the right thing can be added to the cart
+		$.ajax({ type: "POST",   
+		 url: "/res/getNewProductID.asp?shopifySKU=" + shopifySKU,   
+		 async: false,
+		 success : function(newProductInfo)
+		 {
+			npiArr=newProductInfo.split("|")
+			$(".atc").attr("data-pcolorID",npiArr[0])
+			$(".atc").attr("data-productID",npiArr[1])
+			$(".atc").attr("data-shopifySKU",shopifySKU);
+			$(".theUPC").html(npiArr[4]);
+			$(".theQty").html(npiArr[5]);
+			$(".theOOS").html(npiArr[6]);
+			displayPrice(npiArr[3],npiArr[2]);
+		 }
+	});
+	$(".theSKU").html(shopifySKU);
+	scsChecked=v;
+};
+
+function addEMFShield(cb) {
+	if($(cb).is(":checked")) {
+		shopifySKU=shopifySKU.replace("SD","ES");
+	} else {
+		shopifySKU=shopifySKU.replace("ES","SD");
+	}
+	//after the SKU is changed, need to get the productID and pcolorID so that the right thing can be added to the cart
+	//console.log("addEMFShield - " + shopifySKU)
+	$.ajax({ type: "POST",   
+		 url: "/res/getNewProductID.asp?shopifySKU=" + shopifySKU,   
+		 async: false,
+		 success : function(newProductInfo)
+		 {
+			npiArr=newProductInfo.split("|")
+			$(".atc").attr("data-pcolorID",npiArr[0])
+			$(".atc").attr("data-productID",npiArr[1])
+			$(".atc").attr("data-shopifySKU",shopifySKU);
+			$(".theUPC").html(npiArr[4]);
+			$(".theQty").html(npiArr[5]);
+			$(".theOOS").html(npiArr[6]);
+			displayPrice(npiArr[3],npiArr[2]);
+		 }
+	});
+	$(".theSKU").html(shopifySKU);
+}
+
+function formatPlug (plug) {
+  if (!plug.id) {
+    return plug.text;
+  }
+  var plugPath='';
+  if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
+  if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
+  if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
+  if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
+  if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  var $plug = $(
+    '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
+  );
+  return $plug;
+};
+
+function updateATC(p) {
+	var plugID=$(p).find(':selected').attr('data-plugID');
+	var plugCode=$(p).find(':selected').attr('data-plugCode');
+
+	
+		shopifySKU=$(".color-choice-on").attr("data-colorPlugSKU" + plugCode);
+		whichUPC=$(".color-choice-on").attr("data-colorPlugUPC" + plugCode);
+	
+	
+
+	$(".atc").attr("data-shopifySKU",shopifySKU);
+	$(".atc").attr("data-plugID",plugID);
+	$(".theSKU").html(shopifySKU);
+	$(".theUPC").html(whichUPC);
+	$(".theQty").html(theQty);
+	$(".theOOS").html(theOOS);
+}
+
+var colorHash=(window.location.hash).replace("#","");
+if(colorHash=="") { 
+	colorHash="natural"
+}
+
+
+	whichCC=$(".cc[data-colorCode=" + colorHash + "]");
+	if($(whichCC).hasClass("colorNotAvailable")) {
+		loadGallery(whichCC,"outOfStockClass");
+	} else {
+		loadGallery(whichCC);
+	}
+
+	
+function loadGallery(cc,oos) {
+	
+	$(".pc").removeClass("color-choice-on").addClass("color-choice-off");
+	$(cc).addClass("color-choice-on");
+	$(".color, .sac-color").html($(cc).attr("data-color"));
+	whichColorCode=$(cc).attr("data-colorCode");
+	whichColorOrderProcessing=$(cc).attr("data-colorOrderProcessing");
+		if(whichColorOrderProcessing != '') { 
+			$("#orderProcessing").html(whichColorOrderProcessing);
+		} else {
+			$("#orderProcessing").html("1–3 days");
+		}
+	whichColorSKU=$(cc).attr("data-colorSKU");
+	whichColorUPC=$(cc).attr("data-colorUPC");
+	var plugCode=$("#plugChoice").find(':selected').attr('data-plugCode');
+	whichColorPlugSKU=$(cc).attr("data-colorPlugSKU" + plugCode);
+	whichColorPlugUPC=$(cc).attr("data-colorPlugUPC" + plugCode);	
+	whichColorID=$(cc).attr("data-colorID");
+	stockInfoArr=$(cc).attr("data-stock").split("|");  //[0]=quantity, [1]=deny or continue, [2]=track quantity
+	{% comment %} $("#theGallery").load("/res/getGallery.asp",{hasColors:1,productCode:'faraday-infrared-sauna',firstColorCode:whichColorCode}); {% endcomment %}
+	$(".atc-box, .op-30day-box").removeClass("outOfStockClass").addClass(oos);
+	//console.log(stockInfoArr[1],stockInfoArr[0])
+	$(".oos-fineprint").removeClass("hideMe");
+	if(oos=="outOfStockClass" || (stockInfoArr[1]=='deny' && stockInfoArr[0]<=0)) {
+		$("#sacText").html("Out of Stock").addClass("sac-text-disabled");
+		$(".oos-fineprint").addClass("hideMe");
+	} else {
+		$("#sacText").html("Add to Cart").removeClass("sac-text-disabled");
+	}
+	
+if((stockInfoArr[1]=='continue' && stockInfoArr[0]<=0)) {
+	$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
+	$(".preorder-box").removeClass("hideMe");
+	//$(".op-30day-box").addClass("hideMe");
+} else {
+	$(".atcMain, #sacText").html("Add to Cart");
+	$(".preorder-box").addClass("hideMe");
+	$(".op-30day-box").removeClass("hideMe");
+}
+	
+	if(whichColorSKU !='') {
+		shopifySKU=whichColorSKU;
+		$(".atc").attr("data-shopifySKU",shopifySKU);
+		var saunaCoverSet=$("input[name=ownShield]:checked").val();
+		
+		
+			
+		$(".theSKU").html(shopifySKU);
+		$(".theUPC").html(whichColorUPC);
+	}
+
+	if(typeof whichColorPlugSKU !== "undefined") {
+		$(".theSKU").html(whichColorPlugSKU);
+		$(".theUPC").html(whichColorPlugUPC);
+		$(".theQty").html(stockInfoArr[0]);
+		$(".theOOS").html(stockInfoArr[1]);
+		shopifySKU=whichColorPlugSKU;
+	}
+
+	$(".atc").attr("data-shopifySKU",shopifySKU);
+	
+		$(".atc").attr("data-pcolorID",whichColorID);
+	
+
+	displayPrice($(cc).attr("data-colorCompareAtPrice"),$(cc).attr("data-colorPrice"))
+	//window.location.hash=whichColorCode;  //commented because otherwise back button breaks/only changes hash
+}
+
+var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
+function scrollRelated(v) {
+	tileSize=295; //includes right margin
+	numTiles=parseInt(currentRelatedCarouselWidth / tileSize);
+	timeToScroll=numTiles * 200;
+	moveAmt=numTiles * tileSize  * v;
+	$(".related-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+//currentThumbsCarouselWidth is in getGallery.asp
+function scrollGallery(v) {
+	tileSize=145; //includes right margin
+	numTiles=parseInt(currentThumbsCarouselWidth / tileSize);
+	timeToScroll=numTiles * 100;
+	moveAmt=numTiles * tileSize  * v;
+	$(".product-thumbs").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+function showGalleryHero(n,colorCode) {
+	if(colorCode==0) {
+		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-gallery-' | asset_url }}" + n + ".jpg"});
+	} else {
+		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-' | asset_url }}" + colorCode + "-gallery-" + n + ".jpg"});
+	}
+}
+
+function potMore(f) {
+	$(".pot-col").addClass("hideMe");
+	$("#" + f + "Col").removeClass("hideMe");
+}
+
+function displayPrice(c,p) {
+	c=parseFloat(c);
+	p=parseFloat(p);
+	if(p < c) {
+		priceDisplay="<div class='two-prices'>$" + p.toLocaleString() + " <span>$" + c.toLocaleString() + "</span></div>"
+	} else {
+		priceDisplay="$" + p.toLocaleString();
+	}
+	$(".price").html(priceDisplay);
+	$(".sac-price").html("$" + c.toLocaleString());
+	$(".atc").attr("data-fbPrice",p);
+	
+	console.log("ViewContent - " + p,shopifySKU)
+	fbq('track', 'ViewContent',
+	  {
+		value:  parseInt(p),
+		currency: 'USD',
+		content_type: 'product', 
+		content_ids: shopifySKU
+	  }
+	);	
+	
+}
+
+let options = {
+	root: null,
+	rootMargin: '-20px 0px 0px 0px', 
+	threshold: 1.0 
+};
+
+const stickyAddToCart = document.querySelector('.atcMain');
+if(window.matchMedia('(min-width: 750px)').matches) {
+	createObserver('stickyAddToCart');
+}
+
+function onChangestickyAddToCart(changes, observerstickyAddToCart) {
+		changes.forEach(change => { if (change.intersectionRatio >= 1) {
+			$(".stickyBG").removeClass("stickyBG-visible");
+			//console.log("hidden")
+		} else {
+			//console.log("visible")
+			$(".stickyBG").addClass("stickyBG-visible");
+		}
+	});
+}
+
+
+	function updateUC(p) {
+		ucArr=["{{ 'targeted-therapy-light.jpg' | asset_url }}","{{ 'targeted-therapy-desk-arm.jpg' | asset_url }}","{{ 'targeted-therapy-case.jpg' | asset_url }}","{{ 'tiphany-adams.jpg' | asset_url }}targeted-therapy-sauna-supreme.jpg","{{ 'targeted-therapy-better-night-light.jpg' | asset_url }}"]
+		$(".build-panels p").addClass("hideMe");
+		$("#bp" + p).find("p").removeClass("hideMe");
+		$("#bpImg").attr("src",ucArr[p-1]);
+	}
+</script>
+<script>
+	var currentThumbsCarouselWidth=$(".product-thumbs").width() + 20;
+	$("#theGallery").removeClass("spinner");
+</script>
+
+<script src="{{ 'lite-yt-embed.js' | asset_url }}"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function isIE() {
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
+      const trident = ua.indexOf('Trident/');
+
+      return (msie > 0 || trident > 0);
+    }
+
+    if (!isIE()) return;
+    const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
+    const noScriptInputWrapper = document.createElement('div');
+    const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
+    noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
+    variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+
+    document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function(event) {
+      hiddenInput.value = event.currentTarget.value;
+    });
+  });
+</script>
+
+{%- if first_3d_model -%}
+  <script type="application/json" id="ProductJSON-{{ product.id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+  </script>
+
+  <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+{%- endif -%}
+
+{%- liquid
+  if product.selected_or_first_available_variant.featured_media
+    assign seo_media = product.selected_or_first_available_variant.featured_media
+  else
+    assign seo_media = product.featured_media
+  endif
+-%}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {% if seo_media -%}
+      {%- assign media_size = seo_media.preview_image.width | append: 'x' -%}
+      "image": [
+        {{ seo_media | img_url: media_size | prepend: "https:" | json }}
+      ],
+    {%- endif %}
+    "description": {{ product.description | strip_html | json }},
+    {% if product.selected_or_first_available_variant.sku != blank -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- endif %}
+    "brand": {
+      "@type": "Thing",
+      "name": {{ product.vendor | json }}
+    },
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type" : "Offer",
+          {%- if variant.sku != blank -%}
+            "sku": {{ variant.sku | json }},
+          {%- endif -%}
+          "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price" : {{ variant.price | divided_by: 100.00 | json }},
+          "priceCurrency" : {{ cart.currency.iso_code | json }},
+          "url" : {{ request.origin | append: variant.url | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "text",
+      "name": "t:sections.main-product.blocks.text.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Text block",
+          "label": "t:sections.main-product.blocks.text.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
+            },
+            {
+              "value": "uppercase",
+              "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main-product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+      "type": "quantity_selector",
+      "name": "t:sections.main-product.blocks.quantity_selector.name",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "t:sections.main-product.blocks.variant_picker.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
+            },
+            {
+              "value": "button",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+            }
+          ],
+          "default": "button",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "t:sections.main-product.blocks.description.name",
+      "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "t:sections.main-product.blocks.share.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.main-product.blocks.share.settings.text.label",
+          "default": "Share"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.share.settings.featured_image_info.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.share.settings.title_info.content"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "t:sections.main-product.blocks.custom_liquid.name",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.label",
+          "info": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.info"
+        }
+      ]
+    },
+    {
+      "type": "collapsible_tab",
+      "name": "t:sections.main-product.blocks.collapsible_tab.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Collapsible row",
+          "info": "t:sections.main-product.blocks.collapsible_tab.settings.heading.info",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            }
+          ],
+          "default": "check_mark",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.label"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "popup",
+      "name": "t:sections.main-product.blocks.popup.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Pop-up link text",
+          "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+        },
+        {
+          "id": "page",
+          "type": "page",
+          "label": "t:sections.main-product.blocks.popup.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "t:sections.main-product.blocks.rating.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_info",
+      "default": true,
+      "label": "t:sections.main-product.settings.enable_sticky_info.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.settings.header.content",
+      "info": "t:sections.main-product.settings.header.info"
+    },
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "t:sections.main-product.settings.gallery_layout.options__1.label"
+        },
+        {
+          "value": "thumbnail",
+          "label": "t:sections.main-product.settings.gallery_layout.options__2.label"
+        },
+        {
+          "value": "thumbnail_slider",
+          "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
+        }
+      ],
+      "default": "stacked",
+      "label": "t:sections.main-product.settings.gallery_layout.label"
+    },
+    {
+      "type": "select",
+      "id": "media_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.main-product.settings.media_size.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.main-product.settings.media_size.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.main-product.settings.media_size.options__3.label"
+        }
+      ],
+      "default": "large",
+      "label": "t:sections.main-product.settings.media_size.label",
+      "info": "t:sections.main-product.settings.media_size.info"
+    },
+    {
+      "type": "select",
+      "id": "mobile_thumbnails",
+      "options": [
+        {
+          "value": "show",
+          "label": "t:sections.main-product.settings.mobile_thumbnails.options__1.label"
+        },
+        {
+          "value": "hide",
+          "label": "t:sections.main-product.settings.mobile_thumbnails.options__2.label"
+        }
+      ],
+      "default": "hide",
+      "label": "t:sections.main-product.settings.mobile_thumbnails.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_variants",
+      "default": false,
+      "label": "t:sections.main-product.settings.hide_variants.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "default": false,
+      "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}
