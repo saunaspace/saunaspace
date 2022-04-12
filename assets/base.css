@@ -4202,6 +4202,10 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	margin: 60px 0;
 }
 
+.product__media-gallery li {
+	list-style-type: none;
+}
+
 .product-gallery {
 	width: 100%;
 	max-width: 720px;
