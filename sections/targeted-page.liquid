@@ -1,0 +1,178 @@
+
+
+<img src="{{ 'targeted-therapy.jpg' | asset_url }}" style="display: none;">
+	<div class="photo-headerBG" style="background-image:url({{ 'targeted-therapy.jpg' | asset_url }}); background-position: 50% 0; ">
+		<div class="ph-width">
+			<div class="ph-text">
+				<cms id='cms0'>
+				<h1>Experience Relief Anywhere</h1>
+				<p class="etica">At home, at work, and on the road, the Photon shines as your portable infrared therapy oasis. Discover the many ways this one-light wonder can brighten your day.</p>
+				</cms cms0>
+			</div>
+		</div>
+	</div>
+
+		<div class="side-by-side">
+			<div class="sbs-img"><img src="{{ 'targeted-therapy-light.jpg' | asset_url }}" alt="" loading="lazy" /></div>
+			<div class="sbs-text">
+				<cms id='cms1'>
+				<h2>Target Trouble Spots</h2>
+				<p>Enjoy the benefits of infrared therapy wherever and whenever you need it. Bask in the Photon’s glow for deep tissue rejuvenation and calming warmth.</p>
+				<a href="/products/photon-infrared-therapy-light" class="btn">Shop Photon Therapy Light</a>
+				</cms cms1>
+			</div>
+		</div>
+
+		<div class="side-by-side sbs-reverse">
+			<div class="sbs-img"><img src="{{ 'targeted-therapy-desk-arm.jpg' | asset_url }}" alt="" loading="lazy" /></div>
+			<div class="sbs-text">
+				<cms id='cms2'>
+				<h2>Beat Screen Fatigue</h2>
+				<p>Ease the exhaustion of long days at the computer by counteracting the flickering blue light of your screens. Our Photon Desk Arm saves precious desk space and helps you find the perfect angle.</p>
+				<a href="/products/photon-desk-arm" class="btn">Shop Photon Desk Arm</a>
+				</cms cms2>
+			</div>
+		</div>
+
+		<div class="side-by-side">
+			<div class="sbs-img"><img src="{{ 'targeted-therapy-case.jpg' | asset_url }}" alt="" loading="lazy" /></div>
+			<div class="sbs-text">
+				<cms id='cms3'>
+				<h2>Travel in Comfort</h2>
+				<p>The Photon can help your body adjust gracefully during hectic travel days, and the soft case makes it easy to bring along for the adventure. Say hello to your new favorite piece of carry-on.</p>
+				<a href="/products/photon-soft-case" class="btn">Shop Photon Soft Case</a>
+				</cms cms3>
+			</div>
+		</div>
+	
+		<section>
+			<div class="divider"></div>
+			<div class="two-cols">
+				<div class="col">
+					<img src="{{ 'targeted-therapy-sauna-supreme.jpg' | asset_url }}" alt="" loading="lazy" />
+					<cms id='cms4a'>
+					<h2>Sauna Supreme</h2>
+					<p>Amp up the intensity of your sauna sessions or give special attention to cold feet with a Photon in your Luminati or Faraday.</p>
+					</cms cms4a>
+				</div>
+				<div class="col">
+					<img src="{{ 'targeted-therapy-better-night-light.jpg' | asset_url }}" alt="" loading="lazy" />
+					<cms id='4b'>
+					<h2>A Better Night Light</h2>
+					<p>Escape the strain of harsh indoor lights with a Photon that evokes the warm tones of sunset.</p>
+					</cms cms4b>
+				</div>
+			</div>
+
+		</section>
+
+		<div class="photo-headerBG ph-inline" style="background-image:url({{ 'targeted-therpay-full-spectrum-renewal.jpg' | asset_url }}); background-position: 50% 0; ">
+			<div class="ph-width">
+				<div class="ph-text">
+					<cms id='cms5'>
+					<h1>Full-Spectrum Renewal</h1>
+					<p class="etica">The magic of SaunaSpace starts with our one-of-a-kind infrared spectrum that blends the best of nature with the latest innovations.</p>
+					<a href="/how-do-infrared-saunas-work" class="btn btn-outline">Learn About Thermalight® Technology</a>
+					</cms cms5>
+				</div>
+			</div>
+		</div>
+
+		<section>
+			<h2 class="alignLeft">Shop Targeted Therapy</h2>
+				<div class="product-tiles">
+						<!--the include below is looking for rsRP -->
+						
+
+					<div class="product-tile" style="flex-shrink: 0;">
+						
+							<a href="products/photon-infrared-therapy-light.html" ><img src="{{ 'photon-infrared-therapy-light-tile.jpg' | asset_url }}" alt="Photon Infrared Therapy Light" class="pt-img" /></a>
+							<a href="products/photon-infrared-therapy-light.html" class="pt-name">Photon Infrared Therapy Light</a>
+						
+							<p class="pt-price etica price3">$349.99</p>
+						
+					</div>
+	
+		
+
+					<div class="product-tile" style="flex-shrink: 0;">
+						
+							<a href="products/photon-desk-arm.html" ><img src="{{ 'photon-desk-arm-tile.jpg' | asset_url }}" alt="Photon Desk Arm" class="pt-img" /></a>
+							<a href="products/photon-desk-arm.html" class="pt-name">Photon Desk Arm</a>
+						
+							<p class="pt-price etica price4">$249.99</p>
+						
+					</div>
+	
+		
+
+					<div class="product-tile" style="flex-shrink: 0;">
+						
+							<a href="products/photon-soft-case.html" ><img src="{{ 'photon-soft-case-tile.jpg' | asset_url }}" alt="Photon Soft Case" class="pt-img" /></a>
+							<a href="products/photon-soft-case.html" class="pt-name">Photon Soft Case</a>
+						
+							<p class="pt-price etica price5">$279.99</p>
+						
+					</div>
+	
+		
+				</div>
+		</section>
+{% javascript %}
+$(".compare-panel").hover(
+	function() {
+	var whichPanel=$(this).attr("data-panel")
+	$("#" + whichPanel).addClass( "num-on" );
+},
+	function() {
+	var whichPanel=$(this).attr("data-panel")
+	$("#" + whichPanel).removeClass( "num-on" );
+	}
+);
+
+$(".num").hover(
+	function() {
+	var whichNum=$(this).attr("id")
+	$("[data-panel=" + whichNum + "]").addClass( "compare-panel-on" );
+},
+	function() {
+	var whichNum=$(this).attr("id")
+	$("[data-panel=" + whichNum + "]").removeClass( "compare-panel-on" );
+	}
+);
+
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}
