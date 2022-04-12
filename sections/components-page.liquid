@@ -1,0 +1,169 @@
+
+<div class="photo-headerBG noMargin" style="background-image:url({{ 'sauna-components.jpg' | asset_url }}); background-position: 50% 0; ">
+		<div class="ph-width">
+			<div class="ph-text">
+				<cms id='0'>
+				<h1>Sauna Your Way</h1>
+				<p class="etica">Upgrade your traditional sauna or build up to the ultimate experience piece by piece with expertly crafted components from SaunaSpace.</p>
+				</cms cms0>
+			</div>
+		</div>
+	</div>
+
+<div class="tanBG ">	
+	<section>
+		<h2 class="h2Spacing">Small Space Conversion</h2>
+		<div class="three-cols noMargin">
+			<div class="three-col">
+				<img src="{{ 'sauna-components-ampUp.jpg' | asset_url }}" alt="" loading="lazy" />
+				<div class="three-col-text">
+					<cms id='cms1a'>
+					<div class="three-col-head">Amp up your cabinet sauna</div>
+					<p>Sweat faster and enjoy the benefits of light therapy by replacing the heat source in your existing sauna with a Tungsten Infrared Sauna Panel.</p>
+					</cms cms1a>
+				</div>
+			</div>
+			<div class="three-col">
+				<img src="{{ 'sauna-components-transform.jpg' | asset_url }}" alt="" loading="lazy" />
+				<div class="three-col-text">
+					<cms id='cms1b'>
+					<div class="three-col-head">Transform small spaces</div>
+					<p>Any closet or enclosure can transition into a sauna with a Tungsten, Tungsten Pedestal, and Sauna Stool.</p>
+					</cms cms1b>
+				</div>
+			</div>
+			<div class="three-col">
+				<img src="{{ 'sauna-components-showerToSpa.jpg' | asset_url }}" alt="" loading="lazy" />
+				<div class="three-col-text">
+					<cms id='cms1c'>
+					<div class="three-col-head">Go from shower to spa</div>
+					<p>Tap into your shower’s full potential. Our Shower Sauna Conversion Kit sets up (and stows away) in minutes.</p>
+					</cms cms1c>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<section>
+	<div class="centered-text">
+		<cms id='cms2'>
+		<h2>Build the Perfect Sauna</h2>
+		<p>Want to create your very own Faraday Infrared Sauna one piece at a time? Here’s the plan.</p>
+		</cms cms2>
+	</div>
+</section>
+
+	<div class="two-cols two-cols-wide tc-reverse tc-top">
+		<div class="col">
+			<img id="bpImg" src="{{ 'sauna-components-01-tungsten.jpg' | asset_url }}" alt="Tungsten Infrared Sauna Panel" loading="lazy" />
+		</div>
+		<div class="col build-panels">
+			<a href="javascript:void(0)" id="bp1" class="build-panel" onClick="updateSC(1)">
+				<div class="bp-head">Tungsten Infrared Sauna Panel</div>
+				<p>Get the benefits of heat and light therapy in your closet or shower, then upgrade to the enclosure later.</p>
+			</a>
+			<a href="javascript:void(0)" id="bp2" class="build-panel" onClick="updateSC(2)">
+				<div class="bp-head">Sauna Stool</div>
+				<p class="hideMe">Specially designed to make rotating easy and will fit in your finished sauna perfectly.</p>
+			</a>
+			<a href="javascript:void(0)" id="bp3" class="build-panel" onClick="updateSC(3)">
+				<div class="bp-head">EMF Shield</div>
+				<p class="hideMe">Make your oasis complete by blocking out cell signals, Wi-Fi, and other electromagnetic fields that detract from total relief.</p>
+			</a>
+			<a href="javascript:void(0)" id="bp4" class="build-panel" onClick="updateSC(4)">
+				<div class="bp-head">Sauna Enclosure Kit</div>
+				<p class="hideMe">Make your sessions more effective and create a dedicated retreat for health and wellness.</p>
+			</a>
+		</div>
+	</div>
+
+
+<div class="greyBG">
+	<div class="two-cols two-cols-wide">
+		<div class="col">
+			<img src="{{ 'thermalight-infrared-bulb-greyBG.jpg' | asset_url }}" alt="Thermalight bulb" loading="lazy" />
+		</div>
+		<div class="col">
+			<div class="tcw-text">
+				<cms id='cms3'>
+
+<h2 class="alignLeft">Technology that Works Like Nature</h2>
+<p>We’ve perfected our ThermaLight® bulbs to mimic natural heat and light therapy from the sun—minus the harmful UV—so you can feel your best.</p>
+<a href="/how-do-infrared-saunas-work" class="bold-link arrow-link">See How it Works</a>
+</cms cms3>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section>
+	<h2 class="alignLeft">Shop Sauna Components</h2>
+
+		<div class="product-tiles">
+				<!--the include below is looking for rsRP -->
+				<!--#include virtual="/res/relatedProducts.asp" -->
+		</div>
+
+
+</section>
+
+
+{% javascript %}
+function updateSC(p) {
+		if(p==1) {
+			$("#bp2 p, #bp3 p, #bp4 p").addClass("hideMe");
+			$("#bp1 p").removeClass("hideMe");
+			$("#bpImg").attr("src","{{ 'about-brian-richards.jpg' | asset_url }}sauna-components-01-tungsten.jpg")
+		}
+		if(p==2) {
+			$("#bp3 p, #bp4 p").addClass("hideMe");
+			$("#bp1 p, #bp2 p").removeClass("hideMe");
+			$("#bpImg").attr("src","{{ 'about-brian-richards.jpg' | asset_url }}sauna-components-02-stool.jpg")
+		}
+		if(p==3) {
+			$("#bp4 p").addClass("hideMe");
+			$("#bp1 p, #bp2 p, #bp3 p").removeClass("hideMe");
+			$("#bpImg").attr("src","{{ 'about-brian-richards.jpg' | asset_url }}sauna-components-04-emf.jpg")
+		}
+		if(p==4) {
+			$("#bp1 p, #bp2 p, #bp3 p, #bp4 p").removeClass("hideMe");
+			$("#bpImg").attr("src","{{ 'about-brian-richards.jpg' | asset_url }}sauna-components-03-enclosure.jpg")
+		}
+	}
+
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}
