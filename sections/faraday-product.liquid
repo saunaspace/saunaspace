@@ -42,7 +42,6 @@
 			<div class="sac-wrap">
 				<div class="sac-price etica">              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
 </div>
-				<a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="<%=productID%>" data-shopifySKU="<%=shopifySKU%>" data-pcolorID="<%=firstColorID%>" data-pcsID="">Add to Cart</a>
 			</div>
 		</div>
 	</div>
@@ -208,7 +207,60 @@
     <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
+        <div class="stickyBG">
+            <div class="sticky-add-to-cart">
+                <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
+                <div class="sac-wrap">
+                    <div class="sac-price etica">$5,499.99</div>
+                    <a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
+                </div>
+            </div>
+        </div>
 
+        <div class="product-text">
+                <div class="yotpo bottomLine" data-product-id="2105477365849" data-url="index.html"></div>
+                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">Faraday Infrared Sauna</h1>
+                
+                    <div class="product-price etica price"></div>
+                    <p>price varies by color</p>
+                     <div class="product-color etica"><span>Color:</span><span class="color">Natural</span></div>
+                    <div class="color-choices">
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c1 color-choice-off  " data-stock="0|continue|1" data-colorCompareAtPrice="5499.99" data-colorPrice="5499.99" data-color="Natural" data-colorCode="natural" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BNA00N" data-colorPlugSKUUK="SF002GNA00N" data-colorPlugSKUEU="SF002FNA00N" data-colorPlugSKUSW="SF002JNA00N" data-colorPlugSKUAU="SF002ZNA00N" data-colorPlugSKUBR="SF002NNA00N" data-colorPlugSKUIN="SF002MNA00N" data-colorPlugUPCUS="810018190125" data-colorPlugUPCUK="810018190170" data-colorPlugUPCEU="810018190224" data-colorPlugUPCSW="810018190279" data-colorPlugUPCAU="810018190323" data-colorPlugUPCBR="810018190422" data-colorPlugUPCIN="810018190378" data-colorID="1" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'natural.jpg' | asset_url }})"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c2 color-choice-off   cna-dark" data-stock="0|continue|1" data-colorCompareAtPrice="5699.99" data-colorPrice="5699.99" data-color="Indigo" data-colorCode="indigo" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BND00N" data-colorPlugSKUUK="SF002GND00N" data-colorPlugSKUEU="SF002FND00N" data-colorPlugSKUSW="SF002JND00N" data-colorPlugSKUAU="SF002ZND00N" data-colorPlugSKUBR="SF002NND00N" data-colorPlugSKUIN="SF002MND00N" data-colorPlugUPCUS="810018190132" data-colorPlugUPCUK="810018190187" data-colorPlugUPCEU="810018190231" data-colorPlugUPCSW="810018190286" data-colorPlugUPCAU="810018190330" data-colorPlugUPCBR="810018190439" data-colorPlugUPCIN="810018190385" data-colorID="2" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'indigo.jpg' | asset_url }})"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c3 color-choice-off   cna-dark" data-stock="0|continue|1" data-colorCompareAtPrice="5699.99" data-colorPrice="5699.99" data-color="Dark Chocolate" data-colorCode="dark-chocolate" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BDC00N" data-colorPlugSKUUK="SF002GDC00N" data-colorPlugSKUEU="SF002FDC00N" data-colorPlugSKUSW="SF002JDC00N" data-colorPlugSKUAU="SF002ZDC00N" data-colorPlugSKUBR="SF002NDC00N" data-colorPlugSKUIN="SF002MDC00N" data-colorPlugUPCUS="810018190149" data-colorPlugUPCUK="810018190194" data-colorPlugUPCEU="810018190248" data-colorPlugUPCSW="810018190293" data-colorPlugUPCAU="810018190347" data-colorPlugUPCBR="810018190446" data-colorPlugUPCIN="810018190392" data-colorID="3" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'dark-chocolate.jpg' | asset_url }})"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c4 color-choice-off  " data-stock="1|continue|1" data-colorCompareAtPrice="5699.99" data-colorPrice="5699.99" data-color="Stone" data-colorCode="stone" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BST00N" data-colorPlugSKUUK="SF002GST00N" data-colorPlugSKUEU="SF002FST00N" data-colorPlugSKUSW="SF002JST00N" data-colorPlugSKUAU="SF002ZST00N" data-colorPlugSKUBR="SF002NST00N" data-colorPlugSKUIN="SF002MST00N" data-colorPlugUPCUS="810018190156" data-colorPlugUPCUK="810018190200" data-colorPlugUPCEU="810018190255" data-colorPlugUPCSW="810018190309" data-colorPlugUPCAU="810018190354" data-colorPlugUPCBR="810018190453" data-colorPlugUPCIN="810018190408" data-colorID="4" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'stone.jpg' | asset_url }})"></div></div>
+                    
+                        <div onClick="loadGallery(this,'')" class="cc pc c5 color-choice-off  " data-stock="1|continue|1" data-colorCompareAtPrice="5999.99" data-colorPrice="5999.99" data-color="Hand-Dyed Turmeric" data-colorCode="turmeric" data-colorSKU="" data-colorUPC="" data-colorPlugSKUUS="SF001BTU00N" data-colorPlugSKUUK="SF002GTU00N" data-colorPlugSKUEU="SF002FTU00N" data-colorPlugSKUSW="SF002JTU00N" data-colorPlugSKUAU="SF002ZTU00N" data-colorPlugSKUBR="SF002NTU00N" data-colorPlugSKUIN="SF002MTU00N" data-colorPlugUPCUS="810018190163" data-colorPlugUPCUK="810018190217" data-colorPlugUPCEU="810018190262" data-colorPlugUPCSW="810018190316" data-colorPlugUPCAU="810018190361" data-colorPlugUPCBR="810018190460" data-colorPlugUPCIN="810018190415" data-colorID="5" data-colorOrderProcessing=""><div class="color-choice" style="background-image:url({{ 'turmeric.jpg' | asset_url }})"></div></div>
+                    
+                    </div><!--color-choices-->
+            
+                    <div class="product-plug">
+                        <p>Select your plug type:</p>
+                        <select class="select-icons" onChange="updateATC(this)" id="plugChoice">
+                            
+                            <option value="US" data-plugID="1" data-plugCode="US">US Plug (Standard)</option>
+                            
+                            <option value="UK" data-plugID="2" data-plugCode="UK">UK Plug Adapter</option>
+                            
+                            <option value="EU" data-plugID="3" data-plugCode="EU">EURO Plug Adapter</option>
+                            
+                            <option value="SW" data-plugID="4" data-plugCode="SW">Swiss Plug Adapter</option>
+                            
+                            <option value="AU" data-plugID="5" data-plugCode="AU">AU/NZ Plug Adapter</option>
+                            
+                            <option value="BR" data-plugID="6" data-plugCode="BR">Brazil Plug Adapter</option>
+                            
+                            <option value="IN" data-plugID="7" data-plugCode="IN">India Plug Adapter</option>
+                            
+                        </select> 
+                    </div>
+                
+                
+                </div><!--product-text-->
         {%- for block in section.blocks -%}
           {%- case block.type -%}
           {%- when '@app' -%}
@@ -217,10 +269,6 @@
             <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
             </p>
-          {%- when 'title' -%}
-            <h1 class="product__title" {{ block.shopify_attributes }}>
-              {{ product.title | escape }}
-            </h1>
           {%- when 'price' -%}
             <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
               {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
@@ -247,6 +295,8 @@
                 {{ product.description }}
               </div>
             {%- endif -%}
+
+            
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
           {%- when 'collapsible_tab' -%}
@@ -388,7 +438,62 @@
                 </variant-selects>
               {%- endif -%}
             {%- endunless -%}
-
+            <div class="atc-box">
+                <div class="atc-outOfStock">
+                    
+                        <p><strong>Sorry, this item is out of stock.</strong></p>
+                    <p>Please select a different color.</p>
+                </div>
+            </div>
+            
+            
+    
+            <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
+                <div class="op-30day">This item is currently out of stock but we are making more. You can pre-order this and we will ship as soon as it is ready.</div>
+            </div>
+            
+            <div class="op-30day-box">
+                
+                    <div class="op-30day">
+                        <div style="width: 100%;"><strong>Order Processing:</strong> <span id="orderProcessing">1–3 days</span>.</div>
+                    </div>
+                    <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
+                
+            </div>
+            
+    
+            
+            <div class="warranty-trial">
+                <div class="pwt product-warranty">10-year Warranty</div><div class="pwt product-trial">100-day Trial</div>
+            </div>
+            
+            
+            <div class="pay-over-time">
+                <div class="pot-head">Pay Over Time</div>
+                <div class="pot-col">
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="60" alt="SplitIt" />
+                    <span data-ml="splitItSummary"><p>Monthly payments using your credit card. 0% interest.</p></span>
+                    <a href="javascript:void(0)" onClick="potMore('splitit')">Learn More</a>
+                </div>
+                <div class="pot-divider"></div>
+                <div class="pot-col">
+                    <img src="{{ 'bread.png' | asset_url }}" width="60" alt="Bread Financing" />
+                    <span data-ml="breadSummary"><p>Simple loan with monthly payments as low as 0% APR for 6 months.*</p></span>
+                    <a href="javascript:void(0)" onClick="potMore('bread')">Learn More</a>
+                </div>
+                <div class="pot-col-100 hideMe" id="splititCol">
+                    <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15"  /></a>
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" />
+                    <span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
+                    <p class="fineprint">You can choose this option at checkout.</p>
+                </div>
+                <div class="pot-col-100 hideMe" id="breadCol">
+                    <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" /></a>
+                    <img src="{{ 'bread.png' | asset_url }}" width="70" alt="Bread Financing" />
+                    <span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
+                    <p class="fineprint">Check your eligibility in minutes at checkout.</p>
+                </div>
+            </div>
             <noscript class="product-form__noscript-wrapper-{{ section.id }}">
               <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
                 <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
@@ -635,7 +740,6 @@
         <div class="pid-cols">
             <div class="pid-col-text pid-specs">
                 <p><strong>Weight</strong></p><p>Total: 52.7 lb (23.9 kg)</p><p>Tungsten Sauna Panel: 11.4 lb (5.2 kg)</p><p>Frame Poles: 6.6 lb (3 kg)</p><p>Grounding Mat: 3.4 lb (1.5 kg)</p><p>Sauna Stool: 8.5 lb (3.9 kg)</p><p>Cover Set: 21 lb (9.5 kg)</p><p>EMF Shield Cover: 1.8 lb (0.8 kg)</p><p><br></p><p><strong>Assembled dimensions</strong></p><p>Entrance width: 52 in (132 cm)</p><p>Rear width: 24 in (61 cm)</p><p>Depth: 52 in (132 cm)</p><p>Height: 63 in (160 cm)</p><p><br></p><p><strong>Tungsten Sauna Panel dimensions</strong></p><p>Width: 23.75 in (60.3 cm)</p><p>Height: 23.5 in (59.7 cm)</p><p>Depth: 9 in (22.9 cm)</p><p><br></p><p><strong>Sauna Stool dimensions</strong></p><p>Height: 18 in (46 cm)</p><p>Seat width: 14 in (36 cm)</p><p>Leg width: 16 in (41 cm)</p><p><br></p><p><strong>Electrical info</strong></p><p>Wattage: 250 W</p><p>Input voltage and frequency: 120 V at 50–60 Hz, 240 V at 50–60 Hz</p><p><br></p><p><strong>Approvals</strong></p><p>All electrical parts UL-listed</p><p>CE-certified</p>
-                <!-- <p><strong>SKU:</strong> <span class="theSKU"></span><br /><strong>UPC:</strong> <span class="theUPC"></span></p> -->
             </div>
             <div class="pid-col-img">
                 <img src="{{ 'faraday-infrared-sauna-specifications.jpg' | asset_url }}" alt="" />
@@ -907,7 +1011,7 @@ if(shopifySKU) {
 
 $(".oos-fineprint").removeClass("hideMe");
 
-	$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
+	{% comment %} $(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order {% endcomment %}
 	$(".preorder-box").removeClass("hideMe");
 	//$(".op-30day-box").addClass("hideMe");
 
@@ -1071,16 +1175,7 @@ function loadGallery(cc,oos) {
 	} else {
 		$("#sacText").html("Add to Cart").removeClass("sac-text-disabled");
 	}
-	
-if((stockInfoArr[1]=='continue' && stockInfoArr[0]<=0)) {
-	$(".atcMain, #sacText").html("Add to Cart"); //was Pre-Order
-	$(".preorder-box").removeClass("hideMe");
-	//$(".op-30day-box").addClass("hideMe");
-} else {
-	$(".atcMain, #sacText").html("Add to Cart");
-	$(".preorder-box").addClass("hideMe");
-	$(".op-30day-box").removeClass("hideMe");
-}
+
 	
 	if(whichColorSKU !='') {
 		shopifySKU=whichColorSKU;

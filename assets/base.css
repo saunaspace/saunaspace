@@ -5141,7 +5141,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	display: none;
 }
 
-.btn {
+.btn, .product-form__submit {
 	text-transform: uppercase;
 	color: #fff;
 	font-weight: 700;
@@ -5453,13 +5453,13 @@ a { color: #C67A26; }
 	.select2-selection__rendered { text-align: left; font-weight: 700; font-size: 1.4rem; height: 30px !important; }
 	.select2-selection__rendered::before {content: ''; background-repeat: no-repeat; background-size: contain; width: 16px; height: 22px; display: inline-block; margin-right: 8px; transform:translateY(9px);}
 
-	span[title="US Plug (Standard)"]::before {  background-image:url(/img/plug-us.svg); }
-	span[title="UK Plug Adapter"]::before {  background-image:url(/img/plug-uk.svg); }
-	span[title="EURO Plug Adapter"]::before {  background-image:url(/img/plug-eu.svg); }
-	span[title="Swiss Plug Adapter"]::before {  background-image:url(/img/plug-sw.svg); }
-	span[title="AU/NZ Plug Adapter"]::before {  background-image:url(/img/plug-au.svg); }
-	span[title="Brazil Plug Adapter"]::before {  background-image:url(/img/plug-br.svg); }
-	span[title="India Plug Adapter"]::before {  background-image:url(/img/plug-in.svg); }
+	span[title="US Plug (Standard)"]::before {  background-image:url(plug-us.svg); }
+	span[title="UK Plug Adapter"]::before {  background-image:url(plug-uk.svg); }
+	span[title="EURO Plug Adapter"]::before {  background-image:url(plug-eu.svg); }
+	span[title="Swiss Plug Adapter"]::before {  background-image:url(plug-sw.svg); }
+	span[title="AU/NZ Plug Adapter"]::before {  background-image:url(plug-au.svg); }
+	span[title="Brazil Plug Adapter"]::before {  background-image:url(plug-br.svg); }
+	span[title="India Plug Adapter"]::before {  background-image:url(plug-in.svg); }
 
 	.select2-results__option { border-bottom: 1px solid #939393; white-space: nowrap;  }
 	.select2-results__option span { font-size: 1.5rem; height: 24px; display: flex; align-items: center;  }
