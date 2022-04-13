@@ -995,7 +995,7 @@ $(".cc").on("click",function() {
 	
 	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
 	$(this).addClass("color-choice-on");
-	$(".img" + whichProduct).attr("src","/img/products/" + whichProductCode + "-" + whichColor + "-tile.jpg");
+	$(".img" + whichProduct).attr("src","/assets/" + whichProductCode + "-" + whichColor + "-tile.jpg");
 	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
 });
 
@@ -1005,7 +1005,7 @@ $(".ccrp").on("click",function() {
 	whichColor=$(this).attr("data-colorCode");
 	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
 	$(this).addClass("color-choice-on");
-	$(".img" + whichProduct).attr("src","/img/products/" + whichProductCode + "-" + whichColor + "-tile.jpg");
+	$(".img" + whichProduct).attr("src","/assets/" + whichProductCode + "-" + whichColor + "-tile.jpg");
 	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
 	tileLink="rp" + whichProductCode;
 	baseURL=$("#" + tileLink).attr("data-url");
