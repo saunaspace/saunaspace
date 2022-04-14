@@ -4124,7 +4124,9 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 
 .product-tile {
 	width: 275px;
-	margin-right: 20px;
+	    padding: 0 10px;
+    margin: 0;
+}
 }
 .product__media-wrapper {
 	    margin: 0;
