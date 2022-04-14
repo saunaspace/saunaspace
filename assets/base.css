@@ -2898,7 +2898,7 @@ body {
 }
 
 section:not(.shopify-section) {
-	width: 100%;
+	width: 90%;
 	max-width: 1350px;
 	margin: 0 auto;
 }
@@ -4525,7 +4525,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	padding-top: var(--sectionBottom);
 	border-top: 1px solid #939393;
 	border-bottom: 1px solid #939393;
-	width: 100%;
+	width: 90%;
 	max-width: 1350px;
 	margin: 0 auto var(--sectionBottom) auto;
 }
