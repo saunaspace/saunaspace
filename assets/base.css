@@ -961,7 +961,7 @@ summary::-webkit-details-marker {
   row-gap: var(--grid-mobile-vertical-spacing);
 }
 
-.grid .grid-item {
+.grid .grid__item {
 	list-style-type: none;
 }
 
