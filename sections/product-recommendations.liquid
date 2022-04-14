@@ -26,7 +26,7 @@
       <h2 class="product-recommendations__heading {{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
       <ul class="grid product-grid{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %} grid--{{ section.settings.columns_desktop }}-col-desktop{% endif %} grid--{{ section.settings.columns_mobile }}-col-tablet-down" role="list">
         {% for recommendation in recommendations.products %}
-          <li class="grid__item product-tile"  style="flex-shrink: 0;">
+          <li class="product-tile"  style="flex-shrink: 0;">
             {% render 'card-product',
               card_product: recommendation,
               media_aspect_ratio: section.settings.image_ratio,
