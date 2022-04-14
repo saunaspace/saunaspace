@@ -2858,6 +2858,8 @@ details-disclosure > details {
   }
 }
 
+
+
 .font-body-bold {
   font-weight: var(--font-body-weight-bold);
 }
@@ -4124,7 +4126,16 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	width: 275px;
 	margin-right: 20px;
 }
+.product__media-wrapper {
+	    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 660px;
+}
 
+.product__media-gallery li {
+	margin: 0;
+}
 	.product-tile .color-choices { justify-content: flex-start; margin: 0 0 10px 0; }
 
 .pt-img {
