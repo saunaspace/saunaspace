@@ -4521,7 +4521,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		.top-feature img { margin: 0 auto 20px auto; width: 100px; height: 100px; }
 		.tf-title { font-weight: 700 !important; margin-bottom: 1em; }
 
-.related-products {
+.related-products, .product-recommendations {
 	padding-top: var(--sectionBottom);
 	border-top: 1px solid #939393;
 	border-bottom: 1px solid #939393;
