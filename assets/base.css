@@ -4238,7 +4238,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	max-width: 420px;
 } */
 
-	.product-text h1, .product-name-mobile { color: #000; text-transform: none; font-size: 3.2rem; font-weight: 700; margin-bottom: 1em; }
+	h1.product__title, .product-text h1, .product-name-mobile { color: #000; text-transform: none; font-size: 3.2rem; font-weight: 700; margin-bottom: 1em; }
 		.product-name-mobile { display: none; text-align: center; margin: .5em 0 0 0; padding: 0 1em; }
 	
 	.product-text h1 + p { margin-top: -1.5em; }

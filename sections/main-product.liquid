@@ -183,7 +183,7 @@
         {%- endif -%}
       </media-gallery>
     </div>
-    <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+    <div class="product__info-wrapper product-text grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
@@ -476,11 +476,53 @@
               </p>
             {%- endif -%}
           {%- endcase -%}
+         
+					<div class="wwli">
+						<div class="wwli-head">Why We Love It</div>
+						
+					</div>
+	
+				
+				<div class="pay-over-time">
+					<div class="pot-head">Pay Over Time</div>
+					<div class="pot-col">
+						<img src="/img/splitit.svg" width="60" alt="SplitIt" />
+						<span data-ml="splitItSummary"><%=mlDict("splitItSummary")%></span>
+						<a href="javascript:void(0)" onClick="potMore('splitit')">Learn More</a>
+					</div>
+					<div class="pot-divider"></div>
+					<div class="pot-col">
+						<img src="/img/bread.png" width="60" alt="Bread Financing" />
+						<span data-ml="breadSummary"><%=mlDict("breadSummary")%></span>
+						<a href="javascript:void(0)" onClick="potMore('bread')">Learn More</a>
+					</div>
+					<div class="pot-col-100 hideMe" id="splititCol">
+						<a href="javascript:void(0)" class="pot-close"><img src="/img/close.svg" alt="Close" style="width: 15" height="15"  /></a>
+						<img src="/img/splitit.svg" width="70" alt="SplitIt" />
+						<span data-ml="splitItText"><%=mlDict("splitItText")%></span>
+						<p class="fineprint">You can choose this option at checkout.</p>
+					</div>
+					<div class="pot-col-100 hideMe" id="breadCol">
+						<a href="javascript:void(0)" class="pot-close"><img src="/img/close.svg" alt="Close" style="width: 15" height="15" /></a>
+						<img src="/img/bread.png" width="70" alt="Bread Financing" />
+						<span data-ml="breadText"><%=mlDict("breadText")%></span>
+						<p class="fineprint">Check your eligibility in minutes at checkout.</p>
+					</div>
+				</div>
+				<p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;"><strong>SKU: </strong><span class="theSKU"></span>&nbsp;&nbsp;<strong>UPC: </strong><span class="theUPC"></span></p>
+		
         {%- endfor -%}
       </div>
     </div>
   </div>
-
+<section>
+  {%- if product.description != blank -%}
+		<div class="pcDescription">       
+             {{ product.description }}          
+	
+			</div>
+        {%- endif -%}
+	</section>
   <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
     <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
       <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
