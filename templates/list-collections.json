@@ -2,10 +2,75 @@
   "sections": {
     "main": {
       "type": "main-list-collections",
+      "blocks": {
+        "b7c39c0a-63e4-48cf-bb8c-48e446a86f8a": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Infrared Saunas",
+            "deal_sub_txt": "",
+            "collection_title": "saunas",
+            "collection_img": "shopify:\/\/shop_images\/cat-infrared-saunas.jpg"
+          }
+        },
+        "db6e65a5-65d0-4610-900c-974cfd9c2b41": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Targeted Therapy",
+            "deal_sub_txt": "",
+            "collection_title": "targeted",
+            "collection_img": "shopify:\/\/shop_images\/cat-targeted-therapy.jpg"
+          }
+        },
+        "bc87d548-6cd2-4a69-942b-99874b3d09bb": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Sauna Components",
+            "deal_sub_txt": "",
+            "collection_title": "sauna-components",
+            "collection_img": "shopify:\/\/shop_images\/cat-sauna-components.jpg"
+          }
+        },
+        "2cd0567d-b5b8-4752-96d5-6db556a29c2b": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Replacement Bulbs",
+            "deal_sub_txt": "",
+            "collection_title": "replacement-bulbs",
+            "collection_img": "shopify:\/\/shop_images\/cat-replacement-bulbs.jpg"
+          }
+        },
+        "01d88204-d4b1-4d6f-b6c7-0f14fb456db1": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Merchandise",
+            "deal_sub_txt": "",
+            "collection_title": "merchandise",
+            "collection_img": "shopify:\/\/shop_images\/cat-merchandise.jpg"
+          }
+        },
+        "45de8b00-e31f-4297-941e-8c9c0128acb9": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Products We Love",
+            "deal_sub_txt": "",
+            "collection_title": "products-we-love",
+            "collection_img": "shopify:\/\/shop_images\/cat-products-we-love.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b7c39c0a-63e4-48cf-bb8c-48e446a86f8a",
+        "db6e65a5-65d0-4610-900c-974cfd9c2b41",
+        "bc87d548-6cd2-4a69-942b-99874b3d09bb",
+        "2cd0567d-b5b8-4752-96d5-6db556a29c2b",
+        "01d88204-d4b1-4d6f-b6c7-0f14fb456db1",
+        "45de8b00-e31f-4297-941e-8c9c0128acb9"
+      ],
       "settings": {
         "title": "Collections",
         "sort": "alphabetical",
-        "image_ratio": "square"
+        "image_ratio": "square",
+        "enable_collection": true
       }
     }
   },
