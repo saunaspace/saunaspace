@@ -1,7 +1,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 {% if section.settings.enable_collection %}
-<section>
+<section class="category_filter_box">
   <div class="product-categories">
     <a href="javascript:void(0)" class="product-category pc-shopAll product-category-on" data-cat="all" onclick="filterProducts('all')">
       <div><span>Shop All</span></div>
@@ -42,6 +42,12 @@
   {% endcomment %}
   </div>
 </section>
+
+{% style %}
+.category_filter_box{
+	border-bottom: 1px solid #979797;
+}
+{% endstyle %}
 <script>
 	
 	
