@@ -30,7 +30,7 @@
   endif
 -%}
 
-<div class="price
+<div class="price pt-price etica
   {%- if price_class %} {{ price_class }}{% endif -%}
   {%- if available == false %} price--sold-out {% endif -%}
   {%- if compare_at_price > price %} price--on-sale {% endif -%}
@@ -44,7 +44,7 @@
     {%- endcomment -%}
     <div class="price__regular">
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-      <span class="price-item price-item--regular">
+      <span class="price-item price-item--regular pt-price etica price{{product.id}}">
         {{ money_price }}
       </span>
     </div>
