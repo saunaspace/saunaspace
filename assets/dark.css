@@ -1,4 +1,7 @@
 /* https://www.ditdot.hr/en/dark-mode-website-tutorial */ 
+  .dark .gradient {
+      background: inherit;
+  }
   .dark, .dark .navBG, .dark .rc-box, .dark .product-color span, .dark .research-links h3 {
   	background: #000;
   	transition: all .25s;
