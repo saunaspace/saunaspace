@@ -1012,6 +1012,10 @@ $(".ccrp").on("click",function() {
 	baseURL=$("#" + tileLink).attr("data-url");
 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
 });
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
 
 const stickyAddToCart = document.querySelector('.atcMain');
 if(window.matchMedia('(min-width: 750px)').matches) {
