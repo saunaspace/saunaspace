@@ -1,0 +1,67 @@
+/* https://www.ditdot.hr/en/dark-mode-website-tutorial */ 
+  .dark, .dark .navBG, .dark .rc-box, .dark .product-color span, .dark .research-links h3 {
+  	background: #000;
+  	transition: all .25s;
+  }
+  
+  .dark .tanBG, .dark .mega-nav, .dark .compare-panel, .dark .greyBG, .dark .photo-headerBG, .dark .build-panel,
+  .dark .nav-full-cart, .dark .yc-col-checkout, .dark .qty-change, .dark .health-benefit, .dark .event-box { 
+  	background-color: #2A2727; 
+  }
+  
+  .dark .util-nav-link, .dark .nav-link, .dark .nav-right, .dark .centered-text, .dark .bold-link, .dark .tcw-text, .dark h2, .dark .rc-box,
+  .dark .shop-nav-head, .dark .sf-link, .dark .nav-arrow-link, .dark .nav-learn-article, .dark .nav-learn-blog, .dark .fr-text,
+  .dark .rcat-link, .dark .review-cta, .dark .pr-text, .dark .trial-col, .dark .sbs-text, .dark .compare-panel,
+  .dark .product-tiles, .dark .pt-name, .dark .col p, .dark .three-col-text, .dark .build-panel, .dark .pc-summary, .dark .pc-summary a,
+  .dark .product-category span, .dark .product-text, .dark .product-text h1, .dark .product-name-mobile,
+  .dark .pid-col-text, .dark .product-info-tab, .dark .wi, .dark .hasBoxes, .dark .pcDescription, .dark .cart-item-name,
+  .dark .your-cart, .dark .yc-item-name, .dark .yc-col, .dark .yc-col-learnMore, .dark .page-anchor, .dark .acc-term, .dark .health-benefit,
+  .dark .research-topics, .dark .topicLink, .dark .research-link a, .dark .research-link p, .dark .genericText, .dark .warranty-box, 
+  .dark .warranty-col, .dark .legalText, .dark .fineprint, .dark .two-cols-narrow .col, .dark .contact-col, .dark .contact-cols-text,
+  .dark .contact-tile, .dark .col-bordered a, .dark .event-box, .dark .event-link, .dark .event-invite, h4, .dark .sgl-text,
+  .dark .sauna-types td, .dark .sauna-types th, .dark .research-links h3, .dark .darkP {
+  	color: #FFF8E7;
+  }
+  
+  .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,
+  .dark .page-anchor:hover, .dark .rcat-link-on, .dark .util-nav-link:hover, .dark .nav-cart:hover, .dark .sf-link:hover span, .dark .color-choice-on,
+  .dark .product-info-tabs, .dark .research-links h3 {
+  	border-color: #fff; 
+  }
+  
+  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
+  .dark .product-warranty, .dark .product-trial, .dark .pot-col img, .dark .nfc-close svg,
+  .dark .yc-financing img, .dark .col-bordered img, .dark .col-centered img, .dark .contact-col img, .dark .event-link svg,
+  .dark .hamb-label, .dark .wwli-head { 
+  	filter: brightness(0) invert(1); 
+  }
+  
+  .dark .tcg-img img:not(.tcg-photo) {
+  	filter: invert(1) hue-rotate(180deg); 
+  }
+  
+  .dark .nav-cart { background-image: url(../img/cart_white.svg); background-repeat: no-repeat; }
+  .dark .nav-learn-blog { background-image: url(../img/isExternalLink_white.svg); }
+  .dark .checkmark-list { background-image: url(../img/checkmark.svg); }
+  .dark .logo { background-image: url(../img/sp-logo-dark.svg); }
+  .dark .stuck .logo { background-image: url(../img/logo_symbol.svg); }
+  .dark .hasBoxes { background-image: url(../img/boxes_white.svg); }
+  .dark .arrow-link::after, .dark .nav-link-arrow::after { background-image: url(../img/nav_link_arrow_white.svg); }
+  .dark .isExternalLink:after { background-image: url(../img/isExternalLink_white.svg); }
+  
+  .dark .yotpo div, .dark .yotpo span, .dark .yotpo p, .dark .yotpo a, .dark .yotpo img, .dark .yotpo i, .dark .yotpo strong, .dark .yotpo sup, .dark .yotpo ul, .dark .yotpo li, .dark .yotpo form, .dark .yotpo label {
+  	color: #FFF8E7 !important;
+  }
+  .dark .yotpo a.text-m, .dark .yotpo a.text-m:hover { color: #FFF8E7 !important; }
+  .dark .filters-dropdown .yotpo-dropdown-button { background: #000 !important; }
+  .dark .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text { color: #FFF8E7 !important; }
+  
+	.dark .compare-panel-on { background: #C67A26; color: #FFF8E7; }
+	.dark .cp-shield { color: #FFF8E7; background: #6E1500; border: 0;}
+    
+  .dark .product-category-on div span { color: #000; }
+    
+  .dark .qty-add, .dark .acc-term { background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff); }
+  .dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
+
+	.dark .color-choice { outline: 2px solid #fff; width: 28px; height: 28px; }
