@@ -46,7 +46,7 @@
   .dark .nav-cart { background-image: url(../img/cart_white.svg); background-repeat: no-repeat; }
   .dark .nav-learn-blog { background-image: url(../img/isExternalLink_white.svg); }
   .dark .checkmark-list { background-image: url(../img/checkmark.svg); }
-  .dark .logo { background-image: url(../img/sp-logo-dark.svg); }
+  .dark .logo { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/sp-logo-dark.svg); }
   .dark .stuck .logo { background-image: url(../img/logo_symbol.svg); }
   .dark .hasBoxes { background-image: url(../img/boxes_white.svg); }
   .dark .arrow-link::after, .dark .nav-link-arrow::after { background-image: url(../img/nav_link_arrow_white.svg); }
