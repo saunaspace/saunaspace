@@ -1012,3 +1012,19 @@ $(".ccrp").on("click",function() {
 	baseURL=$("#" + tileLink).attr("data-url");
 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
 });
+
+const stickyAddToCart = document.querySelector('.atcMain');
+if(window.matchMedia('(min-width: 750px)').matches) {
+	createObserver('stickyAddToCart');
+}
+
+function onChangestickyAddToCart(changes, observerstickyAddToCart) {
+		changes.forEach(change => { if (change.intersectionRatio >= 1) {
+			$(".stickyBG").removeClass("stickyBG-visible");
+			//console.log("hidden")
+		} else {
+			//console.log("visible")
+			$(".stickyBG").addClass("stickyBG-visible");
+		}
+	});
+}
