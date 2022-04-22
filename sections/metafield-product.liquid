@@ -618,7 +618,13 @@
 <div class="tanBG noMargin">
     <div class="product-info-tabs">
         <a href="javascript:void(0)" class="product-info-tab product-info-tab-on" data-tab="overview">Overview</a>
-        <a href="javascript:void(0)" class="product-info-tab" data-tab="whatsIncluded">What’s Included</a><a href="javascript:void(0)" class="product-info-tab" data-tab="materials">Materials</a><a href="javascript:void(0)" class="product-info-tab" data-tab="specs">Specifications</a><a href="javascript:void(0)" class="product-info-tab" data-tab="instructions">Instructions</a>
+        {% if product.metafields.my_fields.whatinclude != blank %}
+      	{{product.metafields.my_fields.whatinclude}}
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="whatsIncluded">What’s Included</a>
+      	{% endif %}
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="materials">Materials</a>
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="specs">Specifications</a>
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="instructions">Instructions</a>
     </div>
     
     <div class="product-info-details" id="pid-overview">
