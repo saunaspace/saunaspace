@@ -621,9 +621,15 @@
         {% if product.metafields.my_fields.whatinclude != blank %}
       	<a href="javascript:void(0)" class="product-info-tab" data-tab="whatsIncluded">What’s Included</a>
       	{% endif %}
+      	{% if product.metafields.my_fields.materials != blank %}
       	<a href="javascript:void(0)" class="product-info-tab" data-tab="materials">Materials</a>
+      	{% endif %}
+      	{% if product.metafields.my_fields.specifications != blank %}
       	<a href="javascript:void(0)" class="product-info-tab" data-tab="specs">Specifications</a>
+      	{% endif %}
+      	{% if product.metafields.my_fields.materials != blank %}
       	<a href="javascript:void(0)" class="product-info-tab" data-tab="instructions">Instructions</a>
+      	{% endif %}
     </div>
     
     <div class="product-info-details" id="pid-overview">
