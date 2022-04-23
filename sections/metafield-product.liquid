@@ -663,50 +663,26 @@
     </div>
   	{% endif %}
     
+  	{% if product.metafields.my_fields.instructions != blank %}
     <div class="product-info-details hideMe" id="pid-instructions">
     <section>
-        <div class="pid-cols">
-            <div class="pid-col-text"><h2>Installation Locations</h2><p>The Faraday can be installed in any temperature- and humidity-controlled indoor space. Do not install your Faraday in a garage, enclosed porch, or other space subject to outdoor humidity.</p><p>Can be installed on any indoor flooring: wood, laminate, tile, synthetic. Heat from sauna does not heat up surroundings to any significant degree. The enclosure’s untreated dual-layer cover protects materials outside the sauna and prevents off-gassing.</p><p><a href="../../downloads/SaunaSpace_Sauna_Operation_Manual_Rev_21CE0126.pdf" target="_blank">Faraday Product Manual</a></p></div>
-            <div class="pid-col-img">
-                
-            </div>
-        </div>
+        {{ product.metafields.my_fields.instructions }}
     </section>
     </div>
+  	{% endif %}
     
     
     </div>
     
+  	{% if product.metafields.my_fields.top-features != blank %}
     <div class="maroonBG">
     <div class="top-features">
-        
-        <div class="top-feature">
-            <img src="{{ 'emf-protection.svg' | asset_url }}" alt="" loading="lazy" />
-            <div class="tf-title etica">EMF Protection</div>
-            <p>Block out environmental stressors and disconnect from the world.</p>
-        </div>
-        
-        <div class="top-feature">
-            <img src="{{ 'faster-sessions.svg' | asset_url }}" alt=""  loading="lazy"/>
-            <div class="tf-title etica">Faster Sessions</div>
-            <p>Full-spectrum infrared therapy helps you sweat faster and better than traditional saunas.</p>
-        </div>
-        
-        <div class="top-feature">
-            <img src="{{ 'portability.svg' | asset_url }}" alt="" loading="lazy" />
-            <div class="tf-title etica">Portability</div>
-            <p>Save space with a compact sauna that stows away in minutes.</p>
-        </div>
-        
-        <div class="top-feature">
-            <img src="{{ 'built-to-last.svg' | asset_url }}" alt="" loading="lazy" />
-            <div class="tf-title etica">Built-to-Last</div>
-            <p>Make a smart investment in a sauna made with quality materials.</p>
-        </div>
-        
+		{{ product.metafields.my_fields.top-features }}    
     </div>
     </div>
+  	{% endif %}
     
+  	{% if product.metafields.my_fields.features_section_2 != blank %}
     <div class="oc2"  style="background-image: url({{ 'faraday-infrared-sauna-emfBlocking.jpg' | asset_url }});">
         <div class="oc-text oc-text-extra-padding" style="background-image:url({{ 'emf-blocking-badge-faded.svg' | asset_url }});">
             <cms id='cms1'>
@@ -717,7 +693,9 @@
     </cms cms1>
         </div>
     </div>
-    
+    {% endif %}
+  
+  	{% if product.metafields.my_fields.features_section_3 != blank %}
     <div class="two-cols two-cols-wide">
     <div class="col">
         <img src="{{ 'health-benefits-thermalight.jpg' | asset_url }}" alt="Thermalight bulb"  loading="lazy" />
@@ -733,6 +711,7 @@
         </div>
     </div>
     </div>
+  	{% endif %}
     
     <div class="related-products">
     
