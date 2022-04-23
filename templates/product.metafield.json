@@ -34,8 +34,8 @@
         }
       },
       "block_order": [
-        "title",
         "caption",
+        "title",
         "price",
         "variant_picker",
         "buy_buttons"
