@@ -220,36 +220,37 @@
 
         <div class="product-text">
                 <div class="yotpo bottomLine" data-product-id="2105477365849" data-url="index.html"></div>
-                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">Faraday Infrared Sauna</h1>
-                </div><!--product-text-->
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-          {%- when '@app' -%}
-            {% render block %}
-          {%- when 'text' -%}
-            <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
-              {{- block.settings.text -}}
-            </p>
-          {%- when 'price' -%}
-            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
-            </div>
-            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-              <div class="product__tax caption rte">
-                {%- if shop.taxes_included -%}
-                  {{ 'products.product.include_taxes' | t }}
-                {%- endif -%}
-                {%- if shop.shipping_policy.body != blank -%}
-                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                {%- endif -%}
+        	{%- for block in section.blocks -%}
+            {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+            {%- when 'text' -%}
+              <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+                {{- block.settings.text -}}
+              </p>
+				{%- when 'title' -%}
+                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">{{ product.title | escape }}</h1>            {%- when 'price' -%}
+              <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
               </div>
-            {%- endif -%}
-            <div {{ block.shopify_attributes }}>
-              {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                {{ form | payment_terms }}
-              {%- endform -%}
-            </div>
+              {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+                <div class="product__tax caption rte">
+                  {%- if shop.taxes_included -%}
+                    {{ 'products.product.include_taxes' | t }}
+                  {%- endif -%}
+                  {%- if shop.shipping_policy.body != blank -%}
+                    {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              <div {{ block.shopify_attributes }}>
+                {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  {{ form | payment_terms }}
+                {%- endform -%}
+              </div>
+        </div><!--product-text-->
+        
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
