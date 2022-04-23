@@ -650,18 +650,13 @@
     </section>
     </div>
   	{% endif %}
-    
+    {% if product.metafields.my_fields.materials != blank %}
     <div class="product-info-details hideMe" id="pid-materials">
     <section>
-        <div class="pid-cols">
-            <div class="pid-col-text"><h2>Natural. Hypoallergenic. Sustainable.</h2><h3>North American basswood</h3><p>Sustainably harvested and crafted without chemicals or oils.</p><h3>Stainless steel</h3><p>Untreated, USA-manufactured guards free of powder coating.</p><h3>Organic bamboo</h3><p>Heat-treated for durability. Unvarnished and chemical-free.</p><h3>Organic canvas</h3><p>GOTS-certified 100% cotton canvas. Durable, machine-washable construction.</p><h3>Organic cotton and silver</h3><p>Our cutting-edge shielding fabric is machine washable and free of aluminum and nickel.</p></div>
-            <div class="pid-col-img">
-                <img src="{{ 'faraday-infrared-sauna-materials.jpg' | asset_url }}" alt=""  loading="lazy"/>
-            </div>
-        </div>
+        {{ product.metafields.my_fields.materials }}
     </section>
     </div>
-    
+    {% endif %}
     <div class="product-info-details hideMe" id="pid-specs">
     <section>
         <div class="pid-cols">
