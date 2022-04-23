@@ -952,7 +952,12 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 		}
 	});
 }
-
+function updateUC(p) {
+  ucArr=["https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-light.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-desk-arm.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-case.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-sauna-supreme.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-better-night-light.jpg"]
+  $(".build-panels p").addClass("hideMe");
+  $("#bp" + p).find("p").removeClass("hideMe");
+  $("#bpImg").attr("src",ucArr[p-1]);
+}
 </script>
 
 <script src="{{ 'lite-yt-embed.js' | asset_url }}"></script>
