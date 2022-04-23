@@ -685,32 +685,13 @@
     
   	{% if product.metafields.my_fields.features_section_2 != blank %}
     <div class="oc2"  style="background-image: url({{ 'faraday-infrared-sauna-emfBlocking.jpg' | asset_url }});">
-        <div class="oc-text oc-text-extra-padding" style="background-image:url({{ 'emf-blocking-badge-faded.svg' | asset_url }});">
-            <cms id='cms1'>
-    
-    <h2 class="alignLeft">The World’s Only EMF-Blocking Sauna</h2>
-    <p>Your environment is probably more stressful than you realize. That’s why our unique shielding fabric—made of silver and organic cotton—blocks electromagnetic fields from electricity, Wi-Fi, Bluetooth, cell signals and more so your body and mind can maximize the benefits of your full-spectrum infrared sauna. Third-party lab testing confirms the SaunaSpace EMF shield is up to 70x more effective than the competition.</p>
-    <div class="btnBox"><a href="../../what-are-electromagnetic-fields-emfs.html" class="btn btn-outline">Learn More</a></div>
-    </cms cms1>
-        </div>
+        {{ product.metafields.my_fields.features_section_2 }}
     </div>
     {% endif %}
   
   	{% if product.metafields.my_fields.features_section_3 != blank %}
     <div class="two-cols two-cols-wide">
-    <div class="col">
-        <img src="{{ 'health-benefits-thermalight.jpg' | asset_url }}" alt="Thermalight bulb"  loading="lazy" />
-    </div>
-    <div class="col">
-        <div class="tcw-text">
-            <cms id='cms4'>
-    
-    <h2 class="alignLeft">No One Does Infrared LikeUs</h2>
-    <p>We’ve spent years crafting the perfect hand-blown sauna bulb. We mimic the best of the sun—with none of the harmful UV—to create full-spectrum infrared therapy that is truly one of a kind.</p>
-    <a href="../../how-do-infrared-saunas-work.html" class="bold-link arrow-link">See How it Works</a>
-    </cms cms4>
-        </div>
-    </div>
+    {{ product.metafields.my_fields.features_section_3 }}
     </div>
   	{% endif %}
     
