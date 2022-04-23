@@ -229,7 +229,9 @@
                 {{- block.settings.text -}}
               </p>
 				{%- when 'title' -%}
-                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">{{ product.title | escape }}</h1>            {%- when 'price' -%}
+                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">{{ product.title | escape }}</h1>
+          	  
+              {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
               </div>
