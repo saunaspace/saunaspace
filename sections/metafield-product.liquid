@@ -684,7 +684,11 @@
     </div>
     </div>
   	{% endif %}
-    
+  
+    {% if product.metafields.my_fields.features_section_1 != blank %}
+        {{ product.metafields.my_fields.features_section_1 }}
+    {% endif %}
+  
   	{% if product.metafields.my_fields.features_section_2 != blank %}
         {{ product.metafields.my_fields.features_section_2 }}
     {% endif %}
