@@ -684,9 +684,7 @@
   	{% endif %}
     
   	{% if product.metafields.my_fields.features_section_2 != blank %}
-    <div class="oc2"  style="background-image: url({{ 'faraday-infrared-sauna-emfBlocking.jpg' | asset_url }});">
         {{ product.metafields.my_fields.features_section_2 }}
-    </div>
     {% endif %}
   
   	{% if product.metafields.my_fields.features_section_3 != blank %}
@@ -695,6 +693,11 @@
     </div>
   	{% endif %}
     
+  	{% if product.metafields.my_fields.features_section_4 != blank %}
+    <div class="orangeBG">
+		{{ product.metafields.my_fields.features_section_4 }}
+  	</div>
+    {% endif %}
     <div class="related-products">
     
     <h2>You may also like</h2>
