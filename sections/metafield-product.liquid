@@ -657,18 +657,14 @@
     </section>
     </div>
     {% endif %}
+  	{% if product.metafields.my_fields.specifications != blank %}
     <div class="product-info-details hideMe" id="pid-specs">
     <section>
-        <div class="pid-cols">
-            <div class="pid-col-text pid-specs">
-                <p><strong>Weight</strong></p><p>Total: 52.7 lb (23.9 kg)</p><p>Tungsten Sauna Panel: 11.4 lb (5.2 kg)</p><p>Frame Poles: 6.6 lb (3 kg)</p><p>Grounding Mat: 3.4 lb (1.5 kg)</p><p>Sauna Stool: 8.5 lb (3.9 kg)</p><p>Cover Set: 21 lb (9.5 kg)</p><p>EMF Shield Cover: 1.8 lb (0.8 kg)</p><p><br></p><p><strong>Assembled dimensions</strong></p><p>Entrance width: 52 in (132 cm)</p><p>Rear width: 24 in (61 cm)</p><p>Depth: 52 in (132 cm)</p><p>Height: 63 in (160 cm)</p><p><br></p><p><strong>Tungsten Sauna Panel dimensions</strong></p><p>Width: 23.75 in (60.3 cm)</p><p>Height: 23.5 in (59.7 cm)</p><p>Depth: 9 in (22.9 cm)</p><p><br></p><p><strong>Sauna Stool dimensions</strong></p><p>Height: 18 in (46 cm)</p><p>Seat width: 14 in (36 cm)</p><p>Leg width: 16 in (41 cm)</p><p><br></p><p><strong>Electrical info</strong></p><p>Wattage: 250 W</p><p>Input voltage and frequency: 120 V at 50–60 Hz, 240 V at 50–60 Hz</p><p><br></p><p><strong>Approvals</strong></p><p>All electrical parts UL-listed</p><p>CE-certified</p>
-            </div>
-            <div class="pid-col-img">
-                <img src="{{ 'faraday-infrared-sauna-specifications.jpg' | asset_url }}" alt="" loading="lazy" />
-            </div>
-        </div>
+      	{{ product.metafields.my_fields.specifications }}
+        
     </section>
     </div>
+  	{% endif %}
     
     <div class="product-info-details hideMe" id="pid-instructions">
     <section>
