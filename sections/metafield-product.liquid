@@ -643,58 +643,13 @@
     </section>
     </div>
     
-    
+    {% if product.metafields.my_fields.whatinclude != blank %}
     <div class="product-info-details hideMe" id="pid-whatsIncluded">
     <section>
-        <div class="wis">
-            
-                <div class="wi" style="background-image: url('{{ 'tungsten-sauna-panel-wi.jpg' | asset_url }}');">
-                    <h3>Tungsten Infrared Sauna Panel</h3>
-                    <p>Four 250 W full-spectrum infrared ThermaLight® on a solid American basswood mount with carrying handle. Stainless steel guards protect from heat and electromagnetic fields.
-    </p>
-                </div>
-            
-                <div class="wi" style="background-image: url('{{ 'portable-enclosure-wi.jpg' | asset_url }}');">
-                    <h3>Portable Sauna Enclosure</h3>
-                    <p>Two layers of organic cotton canvas, American basswood frame, and easy-insert connectors. </p>
-                </div>
-            
-                <div class="wi" style="background-image: url('{{ 'bamboo-grounding-mat-wi.jpg' | asset_url }}');">
-                    <h3>Bamboo Grounding Mat</h3>
-                    <p>One organic, unvarnished bamboo grounding mat and three-foot grounding cable to protect from wired electric field voltage.</p>
-                </div>
-            
-                <div class="wi" style="background-image: url('{{ 'emf-shield-wi.jpg' | asset_url }}');">
-                    <h3>EMF Shield</h3>
-                    <p>Our proprietary machine-washable shield with grounding cable. </p>
-                </div>
-            
-                <div class="wi" style="background-image: url('{{ 'sauna-stool-wi.jpg' | asset_url }}');">
-                    <h3>Sauna Stool</h3>
-                    <p>One ergonomic stool made of American basswood.</p>
-                </div>
-            
-                <div class="wi" style="background-image: url('{{ 'saunaspace-exfoliating-brush-wi.jpg' | asset_url }}');">
-                    <h3>SaunaSpace Exfoliating Brush</h3>
-                    <p>One exfoliating brush made of bamboo with stiff bristles for invigorating exfoliation.</p>
-                </div>
-            
-                <div class="wi" style="background-image: url('{{ 'headsuphealth-wi.jpg' | asset_url }}');">
-                    <h3>Heads Up App</h3>
-                    <p>Track your results with a 3 months complimentary App access, customized for your SaunaSpace experience.</p>
-                </div>
-            
-                <div class="hasBoxes">
-                    <h3>Number of Boxes</h3>
-                    Your Faraday Infrared Sauna will ship in <strong>3</strong> boxes.
-                    
-                        <p class="fineprint" style="margin-top: .5em;">Box 1: 27 x 26 x 11 in, 27 lb (69 x 66 x 28 cm, 12.2 kg)<br>Box 2: 37 x 17 x 11 in, 42 lb (94 x 43 x 28 cm, 19 kg)<br>Box 3: 19 x 18 x 6 in, 11 lb (48 x 46 x 15 cm, 5 kg)</p>
-                    
-                </div>
-            
-        </div>
+        {{ product.metafields.my_fields.whatinclude }}
     </section>
     </div>
+  	{% endif %}
     
     <div class="product-info-details hideMe" id="pid-materials">
     <section>
