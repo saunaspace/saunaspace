@@ -632,16 +632,13 @@
       	{% endif %}
     </div>
     
-    <div class="product-info-details" id="pid-overview">
+    {%- if product.description != blank -%}
+  	<div class="product-info-details" id="pid-overview">
     <section>
-        <div class="pid-cols">
-            <div class="pid-col-text"><p><strong>Experience the ultimate escape with the Faraday sauna.</strong></p><p>Its exclusive shield uses a blend of silver and organic cotton to block more than 99% of common electromagnetic fields for a deeper sense of peace and rejuvenation. Our full-spectrum ThermaLight® infrared therapy helps you sweat faster, more efficiently, and at lower temperatures compared to other saunas.&nbsp;</p><p>With four levels of intensity and adjustable height, the sauna panel lets you completely tailor your session to your preferences.</p><ul><li>Blocks virtually all environmental EMFs</li><li>Compact and portable</li><li>Hypoallergenic</li><li>Tool-free assembly</li><li>Wheelchair accessible</li><li>Machine-washable cover and shield</li><li>Minimalist design</li></ul></div>
-            <div class="pid-col-img">
-                <img src="{{ 'faraday-infrared-sauna-overview.jpg' | asset_url }}" alt=""  loading="lazy"/>
-            </div>
-        </div>
+      {{ product.description }}
     </section>
     </div>
+    {%- endif -%}
     
     {% if product.metafields.my_fields.whatinclude != blank %}
     <div class="product-info-details hideMe" id="pid-whatsIncluded">
