@@ -6089,8 +6089,8 @@ span[data-ml]::before {
 
 #bcpo .bcpo-dd .inner label {
 	background: #FFF;
-	color: black;
-	line-height: 1.4;
+  	line-height: 1.8;
+	padding: 0 6px;
 }
 #bcpo .bcpo-dd .inner label:hover{
   	background: #6E1500 !important;
