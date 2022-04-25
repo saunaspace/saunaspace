@@ -6067,7 +6067,11 @@ span[data-ml]::before {
 	background-size: 100% 1px;
 	background-repeat: no-repeat;
 }
-
+#bcpo .bcpo-images .bcpo-label .product-color label {
+	background: #fff;
+	padding: 0 5px;
+	display: inline-block;
+}
 
 
 
