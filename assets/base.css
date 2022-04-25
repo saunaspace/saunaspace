@@ -6071,7 +6071,10 @@ span[data-ml]::before {
 	background: #fff;
 	padding: 0 5px;
 	display: inline-block;
+  	font-family: lft-etica-mono,sans-serif;
+  	font-weight: 400;
 }
+
 
 
 
