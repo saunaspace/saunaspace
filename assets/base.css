@@ -6097,4 +6097,5 @@ span[data-ml]::before {
 }
 .single-page-price .price__container::after {
 	content: "price varies by color";
+  	font-family: 'UntitledSans', sans-serif;
 }
