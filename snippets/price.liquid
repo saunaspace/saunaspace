@@ -48,7 +48,7 @@
         {{ money_price }}
       </span>
     </div>
-    {{product.selected_or_first_available_variant.unit_price_measurement}}
+    {{product.selected_or_first_available_variant}}
     <div class="price__sale">
       {%- unless product.price_varies == false and product.compare_at_price_varies %}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
