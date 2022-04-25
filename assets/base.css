@@ -6095,4 +6095,6 @@ span[data-ml]::before {
 #bcpo .bcpo-dd .inner label:hover{
   	background: #6E1500 !important;
 }
-
+.single-page-price .price__container::after {
+	content: "price varies by color";
+}
