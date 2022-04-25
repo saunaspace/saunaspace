@@ -6074,7 +6074,12 @@ span[data-ml]::before {
   	font-family: lft-etica-mono,sans-serif;
   	font-weight: 400;
 }
-
+#bcpo .bcpo-images div.bcpo-image-parent {
+  	width: 38px;
+}
+#bcpo .bcpo-images label.bcpo-front-image-label{
+  	height:32px;
+}
 
 
 
