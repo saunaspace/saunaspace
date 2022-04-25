@@ -6043,3 +6043,9 @@ span[data-ml]::before {
 #bcpo .bcpo-dropdown .bcpo-value {
 	display: none;
 }
+#bcpo:not(.g-card) .bcpo-dropdown {
+	display: flex !important;
+	align-items: center;
+}
+
+
