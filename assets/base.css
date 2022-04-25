@@ -6046,6 +6046,8 @@ span[data-ml]::before {
 #bcpo:not(.g-card) .bcpo-dropdown {
 	display: flex !important;
 	align-items: center;
+	justify-content: center;
+	width: 100%;
 }
 #bcpo .bcpo-dropdown label {
 	padding: 0;
@@ -6080,7 +6082,10 @@ span[data-ml]::before {
 #bcpo .bcpo-images label.bcpo-front-image-label{
   	height:32px;
 }
-
+#bcpo .bcpo-dd > ul > li {
+	border-radius: 0;
+	max-width: 210px;
+}
 
 
 
