@@ -6040,3 +6040,6 @@ span[data-ml]::before {
 #bcpo .bcpo-dropdown {
 	order: 2;
 }
+#bcpo .bcpo-dropdown .bcpo-value {
+	display: none;
+}
