@@ -971,7 +971,8 @@ $(document).on('click','label',function(){
   	//console.log('data is changed')
   setTimeout(function(){
     var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
-    console.log('current price is: '+damount )
+    console.log('current price is: '+damount );
+    $('.stickyBG .price-item').text(damount);
   },200)
 })
 
