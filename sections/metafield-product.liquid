@@ -974,7 +974,10 @@ $(document).on('click','label',function(){
     console.log('current price is: '+damount );
     $('.stickyBG .price-item').text(damount);
   },200)
-})
+});
+$(document).on('click','#sacText',function(){
+  $('.product-form__submit').click();
+});
 
 updateUC(1)
 function updateUC(p) {
