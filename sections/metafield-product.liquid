@@ -44,7 +44,13 @@
 				<div class="sac-price etica">
                   	{%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
                 </div>
-              	<a href="javascript:void(0)" class="btn atc" id="sacText">Add to Cart</a>
+              	<a href="javascript:void(0)" class="btn atc" id="sacText">
+                  {%- if product.selected_or_first_available_variant.available -%}
+                  	{{ 'products.product.add_to_cart' | t }}
+                  {%- else -%}
+                  	{{ 'products.product.sold_out' | t }}
+                  {%- endif -%}
+              	</a>
 			</div>
       </div>
 	</div>
