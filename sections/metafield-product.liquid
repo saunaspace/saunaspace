@@ -208,6 +208,7 @@
     <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
+        {% comment %}
         <div class="stickyBG">
             <div class="sticky-add-to-cart">
                 <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
@@ -217,6 +218,7 @@
                 </div>
             </div>
         </div>
+        {% endcomment %}
 
         <div class="product-text">
         	{%- for block in section.blocks -%}
