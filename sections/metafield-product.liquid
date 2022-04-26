@@ -41,6 +41,7 @@
 		<div class="sticky-add-to-cart">
           {%- for block in section.blocks -%}
             {%- case block.type -%}
+          	{%- when 'title' -%}
 			<div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
 			<div class="sac-wrap">
               	{%- when 'price' -%}
