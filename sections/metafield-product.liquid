@@ -968,7 +968,8 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 }
 //change in price
 $(document).on('click','label',function(){
-  	console.log('data is changed')
+  	//console.log('data is changed')
+  var damount = $('.price__regular .price-item[data-amount]').attr('data-amount')
 })
 
 updateUC(1)
