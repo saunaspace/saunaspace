@@ -4173,7 +4173,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		align-items: center;
 	}
 	
-	.stickyBG-visible { transform: translateY(-90px); transition: transform .25s; }
+	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; }
 
 .sac-product {
 	font-weight: 700;
