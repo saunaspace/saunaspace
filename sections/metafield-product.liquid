@@ -944,7 +944,10 @@ let options = {
 	rootMargin: '-20px 0px 0px 0px', 
 	threshold: 1.0 
 };
-
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
 const stickyAddToCart = document.querySelector('.atcMain');
 if(window.matchMedia('(min-width: 750px)').matches) {
 	createObserver('stickyAddToCart');
