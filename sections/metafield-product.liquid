@@ -41,7 +41,11 @@
 		<div class="sticky-add-to-cart">
 			<div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
 			<div class="sac-wrap">
-				<div class="sac-price etica">{%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}</div>
+				<div class="sac-price etica">
+                  <span class="price-item price-item--regular pt-price etica price{{product.id}}">
+                  	{%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+                  </span>
+                </div>
               	<a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
 			</div>
 		</div>
