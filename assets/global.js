@@ -999,7 +999,7 @@ $(".cc").on("click",function() {
 	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
 });
 
-$(".ccrp").on("click",function() {
+$(document).on('click','.ccrp',function() {
 	whichProduct=$(this).attr("data-productID");
 	whichProductCode=$(this).attr("data-productCode");
 	whichColor=$(this).attr("data-colorCode");
