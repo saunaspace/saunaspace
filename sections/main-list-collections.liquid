@@ -72,7 +72,8 @@ section.category_filter_box {
         return results == null ? null : results[1];
     }
     var getValue = queryStr('filter', window.location.href)
-  console.log(getValue);
+  	console.log(getValue);
+  	filterProducts(getValue);
 	
 	function filterProducts(pc) {
 		$(".product-category").removeClass("product-category-on");
