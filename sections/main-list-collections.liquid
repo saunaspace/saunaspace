@@ -73,19 +73,21 @@ section.category_filter_box {
     }
     var getValue = queryStr('filter', window.location.href)
   	console.log(getValue);
-  setTimeout(function(){
+  //setTimeout(function(){
   	filterProducts(getValue);
-  },200)
+  //},200)
 	
 	function filterProducts(pc) {
 		$(".product-category").removeClass("product-category-on");
 		$("[data-cat=" + pc + "]").addClass("product-category-on");
-		$(".collection_Div").addClass("hideMe");
-		if(pc=="all") {
-			$(".collection_Div").removeClass("hideMe");
-		} else {
-			$("." + pc).removeClass("hideMe");
-		}
+      	setTimeout(function(){
+          $(".collection_Div").addClass("hideMe");
+          if(pc=="all") {
+              $(".collection_Div").removeClass("hideMe");
+          } else {
+              $("." + pc).removeClass("hideMe");
+          }
+        },200)
 	}
 	
 	
