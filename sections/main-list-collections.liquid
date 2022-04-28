@@ -1,6 +1,99 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+{% if section.settings.enable_collection %}
+<section class="category_filter_box">
+  <div class="product-categories">
+    <a href="javascript:void(0)" class="product-category pc-shopAll product-category-on" data-cat="all" onclick="filterProducts('all')">
+      <div><span>Shop All</span></div>
+    </a>
+  {% for block in section.blocks %}
+      {% if block.type == "collection_list" %}
+          {% if block.settings.col_item != blank %}
+          <a href="javascript:void(0)" class="product-category" style="background-image:url({{ block.settings.collection_img | img_url : 'master'  }})" data-cat="{{ block.settings.collection_title.title | handle }}" onclick="filterProducts('{{ block.settings.collection_title.title | handle }}')">
+              <div><span>{{ block.settings.col_item }}</span></div>
+            </a>
+          {% endif %}
+      {% endif %}
+  {% endfor %}
+  {% comment %}
+    <a href="javascript:void(0)" class="product-category product-category-on" style="background-image:url(../img/cat-infrared-saunas.jpg)" data-cat="infrared-saunas" onclick="filterProducts('infrared-saunas')">
+      <div><span>Infrared Saunas</span></div>
+    </a>
 
+    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-targeted-therapy.jpg)" data-cat="targeted-therapy" onclick="filterProducts('targeted-therapy')">
+      <div><span>Targeted Therapy</span></div>
+    </a>
+
+    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-sauna-components.jpg)" data-cat="sauna-components" onclick="filterProducts('sauna-components')">
+      <div><span>Sauna Components</span></div>
+    </a>
+
+    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-replacement-bulbs.jpg)" data-cat="replacement-bulbs" onclick="filterProducts('replacement-bulbs')">
+      <div><span>Replacement Bulbs</span></div>
+    </a>
+
+    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-merchandise.jpg)" data-cat="merchandise" onclick="filterProducts('merchandise')">
+      <div><span>Merchandise</span></div>
+    </a>
+
+    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-products-we-love.jpg)" data-cat="products-we-love" onclick="filterProducts('products-we-love')">
+      <div><span>Products We Love</span></div>
+    </a>
+  {% endcomment %}
+  </div>
+</section>
+
+{% style %}
+section.category_filter_box {
+	border-bottom: 1px solid #979797;
+	max-width: 1200px;
+}
+.collection_Div > div.collection {
+	padding: 20px 0;
+}
+.collection_Div .grid.product-grid{
+	column-gap: 20px;
+}
+
+@media screen and (min-width: 990px){
+	.collection_Div .grid--4-col-desktop .grid__item {
+        max-width: 275px;
+		margin-left:0px;
+    }
+}
+{% endstyle %}
+<script>
+	function queryStr( name, url ) {
+        if (!url) url = location.href;
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( url );
+        return results == null ? null : results[1];
+    }
+    var getValue = queryStr('filter', window.location.href)
+  	console.log(getValue);
+  //setTimeout(function(){
+  	filterProducts(getValue);
+  //},200)
+	
+	function filterProducts(pc) {
+		$(".product-category").removeClass("product-category-on");
+		$("[data-cat=" + pc + "]").addClass("product-category-on");
+      	setTimeout(function(){
+          $(".collection_Div").addClass("hideMe");
+          if(pc=="all") {
+              $(".collection_Div").removeClass("hideMe");
+          } else {
+              $("." + pc).removeClass("hideMe");
+          }
+        },200)
+	}
+	
+	
+		
+</script>
+{% else %}
 <div class="page-width">
   <h1 class="title title--primary">{{ section.settings.title | escape }}</h1>
   {%- liquid
@@ -23,7 +116,7 @@
     {%- endfor -%}
   </ul>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.main-list-collections.name",
@@ -87,6 +180,40 @@
       "default": "adapt",
       "label": "t:sections.main-list-collections.settings.image_ratio.label",
       "info": "t:sections.main-list-collections.settings.image_ratio.info"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_collection",
+      "label": "Enable Collection Filter",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_list",
+      "name": "Collection List",
+      "settings": [
+        {
+          "type" : "text",
+          "id": "col_item",
+          "label" : "Title"
+        },
+        {
+          "type" : "text",
+          "id": "deal_sub_txt",
+          "label" : "Detail"
+        },
+        {
+          "type" : "collection",
+          "id": "collection_title",
+          "label" : "Collection"
+        },
+        {
+          "type" : "image_picker",
+          "id": "collection_img",
+          "label" : "Collection Image"
+        }
+      ]
     }
   ]
 }

@@ -8,6 +8,12 @@
 <noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
 
 {%- style -%}
+  .title-wrapper-with-link.title-wrapper--no-top-margin {
+      flex-wrap: wrap;
+  }
+  .title-wrapper-with-link .pc-summary {
+      width: 100%;
+  }
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -36,12 +42,19 @@
   endif
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} isolate gradient">
+<div id="{{ section.settings.collection.title | handle }}" class="color-{{ section.settings.color_scheme }} isolate gradient {{ section.settings.collection.title | handle }} collection_Div">
   <div class="collection page-width{% if show_mobile_slider %} page-width-desktop{% endif %} section-{{ section.id }}-padding">
     {%- unless section.settings.title == blank -%}
       <div class="title-wrapper-with-link{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %} title-wrapper--no-top-margin">
         <h2 class="title {{ section.settings.heading_size }}">{{ section.settings.title | escape }}</h2>
-  
+        {% if section.settings.sub_title != blank %}
+        <div class="pc-summary sauna-components">
+          	<p class="etica">{{ section.settings.sub_title }}</p>
+          	{% if section.settings.view_btn != blank %}
+          	<a href="{{ section.settings.collection.url }}" class="arrow-link">{{ section.settings.view_btn }}</a>
+          	{% endif %}
+        </div>
+        {% endif %}
         {%- if section.settings.show_view_all and section.settings.swipe_on_mobile and more_in_collection -%}
           <a href="{{ section.settings.collection.url }}" class="link underlined-link large-up-hide">{{ 'sections.featured_collection.view_all' | t }}</a>
         {%- endif -%}
@@ -128,6 +141,16 @@
       "label": "t:sections.all.heading_size.label"
     },
     {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Heading"
+    },
+    {
+      "type": "text",
+      "id": "view_btn",
+      "label": "View All Text"
+    },
+	{
       "type": "collection",
       "id": "collection",
       "label": "t:sections.featured-collection.settings.collection.label"

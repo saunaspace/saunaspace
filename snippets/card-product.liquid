@@ -15,7 +15,7 @@
 {% endcomment %}
 
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
-
+{% assign product = card_product %}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -28,8 +28,8 @@
       assign ratio = 1
     endif
   -%}
-  <div class="card-wrapper underline-links-hover">
-    <div class="card
+  <div class="card-wrapper underline-links-hover test">
+    <div class="card product-tile
       card--{{ settings.card_style }}
       {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
       {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }}{% endif %}
@@ -41,6 +41,7 @@
         {%- if card_product.featured_media -%}
           <div class="card__media">
             <div class="media media--transparent media--hover-effect">
+              <a href="{{ card_product.url }}">
               <img
                 srcset="{%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
                   {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
@@ -52,7 +53,7 @@
                 src="{{ card_product.featured_media | image_url: width: 533 }}"
                 sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                 alt="{{ card_product.featured_media.alt | escape }}"
-                class="motion-reduce"
+                class="motion-reduce pt-img img{{ product.id }}"
                 {% unless lazy_load == false %}loading="lazy"{% endunless %}
                 width="{{ card_product.featured_media.width }}"
                 height="{{ card_product.featured_media.height }}"
@@ -76,6 +77,7 @@
                   height="{{ card_product.media[1].height }}"
                 >
               {%- endif -%}
+              </a>
             </div>
           </div>
         {%- endif -%}
@@ -98,11 +100,43 @@
       </div>
       <div class="card__content">
         <div class="card__information">
+          {% comment %}
           <h3 class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}">
             <a href="{{ card_product.url }}" class="full-unstyled-link">
               {{ card_product.title | escape }}
             </a>
           </h3>
+          {% endcomment %}
+          <a href="{{ card_product.url }}" class="pt-name">{{ card_product.title | escape }}</a>
+          
+          <div style="clear:both;"></div>
+          
+          {% assign swatch = 'Color' %}
+          {% assign colorNames = 'Natural;Indigo;Dark Chocolate;Stone;Hand-Dyed Turmeric' | split: ";" %}
+    	  {% assign colorValues = 'natural.jpg;indigo.jpg;dark-chocolate.jpg;stone.jpg;turmeric.jpg' | split: ";" %}
+          <div class="color-choices"> 
+           {% for option in product.options %}
+              {% if option == swatch %}
+            	  
+                  {% assign index = forloop.index0 %}
+            	  
+            	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
+                  {% for color in uniqueColors %}
+                    {% assign currentVariant = product.variants | where: "option2", color | first %}
+                    {% for colorName in colorNames %}
+                      {% if colorName == currentVariant.option2 %}
+                        {% assign colorIndex = forloop.index0 %}
+                      {% endif %}
+                    {% endfor %}
+            		<div class="ccrp p{{ product.id }} cat color-choice-off" data-productID="{{ product.id }}" data-productCode="emf-shield" data-colorPrice="{{ currentVariant.price | money_with_currency }}" data-colorCode="{{ currentVariant.option2 | handle }}" {% if currentVariant.featured_image.src  %}data-image="{{ currentVariant.featured_image.src | img_url: '300x300', crop: 'center', scale: 2 }}" {% endif %}>
+                      <div class="color-choice" style="background-image:url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/{{ colorValues[colorIndex] }})"></div>
+            		</div>
+            		
+                  {% endfor %}
+             {% endif %}
+           {% endfor %}
+          </div>
+          
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
@@ -170,7 +204,7 @@
       <div class="card__content">
         <div class="card__information">
           <h3 class="card__heading{% if settings.card_style == 'standard' %} h5{% endif %}">
-            <a role="link" aria-disabled="true" class="full-unstyled-link">
+            <a role="link" aria-disabled="true" class="full-unstyled-link pt-name">
               {{ 'onboarding.product_title' | t }}
             </a>
           </h3>

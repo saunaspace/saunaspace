@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "metafield-product",
       "blocks": {
         "title": {
           "type": "title",
@@ -23,7 +23,7 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "dropdown"
+            "picker_type": "button"
           }
         },
         "buy_buttons": {
@@ -34,8 +34,8 @@
         }
       },
       "block_order": [
-        "title",
         "caption",
+        "title",
         "price",
         "variant_picker",
         "buy_buttons"

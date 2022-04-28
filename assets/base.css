@@ -367,11 +367,6 @@ body,
   font-weight: var(--font-body-weight);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
 .h0,
 .h1,
 .h2,
@@ -380,7 +375,7 @@ h5,
 .h5 {
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
-  font-weight: var(--font-heading-weight);
+  font-weight: 700;
   letter-spacing: calc(var(--font-heading-scale) * 0.06rem);
   color: rgb(var(--color-foreground));
   line-height: calc(1 + 0.3 / max(1, var(--font-heading-scale)));
@@ -397,62 +392,61 @@ h5,
   }
 }
 
-h1,
+
 .h1 {
   font-size: calc(var(--font-heading-scale) * 3rem);
 }
 
 @media only screen and (min-width: 750px) {
-  h1,
+
   .h1 {
     font-size: calc(var(--font-heading-scale) * 4rem);
   }
 }
 
-h2,
+
 .h2 {
   font-size: calc(var(--font-heading-scale) * 2rem);
 }
 
 @media only screen and (min-width: 750px) {
-  h2,
+
   .h2 {
     font-size: calc(var(--font-heading-scale) * 2.4rem);
   }
 }
 
-h3,
+
 .h3 {
   font-size: calc(var(--font-heading-scale) * 1.7rem);
 }
 
 @media only screen and (min-width: 750px) {
-  h3,
+,
   .h3 {
     font-size: calc(var(--font-heading-scale) * 1.8rem);
   }
 }
 
-h4,
+
 .h4 {
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
   font-size: calc(var(--font-heading-scale) * 1.5rem);
 }
 
-h5,
+
 .h5 {
   font-size: calc(var(--font-heading-scale) * 1.2rem);
 }
 
 @media only screen and (min-width: 750px) {
-  h5,
   .h5 {
     font-size: calc(var(--font-heading-scale) * 1.3rem);
   }
 }
 
-h6,
+
 .h6 {
   color: rgba(var(--color-foreground), 0.75);
   margin-block-start: 1.67em;
@@ -2858,6 +2852,8 @@ details-disclosure > details {
   }
 }
 
+
+
 .font-body-bold {
   font-weight: var(--font-body-weight-bold);
 }
@@ -2897,7 +2893,7 @@ body {
 
 section:not(.shopify-section) {
 	width: 90%;
-	max-width: 1200px;
+	max-width: 1350px;
 	margin: 0 auto;
 }
 
@@ -4122,9 +4118,20 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 
 .product-tile {
 	width: 275px;
-	margin-right: 20px;
+	    padding: 0 10px;
+    margin: 0;
+}
+}
+.product__media-wrapper {
+	    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 660px;
 }
 
+.product__media-gallery li {
+	margin: 0;
+}
 	.product-tile .color-choices { justify-content: flex-start; margin: 0 0 10px 0; }
 
 .pt-img {
@@ -4166,7 +4173,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		align-items: center;
 	}
 	
-	.stickyBG-visible { transform: translateY(-90px); transition: transform .25s; }
+	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; }
 
 .sac-product {
 	font-weight: 700;
@@ -4510,11 +4517,11 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		.top-feature img { margin: 0 auto 20px auto; width: 100px; height: 100px; }
 		.tf-title { font-weight: 700 !important; margin-bottom: 1em; }
 
-.related-products {
+.related-products, .product-recommendations {
 	padding-top: var(--sectionBottom);
 	border-top: 1px solid #939393;
 	border-bottom: 1px solid #939393;
-	width: 100%;
+	width: 90%;
 	max-width: 1350px;
 	margin: 0 auto var(--sectionBottom) auto;
 }
@@ -6026,3 +6033,69 @@ span[data-ml]::before {
 	 aspect-ratio: 8.5 / 10;
  }
 
+#bcpo {
+	display: flex;
+	flex-wrap: wrap;
+}
+#bcpo .bcpo-dropdown {
+	order: 2;
+}
+#bcpo .bcpo-dropdown .bcpo-value {
+	display: none;
+}
+#bcpo:not(.g-card) .bcpo-dropdown {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+#bcpo .bcpo-dropdown label {
+	padding: 0;
+}
+#bcpo .bcpo-dropdown .single-option-selector {
+	margin: 0;
+}
+#bcpo .bcpo-images {
+	text-align: center;
+	margin: 0 auto;
+}
+#bcpo .bcpo-images .bcpo-label {
+	font-size: 1.4rem;
+	display: inline-block;
+	padding: 0 1em;
+	margin-top: 15px;
+	background-image: linear-gradient(#939393,#939393);
+	background-position: 0 50%;
+	background-size: 100% 1px;
+	background-repeat: no-repeat;
+}
+#bcpo .bcpo-images .bcpo-label label {
+	background: #fff;
+	padding: 0 5px;
+	display: inline-block;
+  	font-family: lft-etica-mono,sans-serif;
+  	font-weight: 400;
+}
+#bcpo .bcpo-images div.bcpo-image-parent {
+  	width: 38px;
+}
+#bcpo .bcpo-images label.bcpo-front-image-label{
+  	height:32px;
+}
+#bcpo .bcpo-dd > ul > li {
+	border-radius: 0;
+	max-width: 210px;
+}
+
+#bcpo .bcpo-dd .inner label {
+	background: #FFF;
+  	line-height: 1.8;
+	padding: 0 6px;
+}
+#bcpo .bcpo-dd .inner label:hover{
+  	background: #6E1500 !important;
+}
+.single-page-price .price__container::after {
+	content: "price varies by color";
+  	font-family: 'UntitledSans', sans-serif;
+}

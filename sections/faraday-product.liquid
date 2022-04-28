@@ -36,7 +36,7 @@
 </div>
 
 
-	<div class="stickyBG">
+	<div class="stickyBG" style="top:146px;">
 		<div class="sticky-add-to-cart">
 			<div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
 			<div class="sac-wrap">
@@ -204,10 +204,10 @@
         {%- endif -%}
       </media-gallery>
     </div>
-    <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+    <div class="product__info-wrapper product-text grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
-        <div class="stickyBG">
+        <div class="stickyBG" style="top:146px;">
             <div class="sticky-add-to-cart">
                 <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
                 <div class="sac-wrap">
@@ -494,7 +494,7 @@
                     <button
                       type="submit"
                       name="add"
-                      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                      class="product-form__submit atcMain button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
                         <span>

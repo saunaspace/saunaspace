@@ -2,14 +2,217 @@
   "sections": {
     "main": {
       "type": "main-list-collections",
+      "blocks": {
+        "b7c39c0a-63e4-48cf-bb8c-48e446a86f8a": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Infrared Saunas",
+            "deal_sub_txt": "",
+            "collection_title": "saunas",
+            "collection_img": "shopify:\/\/shop_images\/cat-infrared-saunas.jpg"
+          }
+        },
+        "db6e65a5-65d0-4610-900c-974cfd9c2b41": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Targeted Therapy",
+            "deal_sub_txt": "",
+            "collection_title": "targeted",
+            "collection_img": "shopify:\/\/shop_images\/cat-targeted-therapy.jpg"
+          }
+        },
+        "bc87d548-6cd2-4a69-942b-99874b3d09bb": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Sauna Components",
+            "deal_sub_txt": "",
+            "collection_title": "sauna-components",
+            "collection_img": "shopify:\/\/shop_images\/cat-sauna-components.jpg"
+          }
+        },
+        "2cd0567d-b5b8-4752-96d5-6db556a29c2b": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Replacement Bulbs",
+            "deal_sub_txt": "",
+            "collection_title": "replacement-bulbs",
+            "collection_img": "shopify:\/\/shop_images\/cat-replacement-bulbs.jpg"
+          }
+        },
+        "01d88204-d4b1-4d6f-b6c7-0f14fb456db1": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Merchandise",
+            "deal_sub_txt": "",
+            "collection_title": "merchandise",
+            "collection_img": "shopify:\/\/shop_images\/cat-merchandise.jpg"
+          }
+        },
+        "45de8b00-e31f-4297-941e-8c9c0128acb9": {
+          "type": "collection_list",
+          "settings": {
+            "col_item": "Products We Love",
+            "deal_sub_txt": "",
+            "collection_title": "products-we-love",
+            "collection_img": "shopify:\/\/shop_images\/cat-products-we-love.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b7c39c0a-63e4-48cf-bb8c-48e446a86f8a",
+        "db6e65a5-65d0-4610-900c-974cfd9c2b41",
+        "bc87d548-6cd2-4a69-942b-99874b3d09bb",
+        "2cd0567d-b5b8-4752-96d5-6db556a29c2b",
+        "01d88204-d4b1-4d6f-b6c7-0f14fb456db1",
+        "45de8b00-e31f-4297-941e-8c9c0128acb9"
+      ],
       "settings": {
         "title": "Collections",
         "sort": "alphabetical",
-        "image_ratio": "square"
+        "image_ratio": "square",
+        "enable_collection": true
+      }
+    },
+    "1650396884b8d218b2": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Infrared Saunas",
+        "heading_size": "h1",
+        "sub_title": "Full-spectrum heat and light therapy.",
+        "view_btn": "Compare Saunas",
+        "collection": "saunas",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1650397031f96ab846": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Targeted Therapy",
+        "heading_size": "h1",
+        "sub_title": "Portable infrared therapy.",
+        "view_btn": "Learn More",
+        "collection": "targeted",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "16503970389ba395e8": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Sauna Components",
+        "heading_size": "h1",
+        "sub_title": "Customize your perfect sauna.",
+        "view_btn": "See How",
+        "collection": "sauna-components",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1650397042cc6f12f9": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Replacement Bulbs",
+        "heading_size": "h1",
+        "sub_title": "High-quality incandesent sauna bulbs.",
+        "view_btn": "",
+        "collection": "replacement-bulbs",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1650397047c3ad7b49": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Merchandise",
+        "heading_size": "h1",
+        "sub_title": "Show your SaunaSpace pride.",
+        "view_btn": "",
+        "collection": "merchandise",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1650397050e89e7a9b": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Products We Love",
+        "heading_size": "h1",
+        "sub_title": "Our team's favorites.",
+        "view_btn": "",
+        "collection": "products-we-love",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1650396884b8d218b2",
+    "1650397031f96ab846",
+    "16503970389ba395e8",
+    "1650397042cc6f12f9",
+    "1650397047c3ad7b49",
+    "1650397050e89e7a9b"
   ]
 }

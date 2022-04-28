@@ -7,6 +7,7 @@
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+{{ 'lite-yt-embed.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -22,7 +23,7 @@
   }
 {%- endstyle -%}
 
-<script>(function () { if (window.bcpo_data && bcpo_data.virtual_options && bcpo_data.virtual_options.length) { return; } var script = document.createElement('script'); script.src = "{{ 'product-form.js' | asset_url }}"; document.head.appendChild(script); })();</script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
 {%- if first_3d_model -%}
@@ -30,12 +31,38 @@
   <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
   <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
+
 <div class="free-shippingBG">
     <section class="free-shipping">Free shipping and returns in the contiguous US and Canada on orders over $200.</section>
 </div>
 
+
+	<div class="stickyBG">
+		<div class="sticky-add-to-cart">
+			<div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
+			<div class="sac-wrap">
+				<div class="sac-price etica">
+                  	{%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+                </div>
+              	<a href="javascript:void(0)" class="btn atc" id="sacText">
+                  {%- if product.selected_or_first_available_variant.available -%}
+                  	{{ 'products.product.add_to_cart' | t }}
+                  {%- else -%}
+                  	{{ 'products.product.sold_out' | t }}
+                  {%- endif -%}
+              	</a>
+			</div>
+      </div>
+	</div>
+
+            <h1 class="product-name-mobile" {{ block.shopify_attributes }}>
+              {{ product.title | escape }}
+            </h1>
+
+            
+
 <section class="page-width section-{{ section.id }}-padding">
-  <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+  <div class="product product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
       <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
         <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
@@ -186,48 +213,63 @@
         {%- endif -%}
       </media-gallery>
     </div>
-    <div class="product__info-wrapper product-text grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+    <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
+        {% comment %}
+        <div class="stickyBG">
+            <div class="sticky-add-to-cart">
+                <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
+                <div class="sac-wrap">
+                    <div class="sac-price etica">$5,499.99</div>
+                    <a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endcomment %}
 
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-          {%- when '@app' -%}
-            {% render block %}
-          {%- when 'text' -%}
-            <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
-              {{- block.settings.text -}}
-            </p>
-          {%- when 'title' -%}
-            <h1 class="product__title" {{ block.shopify_attributes }}>
-              {{ product.title | escape }}
-            </h1>
-          {%- when 'price' -%}
-            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
-            </div>
-            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-              <div class="product__tax caption rte">
-                {%- if shop.taxes_included -%}
-                  {{ 'products.product.include_taxes' | t }}
-                {%- endif -%}
-                {%- if shop.shipping_policy.body != blank -%}
-                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                {%- endif -%}
+        <div class="product-text">
+        	{%- for block in section.blocks -%}
+            {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
+            {%- when 'text' -%}
+              <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+                {{- block.settings.text -}}
+              </p>
+				{%- when 'title' -%}
+                <h1 id="theProduct" data-plugSKUUS="" data-plugSKUUK="" data-plugSKUEU="" data-plugSKUSW="" data-plugSKUAU="" data-plugSKUBR="" data-plugSKUIN=""  data-plugUPCUS="" data-plugUPCUK="" data-plugUPCEU="" data-plugUPCSW="" data-plugUPCAU="" data-plugUPCBR="" data-plugUPCIN="">{{ product.title | escape }}</h1>
+          	  
+              {%- when 'price' -%}
+              <div class="no-js-hidden single-page-price" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+          	  </div>
+              {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+                <div class="product__tax caption rte">
+                  {%- if shop.taxes_included -%}
+                    {{ 'products.product.include_taxes' | t }}
+                  {%- endif -%}
+                  {%- if shop.shipping_policy.body != blank -%}
+                    {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              <div {{ block.shopify_attributes }}>
+                {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  {{ form | payment_terms }}
+                {%- endform -%}
               </div>
-            {%- endif -%}
-            <div {{ block.shopify_attributes }}>
-              {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                {{ form | payment_terms }}
-              {%- endform -%}
-            </div>
+        </div><!--product-text-->
+        
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
                 {{ product.description }}
               </div>
             {%- endif -%}
+
+            
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
           {%- when 'collapsible_tab' -%}
@@ -316,6 +358,7 @@
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           {%- when 'variant_picker' -%}
+        
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
@@ -369,7 +412,29 @@
                 </variant-selects>
               {%- endif -%}
             {%- endunless -%}
-
+            <div class="atc-box">
+                <div class="atc-outOfStock">
+                    
+                        <p><strong>Sorry, this item is out of stock.</strong></p>
+                    <p>Please select a different color.</p>
+                </div>
+            </div>
+            
+            
+    
+            <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
+                <div class="op-30day">This item is currently out of stock but we are making more. You can pre-order this and we will ship as soon as it is ready.</div>
+            </div>
+            
+            <div class="op-30day-box">
+                
+                    <div class="op-30day">
+                        <div style="width: 100%;"><strong>Order Processing:</strong> <span id="orderProcessing">1–3 days</span>.</div>
+                    </div>
+                    <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
+                
+            </div>
+        	<a href="javascript-void(0);" class="atcMain"></a>
             <noscript class="product-form__noscript-wrapper-{{ section.id }}">
               <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
                 <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
@@ -405,7 +470,6 @@
                 </div>
 
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
                   <div class="product-form__buttons">
                     <button
                       type="submit"
@@ -432,6 +496,40 @@
                   </div>
                 {%- endform -%}
               </product-form>
+    
+            
+            <div class="warranty-trial">
+                <div class="pwt product-warranty">10-year Warranty</div><div class="pwt product-trial">100-day Trial</div>
+            </div>
+            
+            
+            <div class="pay-over-time">
+                <div class="pot-head">Pay Over Time</div>
+                <div class="pot-col">
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="60" alt="SplitIt" loading="lazy" />
+                    <span data-ml="splitItSummary"><p>Monthly payments using your credit card. 0% interest.</p></span>
+                    <a href="javascript:void(0)" onClick="potMore('splitit')">Learn More</a>
+                </div>
+                <div class="pot-divider"></div>
+                <div class="pot-col">
+                    <img src="{{ 'bread.png' | asset_url }}" width="60" alt="Bread Financing" loading="lazy" />
+                    <span data-ml="breadSummary"><p>Simple loan with monthly payments as low as 0% APR for 6 months.*</p></span>
+                    <a href="javascript:void(0)" onClick="potMore('bread')">Learn More</a>
+                </div>
+                <div class="pot-col-100 hideMe" id="splititCol">
+                    <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy" /></a>
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" />
+                    <span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
+                    <p class="fineprint">You can choose this option at checkout.</p>
+                </div>
+                <div class="pot-col-100 hideMe" id="breadCol">
+                    <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15"  loading="lazy"/></a>
+                    <img src="{{ 'bread.png' | asset_url }}" width="70" alt="Bread Financing" />
+                    <span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
+                    <p class="fineprint">Check your eligibility in minutes at checkout.</p>
+                </div>
+            </div>
+            
 
               {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
 
@@ -479,51 +577,11 @@
               </p>
             {%- endif -%}
           {%- endcase -%}
-         
-				
         {%- endfor -%}
-<div class="op-30day">
-							<div><strong>Order Processing:</strong>  1–4 days.</div>
-							<div>30-Day Returns</div>
-						</div>
-            <hr/>
-				<div class="pay-over-time">
-					<div class="pot-head">Pay Over Time</div>
-					<div class="pot-col">
-						<img src="{{ 'splitit.svg' | asset_url }}" width="60" alt="SplitIt" loading="lazy" />
-						<span data-ml="splitItSummary">Monthly payments using your credit card. 0% interest.</span>
-						<a href="javascript:void(0)" onClick="potMore('splitit')">Learn More</a>
-					</div>
-					<div class="pot-divider"></div>
-					<div class="pot-col">
-						<img src="{{ 'bread.png' | asset_url }}" width="60" alt="Bread Financing" loading="lazy" />
-						<span data-ml="breadSummary">Simple loan with monthly payments as low as 0% APR for 6 months.*</span>
-						<a href="javascript:void(0)" onClick="potMore('bread')">Learn More</a>
-					</div>
-					<div class="pot-col-100 hideMe" id="splititCol">
-						<a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy"  /></a>
-						<img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" loading="lazy" />
-						<span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
-						<p class="fineprint">You can choose this option at checkout.</p>
-					</div>
-					<div class="pot-col-100 hideMe" id="breadCol">
-						<a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy" /></a>
-						<img src="{{ 'bread.png' | asset_url }}" width="70" alt="Bread Financing" loading="lazy"/>
-						<span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
-						<p class="fineprint">Check your eligibility in minutes at checkout.</p>
-					</div>
-				</div>		
       </div>
     </div>
   </div>
-<section>
-  {%- if product.description != blank -%}
-		<div class="pcDescription">       
-             {{ product.description }}          
-	
-			</div>
-        {%- endif -%}
-	</section>
+
   <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
     <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
       <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
@@ -567,6 +625,211 @@
   {%- endfor -%}
 </section>
 
+
+
+
+<div class="tanBG noMargin">
+    <div class="product-info-tabs">
+        <a href="javascript:void(0)" class="product-info-tab product-info-tab-on" data-tab="overview">Overview</a>
+        {% if product.metafields.my_fields.whatinclude != blank %}
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="whatsIncluded">What’s Included</a>
+      	{% endif %}
+      	{% if product.metafields.my_fields.materials != blank %}
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="materials">Materials</a>
+      	{% endif %}
+      	{% if product.metafields.my_fields.specifications != blank %}
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="specs">Specifications</a>
+      	{% endif %}
+      	{% if product.metafields.my_fields.instructions != blank %}
+      	<a href="javascript:void(0)" class="product-info-tab" data-tab="instructions">Instructions</a>
+      	{% endif %}
+    </div>
+    
+    {%- if product.description != blank -%}
+  	<div class="product-info-details" id="pid-overview">
+    <section>
+      {{ product.description }}
+    </section>
+    </div>
+    {%- endif -%}
+    
+    {% if product.metafields.my_fields.whatinclude != blank %}
+    <div class="product-info-details hideMe" id="pid-whatsIncluded">
+    <section>
+      	{{ product.metafields.my_fields.whatinclude }}
+    </section>
+    </div>
+  	{% endif %}
+    {% if product.metafields.my_fields.materials != blank %}
+    <div class="product-info-details hideMe" id="pid-materials">
+    <section>
+        {{ product.metafields.my_fields.materials }}
+    </section>
+    </div>
+    {% endif %}
+  	{% if product.metafields.my_fields.specifications != blank %}
+    <div class="product-info-details hideMe" id="pid-specs">
+    <section>
+      	{{ product.metafields.my_fields.specifications }}
+        
+    </section>
+    </div>
+  	{% endif %}
+    
+  	{% if product.metafields.my_fields.instructions != blank %}
+    <div class="product-info-details hideMe" id="pid-instructions">
+    <section>
+        {{ product.metafields.my_fields.instructions }}
+    </section>
+    </div>
+  	{% endif %}
+    
+    
+    </div>
+    
+  	{% if product.metafields.my_fields.top-features != blank %}
+    <div class="maroonBG">
+    <div class="top-features">
+		{{ product.metafields.my_fields.top-features }}    
+    </div>
+    </div>
+  	{% endif %}
+  
+    {% if product.metafields.my_fields.features_section_1 != blank %}
+        {{ product.metafields.my_fields.features_section_1 }}
+    {% endif %}
+  
+  	{% if product.metafields.my_fields.features_section_2 != blank %}
+        {{ product.metafields.my_fields.features_section_2 }}
+    {% endif %}
+  
+  	{% if product.metafields.my_fields.features_section_3 != blank %}
+    	{{ product.metafields.my_fields.features_section_3 }}
+  	{% endif %}
+    
+  	{% if product.metafields.my_fields.features_section_4 != blank %}
+		{{ product.metafields.my_fields.features_section_4 }}
+    {% endif %}
+  	
+  {% comment %}
+    <div class="related-products">
+    
+    <h2>You may also like</h2>
+    
+    
+        <div class="rc-arrows">
+            <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onClick="scrollRelated(1);"  loading="lazy"/>
+            <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onClick="scrollRelated(-1);" loading="lazy" />
+            <div class="review-carousel related-carousel">
+            <!--the include below is looking for rsRP -->
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../sauna-components/sauna-stool.html" ><img src="{{ 'sauna-stool-tile.jpg' | asset_url }}" alt="Sauna Stool" class="pt-img"  loading="lazy"/></a>
+                        <a href="../sauna-components/sauna-stool.html" class="pt-name">Sauna Stool</a>
+                    
+                        <p class="pt-price etica price8">$249.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../targeted-therapy/photon-infrared-therapy-light.html" ><img src="{{ 'photon-infrared-therapy-light-tile.jpg' | asset_url }}" alt="Photon Infrared Therapy Light" class="pt-img"  loading="lazy"/></a>
+                        <a href="../targeted-therapy/photon-infrared-therapy-light.html" class="pt-name">Photon Infrared Therapy Light</a>
+                    
+                        <p class="pt-price etica price3">$349.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../merchandise/infini-tee.html" ><img src="{{ 'infini-tee-tile.jpg' | asset_url }}" alt="Infini Tee" class="pt-img"  loading="lazy"/></a>
+                        <a href="../merchandise/infini-tee.html" class="pt-name">Infini Tee</a>
+                    
+                            <p class="pt-price etica">From: $24.99</p>
+                        
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../merchandise/saunaspace-bath-towel.html" ><img src="{{ 'saunaspace-bath-towel-tile.jpg' | asset_url }}" alt="SaunaSpace Bath Towel" class="pt-img" loading="lazy" /></a>
+                        <a href="../merchandise/saunaspace-bath-towel.html" class="pt-name">SaunaSpace Bath Towel</a>
+                    
+                        <p class="pt-price etica price24">$29.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../products-we-love/its-easy-being-green-book.html" ><img src="{{ 'its-easy-being-green-book-tile.jpg' | asset_url }}" alt="It’s Easy Being Green: How Conscious Consumers and Ecopreneurs Can Save the World" class="pt-img" loading="lazy" /></a>
+                        <a href="../products-we-love/its-easy-being-green-book.html" class="pt-name">It’s Easy Being Green: How Conscious Consumers and Ecopreneurs Can Save the World</a>
+                    
+                        <p class="noMargin">Aviva Peltin</p>
+                    
+                        <p class="pt-price etica price45">$16.99</p>
+                    
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../replacement-bulbs/thermalight-infrared-bulb.html" ><img src="{{ 'thermalight-infrared-bulb-tile.jpg' | asset_url }}" alt="ThermaLight Infrared Bulb" class="pt-img" loading="lazy" /></a>
+                        <a href="../replacement-bulbs/thermalight-infrared-bulb.html" class="pt-name">ThermaLight Infrared Bulb</a>
+                    
+                            <p class="pt-price etica">From: $89.99</p>
+                        
+                </div>
+    
+    
+    
+                <div class="product-tile" style="flex-shrink: 0;">
+                    
+                        <a href="../merchandise/saunaspace-sticker.html" ><img src="{{ 'saunaspace-sticker-tile.jpg' | asset_url }}" alt="SaunaSpace Sticker" class="pt-img"  loading="lazy" /></a>
+                        <a href="../merchandise/saunaspace-sticker.html" class="pt-name">SaunaSpace Sticker</a>
+                    
+                        <p class="pt-price etica price27">$4.99</p>
+                    
+                </div>
+    
+    
+            </div>
+        </div>
+                    
+    </div>
+    
+    
+    
+    <section class="reviews">
+    <h2>Reviews and Questions</h2>
+    
+    <div class="yotpo yotpo-main-widget" 
+        data-product-id="2105477365849"
+        data-name="Faraday+Infrared+Sauna"
+        data-url="https%3A%2F%2Fsauna%2Espace%2FpcatCode%2Ffaraday%2Dinfrared%2Dsauna"
+        data-image-url="https%3A%2F%2Fsauna%2Espace%2Fimg%2Fproducts%2Ffaraday%2Dinfrared%2Dsauna%2Dnatural%2Dgallery%2D01%2Ejpg"
+        data-price="5499.99"
+        data-currency="USD"
+        data-description="The+ultimate+sauna%3A+full%2Dspectrum+infrared%2C+light+therapy%2C+sustainable+materials%2C+compact%2C+portable%2C+and+the+world%27s+only+EMF%2Dblocking+sauna+shield%2E"></div>
+    </section>
+    
+    <div class="divider"></div>
+    
+    <section>
+    <h2>Feel the #Saunaspace Love</h2>
+    <div class="yotpo yotpo-pictures-widget" data-gallery-id="616f0941238de41916812c43"></div>
+    </section>
+  {% endcomment %}
+    
+
 {% javascript %}
   class ProductModal extends ModalDialog {
     constructor() {
@@ -608,12 +871,144 @@
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {% endif %}
 
-<script>
+<script src="{{ 'select2.min.js' | asset_url }}" async></script>
 
-  function potMore(f) {
+<script>
+$(document).ready(function() {
+  	//var formatPlug;
+	$(".select-icons").select2({
+		templateResult: formatPlug,
+		minimumResultsForSearch: Infinity
+	});
+	$(".product-info-details a").removeAttr('target');
+	
+	$(".pid-col-text a").each(function() {
+		if($(this).attr("href").indexOf(".pdf") > 0) {
+			$(this).attr({"target":"_blank"});
+		}
+	});
+	
+});
+
+
+$(".product-info-tab").on("click",function() {
+	$(".product-info-tab").removeClass("product-info-tab-on");
+	$(this).addClass("product-info-tab-on");
+	$(".product-info-details").addClass("hideMe");
+	var whichTab=$(this).attr("data-tab");
+	$("#pid-" + whichTab).removeClass("hideMe");
+});
+
+//swapping out tiles in related products based on color choices is in global.js.
+
+
+$(".pot-col-100").on("click",function() {
+	$(this).addClass("hideMe");
+	$(".pot-col").removeClass("hideMe");
+});
+
+
+
+var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
+
+function scrollRelated(v) {
+	tileSize=295; //includes right margin
+	numTiles=parseInt(currentRelatedCarouselWidth / tileSize);
+	timeToScroll=numTiles * 200;
+	moveAmt=numTiles * tileSize  * v;
+	$(".related-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+//currentThumbsCarouselWidth is in getGallery.asp
+function scrollGallery(v) {
+	tileSize=145; //includes right margin
+	numTiles=parseInt(currentThumbsCarouselWidth / tileSize);
+	timeToScroll=numTiles * 100;
+	moveAmt=numTiles * tileSize  * v;
+	$(".product-thumbs").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+function showGalleryHero(n,colorCode) {
+	if(colorCode==0) {
+		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-gallery-' | asset_url }}" + n + ".jpg"});
+	} else {
+		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-' | asset_url }}" + colorCode + "-gallery-" + n + ".jpg"});
+	}
+}
+
+function potMore(f) {
 	$(".pot-col").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
 }
+
+
+let options = {
+	root: null,
+	rootMargin: '-20px 0px 0px 0px', 
+	threshold: 1.0 
+};
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
+const stickyAddToCart = document.querySelector('.atcMain');
+if(window.matchMedia('(min-width: 750px)').matches) {
+	createObserver('stickyAddToCart');
+}
+
+function onChangestickyAddToCart(changes, observerstickyAddToCart) {
+		changes.forEach(change => { if (change.intersectionRatio >= 1) {
+			$(".stickyBG").removeClass("stickyBG-visible");
+			//console.log("hidden")
+		} else {
+			//console.log("visible")
+			$(".stickyBG").addClass("stickyBG-visible");
+		}
+	});
+}
+//change in price
+$(document).on('click','label',function(){
+  	//console.log('data is changed')
+  setTimeout(function(){
+    var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
+    console.log('current price is: '+damount );
+    $('.stickyBG .price-item').text(damount);
+  },200)
+});
+$(document).on('click','#sacText',function(){
+  $('.product-form__submit').click();
+});
+
+updateUC(1)
+function updateUC(p) {
+  ucArr=["https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-light.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-desk-arm.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-case.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-sauna-supreme.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-better-night-light.jpg"]
+  $(".build-panels p").addClass("hideMe");
+  $("#bp" + p).find("p").removeClass("hideMe");
+  $("#bpImg").attr("src",ucArr[p-1]);
+}
+      
+function formatPlug (plug) {
+  if (!plug.id) {
+    return plug.text;
+  }
+  var plugPath='';
+  if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
+  if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
+  if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
+  if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
+  if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+  var $plug = $(
+    '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
+  );
+  return $plug;
+};
+</script>
+
+<script src="{{ 'lite-yt-embed.js' | asset_url }}"></script>
+
+<script>
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
       const ua = window.navigator.userAgent;
