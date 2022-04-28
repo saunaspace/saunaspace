@@ -68,6 +68,72 @@
 	</section>
 
 
+
+</script>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+        {%- if page.title != blank -%}
+            "name":      "{{ page.title | escape }}",
+        {%- else -%}
+            "name":   "{{ 'page.title' | t }}",
+        {%- endif -%}
+        {% unless page.metafields.start-date.startdate == blank %}
+                "startDate": "{{page.metafields.start-date.startdate}}",
+        {% endunless %}
+        {% unless page.metafields.end-date.enddate == blank %}
+                "endDate": "{{page.metafields.end-date.enddate}}",
+        {% endunless %}
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        {% unless page.metafields.location-name.locationname == blank %}
+            "name": "{{page.metafields.location-name.locationname}}",
+        {% endunless %}
+        "address": {
+          "@type": "PostalAddress",
+            {% unless page.metafields.location-street-addr.locationstreetaddr == blank %}
+                "streetAddress": "{{page.metafields.location-street-addr.locationstreetaddr}}",
+            {% endunless %}
+            {% unless page.metafields.location-city.locationcity == blank %}
+                "addressLocality": "{{page.metafields.location-city.locationcity}}",
+            {% endunless %}
+            {% unless page.metafields.location-zip.locationzip == blank %}
+                "postalCode": "{{page.metafields.location-zip.locationzip}}",
+            {% endunless %}
+            {% unless page.metafields.location-state.locationstate == blank %}
+                "addressRegion": "{{page.metafields.location-state.locationstate}}",
+            {% endunless %}
+            {% unless page.metafields.location-country.locationcountry == blank %}
+                "addressCountry": "{{page.metafields.location-country.locationcountry}}",
+            {% endunless %}
+        }
+      },
+      "description": "{{ page.content }}",
+      "image" : ["{{page.metafields.event-image.eventimage}}" ],
+        {% unless page.metafields.event-cost.eventcost == blank %}
+            "offers": {
+                "price": "{{page.metafields.event-cost.eventcost}}",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "validFrom": "1/1/2022"
+            },
+        {% endunless %}
+		"organizer": {
+            {% unless page.metafields.organizer-name.organizername == blank %}
+			"name": "{{page.metafields.organizer-name.organizername}}",
+            {% endunless %}
+            {% unless page.metafields.registration-link.registrationlink == blank %}
+                "url": "{{page.metafields.registration-link.registrationlink}}",
+            {% endunless %}
+		  }
+    }
+    </script>
+
     {% schema %}
 {
   "name": "t:sections.main-page.name",
