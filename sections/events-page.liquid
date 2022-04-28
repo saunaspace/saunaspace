@@ -62,7 +62,7 @@
 					<p>{{ pages[event].content }}</p>
 					<div class="event-link-div"><a href="{{ pages[event].metafields.registration-link.registrationlink }}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
 				</div>
-				<a href="{{ pages[event] }}" class="events-img"><img src="{{pages[event].metafields.event-image.eventimage}}" loading="lazy" /></a>
+				<a href="/{{ event }}" class="events-img"><img src="{{pages[event].metafields.event-image.eventimage}}" loading="lazy" /></a>
 			</div>
 {% endfor %}
 
