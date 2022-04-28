@@ -45,11 +45,11 @@
   <span>{{ ingredient }}</span>
 {% endfor %} 
 
-    {% if page.metafields.event-page.eventpage != blank %}
+    {% if page.metafields.event-page != blank %}
 
         {% assign event = page.metafields.event-page.eventpage %}
 
-        <pre>{{ page.metafields.event-page.eventpage }}</pre>
+        <pre>{{ page.metafields.event-page }}</pre>
 
         {% for value in event %}
 
