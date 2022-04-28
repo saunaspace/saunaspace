@@ -4,10 +4,10 @@
 			<div class="event-top">
 				<div class="event-top-text">
 					<h1 class="et-title">
-                        {%- if section.settings.page.title != blank -%}
-                            {{ section.settings.page.title | escape }}
+                        {%- if page.title != blank -%}
+                            {{ page.title | escape }}
                         {%- else -%}
-                            {{ 'sections.page.title' | t }}
+                            {{ 'page.title' | t }}
                         {%- endif -%}
                     </h1>
 					<div class="et-dates">
@@ -41,16 +41,18 @@
                          {% endunless %}
 					</div>
 				</div>
-				<a href="https://summit.healthoptimisation.com/" target="_blank" class="et-link">Register</a>
+                {% unless page.metafields.registration-link.registrationlink == blank %}
+                    <a href="page.metafields.registration-link.registrationlink" target="_blank" class="et-link">Register</a>
+                {% endunless %}
 			</div>
 			<div class="event-box">
 				<div class="event-text">
 					<div class="event-title">Event Details</div>
-					{{ section.settings.page.content }}
+					{{ page.content }}
                     {% unless page.metafields.event-cost.eventcost == blank %}
                         <span class="eventCost">{{page.metafields.event-cost.eventcost}}</span> 
                     {% endunless %}
-                    {% unless page.metafields.event-cost.eventcost == blank %}
+                    {% unless page.metafields.registration-link.registrationlink == blank %}
                         <div class="event-link-div"><a href="{{page.metafields.registration-link.registrationlink}}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
                     {% endunless %}
                 </div>
