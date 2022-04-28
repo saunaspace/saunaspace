@@ -42,7 +42,7 @@
 			</div>
 
 {% for ingredient in page.metafields.event-page.eventpage %} 
-  <span>{{ ingredient }}</span>
+  <span>{{ ingredient.page.title }}</span>
 {% endfor %} 
 
     {% if page.metafields.event-page.eventpage != blank %}
