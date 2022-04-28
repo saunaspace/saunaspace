@@ -41,7 +41,7 @@
 				<a href="events/health-optimization-summit-2022.html" class="events-img"><img src="{{ 'health-optimization-summit-2022.jpg' | asset_url }}" /></a>
 			</div>
 
-{% assign selected_handles = page.metafields.event-page | split: '|' %}
+{% assign selected_handles = page.metafields.event-page.eventpage | split: '|' %}
 {% for selected_handle in selected_handles %}
 
     {{ pages[selected_handle].title }}
