@@ -41,39 +41,24 @@
 				<a href="events/health-optimization-summit-2022.html" class="events-img"><img src="{{ 'health-optimization-summit-2022.jpg' | asset_url }}" /></a>
 			</div>
 
-{% assign selected_handles = page.metafields.event-page.eventpage | split: '|' %}
-{% for selected_handle in selected_handles %}
+{% assign events = page.metafields.event-page.eventpage | split: '|' %}
+{% for event in events %}
 
-    {{ pages[selected_handle].content }}
-{% endfor %}
+    
 
-    {% if page.metafields.event-page != blank %}
-
-        {% assign event = page.metafields.event-page %}
-
-        <pre>{{ page.metafields.event-page }}</pre>
-
-        {% for value in event %}
-
-            {% assign i = forloop.index0 %}
-            <div class="event-box item--{{ i }}">
+    <div class="event-box">
 				<div class="event-text">
-					<div class="event-title">{{event[i]}}</div>
-					<p class="event-dates etica">5/28/2022 - 5/29/2022<br />52 Upper Street, The Angel<br>London N1 0HQ, UK</p>
-					<p>Optimise your mind, body, and environment to gain control over your own health; new levels of energy, performance, and vitality.</p>
+					<div class="event-title">{{ pages[event].title }}</div>
+
+                    
+					<p class="event-dates etica">{{ pages[event].page.metafields.start-date.startdate }} - 5/29/2022<br />52 Upper Street, The Angel<br>London N1 0HQ, UK</p>
+					{{ pages[event].content }}
 					<div class="event-link-div"><a href="https://summit.healthoptimisation.com/" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
 				</div>
 				<a href="events/health-optimization-summit-2022.html" class="events-img"><img src="{{ 'health-optimization-summit-2022.jpg' | asset_url }}" /></a>
 			</div>
-            <div class="item item--{{ i }}">
-                <h4>{{ page.metafields.event-page.page.title[i] }}</h4>
-                <p>{{ page.metafields.event-page.content[i] }}</p>
-            </div>
-            
-        {% endfor %}
+{% endfor %}
 
-    {% endif %}
-		
 	</section>
 
 
