@@ -4,10 +4,10 @@
 			<div class="event-top">
 				<div class="event-top-text">
 					<h1 class="et-title">
-                        {%- if section.settings.page.title != blank -%}
-                            {{ section.settings.page.title | escape }}
+                        {%- if page.title != blank -%}
+                            {{ page.title | escape }}
                         {%- else -%}
-                            {{ 'sections.page.title' | t }}
+                            {{ 'page.title' | t }}
                         {%- endif -%}
                     </h1>
 					<div class="et-dates">
@@ -41,16 +41,18 @@
                          {% endunless %}
 					</div>
 				</div>
-				<a href="https://summit.healthoptimisation.com/" target="_blank" class="et-link">Register</a>
+                {% unless page.metafields.registration-link.registrationlink == blank %}
+                    <a href="page.metafields.registration-link.registrationlink" target="_blank" class="et-link">Register</a>
+                {% endunless %}
 			</div>
 			<div class="event-box">
 				<div class="event-text">
 					<div class="event-title">Event Details</div>
-					{{ section.settings.page.content }}
+					{{ page.content }}
                     {% unless page.metafields.event-cost.eventcost == blank %}
                         <span class="eventCost">{{page.metafields.event-cost.eventcost}}</span> 
                     {% endunless %}
-                    {% unless page.metafields.event-cost.eventcost == blank %}
+                    {% unless page.metafields.registration-link.registrationlink == blank %}
                         <div class="event-link-div"><a href="{{page.metafields.registration-link.registrationlink}}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
                     {% endunless %}
                 </div>
@@ -65,6 +67,72 @@
 		</div>
 	</section>
 
+
+
+</script>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+        {%- if page.title != blank -%}
+            "name":      "{{ page.title | escape }}",
+        {%- else -%}
+            "name":   "{{ 'page.title' | t }}",
+        {%- endif -%}
+        {% unless page.metafields.start-date.startdate == blank %}
+                "startDate": "{{page.metafields.start-date.startdate}}",
+        {% endunless %}
+        {% unless page.metafields.end-date.enddate == blank %}
+                "endDate": "{{page.metafields.end-date.enddate}}",
+        {% endunless %}
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        {% unless page.metafields.location-name.locationname == blank %}
+            "name": "{{page.metafields.location-name.locationname}}",
+        {% endunless %}
+        "address": {
+          "@type": "PostalAddress",
+            {% unless page.metafields.location-street-addr.locationstreetaddr == blank %}
+                "streetAddress": "{{page.metafields.location-street-addr.locationstreetaddr}}",
+            {% endunless %}
+            {% unless page.metafields.location-city.locationcity == blank %}
+                "addressLocality": "{{page.metafields.location-city.locationcity}}",
+            {% endunless %}
+            {% unless page.metafields.location-zip.locationzip == blank %}
+                "postalCode": "{{page.metafields.location-zip.locationzip}}",
+            {% endunless %}
+            {% unless page.metafields.location-state.locationstate == blank %}
+                "addressRegion": "{{page.metafields.location-state.locationstate}}",
+            {% endunless %}
+            {% unless page.metafields.location-country.locationcountry == blank %}
+                "addressCountry": "{{page.metafields.location-country.locationcountry}}",
+            {% endunless %}
+        }
+      },
+      "description": "{{ page.content }}",
+      "image" : ["{{page.metafields.event-image.eventimage}}" ],
+        {% unless page.metafields.event-cost.eventcost == blank %}
+            "offers": {
+                "price": "{{page.metafields.event-cost.eventcost}}",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "validFrom": "1/1/2022"
+            },
+        {% endunless %}
+		"organizer": {
+            {% unless page.metafields.organizer-name.organizername == blank %}
+			"name": "{{page.metafields.organizer-name.organizername}}",
+            {% endunless %}
+            {% unless page.metafields.registration-link.registrationlink == blank %}
+                "url": "{{page.metafields.registration-link.registrationlink}}",
+            {% endunless %}
+		  }
+    }
+    </script>
 
     {% schema %}
 {
