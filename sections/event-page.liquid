@@ -33,7 +33,12 @@
                         {% unless page.metafields.location-state.locationstate == blank %}
                             <span class="eventState">{{page.metafields.location-state.locationstate}}</span> 
                         {% endunless %}
-                        <span class="eventZip">N1 0HQ</span> <span class="eventCountry">UK</span> 
+                        {% unless page.metafields.location-zip.locationzip == blank %}
+                            <span class="eventZip">{{page.metafields.location-zip.locationzip}}</span>
+                        {% endunless %}
+                        {% unless page.metafields.location-country.locationcountry == blank %}
+                         <span class="eventCountry">{{page.metafields.location-country.locationcountry}}</span> 
+                         {% endunless %}
 					</div>
 				</div>
 				<a href="https://summit.healthoptimisation.com/" target="_blank" class="et-link">Register</a>
@@ -42,9 +47,15 @@
 				<div class="event-text">
 					<div class="event-title">Event Details</div>
 					{{ section.settings.page.content }}
-					<div class="event-link-div"><a href="https://summit.healthoptimisation.com/" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
-				</div>
-				<div class="events-img"><img src="../img/events/health-optimization-summit-2022.jpg" /></div>
+                    {% unless page.metafields.event-cost.eventcost == blank %}
+                        <span class="eventCost">{{page.metafields.event-cost.eventcost}}</span> 
+                    {% endunless %}
+                    {% unless page.metafields.event-cost.eventcost == blank %}
+                        <div class="event-link-div"><a href="{{page.metafields.registration-link.registrationlink}}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
+                    {% endunless %}
+                </div>
+				<div class="events-img">
+                    <img src="{{page.metafields.event-image.eventimage}}" /></div>
 			</div>
 	</section>
 	
