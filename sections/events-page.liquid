@@ -47,7 +47,7 @@
 
     {% if page.metafields.event-page != blank %}
 
-        {% assign event = page.metafields.event-page.eventpage %}
+        {% assign event = page.metafields.event-page %}
 
         <pre>{{ page.metafields.event-page }}</pre>
 
@@ -64,8 +64,8 @@
 				<a href="events/health-optimization-summit-2022.html" class="events-img"><img src="{{ 'health-optimization-summit-2022.jpg' | asset_url }}" /></a>
 			</div>
             <div class="item item--{{ i }}">
-                <h4>{{ page.metafields.event-page.eventpage.page.title[i] }}</h4>
-                <p>{{ page.metafields.event-page.eventpage.content[i] }}</p>
+                <h4>{{ page.metafields.event-page.page.title[i] }}</h4>
+                <p>{{ page.metafields.event-page.content[i] }}</p>
             </div>
             
         {% endfor %}
