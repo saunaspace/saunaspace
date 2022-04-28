@@ -33,7 +33,7 @@
 
 {% assign events = page.metafields.event-page.eventpage | split: '|' %}
 {% for event in events %}
-
+<pre>{{event}}</pre>
     
 
     <div class="event-box">
@@ -41,28 +41,28 @@
 					<div class="event-title">{{ pages[event].title }}</div>
 					<p class="event-dates etica">{{ pages[event].metafields.start-date.startdate }} - {{ pages[event].metafields.end-date.enddate }}<br /><div class="et-location etica">
                         {% unless page.metafields.location-name.locationname == blank %}
-                            <span class="eventVenue">{{page.metafields.location-name.locationname}}</span><br />
+                            <span class="eventVenue">{{pages[event].metafields.location-name.locationname}}</span><br />
                         {% endunless %}
-                        {% unless page.metafields.location-street-addr.locationstreetaddr == blank %}
-                            <span class="eventAddress">{{page.metafields.location-street-addr.locationstreetaddr}}</span> 
+                        {% unless pages[event].metafields.location-street-addr.locationstreetaddr == blank %}
+                            <span class="eventAddress">{{pages[event].metafields.location-street-addr.locationstreetaddr}}</span> 
                         {% endunless %}
-                        {% unless page.metafields.location-city.locationcity == blank %}
-                            <span class="eventCity">{{page.metafields.location-city.locationcity}}</span> 
+                        {% unless pages[event].metafields.location-city.locationcity == blank %}
+                            <span class="eventCity">{{pages[event].metafields.location-city.locationcity}}</span> 
                         {% endunless %}
-                        {% unless page.metafields.location-state.locationstate == blank %}
-                            <span class="eventState">{{page.metafields.location-state.locationstate}}</span> 
+                        {% unless pages[event].metafields.location-state.locationstate == blank %}
+                            <span class="eventState">{{pages[event].metafields.location-state.locationstate}}</span> 
                         {% endunless %}
-                        {% unless page.metafields.location-zip.locationzip == blank %}
-                            <span class="eventZip">{{page.metafields.location-zip.locationzip}}</span>
+                        {% unless pages[event].metafields.location-zip.locationzip == blank %}
+                            <span class="eventZip">{{pages[event].metafields.location-zip.locationzip}}</span>
                         {% endunless %}
-                        {% unless page.metafields.location-country.locationcountry == blank %}
-                         <span class="eventCountry">{{page.metafields.location-country.locationcountry}}</span> 
+                        {% unless pages[event].metafields.location-country.locationcountry == blank %}
+                         <span class="eventCountry">{{pages[event].metafields.location-country.locationcountry}}</span> 
                          {% endunless %}
 					</div></p>
 					<p>{{ pages[event].content }}</p>
 					<div class="event-link-div"><a href="{{ pages[event].metafields.registration-link.registrationlink }}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
 				</div>
-				<a href="{{ pages[event] }}" class="events-img"><img src="{{pages[event].metafields.event-image.eventimage}}" loading="lazy" /></a>
+				<a href="/pages/{{ event }}" class="events-img"><img src="{{pages[event].metafields.event-image.eventimage}}" loading="lazy" /></a>
 			</div>
 {% endfor %}
 
