@@ -3,11 +3,37 @@
 
 			<div class="event-top">
 				<div class="event-top-text">
-					<h1 class="et-title">Health Optimization Summit 2022</h1>
-					<div class="et-dates"><span class="eventStartDate">5/28/2022</span> - <span class="eventEndDate">5/29/2022</span>. <span class="eventStartTime">8:00am</span> - <span class="eventEndTime">5:00pm</span></div>
+					<h1 class="et-title">
+                        {%- if section.settings.page.title != blank -%}
+                            {{ section.settings.page.title | escape }}
+                        {%- else -%}
+                            {{ 'sections.page.title' | t }}
+                        {%- endif -%}
+                    </h1>
+					<div class="et-dates">
+                        {% unless page.metafields.start-date.startdate == blank %}
+                            <span class="eventStartDate">
+                                {{page.metafields.start-date.startdate}}
+                            </span>
+                        {% endunless %}
+                        {% unless page.metafields.end-date.enddate == blank %}
+                        - <span class="eventEndDate">{{page.metafields.end-date.enddate}}</span>. 
+                        {% endunless %}
+                        <span class="eventStartTime">8:00am</span> - <span class="eventEndTime">5:00pm</span></div>
 					<div class="et-location etica">
-						<span class="eventVenue">The Angel</span><br />
-						<span class="eventAddress">52 Upper Street</span> <span class="eventCity">London</span> <span class="eventState"></span> <span class="eventZip">N1 0HQ</span> <span class="eventCountry">UK</span> 
+                        {% unless page.metafields.location-name.locationname == blank %}
+                            <span class="eventVenue">{{page.metafields.location-name.locationname}}</span><br />
+                        {% endunless %}
+                        {% unless page.metafields.location-street-addr.locationstreetaddr == blank %}
+                            <span class="eventAddress">{{page.metafields.location-street-addr.locationstreetaddr}}</span> 
+                        {% endunless %}
+                        {% unless page.metafields.location-city.locationcity == blank %}
+                            <span class="eventCity">{{page.metafields.location-city.locationcity}}</span> 
+                        {% endunless %}
+                        {% unless page.metafields.location-state.locationstate == blank %}
+                            <span class="eventState">{{page.metafields.location-state.locationstate}}</span> 
+                        {% endunless %}
+                        <span class="eventZip">N1 0HQ</span> <span class="eventCountry">UK</span> 
 					</div>
 				</div>
 				<a href="https://summit.healthoptimisation.com/" target="_blank" class="et-link">Register</a>
@@ -15,7 +41,7 @@
 			<div class="event-box">
 				<div class="event-text">
 					<div class="event-title">Event Details</div>
-					<p>Optimise your mind, body, and environment to gain control over your own health; new levels of energy, performance, and vitality.</p>
+					{{ section.settings.page.content }}
 					<div class="event-link-div"><a href="https://summit.healthoptimisation.com/" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
 				</div>
 				<div class="events-img"><img src="../img/events/health-optimization-summit-2022.jpg" /></div>
@@ -24,7 +50,7 @@
 	
 	<section class="sec1000">
 		<div class="event-back">
-			<a href="../events.html" class="event-link"><svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible" style="transform: rotate(180deg);"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg> Back to Events</a>
+			<a href="/pages/events" class="event-link"><svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible" style="transform: rotate(180deg);"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg> Back to Events</a>
 		</div>
 	</section>
 
