@@ -44,7 +44,7 @@
 {% assign selected_handles = page.metafields.event-page.eventpage | split: '|' %}
 {% for selected_handle in selected_handles %}
 
-    {{ pages[selected_handle].title }}
+    {{ pages[selected_handle].content }}
 {% endfor %}
 
     {% if page.metafields.event-page != blank %}
