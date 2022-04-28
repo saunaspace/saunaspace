@@ -10,11 +10,16 @@
                             {{ 'sections.page.title' | t }}
                         {%- endif -%}
                     </h1>
-					<div class="et-dates"><span class="eventStartDate">{% unless page.metafields.start-date.startdate == blank %}
-
-     {{page.metafields.start-date.startdate}}
-
-{% endunless %}</span> - <span class="eventEndDate">5/29/2022</span>. <span class="eventStartTime">8:00am</span> - <span class="eventEndTime">5:00pm</span></div>
+					<div class="et-dates">
+                        {% unless page.metafields.start-date.startdate == blank %}
+                            <span class="eventStartDate">
+                                {{page.metafields.start-date.startdate}}
+                            </span>
+                        {% endunless %}
+                        {% unless page.metafields.end-date.enddate == blank %}
+                        - <span class="eventEndDate">{{page.metafields.end-date.enddate}}</span>. 
+                        {% endunless %}
+                        <span class="eventStartTime">8:00am</span> - <span class="eventEndTime">5:00pm</span></div>
 					<div class="et-location etica">
 						<span class="eventVenue">The Angel</span><br />
 						<span class="eventAddress">52 Upper Street</span> <span class="eventCity">London</span> <span class="eventState"></span> <span class="eventZip">N1 0HQ</span> <span class="eventCountry">UK</span> 
