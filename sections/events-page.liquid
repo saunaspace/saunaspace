@@ -45,7 +45,7 @@
 
     {% if page.metafields.event-page.eventpage != blank %}
 
-        {% assign event = page.metafields.event-page.eventpage %}
+        {% assign event = page.metafields.event-page.eventpage.title %}
 
         <pre>{{ page.metafields.event-page.eventpage }}</pre>
 
@@ -54,7 +54,7 @@
             {% assign i = forloop.index0 %}
             <div class="event-box item--{{ i }}">
 				<div class="event-text">
-					<div class="event-title">{{page.metafields.event-page.eventpage.page.title}}</div>
+					<div class="event-title">{{page.metafields.event-page.eventpage.title}}</div>
 					<p class="event-dates etica">5/28/2022 - 5/29/2022<br />52 Upper Street, The Angel<br>London N1 0HQ, UK</p>
 					<p>Optimise your mind, body, and environment to gain control over your own health; new levels of energy, performance, and vitality.</p>
 					<div class="event-link-div"><a href="https://summit.healthoptimisation.com/" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
