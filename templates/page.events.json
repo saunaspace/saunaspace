@@ -1,15 +1,14 @@
 {
-    "sections": {
-      "main": {
-        "type": "events-page",
-        "settings": {
-          "padding_top": 36,
-          "padding_bottom": 36
-        }
+  "sections": {
+    "main": {
+      "type": "events-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
       }
-      },
-    "order": [
-      "main"
-    ]
-  }
-  
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
