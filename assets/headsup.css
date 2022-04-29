@@ -1,1621 +1,430 @@
+/**
+*** SIMPLE GRID
+*** (C) ZACH COLE 2016
+**/
+
+/* ROOT FONT STYLES */
+
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-heavy {
+  font-weight: 700;
+}
+
+/* POSITIONING */
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.justify {
+  text-align: justify;
+}
+
+/* ==== GRID SYSTEM ==== */
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.row [class^="col"] {
+  float: left;
+  margin: 0.5rem 2%;
+  min-height: 0.125rem;
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  width: 96%;
+}
+
+.col-1-sm {
+  width: 4.33%;
+}
+
+.col-2-sm {
+  width: 12.66%;
+}
+
+.col-3-sm {
+  width: 21%;
+}
+
+.col-4-sm {
+  width: 29.33%;
+}
+
+.col-5-sm {
+  width: 37.66%;
+}
+
+.col-6-sm {
+  width: 46%;
+}
+
+.col-7-sm {
+  width: 54.33%;
+}
+
+.col-8-sm {
+  width: 62.66%;
+}
+
+.col-9-sm {
+  width: 71%;
+}
+
+.col-10-sm {
+  width: 79.33%;
+}
+
+.col-11-sm {
+  width: 87.66%;
+}
+
+.col-12-sm {
+  width: 96%;
+}
+
+.row::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.hidden-sm {
+  display: none;
+}
+
+@media only screen and (min-width: 33.75em) {  /* 540px */
+  .container {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 45em) {  /* 720px */
+  .col-1 {
+    width: 4.33%;
+  }
+
+  .col-2 {
+    width: 12.66%;
+  }
+
+  .col-3 {
+    width: 21%;
+  }
+
+  .col-4 {
+    width: 29.33%;
+  }
+
+  .col-5 {
+    width: 37.66%;
+  }
+
+  .col-6 {
+    width: 46%;
+  }
+
+  .col-7 {
+    width: 54.33%;
+  }
+
+  .col-8 {
+    width: 62.66%;
+  }
+
+  .col-9 {
+    width: 71%;
+  }
+
+  .col-10 {
+    width: 79.33%;
+  }
+
+  .col-11 {
+    width: 87.66%;
+  }
+
+  .col-12 {
+    width: 96%;
+  }
+
+  .hidden-sm {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 60em) { /* 960px */
+  .container {
+    width: 90%;
+    max-width: 960px;
+  }
+}
+
+
+#MainContent {
+    position: relative;
+}
+
 body {
  color:#000;
 }
 a {
- color:#0000ff;
  text-decoration:none;
 }
-#lp-pom-root {
- display:block;
- background:rgba(238,238,238,1);
- border-style:none;
- margin:auto;
- padding-top:0px;
- border-radius:0px;
- min-width:960px;
- height:3701px;
+
+p {
+    font-size: 18px;
+    font-weight: normal;
 }
-#lp-pom-block-8 {
- display:block;
+
+h2, h3 {
+    text-align: left;
+}
+
+.inner-content {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 10;
+}
+
+.optimize {
+ display: flex;
+ align-items: center;
  background:rgba(248,248,248,0.6);
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/19und9x-luminati-infrared-sauna-natural-gallery-02_10000000u00kb00002c01o.jpg);
+ background-image:url(saunabg.jpeg);
  background-repeat:no-repeat;
  background-position:center center;
  background-size:cover;
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
  width:100%;
- height:650px;
+ min-height:650px;
  position:relative;
 }
-#lp-pom-image-50 {
- display:none;
- background:rgba(255,255,255,0);
- left:256px;
- top:146px;
- z-index:6;
- position:absolute;
-}
-#lp-pom-text-51 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:83px;
- top:366px;
- z-index:4;
- width:462px;
- height:48px;
- position:absolute;
-}
-#lp-pom-text-52 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:78px;
- top:272px;
- z-index:5;
- width:720px;
- height:86px;
- position:absolute;
-}
-#lp-pom-button-79 {
- display:block;
- border-style:none;
- border-radius:0px;
- left:83px;
- top:451px;
- z-index:2;
- width:285px;
- height:50px;
- position:absolute;
- background:rgba(110,21,0,1);
- box-shadow:none;
- text-shadow:none;
- color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
- font-size:18px;
- line-height:22px;
- font-weight:700;
- font-family:Work Sans;
- font-style:normal;
- text-align:center;
- background-repeat:no-repeat;
-}
-#lp-pom-image-116 {
- display:none;
- background:rgba(255,255,255,0);
- left:63px;
- top:136px;
- z-index:12;
- position:absolute;
-}
-#lp-pom-image-185 {
- display:block;
- background:rgba(255,255,255,0);
- left:78px;
- top:152px;
- z-index:35;
- position:absolute;
-}
-#lp-pom-text-193 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:83px;
- top:303px;
- z-index:36;
- width:300px;
- height:52px;
- position:absolute;
-}
-#lp-pom-block-122 {
- display:block;
- background:rgba(255,255,255,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:450px;
- position:relative;
-}
-#lp-pom-text-123 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:32px;
- top:761px;
- z-index:13;
- width:526px;
- height:38px;
- position:absolute;
-}
-#lp-pom-text-124 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:32px;
- top:840px;
- z-index:14;
- width:493px;
- height:120px;
- position:absolute;
-}
-#lp-pom-image-126 {
- display:block;
- background:rgba(255,255,255,0);
- left:499px;
- top:697px;
- z-index:28;
- position:absolute;
-}
-#lp-pom-block-9 {
- display:block;
- background:rgba(198,122,38,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:980px;
- position:relative;
-}
-#lp-pom-text-15 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:330px;
- top:1181px;
- z-index:1;
- width:300px;
- height:38px;
- position:absolute;
-}
-#lp-pom-text-20 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:330px;
- top:1740px;
- z-index:24;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-text-21 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:10px;
- top:1740px;
- z-index:21;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-text-23 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:648px;
- top:1740px;
- z-index:26;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-image-95 {
- display:block;
- background:rgba(255,255,255,0);
- left:82px;
- top:1598px;
- z-index:22;
- position:absolute;
-}
-#lp-pom-image-96 {
- display:block;
- background:rgba(255,255,255,0);
- left:401px;
- top:1596px;
- z-index:23;
- position:absolute;
-}
-#lp-pom-image-97 {
- display:block;
- background:rgba(255,255,255,0);
- left:720px;
- top:1596px;
- z-index:25;
- position:absolute;
-}
-#lp-pom-image-134 {
- display:block;
- background:rgba(255,255,255,0);
- left:82px;
- top:1257px;
- z-index:15;
- position:absolute;
-}
-#lp-pom-text-135 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:10px;
- top:1401px;
- z-index:16;
- width:262px;
- height:127px;
- position:absolute;
-}
-#lp-pom-image-136 {
- display:block;
- background:rgba(255,255,255,0);
- left:401px;
- top:1257px;
- z-index:17;
- position:absolute;
-}
-#lp-pom-text-137 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:329px;
- top:1401px;
- z-index:18;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-image-138 {
- display:block;
- background:rgba(255,255,255,0);
- left:720px;
- top:1257px;
- z-index:19;
- position:absolute;
-}
-#lp-pom-text-139 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:648px;
- top:1401px;
- z-index:20;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-button-142 {
- display:block;
- border-style:solid;
- border-radius:0px;
- left:294px;
- top:1935px;
- z-index:27;
- width:330px;
- height:46px;
- position:absolute;
- background:rgba(198,122,38,1);
- box-shadow:none;
- text-shadow:none;
- color:#fff;
- border-width:2px;
- border-color:#fff;
- font-size:18px;
- line-height:22px;
- font-weight:700;
- font-family:Work Sans;
- font-style:normal;
- text-align:center;
- background-repeat:no-repeat;
-}
-#lp-pom-block-148 {
- display:block;
- background:rgba(255,255,255,0.5);
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/127myij-pexels-karolina-grabowska-4498449_10000001hc0uk00002i01o.jpg);
- background-repeat:no-repeat;
- background-position:right center;
- background-size:cover;
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:550px;
- position:relative;
-}
-#lp-pom-text-153 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:27px;
- top:2204px;
- z-index:29;
- width:493px;
- height:76px;
- position:absolute;
-}
-#lp-pom-text-154 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:27px;
- top:2284px;
- z-index:30;
- width:493px;
- height:120px;
- position:absolute;
-}
-#lp-pom-block-12 {
- display:block;
- background:rgba(255,255,255,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:466px;
- position:relative;
-}
-#lp-pom-text-39 {
- display:block;
- background:rgba(110,21,0,0);
- border-style:none;
- border-radius:0px;
- left:209px;
- top:2701px;
- z-index:11;
- width:542px;
- height:38px;
- position:absolute;
-}
-#lp-pom-text-40 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:335px;
- top:2765.5px;
- z-index:9;
- width:424px;
- height:74px;
- position:absolute;
-}
-#lp-pom-image-103 {
- display:block;
- background:rgba(255,255,255,0);
- left:42px;
- top:2760px;
- z-index:10;
- position:absolute;
-}
-#lp-pom-text-107 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:335px;
- top:2865px;
- z-index:7;
- width:396px;
- height:120px;
- position:absolute;
-}
-#lp-pom-text-108 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:307px;
- top:2855px;
- z-index:8;
- width:28px;
- height:115px;
- position:absolute;
-}
-#lp-pom-block-158 {
- display:block;
- background:rgba(67,60,60,0.55);
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/45xtim-ss40-1-of-1-1512x_10000001600o200001y01o.jpg);
- background-repeat:no-repeat;
- background-position:center center;
- background-size:cover;
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:550px;
- position:relative;
-}
-#lp-pom-text-162 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:388px;
- top:3151px;
- z-index:31;
- width:519px;
- height:76px;
- position:absolute;
-}
-#lp-pom-text-163 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:388px;
- top:3247px;
- z-index:32;
- width:493px;
- height:48px;
- position:absolute;
-}
-#lp-pom-button-164 {
- display:block;
- border-style:none;
- border-radius:0px;
- left:388px;
- top:3330px;
- z-index:33;
- width:285px;
- height:50px;
- position:absolute;
- background:rgba(110,21,0,1);
- box-shadow:none;
- text-shadow:none;
- color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
- font-size:18px;
- line-height:22px;
- font-weight:700;
- font-family:Work Sans;
- font-style:normal;
- text-align:center;
- background-repeat:no-repeat;
-}
-#lp-pom-text-166 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:215px;
- top:3578px;
- z-index:34;
- width:530px;
- height:48px;
- position:absolute;
-}
-#lp-pom-block-14 {
- display:block;
- background:rgba(110,21,0,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:55px;
- position:relative;
-}
-#lp-pom-text-49 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:313px;
- top:3661px;
- z-index:3;
- width:333px;
- height:26px;
- position:absolute;
-}
-#lp-pom-root .lp-positioned-content {
- top:0px;
- width:960px;
- margin-left:-480px;
-}
-#lp-pom-block-8 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:650px;
-}
-#lp-pom-block-122 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:450px;
-}
-#lp-pom-block-9 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:980px;
-}
-#lp-pom-block-148 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:550px;
-}
-#lp-pom-block-12 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:466px;
-}
-#lp-pom-block-158 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:550px;
-}
-#lp-pom-block-14 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:960px;
- height:55px;
-}
-#lp-pom-image-50 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:272px;
- height:78px;
-}
-#lp-pom-image-50 .lp-pom-image-container img {
- width:272px;
- height:78px;
-}
-#lp-pom-button-79:hover {
- background:rgba(0,0,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-79:active {
- background:rgba(99,14,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-79 .label {
- margin-top:-11px;
-}
-#lp-pom-image-95 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:117px;
- height:117px;
-}
-#lp-pom-image-95 .lp-pom-image-container img {
- width:117px;
- height:117px;
-}
-#lp-pom-image-96 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-96 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-image-97 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-97 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-image-103 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:225px;
- height:225px;
-}
-#lp-pom-image-103 .lp-pom-image-container img {
- width:225px;
- height:225px;
-}
-#lp-pom-image-116 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:193px;
- height:98px;
-}
-#lp-pom-image-116 .lp-pom-image-container img {
- width:193px;
- height:98px;
-}
-#lp-pom-image-126 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:450px;
- height:337px;
-}
-#lp-pom-image-126 .lp-pom-image-container img {
- width:450px;
- height:337px;
-}
-#lp-pom-image-134 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:117px;
- height:117px;
-}
-#lp-pom-image-134 .lp-pom-image-container img {
- width:117px;
- height:117px;
-}
-#lp-pom-image-136 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-136 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-image-138 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-138 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-button-142:hover {
- background:rgba(255,255,255,1);
- box-shadow:none;
- color:#C67A26;
-}
-#lp-pom-button-142:active {
- background:rgba(178,94,24,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-142 .label {
- margin-top:-11px;
-}
-#lp-pom-button-164:hover {
- background:rgba(0,0,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-164:active {
- background:rgba(99,14,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-164 .label {
- margin-top:-11px;
-}
-#lp-pom-image-185 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:414px;
- height:66px;
-}
-#lp-pom-image-185 .lp-pom-image-container img {
- width:414px;
- height:66px;
-}
-#lp-pom-root-color-overlay {
- position:absolute;
- background:none;
- top:0;
- width:100%;
- height:3701px;
- min-height:100%;
-}
-#lp-pom-block-8-color-overlay {
- position:absolute;
- background:rgba(248,248,248,0.6);
- height:650px;
- width:100%;;
-}
-#lp-pom-block-122-color-overlay {
- position:absolute;
- background:none;
- height:450px;
- width:100%;;
-}
-#lp-pom-block-9-color-overlay {
- position:absolute;
- background:none;
- height:980px;
- width:100%;;
-}
-#lp-pom-block-148-color-overlay {
- position:absolute;
- background:rgba(255,255,255,0.5);
- height:550px;
- width:100%;;
-}
-#lp-pom-block-12-color-overlay {
- position:absolute;
- background:none;
- height:466px;
- width:100%;;
-}
-#lp-pom-block-158-color-overlay {
- position:absolute;
- background:rgba(67,60,60,0.55);
- height:550px;
- width:100%;;
-}
-#lp-pom-block-14-color-overlay {
- position:absolute;
- background:none;
- height:55px;
- width:100%;;
-}
-</style><style title="page-styles" type="text/css" data-page-type="main_mobile">
-@media only screen and (max-width: 600px) {
-#lp-pom-root {
- display:block;
- background:rgba(238,238,238,1);
- border-style:none;
- margin:auto;
- padding-top:0px;
- border-radius:0px;
- min-width:320px;
- height:5146px;
-}
-#lp-pom-block-8 {
- display:block;
- background:rgba(248,248,248,0.6);
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/19und9x-luminati-infrared-sauna-natural-gallery-02_10go0dw00000000000001o.jpg);
- background-repeat:no-repeat;
- background-position:center center;
- background-size:cover;
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:468px;
- position:relative;
-}
-#lp-pom-image-50 {
- display:none;
- background:rgba(255,255,255,0);
- left:135px;
- top:44px;
- z-index:6;
- position:absolute;
-}
-#lp-pom-text-51 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:15px;
- top:252px;
- z-index:4;
- width:280px;
- height:72px;
- position:absolute;
-}
-#lp-pom-text-52 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:15px;
- top:125px;
- z-index:5;
- width:411px;
- height:156px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-button-79 {
- display:block;
- border-style:none;
- border-radius:0px;
- left:15px;
- top:352px;
- z-index:2;
- width:280px;
- height:50px;
- position:absolute;
- background:rgba(110,21,0,1);
- box-shadow:none;
- text-shadow:none;
- color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
- font-size:18px;
- line-height:22px;
- font-weight:700;
- font-family:Work Sans;
- font-style:normal;
- text-align:center;
- background-repeat:no-repeat;
-}
-#lp-pom-image-116 {
- display:none;
- background:rgba(255,255,255,0);
- left:15px;
- top:38px;
- z-index:12;
- position:absolute;
-}
-#lp-pom-image-185 {
- display:block;
- background:rgba(255,255,255,0);
- left:20px;
- top:52px;
- z-index:35;
- position:absolute;
-}
-#lp-pom-text-193 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:15px;
- top:191px;
- z-index:36;
- width:300px;
- height:52px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-block-122 {
- display:block;
- background:rgba(255,255,255,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:591px;
- position:relative;
-}
-#lp-pom-text-123 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:22px;
- top:525px;
- z-index:13;
- width:372px;
- height:38px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-text-124 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:22px;
- top:767px;
- z-index:14;
- width:280px;
- height:216px;
- position:absolute;
-}
-#lp-pom-image-126 {
- display:block;
- background:rgba(255,255,255,0);
- left:22px;
- top:560px;
- z-index:28;
- position:absolute;
-}
-#lp-pom-block-9 {
- display:block;
- background:rgba(198,122,38,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:2060px;
- position:relative;
-}
-#lp-pom-text-15 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:0px;
- top:1117px;
- z-index:1;
- width:432px;
- height:38px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-text-20 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:29px;
- top:2533px;
- z-index:24;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-text-21 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:39px;
- top:2237px;
- z-index:21;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-text-23 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:29px;
- top:2831px;
- z-index:26;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-image-95 {
- display:block;
- background:rgba(255,255,255,0);
- left:101.5px;
- top:2093px;
- z-index:22;
- position:absolute;
-}
-#lp-pom-image-96 {
- display:block;
- background:rgba(255,255,255,0);
- left:101px;
- top:2391px;
- z-index:23;
- position:absolute;
-}
-#lp-pom-image-97 {
- display:block;
- background:rgba(255,255,255,0);
- left:101px;
- top:2691px;
- z-index:25;
- position:absolute;
-}
-#lp-pom-image-134 {
- display:block;
- background:rgba(255,255,255,0);
- left:101.5px;
- top:1181px;
- z-index:15;
- position:absolute;
-}
-#lp-pom-text-135 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:29px;
- top:1317px;
- z-index:16;
- width:262px;
- height:127px;
- position:absolute;
-}
-#lp-pom-image-136 {
- display:block;
- background:rgba(255,255,255,0);
- left:101px;
- top:1493px;
- z-index:17;
- position:absolute;
-}
-#lp-pom-text-137 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:29px;
- top:1640px;
- z-index:18;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-image-138 {
- display:block;
- background:rgba(255,255,255,0);
- left:101px;
- top:1796px;
- z-index:19;
- position:absolute;
-}
-#lp-pom-text-139 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:29px;
- top:1942px;
- z-index:20;
- width:262px;
- height:105px;
- position:absolute;
-}
-#lp-pom-button-142 {
- display:block;
- border-style:solid;
- border-radius:0px;
- left:35px;
- top:2991px;
- z-index:27;
- width:246px;
- height:46px;
- position:absolute;
- background:rgba(198,122,38,1);
- box-shadow:none;
- text-shadow:none;
- color:#fff;
- border-width:2px;
- border-color:#fff;
- font-size:18px;
- line-height:22px;
- font-weight:700;
- font-family:Work Sans;
- font-style:normal;
- text-align:center;
- background-repeat:no-repeat;
-}
-#lp-pom-block-148 {
- display:block;
- background:rgba(255,255,255,0.65);
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/127myij-pexels-karolina-grabowska-4498449_10mx0fa0go0fa06900001o.jpg);
- background-repeat:no-repeat;
- background-position:right center;
- background-size:cover;
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:550px;
- position:relative;
-}
-#lp-pom-text-153 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:24px;
- top:3179px;
- z-index:29;
- width:330px;
- height:114px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-text-154 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:24px;
- top:3296px;
- z-index:30;
- width:280px;
- height:216px;
- position:absolute;
-}
-#lp-pom-block-12 {
- display:block;
- background:rgba(255,255,255,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:857px;
- position:relative;
-}
-#lp-pom-text-39 {
- display:block;
- background:rgba(110,21,0,0);
- border-style:none;
- border-radius:0px;
- left:22px;
- top:3724px;
- z-index:11;
- width:401px;
- height:76px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-text-40 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:22px;
- top:4112px;
- z-index:9;
- width:303px;
- height:106px;
- transform:scale(0.93);
- transform-origin:0 0;
- -webkit-transform:scale(0.93);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-image-103 {
- display:block;
- background:rgba(255,255,255,0);
- left:47.5px;
- top:3845px;
- z-index:10;
- position:absolute;
-}
-#lp-pom-text-107 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:52px;
- top:4225px;
- z-index:7;
- width:248px;
- height:180px;
- position:absolute;
-}
-#lp-pom-text-108 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:19.5px;
- top:4215px;
- z-index:8;
- width:28px;
- height:115px;
- position:absolute;
-}
-#lp-pom-block-158 {
- display:block;
- background:rgba(67,60,60,0.55);
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/45xtim-ss40-1-of-1-1512x_10mx0fa0go0fa00000001o.jpg);
- background-repeat:no-repeat;
- background-position:left center;
- background-size:cover;
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:550px;
- position:relative;
-}
-#lp-pom-text-162 {
- display:block;
- background:rgba(36,36,36,0);
- border-style:none;
- border-radius:0px;
- left:20px;
- top:4590px;
- z-index:31;
- width:351px;
- height:114px;
- transform:scale(0.74);
- transform-origin:0 0;
- -webkit-transform:scale(0.74);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-text-163 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:20px;
- top:4691px;
- z-index:32;
- width:280px;
- height:72px;
- position:absolute;
-}
-#lp-pom-button-164 {
- display:block;
- border-style:none;
- border-radius:0px;
- left:20px;
- top:4818px;
- z-index:33;
- width:250px;
- height:50px;
- position:absolute;
- background:rgba(110,21,0,1);
- box-shadow:none;
- text-shadow:none;
- color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
- font-size:18px;
- line-height:22px;
- font-weight:700;
- font-family:Work Sans;
- font-style:normal;
- text-align:center;
- background-repeat:no-repeat;
-}
-#lp-pom-text-166 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:20.5px;
- top:5000px;
- z-index:34;
- width:410px;
- height:48px;
- transform:scale(0.68);
- transform-origin:0 0;
- -webkit-transform:scale(0.68);
- -webkit-transform-origin:0 0;
- position:absolute;
-}
-#lp-pom-block-14 {
- display:block;
- background:rgba(110,21,0,1);
- border-style:none;
- margin-left:auto;
- margin-right:auto;
- margin-bottom:0px;
- border-radius:0px;
- width:100%;
- height:70px;
- position:relative;
-}
-#lp-pom-text-49 {
- display:block;
- background:rgba(255,255,255,0);
- border-style:none;
- border-radius:0px;
- left:20px;
- top:5098px;
- z-index:3;
- width:280px;
- height:26px;
- position:absolute;
-}
-body {
- color:#000;
-}
-a {
- color:#0000ff;
- text-decoration:none;
-}
-#lp-pom-root .lp-positioned-content {
- top:0px;
- width:320px;
- margin-left:-160px;
-}
-#lp-pom-block-8 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:468px;
-}
-#lp-pom-block-122 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:591px;
-}
-#lp-pom-block-9 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:2060px;
-}
-#lp-pom-block-148 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:550px;
-}
-#lp-pom-block-12 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:857px;
-}
-#lp-pom-block-158 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:550px;
-}
-#lp-pom-block-14 .lp-pom-block-content {
- margin-left:auto;
- margin-right:auto;
- width:320px;
- height:70px;
-}
-#lp-pom-image-50 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:160px;
- height:47px;
-}
-#lp-pom-image-50 .lp-pom-image-container img {
- width:160px;
- height:47px;
-}
-#lp-pom-button-79:hover {
- background:rgba(0,0,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-79:active {
- background:rgba(99,14,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-79 .label {
- margin-top:-11px;
-}
-#lp-pom-image-95 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:117px;
- height:117px;
-}
-#lp-pom-image-95 .lp-pom-image-container img {
- width:117px;
- height:117px;
-}
-#lp-pom-image-96 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-96 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-image-97 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-97 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-image-103 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:225px;
- height:225px;
-}
-#lp-pom-image-103 .lp-pom-image-container img {
- width:225px;
- height:225px;
-}
-#lp-pom-image-116 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:120px;
- height:60px;
-}
-#lp-pom-image-116 .lp-pom-image-container img {
- width:120px;
- height:60px;
-}
-#lp-pom-image-126 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:276px;
- height:207px;
-}
-#lp-pom-image-126 .lp-pom-image-container img {
- width:276px;
- height:207px;
-}
-#lp-pom-image-134 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:117px;
- height:117px;
-}
-#lp-pom-image-134 .lp-pom-image-container img {
- width:117px;
- height:117px;
-}
-#lp-pom-image-136 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-136 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-image-138 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:118px;
- height:118px;
-}
-#lp-pom-image-138 .lp-pom-image-container img {
- width:118px;
- height:118px;
-}
-#lp-pom-button-142:hover {
- background:rgba(255,255,255,1);
- box-shadow:none;
- color:#C67A26;
-}
-#lp-pom-button-142:active {
- background:rgba(178,94,24,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-142 .label {
- margin-top:-11px;
-}
-#lp-pom-button-164:hover {
- background:rgba(0,0,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-164:active {
- background:rgba(99,14,0,1);
- box-shadow:none;
- color:#fff;
-}
-#lp-pom-button-164 .label {
- margin-top:-11px;
-}
-#lp-pom-image-185 .lp-pom-image-container {
- border-style:none;
- border-radius:0px;
- width:250px;
- height:39px;
-}
-#lp-pom-image-185 .lp-pom-image-container img {
- width:250px;
- height:39px;
-}
-#lp-pom-root-color-overlay {
- position:absolute;
- background:none;
- top:0;
- width:100%;
- height:5146px;
- min-height:100%;
-}
-#lp-pom-block-8-color-overlay {
- position:absolute;
- background:rgba(248,248,248,0.6);
- height:468px;
- width:100%;;
-}
-#lp-pom-block-122-color-overlay {
- position:absolute;
- background:none;
- height:591px;
- width:100%;;
-}
-#lp-pom-block-9-color-overlay {
- position:absolute;
- background:none;
- height:2060px;
- width:100%;;
-}
-#lp-pom-block-148-color-overlay {
- position:absolute;
- background:rgba(255,255,255,0.65);
- height:550px;
- width:100%;;
-}
-#lp-pom-block-12-color-overlay {
- position:absolute;
- background:none;
- height:857px;
- width:100%;;
-}
-#lp-pom-block-158-color-overlay {
- position:absolute;
- background:rgba(67,60,60,0.55);
- height:550px;
- width:100%;;
-}
-#lp-pom-block-14-color-overlay {
- position:absolute;
- background:none;
- height:70px;
- width:100%;;
-}
-}
-@media only screen and (max-width: 600px) and (-webkit-min-device-pixel-ratio: 1.1), only screen and (max-width: 600px) and (min-resolution: 97dpi) {
-#lp-pom-block-8 {
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/19und9x-luminati-infrared-sauna-natural-gallery-02_100000000000000000001o.jpg);
-}
-#lp-pom-block-148 {
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/127myij-pexels-karolina-grabowska-4498449_119u0uk0xc0uk0ci00001o.jpg);
-}
-#lp-pom-block-158 {
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/45xtim-ss40-1-of-1-1512x_10000000uk0s000000001o.jpg);
-}
-}
-@media only screen and (max-width: 600px) and (-webkit-min-device-pixel-ratio: 2.1), only screen and (max-width: 600px) and (min-resolution: 193dpi) {
-#lp-pom-block-148 {
- background-image:url(//d9hhrg4mnvzow.cloudfront.net/partner.sauna.space/headsuphealth/127myij-pexels-karolina-grabowska-4498449_100000012s0zk0ek00001o.jpg);
-}
+
+.optimize:before, .compatible:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: block;
+    background: rgba(255,255,255,0.8);
+}
+
+.optimize img {
+    margin-bottom: 3rem;
+    max-width: 100%;
+}
+.optimize h2 {
+    color: #000;
+    font-size: 36px;
+    text-align: left;
+    margin-bottom: 4rem;
+}
+
+.optimize p {
+    max-width: 450px;
+    font-size: 18px;
+    margin-bottom: 4rem;
+}
+
+.mono-type {
+    font-family: lft-etica-mono,sans-serif;
+}
+.btn-cta {
+    display: block;
+    border-style: none;
+    border-radius: 0px;
+    z-index: 2;
+    width: 285px;
+    padding: 1rem .5rem;
+    background: rgba(110,21,0,1);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 700;
+    text-align: center;
+}
+
+.btn-cta:hover {
+    background: rgba(0,0,0,1);
+    box-shadow: none;
+    color: #fff;
+}
+
+.what-is {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+}
+
+.what-is h2 [
+    padding-top: 7rem;
+]
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.how-it-works img {
+    margin: 0 auto;
+    max-width: 120px;
+    margin-bottom: 2rem;
+}
+.how-it-works h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.how-it-works h3 {
+    color: #fff;
+    font-family: lft-etica-mono,sans-serif;
+    text-align: center !important;
+    font-size: 18px;
+    margin-bottom: 0;
+    margin-bottom: 2rem;
+}
+
+.how-it-works {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    background:rgba(198,122,38,1);
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:0px;
+    border-radius:0px;
+    width:100%;
+    padding: 10rem 1rem;
+    position:relative;
+}
+.how-it-works [class^="col"] {
+    height: 420px;
+}
+.how-it-works p {
+    text-align: center;
+}
+
+.how-it-works .btn-cta {
+    background: transparent;
+    border: 2px solid;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+.how-it-works .btn-cta:hover {
+    background: rgba(255,255,255,1);
+    box-shadow: none;
+    color: #C67A26;
+}
+
+.compatible {
+    display: flex;
+    align-items: center;
+    background: url(compatible.jpeg) center / cover no-repeat;
+    min-height: 750px;
+    position: relative;
+}
+
+.compatible a {
+    text-decoration: underline;
+}
+
+.story {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 6rem 1rem;
+}
+
+.story .cta-text {
+    font-size: 20px;
+    margin-bottom: 2rem;
+}
+
+.story h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.story blockquote {
+    margin-bottom: 2rem;
+}
+
+.story img {
+    max-width: 100%;
+    width: 260px;
+    text-align: right;
+    float: right;
+}
+
+.custom-health-tracking {
+    color: #fff;
+    min-height: 600px;
+    padding: 6rem 1rem 0;
+    position: relative;
+    background: url(custom-tracker.jpeg) center / cover no-repeat;
+}
+.custom-health-tracking h2, .custom-health-tracking p {
+    margin-bottom: 2rem;
+}
+.custom-health-tracking:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: block;
+    background: rgba(67,60,60,0.55);
+}
+
+.custom-health-tracking .cta-text {
+    max-width: 600px;
+    text-align: center;
+    margin: 22rem auto 0;
+}
+
+.custom-health-tracking .cta-text p {
+    font-size: 16px;
 }
