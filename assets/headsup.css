@@ -31,6 +31,10 @@ a {
  height:650px;
  position:relative;
 }
+
+.lplh-24 {
+    font-family: lft-etica-mono,sans-serif;
+}
 #lp-pom-image-50 {
  display:none;
  background:rgba(255,255,255,0);
@@ -77,12 +81,9 @@ a {
  box-shadow:none;
  text-shadow:none;
  color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
  font-size:18px;
  line-height:22px;
  font-weight:700;
- font-family:Work Sans;
  font-style:normal;
  text-align:center;
  background-repeat:no-repeat;
@@ -322,7 +323,6 @@ a {
  font-size:18px;
  line-height:22px;
  font-weight:700;
- font-family:Work Sans;
  font-style:normal;
  text-align:center;
  background-repeat:no-repeat;
@@ -489,12 +489,10 @@ a {
  box-shadow:none;
  text-shadow:none;
  color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
+
  font-size:18px;
  line-height:22px;
  font-weight:700;
- font-family:Work Sans;
  font-style:normal;
  text-align:center;
  background-repeat:no-repeat;
@@ -853,18 +851,15 @@ a {
  top:352px;
  z-index:2;
  width:280px;
- height:50px;
+ padding: 1rem 0;
  position:absolute;
  background:rgba(110,21,0,1);
  box-shadow:none;
  text-shadow:none;
  color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
  font-size:18px;
- line-height:22px;
+ line-height:1.5;
  font-weight:700;
- font-family:Work Sans;
  font-style:normal;
  text-align:center;
  background-repeat:no-repeat;
@@ -1105,7 +1100,7 @@ a {
  top:2991px;
  z-index:27;
  width:246px;
- height:46px;
+ padding: 1rem 0;
  position:absolute;
  background:rgba(198,122,38,1);
  box-shadow:none;
@@ -1114,9 +1109,8 @@ a {
  border-width:2px;
  border-color:#fff;
  font-size:18px;
- line-height:22px;
+ line-height:1.5;
  font-weight:700;
- font-family:Work Sans;
  font-style:normal;
  text-align:center;
  background-repeat:no-repeat;
@@ -1293,18 +1287,15 @@ a {
  top:4818px;
  z-index:33;
  width:250px;
- height:50px;
+ padding: 1rem 0;
  position:absolute;
  background:rgba(110,21,0,1);
  box-shadow:none;
  text-shadow:none;
  color:#fff;
- border-width:undefinedpx;
- border-color:#undefined;
  font-size:18px;
- line-height:22px;
+ line-height: 1.5;
  font-weight:700;
- font-family:Work Sans;
  font-style:normal;
  text-align:center;
  background-repeat:no-repeat;
