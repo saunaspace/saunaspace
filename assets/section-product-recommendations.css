@@ -8,6 +8,12 @@
 }
 
 .product-recommendations__heading {
-  margin: 0;
-  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+  font-weight: 800;
+  font-family: 'UntitledSans', sans-serif;
 }

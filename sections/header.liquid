@@ -1,22 +1,71 @@
-<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+<link
+  rel="stylesheet"
+  href="{{ 'component-list-menu.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+  rel="stylesheet"
+  href="{{ 'component-search.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+  rel="stylesheet"
+  href="{{ 'component-menu-drawer.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+  rel="stylesheet"
+  href="{{ 'component-cart-notification.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+  rel="stylesheet"
+  href="{{ 'component-cart-items.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
 {%- if settings.predictive_search_enabled -%}
-  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
-{%- if section.settings.menu_type_desktop == 'mega' -%}
-  <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript>{{ 'component-mega-menu.css' | asset_url | stylesheet_tag }}</noscript>
+<link
+  rel="stylesheet"
+  href="{{ 'component-price.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+  rel="stylesheet"
+  href="{{ 'component-loading-overlay.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+{%- endif -%} {%- if section.settings.menu_type_desktop == 'mega' -%}
+<link
+  rel="stylesheet"
+  href="{{ 'component-mega-menu.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript>{{
+  "component-mega-menu.css" | asset_url | stylesheet_tag
+}}</noscript>
 {%- endif -%}
 
-<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{
+  "component-list-menu.css" | asset_url | stylesheet_tag
+}}</noscript>
+<noscript>{{ "component-search.css" | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{
+  "component-menu-drawer.css" | asset_url | stylesheet_tag
+}}</noscript>
+<noscript>{{
+  "component-cart-notification.css" | asset_url | stylesheet_tag
+}}</noscript>
+<noscript>{{
+  "component-cart-items.css" | asset_url | stylesheet_tag
+}}</noscript>
 
 <style>
   header-drawer {
@@ -70,234 +119,415 @@
   }
 </style>
 
-{%- style -%}
-  .section-header {
-    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-header {
-      margin-bottom: {{ section.settings.margin_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+{%- style -%} .section-header { margin-bottom:
+{{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px; } @media screen
+and (min-width: 750px) { .section-header { margin-bottom:
+{{ section.settings.margin_bottom }}px; } } {%- endstyle -%}
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
 
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <div class="overlay hideMe"></div>
-  <div class="util-nav">
-    <a href="/" class="logo nav-mobile"></a>
-    <a href="/pages/financing" class="util-nav-link">Financing</a>
-    <a href="https://help.sauna.space" class="util-nav-link">Support & FAQ</a>
-    <a href="/pages/contact" class="util-nav-link">Contact Us</a>
-    <a href="javascript:void(0)" class="util-nav-link goDark">Dark Mode</a>
-    <input type="checkbox" id="ham" class="hiddenCB" ><label class="hamb-label" for="ham"></label>
-    <div class="ham-links">
-      <img src="{{ 'sp-logo-white.svg' | asset_url }}" alt="SaunaSpace Logo" class="cssclass1 cssclass2" id="logo"  loading="lazy"/>
-      <a href="/pages/reviews" class="ham-link nav-link-arrow">Reviews</a>
-      <a href="/pages/100-day-home-trial" class="ham-link nav-link-arrow">100 Day Home Trial</a>
-      <a href="/pages/financing" class="ham-link nav-link-arrow">Financing</a>
-      <a href="https://help.sauna.space" class="ham-link nav-link-arrow">Support & FAQ</a>
-      <a href="/contact" class="ham-link nav-link-arrow">Contact Us</a>
-      <a href="javascript:void(0)" class="ham-link nav-link-arrow goDark">Dark Mode</a>
-    </div>
+<noscript
+  ><iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe
+></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="overlay hideMe"></div>
+<div class="util-nav">
+  <a href="/" class="logo nav-mobile"></a>
+  <a href="/pages/financing" class="util-nav-link">Financing</a>
+  <a href="https://help.sauna.space" class="util-nav-link">Support & FAQ</a>
+  <a href="/pages/contact" class="util-nav-link">Contact Us</a>
+  <a href="javascript:void(0)" class="util-nav-link goDark">Dark Mode</a>
+  <input type="checkbox" id="ham" class="hiddenCB" /><label
+    class="hamb-label"
+    for="ham"
+  ></label>
+  <div class="ham-links">
+    <img
+      src="{{ 'sp-logo-white.svg' | asset_url }}"
+      alt="SaunaSpace Logo"
+      class="cssclass1 cssclass2"
+      id="logo"
+      loading="lazy"
+    />
+    <a href="/pages/reviews" class="ham-link nav-link-arrow">Reviews</a>
+    <a href="/pages/100-day-home-trial" class="ham-link nav-link-arrow"
+      >100 Day Home Trial</a
+    >
+    <a href="/pages/financing" class="ham-link nav-link-arrow">Financing</a>
+    <a href="https://help.sauna.space" class="ham-link nav-link-arrow"
+      >Support & FAQ</a
+    >
+    <a href="/contact" class="ham-link nav-link-arrow">Contact Us</a>
+    <a href="javascript:void(0)" class="ham-link nav-link-arrow goDark"
+      >Dark Mode</a
+    >
   </div>
-  <div class="navBG" id="topNavBG">
-    <div class="nav-wrap">
-      <div class="nav-left">
-        <a href="/" class="logo"></a>
-        <div class="nav-links">
-          <a href="javascript:void(0)" class="nav-link nl-shop" id="shop">
-            Shop
-            <svg class="nav-arrow hide-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="10.469" height="4.773" overflow="visible"><path fill="none" stroke="#000" stroke-width=".75" d="M.234.293l5 4 5-4"/></svg>
-            <svg class="nav-close hideMe" xmlns="http://www.w3.org/2000/svg" width="10.469" height="8.198" overflow="visible"><g fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"><path d="M.75.75l6.698 6.698M7.448.75L.75 7.448"/></g></svg>
-          </a>
-          <a href="javascript:void(0)" class="nav-link nl-learn" id="learn">
-            Learn
-            <svg class="nav-arrow hide-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="10.469" height="4.773" overflow="visible"><path fill="none" stroke="#000" stroke-width=".75" d="M.234.293l5 4 5-4"/></svg>
-            <svg class="nav-close hideMe" xmlns="http://www.w3.org/2000/svg" width="10.469" height="8.198" overflow="visible"><g fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"><path d="M.75.75l6.698 6.698M7.448.75L.75 7.448"/></g></svg>
-          </a>
-          <a href="/pages/reviews" class="nav-link nl-reviews hideMobile">
-            Reviews
-          </a>
-          <a href="/pages/100-day-home-trial" class="nav-link nl-freetrial hideMobile">
-            100 Day Home Trial
-          </a>
-        </div>
-      </div>
-      <a href="javascript:void(0)" class="nav-right">
-        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset nav-cart" id="cart-icon-bubble">
-          {%- liquid
-            if cart == empty
-              render 'icon-cart-empty'
-            else
-              render 'icon-cart'
-            endif
-          -%} Cart
-          <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-          {%- if cart != empty -%}
-            <div class="cart-count-bubble">
-              {%- if cart.item_count < 100 -%}
-                <span aria-hidden="true">{{ cart.item_count }}</span>
-              {%- endif -%}
-              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-            </div>
-          {%- endif -%}
+</div>
+<div class="navBG" id="topNavBG">
+  <div class="nav-wrap">
+    <div class="nav-left">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="javascript:void(0)" class="nav-link nl-shop" id="shop">
+          Shop
+          <svg
+            class="nav-arrow hide-nav-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10.469"
+            height="4.773"
+            overflow="visible"
+          >
+            <path
+              fill="none"
+              stroke="#000"
+              stroke-width=".75"
+              d="M.234.293l5 4 5-4"
+            />
+          </svg>
+          <svg
+            class="nav-close hideMe"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10.469"
+            height="8.198"
+            overflow="visible"
+          >
+            <g
+              fill="none"
+              stroke="#000"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            >
+              <path d="M.75.75l6.698 6.698M7.448.75L.75 7.448" />
+            </g>
+          </svg>
         </a>
-        <div class="nav-full-cart hideMe"></div>
+        <a href="javascript:void(0)" class="nav-link nl-learn" id="learn">
+          Learn
+          <svg
+            class="nav-arrow hide-nav-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10.469"
+            height="4.773"
+            overflow="visible"
+          >
+            <path
+              fill="none"
+              stroke="#000"
+              stroke-width=".75"
+              d="M.234.293l5 4 5-4"
+            />
+          </svg>
+          <svg
+            class="nav-close hideMe"
+            xmlns="http://www.w3.org/2000/svg"
+            width="10.469"
+            height="8.198"
+            overflow="visible"
+          >
+            <g
+              fill="none"
+              stroke="#000"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            >
+              <path d="M.75.75l6.698 6.698M7.448.75L.75 7.448" />
+            </g>
+          </svg>
+        </a>
+        <a href="/pages/reviews" class="nav-link nl-reviews hideMobile">
+          Reviews
+        </a>
+        <a
+          href="/pages/100-day-home-trial"
+          class="nav-link nl-freetrial hideMobile"
+        >
+          100 Day Home Trial
+        </a>
+      </div>
+    </div>
+    <a href="javascript:void(0)" class="nav-right">
+      <a
+        href="{{ routes.cart_url }}"
+        class="header__icon header__icon--cart link focus-inset nav-cart"
+        id="cart-icon-bubble"
+      >
+        {%- liquid if cart == empty render 'icon-cart-empty' else render
+        'icon-cart' endif -%} Cart
+        <span class="visually-hidden">{{ "templates.cart.cart" | t }}</span>
+        {%- if cart != empty -%}
+        <div class="cart-count-bubble">
+          {%- if cart.item_count < 100 -%}
+          <span aria-hidden="true">{{ cart.item_count }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">{{
+            "sections.header.cart_count" | t: count:cart.item_count
+          }}</span>
+        </div>
+        {%- endif -%}
       </a>
-    </div><!--nav-wrap-->
+      <div class="nav-full-cart hideMe"></div>
+    </a>
   </div>
-  
-  <div class="nav-on-top">
-    <div class="mega-nav shopMN hideMe">
-      <div class="shop-wrap">
-        <div class="shop-grid">
-          <a href="/products?filter=saunas" class="sg-link nav-infrared-saunas"><div class="sgl-text nav-link-arrow">Saunas</div></a>
-          <a href="/products?filter=targeted-therapy" class="sg-link nav-targeted-therapy"><div class="sgl-text nav-link-arrow">Targeted Therapy</div></a>
-          <a href="/products?filter=sauna-components" class="sg-link nav-sauna-components"><div class="sgl-text nav-link-arrow">Sauna Components</div></a>
-          <a href="/products?filter=replacement-bulbs" class="sg-link nav-replacement-bulbs"><div class="sgl-text nav-link-arrow">Replacement Bulbs</div></a>
-          <a href="/products?filter=merchandise" class="sg-link nav-merchandise"><div class="sgl-text nav-link-arrow">Merchandise</div></a>
-          <a href="/products?filter=products-we-love" class="sg-link nav-products-we-love"><div class="sgl-text nav-link-arrow">Products We Love</div></a>
-        </div>
-        <div class="shop-featured">
-          <div class="shop-nav-head">FEATURED PRODUCTS</div>
-          <a href="/products/faraday-infrared-sauna" class="sf-link"><div class="sfl-text"><div class="nav-link-arrow">Faraday</div><span>Infrared Sauna</span></div></a>
-          <a href="/products/luminati-infrared-sauna" class="sf-link"><div class="sfl-text"><div class="nav-link-arrow">Luminati</div><span>Infrared Sauna</span></div></a>
-          <a href="/products/photon-infrared-therapy-light" class="sf-link"><div class="sfl-text"><div class="nav-link-arrow">Photon</div><span>Therapy Light</span></div></a>
-          <a href="/products/tungsten-infrared-sauna-panel" class="sf-link"><div class="sfl-text"><div class="nav-link-arrow">Tungsten</div><span>Sauna Panel</span></div></a>
-          <div class="shop-all">
-            <a href="/products" class="shop-nav-head">Shop All <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a>
-          </div>
+  <!--nav-wrap-->
+</div>
+
+<div class="nav-on-top">
+  <div class="mega-nav shopMN hideMe">
+    <div class="shop-wrap">
+      <div class="shop-grid">
+        <a href="/pages/infrared-saunas" class="sg-link nav-infrared-saunas"
+          ><div class="sgl-text nav-link-arrow">Saunas</div></a
+        >
+        <a href="/pages/targeted-therapy" class="sg-link nav-targeted-therapy"
+          ><div class="sgl-text nav-link-arrow">Targeted Therapy</div></a
+        >
+        <a href="/pages/sauna-components" class="sg-link nav-sauna-components"
+          ><div class="sgl-text nav-link-arrow">Sauna Components</div></a
+        >
+        <a
+          href="/products?filter=replacement-bulbs"
+          class="sg-link nav-replacement-bulbs"
+          ><div class="sgl-text nav-link-arrow">Replacement Bulbs</div></a
+        >
+        <a href="/products?filter=merchandise" class="sg-link nav-merchandise"
+          ><div class="sgl-text nav-link-arrow">Merchandise</div></a
+        >
+        <a
+          href="/products?filter=products-we-love"
+          class="sg-link nav-products-we-love"
+          ><div class="sgl-text nav-link-arrow">Products We Love</div></a
+        >
+      </div>
+      <div class="shop-featured">
+        <div class="shop-nav-head">FEATURED PRODUCTS</div>
+        <a href="/products/faraday-infrared-sauna" class="sf-link"
+          ><div class="sfl-text">
+            <div class="nav-link-arrow">Faraday</div>
+            <span>Infrared Sauna</span>
+          </div></a
+        >
+        <a href="/products/luminati-infrared-sauna" class="sf-link"
+          ><div class="sfl-text">
+            <div class="nav-link-arrow">Luminati</div>
+            <span>Infrared Sauna</span>
+          </div></a
+        >
+        <a href="/products/photon-infrared-therapy-light" class="sf-link"
+          ><div class="sfl-text">
+            <div class="nav-link-arrow">Photon</div>
+            <span>Therapy Light</span>
+          </div></a
+        >
+        <a href="/products/tungsten-infrared-sauna-panel" class="sf-link"
+          ><div class="sfl-text">
+            <div class="nav-link-arrow">Tungsten</div>
+            <span>Sauna Panel</span>
+          </div></a
+        >
+        <div class="shop-all">
+          <a href="/products" class="shop-nav-head"
+            >Shop All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
         </div>
       </div>
     </div>
-    <div class="mega-nav learnMN hideMe">
-      <div class="mn-links">
-        <ul>
-          <li><a href="/pages/how-do-infrared-saunas-work" class="nav-arrow-link">Understanding Infrared Saunas <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-          <li><a href="/pages/how-to-choose-a-sauna" class="nav-arrow-link">Choosing the Right Sauna <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-          <li><a href="/pages/how-to-use-a-sauna" class="nav-arrow-link">Using Your Sauna <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-          <li><a href="/pages/full-spectrum-infrared-sauna-health-benefits" class="nav-arrow-link">Health Benefits <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-          <li><a href="/pages/what-are-electromagnetic-fields-emfs" class="nav-arrow-link">What are EMFs? <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-          <!-- <li><a href="#0" class="nav-arrow-link">Articles & Videos <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li> -->
-          <li><a href="/pages/about" class="nav-arrow-link">About Us <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-          <li><a href="https://saunaspace.helpdocs.io" class="nav-arrow-link">FAQ <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li>
-        </ul>
-        <div>
-          <a href="https://blog.sauna.space/cellulite-reduction-with-near-infrared-nir-sauna-use/" class="nav-learn-article" target="_blank">
-            <img src="{{ 'nav-learn-featured-article.jpg' | asset_url }}" alt="Featured article" loading="lazy"/>
-            <span class="nla-title">Cellulite Reduction with Near Infrared (NIR) Sauna Use<svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></span>
-          </a>
-          <a href="https://blog.sauna.space" class="nav-learn-blog" target="_blank">See all blog articles</a>
-        </div>
+  </div>
+  <div class="mega-nav learnMN hideMe">
+    <div class="mn-links">
+      <ul>
+        <li>
+          <a href="/pages/how-do-infrared-saunas-work" class="nav-arrow-link"
+            >Understanding Infrared Saunas
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+        <li>
+          <a href="/pages/how-to-choose-a-sauna" class="nav-arrow-link"
+            >Choosing the Right Sauna
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+        <li>
+          <a href="/pages/how-to-use-a-sauna" class="nav-arrow-link"
+            >Using Your Sauna
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            href="/pages/full-spectrum-infrared-sauna-health-benefits"
+            class="nav-arrow-link"
+            >Health Benefits
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            href="/pages/what-are-electromagnetic-fields-emfs"
+            class="nav-arrow-link"
+            >What are EMFs?
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+        <!-- <li><a href="#0" class="nav-arrow-link">Articles & Videos <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></li> -->
+        <li>
+          <a href="/pages/about" class="nav-arrow-link"
+            >About Us
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+        <li>
+          <a href="https://saunaspace.helpdocs.io" class="nav-arrow-link"
+            >FAQ
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></a>
+        </li>
+      </ul>
+      <div>
+        <a
+          href="https://blog.sauna.space/cellulite-reduction-with-near-infrared-nir-sauna-use/"
+          class="nav-learn-article"
+          target="_blank"
+        >
+          <img
+            src="{{ 'nav-learn-featured-article.jpg' | asset_url }}"
+            alt="Featured article"
+            loading="lazy"
+          />
+          <span class="nla-title"
+            >Cellulite Reduction with Near Infrared (NIR) Sauna Use<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14.759"
+              height="7.753"
+              overflow="visible"
+            >
+              <g fill="none" stroke="#000">
+                <path d="M0 3.876h14M10 .376l4 3.5-4 3.5" />
+              </g></svg
+          ></span>
+        </a>
+        <a
+          href="https://blog.sauna.space"
+          class="nav-learn-blog"
+          target="_blank"
+          >See all blog articles</a
+        >
       </div>
     </div>
   </div>
-  
-
-
-
+</div>
 
 {%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
-
-{% javascript %}
-  class StickyHeader extends HTMLElement {
-    constructor() {
-      super();
-    }
-
-    connectedCallback() {
-      this.header = document.getElementById('shopify-section-header');
-      this.headerBounds = {};
-      this.currentScrollTop = 0;
-      this.preventReveal = false;
-      this.predictiveSearch = this.querySelector('predictive-search');
-
-      this.onScrollHandler = this.onScroll.bind(this);
-      this.hideHeaderOnScrollUp = () => this.preventReveal = true;
-
-      this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
-      window.addEventListener('scroll', this.onScrollHandler, false);
-
-      this.createObserver();
-    }
-
-    disconnectedCallback() {
-      this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
-      window.removeEventListener('scroll', this.onScrollHandler);
-    }
-
-    createObserver() {
-      let observer = new IntersectionObserver((entries, observer) => {
-        this.headerBounds = entries[0].intersectionRect;
-        observer.disconnect();
-      });
-
-      observer.observe(this.header);
-    }
-
-    onScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (this.predictiveSearch && this.predictiveSearch.isOpen) return;
-
-      if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
-        if (this.preventHide) return;
-        requestAnimationFrame(this.hide.bind(this));
-      } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
-        if (!this.preventReveal) {
-          requestAnimationFrame(this.reveal.bind(this));
-        } else {
-          window.clearTimeout(this.isScrolling);
-
-          this.isScrolling = setTimeout(() => {
-            this.preventReveal = false;
-          }, 66);
-
-          requestAnimationFrame(this.hide.bind(this));
-        }
-      } else if (scrollTop <= this.headerBounds.top) {
-        requestAnimationFrame(this.reset.bind(this));
-      }
-
-      this.currentScrollTop = scrollTop;
-    }
-
-    hide() {
-      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
-      this.closeMenuDisclosure();
-      this.closeSearchModal();
-    }
-
-    reveal() {
-      this.header.classList.add('shopify-section-header-sticky', 'animate');
-      this.header.classList.remove('shopify-section-header-hidden');
-    }
-
-    reset() {
-      this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
-    }
-
-    closeMenuDisclosure() {
-      this.disclosures = this.disclosures || this.header.querySelectorAll('header-menu');
-      this.disclosures.forEach(disclosure => disclosure.close());
-    }
-
-    closeSearchModal() {
-      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
-      this.searchModal.close(false);
-    }
-  }
-
-  customElements.define('sticky-header', StickyHeader);
-{% endjavascript %}
+{% javascript %} class StickyHeader extends HTMLElement { constructor() {
+super(); } connectedCallback() { this.header =
+document.getElementById('shopify-section-header'); this.headerBounds = {};
+this.currentScrollTop = 0; this.preventReveal = false; this.predictiveSearch =
+this.querySelector('predictive-search'); this.onScrollHandler =
+this.onScroll.bind(this); this.hideHeaderOnScrollUp = () => this.preventReveal =
+true; this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+window.addEventListener('scroll', this.onScrollHandler, false);
+this.createObserver(); } disconnectedCallback() {
+this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+window.removeEventListener('scroll', this.onScrollHandler); } createObserver() {
+let observer = new IntersectionObserver((entries, observer) => {
+this.headerBounds = entries[0].intersectionRect; observer.disconnect(); });
+observer.observe(this.header); } onScroll() { const scrollTop =
+window.pageYOffset || document.documentElement.scrollTop; if
+(this.predictiveSearch && this.predictiveSearch.isOpen) return; if (scrollTop >
+this.currentScrollTop && scrollTop > this.headerBounds.bottom) { if
+(this.preventHide) return; requestAnimationFrame(this.hide.bind(this)); } else
+if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+if (!this.preventReveal) { requestAnimationFrame(this.reveal.bind(this)); } else
+{ window.clearTimeout(this.isScrolling); this.isScrolling = setTimeout(() => {
+this.preventReveal = false; }, 66); requestAnimationFrame(this.hide.bind(this));
+} } else if (scrollTop <= this.headerBounds.top) {
+requestAnimationFrame(this.reset.bind(this)); } this.currentScrollTop =
+scrollTop; } hide() { this.header.classList.add('shopify-section-header-hidden',
+'shopify-section-header-sticky'); this.closeMenuDisclosure();
+this.closeSearchModal(); } reveal() {
+this.header.classList.add('shopify-section-header-sticky', 'animate');
+this.header.classList.remove('shopify-section-header-hidden'); } reset() {
+this.header.classList.remove('shopify-section-header-hidden',
+'shopify-section-header-sticky', 'animate'); } closeMenuDisclosure() {
+this.disclosures = this.disclosures ||
+this.header.querySelectorAll('header-menu'); this.disclosures.forEach(disclosure
+=> disclosure.close()); } closeSearchModal() { this.searchModal =
+this.searchModal || this.header.querySelector('details-modal');
+this.searchModal.close(false); } } customElements.define('sticky-header',
+StickyHeader); {% endjavascript %}
 
 <script type="application/ld+json">
   {
@@ -322,142 +552,56 @@
   }
 </script>
 
-{%- if request.page_type == 'index' -%}
-  {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
-  <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": {{ shop.name | json }},
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {{ potential_action_target | json }},
-        "query-input": "required name=search_term_string"
-      },
-      "url": {{ request.origin | append: page.url | json }}
-    }
-  </script>
-{%- endif -%}
-
-{% schema %}
-{
-  "name": "t:sections.header.name",
-  "class": "section-header",
-  "settings": [
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.all.colors.accent_1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.all.colors.accent_2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.all.colors.background_1.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.all.colors.background_2.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.all.colors.inverse.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.all.colors.label"
+{%- if request.page_type == 'index' -%} {% assign potential_action_target =
+request.origin | append: routes.search_url | append: "?q={search_term_string}"
+%}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {{ potential_action_target | json }},
+      "query-input": "required name=search_term_string"
     },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "t:sections.header.settings.logo.label"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 50,
-      "max": 250,
-      "step": 10,
-      "default": 100,
-      "unit": "t:sections.header.settings.logo_width.unit",
-      "label": "t:sections.header.settings.logo_width.label"
-    },
-    {
-      "type": "select",
-      "id": "logo_position",
-      "options": [
-        {
-          "value": "middle-left",
-          "label": "t:sections.header.settings.logo_position.options__1.label"
-        },
-        {
-          "value": "top-left",
-          "label": "t:sections.header.settings.logo_position.options__2.label"
-        },
-        {
-          "value": "top-center",
-          "label": "t:sections.header.settings.logo_position.options__3.label"
-        }
-      ],
-      "default": "middle-left",
-      "label": "t:sections.header.settings.logo_position.label",
-      "info": "t:sections.header.settings.logo_position.info"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "t:sections.header.settings.menu.label"
-    },
-    {
-      "type": "select",
-      "id": "menu_type_desktop",
-      "options": [
-        {
-          "value": "dropdown",
-          "label": "t:sections.header.settings.menu_type_desktop.options__1.label"
-        },
-        {
-          "value": "mega",
-          "label": "t:sections.header.settings.menu_type_desktop.options__2.label"
-        }
-      ],
-      "default": "dropdown",
-      "label": "t:sections.header.settings.menu_type_desktop.label",
-      "info": "t:sections.header.settings.menu_type_desktop.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_line_separator",
-      "default": true,
-      "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sticky_header",
-      "default": true,
-      "label": "t:sections.header.settings.enable_sticky_header.label",
-      "info": "t:sections.header.settings.enable_sticky_header.info"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.spacing"
-    },
-    {
-      "type": "range",
-      "id": "margin_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.header.settings.margin_bottom.label",
-      "default": 0
-    }
-  ]
-}
-{% endschema %}
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+{%- endif -%} {% schema %} { "name": "t:sections.header.name", "class":
+"section-header", "settings": [ { "type": "select", "id": "color_scheme",
+"options": [ { "value": "accent-1", "label":
+"t:sections.all.colors.accent_1.label" }, { "value": "accent-2", "label":
+"t:sections.all.colors.accent_2.label" }, { "value": "background-1", "label":
+"t:sections.all.colors.background_1.label" }, { "value": "background-2",
+"label": "t:sections.all.colors.background_2.label" }, { "value": "inverse",
+"label": "t:sections.all.colors.inverse.label" } ], "default": "background-1",
+"label": "t:sections.all.colors.label" }, { "type": "image_picker", "id":
+"logo", "label": "t:sections.header.settings.logo.label" }, { "type": "range",
+"id": "logo_width", "min": 50, "max": 250, "step": 10, "default": 100, "unit":
+"t:sections.header.settings.logo_width.unit", "label":
+"t:sections.header.settings.logo_width.label" }, { "type": "select", "id":
+"logo_position", "options": [ { "value": "middle-left", "label":
+"t:sections.header.settings.logo_position.options__1.label" }, { "value":
+"top-left", "label": "t:sections.header.settings.logo_position.options__2.label"
+}, { "value": "top-center", "label":
+"t:sections.header.settings.logo_position.options__3.label" } ], "default":
+"middle-left", "label": "t:sections.header.settings.logo_position.label",
+"info": "t:sections.header.settings.logo_position.info" }, { "type":
+"link_list", "id": "menu", "default": "main-menu", "label":
+"t:sections.header.settings.menu.label" }, { "type": "select", "id":
+"menu_type_desktop", "options": [ { "value": "dropdown", "label":
+"t:sections.header.settings.menu_type_desktop.options__1.label" }, { "value":
+"mega", "label": "t:sections.header.settings.menu_type_desktop.options__2.label"
+} ], "default": "dropdown", "label":
+"t:sections.header.settings.menu_type_desktop.label", "info":
+"t:sections.header.settings.menu_type_desktop.info" }, { "type": "checkbox",
+"id": "show_line_separator", "default": true, "label":
+"t:sections.header.settings.show_line_separator.label" }, { "type": "checkbox",
+"id": "enable_sticky_header", "default": true, "label":
+"t:sections.header.settings.enable_sticky_header.label", "info":
+"t:sections.header.settings.enable_sticky_header.info" }, { "type": "header",
+"content": "t:sections.all.spacing" }, { "type": "range", "id": "margin_bottom",
+"min": 0, "max": 100, "step": 4, "unit": "px", "label":
+"t:sections.header.settings.margin_bottom.label", "default": 0 } ] } {%
+endschema %}
