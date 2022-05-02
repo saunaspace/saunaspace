@@ -117,6 +117,18 @@
     <div id='yotpo-testimonials-custom-tab'></div>
 </section>
 
+<script>
+
+    loadReviews(0)
+    
+    function loadReviews(rcID) {
+        $("#allReviews").load("/res/getReviews.asp?rcID=" + rcID);
+        $(".rcat-link").removeClass("rcat-link-on");
+        $("#rc" + rcID).addClass("rcat-link-on");
+    }
+    
+    </script>
+
 
 {% schema %}
 {
