@@ -259,8 +259,11 @@ and (min-width: 750px) { .section-header { margin-bottom:
         class="header__icon header__icon--cart link focus-inset nav-cart"
         id="cart-icon-bubble"
       >
-        {%- liquid if cart == empty render 'icon-cart-empty' else render
-        'icon-cart' endif -%} Cart
+        {%- liquid if cart == empty 
+          render 'icon-cart-empty' else 
+          render 'icon-cart' 
+          endif -%} 
+        Cart
         <span class="visually-hidden">{{ "templates.cart.cart" | t }}</span>
         {%- if cart != empty -%}
         <div class="cart-count-bubble">
@@ -286,10 +289,14 @@ and (min-width: 750px) { .section-header { margin-bottom:
         <a href="/pages/infrared-saunas" class="sg-link nav-infrared-saunas"
           ><div class="sgl-text nav-link-arrow">Saunas</div></a
         >
-        <a href="/pages/targeted-therapy" class="sg-link nav-targeted-therapy"
+        <a
+          href="/pages/targeted-therapy"
+          class="sg-link nav-targeted-therapy"
           ><div class="sgl-text nav-link-arrow">Targeted Therapy</div></a
         >
-        <a href="/pages/sauna-components" class="sg-link nav-sauna-components"
+        <a
+          href="/pages/sauna-components"
+          class="sg-link nav-sauna-components"
           ><div class="sgl-text nav-link-arrow">Sauna Components</div></a
         >
         <a
