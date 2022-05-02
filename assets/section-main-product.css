@@ -1,13 +1,19 @@
-div#bcpo-select-option-0 ul li:after {
-    background: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/plug-us.svg?v=1651502026) !important;
-    background-repeat: no-repeat !important;
-    background-position: left center !important;
-    content: "";
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    left: 6px;
-    top: 8px;
+button.product-form__submit:before, button.product-form__submit:after {
+    display: none;
+}
+#bcpo .bcpo-images input:checked + label, #bcpo .bcpo-colors input:checked + label {
+    box-shadow: 0 0 0 1px black;
+    -webkit-box-shadow: 0 0 0 1px black;
+    -moz-box-shadow: 0 0 0 1px black;
+    
+}
+#bcpo .bcpo-images label.bcpo-front-image-label {
+    height: 38px;
+    width: 38px;
+    border: 3px solid #fff;
+}
+.single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
+    border-color: transparent !important;
 }
 div#bcpo .selector-wrapper.bcpo-images {
     margin-top: 21px !important;

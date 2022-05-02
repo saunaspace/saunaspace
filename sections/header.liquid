@@ -268,7 +268,7 @@ and (min-width: 750px) { .section-header { margin-bottom:
         {%- if cart != empty -%}
         <div class="cart-count-bubble">
           {%- if cart.item_count < 100 -%}
-          <span aria-hidden="true">{{ cart.item_count }}</span>
+          <span aria-hidden="true">( {{ cart.item_count }} )</span>
           {%- endif -%}
           <span class="visually-hidden">{{
             "sections.header.cart_count" | t: count:cart.item_count
@@ -340,7 +340,7 @@ and (min-width: 750px) { .section-header { margin-bottom:
           </div></a
         >
         <div class="shop-all">
-          <a href="/products" class="shop-nav-head"
+          <a href="/products?filter=all" class="shop-nav-head"
             >Shop All
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -39,8 +39,8 @@
     >
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
         {%- if card_product.featured_media -%}
-          <div class="card__media">
-            <div class="media media--transparent media--hover-effect">
+          <div class="card__media"  onclick="location.href='{{ card_product.url }}'">
+            <div class="media media--transparent media--hover-effect" onclick="location.href='{{ card_product.url }}'">
               <a href="{{ card_product.url }}">
               <img
                 srcset="{%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
@@ -81,7 +81,7 @@
             </div>
           </div>
         {%- endif -%}
-        <div class="card__content">
+        <div class="card__content" onclick="location.href='{{ card_product.url }}'">
           <div class="card__information">
             <h3 class="card__heading">
               <a href="{{ card_product.url }}" class="full-unstyled-link">
@@ -89,16 +89,9 @@
               </a>
             </h3>
           </div>
-          <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
-              <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">{{ 'products.product.sold_out' | t }}</span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
-              <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">{{ 'products.product.on_sale' | t }}</span>
-            {%- endif -%}
-          </div>
         </div>
       </div>
-      <div class="card__content">
+      <div class="card__content"  onclick="location.href='{{ card_product.url }}'">
         <div class="card__information">
           {% comment %}
           <h3 class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}">
@@ -191,7 +184,7 @@
       style="--ratio-percent: 100%;"
     >
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: 100%;">
-        <div class="card__content">
+        <div class="card__content"  onclick="location.href='{{ card_product.url }}'">
           <div class="card__information">
             <h3 class="card__heading">
               <a role="link" aria-disabled="true" class="full-unstyled-link">
@@ -201,7 +194,7 @@
           </div>
         </div>
       </div>
-      <div class="card__content">
+      <div class="card__content" onclick="location.href='{{ card_product.url }}'">
         <div class="card__information">
           <h3 class="card__heading{% if settings.card_style == 'standard' %} h5{% endif %}">
             <a role="link" aria-disabled="true" class="full-unstyled-link pt-name">

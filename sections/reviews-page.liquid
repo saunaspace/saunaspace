@@ -1,0 +1,153 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+
+
+<div class="photo-headerBG" style="background-image:url({{ 'reviews.jpg' | asset_url }}); background-position: 50% 0; ">
+    <div class="ph-width">
+        <div class="ph-text">
+            <cms id='cms0'>
+            <h1>The Reviews Are In</h1>
+            <p class="etica">We’re not the only ones who believe in the power of SaunaSpace. Hear it straight from customers and experts.</p>
+            </cms cms0>
+        </div>
+    </div>
+</div>
+
+<div class="tanBG">
+    <h2>What the Experts are Saying</h2>
+    <div class="review-categories">
+        <a href="javascript:void(0)" class="rcat-link rcat-link-on"  onClick="loadReviews(0)" id="rc0">All</a>
+        
+            <a href="javascript:void(0)" class="rcat-link" onClick="loadReviews(1)" id="rc1">Medical</a>
+        
+            <a href="javascript:void(0)" class="rcat-link" onClick="loadReviews(2)" id="rc2">Athletic</a>
+        
+            <a href="javascript:void(0)" class="rcat-link" onClick="loadReviews(3)" id="rc3">Lifestyle</a>
+        
+    </div>
+    <div id="allReviews">
+    </div>
+</div>
+
+<section>
+    <h2>Feel the #Saunaspace Love</h2>
+
+    <div class="yotpo yotpo-pictures-widget" data-gallery-id="5fff1136f22b21000f2f93bd"></div>
+
+    <div class="product-review">
+        <div class="pr-img">
+            <img src="{{ 'review-faraday.jpg' | asset_url }}" alt="Faraday Infrared Sauna" />
+            <img src="{{ 'emf-blocking-badge.svg' | asset_url }}" alt="Zero EMF" class="emf" />
+        </div>
+        <div class="pr-text">
+            <div class="prt-name">Faraday Infrared Sauna</div>
+            <div id="reviewsFaraday" class="yotpo-hearts">
+                <div class="yotpo bottomLine" data-product-id="2105477365849" data-url="index.html"></div>
+            </div>
+            <p>My own little spa. It feels like a calm retreat inside and I’m energized afterwards.</p>
+            <div class="review-name">Barb  G.</div>
+            <div class="review-title etica">Verified Buyer</div>
+            <a href="/products/faraday-infrared-sauna" class="btn">Shop Faraday</a>
+        </div>
+    </div>
+    
+    <div class="product-review pr-reverse">
+        <div class="pr-img">
+            <img src="{{ 'review-photon.jpg' | asset_url }}" alt="Photon Therapy Light" />
+        </div>
+        <div class="pr-text">
+            <div class="prt-name">Photon Therapy Light</div>
+            <div id="reviewsFaraday" class="yotpo-hearts">
+                <div class="yotpo bottomLine" data-product-id="2105477005401" data-url="index.html"></div>
+            </div>
+            <div id="reviewsPhoton" class="yotpo-hearts"></div>
+            <p>I love this light and use it many different ways. If I feel like I want a little more heat or some additional warmth on my feet, I put it in my sauna. It’s also great at night as opposed to harsh light or all that harmful blue light from devices.</p>
+            <div class="review-name">Bella C.</div>
+            <div class="review-title etica">Verified Buyer</div>
+            <a href="/products/photon-infrared-therapy-light" class="btn">Shop Photon</a>
+        </div>
+    </div>
+    
+    <div class="product-review">
+        <div class="pr-img">
+            <img src="{{ 'review-luminati.jpg' | asset_url }}" alt="Photon Therapy Light" />
+        </div>
+        <div class="pr-text">
+            <div class="prt-name">Luminati Infrared Sauna</div>
+            <div id="reviewsFaraday" class="yotpo-hearts">
+                <div class="yotpo bottomLine" data-product-id="2105476743257" data-url="index.html"></div>
+            </div>
+            <div id="reviewsLuminati" class="yotpo-hearts"></div>
+            <p>The detox from the near-infrared sauna is the best. No emf, no chemical or toxins. This will cause powerful cleansing at a deep level that you can't get with other saunas.</p>
+            <div class="review-name">Kyle H.</div>
+            <div class="review-title etica">Verified Buyer</div>
+            <a href="/products/infrared-saunas/luminati-infrared-sauna" class="btn">Shop Luminati</a>
+        </div>
+    </div>
+    
+    <div class="product-review pr-reverse">
+        <div class="pr-img">
+            <img src="{{ 'review-tungsten.jpg' | asset_url }}" alt="Tungsten Sauna Panel" />
+        </div>
+        <div class="pr-text">
+            <div class="prt-name">Tungsten Sauna Panel</div>
+            <div id="reviewsFaraday" class="yotpo-hearts">
+                <div class="yotpo bottomLine" data-product-id="2105475956825" data-url="index.html"></div>
+            </div>
+            <div id="reviewsTungsten" class="yotpo-hearts"></div>
+            <p>I already owned a 2 person “full spectrum” sauna from SunLighten. I drilled a few holes and hung the SaunaSpace light. Now, I don't use any aspect of the old sauna except the shell.</p>
+            <div class="review-name">Fred H.</div>
+            <div class="review-title etica">Verified Buyer</div>
+            <a href="/products/tungsten-infrared-sauna-panel" class="btn">Shop Tungsten</a>
+        </div>
+    </div>
+    
+    
+
+</section>
+
+<div class="divider"></div>
+
+    <h2>What our Customer are Saying</h2>
+<section style="max-width: 800px;">
+    <div id='yotpo-testimonials-custom-tab'></div>
+</section>
+
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

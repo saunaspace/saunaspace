@@ -1141,6 +1141,15 @@ deferred-media {
   display: block;
 }
 
+/* pricing */
+.price-item.price-item--sale.price-item--last, .price-item.price-item--regular.pt-price.etica {
+	font-size: 13px;
+}
+
+.card__content {
+	cursor: pointer;
+}
+
 /* component-button */
 /* Button - default */
 
@@ -2010,19 +2019,19 @@ input[type='checkbox'] {
 }
 
 .cart-count-bubble {
-  position: absolute;
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
-  height: 1.7rem;
-  width: 1.7rem;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.9rem;
-  bottom: 0.8rem;
-  left: 2.2rem;
-  line-height: calc(1 + 0.1 / var(--font-body-scale));
+    position: relative;
+    background-color: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    height: 1.7rem;
+    width: 1.7rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    bottom: -1px;
+    left: 6px;
+    line-height: calc(1 + 0.1 / var(--font-body-scale));
 }
 
 /* section-announcement-bar */
@@ -2247,8 +2256,8 @@ input[type='checkbox'] {
 
 .header__icon,
 .header__icon--cart .icon {
-  height: 4.4rem;
-  width: 4.4rem;
+  height: auto;
+  width: 12rem;
 }
 
 .header__icon--cart {
@@ -2928,7 +2937,7 @@ section:not(.shopify-section) {
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 30px;
 	padding-bottom: 5px;
-	border-bottom: 1px solid transparent;
+	border-bottom: 0px solid transparent;
 }
 
 	.nav-cart:hover { cursor: pointer; border-bottom: 1px solid #000; }
@@ -5998,7 +6007,11 @@ span[data-ml]::before {
 	border-radius: 0;
 	max-width: 210px;
 }
-
+a#cart-icon-bubble {
+    border: none !important;
+    box-shadow: none !important;
+    text-decoration: none;
+}
 #bcpo .bcpo-dd .inner label {
 	background: #FFF;
   	line-height: 1.8;
@@ -6010,4 +6023,12 @@ span[data-ml]::before {
 .single-page-price .price__container::after {
 	content: "price varies by color";
   	font-family: 'UntitledSans', sans-serif;
+}
+
+  .cart-count-bubble {
+    color: #000;
+    font-size: 13px;
+    text-decoration: none !important;
+    background: none !important;
+    width: auto !important;
 }
