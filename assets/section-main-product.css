@@ -1,14 +1,4 @@
-div#bcpo-select-option-0 ul li:after {
-    background: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/plug-us.svg?v=1651502026) !important;
-    background-repeat: no-repeat !important;
-    background-position: left center !important;
-    content: "";
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    left: 6px;
-    top: 8px;
-}
+
 div#bcpo .selector-wrapper.bcpo-images {
     margin-top: 21px !important;
 }
