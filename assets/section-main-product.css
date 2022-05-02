@@ -1,6 +1,14 @@
 button.product-form__submit:before, button.product-form__submit:after {
     display: none;
 }
+#bcpo .bcpo-images input:checked + label, #bcpo .bcpo-colors input:checked + label {
+    box-shadow: 0 0 0 1px black;
+    -webkit-box-shadow: 0 0 0 1px black;
+    -moz-box-shadow: 0 0 0 1px black;
+    border: 3px solid #fff;
+    height: 38px;
+    width: 38px;
+}
 div#bcpo .selector-wrapper.bcpo-images {
     margin-top: 21px !important;
 }
