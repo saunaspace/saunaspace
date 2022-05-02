@@ -1146,6 +1146,10 @@ deferred-media {
 	font-size: 13px;
 }
 
+.card__content {
+	cursor: pointer;
+}
+
 /* component-button */
 /* Button - default */
 
