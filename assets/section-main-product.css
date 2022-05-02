@@ -9,6 +9,9 @@ button.product-form__submit:before, button.product-form__submit:after {
     height: 38px;
     width: 38px;
 }
+.single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
+    border-color: transparent !important;
+}
 div#bcpo .selector-wrapper.bcpo-images {
     margin-top: 21px !important;
 }
