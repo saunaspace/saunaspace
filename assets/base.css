@@ -1141,6 +1141,11 @@ deferred-media {
   display: block;
 }
 
+/* pricing */
+.price-item.price-item--sale.price-item--last, .price-item.price-item--regular.pt-price.etica {
+	font-size: 13px;
+}
+
 /* component-button */
 /* Button - default */
 
