@@ -5998,7 +5998,11 @@ span[data-ml]::before {
 	border-radius: 0;
 	max-width: 210px;
 }
-
+a#cart-icon-bubble {
+    border: none !important;
+    box-shadow: none !important;
+    text-decoration: none;
+}
 #bcpo .bcpo-dd .inner label {
 	background: #FFF;
   	line-height: 1.8;
