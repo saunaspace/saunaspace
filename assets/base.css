@@ -6011,3 +6011,9 @@ span[data-ml]::before {
 	content: "price varies by color";
   	font-family: 'UntitledSans', sans-serif;
 }
+
+      .cart-count-bubble {
+    color: #000;
+    font-size: 13px;
+    text-decoration: none !important;
+}
