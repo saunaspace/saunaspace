@@ -2248,7 +2248,7 @@ input[type='checkbox'] {
 .header__icon,
 .header__icon--cart .icon {
   height: auto;
-  width: 9rem;
+  width: 12rem;
 }
 
 .header__icon--cart {
@@ -2926,7 +2926,7 @@ section:not(.shopify-section) {
 	margin: 1.5em 0 10px 0;
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
-	padding-left: 16px;
+	padding-left: 30px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid transparent;
 }
