@@ -5,9 +5,12 @@ button.product-form__submit:before, button.product-form__submit:after {
     box-shadow: 0 0 0 1px black;
     -webkit-box-shadow: 0 0 0 1px black;
     -moz-box-shadow: 0 0 0 1px black;
+    
+}
+#bcpo .bcpo-images label.bcpo-front-image-label {
+    height: 38px;
+    width: 38px;
     border: 3px solid #fff;
-    height: 35px;
-    width: 35px;
 }
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
     border-color: transparent !important;
