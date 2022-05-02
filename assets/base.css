@@ -6012,8 +6012,10 @@ span[data-ml]::before {
   	font-family: 'UntitledSans', sans-serif;
 }
 
-      .cart-count-bubble {
+  .cart-count-bubble {
     color: #000;
     font-size: 13px;
     text-decoration: none !important;
+    background: none !important;
+    width: auto !important;
 }
