@@ -6,8 +6,8 @@ button.product-form__submit:before, button.product-form__submit:after {
     -webkit-box-shadow: 0 0 0 1px black;
     -moz-box-shadow: 0 0 0 1px black;
     border: 3px solid #fff;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
 }
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
     border-color: transparent !important;
