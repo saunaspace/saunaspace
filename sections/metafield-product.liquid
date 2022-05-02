@@ -553,9 +553,7 @@
               </pickup-availability>
             </div>
               
-             SKU: {% assign current_variant = product.selected_or_first_available_variant %}{{ current_variant.sku }}
-
-            <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+                 <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
           {%- when 'rating' -%}
             {%- if product.metafields.reviews.rating.value != blank -%}
               {% liquid
