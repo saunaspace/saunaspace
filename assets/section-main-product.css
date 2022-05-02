@@ -1,4 +1,6 @@
-
+button.product-form__submit:before, button.product-form__submit:after {
+    display: none;
+}
 div#bcpo .selector-wrapper.bcpo-images {
     margin-top: 21px !important;
 }
