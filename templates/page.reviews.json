@@ -1,15 +1,12 @@
 {
-    "sections": {
-      "main": {
-        "type": "reviews-page",
-        "settings": {
-          "padding_top": 36,
-          "padding_bottom": 36
-        }
+  "sections": {
+    "main": {
+      "type": "reviews-page",
+      "settings": {
       }
-      },
-    "order": [
-      "main"
-    ]
-  }
-  
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
