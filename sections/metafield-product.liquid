@@ -530,7 +530,7 @@
                 </div>
             </div>
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;"><strong>SKU: </strong><span class="theSKU">{% assign current_variant = product.selected_or_first_available_variant %}
-              <span class="variant-sku">{{ current_variant.sku }}</span></span>&nbsp;&nbsp;<strong>UPC: </strong><span class="theUPC">810018190576</span></p>
+              <span class="variant-sku">{{ current_variant.sku }}</span></span>&nbsp;&nbsp;<strong>UPC: </strong><span class="theUPC">{{ variant.barcode }}</span></p>
 
               {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
 
