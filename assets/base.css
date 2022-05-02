@@ -2928,7 +2928,7 @@ section:not(.shopify-section) {
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 30px;
 	padding-bottom: 5px;
-	border-bottom: 1px solid transparent;
+	border-bottom: 0px solid transparent;
 }
 
 	.nav-cart:hover { cursor: pointer; border-bottom: 1px solid #000; }
