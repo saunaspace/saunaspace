@@ -191,7 +191,7 @@
 /* base */
 
 .thumbnail[aria-current] {
-	border-color: 1px solid #C57A29 !important;
+	border: 1px solid #C57A29 !important;
 }
 
 .no-js:not(html) {
