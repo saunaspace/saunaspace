@@ -20,6 +20,24 @@
 {%- endstyle -%}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<section>
+	<div class="your-cart">
+	
+		<div class="yc-head-wrap">
+			<div class="yc-head">Your Cart</div>
+			<div class="yc-top-checkout">
+				<div class="yctc-text">
+					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">0</span></div>
+					<div class="fineprint">Shipping and tax are calculated at checkout.</div>
+				</div>
+				<form action="/checkout" method="post">
+					<input type="hidden" name="cartID" value="<%=cartID%>">
+					<input type="submit" class="btn btn-checkout" value="Check Out" />
+				</form>
+			</div>
+		</div>
+
+
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="title-wrapper-with-link">
@@ -293,6 +311,9 @@
     <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
   </form>
 </cart-items>
+
+</div>
+</section>
 
 {% schema %}
 {
