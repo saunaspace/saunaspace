@@ -260,6 +260,9 @@
                   {{ form | payment_terms }}
                 {%- endform -%}
               </div>
+              {% if product.metafields.my_fields.color_varies_text == true %}
+              Price varies by color<br/>
+             {% endif %}
         </div><!--product-text-->
         
           {%- when 'description' -%}
@@ -359,9 +362,7 @@
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           
           {%- when 'variant_picker' -%}
-          {% if product.metafields.my_fields.color_varies_text == true %}
-          Price varies by color<br/>
-         {% endif %}
+
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
