@@ -6020,15 +6020,8 @@ a#cart-icon-bubble {
 #bcpo .bcpo-dd .inner label:hover{
   	background: #6E1500 !important;
 }
-.single-page-price .price__container::after {
-	content: "price varies by color";
-  	font-family: 'UntitledSans', sans-serif;
-}
 
 
-#price-template--14575164096555__main .price__container::after {
-	content: none;
-}
 
   .cart-count-bubble {
     color: #000;

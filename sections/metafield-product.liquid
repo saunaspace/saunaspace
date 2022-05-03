@@ -261,7 +261,13 @@
                 {%- endform -%}
               </div>
               {% if product.metafields.my_fields.color_varies_text == true %}
-              <span> Price varies by color</span><br/>
+              <style>
+                .single-page-price .price__container::after {
+	content: "price varies by color";
+  	font-family: 'UntitledSans', sans-serif;
+}
+
+              </style>
              {% endif %}
         </div><!--product-text-->
         
