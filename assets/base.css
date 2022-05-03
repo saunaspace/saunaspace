@@ -190,6 +190,10 @@
 
 /* base */
 
+.thumbnail[aria-current] {
+	border-color: 1px solid #C57A29;
+}
+
 .no-js:not(html) {
   display: none !important;
 }
