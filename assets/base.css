@@ -3761,8 +3761,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	.yc-op { margin-top: auto; font-size: 1.4rem; }
 		.yc-op .fineprint { font-size: 1.2rem; line-height: 1.3em; margin-top: 5px; margin-bottom: 0; }
 	
-	.yc-item th { font-size: 1.5rem; font-weight: 700;
-		display: block;}
+	.yc-item th { font-size: 1.5rem; font-weight: 700;}
 	.yc-item label + .yc-price { margin-top: .75em;}
 	
 	.yc-item-col { width: 130px; }
