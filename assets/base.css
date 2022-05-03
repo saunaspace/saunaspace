@@ -1151,7 +1151,7 @@ deferred-media {
 }
 
 .card-information .price-item.price-item--sale.price-item--last, .card-information .price-item.price-item--regular.pt-price.etica {
-	font-size: 16px;
+	font-size: 16px !important;
 }
 
 .card__content {
