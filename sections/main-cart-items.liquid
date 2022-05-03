@@ -62,7 +62,7 @@
     <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
       <div class="js-contents">
         {%- if cart != empty -%}
-          <table class="cart-items">
+          <table class="cart-items yc-item">
             <thead>
               <tr>
                 <th class="caption-with-letter-spacing" colspan="2" scope="col">{{ 'sections.cart.headings.product' | t }}</th>
@@ -96,7 +96,7 @@
                       <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
                     {%- endif -%}
 
-                    <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
+                    <a href="{{ item.url }}" class="cart-item__name yc-item-name">{{ item.product.title | escape }}</a>
 
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
