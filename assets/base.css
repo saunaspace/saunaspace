@@ -1142,7 +1142,7 @@ deferred-media {
 }
 
 /* pricing */
-.price-item.price-item--sale.price-item--last, .price-item.price-item--regular.pt-price.etica {
+.price-item.price-item--sale.price-item--last, .price-item.price-item--regular.pt-price.etica, .product__info-container .price--on-sale .price-item--regular {
 	font-size: 20px;
 }
 
