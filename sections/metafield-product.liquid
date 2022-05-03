@@ -357,9 +357,7 @@
               </details>
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
-            {% if product.metafields.my_fields.color_varies_text == true %}
-          Price varies by color<br/>
-         {% endif %}
+          
           {%- when 'variant_picker' -%}
           
             {%- unless product.has_only_default_variant -%}
@@ -386,6 +384,9 @@
                   </script>
                 </variant-radios>
               {%- else -%}
+              {% if product.metafields.my_fields.color_varies_text == true %}
+              Price varies by color<br/>
+             {% endif %}
                 <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
