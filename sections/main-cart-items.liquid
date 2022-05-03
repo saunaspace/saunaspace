@@ -27,7 +27,7 @@
 			<div class="yc-head">Your Cart</div>
 			<div class="yc-top-checkout">
 				<div class="yctc-text">
-					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">{{ 'sections.cart.subtotal' | t }}</span></div>
+					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">{{ cart.total_price | money_with_currency }}</span></div>
 					<div class="fineprint">Shipping and tax are calculated at checkout.</div>
 				</div>
 				<form action="/checkout" method="post">
