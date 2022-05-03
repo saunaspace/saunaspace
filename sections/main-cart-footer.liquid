@@ -5,36 +5,36 @@
 
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div>
-    <div class="cart__footer">
+    <div class="cart__footer yc-cols">
       {%- if section.settings.show_cart_note -%}
         <cart-note class="cart__note field">
           <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
           <textarea class="text-area field__input" name="note" form="cart" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
-      <div class="yc-cols">
+     
         <div class="yc-col">
           <div class="yc-col-head yc-acc">Pay Over Time</div>
           <div class="ycf-box hideMe">
             <div class="yc-financing">
-              <img src="/img/splitit.svg" width="85" alt="SplitIt">
+              <img src="{{ 'splitit.svgg' | asset_url }}" width="85" alt="SplitIt" loading="lazy" />
               <span data-ml="splitItSummary"><p>Monthly payments using your credit card. 0% interest.</p></span>
               <a href="javascript:void(0)" class="yc-col-learnMore" onclick="potMore('splitit')">Learn More</a>
                 
-              <img src="/img/bread.png" width="85" alt="Bread Financing" style="margin-top: 40px;">
+              <img src="{{ 'bread.png' | asset_url }}" width="85" alt="Bread Financing" style="margin-top: 40px;" loading="lazy" />
               <span data-ml="breadSummary"><p>Simple loan with monthly payments as low as 0% APR for 6 months.*</p></span>
               <a href="javascript:void(0)" class="yc-col-learnMore" onclick="potMore('bread')">Learn More</a>
             </div>
           </div>
           <div class="pot-col-100 hideMe" id="splititCol">
-            <a href="javascript:void(0)" class="pot-close"><img src="/img/close.svg" alt="Close" style="width: 15" height="15"></a>
-            <img src="/img/splitit.svg" width="85" alt="SplitIt">
+            <a href="javascript:void(0)" class="pot-close"><img src="{{ 'sclose.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy"/ ></a>
+            <img src="{{ 'splitit.svg' | asset_url }}" width="85" alt="SplitIt" loading="lazy" />
             <span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
             <p class="fineprint">You can choose this option at checkout.</p>
           </div>
           <div class="pot-col-100 hideMe" id="breadCol">
-            <a href="javascript:void(0)" class="pot-close"><img src="/img/close.svg" alt="Close" style="width: 15" height="15"></a>
-            <img src="/img/bread.png" width="85" alt="Bread Financing">
+            <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy" /></a>
+            <img src="{{ 'bread.png' | asset_url }}" width="85" alt="Bread Financing" loading="lazy" />
               <span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
               <p class="fineprint">Check your eligibility in minutes at checkout.</p>
           </div>
@@ -113,12 +113,12 @@
           {%- endcase -%}
         {% endfor %}
         </div>
-      </div>
-      <div class="cart__blocks">
+   
+      
         
 
         <div id="cart-errors"></div>
-      </div>
+   
     </div>
   </div>
 </div>
