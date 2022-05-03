@@ -482,8 +482,15 @@
          
 				
         {%- endfor -%}
-<div class="op-30day">
-							<div><strong>Order Processing:</strong>  1–4 days.</div>
+<div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
+  {% if product.metafields.lead-time.leadtime != blank %}
+ {{product.metafields.lead-time.leadtime}}.
+ {% else %}
+  1–3 days.
+  {% endif %}
+</span>            
+</div>
+
 							<div>30-Day Returns</div>
 						</div>
             <hr/>
@@ -565,6 +572,17 @@
       </div>
     </modal-dialog>
   {%- endfor -%}
+</section>
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+
+<section>
+  <h2>Feel the #Saunaspace Love</h2>
+  <div
+  class="yotpo yotpo-pictures-widget"
+  data-gallery-id="{{product.metafields.yotpo-gallery.yotpogallery}}">
+</div>
+
 </section>
 
 {% javascript %}
@@ -1165,4 +1183,3 @@
 }
 {% endschema %}
 
-<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
