@@ -3,6 +3,11 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}	
 
+<style>
+  .product-tile .color-choices {
+    display: none;
+  }
+</style>
 
 	<div class="photo-headerBG" style="background-image:url({{ 'reviews.jpg' | asset_url }}); background-position: 50% 0; ">
 		<div class="ph-width">
