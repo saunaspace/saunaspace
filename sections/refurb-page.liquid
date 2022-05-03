@@ -11,7 +11,12 @@
 			</div>
 		</div>
 	</div>
-		
+  {% for product in collections.certified-refurbished.products %}
+  <li>
+    <img src="{{ product.featured_image | product_img_url: 'medium' }}" alt="{{ product.title | escape  }}" />    
+    <a class="shop-now" href="{{ product.url }}">{{ product.title | escape  }}</a>                              
+  </li> 
+{% endfor %}
 			<section>
 					<div class="short-content">
 						<p class="etica">Sorry, there are no refurbished items available right now. Check again soon or explore <a href="/products">new equipment</a>.
