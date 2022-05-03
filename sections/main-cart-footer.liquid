@@ -59,17 +59,15 @@
           <div class="ycc-lineitem"><strong>Subtotal</strong><span class="etica cartTotal">$349.99</span></div>
           <div class="ycc-lineitem"><strong>Shipping & Tax</strong><span class="fineprint">Calculated at checkout</span></div>
           -->
-          <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal">$349.99</span><div class="fineprint">Shipping and tax are calculated at checkout.</div></div>
-  
+          
           {% for block in section.blocks %}
           {%- case block.type -%}
-            {%- when '@app' -%}
-              {% render block %}
-            {%- when 'subtotal' -%}
-              <div class="js-contents" {{ block.shopify_attributes }}>
-                <div class="totals">
-                  <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
-                  <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
+          {%- when '@app' -%}
+          {% render block %}
+          {%- when 'subtotal' -%}
+          <div class="js-contents" {{ block.shopify_attributes }}>
+            <div class="totals">
+                  <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">{{ cart.total_price | money_with_currency }}</span><div class="fineprint">Shipping and tax are calculated at checkout.</div></div>
                 </div>
 
                 <div>
