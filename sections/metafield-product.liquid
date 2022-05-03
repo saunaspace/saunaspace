@@ -373,7 +373,10 @@
           
           {%- when 'variant_picker' -%}
           {% if product.metafields.my_fields.top_notes != blank %}
+
+          <div class="emf-shield">
           {{product.metafields.my_fields.top_notes}}
+          </div>
          {% endif %}
 
             {%- unless product.has_only_default_variant -%}
