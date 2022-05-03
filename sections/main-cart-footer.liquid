@@ -139,6 +139,22 @@
 {% endjavascript %}
 
 <script>
+
+function potMore(f) {
+	$(".yc-financing").addClass("hideMe");
+	$("#" + f + "Col").removeClass("hideMe");
+}
+
+$(".pot-col-100").on("click",function() {
+	$(this).addClass("hideMe");
+	$(".yc-financing").removeClass("hideMe");
+});
+
+$(".yc-col-head.yc-acc").on("click",function() {
+	$(this).toggleClass("yc-acc-minus");
+	$(this).next().toggleClass("hideMe");
+});
+
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
       const ua = window.navigator.userAgent;
