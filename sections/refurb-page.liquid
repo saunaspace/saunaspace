@@ -16,6 +16,9 @@
 		</div>
 	</div>
 
+  {% if collections.certified-refurbished.products != empty %}
+  <section>
+    <div class="short-content">
   <ul id="product-grid" data-id="{{ section.id }}" class="
   grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
   {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
@@ -40,10 +43,11 @@
   {%- endfor -%}
 </ul>
 
+</div>
+</section>
 
 
-
-
+{% else %}
 
 
 			<section>
@@ -52,7 +56,7 @@
 					</div>
 			</section>
 
-
+{% endif %}
 
 {% schema %}
 {
