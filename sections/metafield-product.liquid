@@ -372,6 +372,9 @@
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           
           {%- when 'variant_picker' -%}
+          {% if product.metafields.my_fields.top_notes != blank %}
+          {{product.metafields.my_fields.top_notes}}
+         {% endif %}
 
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
