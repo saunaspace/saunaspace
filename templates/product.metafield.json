@@ -55,7 +55,7 @@
       "type": "product-recommendations",
       "settings": {
         "heading": "You may also like",
-        "heading_size": "h2",
+        "heading_size": "h1",
         "columns_desktop": 4,
         "color_scheme": "background-1",
         "image_ratio": "square",
