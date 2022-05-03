@@ -6025,6 +6025,11 @@ a#cart-icon-bubble {
   	font-family: 'UntitledSans', sans-serif;
 }
 
+
+#price-template--14575164096555__main .price__container::afte {
+	content: none;
+}
+
   .cart-count-bubble {
     color: #000;
     font-size: 13px;
