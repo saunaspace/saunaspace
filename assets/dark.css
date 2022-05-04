@@ -7,7 +7,7 @@
   	transition: all .25s;
   }
 
-  .stuck .logo {
+  .stuck .logo, .sticky .logo {
     background-image: url(../img/logo_symbol.svg);
     top: 8px;
   }
