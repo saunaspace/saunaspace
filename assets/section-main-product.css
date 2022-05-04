@@ -52,6 +52,14 @@ button.product-form__submit:before, button.product-form__submit:after {
 .size-div.product__accordion.accordion {
     border: none;
 }
+table:not([class]) td, table:not([class]) th {
+    border-left: none;
+    border-right: none;
+}
+table:not([class]) th{
+  
+    border: none;
+}
 .size-div.product__accordion.accordion {
     border: none;
     margin: 0px !important;
