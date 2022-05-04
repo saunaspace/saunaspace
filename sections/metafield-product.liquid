@@ -260,7 +260,11 @@
                   {{ form | payment_terms }}
                 {%- endform -%}
               </div>
-              {% if product.metafields.my_fields.color_varies_text == true %}
+              
+            
+        </div><!--product-text-->
+
+        {% if product.metafields.my_fields.color_varies_text == true %}
               <style>
                 .single-page-price .price__container::after {
                   content: "price varies by color";
@@ -273,8 +277,6 @@
 
               </style>
              {% endif %}
-            
-        </div><!--product-text-->
         
           {%- when 'description' -%}
             {%- if product.description != blank -%}
@@ -839,12 +841,12 @@ setTimeout(
     $( $('.bcpo-title') ).each(function( i ) {
     if ( $(this).text() == "Plug Type:" ) {
       console.log('text found');
+      $(this).addClass('plug-' + i);
       $(this).text('Select your plug type:');
     }
   });
 
-console.log("text:" + $('.bcpo-title').text());
-}, 500);
+}, 900);
 
 
 var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;

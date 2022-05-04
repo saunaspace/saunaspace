@@ -54,7 +54,7 @@
                 sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                 alt="{{ card_product.featured_media.alt | escape }}"
                 class="motion-reduce pt-img img{{ product.id }}"
-                {% unless lazy_load == false %}loading="lazy"{% endunless %}
+                {% unless lazy_load == false %} loading="lazy" {% endunless %}
                 width="{{ card_product.featured_media.width }}"
                 height="{{ card_product.featured_media.height }}"
               >
@@ -81,7 +81,7 @@
             </div>
           </div>
         {%- endif -%}
-        <div class="card__content" onclick="location.href='{{ card_product.url }}'">
+        <div class="card__content">
           <div class="card__information">
             <h3 class="card__heading">
               <a href="{{ card_product.url }}" class="full-unstyled-link">
@@ -91,7 +91,7 @@
           </div>
         </div>
       </div>
-      <div class="card__content"  onclick="location.href='{{ card_product.url }}'">
+      <div class="card__content">
         <div class="card__information">
           {% comment %}
           <h3 class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}">

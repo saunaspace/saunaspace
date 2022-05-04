@@ -6,6 +6,11 @@
   	background: #000;
   	transition: all .25s;
   }
+
+  .stuck .logo, .sticky .logo {
+    background-image: url(logo_symbol.svg);
+    top: 8px;
+  }
   
   .dark .tanBG, .dark .mega-nav, .dark .compare-panel, .dark .greyBG, .dark .photo-headerBG, .dark .build-panel,
   .dark .nav-full-cart, .dark .yc-col-checkout, .dark .qty-change, .dark .health-benefit, .dark .event-box { 
