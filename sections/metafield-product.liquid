@@ -273,14 +273,7 @@
 
               </style>
              {% endif %}
-             {% if product.metafields.my_fields.why_we_love_it != blank %}
-             <div class="wwli">
-              <div class="wwli-head">Why We Love It</div>
-              <p> {{product.metafields.my_fields.why_we_love_it}} </p>
-            </div>
-
-              
-             {% endif %}
+            
         </div><!--product-text-->
         
           {%- when 'description' -%}
@@ -381,7 +374,14 @@
           
           {%- when 'variant_picker' -%}
           {% if product.metafields.my_fields.top_notes != blank %}
+          {% if product.metafields.my_fields.why_we_love_it != blank %}
+          <div class="wwli">
+           <div class="wwli-head">Why We Love It</div>
+           <p> {{product.metafields.my_fields.why_we_love_it}} </p>
+         </div>
 
+           
+          {% endif %}
           <div class="emf-shield">
           {{product.metafields.my_fields.top_notes}}
           </div>
