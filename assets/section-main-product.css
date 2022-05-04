@@ -24,8 +24,16 @@
 .product-form__input.product-form__input--dropdown div.select svg.icon.icon-caret {
     display: none;
 }
+.product-form__input.product-form__input--dropdown {
+    margin: 0px !important;
+    max-width: 100%;
+}
 button.product-form__submit:before, button.product-form__submit:after {
     display: none;
+}
+.product-form__input.product-form__input--dropdown div.select {
+    width: 100% !important;
+    max-width: 100% !important;
 }
 #bcpo .bcpo-images input:checked + label, #bcpo .bcpo-colors input:checked + label {
     box-shadow: 0 0 0 1px black;
