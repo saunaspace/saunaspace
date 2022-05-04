@@ -5989,6 +5989,10 @@ span[data-ml]::before {
 	display: flex;
 	flex-wrap: wrap;
 }
+
+.plug-0 {
+	font-weight: normal;
+}
 #bcpo .bcpo-dropdown {
 	order: 2;
 }

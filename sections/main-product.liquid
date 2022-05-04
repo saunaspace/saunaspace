@@ -652,6 +652,7 @@ setTimeout(
     $( $('.bcpo-title') ).each(function( i ) {
     if ( $(this).text() == "Plug Type:" ) {
       console.log('text found');
+      $(this).addClass('plug-' + i);
       $(this).text('Select your plug type:');
     }
   });
