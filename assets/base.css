@@ -2900,7 +2900,7 @@ section:not(.shopify-section) {
 	transition: top .25s;
 }
 
-.stuck .logo { background-image: url( 'logo_symbol.svg'); top: 8px; }
+.stuck .logo, .sticky .logo { background-image: url( 'logo_symbol.svg'); top: 8px; }
 .stuck + .nav-on-top { top: 66px; }
 
 
