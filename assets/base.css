@@ -2263,9 +2263,13 @@ input[type='checkbox'] {
 .modal__close-button:hover .icon {
   transform: scale(1.07);
 }
+   a#cart-icon-bubble {
+    border-bottom: 1px solid transparent !important;
+}
 a#cart-icon-bubble:hover {
     border-bottom: 1px solid #000 !important;
 }
+ 
   .cart-count-bubble > span {
     margin-top: 0px;
     line-height: 25px;
@@ -2280,7 +2284,7 @@ a#cart-icon-bubble:hover {
 .header__icon,
 .header__icon--cart .icon {
   height: auto;
-  width: 15rem;
+  width: 17rem;
 }
 .cart-count-bubble > span {
     font-size: 1.6rem;
@@ -2960,7 +2964,7 @@ section:not(.shopify-section) {
 	margin: 1.5em 0 10px 0;
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
-	padding-left: 30px;
+	padding-left: 17px;
 	padding-bottom: 5px;
 	border-bottom: 0px solid transparent;
 }
