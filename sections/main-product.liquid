@@ -344,7 +344,8 @@
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
                       <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-                        {{ option.name }}
+                        
+                        {% if option.name == 'Size' %} Select a size {% else %} {{ option.name }}  {% endif %}
                       </label>
                       <div class="select">
                         <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
@@ -482,20 +483,14 @@
          
 				
         {%- endfor -%}
-        {% if product.metafields.my_fields.why_we_love_it != blank %}
-          <div class="wwli">
-            <div class="wwli-head">Why We Love It</div>
-            <p> {{product.metafields.my_fields.why_we_love_it}} </p>
-          </div>
-        {% endif %}
-        <div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
-          {% if product.metafields.lead-time.leadtime != blank %}
-        {{product.metafields.lead-time.leadtime}}.
-        {% else %}
-          1–3 days.
-          {% endif %}
-        </span>            
-        </div>
+<div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
+  {% if product.metafields.lead-time.leadtime != blank %}
+ {{product.metafields.lead-time.leadtime}}.
+ {% else %}
+  1–3 days.
+  {% endif %}
+</span>            
+</div>
 
 							<div>30-Day Returns</div>
 						</div>
@@ -525,9 +520,7 @@
 						<span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
 						<p class="fineprint">Check your eligibility in minutes at checkout.</p>
 					</div>
-				</div>	
-        <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;"><strong>SKU: </strong><span class="theSKU">{% assign current_variant = product.selected_or_first_available_variant %}
-          <span class="variant-sku">{{ current_variant.sku }}</span></span>&nbsp;&nbsp;<strong>UPC: </strong><span class="theUPC">{{ current_variant.barcode }}</span></p>	
+				</div>		
       </div>
     </div>
   </div>
