@@ -26,15 +26,6 @@
             "picker_type": "dropdown"
           }
         },
-        "1723aed0-a079-41ce-a4b6-539da3e866b4": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Size Chart",
-            "icon": "none",
-            "content": "<p>{{ product.metafields.my_fields.sizechart | metafield_tag }}<\/p>",
-            "page": ""
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -47,7 +38,6 @@
         "caption",
         "price",
         "variant_picker",
-        "1723aed0-a079-41ce-a4b6-539da3e866b4",
         "buy_buttons"
       ],
       "settings": {
