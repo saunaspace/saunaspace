@@ -5989,7 +5989,9 @@ span[data-ml]::before {
 	display: flex;
 	flex-wrap: wrap;
 }
-
+#bcpo .bcpo-title {
+	font-weight: normal;
+}
 .plug-0 {
 	font-weight: normal;
 }
