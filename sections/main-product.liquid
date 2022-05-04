@@ -34,6 +34,25 @@
     <section class="free-shipping">Free shipping and returns in the contiguous US and Canada on orders over $200.</section>
 </div>
 
+
+<div class="stickyBG">
+  <div class="sticky-add-to-cart">
+    <div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
+    <div class="sac-wrap">
+      <div class="sac-price etica">
+                  {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
+              </div>
+              <a href="javascript:void(0)" class="btn atc" id="sacText">
+                {%- if product.selected_or_first_available_variant.available -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </a>
+    </div>
+    </div>
+</div>
+
 <section class="page-width section-{{ section.id }}-padding">
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
@@ -678,6 +697,30 @@ setTimeout(
   function potMore(f) {
 	$(".pot-col").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
+}
+
+const stickyAddToCart = document.querySelector('.atcMain');
+if(window.matchMedia('(min-width: 750px)').matches) {
+	createObserver('stickyAddToCart');
+}
+
+function onChangestickyAddToCart(changes, observerstickyAddToCart) {
+		changes.forEach(change => { if (change.intersectionRatio >= 1) {
+			$(".stickyBG").removeClass("stickyBG-visible");
+			//console.log("hidden")
+		} else {
+			//console.log("visible")
+			$(".stickyBG").addClass("stickyBG-visible");
+		}
+	});
+}
+
+updateUC(1)
+function updateUC(p) {
+  ucArr=["https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-light.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-desk-arm.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-case.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-sauna-supreme.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-better-night-light.jpg"]
+  $(".build-panels p").addClass("hideMe");
+  $("#bp" + p).find("p").removeClass("hideMe");
+  $("#bpImg").attr("src",ucArr[p-1]);
 }
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
