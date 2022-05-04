@@ -191,7 +191,7 @@
 /* base */
 
 .thumbnail[aria-current] {
-	border: 1px solid #C57A29 !important;
+	border: 2px solid #C57A29 !important;
 }
 
 .no-js:not(html) {
@@ -2944,7 +2944,7 @@ section:not(.shopify-section) {
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 30px;
-	padding-bottom: 5px;
+	padding-bottom:14px;
 	border-bottom: 0px solid transparent;
 }
 
@@ -4089,7 +4089,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	position: fixed;
 	left: 0;
 	transform: translateY(-250px);
-	padding: 20px 0;
+	padding: 10px 0;
 	width: 100%;
 	border-bottom: 1px solid #979797;
 	z-index: 3;
@@ -4105,7 +4105,9 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		align-items: center;
 	}
 	
-	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; }
+	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; 
+		top: 225px;
+	}
 
 .sac-product {
 	font-weight: 700;
