@@ -4089,7 +4089,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	position: fixed;
 	left: 0;
 	transform: translateY(-250px);
-	padding: 20px 0;
+	padding: 10px 0;
 	width: 100%;
 	border-bottom: 1px solid #979797;
 	z-index: 3;
@@ -4105,7 +4105,9 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		align-items: center;
 	}
 	
-	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; }
+	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; 
+		top: 225px;
+	}
 
 .sac-product {
 	font-weight: 700;
