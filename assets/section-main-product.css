@@ -21,6 +21,9 @@
     background-position: right 0.7em top 50%;
     background-size: 0.65em auto;
 }
+.product-form__input.product-form__input--dropdown div.select svg.icon.icon-caret {
+    display: none;
+}
 button.product-form__submit:before, button.product-form__submit:after {
     display: none;
 }
