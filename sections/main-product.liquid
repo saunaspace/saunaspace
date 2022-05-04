@@ -646,7 +646,19 @@
 {% endif %}
 
 <script>
+$(document).ready(function() {
+setTimeout(
+  function() { 
+    $( $('.bcpo-title') ).each(function( i ) {
+    if ( $(this).text() == "Plug Type:" ) {
+      console.log('text found');
+      $(this).text('Select your plug type:');
+    }
+  });
 
+}, 500);
+
+});
   function potMore(f) {
 	$(".pot-col").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
