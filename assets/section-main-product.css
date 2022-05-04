@@ -49,7 +49,24 @@ button.product-form__submit:before, button.product-form__submit:after {
 .size-chart table {
     width: 100%;
 }
-
+.size-div.product__accordion.accordion {
+    border: none;
+}
+.size-div.product__accordion.accordion {
+    border: none;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.size-div summary {
+    padding: 0px !important;
+}
+.size-div h2.h4.accordion__title {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: unset;
+    margin: 0 auto;
+}
 .size-chart td {
     text-align: left;
     font-size: 1.4rem;
