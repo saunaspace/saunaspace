@@ -4104,7 +4104,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		justify-content: flex-end;
 		align-items: center;
 	}
-	.sticky-add-to-cart .price-item.price-item--sale.price-item--last, .sticky-add-to-cart  .price-item.price-item--regular.pt-price.etica, .sticky-add-to-cart  .product__info-container .price--on-sale .price-item--regular {
+	.sticky-add-to-cart .price-item.price-item--sale.price-item--last, .sticky-add-to-cart  .price-item.price-item--regular.pt-price.etica, .sticky-add-to-cart  .product__info-container .price--on-sale .price-item--regular, .sticky-add-to-cart .price--on-sale .price-item--regular {
 		font-size: 18px !important;
 	}
 	
