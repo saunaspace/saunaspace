@@ -6039,7 +6039,6 @@ span[data-ml]::before {
 	max-width: 210px;
 }
 a#cart-icon-bubble {
-    border: none !important;
     box-shadow: none !important;
     text-decoration: none;
 }
