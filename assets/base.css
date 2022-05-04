@@ -191,7 +191,7 @@
 /* base */
 
 .thumbnail[aria-current] {
-	border: 2px solid #C57A29 !important;
+	border: 1px solid #C57A29 !important;
 }
 
 .no-js:not(html) {
@@ -420,7 +420,7 @@ blockquote {
 .field__input,
 .form__label,
 .select__select {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   letter-spacing: 0.04rem;
 }
@@ -1242,7 +1242,8 @@ button.shopify-payment-button__button--unbranded {
   left: var(--buttons-border-width);
   z-index: 1;
   border-radius: var(--buttons-radius);
-  box-shadow: none;
+  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)),
+    0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
   transition: box-shadow var(--duration-short) ease;
 }
 
@@ -1251,7 +1252,8 @@ button.shopify-payment-button__button--unbranded {
 .customer button:hover::after,
 .shopify-payment-button__button--unbranded:hover::after {
   --border-offset: 1.3px;
-  box-shadow: none;
+  box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)),
+    0 0 0 calc(var(--buttons-border-width) + 1px) rgba(var(--color-button), var(--alpha-button-background));
 }
 
 .button--secondary:after {
@@ -2898,7 +2900,7 @@ section:not(.shopify-section) {
 	transition: top .25s;
 }
 
-.stuck .logo, .sticky .logo { background-image: url( 'logo_symbol.svg'); top: 8px; }
+.stuck .logo { background-image: url( 'logo_symbol.svg'); top: 8px; }
 .stuck + .nav-on-top { top: 66px; }
 
 
@@ -2942,7 +2944,7 @@ section:not(.shopify-section) {
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 30px;
-	padding-bottom:14px;
+	padding-bottom: 5px;
 	border-bottom: 0px solid transparent;
 }
 
@@ -4087,7 +4089,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	position: fixed;
 	left: 0;
 	transform: translateY(-250px);
-	padding: 10px 0;
+	padding: 20px 0;
 	width: 100%;
 	border-bottom: 1px solid #979797;
 	z-index: 3;
@@ -4102,17 +4104,8 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		justify-content: flex-end;
 		align-items: center;
 	}
-	.sticky-add-to-cart .price-item.price-item--sale.price-item--last, .sticky-add-to-cart  .price-item.price-item--regular.pt-price.etica, .sticky-add-to-cart  .product__info-container .price--on-sale .price-item--regular, .sticky-add-to-cart .price--on-sale .price-item--regular {
-		font-size: 18px !important;
-	}
 	
-	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; 
-		top: 225px;
-	}
-
-	span.bcpo-value {
-		display: none;
-	}
+	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s; }
 
 .sac-product {
 	font-weight: 700;
@@ -5970,13 +5963,8 @@ span[data-ml]::before {
  }
 
 #bcpo {
-	display: inline-block;
-    text-align: center;
-    margin: 0 auto;
-}
-
-#bcpo .bcpo-title {
-	font-weight: normal;
+	display: flex;
+	flex-wrap: wrap;
 }
 #bcpo .bcpo-dropdown {
 	order: 2;
@@ -5998,7 +5986,7 @@ span[data-ml]::before {
 }
 #bcpo .bcpo-images {
 	text-align: center;
-	margin: 10px auto 0;
+	margin: 0 auto;
 }
 #bcpo .bcpo-images .bcpo-label {
 	font-size: 1.4rem;
