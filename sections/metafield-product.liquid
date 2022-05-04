@@ -273,6 +273,7 @@
 
               </style>
              {% endif %}
+            
         </div><!--product-text-->
         
           {%- when 'description' -%}
@@ -373,7 +374,7 @@
           
           {%- when 'variant_picker' -%}
           {% if product.metafields.my_fields.top_notes != blank %}
-
+          
           <div class="emf-shield">
           {{product.metafields.my_fields.top_notes}}
           </div>
@@ -509,7 +510,12 @@
      <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
                 <div class="op-30day">This item is currently out of stock but we are making more. You can pre-order this and we will ship as soon as it is ready.</div>
             </div>
-            
+            {% if product.metafields.my_fields.why_we_love_it != blank %}
+              <div class="wwli">
+                <div class="wwli-head">Why We Love It</div>
+                <p> {{product.metafields.my_fields.why_we_love_it}} </p>
+              </div>
+            {% endif %}
             <div class="op-30day-box">
                 
                     <div class="op-30day">
@@ -828,6 +834,17 @@ $(".pot-col-100").on("click",function() {
 	$(".pot-col").removeClass("hideMe");
 });
 
+setTimeout(
+  function() { 
+    $( $('.bcpo-title') ).each(function( i ) {
+    if ( $(this).text() == "Plug Type:" ) {
+      console.log('text found');
+      $(this).text('Select your plug type:');
+    }
+  });
+
+console.log("text:" + $('.bcpo-title').text());
+}, 500);
 
 
 var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
