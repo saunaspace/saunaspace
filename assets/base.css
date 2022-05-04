@@ -2266,7 +2266,7 @@ input[type='checkbox'] {
    
   a#cart-icon-bubble {
     
-    border-bottom: 1px solid transparent !important;
+    border-bottom: 1px solid rgba(0,0,0,0) !important;
 }
 
 
