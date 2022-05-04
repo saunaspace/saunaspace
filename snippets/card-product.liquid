@@ -54,7 +54,7 @@
                 sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                 alt="{{ card_product.featured_media.alt | escape }}"
                 class="motion-reduce pt-img img{{ product.id }}"
-                {% unless lazy_load == false %}loading="lazy"{% endunless %}
+                {% unless lazy_load == false %} loading="lazy" {% endunless %}
                 width="{{ card_product.featured_media.width }}"
                 height="{{ card_product.featured_media.height }}"
               >
@@ -88,6 +88,31 @@
                 {{ card_product.title | escape }}
               </a>
             </h3>
+          </div>
+          {% assign swatch = 'Color' %}
+          {% assign colorNames = 'Natural;Indigo;Dark Chocolate;Stone;Hand-Dyed Turmeric' | split: ";" %}
+    	  {% assign colorValues = 'natural.jpg;indigo.jpg;dark-chocolate.jpg;stone.jpg;turmeric.jpg' | split: ";" %}
+          <div class="color-choices"> 
+           {% for option in product.options %}
+              {% if option == swatch %}
+            	  
+                  {% assign index = forloop.index0 %}
+            	  
+            	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
+                  {% for color in uniqueColors %}
+                    {% assign currentVariant = product.variants | where: "option2", color | first %}
+                    {% for colorName in colorNames %}
+                      {% if colorName == currentVariant.option2 %}
+                        {% assign colorIndex = forloop.index0 %}
+                      {% endif %}
+                    {% endfor %}
+            		<div class="ccrp p{{ product.id }} cat color-choice-off" data-productID="{{ product.id }}" data-productCode="emf-shield" data-colorPrice="{{ currentVariant.price | money_with_currency }}" data-colorCode="{{ currentVariant.option2 | handle }}" {% if currentVariant.featured_image.src  %}data-image="{{ currentVariant.featured_image.src | img_url: '300x300', crop: 'center', scale: 2 }}" {% endif %}>
+                      <div class="color-choice" style="background-image:url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/{{ colorValues[colorIndex] }})"></div>
+            		</div>
+            		
+                  {% endfor %}
+             {% endif %}
+           {% endfor %}
           </div>
         </div>
       </div>
