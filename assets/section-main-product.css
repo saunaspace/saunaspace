@@ -40,6 +40,7 @@ button.product-form__submit:before, button.product-form__submit:after {
     border-spacing: 0;
     border: none !important;
     box-shadow: unset !important;
+  table-layout: auto !important;
 }
 .sc-head {
     font-weight: 700;
