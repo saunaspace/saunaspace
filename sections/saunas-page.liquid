@@ -274,6 +274,29 @@
 				</div>
 				<!--the include below is looking for rsRP -->
 				<!--#include virtual="/res/relatedProducts.asp" -->
+				<ul id="product-grid" data-id="{{ section.id }}" class="
+				grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+				{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+				  grid--{{ section.settings.columns_desktop }}-col-desktop
+				{% endif %}">
+				{% for product in collections.saunas.products %}
+				  {% assign lazy_load = false %}
+				  {%- if forloop.index > 2 -%}
+					{%- assign lazy_load = true -%}
+				  {%- endif -%}
+			  
+				  <li class="grid__item">
+					{% render 'card-product',
+					  card_product: product,
+					  media_aspect_ratio: section.settings.image_ratio,
+					  show_secondary_image: section.settings.show_secondary_image,
+					  show_vendor: section.settings.show_vendor,
+					  show_rating: section.settings.show_rating,
+					  lazy_load: lazy_load
+					%}
+				  </li>
+				{%- endfor -%}
+			  </ul>
 				<div class="product-tile" style="flex-shrink: 0;">
 						
 							<a id="rpfaraday-infrared-sauna" href="/products/faraday-infrared-sauna" data-url="/products/faraday-infrared-sauna"><img src="{{ 'faraday-infrared-sauna-natural-tile.jpg' | asset_url }}" alt="Faraday Infrared Sauna" class="pt-img img1" /></a>
