@@ -42,7 +42,7 @@
 			<div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
 			<div class="sac-wrap">
 				<div class="sac-price etica">
-                  	{%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+                  	{%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
                 </div>
               	<a href="javascript:void(0)" class="btn atc" id="sacText">
                   {%- if product.selected_or_first_available_variant.available -%}
@@ -260,6 +260,19 @@
                   {{ form | payment_terms }}
                 {%- endform -%}
               </div>
+              {% if product.metafields.my_fields.color_varies_text == true %}
+              <style>
+                .single-page-price .price__container::after {
+                  content: "price varies by color";
+                  font-family: 'UntitledSans', sans-serif;
+                  display: block;
+                  text-align: center;
+                  width: 100%;
+                  font-size: 16px;
+                }
+
+              </style>
+             {% endif %}
         </div><!--product-text-->
         
           {%- when 'description' -%}
@@ -357,8 +370,15 @@
               </details>
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
+          
           {%- when 'variant_picker' -%}
-        
+          {% if product.metafields.my_fields.top_notes != blank %}
+
+          <div class="emf-shield">
+          {{product.metafields.my_fields.top_notes}}
+          </div>
+         {% endif %}
+
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
@@ -383,6 +403,7 @@
                   </script>
                 </variant-radios>
               {%- else -%}
+             
                 <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">

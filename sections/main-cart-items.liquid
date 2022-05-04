@@ -20,13 +20,25 @@
 {%- endstyle -%}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<section>
+	<div class="your-cart">
+	
+		<div class="yc-head-wrap">
+			<div class="yc-head">Your Cart</div>
+			<div class="yc-top-checkout">
+				<div class="yctc-text">
+					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">{{ cart.total_price | money_with_currency }}</span></div>
+					<div class="fineprint">Shipping and tax are calculated at checkout.</div>
+				</div>
+				<form action="/checkout" method="post">
+					<input type="submit" class="btn btn-checkout" value="Check Out" />
+				</form>
+			</div>
+		</div>
+
+
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
-  <div class="title-wrapper-with-link">
-    <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
-    <a href="{{ routes.all_products_collection_url }}" class="underlined-link">{{ 'general.continue_shopping' | t }}</a>
-  </div>
-
   <div class="cart__warnings">
     <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
     <a href="{{ routes.all_products_collection_url }}" class="button">
@@ -79,7 +91,7 @@
                       <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
                     {%- endif -%}
 
-                    <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
+                    <a href="{{ item.url }}" class="cart-item__name yc-item-name">{{ item.product.title | escape }}</a>
 
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
@@ -293,6 +305,9 @@
     <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
   </form>
 </cart-items>
+
+</div>
+</section>
 
 {% schema %}
 {

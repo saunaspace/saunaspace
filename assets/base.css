@@ -190,6 +190,10 @@
 
 /* base */
 
+.thumbnail[aria-current] {
+	border: 1px solid #C57A29 !important;
+}
+
 .no-js:not(html) {
   display: none !important;
 }
@@ -1142,8 +1146,12 @@ deferred-media {
 }
 
 /* pricing */
-.price-item.price-item--sale.price-item--last, .price-item.price-item--regular.pt-price.etica {
-	font-size: 13px;
+.price-item.price-item--sale.price-item--last, .price-item.price-item--regular.pt-price.etica, .product__info-container .price--on-sale .price-item--regular {
+	font-size: 20px !important;
+}
+
+.card-information .price-item.price-item--sale.price-item--last, .card-information .price-item.price-item--regular.pt-price.etica {
+	font-size: 16px !important;
 }
 
 .card__content {
@@ -3761,7 +3769,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	.yc-op { margin-top: auto; font-size: 1.4rem; }
 		.yc-op .fineprint { font-size: 1.2rem; line-height: 1.3em; margin-top: 5px; margin-bottom: 0; }
 	
-	.yc-item label { font-size: 1.5rem; }
+	.yc-item th { font-size: 1.5rem; font-weight: 700;}
 	.yc-item label + .yc-price { margin-top: .75em;}
 	
 	.yc-item-col { width: 130px; }
@@ -6020,10 +6028,8 @@ a#cart-icon-bubble {
 #bcpo .bcpo-dd .inner label:hover{
   	background: #6E1500 !important;
 }
-.single-page-price .price__container::after {
-	content: "price varies by color";
-  	font-family: 'UntitledSans', sans-serif;
-}
+
+
 
   .cart-count-bubble {
     color: #000;

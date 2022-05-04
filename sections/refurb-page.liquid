@@ -1,5 +1,14 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}	
 
-	
+<style>
+  .product-tile .color-choices {
+    display: none;
+  }
+</style>
+
 	<div class="photo-headerBG" style="background-image:url({{ 'reviews.jpg' | asset_url }}); background-position: 50% 0; ">
 		<div class="ph-width">
 			<div class="ph-text">
@@ -11,14 +20,48 @@
 			</div>
 		</div>
 	</div>
-		
+
+  {% if collections.certified-refurbished.products != empty %}
+  <section>
+    <div class="short-content">
+  <ul id="product-grid" data-id="{{ section.id }}" class="
+  grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+  {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+    grid--{{ section.settings.columns_desktop }}-col-desktop
+  {% endif %}">
+  {% for product in collections.certified-refurbished.products %}
+    {% assign lazy_load = false %}
+    {%- if forloop.index > 2 -%}
+      {%- assign lazy_load = true -%}
+    {%- endif -%}
+
+    <li class="grid__item">
+      {% render 'card-product',
+        card_product: product,
+        media_aspect_ratio: section.settings.image_ratio,
+        show_secondary_image: section.settings.show_secondary_image,
+        show_vendor: section.settings.show_vendor,
+        show_rating: section.settings.show_rating,
+        lazy_load: lazy_load
+      %}
+    </li>
+  {%- endfor -%}
+</ul>
+
+</div>
+</section>
+
+
+{% else %}
+
+
 			<section>
 					<div class="short-content">
 						<p class="etica">Sorry, there are no refurbished items available right now. Check again soon or explore <a href="/products">new equipment</a>.
 					</div>
 			</section>
 
-
+{% endif %}
 
 {% schema %}
 {
