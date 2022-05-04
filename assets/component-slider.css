@@ -246,39 +246,43 @@ slider-component {
 .slider-button:not([disabled]):hover {
   color: rgb(var(--color-foreground));
 }
-
 .slider-button .icon {
+  display: none;
+}
+.slider-button  {
   /* height: 0.6rem; */
   z-index: 2;
     position: absolute;
-    left: 0;
-    top: 30px;
+    left: 5px;
+    top: 55px;
     width: 50px;
     height: 50px;
-    background: rgba(198,122,38,.7) url(/assets/arrow_white.svg) 50% 50% no-repeat;
+    background: rgba(198,122,38,.7) url(arrow_white.svg) 50% 50% no-repeat;
     background-size: 17px;
 }
 
-.slider-button[disabled] .icon {
+.slider-button[disabled]  {
   color: rgba(var(--color-foreground), 0.3);
   cursor: not-allowed;
 }
 
-.slider-button--next .icon {
+.slider-button--next  {
   /* transform: rotate(-90deg); */
   left: auto;
-    right: 0;
+    right: 5px;
     transform: rotate(180deg);
 }
 
-.slider-button--prev .icon {
-  transform: rotate(90deg);
+.slider-button:hover {
+  background: rgba(198,122,38,1) url(arrow_white.svg) 50% 50% no-repeat;
+  background-size: 17px;
 }
 
-.slider-button--next:not([disabled]):hover .icon {
+
+/* .slider-button--next:not([disabled]):hover .icon {
   transform: rotate(-90deg) scale(1.1);
 }
 
 .slider-button--prev:not([disabled]):hover .icon {
   transform: rotate(90deg) scale(1.1);
-}
+} */
