@@ -66,6 +66,7 @@ button.product-form__submit:before, button.product-form__submit:after {
     text-align: center;
     text-transform: unset;
     margin: 0 auto;
+  text-decoration: underline;
 }
 .size-chart td {
     text-align: left;
