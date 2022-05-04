@@ -273,6 +273,7 @@ and (min-width: 750px) { .section-header { margin-bottom:
           <span class="visually-hidden as">{{
             "sections.header.cart_count" | t: count:cart.item_count
           }}</span>)
+            <span>{{ cart.total_price | money }}</span>
         </div> 
         {%- endif -%}
       </a>
