@@ -2266,9 +2266,7 @@ input[type='checkbox'] {
    
  
 
-a#cart-icon-bubble:hover {
-    border-bottom: 1px solid #000 !important;
-}
+
   a#cart-icon-bubble {
     
     border-bottom: 1px solid rgba(0,0,0,0) !important;
@@ -6062,4 +6060,7 @@ a#cart-icon-bubble {
     text-decoration: none !important;
     background: none !important;
     width: auto !important;
+}
+      a#cart-icon-bubble:hover {
+    border-bottom: 1px solid #000 !important;
 }
