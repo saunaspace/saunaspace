@@ -2266,9 +2266,7 @@ input[type='checkbox'] {
    
  
 
-a#cart-icon-bubble:hover {
-    border-bottom: 1px solid #000 !important;
-}
+
   a#cart-icon-bubble {
     
     border-bottom: 1px solid rgba(0,0,0,0) !important;
@@ -2288,7 +2286,7 @@ a#cart-icon-bubble:hover {
 .header__icon,
 .header__icon--cart .icon {
   height: auto;
-  width: 17rem;
+  width: auto;
 }
 .cart-count-bubble > span {
     font-size: 1.6rem;
@@ -2968,7 +2966,7 @@ section:not(.shopify-section) {
 	margin: 1.5em 0 10px 0;
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
-	padding-left: 17px;
+	padding-left: 25px;
 	padding-bottom: 5px;
 	border-bottom: 0px solid transparent;
 }
@@ -6041,7 +6039,6 @@ span[data-ml]::before {
 	max-width: 210px;
 }
 a#cart-icon-bubble {
-    border: none !important;
     box-shadow: none !important;
     text-decoration: none;
 }
@@ -6062,4 +6059,7 @@ a#cart-icon-bubble {
     text-decoration: none !important;
     background: none !important;
     width: auto !important;
+}
+      a#cart-icon-bubble:hover {
+    border-bottom: 1px solid #000 !important;
 }
