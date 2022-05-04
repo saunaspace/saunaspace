@@ -2264,16 +2264,16 @@ input[type='checkbox'] {
   transform: scale(1.07);
 }
    
-  a#cart-icon-bubble {
-    
-    border-bottom: 1px solid transparent !important;
-}
-
+ 
 
 a#cart-icon-bubble:hover {
     border-bottom: 1px solid #000 !important;
 }
- 
+  a#cart-icon-bubble {
+    
+    border-bottom: 1px solid rgba(0,0,0,0) !important;
+}
+
   .cart-count-bubble > span {
     margin-top: 0px;
     line-height: 25px;
