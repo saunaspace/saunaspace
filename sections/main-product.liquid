@@ -222,6 +222,19 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
+            {% if product.metafields.my_fields.color_varies_text == true %}
+              <style>
+                .single-page-price .price__container::after {
+                  content: "price varies by color";
+                  font-family: 'UntitledSans', sans-serif;
+                  display: block;
+                  text-align: center;
+                  width: 100%;
+                  font-size: 16px;
+                }
+
+              </style>
+             {% endif %}
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
