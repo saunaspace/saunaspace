@@ -654,6 +654,8 @@ setTimeout(
       console.log('text found');
       $(this).addClass('plug-' + i);
       $(this).text('Select your plug type:');
+    } else if( $(this).text() == "Curtain Type:" ) {
+      $(this).text('Select your curtain type:');
     }
   });
 
