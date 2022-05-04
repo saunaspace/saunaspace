@@ -2247,6 +2247,13 @@ input[type='checkbox'] {
 .header__icon span {
   height: 100%;
 }
+  .cart-count-bubble > span {
+    margin-top: 0px;
+    line-height: 25px;
+}
+  span.cart-price {
+    padding-left: 4px;
+}
 
 .header__icon::after {
   content: none;
@@ -2258,6 +2265,10 @@ input[type='checkbox'] {
 }
 a#cart-icon-bubble:hover {
     text-decoration: underline;
+}
+  .cart-count-bubble > span {
+    margin-top: 0px;
+    line-height: 25px;
 }
 .header__icon .icon {
   height: 2rem;
