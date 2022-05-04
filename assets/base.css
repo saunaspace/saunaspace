@@ -2256,7 +2256,9 @@ input[type='checkbox'] {
 .modal__close-button:hover .icon {
   transform: scale(1.07);
 }
-
+a#cart-icon-bubble:hover {
+    text-decoration: underline;
+}
 .header__icon .icon {
   height: 2rem;
   width: 2rem;
@@ -2267,9 +2269,11 @@ input[type='checkbox'] {
 .header__icon,
 .header__icon--cart .icon {
   height: auto;
-  width: 12rem;
+  width: 15rem;
 }
-
+.cart-count-bubble > span {
+    font-size: 1.6rem;
+}
 .header__icon--cart {
   position: relative;
   margin-right: -1.2rem;
