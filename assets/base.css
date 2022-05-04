@@ -2264,7 +2264,7 @@ input[type='checkbox'] {
   transform: scale(1.07);
 }
 a#cart-icon-bubble:hover {
-    text-decoration: underline;
+    border-bottom: 1px solid #000 !important;
 }
   .cart-count-bubble > span {
     margin-top: 0px;
