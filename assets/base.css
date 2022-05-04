@@ -5972,8 +5972,9 @@ span[data-ml]::before {
  }
 
 #bcpo {
-	display: flex;
-	flex-wrap: wrap;
+	display: inline-block;
+    text-align: center;
+    margin: 0 auto;
 }
 #bcpo .bcpo-dropdown {
 	order: 2;
