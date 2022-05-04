@@ -2944,7 +2944,7 @@ section:not(.shopify-section) {
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 30px;
-	padding-bottom:30px;
+	padding-bottom:14px;
 	border-bottom: 0px solid transparent;
 }
 
