@@ -1,3 +1,16 @@
+td.cart-item__quantity quantity-input.quantity:before, td.cart-item__quantity quantity-input.quantity:after {
+    display: none;
+}
+.cart-item__quantity-wrapper input.quantity__input {
+    border-top: 1px solid #C67A26;
+border-bottom: 1px solid #C67A26;
+}
+.cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
+    border: 1px solid #C67A26;
+}
+.cart-item__quantity-wrapper button svg {
+    width: 19px;
+}
 .cart-items td,
 .cart-items th {
   padding: 0;
