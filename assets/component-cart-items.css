@@ -347,7 +347,7 @@ p.fineprint.oos-fineprint {
   }
 
   .cart-item > td + td {
-    padding-left: 2rem;
+    padding-left: 0rem;
   }
 td.cart-item__price {
     
@@ -392,8 +392,12 @@ td.cart-item__details .product-option {
   }
 
   .cart-item__details {
-    width: 50rem;
+    width: 40rem;
   }
+  td.cart-item__quantity {
+    width: 184px;
+    min-width: 200px;
+}
 
   .cart-items thead th:first-child {
     width: 60%;
