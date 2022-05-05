@@ -109,6 +109,7 @@
     	  {% assign colorValues = 'natural.jpg;indigo.jpg;dark-chocolate.jpg;stone.jpg;turmeric.jpg' | split: ";" %}
           <div class="color-choices"> 
            {% for option in product.options %}
+             {{ option.name }}
               {% if option == swatch %}
             	  
                   {% assign index = forloop.index0 %}
