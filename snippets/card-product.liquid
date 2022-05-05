@@ -111,7 +111,7 @@
            {% for option in product.options %}
              
               {% if option == swatch %}
-            	  {{ option.forloop.index}}
+            	 option{{ forloop.index }}
                   {% assign index = forloop.index0 %}
             	
             	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
