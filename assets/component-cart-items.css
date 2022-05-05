@@ -312,8 +312,11 @@ cart-remove-button .icon-remove {
 
   .cart-items td {
     vertical-align: top;
-    padding-top: 4rem;
+    padding-top: 16;
   }
+  tr.cart-item {
+    border-bottom: 1px solid #939393;
+}
 
   .cart-item {
     display: table-row;
