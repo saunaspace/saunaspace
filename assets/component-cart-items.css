@@ -19,6 +19,15 @@ th.small-hide.caption-with-letter-spacing:last-child {
 .cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
     border: 1px solid #C67A26;
 }
+.your-cart cart-items.page-width {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0px auto;
+}
+.your-cart {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 table.cart-items thead th {
     border: none;
 font-size: 1.5rem;
