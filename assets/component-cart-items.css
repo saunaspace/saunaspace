@@ -13,6 +13,9 @@ th.caption-with-letter-spacing {
     /* margin-bottom: -21px !important; */
     padding-bottom: 5px;
 }
+th.small-hide.caption-with-letter-spacing:last-child {
+    padding-left: 16px;
+}
 .cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
     border: 1px solid #C67A26;
 }
