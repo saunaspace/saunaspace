@@ -301,7 +301,9 @@ cart-remove-button .icon-remove {
   .cart-items th {
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   }
-
+p.fineprint.oos-fineprint {
+    margin-bottom: 4px;
+}
   .cart-items thead th:first-child {
     width: 50%;
   }
