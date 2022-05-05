@@ -62,16 +62,7 @@
       <div class="js-contents">
         {%- if cart != empty -%}
           <table class="cart-items">
-            <thead>
-              <tr>
-                <th class="caption-with-letter-spacing" colspan="2" scope="col"></th>
-                <th class="medium-hide large-up-hide right caption-with-letter-spacing" colspan="1" scope="col">{{ 'sections.cart.headings.total' | t }}</th>
-                <th class="cart-items__heading--wide small-hide caption-with-letter-spacing" colspan="1" scope="col">{{ 'sections.cart.headings.quantity' | t }}</th>
-                <th class="cart-items__heading--wide small-hide caption-with-letter-spacing item-price" colspan="1" scope="col">Item Price</th>
-                <th class="small-hide caption-with-letter-spacing" colspan="1" scope="col">Total Price</th>
-              </tr>
-            </thead>
-
+          
             <tbody>
               {%- for item in cart.items -%}
                 <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
@@ -201,6 +192,7 @@
                   </td>
 
                   <td class="cart-item__quantity">
+                    <p class="cart-labels"><strong>Total Price</strong></p>
                     <div class="cart-item__quantity-wrapper">
                       <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                         {{ 'products.product.quantity.label' | t }}
@@ -242,6 +234,7 @@
                     </div>
                   </td>
 <td class="cart-item__price">
+  <p class="cart-labels"><strong>Total Price</strong></p>
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
                         <span class="visually-hidden">
@@ -276,7 +269,7 @@
                     </div>
 
                     <div class="cart-item__price-wrapper">
-                      <strong>Total Price</strong>
+                      <p class="cart-labels"><strong>Total Price</strong></p>
                       {%- if item.original_line_price != item.final_line_price -%}
                         <dl class="cart-item__discounted-prices">
                           <dt class="visually-hidden">
