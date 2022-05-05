@@ -73,6 +73,10 @@ color: #000;
 .cart-item__quantity-wrapper {
   display: flex;
 }
+div#main-cart-items {
+    border-bottom: 0px !important;
+    padding-bottom: 0px !important;
+}
 
 .cart-item__totals {
   position: relative;
