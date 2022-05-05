@@ -139,7 +139,7 @@
   {% endif %}
 </span>  
 <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>          
-<p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;"><strong>SKU: </strong><span class="theSKU">{% assign current_variant = product.selected_or_first_available_variant %}
+  <p class="sku"><span>SKU: {{ item.variant.sku }}</span></p>
   </div>
 
 						</div>
