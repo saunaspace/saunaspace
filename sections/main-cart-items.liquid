@@ -115,6 +115,9 @@
                     {%- else -%}
                       <div class="product-option">
                         {{ item.original_price | money }}
+                        {% if item.variant.compare_at_price > item.variant.price %}
+  <s>{{ item.variant.compare_at_price | money }}</s>
+{% endif %}
                       </div>
                     {%- endif -%}
 
