@@ -19,6 +19,9 @@ th.caption-with-letter-spacing {
 th.small-hide.caption-with-letter-spacing:last-child {
     padding-left: 0px;
 }
+.cart-item cart-remove-button {
+    margin-left: 0px !important;
+}
 .cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
     border: 1px solid #C67A26;
 }
@@ -381,6 +384,7 @@ td.cart-item__details .product-option {
     text-align: left;
     color: #000;
     font-size: 1.4rem;
+    text-decoration: underline;
     margin-top: 2em;
     display: block;
 }
