@@ -113,9 +113,26 @@
               {% if option == swatch %}
             	 
                   {% assign index = forloop.index0 %}
+            {% if forloop.index == 1 %}
             	
-            	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
-           {{ uniqueColors }}
+            	  {% assign uniqueColors = product.variants | map: "option1" | uniq %}
+  
+                  {% for color in uniqueColors %}
+            
+                    {% assign currentVariant = product.variants | where: "option1", color | first %}
+                    {% for colorName in colorNames %}
+                      {% if colorName == currentVariant.option1  %}
+                        {% assign colorIndex = forloop.index0 %}
+                      {% endif %}
+                    {% endfor %}
+            		<div class="ccrp p{{ product.id }} cat color-choice-off" data-productID="{{ product.id }}" data-productCode="emf-shield" data-colorPrice="{{ currentVariant.price | money_with_currency }}" data-colorCode="{{ currentVariant.option2 | handle }}" {% if currentVariant.featured_image.src  %}data-image="{{ currentVariant.featured_image.src | img_url: '300x300', crop: 'center', scale: 2 }}" {% endif %}>
+                      <div class="color-choice" style="background-image:url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/{{ colorValues[colorIndex] }})"></div>
+            		</div>
+            		
+                  {% endfor %}
+            {% elsif forloop.index == 2 %}
+             {% assign uniqueColors = product.variants | map: "option2" | uniq %}
+  
                   {% for color in uniqueColors %}
             
                     {% assign currentVariant = product.variants | where: "option2", color | first %}
@@ -127,8 +144,8 @@
             		<div class="ccrp p{{ product.id }} cat color-choice-off" data-productID="{{ product.id }}" data-productCode="emf-shield" data-colorPrice="{{ currentVariant.price | money_with_currency }}" data-colorCode="{{ currentVariant.option2 | handle }}" {% if currentVariant.featured_image.src  %}data-image="{{ currentVariant.featured_image.src | img_url: '300x300', crop: 'center', scale: 2 }}" {% endif %}>
                       <div class="color-choice" style="background-image:url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/{{ colorValues[colorIndex] }})"></div>
             		</div>
-            		
-                  {% endfor %}
+            {% endfor %}
+            {% endif %}
              {% endif %}
            {% endfor %}
           </div>
