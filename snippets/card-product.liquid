@@ -109,13 +109,13 @@
     	  {% assign colorValues = 'natural.jpg;indigo.jpg;dark-chocolate.jpg;stone.jpg;turmeric.jpg' | split: ";" %}
           <div class="color-choices"> 
            {% for option in product.options %}
-             {{ option.name }}
+             
               {% if option == swatch %}
             	  
                   {% assign index = forloop.index0 %}
             	
             	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
-            {{ option.name }} 
+            {{ option1.name }} 
                   {% for color in uniqueColors %}
                     {% assign currentVariant = product.variants | where: "option2", color | first %}
                     {% for colorName in colorNames %}
