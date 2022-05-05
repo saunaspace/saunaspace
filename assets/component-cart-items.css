@@ -1,3 +1,10 @@
+td.cart-item__price .product-option {
+    color: #000;
+}
+
+td.cart-item__price .product-option s{
+    color: #767676;
+}
 th.cart-items__heading--wide.small-hide.caption-with-letter-spacing.item-price {
     text-align: center;
 }
