@@ -5151,7 +5151,7 @@ p {
 	line-height: 1.4em;
 	margin-bottom: 1em;
 }
-	
+p.sku {font-size: 1.2rem}	
 	.fineprint { font-size: 1.2rem; font-style: italic; }
 
 h1 {
