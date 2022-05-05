@@ -9,6 +9,10 @@ td.cart-item__details .op-30day {
     border-top: 1px solid #C67A26;
 border-bottom: 1px solid #C67A26;
 }
+th.caption-with-letter-spacing {
+    /* margin-bottom: -21px !important; */
+    padding-bottom: 5px;
+}
 .cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
     border: 1px solid #C67A26;
 }
@@ -17,6 +21,8 @@ table.cart-items thead th {
 font-size: 1.5rem;
 font-weight: 700;
 color: #000;
+  text-transform: inherit;
+    letter-spacing: 0px;
 }
 .cart-item__quantity-wrapper {
     flex-direction: column;
