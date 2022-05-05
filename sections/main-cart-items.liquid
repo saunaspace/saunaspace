@@ -151,8 +151,8 @@
                       <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                     {%- endif -%}
 <div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
-  {% if product.metafields.lead-time.leadtime != blank %}
- {{product.metafields.lead-time.leadtime}}.
+  {% if item.product.metafields.lead-time.leadtime != blank %}
+ {{item.product.metafields.lead-time.leadtime}}.
  {% else %}
   1–3 days.
   {% endif %}
