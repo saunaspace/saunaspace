@@ -1,3 +1,6 @@
+th.cart-items__heading--wide.small-hide.caption-with-letter-spacing.item-price {
+    text-align: center;
+}
 td.cart-item__quantity quantity-input.quantity:before, td.cart-item__quantity quantity-input.quantity:after {
     display: none;
 }
@@ -385,7 +388,7 @@ td.cart-item__details .product-option {
 @media screen and (min-width: 990px) {
   .cart-item .cart-item__quantity,
   .cart-items .cart-items__heading--wide {
-    padding-left: 6rem;
+    padding-left: 0rem;
   }
 
   .cart-item__details {
