@@ -384,11 +384,12 @@ td.cart-item__price {
 }
   td.cart-item__price .product-option {
     font-size: 16px;
-    color: #767676;
+    color: #000;
     font-family: lft-etica-mono,sans-serif;
 }
   td.cart-item__price .product-option s {
     display: block;
+     color: #767676;
     width: 100%;
 }
   .cart-item__details {
