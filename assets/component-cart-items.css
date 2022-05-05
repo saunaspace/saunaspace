@@ -322,7 +322,23 @@ cart-remove-button .icon-remove {
   .cart-item > td + td {
     padding-left: 2rem;
   }
-
+td.cart-item__price {
+    
+    max-width: 200px;
+    min-width: 200px;
+}
+  td.cart-item__price {
+    text-align: center;
+}
+  td.cart-item__price .product-option {
+    font-size: 16px;
+    color: #767676;
+    font-family: lft-etica-mono,sans-serif;
+}
+  td.cart-item__price .product-option s {
+    display: block;
+    width: 100%;
+}
   .cart-item__details {
     width: 35rem;
   }
