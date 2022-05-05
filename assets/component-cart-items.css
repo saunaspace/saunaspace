@@ -347,7 +347,9 @@ td.cart-item__price {
   .cart-item__details {
     width: 35rem;
   }
-
+td.cart-item__details .product-option {
+    color: #000;
+}
   .cart-item__media {
     min-width: 224px;
   }
