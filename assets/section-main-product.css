@@ -1,4 +1,4 @@
-section.yotpo-containers.page-width h2 {
+section.yotpo-containers.page-width > h2 {
     border-top: 1px solid #979797;
     padding-top: 60px;
 }
