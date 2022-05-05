@@ -120,7 +120,7 @@
             
                     {% assign currentVariant = product.variants | where: "forloop.index", color | first %}
                     {% for colorName in colorNames %}
-                      {% if colorName == currentVariant.optionforloop.index %}
+                      {% if colorName == currentVariant.option2 %}
                         {% assign colorIndex = forloop.index0 %}
                       {% endif %}
                     {% endfor %}
