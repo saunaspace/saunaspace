@@ -344,7 +344,7 @@ td.cart-item__price {
   }
 
   .cart-item__media {
-    width: 265px;
+    min-width: 220px;
   }
 
   .cart-item cart-remove-button {
