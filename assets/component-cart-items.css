@@ -69,7 +69,9 @@ color: #000;
   opacity: 0.85;
   font-weight: normal;
 }
-
+p.cart-labels {
+    margin-bottom: 5px;
+}
 .cart-item__quantity-wrapper {
   display: flex;
 }
