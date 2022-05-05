@@ -114,12 +114,12 @@
             	  
                   {% assign index = forloop.index0 %}
             	
-            	  {% assign uniqueColors = product.variants | map: "option1" | uniq %}
+            	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
             {{ option }} 
                   {% for color in uniqueColors %}
-                    {% assign currentVariant = product.variants | where: "option1", color | first %}
+                    {% assign currentVariant = product.variants | where: "option2", color | first %}
                     {% for colorName in colorNames %}
-                      {% if colorName == currentVariant.option1 %}
+                      {% if colorName == currentVariant.option2 %}
                         {% assign colorIndex = forloop.index0 %}
                       {% endif %}
                     {% endfor %}
