@@ -150,7 +150,17 @@
 
                       <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                     {%- endif -%}
+<div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
+  {% if product.metafields.lead-time.leadtime != blank %}
+ {{product.metafields.lead-time.leadtime}}.
+ {% else %}
+  1–3 days.
+  {% endif %}
+</span>  
+<p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>          
+</div>
 
+						</div>
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                       {%- for discount in item.discounts -%}
                         <li class="discounts__discount">
