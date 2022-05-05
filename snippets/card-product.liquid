@@ -114,7 +114,7 @@
             	 
                   {% assign index = forloop.index0 %}
             	
-            	  {% assign uniqueColors = product.variants | map: "option.forloop.index" | uniq %}
+            	  {% assign uniqueColors = product.variants | map: "option"forloop.index | uniq %}
            {{ uniqueColors }}
                   {% for color in uniqueColors %}
             
