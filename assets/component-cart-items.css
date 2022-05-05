@@ -16,11 +16,19 @@ th.caption-with-letter-spacing {
     /* margin-bottom: -21px !important; */
     padding-bottom: 5px;
 }
+tr.cart-item td {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
 th.small-hide.caption-with-letter-spacing:last-child {
     padding-left: 0px;
 }
 .cart-item cart-remove-button {
     margin-left: 0px !important;
+}
+tr.cart-item td {
+    border-bottom: 1px solid #939393;
+ 
 }
 .cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
     border: 1px solid #C67A26;
