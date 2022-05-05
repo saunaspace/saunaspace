@@ -26,6 +26,7 @@ font-weight: 700;
 color: #000;
   text-transform: inherit;
     letter-spacing: 0px;
+  padding-bottom: 7px;
 }
 .cart-item__quantity-wrapper {
     flex-direction: column;
