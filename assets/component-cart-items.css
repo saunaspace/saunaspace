@@ -77,7 +77,9 @@ div#main-cart-items {
     border-bottom: 0px !important;
     padding-bottom: 0px !important;
 }
-
+div#main-cart-footer {
+    padding: 0px;
+}
 .cart-item__totals {
   position: relative;
 }
