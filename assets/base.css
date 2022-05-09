@@ -6052,8 +6052,7 @@ span[data-ml]::before {
   	font-weight: 400;
 }
       .product__info-container div#bcpo.bcpo.bcpo-invisible {
-    padding-left: 0px;
-    padding-right: 0px;
+    margin-top: 10px;
 }
 #bcpo .bcpo-images div.bcpo-image-parent {
   	width: 38px;
