@@ -6095,6 +6095,9 @@ a#cart-icon-bubble {
       #bcpo .bcpo-dd ul li {
     max-width: 200px;
 }
+      main#MainContent.sticky .stickyBG.stickyBG-visible {
+    transform: translateY(-23px);
+}
   @media only screen and (min-width 991px) and (max-width 1100px){    
       
       #bcpo:not(.g-card) .bcpo-dropdown {
