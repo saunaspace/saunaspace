@@ -6061,10 +6061,7 @@ span[data-ml]::before {
 #bcpo .bcpo-images label.bcpo-front-image-label{
   	height:32px;
 }
-#bcpo .bcpo-dd > ul > li {
-	border-radius: 0;
-	max-width: 204px;
-}
+
 a#cart-icon-bubble {
     box-shadow: none !important;
     text-decoration: none;
