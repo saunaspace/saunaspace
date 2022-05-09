@@ -30,17 +30,13 @@
 		<div class="yc-head-wrap">
 			<div class="yc-head">Your Cart</div>
 			<div class="yc-top-checkout">
-        <div class="js-contents" {{ block.shopify_attributes }}>
-          <div class="totals">
 				<div class="yctc-text">
-					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop etica-bold cartTotal totals__subtotal-value">{{ cart.total_price | money_with_currency }}</span></div>
+					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">{{ cart.total_price | money_with_currency }}</span></div>
 					<div class="fineprint">Shipping and tax are calculated at checkout.</div>
 				</div>
 				<form action="/checkout" method="post">
 					<input type="submit" class="btn btn-checkout" value="Check Out" />
 				</form>
-        </div>
-        </div>
 			</div>
 		</div>
 
@@ -327,20 +323,13 @@
 </div>
 </section>
 
-{% javascript %}
-  class CartNote extends HTMLElement {
-    constructor() {
-      super();
+<script>
 
-      this.addEventListener('change', debounce((event) => {
-        const body = JSON.stringify({ note: event.target.value });
-        fetch(`${routes.cart_update_url}`, {...fetchConfig(), ...{ body }});
-      }, 300))
-    }
-  }
+$('.totals__subtotal-value').bind('DOMSubtreeModified', function () {
+  console.log('changed');
+});
 
-  customElements.define('cart-note', CartNote);
-{% endjavascript %}
+</script>
 
 {% schema %}
 {
