@@ -6017,6 +6017,13 @@ span[data-ml]::before {
 	justify-content: center;
 	width: 100%;
 }
+
+@media (max-width: 700px) {
+	#bcpo:not(.g-card) .bcpo-dropdown {
+		display: block !important;
+
+	}
+}
 #bcpo .bcpo-dropdown label {
 	padding: 0;
 }
