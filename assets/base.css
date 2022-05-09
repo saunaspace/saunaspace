@@ -6078,7 +6078,12 @@ a#cart-icon-bubble {
 }
 
 
-
+.price--end{
+	font-family: lft-etica-mono,sans-serif;
+}
+.cart__footer {
+	padding-top: 0;
+}
   .cart-count-bubble {
     color: #000;
     font-size: 13px;
