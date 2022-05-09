@@ -323,6 +323,14 @@
 </div>
 </section>
 
+<script>
+
+$('.totals__subtotal-value').bind('DOMSubtreeModified', function () {
+  console.log('changed');
+});
+
+</script>
+
 {% schema %}
 {
   "name": "t:sections.main-cart-items.name",
