@@ -726,8 +726,13 @@ setTimeout(
 	$(".pot-col").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
 }
+let options = {
+	root: null,
+	rootMargin: '-20px 0px 0px 0px', 
+	threshold: 1.0 
+};
 function createObserver(o) {
-	
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
 	window['observer' + o].observe(eval(o));
 }
 const stickyAddToCart = document.querySelector('.atcMain');
