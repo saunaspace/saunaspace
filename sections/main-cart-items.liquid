@@ -324,13 +324,17 @@
 </section>
 
 <script>
-// Shopify.formatMoney = "{{ shop.money_format }}";
-  //Catch all the AJAX Request to Cart.JS and Cart/Change.JS
+const formatToCurrency = amount => {
+  return "$" + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+};
+
+//Catch all the AJAX Request to Cart.JS and Cart/Change.JS
   $( document ).ajaxComplete(function( event, xhr, settings ) {
     if ( settings.url === "/cart.js" ) {
-      console.log('total price: ' +  Shopify.formatMoney(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100, "{{ shop.money_with_currency_format }}"));
+
+      console.log('total price: ' +  formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
       console.log( "Cart.JS = Triggered ajaxComplete handler. The result is " + xhr.responseText + ' TOTAL PRICE = ' + parseFloat( xhr.responseText.split(",")[4].split(":")[1] )/100 );
-      $('.cartTotalTop').html( Shopify.formatMoney(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100, "{{ shop.money_with_currency_format }}"));
+      $('.cartTotalTop').html( formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
     }
     
     if ( settings.url === "/cart/change.js" ) {
