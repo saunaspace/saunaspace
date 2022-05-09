@@ -325,9 +325,8 @@
 
 <script>
 
-$('.totals__subtotal-value').bind('DOMSubtreeModified', function () {
-  console.log('changed');
-});
+$('.cartTotalTop').html(Shopify.formatMoney(response.total_price, '$\{\{amount\}\}'))
+
 
 </script>
 
