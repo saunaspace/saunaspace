@@ -324,7 +324,7 @@
 </section>
 
 <script>
-
+Shopify.money_format = "{{ shop.money_format }}";
   //Catch all the AJAX Request to Cart.JS and Cart/Change.JS
   $( document ).ajaxComplete(function( event, xhr, settings ) {
     if ( settings.url === "/cart.js" ) {
