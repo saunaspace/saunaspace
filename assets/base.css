@@ -6051,6 +6051,10 @@ span[data-ml]::before {
   	font-family: lft-etica-mono,sans-serif;
   	font-weight: 400;
 }
+      .product__info-container div#bcpo.bcpo.bcpo-invisible {
+    padding-left: 0px;
+    padding-right: 0px;
+}
 #bcpo .bcpo-images div.bcpo-image-parent {
   	width: 38px;
 }
@@ -6059,7 +6063,7 @@ span[data-ml]::before {
 }
 #bcpo .bcpo-dd > ul > li {
 	border-radius: 0;
-	max-width: 210px;
+	max-width: 204px;
 }
 a#cart-icon-bubble {
     box-shadow: none !important;
