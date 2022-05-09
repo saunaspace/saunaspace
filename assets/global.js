@@ -976,7 +976,7 @@ function createObserver(o) {
 const el = document.querySelector(".navBG");
 const els = document.querySelector("#MainContent");
 const observer = new IntersectionObserver(([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1), {
-  threshold: [1]
+  threshold: [2]
 });
 observer.observe(el);
 observer.observe(els);
