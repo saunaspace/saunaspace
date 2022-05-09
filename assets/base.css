@@ -4132,7 +4132,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		font-size: 16px !important;
 	}
 	
-	.stickyBG-visible { transform: translateY(-160px); transition: transform .25s;     z-index: 1;}
+	.stickyBG-visible { transform: translateY(-92px); transition: transform .25s;     z-index: 1;}
 
 .sac-product {
 	font-weight: 700;
