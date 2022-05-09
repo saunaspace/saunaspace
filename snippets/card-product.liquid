@@ -81,7 +81,7 @@
             </div>
           </div>
         {%- endif -%}
-        <div class="card__content">
+        <div class="card__content card-image-content"  onclick="location.href='{{ card_product.url }}'">
           <div class="card__information">
             <h3 class="card__heading">
               <a href="{{ card_product.url }}" class="full-unstyled-link">
@@ -109,15 +109,19 @@
     	  {% assign colorValues = 'natural.jpg;indigo.jpg;dark-chocolate.jpg;stone.jpg;turmeric.jpg' | split: ";" %}
           <div class="color-choices"> 
            {% for option in product.options %}
+             
               {% if option == swatch %}
-            	  
+            	 
                   {% assign index = forloop.index0 %}
-            	  
-            	  {% assign uniqueColors = product.variants | map: "option2" | uniq %}
+            {% if forloop.index == 1 %}
+            	
+            	  {% assign uniqueColors = product.variants | map: "option1" | uniq %}
+  
                   {% for color in uniqueColors %}
-                    {% assign currentVariant = product.variants | where: "option2", color | first %}
+            
+                    {% assign currentVariant = product.variants | where: "option1", color | first %}
                     {% for colorName in colorNames %}
-                      {% if colorName == currentVariant.option2 %}
+                      {% if colorName == currentVariant.option1  %}
                         {% assign colorIndex = forloop.index0 %}
                       {% endif %}
                     {% endfor %}
@@ -126,6 +130,22 @@
             		</div>
             		
                   {% endfor %}
+            {% elsif forloop.index == 2 %}
+             {% assign uniqueColors = product.variants | map: "option2" | uniq %}
+  
+                  {% for color in uniqueColors %}
+            
+                    {% assign currentVariant = product.variants | where: "option2", color | first %}
+                    {% for colorName in colorNames %}
+                      {% if colorName == currentVariant.option2  %}
+                        {% assign colorIndex = forloop.index0 %}
+                      {% endif %}
+                    {% endfor %}
+            		<div class="ccrp p{{ product.id }} cat color-choice-off" data-productID="{{ product.id }}" data-productCode="emf-shield" data-colorPrice="{{ currentVariant.price | money_with_currency }}" data-colorCode="{{ currentVariant.option2 | handle }}" {% if currentVariant.featured_image.src  %}data-image="{{ currentVariant.featured_image.src | img_url: '300x300', crop: 'center', scale: 2 }}" {% endif %}>
+                      <div class="color-choice" style="background-image:url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/{{ colorValues[colorIndex] }})"></div>
+            		</div>
+            {% endfor %}
+            {% endif %}
              {% endif %}
            {% endfor %}
           </div>

@@ -600,6 +600,7 @@ window.onscroll = function() {myFunction()};
 
 // Get the header
 var header = document.getElementById("topNavBG");
+      var mains = document.getElementById("MainContent");
 
 // Get the offset position of the navbar
 var sticky = header.offsetTop;
@@ -608,8 +609,10 @@ var sticky = header.offsetTop;
 function myFunction() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky");
+    mains.classList.add("sticky");
   } else {
     header.classList.remove("sticky");
+    mains.classList.remove("sticky");
   }
 }
 </script>

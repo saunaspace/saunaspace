@@ -1,3 +1,68 @@
+div#bcpo.bcpo.bcpo-invisible {
+    margin-top: 13px;
+}
+
+th.cart-items__heading--wide.small-hide.caption-with-letter-spacing.item-price {
+    text-align: center;
+}
+td.cart-item__quantity quantity-input.quantity:before, td.cart-item__quantity quantity-input.quantity:after {
+    display: none;
+}
+td.cart-item__details .op-30day {
+    text-align: left;
+    margin-top: 45px;
+}
+.cart-item__quantity-wrapper input.quantity__input {
+    border-top: 1px solid #C67A26;
+border-bottom: 1px solid #C67A26;
+}
+th.caption-with-letter-spacing {
+    /* margin-bottom: -21px !important; */
+    padding-bottom: 5px;
+}
+tr.cart-item td {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+th.small-hide.caption-with-letter-spacing:last-child {
+    padding-left: 0px;
+}
+.cart-item cart-remove-button {
+    margin-left: 0px !important;
+}
+tr.cart-item td {
+    border-bottom: 1px solid #939393;
+ 
+}
+.cart-item__quantity-wrapper button.quantity__button.no-js-hidden {
+    border: 1px solid #C67A26;
+}
+.your-cart cart-items.page-width {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0px auto;
+  padding-top: 0px;
+}
+
+.your-cart {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+table.cart-items thead th {
+    border: none;
+font-size: 1.5rem;
+font-weight: 700;
+color: #000;
+  text-transform: inherit;
+    letter-spacing: 0px;
+  padding-bottom: 7px;
+}
+.cart-item__quantity-wrapper {
+    flex-direction: column;
+}
+.cart-item__quantity-wrapper button svg {
+    width: 19px;
+}
 .cart-items td,
 .cart-items th {
   padding: 0;
@@ -10,11 +75,19 @@
   opacity: 0.85;
   font-weight: normal;
 }
-
+p.cart-labels {
+    margin-bottom: 5px;
+}
 .cart-item__quantity-wrapper {
   display: flex;
 }
-
+div#main-cart-items {
+    border-bottom: 0px !important;
+    padding-bottom: 0px !important;
+}
+div#main-cart-footer {
+    padding: 0px;
+}
 .cart-item__totals {
   position: relative;
 }
@@ -38,6 +111,9 @@
 }
 
 @media screen and (min-width: 750px) {
+  .cart__footer.yc-cols > div {
+    flex: 0 0 calc(33.33% - 3rem);
+}
   .cart-item__image {
     max-width: 100%;
   }
@@ -275,7 +351,9 @@ cart-remove-button .icon-remove {
   .cart-items th {
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   }
-
+p.fineprint.oos-fineprint {
+    margin-bottom: 4px;
+}
   .cart-items thead th:first-child {
     width: 50%;
   }
@@ -286,23 +364,65 @@ cart-remove-button .icon-remove {
 
   .cart-items td {
     vertical-align: top;
-    padding-top: 4rem;
+    padding-top: 16;
   }
+  tr.cart-item {
+    border-bottom: 1px solid #939393;
+}
 
   .cart-item {
     display: table-row;
   }
 
   .cart-item > td + td {
-    padding-left: 4rem;
+    padding-left: 0rem;
   }
-
+td.cart-item__price {
+    
+    max-width: 200px;
+    min-width: 200px;
+}
+  td.cart-item__price {
+    text-align: center;
+}
+  td.cart-item__price .product-option {
+    font-size: 16px;
+    color: #000;
+    font-family: lft-etica-mono,sans-serif;
+}
+  td.cart-item__price .product-option s {
+    display: block;
+     color: #767676;
+    width: 100%;
+}
   .cart-item__details {
     width: 35rem;
   }
+td.cart-item__details .product-option {
+    color: #000;
+  margin: 0px;
 
+}
+  td.cart-item__price .product-option {
+    color: #000;
+}
+
+td.cart-item__price .product-option s{
+    color: #767676;
+}
+  cart-remove-button {
+    margin: 0px;
+}
+  cart-remove-button a.button.button--tertiary {
+    text-align: left;
+    color: #000;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    margin-top: 2em;
+    display: block;
+}
   .cart-item__media {
-    width: 10rem;
+    min-width: 224px;
   }
 
   .cart-item cart-remove-button {
@@ -317,12 +437,16 @@ cart-remove-button .icon-remove {
 @media screen and (min-width: 990px) {
   .cart-item .cart-item__quantity,
   .cart-items .cart-items__heading--wide {
-    padding-left: 6rem;
+    padding-left: 0rem;
   }
 
   .cart-item__details {
-    width: 50rem;
+    width: 40rem;
   }
+  td.cart-item__quantity {
+    width: 184px;
+    min-width: 200px;
+}
 
   .cart-items thead th:first-child {
     width: 60%;

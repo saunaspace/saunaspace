@@ -1,3 +1,12 @@
+section.yotpo-containers.page-width > h2 {
+    border-top: 1px solid #979797;
+    padding-top: 60px;
+}
+section.yotpo-containers .yotpo.yotpo-main-widget {
+    border-bottom: 1px solid #979797;
+    padding-bottom: 60px;
+    margin-bottom: 60px;
+}
 .product-form__input.product-form__input--dropdown select.select__select {
     display: block;
     width: 100%;

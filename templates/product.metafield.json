@@ -3,6 +3,12 @@
     "main": {
       "type": "metafield-product",
       "blocks": {
+        "e0d37104-d3d1-4e8b-884a-427274c49e1d": {
+          "type": "shopify:\/\/apps\/yotpo-product-reviews-photos\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
         "caption": {
           "type": "text",
           "settings": {
@@ -34,6 +40,7 @@
         }
       },
       "block_order": [
+        "e0d37104-d3d1-4e8b-884a-427274c49e1d",
         "caption",
         "title",
         "price",

@@ -442,6 +442,30 @@
               </details>
             </div>
         {% endif %}
+           
+        	<a href="javascript-void(0);" class="atcMain"></a>
+            <noscript class="product-form__noscript-wrapper-{{ section.id }}">
+              <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+                <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+                <div class="select">
+                  <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                        {% if variant.available == false %}disabled{% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-slider' %}
+                </div>
+              </div>
+            </noscript>
+        
         {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
@@ -624,17 +648,21 @@
     </modal-dialog>
   {%- endfor -%}
 </section>
+  
+   <section class="yotpo-containers page-width section-{{ section.id }}-padding">
+    <h2>Reviews and Questions</h2>
+  	<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+    <section>
+      <h2>Feel the #Saunaspace Love</h2>
+      <div
+      class="yotpo yotpo-pictures-widget"
+      data-gallery-id="{{product.metafields.yotpo-gallery.yotpogallery}}">
+    </div>
 
-<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+    </section>
+  </section>
 
-<section>
-  <h2>Feel the #Saunaspace Love</h2>
-  <div
-  class="yotpo yotpo-pictures-widget"
-  data-gallery-id="{{product.metafields.yotpo-gallery.yotpogallery}}">
-</div>
 
-</section>
 
 {% javascript %}
   class ProductModal extends ModalDialog {
@@ -698,7 +726,15 @@ setTimeout(
 	$(".pot-col").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
 }
-
+let options = {
+	root: null,
+	rootMargin: '-20px 0px 0px 0px', 
+	threshold: 1.0 
+};
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
 const stickyAddToCart = document.querySelector('.atcMain');
 if(window.matchMedia('(min-width: 750px)').matches) {
 	createObserver('stickyAddToCart');
@@ -707,9 +743,9 @@ if(window.matchMedia('(min-width: 750px)').matches) {
 function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 		changes.forEach(change => { if (change.intersectionRatio >= 1) {
 			$(".stickyBG").removeClass("stickyBG-visible");
-			//console.log("hidden")
+			console.log("hidden ad")
 		} else {
-			//console.log("visible")
+			console.log("visible af")
 			$(".stickyBG").addClass("stickyBG-visible");
 		}
 	});

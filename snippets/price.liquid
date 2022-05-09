@@ -26,7 +26,7 @@
   endif
 
   if target == product and product.price_varies
-    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+    assign money_price = money_price
   endif
 -%}
 

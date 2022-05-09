@@ -62,15 +62,7 @@
       <div class="js-contents">
         {%- if cart != empty -%}
           <table class="cart-items">
-            <thead>
-              <tr>
-                <th class="caption-with-letter-spacing" colspan="2" scope="col">{{ 'sections.cart.headings.product' | t }}</th>
-                <th class="medium-hide large-up-hide right caption-with-letter-spacing" colspan="1" scope="col">{{ 'sections.cart.headings.total' | t }}</th>
-                <th class="cart-items__heading--wide small-hide caption-with-letter-spacing" colspan="1" scope="col">{{ 'sections.cart.headings.quantity' | t }}</th>
-                <th class="small-hide right caption-with-letter-spacing" colspan="1" scope="col">{{ 'sections.cart.headings.total' | t }}</th>
-              </tr>
-            </thead>
-
+          
             <tbody>
               {%- for item in cart.items -%}
                 <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
@@ -79,12 +71,12 @@
                       {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                       <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
                         <div class="cart-item__image-container gradient global-media-settings">
-                          <img src="{{ item.image | image_url: width: 300 }}"
+                          <img src="{{ item.image | img_url: '220x220', crop: 'center' }}"
                             class="cart-item__image"
                             alt="{{ item.image.alt | escape }}"
                             loading="lazy"
-                            width="150"
-                            height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
+                            width="220"
+                            height="{{ 220 | divided_by: item.image.aspect_ratio | ceil }}"
                           >
                         </div>
                     {% endif %}
@@ -97,33 +89,13 @@
 
                     <a href="{{ item.url }}" class="cart-item__name yc-item-name">{{ item.product.title | escape }}</a>
 
-                    {%- if item.original_price != item.final_price -%}
-                      <div class="cart-item__discounted-prices">
-                        <span class="visually-hidden">
-                          {{ 'products.product.price.regular_price' | t }}
-                        </span>
-                        <s class="cart-item__old-price product-option">
-                          {{- item.original_price | money -}}
-                        </s>
-                        <span class="visually-hidden">
-                          {{ 'products.product.price.sale_price' | t }}
-                        </span>
-                        <strong class="cart-item__final-price product-option">
-                          {{ item.final_price | money }}
-                        </strong>
-                      </div>
-                    {%- else -%}
-                      <div class="product-option">
-                        {{ item.original_price | money }}
-                      </div>
-                    {%- endif -%}
 
                     {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
                       <dl>
                         {%- if item.product.has_only_default_variant == false -%}
                           {%- for option in item.options_with_values -%}
                             <div class="product-option">
-                              <dt>{{ option.name }}: </dt>
+                              <dt><strong>{{ option.name }}:</strong> </dt>
                               <dd>{{ option.value }}</dd>
                             </div>
                           {%- endfor -%}
@@ -150,7 +122,18 @@
 
                       <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                     {%- endif -%}
+<div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
+  {% if item.product.metafields.lead-time.leadtime != blank %}
+ {{item.product.metafields.lead-time.leadtime}}.
+ {% else %}
+  1–3 days.
+  {% endif %}
+</span>  
+<p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>          
+  <p class="sku"><span><strong>SKU:</strong> {{ item.variant.sku }}</span></p>
+  </div>
 
+						</div>
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                       {%- for discount in item.discounts -%}
                         <li class="discounts__discount">
@@ -209,6 +192,7 @@
                   </td>
 
                   <td class="cart-item__quantity">
+                    <p class="cart-labels"><strong>Total Price</strong></p>
                     <div class="cart-item__quantity-wrapper">
                       <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                         {{ 'products.product.quantity.label' | t }}
@@ -235,7 +219,7 @@
 
                       <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
                         <a href="{{ item.url_to_remove }}" class="button button--tertiary" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
-                          {% render 'icon-remove' %}
+                          Remove
                         </a>
                       </cart-remove-button>
                     </div>
@@ -249,7 +233,32 @@
                       </svg>
                     </div>
                   </td>
-
+<td class="cart-item__price">
+  <p class="cart-labels"><strong>Total Price</strong></p>
+                    {%- if item.original_price != item.final_price -%}
+                      <div class="cart-item__discounted-prices">
+                        <span class="visually-hidden">
+                          {{ 'products.product.price.regular_price' | t }}
+                        </span>
+                        <s class="cart-item__old-price product-option">
+                          {{- item.original_price | money -}}
+                        </s>
+                        <span class="visually-hidden">
+                          {{ 'products.product.price.sale_price' | t }}
+                        </span>
+                        <strong class="cart-item__final-price product-option">
+                          {{ item.final_price | money }}
+                        </strong>
+                      </div>
+                    {%- else -%}
+                      <div class="product-option">
+                        {{ item.original_price | money }}
+                        {% if item.variant.compare_at_price > item.variant.price %}
+  <s>{{ item.variant.compare_at_price | money }}</s>
+{% endif %}
+                      </div>
+                    {%- endif -%}
+                  </td>
                   <td class="cart-item__totals right small-hide">
                     <div class="loading-overlay hidden">
                       <div class="loading-overlay__spinner">
@@ -260,6 +269,7 @@
                     </div>
 
                     <div class="cart-item__price-wrapper">
+                      <p class="cart-labels"><strong>Total Price</strong></p>
                       {%- if item.original_line_price != item.final_line_price -%}
                         <dl class="cart-item__discounted-prices">
                           <dt class="visually-hidden">
@@ -279,7 +289,7 @@
                         </dl>
                       {%- else -%}
                         <span class="price price--end">
-                          {{ item.original_line_price | money }}
+                          <strong>{{ item.original_line_price | money }}</strong>
                         </span>
                       {%- endif -%}
 
