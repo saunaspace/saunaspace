@@ -735,9 +735,9 @@ if(window.matchMedia('(min-width: 750px)').matches) {
 function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 		changes.forEach(change => { if (change.intersectionRatio >= 1) {
 			$(".stickyBG").removeClass("stickyBG-visible");
-			//console.log("hidden")
+			console.log("hidden ad")
 		} else {
-			//console.log("visible")
+			console.log("visible af")
 			$(".stickyBG").addClass("stickyBG-visible");
 		}
 	});
