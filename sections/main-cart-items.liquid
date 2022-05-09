@@ -30,6 +30,8 @@
 		<div class="yc-head-wrap">
 			<div class="yc-head">Your Cart</div>
 			<div class="yc-top-checkout">
+        <div class="js-contents" {{ block.shopify_attributes }}>
+          <div class="totals">
 				<div class="yctc-text">
 					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">{{ cart.total_price | money_with_currency }}</span></div>
 					<div class="fineprint">Shipping and tax are calculated at checkout.</div>
@@ -37,6 +39,8 @@
 				<form action="/checkout" method="post">
 					<input type="submit" class="btn btn-checkout" value="Check Out" />
 				</form>
+        </div>
+        </div>
 			</div>
 		</div>
 
