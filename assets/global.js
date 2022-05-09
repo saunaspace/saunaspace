@@ -973,7 +973,7 @@ function createObserver(o) {
 
 "use strict";
 
-const el = document.querySelector(".navBG");
+const el = document.querySelector(".navBG, .content-for-layout");
 const els = document.querySelector("#MainContent");
 const observer = new IntersectionObserver(([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1), {
   threshold: [2]
