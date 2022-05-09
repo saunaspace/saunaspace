@@ -332,13 +332,12 @@ const formatToCurrency = amount => {
   $( document ).ajaxComplete(function( event, xhr, settings ) {
     if ( settings.url === "/cart.js" ) {
 
-      console.log('total price: ' +  formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
-      console.log( "Cart.JS = Triggered ajaxComplete handler. The result is " + xhr.responseText + ' TOTAL PRICE = ' + parseFloat( xhr.responseText.split(",")[4].split(":")[1] )/100 );
       $('.cartTotalTop').html( formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
     }
     
     if ( settings.url === "/cart/change.js" ) {
-      console.log( "Change.JS = Triggered ajaxComplete handler. The result is " + xhr.responseText + ' TOTAL PRICE = ' + parseFloat( xhr.responseText.split(",")[4].split(":")[1] )/100 );
+      $('.cartTotalTop').html( formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
+
     }
   }); 
 
