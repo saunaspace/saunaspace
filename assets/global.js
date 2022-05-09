@@ -974,11 +974,12 @@ function createObserver(o) {
 "use strict";
 
 const el = document.querySelector(".navBG");
-const el = document.querySelector("#MainContent");
+const els = document.querySelector("#MainContent");
 const observer = new IntersectionObserver(([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1), {
   threshold: [1]
 });
 observer.observe(el);
+observer.observe(els);
 
 window.addEventListener("resize", function() {
 	currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
