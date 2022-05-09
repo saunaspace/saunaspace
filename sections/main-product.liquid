@@ -402,7 +402,7 @@
                 </variant-selects>
               {%- endif -%}
             {%- endunless -%}
-<a href="javascript-void(0);" class="atcMain"></a>
+
             <noscript class="product-form__noscript-wrapper-{{ section.id }}">
               <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
                 <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
@@ -442,6 +442,7 @@
               </details>
             </div>
         {% endif %}
+        <a href="javascript-void(0);" class="atcMain"></a>
         {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
