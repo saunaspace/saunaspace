@@ -330,7 +330,7 @@
     if ( settings.url === "/cart.js" ) {
       console.log('total price: ' + xhr.responseText.total_price);
       console.log( "Cart.JS = Triggered ajaxComplete handler. The result is " + xhr.responseText + ' TOTAL PRICE = ' + parseFloat( xhr.responseText.split(",")[4].split(":")[1] )/100 );
-      $('.cartTotalTop').html(Shopify.formatMoney(  xhr.responseText.split(",")[4].split(":")[1] , '$\{\{amount\}\}'))
+      $('.cartTotalTop').html( xhr.responseText.split(",")[4].split(":")[1] )
     }
     
     if ( settings.url === "/cart/change.js" ) {
