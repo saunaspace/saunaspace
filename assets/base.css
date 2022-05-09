@@ -6099,6 +6099,7 @@ a#cart-icon-bubble {
 }
       #bcpo .bcpo-dd ul li {
     max-width: 200px;
+	border-radius: 0;
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
     transform: translateY(-23px);
