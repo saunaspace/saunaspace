@@ -328,7 +328,7 @@
   //Catch all the AJAX Request to Cart.JS and Cart/Change.JS
   $( document ).ajaxComplete(function( event, xhr, settings ) {
     if ( settings.url === "/cart.js" ) {
-      console.log(xhr.responseText.total_price);
+      console.log('total price: ' + xhr.responseText.total_price);
       console.log( "Cart.JS = Triggered ajaxComplete handler. The result is " + xhr.responseText + ' TOTAL PRICE = ' + parseFloat( xhr.responseText.split(",")[4].split(":")[1] )/100 );
     }
     
