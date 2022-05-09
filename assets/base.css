@@ -6092,3 +6092,6 @@ a#cart-icon-bubble {
       div#ProductInfo-template--14543268544555__main #bcpo .bcpo-dropdown {
     order: 2 !important;
 }
+      #bcpo .bcpo-dd ul li {
+    max-width: 200px;
+}
