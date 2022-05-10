@@ -6166,6 +6166,8 @@ text-decoration: none;
       .qimify-minicart-popup-wrapper .qimify-minicart-footer .qimify-minicart-cart-total {
     width: 100% !important;
     text-align: left !important;
+        color:#000 !important;
+        font-size: 16px !important;
 }
 .qimify-minicart-popup-wrapper .qimify-minicart-body.qimify-minicart-has-items {
     box-shadow: none !important;
