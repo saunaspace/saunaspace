@@ -6126,3 +6126,40 @@ a#cart-icon-bubble {
       .qimify-minicart-img-wrapper{
          display: none !important;
       }
+      .qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-product-title a {
+    color: #000;
+    font-size: 1.4rem !important;
+    line-height: 1.3em !important;
+    font-weight: 700 !important;
+text-decoration: none;
+}
+.qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details {
+    width: 100% !important;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+    position: relative;
+    overflow: auto;
+    line-height: 1em;
+}
+.qimify-minicart-product-wrapper {
+    padding: 10px 0px;
+    border-bottom: 1px solid #939393;
+}
+.qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-line-subtotal {
+    font-size: 16px;
+    font-weight: 700 !important;
+}
+.qimify-minicart-popup-wrapper .qimify-minicart-footer .qimify-minicart-cart-total span span {
+    color: #000 !important;
+    float: right !important;
+    font-weight: 700;
+}
+.qimify-minicart-popup-wrapper .qimify-minicart-btn {
+   
+    padding: 0.75em 1.5em !important;
+    font-weight: 700 !important;
+}
+.qimify-minicart-qimify-brand {
+    display: none !important;
+}
