@@ -6123,3 +6123,6 @@ a#cart-icon-bubble {
       cart-notification {
     display: none !important;
 }
+      .qimify-minicart-img-wrapper{
+         display: none !important;
+      }
