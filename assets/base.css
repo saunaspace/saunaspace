@@ -6124,7 +6124,7 @@ a#cart-icon-bubble {
     display: none !important;
 }
       .qimify-minicart-img-wrapper{
-         display: none !important;
+       //  display: none !important;
       }
       .qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-product-title a {
     color: #000;
