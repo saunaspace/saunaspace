@@ -566,15 +566,16 @@
 </span>  
 <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>          
 </div>
-{% if product.metafields.my_fields.why_we_love_it != blank %}
-<div class="wwli">
-  <div class="wwli-head">Why We Love It</div>
-  <p> {{product.metafields.my_fields.why_we_love_it}} </p>
-</div>
-{% endif %}
-
+	
 						</div>
             <hr/>
+            {% if product.metafields.my_fields.why_we_love_it != blank %}
+              <div class="wwli">
+                <div class="wwli-head">Why We Love It</div>
+                <p> {{product.metafields.my_fields.why_we_love_it}} </p>
+              </div>
+            {% endif %}
+
 				<div class="pay-over-time">
 					<div class="pot-head">Pay Over Time</div>
 					<div class="pot-col">
