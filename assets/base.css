@@ -6179,5 +6179,5 @@ text-decoration: none;
 }
       
       .qimify-minicart-popup-wrapper {
-      	background-color: #FFFAF4;
+      	background-color: #FFFAF4 !Important;
       }
