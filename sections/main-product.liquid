@@ -711,25 +711,10 @@
 {% if product.media.size > 0 %}
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {% endif %}
-
+{% include 'product-page' %}
 <script>
-$(document).ready(function() {
-setTimeout(
-  function() { 
-    $( $('.bcpo-title') ).each(function( i ) {
-    if ( $(this).text() == "Plug Type:" ) {
-      console.log('text found');
-      $(this).addClass('plug-' + i);
-      $(this).text('Select your plug type:');
-    } else if( $(this).text() == "Curtain Type:" || $(this).text() == "Type:" ) {
-      $(this).text('Select your curtain type:');
-      $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
-    }
 
-})}, 500);
-
-});
-  function potMore(f) {
+function potMore(f) {
 	$(".pot-col").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
 }
