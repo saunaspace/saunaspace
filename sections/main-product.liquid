@@ -570,7 +570,11 @@
 						</div>
             <hr/>
             {% if product.metafields.my_fields.sidebar_description == true %}
-              {{ product.description }}
+              <div style="text-align: left;">
+                <p><strong>Details</strong></p>
+                {{ product.description }}
+
+              </div>
              {% endif %}
             {% if product.metafields.my_fields.why_we_love_it != blank %}
               <div class="wwli">
@@ -609,7 +613,7 @@
     </div>
   </div>
 <section>
-  {%- if product.description != blank -%}
+  {% if product.metafields.my_fields.sidebar_description == true %}
 		<div class="pcDescription">       
              {{ product.description }}          
 	
