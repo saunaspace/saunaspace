@@ -6192,3 +6192,7 @@ text-decoration: none;
 .cart__footer .totals {
 	margin-bottom: 20px;
 }
+
+.pid-col-img img {
+	max-width: 100%;
+}
