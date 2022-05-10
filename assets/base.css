@@ -6119,3 +6119,7 @@ a#cart-icon-bubble {
       }
 }
       
+      
+      cart-notification {
+    display: none !important;
+}
