@@ -6187,3 +6187,8 @@ text-decoration: none;
         	font-family: 'UntitledSans', sans-serif !Important;
 
       }
+
+
+.cart__footer .totals {
+	margin-bottom: 20px;
+}
