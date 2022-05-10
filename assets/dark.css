@@ -29,7 +29,7 @@
   .dark .contact-tile, .dark .col-bordered a, .dark .event-box, .dark .event-link, .dark .event-invite, h4, .dark .sgl-text,
   .dark .sauna-types td, .dark .sauna-types th, .dark .research-links h3, .dark .darkP, .dark .header__icon, .dark .pt-price, .dark .price, .dark .card-information>.price, .dark .price--on-sale .price-item--regular, .dark td.cart-item__price .product-option, .dark .product-info-details, .dark .pot-col a, .dark .cart-count-bubble,
 	td.cart-item__details .product-option{
-  	color: #FFF8E7;
+  	color: #FFF8E7 !important;
   }
   
   .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,
