@@ -509,7 +509,12 @@
               </product-form>
 
               {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
-
+			{% if product.metafields.my_fields.why_we_love_it != blank %}
+              <div class="wwli">
+                <div class="wwli-head">Why We Love It</div>
+                <p> {{product.metafields.my_fields.why_we_love_it}} </p>
+              </div>
+            {% endif %}
               {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
 
               <pickup-availability class="product__pickup-availabilities no-js-hidden"
