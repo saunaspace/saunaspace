@@ -6163,3 +6163,15 @@ text-decoration: none;
 .qimify-minicart-qimify-brand {
     display: none !important;
 }
+      .qimify-minicart-popup-wrapper .qimify-minicart-footer .qimify-minicart-cart-total {
+    width: 100% !important;
+    text-align: left !important;
+}
+.qimify-minicart-popup-wrapper .qimify-minicart-body.qimify-minicart-has-items {
+    box-shadow: none !important;
+}
+.qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-product-title a {
+    font-size: 16px !important;
+    letter-spacing: 0px !important;
+    color: #000 !important;
+}
