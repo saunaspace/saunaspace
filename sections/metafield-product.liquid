@@ -277,7 +277,9 @@
 
               </style>
              {% endif %}
-        
+             {% if product.metafields.my_fields.sidebar_description == true %}
+              {{ product.description }}
+             {% endif %}
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
