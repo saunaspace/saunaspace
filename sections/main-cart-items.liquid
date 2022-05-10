@@ -323,6 +323,26 @@
 </div>
 </section>
 
+<script>
+const formatToCurrency = amount => {
+  return "$" + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+};
+
+//Catch all the AJAX Request to Cart.JS and Cart/Change.JS
+  $( document ).ajaxComplete(function( event, xhr, settings ) {
+    if ( settings.url === "/cart.js" ) {
+
+      $('.cartTotalTop').html( formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
+    }
+    
+    if ( settings.url === "/cart/change.js" ) {
+      $('.cartTotalTop').html( formatToCurrency(parseFloat(xhr.responseText.split(",")[4].split(":")[1] )/100));
+
+    }
+  }); 
+
+</script>
+
 {% schema %}
 {
   "name": "t:sections.main-cart-items.name",
