@@ -688,6 +688,9 @@
   	<div class="product-info-details" id="pid-overview">
     <section>
       {{ product.description }}
+      {%- if product.metafields.my_fields.product_description_image != blank -%} 
+        {{product.metafields.my_fields.product_description_image}}
+      {%- endif -%}
     </section>
     </div>
     {%- endif -%}
