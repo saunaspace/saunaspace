@@ -804,27 +804,7 @@
 {% endif %}
 
 <script src="{{ 'select2.min.js' | asset_url }}" async></script>
-<script>
-  $(document).ready(function() {
-      console.log('running');
-  setTimeout(
-    function() { 
-      $( $('.bcpo-title') ).each(function( i ) {
-      if ( $(this).text() == "Plug Type:" ) {
-        console.log('text found');
-        $(this).addClass('plug-' + i);
-        $(this).text('Select your plug type:');
-      } else if( $(this).text() == "Curtain Type:" || $(this).text() == "Type:" ) {
-        $(this).text('Select your curtain type:');
-        $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
-      } else if( $(this).text() == "Voltage" || $(this).text() == "Type:" ) {
-        $(this).text('Select a Voltage:');
-        $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
-      }
-  
-  })}, 500);
-});
-</script>
+{% include 'product-page' %}
 <script>
 $(document).ready(function() {
   	//var formatPlug;
