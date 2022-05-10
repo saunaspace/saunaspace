@@ -34,6 +34,10 @@
   .dark .stickyBG .pt-price, .dark .stickyBG .price{
     color:#000 !important;
   }
+  .dark .stickyBG .price--on-sale .price-item--regular{
+    color:#000 !important;
+  }
+
   .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,
   .dark .page-anchor:hover, .dark .rcat-link-on, .dark .util-nav-link:hover, .dark .nav-cart:hover, .dark .sf-link:hover span, .dark .color-choice-on,
   .dark .product-info-tabs, .dark .research-links h3 {
