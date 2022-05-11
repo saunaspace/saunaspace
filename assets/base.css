@@ -6223,3 +6223,23 @@ a#cart-icon-bubble {
 .product__info-container hr {
 	margin: 2rem 0 3rem;
 }
+
+span.product__media-icon
+.product__media-icon {
+	background-color: rgba(198,122,38,.7);
+	border: none;
+	transition: color var(--duration-long) ease,opacity var(--duration-long) ease;
+	Left: calc(1rem + var(--media-border-width));
+	top: calc(1Rem + var(--media-border-width));
+}
+
+.product__modal-opener:hover .product__media-icon {
+	border: none;
+}
+	
+
+.product__media-icon .icon {
+	width: 2rem;
+	height: 2rem;
+	color: #fff;
+}
