@@ -2964,7 +2964,7 @@ section:not(.shopify-section) {
 .nav-cart {
 	font-weight: 700;
 	font-family: lft-etica-mono,sans-serif;
-	margin: 1.5em 0 10px 0;
+	margin: 0 0 17px 0;
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 25px;
