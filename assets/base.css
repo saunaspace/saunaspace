@@ -6243,3 +6243,9 @@ span.product__media-icon
 	height: 2rem;
 	color: #fff;
 }
+
+.product-media-modal__toggle{
+	background-color: rgba(198,122,38,.7);
+	border: none;
+	color: #fff;
+}
