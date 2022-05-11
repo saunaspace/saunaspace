@@ -6139,7 +6139,7 @@ a#cart-icon-bubble {
     overflow: auto;
     line-height: 1em;
 } */
-.qimify-minicart-product-wrapper {
+/* .qimify-minicart-product-wrapper {
     padding: 10px 0px;
     border-bottom: 1px solid #939393;
 }
@@ -6153,7 +6153,7 @@ a#cart-icon-bubble {
     font-weight: 700;
   	font-family: 'UntitledSans', sans-serif;
 
-}
+} */
 .qimify-minicart-popup-wrapper .qimify-minicart-btn {
     padding: 0.75em 1.5em !important;
     font-weight: 700 !important;
