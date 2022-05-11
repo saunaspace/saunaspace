@@ -6175,9 +6175,7 @@ a#cart-icon-bubble {
     box-shadow: none !important;
 } */
 /* 
-.qimify-minicart-product-price {
-	display: none;
-}
+
 
 .qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-product-title a {
     font-size: 16px !important;
@@ -6187,6 +6185,10 @@ a#cart-icon-bubble {
 
 }
        */
+
+.qimify-minicart-product-price {
+	display: none;
+}
 .qimify-minicart-popup-wrapper {
 	background-color: #FFFAF4 !Important;
 	font-family: 'UntitledSans', sans-serif !Important;
