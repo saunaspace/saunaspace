@@ -32,10 +32,7 @@
 		<h4>Upcoming Events</h4>
 
 {% assign events = page.metafields.event-page.eventpage | split: '|' %}
-{% for event in events %}
-<pre>{{event}}</pre>
-    
-
+{% for event in events %}    
     <div class="event-box">
 				<div class="event-text">
 					<div class="event-title">{{ pages[event].title }}</div>
