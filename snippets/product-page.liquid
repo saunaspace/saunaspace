@@ -1,0 +1,22 @@
+<script>
+    $(document).ready(function() {
+        console.log('prod running');
+    setTimeout(
+      function() { 
+        $( $('.bcpo-title') ).each(function( i ) {
+            console.log($(this).text());
+        if ( $(this).text() == "Plug Type:" ) {
+            $(this).addClass('plug-' + i);
+            $(this).text('Select your plug type:');
+        } else if( $(this).text() == "Curtain Type:" || $(this).text() == "Type:" ) {
+            $(this).text('Select your curtain type:');
+            $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
+        } else if( $(this).text() == "Voltage:") {
+            console.log('text found');
+          $(this).text('Select a Voltage:');
+          $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
+        }
+    
+    })}, 700);
+});
+</script>

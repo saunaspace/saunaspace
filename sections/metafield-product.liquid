@@ -277,7 +277,9 @@
 
               </style>
              {% endif %}
-        
+             {% if product.metafields.my_fields.sidebar_description == true %}
+              {{ product.description }}
+             {% endif %}
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
@@ -685,7 +687,17 @@
     {%- if product.description != blank -%}
   	<div class="product-info-details" id="pid-overview">
     <section>
-      {{ product.description }}
+      {%- if product.metafields.my_fields.product_description_image != blank -%} 
+      <div class="pid-cols">
+				<div class="pid-col-text">{{ product.description }}</div>
+				<div class="pid-col-img">
+					{{product.metafields.my_fields.product_description_image | image_url: width: 800 | image_tag: width: nil }}
+				</div>
+			</div>
+      {%- else -%}
+        {{ product.description }}
+      
+      {%- endif -%}
     </section>
     </div>
     {%- endif -%}
@@ -804,7 +816,7 @@
 {% endif %}
 
 <script src="{{ 'select2.min.js' | asset_url }}" async></script>
-
+{% include 'product-page' %}
 <script>
 $(document).ready(function() {
   	//var formatPlug;
@@ -838,18 +850,6 @@ $(".pot-col-100").on("click",function() {
 	$(this).addClass("hideMe");
 	$(".pot-col").removeClass("hideMe");
 });
-
-setTimeout(
-  function() { 
-    $( $('.bcpo-title') ).each(function( i ) {
-    if ( $(this).text() == "Plug Type:" ) {
-      console.log('text found');
-      $(this).addClass('plug-' + i);
-      $(this).text('Select your plug type:');
-    }
-  });
-
-}, 900);
 
 
 var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
