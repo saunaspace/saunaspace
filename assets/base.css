@@ -426,6 +426,7 @@ blockquote {
 }
   .product-form__input.product-form__input--dropdown label.form__label{
   font-size: 1.6rem;
+  margin-bottom: 0;
   }
 .color-foreground {
   color: rgb(var(--color-foreground));

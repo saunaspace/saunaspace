@@ -297,6 +297,7 @@ div#bcpo-select-option-0 ul li span {
 variant-radios,
 variant-selects {
   display: block;
+  margin-bottom: 1.5em;
 }
 
 .product-form__input--dropdown {
