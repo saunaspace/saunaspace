@@ -681,5 +681,8 @@ function myFunction() {
       });
     </script>
     <script>Shopify.money_format = "{{ shop.money_format }}";</script>
+    {% if shop.metafields.qimify_minicart.script_src %}
+<script type="text/javascript" src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{shop.permanent_domain }}" async="async"></script>
+{% endif %}
   </body>
 </html>
