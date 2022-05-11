@@ -6109,10 +6109,10 @@ a#cart-icon-bubble {
 	margin: 5px auto 0;
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-22px);
+    transform: translateY(-25px);
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-22px);
+    transform: translateY(-25px);
     z-index: 333 !important;
 }
   @media only screen and (min-width 991px) and (max-width 1100px){    
