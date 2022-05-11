@@ -192,8 +192,9 @@
 
 .thumbnail[aria-current] {
 	border: none;
-	outline: 2px solid #c57a29;
-	outline-offset: -2px;
+	outline: 2px solid #c57a29 !important;
+    outline-offset: -2px !important;
+    box-shadow: none !important;
 }
 
 .no-js:not(html) {
