@@ -907,6 +907,15 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 		}
 	});
 }
+
+if($('.bcpo-images .bcpo-value').text() != blank) {
+  var dcolor = $('.bcpo-images .bcpo-value').text();
+  console.log('current color is: '+dcolor );
+
+  $('.stickyBG .sac-color').text(dcolor);
+}
+
+
 //change in price
 $(document).on('click','label',function(){
   	//console.log('data is changed')
