@@ -6202,3 +6202,10 @@ a#cart-icon-bubble {
 .pid-col-img img {
 	max-width: 100%;
 }
+
+.button:before, .shopify-challenge__button:before, .customer button:before, .shopify-payment-button__button--unbranded:before, .shopify-payment-button [role="button"]:before, .cart__dynamic-checkout-buttons [role='button']:before {
+	content: none;
+}
+.button:after, .shopify-challenge__button:after, .customer button:after, .shopify-payment-button__button--unbranded:after {
+	content: none;
+}
