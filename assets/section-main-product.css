@@ -105,11 +105,11 @@ table:not([class]) th{
 }
 
 .selector-wrapper.bcpo-default {
-  width: 100%;
+  width: 100%  !important;
 }
 
 #bcpo .bcpo-default select {
-  width: 100%;
+  width: 100% !important;
   border-radius: 0;
 }
 
