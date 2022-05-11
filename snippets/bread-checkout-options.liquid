@@ -1,0 +1,102 @@
+<script type="application/javascript">
+    (function(window){
+      // document.addEventListener('DOMContentLoaded', function() {
+      //   document.querySelector('img[alt="Bread"]').setAttribute('src', 'enter image URL here');
+      // });
+    
+      if (window.BreadShopifyPlus) return;
+  
+      var formatPhone = function(phone) {
+        p = phone.replace(/\D/g,'');
+        if (p.length > 10) p = p.slice(p.length - 10);
+        return p;
+      };
+  
+      var shippingAddressPhone = '';
+      var billingAddressPhone = '';
+      {% if checkout.customer.phone != null %}
+      shippingAddressPhone = '{{ checkout.customer.phone }}';
+      billingAddressPhone = '{{ checkout.customer.phone }}';
+      {% else %}
+      shippingAddressPhone = '{{ checkout.shipping_address.phone }}';
+      billingAddressPhone = '{{ checkout.billing_address.phone }}';
+      {% endif %}
+      shippingAddressPhone = formatPhone(shippingAddressPhone);
+      billingAddressPhone = formatPhone(billingAddressPhone);
+  
+      var checkoutItems = [];
+      {% for line_item in checkout.line_items %}
+      checkoutItems.push({
+        name: '{{ line_item.title }}',
+        price: {{ line_item.price }},
+        sku: '{{ line_item.sku }}',
+        imageUrl: 'https:{{ line_item.variant.image | img_url }}',
+        detailUrl: '{{ line_item.variant.url }}',
+        quantity: {{ line_item.quantity }}
+      });
+      {% endfor %}
+  
+      var shippingContact = {
+        firstName: '{{ checkout.shipping_address.first_name }}',
+        lastName: '{{ checkout.shipping_address.last_name }}',
+        address: '{{ checkout.shipping_address.address1 }}',
+        address2: '{{ checkout.shipping_address.address2 }}',
+        zip: '{{ checkout.shipping_address.zip }}',
+        city: '{{ checkout.shipping_address.city }}',
+        state: '{{ checkout.shipping_address.province_code }}',
+        phone: shippingAddressPhone,
+        email: '{{ checkout.customer.email }}'
+      };
+  
+      {% if checkout.billing_address != null %}
+      var billingContact = {
+        firstName: '{{ checkout.billing_address.first_name }}',
+        lastName: '{{ checkout.billing_address.last_name }}',
+        address: '{{ checkout.billing_address.address1 }}',
+        address2: '{{ checkout.billing_address.address2 }}',
+        zip: '{{ checkout.billing_address.zip }}',
+        city: '{{ checkout.billing_address.city }}',
+        state: '{{ checkout.billing_address.province_code }}',
+        phone: billingAddressPhone,
+        email: '{{ checkout.customer.email }}'
+      };
+      {% else %}
+      var billingContact = shippingContact;            
+      {% endif %}
+      
+      var discounts = [];
+      {% for discount in checkout.discounts %}
+      discounts.push({ amount: {{ discount.amount }}, description: '{{ discount.code }}' });
+      {% endfor %}
+  
+      // Add targeted financing logic here
+      var financingProgramId = '';
+                  
+      window.BreadShopifyPlus = {
+        reference: '{{ checkout.id }}'
+      };
+      window.BreadShopifyPlus.opts = {
+        financingProgramId: financingProgramId,
+        customTotal: {{ checkout.total_price }},
+        items: checkoutItems,
+        shippingOptions: [{
+          typeId: '{{ checkout.shipping_method.handle }}',
+          cost: {{ checkout.shipping_price }},
+          type: '{{ checkout.shipping_method.title }}'
+        }],
+        tax: {{ checkout.tax_price }},
+        discounts: discounts,
+        billingContact: billingContact,
+        shippingContact: shippingContact
+      };
+     
+     // Add custom DOM selectors here
+      var selectors = {
+        placeOrderBtn: ''
+      };
+      // Uncomment the line below to override the standard "Place order" DOM selector
+      // window.BreadShopifyPlus.selectors = selectors;
+     
+    })(window);
+  </script>
+  
