@@ -113,6 +113,10 @@ table:not([class]) th{
   border-radius: 0;
 }
 
+#bcpo .bcpo-default .bcpo-value {
+  display: none;
+}
+
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
     border-color: transparent !important;
 }
