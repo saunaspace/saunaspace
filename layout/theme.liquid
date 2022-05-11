@@ -60,6 +60,10 @@
       })();
     </script>
 
+<script>
+  const colorScheme = localStorage.getItem("color-scheme") || "light-mode";
+</script>
+
     {% style %}
     {{
       settings.type_body_font | font_face: font_display:"swap"
