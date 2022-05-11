@@ -6105,14 +6105,18 @@ a#cart-icon-bubble {
 	border-radius: 0;
 }
 
+.navBG.sticky {
+	padding: 10px 0 5px;
+}
+
 #bcpo .bcpo-images {
 	margin: 5px auto 0;
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-22px);
+    transform: translateY(-10px);
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-22px);
+    transform: translateY(-10px);
     z-index: 333 !important;
 }
   @media only screen and (min-width 991px) and (max-width 1100px){    
