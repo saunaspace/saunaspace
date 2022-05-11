@@ -6051,11 +6051,10 @@ span[data-ml]::before {
   	font-family: lft-etica-mono,sans-serif;
   	font-weight: 400;
 }
-      .product__info-container div#bcpo.bcpo.bcpo-invisible {
-    padding-left: 0px;
+.product__info-container div#bcpo.bcpo.bcpo-invisible {
+	padding-left: 0px;
     padding-right: 0px;
-
-    margin-top: 10px;
+    margin-top: 0;
 }
 #bcpo .bcpo-images div.bcpo-image-parent {
   	width: 38px;
