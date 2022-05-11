@@ -6210,3 +6210,7 @@ a#cart-icon-bubble {
 .button:after, .shopify-challenge__button:after, .customer button:after, .shopify-payment-button__button--unbranded:after {
 	content: none;
 }
+
+.product__info-container hr {
+	margin: 2rem 0 3rem;
+}
