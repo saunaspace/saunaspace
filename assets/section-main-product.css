@@ -72,7 +72,7 @@ table:not([class]) th{
 }
 .size-div.product__accordion.accordion {
     border: none;
-    margin: 0px !important;
+    margin: -1.3em 0 1.5em;
     padding: 0px !important;
 }
 .size-div summary {
