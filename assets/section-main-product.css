@@ -126,6 +126,9 @@ table:not([class]) th{
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
     border-color: transparent !important;
 }
+#bcpo .bcpo-label > label {
+  margin-bottom: 0;
+}
 
 button.product-form__submit.button.button--full-width.button--primary:before, button.product-form__submit.button.button--full-width.button--primary:after {
     display: none;
