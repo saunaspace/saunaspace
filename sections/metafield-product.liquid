@@ -910,6 +910,8 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 function isEmpty( el ){
       return !$.trim(el.html())
   }
+
+  setTimeout(function(){
   if (isEmpty($('.bcpo-images .bcpo-value'))) {
       // do something
   } else {
@@ -918,7 +920,7 @@ function isEmpty( el ){
 
   $('.stickyBG .sac-color').text(dcolor);
   }
-
+}, 500)
 
 
 //change in price
