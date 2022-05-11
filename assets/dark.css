@@ -31,7 +31,7 @@
 	.dark td.cart-item__details .product-option, .dark .quantity__button, .dark .quantity__input, .dark .is-empty .cart__empty-text, .dark .is-empty .cart__warnings, .dark .cart__login-paragraph a {
   	color: #FFF8E7 !important;
   }
-  .dark .stickyBG .pt-price, .dark .stickyBG .price, .dark .optimize h2{
+  .dark .stickyBG .pt-price, .dark .stickyBG .price {
     color:#000 !important;
   }
   .dark .stickyBG .price--on-sale .price-item--regular{
@@ -42,7 +42,7 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .research-links h3, .dark .what-is, .dark .story, .dark .compatible h2, .dark .compatible {
+  .dark .research-links h3, .dark .what-is, .dark .story, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize {
     color: #fff;
   }
 
