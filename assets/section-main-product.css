@@ -128,6 +128,7 @@ table:not([class]) th{
 }
 #bcpo .bcpo-label > label {
   margin-bottom: 0;
+  padding: 0;
 }
 
 button.product-form__submit.button.button--full-width.button--primary:before, button.product-form__submit.button.button--full-width.button--primary:after {
