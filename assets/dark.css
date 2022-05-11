@@ -28,7 +28,7 @@
   .dark .warranty-col, .dark .legalText, .dark .fineprint, .dark .two-cols-narrow .col, .dark .contact-col, .dark .contact-cols-text,
   .dark .contact-tile, .dark .col-bordered a, .dark .event-box, .dark .event-link, .dark .event-invite, h4, .dark .sgl-text,
   .dark .sauna-types td, .dark .sauna-types th, .dark .research-links h3, .dark .darkP, .dark .header__icon, .dark .pt-price, .dark .price, .dark .card-information>.price, .dark .price--on-sale .price-item--regular, .dark td.cart-item__price .product-option, .dark .product-info-details, .dark .pot-col a, .dark .cart-count-bubble,
-	.dark td.cart-item__details .product-option, .dark .quantity__button, .dark .quantity__input, .dark .is-empty .cart__empty-text, .dark .is-empty .cart__warnings {
+	.dark td.cart-item__details .product-option, .dark .quantity__button, .dark .quantity__input, .dark .is-empty .cart__empty-text, .dark .is-empty .cart__warnings, .dark .cart__login-paragraph {
   	color: #FFF8E7 !important;
   }
   .dark .stickyBG .pt-price, .dark .stickyBG .price{
