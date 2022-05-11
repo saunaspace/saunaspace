@@ -4419,6 +4419,8 @@ h1.product__title, .product-text h1, .product-name-mobile { color: #000;text-ali
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	max-width: 1200px;
+    margin: 0 auto;
 }
 
 	.pid-col-text { width: 50%; }
