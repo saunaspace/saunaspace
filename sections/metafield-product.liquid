@@ -815,11 +815,6 @@
 <script>
 $(document).ready(function() {
 
-  $('.bcpo-front-image-option ').change(function(e) {
-          console.log('clicked');
-        
-      });
-
 
 
   	//var formatPlug;
@@ -917,9 +912,12 @@ $(document).on('click','label',function(){
   	//console.log('data is changed')
   setTimeout(function(){
     var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
-    var dcolor = $('.bcpo-value').text();
+    var dcolor = $('.bcpo-images .bcpo-value').text();
     console.log('current color is: '+dcolor );
     $('.stickyBG .price-item').text(damount);
+    $('.stickyBG .sac-color').text(dcolor);
+
+    
   },200)
 });
 $(document).on('click','#sacText',function(){
