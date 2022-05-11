@@ -6155,7 +6155,7 @@ a#cart-icon-bubble {
 .qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-line-subtotal {
     font-size: 16px;
     font-weight: 700 !important;
-	position: static !important;
+	top: 50px !important;
 }
 .qimify-minicart-popup-wrapper .qimify-minicart-btn {
     padding: 0.75em 1.5em !important;
