@@ -6154,11 +6154,13 @@ a#cart-icon-bubble {
   	font-family: 'UntitledSans', sans-serif;
 
 } */
+
+
 .qimify-minicart-popup-wrapper .qimify-minicart-btn {
     padding: 0.75em 1.5em !important;
     font-weight: 700 !important;
 }
-.qimify-minicart-qimify-brand {
+.qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-quantity, .qimify-minicart-qimify-brand {
     display: none !important;
 }
 
