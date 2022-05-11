@@ -380,7 +380,7 @@
                     <div class="product-form__input product-form__input--dropdown">
                       <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
                         
-                        {% if option.name == 'Size' %} Select a size {% else %} {{ option.name }}  {% endif %}
+                        {% if option.name == 'Size' %} Select a size. {% else %} {{ option.name }}  {% endif %}
                       </label>
                       <div class="select">
                         <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
