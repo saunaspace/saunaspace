@@ -117,6 +117,10 @@ table:not([class]) th{
   display: none;
 }
 
+#bcpo .bcpo-default .bcpo-title {
+  font-weight: bold;
+}
+
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
     border-color: transparent !important;
 }
