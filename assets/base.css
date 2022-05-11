@@ -6112,10 +6112,10 @@ a#cart-icon-bubble {
 	margin: 5px auto 0;
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-10px);
+    transform: translateY(-16px);
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-10px);
+    transform: translateY(-16px);
     z-index: 333 !important;
 }
   @media only screen and (min-width 991px) and (max-width 1100px){    
