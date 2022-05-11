@@ -411,14 +411,14 @@ fieldset.product-form__input .form__label {
 
 /* Product info */
 
-.product__info-container > * + * {
+/* .product__info-container > * + * {
   margin: 1.5rem 0;
 }
 
 .product__info-container .product-form,
 .product__info-container .product__description {
   margin: 2.5rem 0;
-}
+} */
 
 .product__text {
   margin-bottom: 0;
