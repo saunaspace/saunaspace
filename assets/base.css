@@ -3763,7 +3763,9 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	font-size: 4rem;
 	font-weight: 700;
 }
-
+.is-empty .cart__empty-text, .is-empty .cart__warnings {
+	color: #000;
+}
 .yc-top-checkout {
 	display: flex;
 	align-items: center;
