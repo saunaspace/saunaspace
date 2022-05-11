@@ -2941,7 +2941,7 @@ section:not(.shopify-section) {
 .util-nav {
 	width: 90%;
 	max-width: 1200px;
-	margin: 15px auto 0 auto;
+	margin: 16px auto 5px auto;
 	text-align: right;
 	position: relative;
 	z-index: 100;
