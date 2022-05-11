@@ -6192,6 +6192,7 @@ a#cart-icon-bubble {
 .qimify-minicart-popup-wrapper {
 	background-color: #FFFAF4 !Important;
 	font-family: 'UntitledSans', sans-serif !Important;
+	border: 1px solid #C67A26 !important;
 }
 
 
