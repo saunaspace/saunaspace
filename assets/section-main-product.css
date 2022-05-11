@@ -1213,6 +1213,8 @@ a.product__text {
 
 .thumbnail:hover {
   opacity: 0.7;
+  outline: 2px solid #c57a29;
+  outline-offset: -2px;
 }
 
 .thumbnail.global-media-settings img {

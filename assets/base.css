@@ -191,7 +191,9 @@
 /* base */
 
 .thumbnail[aria-current] {
-	border: 1px solid #C57A29 !important;
+	border: none;
+	outline: 2px solid #c57a29;
+	outline-offset: -2px;
 }
 
 .no-js:not(html) {
