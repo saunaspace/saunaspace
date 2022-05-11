@@ -96,6 +96,9 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
+    "checkout_logo_image": "shopify:\/\/shop_images\/ss-logo-full-4-white-bg-horizontal-lg.png",
+    "checkout_accent_color": "#c67a26",
+    "checkout_button_color": "#c67a26",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -183,7 +186,10 @@
           "color_scheme": "background-1"
         }
       }
-    }
+    },
+    "content_for_index": [
+
+    ]
   },
   "presets": {
     "Default": {

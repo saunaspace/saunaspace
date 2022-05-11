@@ -216,17 +216,6 @@
     <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class=" product-text product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
-        {% comment %}
-        <div class="stickyBG">
-            <div class="sticky-add-to-cart">
-                <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
-                <div class="sac-wrap">
-                    <div class="sac-price etica">$5,499.99</div>
-                    <a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        {% endcomment %}
 
         <div class="">
         	{%- for block in section.blocks -%}
@@ -662,6 +651,12 @@
       </div>
     </modal-dialog>
   {%- endfor -%}
+
+  {%- if product.media.size > 0 -%}
+    <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
 </section>
 
 
@@ -819,6 +814,9 @@
 {% include 'product-page' %}
 <script>
 $(document).ready(function() {
+
+
+
   	//var formatPlug;
 	$(".select-icons").select2({
 		templateResult: formatPlug,
@@ -909,13 +907,33 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
 		}
 	});
 }
+function isEmpty( el ){
+      return !$.trim(el.html())
+  }
+
+  setTimeout(function(){
+  if (isEmpty($('.bcpo-images .bcpo-value'))) {
+      // do something
+  } else {
+    var dcolor = $('.bcpo-images .bcpo-value').text();
+  console.log('current color is: '+dcolor );
+
+  $('.stickyBG .sac-color').text(dcolor);
+  }
+}, 800)
+
+
 //change in price
 $(document).on('click','label',function(){
   	//console.log('data is changed')
   setTimeout(function(){
     var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
-    console.log('current price is: '+damount );
+    var dcolor = $('.bcpo-images .bcpo-value').text();
+    console.log('current color is: '+dcolor );
     $('.stickyBG .price-item').text(damount);
+    $('.stickyBG .sac-color').text(dcolor);
+
+    
   },200)
 });
 $(document).on('click','#sacText',function(){

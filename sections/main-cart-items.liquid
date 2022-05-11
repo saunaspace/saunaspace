@@ -27,7 +27,7 @@
 <section>
 	<div class="your-cart">
 	
-		<div class="yc-head-wrap">
+		<div class="yc-head-wrap {% if cart == empty %} is-empty{% endif %}">
 			<div class="yc-head">Your Cart</div>
 			<div class="yc-top-checkout">
 				<div class="yctc-text">
@@ -43,18 +43,18 @@
 
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
-  <div class="cart__warnings">
+  <div class="cart__warnings" style="margin-bottom: 8rem">
     <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-    <a href="{{ routes.all_products_collection_url }}" class="button">
+    <a href="https://saunadev.myshopify.com/products?filter=all" class="btn">
       {{ 'general.continue_shopping' | t }}
     </a>
 
-    {%- if shop.customer_accounts_enabled and customer == nil -%}
+    <!-- {%- if shop.customer_accounts_enabled and customer == nil -%}
       <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
       <p class="cart__login-paragraph">
         {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
       </p>
-    {%- endif -%}
+    {%- endif -%} -->
   </div>
 
   <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
