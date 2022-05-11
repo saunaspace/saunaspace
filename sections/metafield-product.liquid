@@ -216,17 +216,6 @@
     <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
       <div id="ProductInfo-{{ section.id }}" class=" product-text product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
-        {% comment %}
-        <div class="stickyBG">
-            <div class="sticky-add-to-cart">
-                <div class="sac-product">Faraday Infrared Sauna<span class="sac-color"></span></div>
-                <div class="sac-wrap">
-                    <div class="sac-price etica">$5,499.99</div>
-                    <a tabindex="-1" href="javascript:void(0)" class="btn atc" id="sacText" data-productID="1" data-shopifySKU="SF001BNA00N" data-pcolorID="1" data-pcsID="">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        {% endcomment %}
 
         <div class="">
         	{%- for block in section.blocks -%}
@@ -825,6 +814,14 @@
 {% include 'product-page' %}
 <script>
 $(document).ready(function() {
+
+  $('.bcpo-front-image-option ').change(function(e) {
+          console.log('clicked');
+        
+      });
+
+
+
   	//var formatPlug;
 	$(".select-icons").select2({
 		templateResult: formatPlug,
