@@ -20,13 +20,13 @@
 <div class="tanBG">
     <h2>What the Experts are Saying</h2>
     <div class="review-categories">
-        <a href="javascript:void(0)" class="rcat-link rcat-link-on"  onClick="loadReviews(0)" id="rc0">All</a>
+            <a href="javascript:void(0)" class="product-info-tab product-info-tab-on rcat-link rcat-link-on" data-tab="all">All</a>
+
+            <a href="javascript:void(0)" class="product-info-tab product-info-tab-on rcat-link rcat-link-on" data-tab="medical">Medical</a>
         
-            <a href="javascript:void(0)" class="rcat-link" onClick="loadReviews(1)" id="rc1">Medical</a>
-        
-            <a href="javascript:void(0)" class="rcat-link" onClick="loadReviews(2)" id="rc2">Athletic</a>
-        
-            <a href="javascript:void(0)" class="rcat-link" onClick="loadReviews(3)" id="rc3">Lifestyle</a>
+            <a href="javascript:void(0)" class="product-info-tab product-info-tab-on rcat-link rcat-link-on" data-tab="athletic">Athletic</a>
+
+            <a href="javascript:void(0)" class="product-info-tab product-info-tab-on rcat-link rcat-link-on" data-tab="lifestyle">Lifestyle</a>
         
     </div>
     <div id="allReviews">
@@ -275,12 +275,14 @@
 
 <script>
 
-    loadReviews(0)
-    
-    function loadReviews(rcID) {
-        $(".rcat-link").removeClass("rcat-link-on");
-        $("#rc" + rcID).addClass("rcat-link-on");
-    }
+$(".product-info-tab").on("click",function() {
+	$(".product-info-tab").removeClass("product-info-tab-on");
+	$(this).addClass("product-info-tab-on");
+	$(".product-info-details").addClass("hideMe");
+	var whichTab=$(this).attr("data-tab");
+	$("#pid-" + whichTab).removeClass("hideMe");
+});
+
     
     </script>
 
