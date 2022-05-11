@@ -44,6 +44,9 @@
   	border-color: #fff; 
   }
 
+  .dark .pot-col-100 img {
+    filter: brightness(0) invert(1);
+  }
   .dark .pot-close img {
     filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);
   }
