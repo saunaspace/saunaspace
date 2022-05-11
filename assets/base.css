@@ -6124,15 +6124,13 @@ a#cart-icon-bubble {
     display: none !important;
 }
 
-.qimify-minicart-product-details .qimify-minicart-product-title a {
+      /* .qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details .qimify-minicart-product-title a {
     color: #000;
-    font-size: 1.2rem !important;
-    line-height: 1.1em !important;
+    font-size: 1.4rem !important;
+    line-height: 1.3em !important;
     font-weight: 700 !important;
-	text-decoration: none;
+text-decoration: none;
 }
-
-    /*
 .qimify-minicart-popup-wrapper .qimify-minicart-body .qimify-minicart-product-wrapper .qimify-minicart-product-details {
     width: 100% !important;
     display: inline-block;
