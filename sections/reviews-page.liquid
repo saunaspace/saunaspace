@@ -189,13 +189,86 @@
             </script>
 </div>
     </div>
-    <div class="product-info-details" id="pid-medical">
-        medical
+    <div class="product-info-details hideMe" id="pid-medical">
+        <div id="medical">
+            <div class="featured-review">
+                <div class="fr-img">
+                    <img src="{{ 'chris-kresser.jpg' | asset_url }}" alt="Chris Kresser">
+                    <div class="fr-text hide-desktop">
+                        <div class="review-name">Chris Kresser</div>
+                        <div class="review-title etica">M.S., L.Ac, Founder of <a href="https://chriskresser.com/">Kresser Institute</a></div>
+                    </div>
+                </div>
+                <div class="fr-text">
+                    <div class="review-name hide-mobile">Chris Kresser</div>
+                    <div class="review-title etica hide-mobile">M.S., L.Ac, Founder of <a href="https://chriskresser.com/">Kresser Institute</a></div>
+                    <div class="review-text"><p>“I believe that near-infrared is the most therapeutic of the sauna options, and I love that Faraday not only doesn’t emit EMF or MF, it blocks out all ambient EMF for a completely ‘clean’ detox experience. I’ve noticed benefits in sleep, mood, energy, and overall vitality after just a couple of weeks of using it. I even put my far infrared sauna on Craigslist because I haven’t used it once since I got the SaunaSpace.”</p><p>SaunaSpace owner since 2018</p></div>
+                    
+                        <div class="review-cta-wrap"><a href="https://chriskresser.com/how-sauna-therapy-can-prevent-reverse-chronic-disease-with-brian-richards/" target="_blank" class="review-cta arrow-link">Listen to the Podcast</a></div>
+                    
+                </div>
+            </div><!--featured-review-->
+            
+            <div class="rc-arrows noMargin">
+                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
+                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
+                <div class="review-carousel">
+                
+                
+                <div class="rc-box">
+                    <div class="rcb-name">
+                        <img src="{{ 'terry-wahls.jpg' | asset_url }}" alt="Terry Wahls">
+                        <div class="rcb-text">
+                            <div class="review-name">Terry Wahls</div>
+                            <div class="review-title etica">MD, Founder of <a href="https://terrywahls.com/about-the-wahls-protocol/">The Wahls Protocol</a></div>
+                        </div>
+                    </div>
+                    <div class="review-text"><p><span style="background-color: rgb(255, 255, 255);">“</span>I am still am very much enjoying my sauna most mornings! I definitely prefer the incandescent lamp heat over the far-infrared heaters in my old cabinet sauna.<span style="background-color: rgb(255, 255, 255);">”</span></p></div>
+                    
+                        <div class="review-cta-wrap"><a href="https://terrywahls.com/near-infrared-light-and-heat-natures-most-powerful-healing-detox-solution/" target="_blank" class="review-cta arrow-link">Read the Blog Post</a></div>
+                    
+                </div>
+                
+                <div class="rc-box">
+                    <div class="rcb-name">
+                        <img src="{{ 'thomas-cowan.jpeg' | asset_url }}" alt="Thomas Cowan">
+                        <div class="rcb-text">
+                            <div class="review-name">Thomas Cowan</div>
+                            <div class="review-title etica">MD, Author and Founder of Dr. Cowan's Garden</div>
+                        </div>
+                    </div>
+                    <div class="review-text"><p><span style="color: rgb(0, 0, 0);">“The SaunaSpace incandescent red light lamps and saunas are a truly revolutionary technology. Akin to bring the healing wavelengths of the sun into your home, exposure to red light, incandescent light stimulates mitochondrial function and effective detoxification. I use mine every day and believe the SaunaSpace products are one of the most profound therapeutic tools available.”</span></p></div>
+                    
+                        <div class="review-cta-wrap"><a href="https://podcasts.apple.com/us/podcast/conversations-with-dr-cowan-friends/id1530268266" target="_blank" class="review-cta arrow-link">Listen to the Podcast</a></div>
+                    
+                </div>
+                
+                <div class="rc-box">
+                    <div class="rcb-name">
+                        <img src="{{ 'ken-sharlin.jpeg' | asset_url }}" alt="Ken Sharlin">
+                        <div class="rcb-text">
+                            <div class="review-name">Ken Sharlin</div>
+                            <div class="review-title etica">MD, MPH, IFMP, Author</div>
+                        </div>
+                    </div>
+                    <div class="review-text"><p><span style="color: rgb(0, 0, 0);">“As a doctor passionate about helping my patients identify and treat the root causes of chronic neurological conditions, the SaunaSpace has become an essential element in my toolbox. In this demanding world of ‘eat this, not that,’ SaunaSpace invites us into its sacred, protected space, where—through the healing powers of red light and heat—all we are asked to do is just sit and breathe. We need more of that in our lives.”</span></p></div>
+                    
+                        <div class="review-cta-wrap"><a href="https://functionalmedicine.doctor/" target="_blank" class="review-cta arrow-link">More about Ken</a></div>
+                    
+                </div>
+                
+                </div>
+            </div>
+                        
+            
+            <script>
+                currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+            </script>
     </div>
-    <div class="product-info-details" id="pid-athletic">
+    <div class="product-info-details hideMe" id="pid-athletic">
         athletic
     </div>
-    <div class="product-info-details" id="pid-lifestyle">
+    <div class="product-info-details hideMe" id="pid-lifestyle">
         lifestyle
     </div>
     
