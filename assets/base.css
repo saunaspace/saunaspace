@@ -6171,7 +6171,7 @@ text-decoration: none;
         color:#000 !important;
         font-size: 16px !important;
 } */
-.qimify-minicart-popup-wrapper .qimify-minicart-body.qimify-minicart-has-items {
+.qimify-minicart-popup-wrapper .qimify-minicart-body.qimify-minicart-has-items, .qimify-minicart-product-price {
     box-shadow: none !important;
 }
 
