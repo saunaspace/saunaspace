@@ -103,6 +103,16 @@ table:not([class]) th{
     width: 38px;
     border: 3px solid #fff;
 }
+
+.selector-wrapper.bcpo-default {
+  width: 100%;
+}
+
+#bcpo .bcpo-default select {
+  width: 100%;
+  border-radius: 0;
+}
+
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
     border-color: transparent !important;
 }
