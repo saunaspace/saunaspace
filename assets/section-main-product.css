@@ -118,7 +118,7 @@ table:not([class]) th{
 }
 
 #bcpo .bcpo-default .bcpo-title {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .single-option-selector.bcpo-images.bcpo-circle .bcpo-image-parent:hover {
