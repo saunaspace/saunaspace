@@ -514,21 +514,24 @@
                     <div class="op-30day">
                         <div style="width: 100%;"><strong>Order Processing:</strong> <span id="orderProcessing">
                           {% if product.metafields.lead-time.leadtime != blank %}
-                         {{product.metafields.lead-time.leadtime}}.
+                         {{ product.metafields.lead-time.leadtime }}.
                          {% else %}
                           1–3 days.
                           {% endif %}
                         </span>            
                         </div>
+                        {% if product.metafields.my_fields.thirty_day_returns == true %}
+                          <div>30-Day Returns</div>
+                        {% endif %}
                     </div>
                     <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
                 
             </div>
-            
-            <div class="warranty-trial">
-                <div class="pwt product-warranty">10-year Warranty</div><div class="pwt product-trial">100-day Trial</div>
-            </div>
-            
+            {% if product.metafields.my_fields.thirty_day_returns != true %}
+              <div class="warranty-trial">
+                  <div class="pwt product-warranty">10-year Warranty</div><div class="pwt product-trial">100-day Trial</div>
+              </div>
+            {% endif %}
             
             <div class="pay-over-time">
                 <div class="pot-head">Pay Over Time</div>
