@@ -5880,7 +5880,10 @@ sup {
 
 @media all and (max-width: 650px) {
 	.product-info-tabs { flex-wrap: wrap; }
-	.product-info-tab { border: none !important; }
+	.product-info-tab { 
+		border: none !important; 
+		margin-bottom: 16px;
+	}
 	.pid-cols { flex-direction: column-reverse; margin-top: 20px; }
 	.pid-col-img { width: 80%; max-width: 400px; margin: 0 auto 20px auto; }
 	.pid-col-text { width: 100%; }
