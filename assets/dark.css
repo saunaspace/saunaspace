@@ -42,6 +42,10 @@
     background: rgba(67,60,60,.55);
   }
 
+  .dark .product-media-modal {
+    background-color: #000;
+  }
+
   .dark .research-links h3, .dark .what-is, .dark .story, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize, .dark .story blockquote {
     color: #fff;
   }
