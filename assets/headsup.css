@@ -415,6 +415,13 @@ h2, h3 {
     float: right;
 }
 
+@media (max-width: 45em) {
+  .story img {
+    float: none;
+    margin: 0 auto;
+  }
+}
+
 .custom-health-tracking {
     color: #fff;
     min-height: 600px;
