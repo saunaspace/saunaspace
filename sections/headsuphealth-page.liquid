@@ -17,50 +17,56 @@
 <noscript>{{ "headsup.css" | asset_url | stylesheet_tag }}</noscript>
 
 <div class="optimize">
-  <div class="inner-content row">
-    <img
-      src="{{ 'headsuplogo.png' | asset_url }}"
-      alt=""
-      width="415"
-      height="66"
-      loading="lazy"
-    />
-    <div class="lp-element lp-pom-text nlh" id="lp-pom-text-52">
-      <h2 style="line-height: 35px">
-        OPTIMIZE YOUR SAUNA SESSIONS<br />
-        WITH HEADS UP
-      </h2>
-      <p class="mono-type">
-        Free 90-day membership with your SaunaSpace purchase*
-      </p>
+  <div class="container">
+    <div class="inner-content row">
+      <div class="col-12">
+        <img
+          src="{{ 'headsuplogo.png' | asset_url }}"
+          alt=""
+          width="415"
+          height="66"
+          loading="lazy"
+        />
+        <div class="lp-element lp-pom-text nlh" id="lp-pom-text-52">
+          <h2 style="line-height: 35px">
+            OPTIMIZE YOUR SAUNA SESSIONS<br />
+            WITH HEADS UP
+          </h2>
+          <p class="mono-type">
+            Free 90-day membership with your SaunaSpace purchase*
+          </p>
+        </div>
+        <a
+          class="btn-cta"
+          href="https://app.headsuphealth.com/users/sign_up?ref=saunaspace"
+          target="_blank"
+          >START YOUR FREE TRIAL
+        </a>
+      </div>
     </div>
-    <a
-      class="btn-cta"
-      href="https://app.headsuphealth.com/users/sign_up?ref=saunaspace"
-      target="_blank"
-      >START YOUR FREE TRIAL
-    </a>
   </div>
 </div>
 <div class="what-is">
-  <div class="inner-content row">
-    <div class="col-7">
-      <h2 class="text-uppercase">What Is Heads Up?</h2>
-      <p>
-        Heads Up helps you create customized dashboards that track your health
-        data over time. Measure what is most important to you and find out how
-        your sauna, physical activity, diet, lifestyle, and more are impacting
-        the big picture.
-      </p>
-    </div>
-    <div class="col-5">
-      <img
-        src="{{ 'whatis.png' | asset_url }}"
-        alt=""
-        width="450"
-        height="337"
-        loading="lazy"
-      />
+  <div class="container">
+    <div class="inner-content row">
+      <div class="col-7">
+        <h2 class="text-uppercase">What Is Heads Up?</h2>
+        <p>
+          Heads Up helps you create customized dashboards that track your health
+          data over time. Measure what is most important to you and find out how
+          your sauna, physical activity, diet, lifestyle, and more are impacting
+          the big picture.
+        </p>
+      </div>
+      <div class="col-5">
+        <img
+          src="{{ 'whatis.png' | asset_url }}"
+          alt=""
+          width="450"
+          height="337"
+          loading="lazy"
+        />
+      </div>
     </div>
   </div>
 </div>
