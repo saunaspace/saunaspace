@@ -721,6 +721,11 @@ a.product__text {
   height: 4rem;
 }
 
+
+[aria-label="Close"], [aria-label="Close"]:hover {
+  filter: invert(0%):
+}
+
 .product__media-video .product__media-icon {
   opacity: 1;
 }
