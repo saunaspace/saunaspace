@@ -6275,10 +6275,3 @@ a#cart-icon-bubble {
 .product__modal-opener:hover .product__media-icon {
 	border: none;
 }
-	
-
-.product-media-modal__toggle{
-	background-color: rgba(198,122,38,.7);
-	border: none;
-	color: #fff;
-}
