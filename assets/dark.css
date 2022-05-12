@@ -92,7 +92,9 @@
 	.dark .compare-panel-on { background: #C67A26; color: #FFF8E7; }
 	.dark .cp-shield { color: #FFF8E7; background: #6E1500; border: 0;}
     
-  .dark .product-category-on div span { color: #000; }
+  .dark .product-category-on div span { 
+    color: #000 !important;
+  }
     
   .dark .qty-add, .dark .acc-term { background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff); }
   .dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
