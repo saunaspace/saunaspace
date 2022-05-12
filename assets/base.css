@@ -435,6 +435,13 @@ blockquote {
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   letter-spacing: 0.04rem;
 }
+
+
+.product-form .product-form__buttons {
+	margin-top: 30px;
+}
+
+
   .product-form__input.product-form__input--dropdown label.form__label{
   font-size: 1.6rem;
   margin-bottom: 0;
