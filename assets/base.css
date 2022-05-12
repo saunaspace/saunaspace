@@ -4263,7 +4263,13 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	text-align: center;
 }
 
-h1.product__title, .product-text h1, .product-name-mobile { color: #000;text-align: center; text-transform: none; font-size: 3.2rem; font-weight: 700; margin-bottom: 1em; 
+h1.product__title, .product-text h1, .product-name-mobile { 
+	color: #000;
+	text-align: center; 
+	text-transform: none; 
+	font-size: 3.2rem; 
+	font-weight: 700; 
+	padding-bottom: 1em; 
  }
 .product-name-mobile { display: none; text-align: center; margin: .5em 0 0 0; padding: 0 1em; }
 .product-text .price {
@@ -4271,7 +4277,6 @@ h1.product__title, .product-text h1, .product-name-mobile { color: #000;text-ali
 	font-family: lft-etica-mono,sans-serif;
 	font-weight: 400;
 	display: inline-block;
-	margin-top: 1em;
 	margin-bottom: 1em;
 }
 	.product-text h1 + p { margin-top: -1.5em; }
