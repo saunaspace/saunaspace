@@ -114,3 +114,11 @@
 
   filter: invert(52%) sepia(48%) saturate(726%) hue-rotate(351deg) brightness(92%) contrast(88%);
 }
+
+
+.dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label
+.dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label {
+  box-shadow: 0 0 0 1px #fff;
+    -webkit-box-shadow: 0 0 0 1px #fff;
+    -moz-box-shadow: 0 0 0 1px #fff;
+}
