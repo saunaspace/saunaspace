@@ -716,6 +716,11 @@ a.product__text {
 
 }
 
+.product__media-icon {
+  width: 4rem;
+  height: 4rem;
+}
+
 .product__media-video .product__media-icon {
   opacity: 1;
 }
