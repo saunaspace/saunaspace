@@ -945,7 +945,7 @@ a.product__text {
 }
 
 .product-media-modal__toggle:hover {
-  color: rgba(var(--color-foreground), 0.75);
+  /* color: rgba(var(--color-foreground), 0.75); */
 }
 
 .product-media-modal__toggle .icon {
