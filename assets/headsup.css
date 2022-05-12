@@ -344,6 +344,13 @@ h2, h3 {
 .how-it-works [class^="col"] {
     height: 420px;
 }
+
+@media (max-width: 425px) {
+  .how-it-works [class^="col"] {
+    height: auto;
+}
+}
+
 .how-it-works p {
     text-align: center;
 }
