@@ -1054,6 +1054,9 @@ summary::-webkit-details-marker {
     box-sizing: content-box;
     margin: 0;
   }
+  .product--thumbnail .product__media-item:not(.is-active), .product--thumbnail_slider .product__media-item:not(.is-active) {
+	  display: none;
+  }
 
   .grid--peek .grid__item {
     min-width: 35%;
