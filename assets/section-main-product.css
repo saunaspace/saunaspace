@@ -722,7 +722,7 @@ a.product__text {
 }
 
 
-[aria-label="Close"], [aria-label="Close"]:hover {
+[aria-label="Close"] svg, [aria-label="Close"]:hover svg {
   filter: invert(0%):
 }
 
