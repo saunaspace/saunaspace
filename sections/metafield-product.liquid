@@ -448,7 +448,7 @@
                       <option
                         {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
                         {% if variant.available == false %}disabled{% endif %}
-                        value="{{ variant.id }}" data-upc="variant.barcode"
+                        value="{{ variant.id }}"
                       >
                         {{ variant.title }}
                         {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
@@ -558,12 +558,13 @@
             </div>
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}
+                {{current_variant}}
                 <strong>SKU: </strong>
                 <span class="theSKU">
                   <span class="variant-sku">{{ current_variant.sku }}</span>
                 </span>&nbsp;&nbsp;
               <strong>UPC: </strong>
-              <span class="theUPC">{{ product.selected_or_first_available_variant.barcode }}</span>
+              <span class="theUPC">{{ current_variant.barcode }}</span>
             </p>
 
               {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
