@@ -118,11 +118,12 @@
 
 .dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label
 .dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label {
-  box-shadow: 0 0 0 2px #fff;
-    -webkit-box-shadow: 0 0 0 2px #fff;
-    -moz-box-shadow: 0 0 0 2px #fff;
+  box-shadow: 0 0 0 3px #fff;
+    -webkit-box-shadow: 0 0 0 3px #fff;
+    -moz-box-shadow: 0 0 0 3px #fff;
 }
 
 .dark #bcpo .bcpo-images label.bcpo-front-image-label {
-  border-color: #000;
+  border-color: #fff;
+  border-width: 2px;
 }
