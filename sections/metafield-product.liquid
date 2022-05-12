@@ -558,7 +558,7 @@
             </div>
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}
-                {{current_variant.title}}
+                {{current_variant.sku}}
                 <strong>SKU: </strong>
                 <span class="theSKU">
                   <span class="variant-sku">{{ current_variant.sku }}</span>
