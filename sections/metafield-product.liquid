@@ -541,7 +541,7 @@
               <div class="warranty-trial">
                   <div class="pwt product-warranty">
                     
-                    {% if product.metafields.my_fields.custom_warranty != blank %}
+                    {% if product.metafields.my_fields.custom_warranty == blank %}
                     10-year Warranty
                     {% else %}
                       {{ product.metafields.my_fields.custom_warranty }}-year Warranty
