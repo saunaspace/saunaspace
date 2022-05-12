@@ -273,6 +273,14 @@ html.no-js .no-js-hidden {
   }
 }
 
+@media screen and (max-width: 600px) {
+	.section + .section {
+		max-width: 90%;
+		margin: 0 auto !important;
+	}
+	
+}
+
 .element-margin-top {
   margin-top: 5rem;
 }
