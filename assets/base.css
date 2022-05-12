@@ -902,6 +902,7 @@ summary::-webkit-details-marker {
 	.grid {
 		display: block;
 		margin: 0 auto;
+		text-align: center;
 	}
 	.grid .grid__item {
 		width: 100%;
