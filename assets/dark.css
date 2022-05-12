@@ -52,6 +52,11 @@
   	border-color: #fff !important; 
   }
 
+  .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on {
+
+    border-bottom: 4px solid #fff !important;
+  }
+
   .dark .pot-col-100 img {
     filter: brightness(0) invert(1);
   }
