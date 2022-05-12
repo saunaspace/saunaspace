@@ -225,6 +225,11 @@ h2, h3 {
     z-index: 2;
 }
 
+.inner-content  img {
+  max-width: 100%;
+  height: auto;
+}
+
 .optimize {
  display: flex;
  align-items: center;
