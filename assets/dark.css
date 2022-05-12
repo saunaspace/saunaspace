@@ -122,3 +122,7 @@
     -webkit-box-shadow: 0 0 0 1px #fff;
     -moz-box-shadow: 0 0 0 1px #fff;
 }
+
+.dark #bcpo .bcpo-images label.bcpo-front-image-label {
+  border-color: #000;
+}
