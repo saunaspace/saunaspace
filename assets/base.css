@@ -908,7 +908,7 @@ summary::-webkit-details-marker {
 		width: 100%;
 		display: inline-block;
 		margin: 0 auto;
-
+		max-width: none;
 	}
 }
 
@@ -1060,7 +1060,7 @@ summary::-webkit-details-marker {
   }
 
   .grid--2-col-tablet-down .grid__item {
-    width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
+   // width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
   }
 
   .slider--tablet.grid--peek.grid--2-col-tablet-down .grid__item,
