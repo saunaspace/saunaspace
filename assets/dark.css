@@ -42,7 +42,7 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .research-links h3, .dark .what-is, .dark .story, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize {
+  .dark .research-links h3, .dark .what-is, .dark .story, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize, .dark .story blockquote {
     color: #fff;
   }
 
@@ -98,3 +98,8 @@
   .dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
 
 	.dark .color-choice { outline: 2px solid #fff; width: 28px; height: 28px; }
+
+.dark .rc-arrow-right, .dark .rc-arrow-left {
+
+  filter: invert(52%) sepia(48%) saturate(726%) hue-rotate(351deg) brightness(92%) contrast(88%);
+}
