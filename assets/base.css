@@ -2298,6 +2298,13 @@ input[type='checkbox'] {
     border-bottom: 1px solid rgba(0,0,0,0) !important;
 }
 
+@media screen and(max-width: 750px) { 
+	a#cart-icon-bubble {
+		margin-bottom: 10px;
+	}
+	
+}
+
   .cart-count-bubble > span {
     margin-top: 0px;
     line-height: 25px;
