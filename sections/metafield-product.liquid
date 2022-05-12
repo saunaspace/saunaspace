@@ -510,9 +510,18 @@
               </div>
             {% endif %}
             <div class="op-30day-box">
-                
+
                     <div class="op-30day">
-                        <div style="width: 100%;"><strong>Order Processing:</strong> <span id="orderProcessing">
+                      {% if product.metafields.my_fields.thirty_day_returns == true %}
+                        <style>
+                          .op-30day {
+                            text-align: left !important;
+                          }
+                        </style>
+                      {% else %}
+                        <div style="width: 100%;">
+                      {% endif %}
+                        <strong>Order Processing:</strong> <span id="orderProcessing">
                           {% if product.metafields.lead-time.leadtime != blank %}
                          {{ product.metafields.lead-time.leadtime }}.
                          {% else %}
@@ -561,7 +570,6 @@
             </div>
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}
-                {{current_variant.sku}}
                 <strong>SKU: </strong>
                 <span class="theSKU">
                   <span class="variant-sku">{{ current_variant.sku }}</span>
