@@ -6070,7 +6070,7 @@ span[data-ml]::before {
 	width: 100%;
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1350px) {
 	#bcpo:not(.g-card) .bcpo-dropdown {
 		display: block !important;
 
