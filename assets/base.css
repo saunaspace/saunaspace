@@ -273,7 +273,7 @@ html.no-js .no-js-hidden {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1330px) {
 	.section + .section {
 		max-width: 90%;
 		margin: 0 auto !important;
@@ -1108,7 +1108,7 @@ summary::-webkit-details-marker {
   }
 
   .grid--2-col-tablet-down .grid__item {
-    width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+    //width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
   }
 
   .grid--1-col-tablet-down.grid--peek .grid__item {
