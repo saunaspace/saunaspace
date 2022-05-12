@@ -4272,6 +4272,7 @@ h1.product__title, .product-text h1, .product-name-mobile { color: #000;text-ali
 	font-weight: 400;
 	display: inline-block;
 	margin-top: 1em;
+	margin-bottom: 1em;
 }
 	.product-text h1 + p { margin-top: -1.5em; }
 		.product-text h1 + p.product-price { margin: 0; }
