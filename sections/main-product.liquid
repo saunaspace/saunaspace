@@ -560,13 +560,29 @@
          
 				
         {%- endfor -%}
-            <div class="op-30day"><div><strong>Order Processing:</strong> <span id="orderProcessing">
+        <div class="op-30day">
+          {% if product.metafields.my_fields.thirty_day_returns == true %}
+            <style>
+              .op-30day {
+                text-align: left !important;
+              }
+            </style>
+            <div>
+          {% else %}
+            <div style="width: 100%;">
+          {% endif %}
+            <strong>Order Processing:</strong> <span id="orderProcessing">
               {% if product.metafields.lead-time.leadtime != blank %}
-            {{product.metafields.lead-time.leadtime}}.
-            {% else %}
+             {{ product.metafields.lead-time.leadtime }}.
+             {% else %}
               1–3 days.
               {% endif %}
-            </span>  
+            </span>            
+            </div>
+            {% if product.metafields.my_fields.thirty_day_returns == true %}
+              <div>30-Day Returns</div>
+            {% endif %}
+        </div>
             <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>          
             </div>
               
