@@ -627,7 +627,16 @@
 						<span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
 						<p class="fineprint">Check your eligibility in minutes at checkout.</p>
 					</div>
-				</div>		
+				</div>
+        <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
+          {% assign current_variant = product.selected_or_first_available_variant %}
+            <strong>SKU: </strong>
+            <span class="theSKU">
+              <span class="variant-sku">{{ current_variant.sku }}</span>
+            </span>&nbsp;&nbsp;
+          <strong>UPC: </strong>
+          <span class="theUPC">{{ current_variant.barcode }}</span>
+        </p>		
       </div>
     </div>
   </div>
