@@ -891,6 +891,27 @@ summary::-webkit-details-marker {
   }
 }
 
+
+@media screen and (max-width: 990px) {
+	.grid .grid__item {
+		width: 42%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.grid {
+		display: block;
+		margin: 0 auto;
+	}
+	.grid .grid__item {
+		width: 100%;
+		display: inline-block;
+		margin: 0 auto;
+
+	}
+}
+
+
 .grid:last-child {
   margin-bottom: 0;
 }
