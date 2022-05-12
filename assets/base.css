@@ -905,7 +905,7 @@ summary::-webkit-details-marker {
 		text-align: center;
 	}
 	.grid .grid__item {
-		width: 100%;
+		width: auto;
 		display: inline-block;
 		margin: 0 auto;
 		max-width: none;
