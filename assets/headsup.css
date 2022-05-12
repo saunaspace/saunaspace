@@ -302,9 +302,9 @@ h2, h3 {
     align-items: center;
 }
 
-.what-is h2 [
+.what-is h2 {
     padding-top: 7rem;
-]
+}
 
 @media (max-width: 720px) {
   .what-is h2 {
