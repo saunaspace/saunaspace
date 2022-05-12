@@ -441,7 +441,7 @@ blockquote {
 	margin-top: 30px;
 }
 #bcpo .selector-wrapper > :last-child {
-	margin-bottom: 24px;
+	margin-bottom: 0;
 }
 
 .product-form__input.product-form__input--dropdown label.form__label{
