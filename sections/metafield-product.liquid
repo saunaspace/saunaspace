@@ -539,7 +539,14 @@
             </div>
             {% if product.metafields.my_fields.thirty_day_returns != true %}
               <div class="warranty-trial">
-                  <div class="pwt product-warranty">10-year Warranty</div><div class="pwt product-trial">100-day Trial</div>
+                  <div class="pwt product-warranty">
+                    
+                    {% if product.metafields.my_fields.custom_warranty != blank %}
+                    10-year Warranty
+                    {% else %}
+                      {{ product.metafields.my_fields.custom_warranty }}-year Warranty
+                    {% endif %}
+                  </div><div class="pwt product-trial">100-day Trial</div>
               </div>
             {% endif %}
             
