@@ -600,7 +600,14 @@
     ></script>
     {%- endif -%}
     <script>
-    // When the user scrolls the page, execute myFunction
+
+const mediaQueryList = window.matchMedia('(max-width: 767px)');
+
+if(mediaQueryList.matches) {
+  console.log('Window is max 767px');
+}
+else {
+      // When the user scrolls the page, execute myFunction
 window.onscroll = function() {myFunction()};
 
 // Get the header
@@ -620,6 +627,10 @@ function myFunction() {
     mains.classList.remove("sticky");
   }
 }
+}
+
+
+
 </script>
     <script>
       //https://www.ditdot.hr/en/dark-mode-website-tutorial

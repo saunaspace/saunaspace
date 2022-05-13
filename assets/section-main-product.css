@@ -716,6 +716,16 @@ a.product__text {
 
 }
 
+.product__media-icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+
+[aria-label="Close"] svg, [aria-label="Close"]:hover svg {
+  filter: invert(0%):
+}
+
 .product__media-video .product__media-icon {
   opacity: 1;
 }
@@ -877,10 +887,7 @@ a.product__text {
 }
 
 .product-media-modal__toggle {
-  background-color: rgb(var(--color-background));
-  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
   border-radius: 50%;
-  color: rgba(var(--color-foreground), 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -891,6 +898,9 @@ a.product__text {
   z-index: 2;
   top: 2rem;
   width: 4rem;
+  background-color: rgba(198,122,38,.7);
+  border: none;
+  color: #fff;
 }
 
 .product-media-modal__content .deferred-media {
@@ -935,7 +945,7 @@ a.product__text {
 }
 
 .product-media-modal__toggle:hover {
-  color: rgba(var(--color-foreground), 0.75);
+  /* color: rgba(var(--color-foreground), 0.75); */
 }
 
 .product-media-modal__toggle .icon {

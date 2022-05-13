@@ -222,7 +222,12 @@ h2, h3 {
     max-width: 960px;
     width: 100%;
     margin: 0 auto;
-    z-index: 10;
+    z-index: 2;
+}
+
+.inner-content  img {
+  max-width: 100%;
+  height: auto;
 }
 
 .optimize {
@@ -297,9 +302,15 @@ h2, h3 {
     align-items: center;
 }
 
-.what-is h2 [
-    padding-top: 7rem;
-]
+.what-is h2 {
+  margin-top: 3rem;
+}
+
+@media (max-width: 720px) {
+  .what-is h2 {
+    margin-top: 3rem;
+  }
+}
 
 .text-uppercase {
     text-transform: uppercase;
@@ -339,6 +350,13 @@ h2, h3 {
 .how-it-works [class^="col"] {
     height: 420px;
 }
+
+@media (max-width: 45em) {
+  .how-it-works [class^="col"] {
+    height: auto;
+}
+}
+
 .how-it-works p {
     text-align: center;
 }
@@ -395,6 +413,13 @@ h2, h3 {
     width: 260px;
     text-align: right;
     float: right;
+}
+
+@media (max-width: 45em) {
+  .story img {
+    float: none;
+    margin: 0 auto;
+  }
 }
 
 .custom-health-tracking {
