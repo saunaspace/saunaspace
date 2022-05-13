@@ -4403,7 +4403,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 .size-chart th { text-align: left; font-weight: 700; padding: 10px; font-size: 1.4rem; }
 .size-chart td { text-align: left; font-size: 1.4rem; border-bottom: 1px solid #939393; padding: 10px; }
 
-.atc-outOfStock { display: none; }
+/* .atc-outOfStock { display: none; } */
 
 .atc-box.outOfStockClass .atc-outOfStock { display: block; }
 .atc-box.outOfStockClass .atcMain { opacity: 0; height: 0; width: 0; padding: 0; }

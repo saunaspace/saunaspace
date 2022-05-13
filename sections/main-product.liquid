@@ -570,6 +570,8 @@
          
 				
         {%- endfor -%}
+
+        {% if product.selected_or_first_available_variant.available == true %}
         <div class="op-30day-box">
         <div class="op-30day">
           {% if product.metafields.my_fields.thirty_day_returns == true %}
@@ -598,6 +600,7 @@
             </div>
               
 						</div>
+            {% endif %}
             {% if product.metafields.my_fields.sidebar_description == true %}
               <div style="text-align: left;">
                 <p><strong>Details</strong></p>
