@@ -5828,7 +5828,7 @@ sup {
 	.stickyBG { display: none; }
 	
 	.free-shipping { font-size: 1.4rem; line-height: 1.3em; text-align: center;  }
-	.product-text h1 { display: none; }
+	/* .product-text h1 { display: none; } */
 	.product-name-mobile { display: block; font-size: 2.6rem; }
 	.product-wrap { flex-direction: column; margin: 20px 0; }
 	.product-gallery { max-width: 500px; margin: 0 auto 30px auto; }
