@@ -4297,7 +4297,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 }
 @media (min-width: 991px) {
 
-	.product-text h1 + p { margin-top: -4em; }
+	.product-text h1 + p { margin-top: -1.5em; }
 }
 		.product-text h1 + p.product-price { margin: 0; }
 	.product-text .btn { display: block; padding: 1em 0; }
