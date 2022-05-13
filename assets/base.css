@@ -2338,8 +2338,8 @@ input[type='checkbox'] {
 
 .header__icon,
 .header__icon--cart .icon {
-  height: auto;
-  width: auto;
+  /* height: auto;
+  width: auto; */
 }
 .cart-count-bubble > span {
     font-size: 1.6rem;
@@ -6313,4 +6313,17 @@ a#cart-icon-bubble {
 
 .product__modal-opener:hover .product__media-icon {
 	border: none;
+}
+
+
+#cart-icon-bubble .icon-cart-empty, #cart-icon-bubble .icon-cart {
+	display: none;
+}
+
+.cart-item cart-remove-button {
+	display: none !important;
+}
+
+.cart__footer {
+	padding: 0 4rem !important;
 }

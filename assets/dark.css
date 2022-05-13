@@ -127,3 +127,12 @@
   border-color: #fff;
   border-width: 2px;
 }
+
+
+@media (max-width: 990px) {
+  .dark .yc-acc {
+    color: #fff;
+    background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff)
+  }
+
+}

@@ -1,533 +1,520 @@
 <!DOCTYPE html>
-    <html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
-      <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
-        <meta name="referrer" content="origin">
-    
-        <title>{{ page_title }} test</title>
-    
-        {{ content_for_header }}
-    
-        {{ checkout_stylesheets }}
-        {{ checkout_scripts }}
-        {% include 'bread-checkout-options' %}
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
-        <script src="https://shopify.getbread.com/static/a1d10d47-e53e-49a4-b7c6-b5884a5aa307/checkout.js" type="application/javascript"></script>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
 
-        <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W5T77Q7');</script>
-<!-- End Google Tag Manager -->
-        <style>
-            .section__title.order-notes {
-              display: inline-block;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            width: 100%;
-            float: none;
-          }
-         [data-select-gateway="62750589128"] .radio__label__accessory, .content .shopify-cleanslate .paypalLight, .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:nth-child(2), .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:last-child,  .pickup-instructions {
-            display: none !important;
-            }
-          [data-select-gateway="62750589128"] img {
-          
-              margin-left: -11px;
-          }
-           .content .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6 {
-               margin-right: 0!important;
-             max-width: none !important;
-           }
-    
-            .page--logo-main body {
-            font-family: 'IBM Plex Mono', monospace !important;
-            font-weight: 400;
-          }
-          .page--logo-main h1,
-          .page--logo-main h2,
-          .page--logo-main .payment-due__price,
-          .page--logo-main .order-summary__emphasis,
-          .page--logo-main .step__footer__previous-link-content {
-              font-family: 'Work Sans', sans-serif !important;
-            font-weight: 600;
-          }
-          .page--logo-main .main .logo {
-            text-align: left !important;
-           }
-          .page--logo-main .breadcrumb {
-            display: flex;
-            flex-flow: row;
-            justify-content: flex-start !important;
-          }
-          .page--logo-main .section__header p {
-            display: none;
-          }
-          .page--logo-main .btn {
-            border-radius: 0 !important;
-            text-transform:  uppercase !important;
-            font-family: 'Work Sans', sans-serif !important;
-            font-weight: 600;
-          }
-          .page--logo-main .step__footer__continue-btn:hover {
-            background-color: #fff;
-            border: 1px solid #c67a26;
-            color: #c67a26;
-          }
-          .page--logo-main .field__input {
-            border-radius: 0 !important;
-          }
-          .page--logo-main #smsbump-consent-message {
-            font-family: 'Work Sans', sans-serif !important;
-            font-weight: 400;
-          }
-          img[alt="PayPal"] {
-            height:18px;
-          }
-          .policy-list__item, .step__footer__previous-link, #continue_button {
-            text-transform: capitalize;
-          }
-          .total-line--taxes .total-line__name {
-            position: relative;
-          }
-          .tooltip-checkout {
-            bottom: 3.5rem;
-            left: -3.5rem;
-            width: 850px;
-            font-size: 15px;
-            line-height: 1.3;
-            max-width: 850px;
-          }
-          .masterTooltip {
-              color: #8f8f8f;
-            width: 15px;
-            margin-left: .2rem;
-            transition: color 0.2s ease-in-out;
-          }
-          .masterTooltip:hover {
-              color: #ba571b;
-          }
-          .tooltip-tax {
-              text-align: left;
-            max-width: 400px;
-            margin-left: -5rem;
-            bottom: 2rem;
-          }
-          
-           @media (max-width: 767px) {
-            .tooltip-tax {
-              margin-left: 0;
-            }
-          }
-          .tooltip-is-active {
-            opacity: 1 !important;
-            visibility: visible !important;
-            height: auto;
-          }
-          .tooltip:after {
-            display: none !important;
-            content: none;
-          }    
-          @media (max-width: 767px) {
-            .tooltip-checkout {
-              width: 360px;
-            }
-          }
-          .tooltip-checkout h2 {
-            font-weight: bold;
-            font-style: normal;
-            font-size: 1.45rem;
-            color: #fff;
-          }
-    
-          .checkout-checkbox {
-              -webkit-appearance: checkbox;
-            -moz-appearance: checkbox;
-            appearance: checkbox;
-            margin: 1rem .5rem 1rem .1rem;
-          }
-          .ddu-label {
-            display: block;
-            position: relative;
-          }
-          .tooltip-ddu {
-            text-align: justify;
-            padding: 18px;	
-            
-          }
-          .tooltip-exw {
-            text-align: left;
-          }
-          /* popup styles */
-          .popup {
-            display: none;
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            z-index: 10;
-            -webkit-perspective: 1200px;
-            -moz-perspective: 1200px;
-            perspective: 1200px;
-          }
-         .popup-overlay {
-            background: rgba(0,0,0,0.75);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-         }
-         .popup-content {
-            position: absolute;
-            background: #fff;
-            width: 500px;
-            margin: -58px 0 0 -264px;
-            border-radius: 4px;
-            left: 50%;
-            top: 30%;
-            z-index: 11;
-            padding: 20px;
-            -webkit-backface-visibility: hidden;
-            -moz-backface-visibility: hidden;
-            backface-visibility: hidden;
-            -webkit-transform: translate3d(0,0,0);
-            -moz-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
-            -webkit-transform-style: preserve-3d;
-            -moz-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-         }
-         .popup-content p {
-            margin-bottom: 1rem;
-         }
-         .popup-content ul {
-            /* list-style-type: disc; */
-            margin-left: 1.5rem;
-         }
-         .close-popup {
-            display: inline-block;
-            position: absolute;
-            top: .5rem;
-            right: .5rem;
-            font-size: 26px;
-         }
-          @media (max-width: 767px) {
-            .popup-content {
-              max-width: 80%;
-              margin: 0 auto;
-              left: 1rem;
-              right: 1rem;
-              top: 10%;
-            }
-          }
-    
-        /* Animations */
-        .fadeIn {
-          animation: fadeIn 0.5s ease-in both;
-          -webkit-animation: fadeIn 0.5s ease-in both;
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    {% include 'bread-checkout-options' %}
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://shopify.getbread.com/static/a1d10d47-e53e-49a4-b7c6-b5884a5aa307/checkout.js" type="application/javascript"></script>
+    <style>
+        .section__title.order-notes {
+      	display: inline-block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        float: none;
+      }
+     [data-select-gateway="62750589128"] .radio__label__accessory, .content .shopify-cleanslate .paypalLight, .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:nth-child(2), .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:last-child,  .pickup-instructions {
+        display: none !important;
+		}
+      [data-select-gateway="62750589128"] img {
+      
+      	margin-left: -11px;
+      }
+       .content .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6 {
+       	margin-right: 0!important;
+         max-width: none !important;
+       }
+
+  	  .page--logo-main body {
+        font-family: 'IBM Plex Mono', monospace !important;
+        font-weight: 400;
+      }
+	  .page--logo-main h1,
+      .page--logo-main h2,
+      .page--logo-main .payment-due__price,
+      .page--logo-main .order-summary__emphasis,
+      .page--logo-main .step__footer__previous-link-content {
+      	font-family: 'Work Sans', sans-serif !important;
+        font-weight: 600;
+      }
+      .page--logo-main .main .logo {
+        text-align: left !important;
+       }
+      .page--logo-main .breadcrumb {
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-start !important;
+      }
+      .page--logo-main .section__header p {
+        display: none;
+      }
+      .page--logo-main .btn {
+        border-radius: 0 !important;
+        text-transform:  uppercase !important;
+        font-family: 'Work Sans', sans-serif !important;
+        font-weight: 600;
+      }
+      .page--logo-main .step__footer__continue-btn:hover {
+        background-color: #fff;
+        border: 1px solid #c67a26;
+        color: #c67a26;
+      }
+      .page--logo-main .field__input {
+        border-radius: 0 !important;
+      }
+      .page--logo-main #smsbump-consent-message {
+        font-family: 'Work Sans', sans-serif !important;
+        font-weight: 400;
+      }
+      img[alt="PayPal"] {
+        height:18px;
+      }
+      .policy-list__item, .step__footer__previous-link, #continue_button {
+        text-transform: capitalize;
+      }
+      .total-line--taxes .total-line__name {
+        position: relative;
+      }
+      .tooltip-checkout {
+        bottom: 3.5rem;
+        left: -3.5rem;
+        width: 850px;
+        font-size: 15px;
+        line-height: 1.3;
+        max-width: 850px;
+      }
+      .masterTooltip {
+      	color: #8f8f8f;
+        width: 15px;
+        margin-left: .2rem;
+        transition: color 0.2s ease-in-out;
+      }
+      .masterTooltip:hover {
+      	color: #ba571b;
+      }
+      .tooltip-tax {
+      	text-align: left;
+        max-width: 400px;
+        margin-left: -5rem;
+        bottom: 2rem;
+      }
+      
+       @media (max-width: 767px) {
+        .tooltip-tax {
+          margin-left: 0;
         }
-        @keyframes fadeIn {
-          from { opacity: 0; }
+      }
+      .tooltip-is-active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto;
+      }
+      .tooltip:after {
+        display: none !important;
+        content: none;
+      }    
+      @media (max-width: 767px) {
+        .tooltip-checkout {
+          width: 360px;
         }
-        @-webkit-keyframes fadeIn {
-          from { opacity: 0; }
-        }
-        .fadeOut {
-          animation: fadeOut 0.5s ease-out both;
-          -webkit-animation: fadeOut 0.5s ease-out both;
-        }
-        @keyframes fadeOut {
-          to { opacity: 0; }
-        }
-        @-webkit-keyframes fadeOut {
-          to { opacity: 0; }
-        }
+      }
+      .tooltip-checkout h2 {
+        font-weight: bold;
+        font-style: normal;
+        font-size: 1.45rem;
+        color: #fff;
+      }
+
+      .checkout-checkbox {
+      	-webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        appearance: checkbox;
+        margin: 1rem .5rem 1rem .1rem;
+      }
+      .ddu-label {
+        display: block;
+        position: relative;
+      }
+      .tooltip-ddu {
+        text-align: justify;
+        padding: 18px;	
         
-        .main__footer .policy-list__item  a {
-          color: #000; 
-          text-decoration: underline;
-          }
-          
-        .btn, .sp-modal-toggle {
-          background: #C67A26; 
+      }
+      .tooltip-exw {
+        text-align: left;
+      }
+      /* popup styles */
+      .popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        -webkit-perspective: 1200px;
+        -moz-perspective: 1200px;
+        perspective: 1200px;
+      }
+     .popup-overlay {
+        background: rgba(0,0,0,0.75);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+     }
+     .popup-content {
+        position: absolute;
+        background: #fff;
+        width: 500px;
+        margin: -58px 0 0 -264px;
+        border-radius: 4px;
+        left: 50%;
+        top: 30%;
+        z-index: 11;
+        padding: 20px;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+     }
+     .popup-content p {
+        margin-bottom: 1rem;
+     }
+     .popup-content ul {
+        /* list-style-type: disc; */
+        margin-left: 1.5rem;
+     }
+     .close-popup {
+        display: inline-block;
+        position: absolute;
+        top: .5rem;
+        right: .5rem;
+        font-size: 26px;
+     }
+      @media (max-width: 767px) {
+        .popup-content {
+          max-width: 80%;
+          margin: 0 auto;
+          left: 1rem;
+          right: 1rem;
+          top: 10%;
         }
-        </style>
-        
-        <!-- Hotjar  -->
-        <script>
-            (function(h,o,t,j,a,r){
-                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:1685243,hjsv:6};
-                a=o.getElementsByTagName('head')[0];
-                r=o.createElement('script');r.async=1;
-                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                a.appendChild(r);
-            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-        </script>
-          <!-- End of Hotjar  -->
-        
-        <!-- SMSBump opt-in  --> 
-          {% include 'smsbump_checkout_marketing_subscription' %}
-        <!-- End of SMSBump opt-in  --> 
-        
-    </head>
-      <body>
-        {{ skip_to_content_link }}
-        <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+      }
+
+    /* Animations */
+    .fadeIn {
+      animation: fadeIn 0.5s ease-in both;
+      -webkit-animation: fadeIn 0.5s ease-in both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+    }
+    @-webkit-keyframes fadeIn {
+      from { opacity: 0; }
+    }
+    .fadeOut {
+      animation: fadeOut 0.5s ease-out both;
+      -webkit-animation: fadeOut 0.5s ease-out both;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+    @-webkit-keyframes fadeOut {
+      to { opacity: 0; }
+    }
     
-        <div class="banner" data-header>
-          <div class="wrap">
+    .main__footer .policy-list__item  a {
+      color: #000; 
+      text-decoration: underline;
+  	}
+      
+    .btn, .sp-modal-toggle {
+      background: #C67A26; 
+    }
+    </style>
+    
+    <!-- Hotjar  -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1685243,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+  	<!-- End of Hotjar  -->
+    
+    <!-- SMSBump opt-in  --> 
+  	{% include 'smsbump_checkout_marketing_subscription' %}
+	<!-- End of SMSBump opt-in  --> 
+    
+</head>
+  <body>
+    {{ skip_to_content_link }}
+
+    <div class="banner" data-header>
+      <div class="wrap">
+        <a href="https://sauna.space/cart">{{ content_for_logo }}</a>
+      </div>
+    </div>
+
+    {{ order_summary_toggle }}
+
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main" role="main">
+          <div class="main__header">
+            <a href="https://sauna.space/cart">{{ content_for_logo }}</a>
+            {{ breadcrumb }}
+            <!-- {{ alternative_payment_methods }} -->
+          </div>
+          <div class="main__content">
+            {{ content_for_layout }}
+            <script>
+       
+                Checkout.$(document).on('page:load', function() {
+                  let cart_note_input = '<h2 class="section__title order-notes" style="margin-left: 8px" id="section-delivery-title">Order Notes</h2><textarea name="checkout[note]" placeholder="Enter order notes here like signature not required or hold my order, etc..." value="{{checkout.note}}" data-cart-notes-textarea maxlength="160" class="field__input" style="margin: 0 5px 3rem; width: 98%">{{ checkout.note }}</textarea>'
+//                   Checkout.$('.address-fields').append(cart_note_input)    
+                  Checkout.$(cart_note_input).insertAfter('.address-fields');
+                });
+                
+              </script>
+          </div>
+          <div class="main__footer">
+            {{ content_for_footer }}
+          </div>
+         
+        </div>
+        <div class="sidebar" role="complementary">
+          <div class="sidebar__header">
             <a href="https://sauna.space/cart">{{ content_for_logo }}</a>
           </div>
-        </div>
-    
-        {{ order_summary_toggle }}
-    
-        <div class="content" data-content>
-          <div class="wrap">
-            <div class="main" role="main">
-              <div class="main__header">
-                <a href="https://sauna.space/cart">{{ content_for_logo }}</a>
-                {{ breadcrumb }}
-                <!-- {{ alternative_payment_methods }} -->
-              </div>
-              <div class="main__content">
-                {{ content_for_layout }}
-                <script>
-           
-                    Checkout.$(document).on('page:load', function() {
-                      let cart_note_input = '<h2 class="section__title order-notes" style="margin-left: 8px" id="section-delivery-title">Order Notes</h2><textarea name="checkout[note]" placeholder="Enter order notes here like signature not required or hold my order, etc..." value="{{checkout.note}}" data-cart-notes-textarea maxlength="160" class="field__input" style="margin: 0 5px 3rem; width: 98%">{{ checkout.note }}</textarea>'
-    //                   Checkout.$('.address-fields').append(cart_note_input)    
-                      Checkout.$(cart_note_input).insertAfter('.address-fields');
-                    });
-                    
-                  </script>
-              </div>
-              <div class="main__footer">
-                {{ content_for_footer }}
-              </div>
-             
-            </div>
-            <div class="sidebar" role="complementary">
-              <div class="sidebar__header">
-                <a href="https://sauna.space/cart">{{ content_for_logo }}</a>
-              </div>
-              <div class="sidebar__content">
-                {{ content_for_order_summary }}
-              </div>
-            </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
           </div>
         </div>
+      </div>
+    </div>
+    
+    <div id="popup_default" class="popup">
+      <div class="popup-overlay"></div>
+      <div class="popup-content">
+          <a href="#" class="close-popup" data-id="popup_default">&times;</a>
+  <h2>Customer-Arranged Shipment Using Your Shipper</h2></br>
+          Even though it appears on your receipt as "Free" this shipping method varies in price and will be what your 3rd-party shipping courier charges you.</br></br>Choosing this option (EXW terms) means you assume responsibility for all aspects of your shipment once it is ready for pickup, including scheduling, insuring and paying for your shipment and customs.</br></br>
+          <h2>What Will I Be Responsible For?</h2></br>
+          After we notify you that your shipment is ready, schedule pickup with your courier and email back to us:</br></br>
+          <ul>
+            <li>1. Date & time desired for your pickup</li>
+            <li>2. Barcode label from your shipper</li>
+            <li>3. Waybill document</li>
+            <li>4. Signed customs invoice</li>
+          </ul>
+      </div>
+    </div>
+
+    <div id="popup_ddu" class="popup">
+      <div class="popup-overlay"></div>
+      <div class="popup-content">
+          <a href="#" class="close-popup" data-id="popup_ddu">&times;</a>
+ <h2>SaunaSpace Does Not Pre-Pay International Customs or Taxes</h2></br>
+          Deliver Duty Unpaid (DDU) means you, the recipient, must pay all of the following that apply to your shipment:</br></br>
+		  Value-Added-Tax (VAT), Goods and Services Tax (GST), Harmonized Sales Tax (HST), Provincial Sales Tax (PST), Customs Duties, Customs Fees, Broker Fees</br></br>
+          <h2>How This Does Process Work?</h2></br>
+          After your shipment leaves our facility:</br></br>
+			<ul>
+              <li>1. FedEx or DHL will call your shipping phone number to collect payment for your customs bill.</li>
+              <li>2. After customs bill is paid, your shipment will be released for final delivery to you.</li>
+			</ul></br>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+      (function($){
         
-        <div id="popup_default" class="popup">
-          <div class="popup-overlay"></div>
-          <div class="popup-content">
-              <a href="#" class="close-popup" data-id="popup_default">&times;</a>
-      <h2>Customer-Arranged Shipment Using Your Shipper</h2></br>
-              Even though it appears on your receipt as "Free" this shipping method varies in price and will be what your 3rd-party shipping courier charges you.</br></br>Choosing this option (EXW terms) means you assume responsibility for all aspects of your shipment once it is ready for pickup, including scheduling, insuring and paying for your shipment and customs.</br></br>
-              <h2>What Will I Be Responsible For?</h2></br>
-              After we notify you that your shipment is ready, schedule pickup with your courier and email back to us:</br></br>
-              <ul>
-                <li>1. Date & time desired for your pickup</li>
-                <li>2. Barcode label from your shipper</li>
-                <li>3. Waybill document</li>
-                <li>4. Signed customs invoice</li>
-              </ul>
-          </div>
-        </div>
-    
-        <div id="popup_ddu" class="popup">
-          <div class="popup-overlay"></div>
-          <div class="popup-content">
-              <a href="#" class="close-popup" data-id="popup_ddu">&times;</a>
-     <h2>SaunaSpace Does Not Pre-Pay International Customs or Taxes</h2></br>
-              Deliver Duty Unpaid (DDU) means you, the recipient, must pay all of the following that apply to your shipment:</br></br>
-              Value-Added-Tax (VAT), Goods and Services Tax (GST), Harmonized Sales Tax (HST), Provincial Sales Tax (PST), Customs Duties, Customs Fees, Broker Fees</br></br>
-              <h2>How This Does Process Work?</h2></br>
-              After your shipment leaves our facility:</br></br>
-                <ul>
-                  <li>1. FedEx or DHL will call your shipping phone number to collect payment for your customs bill.</li>
-                  <li>2. After customs bill is paid, your shipment will be released for final delivery to you.</li>
-                </ul></br>
-          </div>
-        </div>
-    
-        {{ tracking_code }}
-    
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
-        <script>
-          (function($){
-            
-            {% if checkout.note%}
-             var order_note = '{{checkout.note}}'
-    
-            Shopify.Checkout.OrderStatus.addContentBox(
-              '<h2 class="ordernotesh3">Order notes</h2><p style="margin-top: 10px">' + order_note + '</p>'
-            )
-            {% endif %}
-            setInterval(function(){ 
-    
-             if( $('#checkout_id_delivery-pickup').is(':checked')){
-                 $('.dynamic-checkout').hide();
-    
-               $('.alternative-payment-separator').hide();
-    
-    
-             } else {
-                  $('.dynamic-checkout').show();
-               $('.alternative-payment-separator').show();
-             }
-            }, 1000);
-            
-            $('[data-title-text="Refund policy"]').text(function () {
-              return $(this).text().replace("Refund policy", "Shipping & Returns Policy"); 
+        {% if checkout.note%}
+         var order_note = '{{checkout.note}}'
+
+        Shopify.Checkout.OrderStatus.addContentBox(
+          '<h2 class="ordernotesh3">Order notes</h2><p style="margin-top: 10px">' + order_note + '</p>'
+        )
+		{% endif %}
+        setInterval(function(){ 
+
+         if( $('#checkout_id_delivery-pickup').is(':checked')){
+             $('.dynamic-checkout').hide();
+
+           $('.alternative-payment-separator').hide();
+
+
+         } else {
+              $('.dynamic-checkout').show();
+           $('.alternative-payment-separator').show();
+         }
+        }, 1000);
+        
+        $('[data-title-text="Refund policy"]').text(function () {
+          return $(this).text().replace("Refund policy", "Shipping & Returns Policy"); 
+        });
+        $('[data-title-text="Terms of service"]').text(function () {
+          return $(this).text().replace("Terms of service", "Terms"); 
+        });
+        
+         // can do something like 
+         $.fn.openPopup = function( settings ) {
+          var elem = $(this);
+          // Establish our default settings
+          var settings = $.extend({
+            anim: 'fade'
+          }, settings);
+          elem.show();
+          elem.find('.popup-content').addClass(settings.anim+'In');
+        }
+
+        $.fn.closePopup = function( settings ) {
+          var elem = $(this);
+          // Establish our default settings
+          var settings = $.extend({
+            anim: 'fade'
+          }, settings);
+          elem.find('.popup-content').removeClass(settings.anim+'In').addClass(settings.anim+'Out');
+
+          setTimeout(function(){
+              elem.hide();
+              elem.find('.popup-content').removeClass(settings.anim+'Out')
+            }, 900);
+        }
+
+         // Click functions for popup
+         $('.open-popup').click(function(){
+            $('#'+$(this).data('id')).openPopup({
+               anim: (!$(this).attr('data-animation') || $(this).data('animation') == null) ? 'fade' : $(this).data('animation')
             });
-            $('[data-title-text="Terms of service"]').text(function () {
-              return $(this).text().replace("Terms of service", "Terms"); 
+         });
+        
+         $('.close-popup').click(function(){
+            $('#'+$(this).data('id')).closePopup({
+               anim: (!$(this).attr('data-animation') || $(this).data('animation') == null) ? 'fade' : $(this).data('animation')
             });
-            
-             // can do something like 
-             $.fn.openPopup = function( settings ) {
-              var elem = $(this);
-              // Establish our default settings
-              var settings = $.extend({
-                anim: 'fade'
-              }, settings);
-              elem.show();
-              elem.find('.popup-content').addClass(settings.anim+'In');
-            }
-    
-            $.fn.closePopup = function( settings ) {
-              var elem = $(this);
-              // Establish our default settings
-              var settings = $.extend({
-                anim: 'fade'
-              }, settings);
-              elem.find('.popup-content').removeClass(settings.anim+'In').addClass(settings.anim+'Out');
-    
-              setTimeout(function(){
-                  elem.hide();
-                  elem.find('.popup-content').removeClass(settings.anim+'Out')
-                }, 900);
-            }
-    
-             // Click functions for popup
-             $('.open-popup').click(function(){
-                $('#'+$(this).data('id')).openPopup({
-                   anim: (!$(this).attr('data-animation') || $(this).data('animation') == null) ? 'fade' : $(this).data('animation')
-                });
-             });
-            
-             $('.close-popup').click(function(){
-                $('#'+$(this).data('id')).closePopup({
-                   anim: (!$(this).attr('data-animation') || $(this).data('animation') == null) ? 'fade' : $(this).data('animation')
-                });
-             });
-    
-            setTimeout(function(){ 
-               $(".radio__label__primary").each( function () {
-                 
-                   if ($(this).data("shipping-method-label-title") === "Customer-Arranged Shipment") {
-                      console.log('EXW');
-                      $(this).append('<svg aria-hidden="true" data-exw focusable="false" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" ></path></svg>');
-                      $('[data-exw]').on('click', function(){
-                         console.log('exw clicked');
-                         $('#popup_default').openPopup();
-                      });
-                      $(this).parent('.radio__label').find('.content-box__emphasis').text('Varies');
-                      $('.edit_checkout').find('.step__sections').append('<label for="attributes[Agree-TOS]" class="ddu-label"><input type="checkbox" class="checkout-checkbox" name="attributes[Agree-TOS]" value="Yes" required>I understand that I must pay all Duties, Taxes and Fees when my package arrives to my country.<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" data-ddu=""></path></svg></label>');
-                     $('[data-ddu]').on('click', function(){
-                         console.log('ddu clicked');
-                         $('#popup_ddu').openPopup();
-                      }); 
-                   } 
-                });
-              
-              $( ".input-radio" ).change(function() {
-                if($('input[value="shopify-Customer-Arranged%20Shipment-0.00"]').is(':checked')){
-                    console.log('CAS is checked');
-                      $('#popup_default').openPopup();
-                }
-              });
-               if($('input[value="shopify-Customer-Arranged%20Shipment-0.00"]').is(':checked')){
-                    console.log('CAS is checked');
-                      $('#popup_default').openPopup();
-                }
-             }, 2000);
-    
-              setTimeout(function(){ 
-                 
-                if($("#tooltip").length < 1) {
-                  console.log('taxes');
-                  $(".total-line--taxes")
-                    .find(".total-line__name")
-                    .append('<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" data-tip=""></path></svg><div id="tooltip" class="tooltip tooltip-tax tooltip-checkout">The shipping address determines taxability of your order.');
-                  }
-    
-    
-               var toolTips = {
-                  timeout: null,
-                  html: '<div class="tooltip-checkout"></div>',
-    
-                init: function(){
-                   
-                   var event = ('ontouchstart' in window) ? 'click' : 'mouseenter mouseleave';
-    
-                   $('[data-tip]').on(event, function(){
-                      $('.tooltip-checkout').toggleClass('tooltip-is-active');
-                   });
-                   $('[data-pickup]').on(event, function(){
-                      $('.tooltip-pickup').toggleClass('tooltip-is-active');
-                   });
-                   $('[data-exu]').on(event, function(){
-                      $('.tooltip-exw').toggleClass('tooltip-is-active');
-                   });
-    //                $('[data-ddu]').on(event, function(){
-    //                   $('.tooltip-ddu').toggleClass('tooltip-is-active');
-    //                });
-    
-                },
-    
-               show: function(){
-                  $('.tooltip-checkout').css({opacity:0});
-                  clearTimeout(toolTips.timeout);
-                  $('.tooltip-checkout').html($(this).data('tip'));
-    
-                  var offset = $(this).offset(),
-                     height = $(this).outerHeight()+15,
-                     parWidth = $(this).outerWidth()/2,
-                     width  = (($('.tooltip-checkout').outerWidth())/2)-parWidth;
-                  $('.tooltip-checkout').css({top:offset.top+height, left:0, opacity:1});
-               },
-    
-               hide: function(){
-                  toolTips.timeout = setTimeout(function(){
-                     $('.tooltip-checkout').css({opacity:0});
-                  }, 150);
-               }
-            }
-    
+         });
+
+        setTimeout(function(){ 
+           $(".radio__label__primary").each( function () {
+             
+               if ($(this).data("shipping-method-label-title") === "Customer-Arranged Shipment") {
+                  console.log('EXW');
+                  $(this).append('<svg aria-hidden="true" data-exw focusable="false" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" ></path></svg>');
+                  $('[data-exw]').on('click', function(){
+                     console.log('exw clicked');
+                     $('#popup_default').openPopup();
+                  });
+                  $(this).parent('.radio__label').find('.content-box__emphasis').text('Varies');
+                  $('.edit_checkout').find('.step__sections').append('<label for="attributes[Agree-TOS]" class="ddu-label"><input type="checkbox" class="checkout-checkbox" name="attributes[Agree-TOS]" value="Yes" required>I understand that I must pay all Duties, Taxes and Fees when my package arrives to my country.<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" data-ddu=""></path></svg></label>');
+                 $('[data-ddu]').on('click', function(){
+                     console.log('ddu clicked');
+                     $('#popup_ddu').openPopup();
+                  }); 
+               } 
+            });
           
-             toolTips.init();
-                
-           }, 2500);
-            document.addEventListener('DOMContentLoaded', function() {
-                 console.log('running');
-                   document.querySelector('img[alt="Bread"]').setAttribute('src', 'https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-now-finance-over-time.png?v=1640116210');
-                });
-          })(jQuery);
-        </script>
-    
-      </body>
-    </html>
-    
+          $( ".input-radio" ).change(function() {
+            if($('input[value="shopify-Customer-Arranged%20Shipment-0.00"]').is(':checked')){
+            	console.log('CAS is checked');
+              	$('#popup_default').openPopup();
+            }
+          });
+           if($('input[value="shopify-Customer-Arranged%20Shipment-0.00"]').is(':checked')){
+            	console.log('CAS is checked');
+              	$('#popup_default').openPopup();
+            }
+         }, 2000);
+
+          setTimeout(function(){ 
+             
+            if($("#tooltip").length < 1) {
+              console.log('taxes');
+              $(".total-line--taxes")
+                .find(".total-line__name")
+                .append('<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" data-tip=""></path></svg><div id="tooltip" class="tooltip tooltip-tax tooltip-checkout">The shipping address determines taxability of your order.');
+          	}
+
+
+           var toolTips = {
+              timeout: null,
+              html: '<div class="tooltip-checkout"></div>',
+
+            init: function(){
+               
+               var event = ('ontouchstart' in window) ? 'click' : 'mouseenter mouseleave';
+
+               $('[data-tip]').on(event, function(){
+                  $('.tooltip-checkout').toggleClass('tooltip-is-active');
+               });
+               $('[data-pickup]').on(event, function(){
+                  $('.tooltip-pickup').toggleClass('tooltip-is-active');
+               });
+               $('[data-exu]').on(event, function(){
+                  $('.tooltip-exw').toggleClass('tooltip-is-active');
+               });
+//                $('[data-ddu]').on(event, function(){
+//                   $('.tooltip-ddu').toggleClass('tooltip-is-active');
+//                });
+
+            },
+
+           show: function(){
+              $('.tooltip-checkout').css({opacity:0});
+              clearTimeout(toolTips.timeout);
+              $('.tooltip-checkout').html($(this).data('tip'));
+
+              var offset = $(this).offset(),
+                 height = $(this).outerHeight()+15,
+                 parWidth = $(this).outerWidth()/2,
+                 width  = (($('.tooltip-checkout').outerWidth())/2)-parWidth;
+              $('.tooltip-checkout').css({top:offset.top+height, left:0, opacity:1});
+           },
+
+           hide: function(){
+              toolTips.timeout = setTimeout(function(){
+                 $('.tooltip-checkout').css({opacity:0});
+              }, 150);
+           }
+        }
+
+      
+         toolTips.init();
+            
+       }, 2500);
+        document.addEventListener('DOMContentLoaded', function() {
+             console.log('running');
+               document.querySelector('img[alt="Bread"]').setAttribute('src', 'https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-now-finance-over-time.png?v=1640116210');
+            });
+      })(jQuery);
+	</script>
+
+  </body>
+</html>

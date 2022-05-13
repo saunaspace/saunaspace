@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
+  <link rel="stylesheet" href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css">
+  <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;</script>
     <script>
       const colorScheme = localStorage.getItem("color-scheme") || "light-mode";
     </script>
@@ -468,58 +470,7 @@
       }
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-W5T77Q7");
-    </script>
-    <!-- End Google Tag Manager -->
-
-    <script>
-      (function (i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-          i[r] ||
-          function () {
-            (i[r].q = i[r].q || []).push(arguments);
-          }),
-          (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-      })(
-        window,
-        document,
-        "script",
-        "https://www.google-analytics.com/analytics.js",
-        "ga"
-      );
-
-      ga("create", "UA-56305503-1", "auto", { allowLinker: true });
-      ga("require", "linker");
-      ga("linker:autoLink", ["saunaspace.myshopify.com"]);
-      ga("send", "pageview");
-    </script>
-    <script type="text/javascript">
-      (function e() {
-        var e = document.createElement("script");
-        (e.type = "text/javascript"),
-          (e.async = true),
-          (e.src =
-            "//staticw2.yotpo.com/YwrSTIBwLO68MpdRmYQmA8PmhOpotElM91q2CYv3/widget.js");
-        var t = document.getElementsByTagName("script")[0];
-        t.parentNode.insertBefore(e, t);
-      })();
-    </script>
+  
     <!-- Hotjar Tracking Code for sauna.space -->
     <script>
       (function (h, o, t, j, a, r) {

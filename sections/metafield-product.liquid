@@ -7,7 +7,6 @@
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
-{{ 'lite-yt-embed.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -427,6 +426,7 @@
                 </variant-selects>
               {%- endif -%}
             {%- endunless -%}
+            {% if product.selected_or_first_available_variant.available == false %}
             <div class="atc-box">
                 <div class="atc-outOfStock">
                     
@@ -436,7 +436,7 @@
             </div>
             
             
-    
+            {% endif %}
             
         	<a href="javascript-void(0);" class="atcMain"></a>
             <noscript class="product-form__noscript-wrapper-{{ section.id }}">
@@ -586,27 +586,6 @@
               <span class="theUPC">{{ current_variant.barcode }}</span>
             </p>
 
-              {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
-
-              {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
-
-              <pickup-availability class="product__pickup-availabilities no-js-hidden"
-                {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %} available{% endif %}
-                data-root-url="{{ routes.root_url }}"
-                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                data-has-only-default-variant="{{ product.has_only_default_variant }}"
-              >
-                <template>
-                  <pickup-availability-preview class="pickup-availability-preview">
-                    {% render 'icon-unavailable' %}
-                    <div class="pickup-availability-info">
-                      <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
-                      <button class="pickup-availability-button link link--text underlined-link">{{ 'products.product.pickup_availability.refresh' | t }}</button>
-                    </div>
-                  </pickup-availability-preview>
-                </template>
-              </pickup-availability>
-            </div>
               
                  <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
           {%- when 'rating' -%}
@@ -794,61 +773,12 @@
     </section>
   </section>
 
-  
-
-{% javascript %}
-  class ProductModal extends ModalDialog {
-    constructor() {
-      super();
-    }
-
-    hide() {
-      super.hide();
-    }
-
-    show(opener) {
-      super.show(opener);
-      this.showActiveMedia();
-    }
-
-    showActiveMedia() {
-      this.querySelectorAll(`[data-media-id]:not([data-media-id="${this.openedBy.getAttribute("data-media-id")}"])`).forEach((element) => {
-          element.classList.remove('active');
-        }
-      )
-      const activeMedia = this.querySelector(`[data-media-id="${this.openedBy.getAttribute("data-media-id")}"]`);
-      const activeMediaTemplate = activeMedia.querySelector('template');
-      const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null;
-      activeMedia.classList.add('active');
-      activeMedia.scrollIntoView();
-
-      const container = this.querySelector('[role="document"]');
-      container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
-
-      if (activeMedia.nodeName == 'DEFERRED-MEDIA' && activeMediaContent && activeMediaContent.querySelector('.js-youtube'))
-        activeMedia.loadContent();
-    }
-  }
-
-  if (!customElements.get('product-modal')) customElements.define('product-modal', ProductModal);
-{% endjavascript %}
-
-{% if product.media.size > 0 %}
-  <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
-{% endif %}
-
-<script src="{{ 'select2.min.js' | asset_url }}" async></script>
-{% include 'product-page' %}
+{% render 'product-page' %}
 <script>
 $(document).ready(function() {
 
 
 
-  	//var formatPlug;
-	$(".select-icons").select2({
-		templateResult: formatPlug,
-		minimumResultsForSearch: Infinity
-	});
 	$(".product-info-details a").removeAttr('target');
 	
 	$(".pid-col-text a").each(function() {
