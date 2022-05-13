@@ -4281,7 +4281,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
  }
 
 @media (min-width: 991px) {
-	h1.product__title, .product-text h1, .product-name-mobile { 
+	h1.funky-margin { 
 		margin-bottom: 4rem;
 	}
 }

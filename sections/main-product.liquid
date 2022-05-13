@@ -218,7 +218,7 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title" {{ block.shopify_attributes }}>
+            <h1 class="product__title funky-margin" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
             </h1>
             {% if product.metafields.my_fields.why_we_love_it != blank %}
