@@ -214,9 +214,11 @@
           {%- when '@app' -%}
             {% render block %}
           {%- when 'text' -%}
+          {% if block.settings.text != blank %}
             <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
             </p>
+            {%- endif -%}
           {%- when 'title' -%}
             <h1 class="product__title funky-margin" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
