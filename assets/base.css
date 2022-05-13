@@ -4280,7 +4280,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	
  }
 
-@media screen and(min-width: 991px) {
+@media (min-width: 991px) {
 	h1.product__title, .product-text h1, .product-name-mobile { 
 		margin-bottom: 4rem;
 	}
