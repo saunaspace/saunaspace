@@ -571,8 +571,8 @@
 				
         {%- endfor -%}
 
-        {% if product.selected_or_first_available_variant.available == true %}
         <div class="op-30day-box">
+          {% if product.selected_or_first_available_variant.available == true %}
         <div class="op-30day">
           {% if product.metafields.my_fields.thirty_day_returns == true %}
             <style>
@@ -599,8 +599,8 @@
             <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>          
             </div>
               
-						</div>
             {% endif %}
+						</div>
             {% if product.metafields.my_fields.sidebar_description == true %}
               <div style="text-align: left;">
                 <p><strong>Details</strong></p>
