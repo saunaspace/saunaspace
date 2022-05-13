@@ -4277,7 +4277,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	font-size: 3.2rem; 
 	font-weight: 700; 
 	padding-bottom: 1em; 
-	
+	margin-bottom: 0;
  }
 
 @media (min-width: 991px) {
