@@ -108,7 +108,7 @@
   .dark .qty-add, .dark .acc-term { background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff); }
   .dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
 
-	.dark .color-choice { outline: 2px solid #fff; width: 28px; height: 28px; }
+	.dark .color-choice { border: 2px solid #fff; width: 28px; height: 28px; }
 
 .dark .rc-arrow-right, .dark .rc-arrow-left {
 
@@ -118,9 +118,9 @@
 
 .dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label
 .dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label {
-  box-shadow: 0 0 0 3px #fff;
-    -webkit-box-shadow: 0 0 0 3px #fff;
-    -moz-box-shadow: 0 0 0 3px #fff;
+  box-shadow: inset 0 0 0 3px #fff;
+    -webkit-box-shadow: inset 0 0 0 3px #fff;
+    -moz-box-shadow: inset 0 0 0 3px #fff;
 }
 
 .dark #bcpo .bcpo-images label.bcpo-front-image-label {
@@ -129,7 +129,14 @@
 }
 
 
-@media (max-width: 990px) {
+@media (min-width: 750px) and (max-width: 990px) {
+  .dark .yc-acc {
+    color: #fff;
+    background-image: linear-gradient(#000,#000),linear-gradient(#000,#000)
+  }
+}
+
+@media (max-width: 750px) {
   .dark .yc-acc {
     color: #fff;
     background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff)

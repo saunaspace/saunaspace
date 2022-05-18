@@ -1,0 +1,134 @@
+<div class="related-products">
+		
+    <h2>You may also like</h2>
+
+    {% assign productMetafields = all_products[item.product.metafields.product.cross_sell_product_1] %}
+    {% assign customrecommendations = all_products[item.product.metafields.my_fields.product_recommendations] %}
+    <script>
+        console.log( 'customrecommendations ' + {{customrecommendations}});
+    </script>
+
+<script>
+    console.log( 'products ' + {{collections.saunas.products}});
+</script>
+{% for product in collections.saunas.products %}
+
+<script>
+    console.log( 'product ' + {{product}});
+</script>{%- endfor -%} 
+
+{% for singlerecommendation in customrecommendations %}
+
+<script>
+    console.log( 'single recommendation ' + {{ singlerecommendation.title }});
+</script>
+<!-- 
+				  {% assign lazy_load = false %}
+				  {%- if forloop.index > 2 -%}
+					{%- assign lazy_load = true -%}
+				  {%- endif -%}
+			  
+				  <li class="grid__item">
+					{% render 'card-product',
+					  card_product: product,
+					  media_aspect_ratio: section.settings.image_ratio,
+					  show_secondary_image: section.settings.show_secondary_image,
+					  show_vendor: section.settings.show_vendor,
+					  show_rating: section.settings.show_rating,
+					  lazy_load: lazy_load
+					%}
+				  </li>
+                -->
+				{%- endfor -%} 
+
+    <div class="rc-arrows">
+        <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onClick="scrollRelated(1);"  loading="lazy"/>
+        <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onClick="scrollRelated(-1);" loading="lazy" />
+        <div class="review-carousel related-carousel">
+        <!--the include below is looking for rsRP -->
+        <!-- {% for recommendation in recommendations %}    
+      
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/sauna-stool" ><img src="{{ 'sauna-stool-tile.jpg' | asset_url }}" alt="Sauna Stool" class="pt-img"  loading="lazy"/></a>
+                    <a href="/products/sauna-stool" class="pt-name">{{ products[recommendation].title }}</a>
+                
+                    <p class="pt-price etica price8">$249.99</p>
+                
+            </div>
+
+            {% endfor %} -->
+
+
+
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/photon-infrared-therapy-light" ><img src="{{ 'photon-infrared-therapy-light-tile.jpg' | asset_url }}" alt="Photon Infrared Therapy Light" class="pt-img"  loading="lazy"/></a>
+                    <a href="/products/photon-infrared-therapy-light" class="pt-name">Photon Infrared Therapy Light</a>
+                
+                    <p class="pt-price etica price3">$349.99</p>
+                
+            </div>
+
+
+
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/infini-tee" ><img src="{{ 'infini-tee-tile.jpg' | asset_url }}" alt="Infini Tee" class="pt-img"  loading="lazy"/></a>
+                    <a href="/products/infini-tee" class="pt-name">Infini Tee</a>
+                
+                        <p class="pt-price etica">From: $24.99</p>
+                    
+            </div>
+
+
+
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/saunaspace-bath-towel" ><img src="{{ 'saunaspace-bath-towel-tile.jpg' | asset_url }}" alt="SaunaSpace Bath Towel" class="pt-img" loading="lazy" /></a>
+                    <a href="/products/saunaspace-bath-towel" class="pt-name">SaunaSpace Bath Towel</a>
+                
+                    <p class="pt-price etica price24">$29.99</p>
+                
+            </div>
+
+
+
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/its-easy-being-green-book" ><img src="{{ 'its-easy-being-green-book-tile.jpg' | asset_url }}" alt="It’s Easy Being Green: How Conscious Consumers and Ecopreneurs Can Save the World" class="pt-img" loading="lazy" /></a>
+                    <a href="/products/its-easy-being-green-book" class="pt-name">It’s Easy Being Green: How Conscious Consumers and Ecopreneurs Can Save the World</a>
+                
+                    <p class="noMargin">Aviva Peltin</p>
+                
+                    <p class="pt-price etica price45">$16.99</p>
+                
+            </div>
+
+
+
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/thermalight-infrared-bulb" ><img src="{{ 'thermalight-infrared-bulb-tile.jpg' | asset_url }}" alt="ThermaLight Infrared Bulb" class="pt-img" loading="lazy" /></a>
+                    <a href="/products/thermalight-infrared-bulb" class="pt-name">ThermaLight Infrared Bulb</a>
+                
+                        <p class="pt-price etica">From: $89.99</p>
+                    
+            </div>
+
+
+
+            <div class="product-tile" style="flex-shrink: 0;">
+                
+                    <a href="/products/saunaspace-sticker" ><img src="{{ 'saunaspace-sticker-tile.jpg' | asset_url }}" alt="SaunaSpace Sticker" class="pt-img"  loading="lazy" /></a>
+                    <a href="/products/saunaspace-sticker" class="pt-name">SaunaSpace Sticker</a>
+                
+                    <p class="pt-price etica price27">$4.99</p>
+                
+            </div>
+
+
+        </div>
+    </div>
+                    
+    </div>

@@ -32,6 +32,9 @@
 		<h4>Upcoming Events</h4>
 
 {% assign events = page.metafields.event-page.eventpage | split: '|' %}
+<script>
+  console.log( {{page.metafields.event-page.eventpage}});
+</script>
 {% for event in events %}    
     <div class="event-box">
 				<div class="event-text">

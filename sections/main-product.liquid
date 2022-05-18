@@ -593,32 +593,7 @@
               </div>
             {% endif %}
 
-				<div class="pay-over-time">
-					<div class="pot-head">Pay Over Time</div>
-					<div class="pot-col">
-						<img src="{{ 'splitit.svg' | asset_url }}" width="60" alt="SplitIt" loading="lazy" />
-						<span data-ml="splitItSummary">Monthly payments using your credit card. 0% interest.</span>
-						<a href="javascript:void(0)" onClick="potMore('splitit')">Learn More</a>
-					</div>
-					<div class="pot-divider"></div>
-					<div class="pot-col">
-						<img src="{{ 'bread.png' | asset_url }}" width="60" alt="Bread Financing" loading="lazy" />
-						<span data-ml="breadSummary">Simple loan with monthly payments as low as 0% APR for 6 months.*</span>
-						<a href="javascript:void(0)" onClick="potMore('bread')">Learn More</a>
-					</div>
-					<div class="pot-col-100 hideMe" id="splititCol">
-						<a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy"  /></a>
-						<img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" loading="lazy" />
-						<span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
-						<p class="fineprint">You can choose this option at checkout.</p>
-					</div>
-					<div class="pot-col-100 hideMe" id="breadCol">
-						<a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy" /></a>
-						<img src="{{ 'bread.png' | asset_url }}" width="70" alt="Bread Financing" loading="lazy"/>
-						<span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
-						<p class="fineprint">Check your eligibility in minutes at checkout.</p>
-					</div>
-				</div>
+            {% render 'pay-over-time' %}
         <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em; display: none;">
           {% assign current_variant = product.selected_or_first_available_variant %}
             <strong>SKU: </strong>

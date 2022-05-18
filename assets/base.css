@@ -3926,12 +3926,23 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 
 }	
 
-	.discount-box .textEntry { margin: 0 15px 0 0; }
-	.discount-box button { width: 90px !important; height: 47px; background:#fff; }
-	
-	.btn.btn-checkout { display: block; text-align: center; padding: 1em 0; font-size: 1.6rem; cursor: pointer; }
+.discount-box .textEntry { margin: 0 15px 0 0; }
+.discount-box button { width: 90px !important; height: 47px; background:#fff; }
+
+.btn.btn-checkout { 
+	display: block; 
+	text-align: center; 
+	padding: 1em 0; 
+	font-size: 1.6rem; 
+	cursor: pointer; 
+	margin: 0 auto;
+}
 
 /* END YOUR CART */
+.your-cart cart-items.page-width.is-empty {
+	margin-bottom: 100px;
+}
+
 
 /* REVIEWS */
 
@@ -4120,7 +4131,14 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 .shop-all h2 { text-align: left; }
 
 .pc-summary { display: flex; align-items: center; margin-bottom: 1em;}
-	.pc-summary a { text-decoration: none; color: #000; font-weight: 700; display: block; margin-left: 1em; }
+	.pc-summary a { 
+		text-decoration: none; 
+		color: #000; 
+		font-weight: 700; 
+		display: none; 
+		margin-left: 1em; 
+	
+	}
 	.pc-summary p { margin-bottom: 0; }
 	
 .product-tiles {
@@ -4295,10 +4313,9 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	display: inline-block;
 	margin-bottom: 1em;
 }
-@media (min-width: 991px) {
 
 	.product-text h1 + p { margin-top: -1.5em; }
-}
+
 		.product-text h1 + p.product-price { margin: 0; }
 	.product-text .btn { display: block; padding: 1em 0; }
 	.product-price { font-size: 2rem; }
@@ -6030,9 +6047,7 @@ sup {
 		.fullBG-text p { font-size: 1.3rem; }
 		
 	.product-color { background: none; line-height: 1.3em;}
-	
-	.product-text h1 + p { margin-top: 0; }
-			
+				
 	.noMargin { margin-bottom: 0 !important; }
 
 }
