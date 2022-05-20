@@ -275,13 +275,13 @@
 					<p class="checkmark-list">EMF-blocking shield</p>
 					<p class="checkmark-list">Holistic escape</p>
 				</div>
-				<!--the include below is looking for rsRP -->
-				<!--#include virtual="/res/relatedProducts.asp" -->
+
 				<ul id="product-grid" data-id="{{ section.id }}" class="
 				grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
 				{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
 				  grid--{{ section.settings.columns_desktop }}-col-desktop
 				{% endif %}">
+				
 				{% for product in collections.saunas.products %}
 				  {% assign lazy_load = false %}
 				  {%- if forloop.index > 2 -%}
