@@ -6356,4 +6356,5 @@ a#cart-icon-bubble {
     font-weight: 700!important;
     font-family: 'UntitledSans', sans-serif!important;
     font-size: 1.5rem!important;
+	text-transform: uppercase !important;
 }
