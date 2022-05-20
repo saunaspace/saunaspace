@@ -61,7 +61,7 @@
     border-bottom: 4px solid #fff !important;
   }
 
-  .dark .pot-col-100 img {
+  .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img {
     filter: brightness(0) invert(1);
   }
   .dark .pot-close img {
@@ -142,4 +142,8 @@
     background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff)
   }
 
+}
+
+.dark .gNego.gNego div, .dark .gNego.gNego a, .dark .shopify-section h1.main-page-title {
+  color: #fff !important;
 }
