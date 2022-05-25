@@ -6,7 +6,9 @@
   	background: #000;
   	transition: all .25s;
   }
-
+.dark ::selection {
+  background: #C67A26;
+}
   .stuck .logo, .sticky .logo {
     background-image: url(logo_symbol.svg);
     top: 8px;

@@ -24,6 +24,18 @@
         width: 100%;
         float: none;
       }
+      .product td {
+        border: none;
+      }
+
+      .product-thumbnail {
+        border: none;
+        background: transparent;
+      }
+
+      .product-thumbnail::after {
+        border: none;
+      }
      [data-select-gateway="62750589128"] .radio__label__accessory, .content .shopify-cleanslate .paypalLight, .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:nth-child(2), .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:last-child,  .pickup-instructions {
         display: none !important;
 		}
@@ -378,7 +390,10 @@
         }, 1000);
         
         $('[data-title-text="Refund policy"]').text(function () {
-          return $(this).text().replace("Refund policy", "Shipping & Returns Policy"); 
+          return $(this).text().replace("Refund policy", "Shipping & Returns"); 
+        });
+        $('[data-title-text="Privacy policy"]').text(function () {
+          return $(this).text().replace("Privacy policy", "Privacy"); 
         });
         $('[data-title-text="Terms of service"]').text(function () {
           return $(this).text().replace("Terms of service", "Terms"); 
