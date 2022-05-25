@@ -444,14 +444,6 @@
       "dark.css" | asset_url | stylesheet_tag
     }}
 
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-W5T77Q7');</script>
-  <!-- End Google Tag Manager -->
-
     {%- unless settings.type_body_font.system? -%}
     <link
       rel="preload"
@@ -705,8 +697,5 @@ $(document).ajaxComplete(function(event, request, settings){
 })
   {% endif %}
 </script>
-  <script src="https://myminicart.pro/mini/js/minicart.js"></script>
-  <div class="sd_dropdown-mini-cart"><div class="sd_dropdown-minibag"> BAG <span class="dropcount"></span></div><div class="sd_dropdown-inner-area"><div class="sd_dropdown-cart-items"></div> </div></div>																
-
-  {% include 'mini-ajax-cart' %}</body>
+  <script src="https://myminicart.pro/mini/js/minicart.js"></script></body>
 </html>
