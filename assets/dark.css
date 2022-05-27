@@ -44,12 +44,16 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .product-media-modal {
+  .dark .product-media-modal, .dark .eufhEh.eufhEh  {
     background-color: #000;
   }
 
-  .dark .research-links h3, .dark .what-is, .dark .story, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize, .dark .story blockquote {
-    color: #fff;
+  .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize, .dark .story blockquote {
+    color: #fff !important;
+  }
+
+  .dark .gHjTpK.gHjTpK a {
+    color: #fff !important;
   }
 
   .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,
