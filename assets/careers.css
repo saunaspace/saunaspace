@@ -210,7 +210,6 @@
   }
   
   p {
-      font-size: 18px;
       font-weight: normal;
   }
   
@@ -228,14 +227,6 @@
   .inner-content  img {
     max-width: 100%;
     height: auto;
-  }
-  
-
-  
-  .optimize p {
-      max-width: 450px;
-      font-size: 18px;
-      margin-bottom: 4rem;
   }
   
   .mono-type {
@@ -261,9 +252,39 @@
       box-shadow: none;
       color: #fff;
   }
-  
+
+  .intro {
+      padding: 4rem 0;
+  }
+
+  .intro a {
+    color: #000;
+    text-decoration: underline;
+  }
+  .intro img {
+      display: inline-block;
+  }
 
   
   .text-uppercase {
       text-transform: uppercase;
   }
+
+.openings {
+    padding: 3rem 0;
+}
+
+.opening img {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    vertical-align: middle;
+}
+
+.opening li {
+    margin-bottom: .5em;
+}
+
+.opening h3 {
+    margin: 3rem 0;
+}
