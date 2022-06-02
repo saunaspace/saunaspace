@@ -333,13 +333,16 @@
   margin-left: 0;
   margin-right: 0;
 }
-
+.login a.login-create {
+  display: inline-block;
+}
 .login .field + a {
   margin-top: 1rem;
 }
 
 .login p {
   margin: 1.5rem 0;
+  font-size: 1.4rem;
 }
 
 .login h3 {
@@ -690,6 +693,8 @@ label[for='AddressProvinceNew'] {
 
 li[data-address] {
   margin-top: 5rem;
+  text-align: left;
+  list-style: none;
 }
 
 .addresses [aria-expanded='false'] ~ div[id] {

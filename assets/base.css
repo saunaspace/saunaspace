@@ -5206,6 +5206,10 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	.facebook { background-image: url(facebook.svg); }
 	.twitter { background-image: url(twitter.svg); }
 	.instagram { background-image: url(instagram.svg); }
+	.youtube { background-image: url(youtube1.svg);
+		width: 38px;
+		height: 38px;
+ }
 
 .overlay {
 	background: rgba(0,0,0,0);
@@ -5220,7 +5224,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	display: none;
 }
 
-.btn, .product-form__submit {
+.btn, .product-form__submit, .customer button {
 	text-transform: uppercase;
 	color: #fff;
 	font-weight: 700;
@@ -5268,7 +5272,9 @@ h1 {
 	font-size: 4rem;
 	margin-bottom: .5em;
 }
-
+.customer h1 {
+	color: #000
+}
 h2 {
 	font-size: 3rem;
 	font-weight: 700;

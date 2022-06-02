@@ -7,8 +7,10 @@
   	transition: all .25s;
   }
 .dark ::selection {
-  background: #C67A26;
+  /* background: #C67A26; */
+  background: #555;
 }
+
   .stuck .logo, .sticky .logo {
     background-image: url(logo_symbol.svg);
     top: 8px;
@@ -48,7 +50,11 @@
     background-color: #000;
   }
 
-  .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, .dark .optimize, .dark .story blockquote {
+  .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
+  .dark .optimize, .dark .story blockquote,
+  .dark .intro p, .dark .intro a, .dark .people h3, .dark .people h2, .dark .people p,
+  .dark .self p, .dark .self a, .dark .self h3, .dark .openings a, .dark .opening p, .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, .dark .opening li::marker, .dark .opening span
+  {
     color: #fff !important;
   }
 
@@ -67,7 +73,7 @@
     border-bottom: 4px solid #fff !important;
   }
 
-  .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img {
+  .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
     filter: brightness(0) invert(1);
   }
   .dark .pot-close img {

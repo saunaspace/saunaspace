@@ -210,11 +210,24 @@
   }
   
   p {
-      font-weight: normal;
+    font-weight: 400;
+    font-family: "Work Sans";
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+     margin-bottom: 3rem;
   }
   
   h2, h3 {
       text-align: left;
+      margin-bottom: .2rem;
+  }
+
+  h3 {
+    color: rgb(0, 0, 0);
+    font-family: "Work Sans";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 28px;
   }
   
   .inner-content {
@@ -257,28 +270,38 @@
       padding: 4rem 0;
   }
 
-  .intro a {
+  .intro a, .openings a, .opening a {
     color: #000;
     text-decoration: underline;
   }
-  .intro img {
+  .intro img, .openings img, .opening img {
       display: inline-block;
   }
 
-  
+
   .text-uppercase {
       text-transform: uppercase;
   }
+
+.self, .people {
+  margin-bottom: 3rem;
+}
 
 .openings {
     padding: 3rem 0;
 }
 
+.openings a {
+  margin-top: 2rem;
+  display: inline-block;
+}
+
 .opening img {
-    display: inline-block;
-    width: 34px;
-    height: 34px;
-    vertical-align: middle;
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  vertical-align: text-top;
+  margin-left: 1rem;
 }
 
 .opening li {

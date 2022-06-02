@@ -68,9 +68,7 @@
         flex-flow: row;
         justify-content: flex-start !important;
       }
-      .page--logo-main .section__header p {
-        display: none;
-      }
+ 
       .page--logo-main .btn {
         border-radius: 0 !important;
         text-transform:  uppercase !important;
@@ -378,16 +376,13 @@
         setInterval(function(){ 
 
          if( $('#checkout_id_delivery-pickup').is(':checked')){
-             $('.dynamic-checkout').hide();
-
-           $('.alternative-payment-separator').hide();
-
-
+          $('.dynamic-checkout').hide();
+          $('.alternative-payment-separator').hide();
          } else {
-              $('.dynamic-checkout').show();
-           $('.alternative-payment-separator').show();
+          $('.dynamic-checkout').show();
+          $('.alternative-payment-separator').show();
          }
-        }, 1000);
+        }, 2000);
         
         $('[data-title-text="Refund policy"]').text(function () {
           return $(this).text().replace("Refund policy", "Shipping & Returns"); 

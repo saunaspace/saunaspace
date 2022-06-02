@@ -12,11 +12,6 @@
         <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onClick="scrollRelated(-1);" loading="lazy" />
         <ul class="review-carousel related-carousel">
             {% for singlerecommendation in customrecommendations %}
-
-            <script>
-                console.log( 'single recommendation ' + {{ singlerecommendation.title }});
-            </script>
-
      {% assign lazy_load = false %}
 				  {%- if forloop.index > 2 -%}
 					{%- assign lazy_load = true -%}

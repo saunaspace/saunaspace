@@ -132,9 +132,9 @@ table:not([class]) th{
 button.product-form__submit.button.button--full-width.button--primary:before, button.product-form__submit.button.button--full-width.button--primary:after {
     display: none;
 }
-div#bcpo-select-option-0 ul li {
-    padding-left: 34px !important;
-}
+/* div#bcpo-select-option-0 ul li {
+  //  padding-left: 34px !important;
+} */
 div#bcpo-select-option-0 ul li span {
     font-size: 1.4rem !important;
     font-weight: 700;
@@ -1212,8 +1212,9 @@ a.product__text {
   top: 0;
   left: 0;
   display: block;
-  height: 100%;
+  height: auto;
   width: 100%;
+  max-width: 86%;
   padding: 0;
   color: rgb(var(--color-base-text));
   cursor: pointer;

@@ -44,10 +44,30 @@
                 data-label="{{ 'customer.order.product' | t }}"
               >
                 <div>
+                
                   {%- if line_item.url != blank -%}
-                    <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+                    <a href="{{ line_item.url }}">
+                      {{ line_item.title }}<br /><br />
+                      <img src="{{ line_item.image | img_url: '220x220', crop: 'center' }}"
+                      class="cart-item__image"
+                      alt="{{ line_item.image.alt | escape }}"
+                      loading="lazy"
+                      width="220"
+                      height="{{ 220 | divided_by: line_item.image.aspect_ratio | ceil }}"
+                    >
+                     </a>
                   {%- else -%}
-                    <p>{{ line_item.title }}</p>
+                    <p>{{ line_item.title }}
+                      <a href="{{ line_item.url }}">
+                        {{ line_item.title }}<br /><br />
+                        <img src="{{ line_item.image | img_url: '220x220', crop: 'center' }}"
+                        class="cart-item__image"
+                        alt="{{ line_item.image.alt | escape }}"
+                        loading="lazy"
+                        width="220"
+                        height="{{ 220 | divided_by: line_item.image.aspect_ratio | ceil }}"
+                      >
+                    </p>
                   {%- endif -%}
                   {%- assign property_size = line_item.properties | size -%}
                   {%- unless line_item.selling_plan_allocation == nil and property_size == 0 -%}
