@@ -53,13 +53,21 @@
   .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
   .dark .optimize, .dark .story blockquote,
   .dark .intro p, .dark .intro a, .dark .people h3, .dark .people h2, .dark .people p,
-  .dark .self p, .dark .self a, .dark .self h3, .dark .openings a, .dark .opening p, .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, .dark .opening li::marker, .dark .opening span
+  .dark .self p, .dark .self a, .dark .self h3, .dark .openings a, .dark .opening p, 
+  .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
+  .dark .opening li::marker, .dark .opening span,
+  .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong
   {
     color: #fff !important;
   }
 
   .dark .gHjTpK.gHjTpK a {
     color: #fff !important;
+  }
+
+  .dark .account table td:first-of-type a {
+    box-shadow: 0 0 0 0.1rem rgb(255 255 255 / 20%);
   }
 
   .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,

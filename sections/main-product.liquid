@@ -563,8 +563,8 @@
             <div style="width: 100%;">
           {% endif %}
             <strong>Order Processing:</strong> <span id="orderProcessing">
-              {% if product.metafields.lead-time.leadtime != blank %}
-             {{ product.metafields.lead-time.leadtime }}.
+              {% if product.metafields.my_fields.lead_time != blank %}
+             {{ product.metafields.my_fields.lead_time }}.
              {% else %}
               1–3 days.
               {% endif %}
@@ -661,18 +661,13 @@
 </section>
 {% render 'product-recommendations' %}
 
-   <section class="yotpo-containers section-{{ section.id }}-padding">
-    <h2>Reviews and Questions</h2>
-  	<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
-    <section>
-      <h2>Feel the #Saunaspace Love</h2>
-      <div
-      class="yotpo yotpo-pictures-widget"
-      data-gallery-id="{{product.metafields.yotpo-gallery.yotpogallery}}">
-    </div>
+<section class="yotpo-containers section-{{ section.id }}-padding">
+  <h2 id="reviews-and-questions">Reviews and Questions</h2>
+  {% render 'product-page' %}
 
-    </section>
-  </section>
+
+</section>
+
 
 {%- if product.media.size > 0 -%}
   <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>

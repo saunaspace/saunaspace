@@ -4581,7 +4581,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 		.top-feature img { margin: 0 auto 20px auto; width: 100px; height: 100px; }
 		.tf-title { font-weight: 700 !important; margin-bottom: 1em; }
 
-.related-products, .product-recommendations {
+.related-products {
 	padding-top: var(--sectionBottom);
 	border-top: 1px solid #939393;
 	border-bottom: 1px solid #939393;
@@ -5769,6 +5769,9 @@ sup {
 
 	.review-carousel {  overflow-x: scroll; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scroll-padding: 0px; scroll-behavior: smooth; }
 	.product-tile, .rc-box { scroll-snap-align: start;}
+	.review-carousel.related-carousel .grid__item {
+		max-width: 80%;
+	}
 }
 
 @media all and (max-width: 800px) {

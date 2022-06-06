@@ -1,0 +1,32 @@
+<section>
+    {% if section.settings.section-gallery != blank %}
+    <h2>Feel the #Saunaspace Love</h2>
+        <div
+        class="yotpo yotpo-pictures-widget"
+        data-gallery-id="{{ section.settings.section-gallery }}">
+        </div>
+    {% endif %}
+</section>
+    <!-- Welcome section ends -->
+    {% schema %}
+    {
+    "name": "Yotpo Gallery",
+    "settings": [
+    {
+        "id": "section-gallery",
+        "type": "text",
+        "label": "Gallery ID"
+        }
+    ],
+    "presets": [
+    {
+    "name": "Yotpo Gallery",
+    "category": "ADVANCED LAYOUT"
+    }
+    ]
+    }
+    {% endschema %}
+    {% stylesheet %}
+    {% endstylesheet %}
+    {% javascript %}
+    {% endjavascript %}

@@ -524,8 +524,8 @@
                         <div style="width: 100%;">
                       {% endif %}
                         <strong>Order Processing:</strong> <span id="orderProcessing">
-                          {% if product.metafields.lead-time.leadtime != blank %}
-                         {{ product.metafields.lead-time.leadtime }}.
+                          {% if product.metafields.my_fields.lead_time != blank %}
+                         {{ product.metafields.my_fields.lead_time }}.
                          {% else %}
                           1–3 days.
                           {% endif %}
@@ -647,7 +647,7 @@
 <div class="tanBG noMargin">
     <div class="product-info-tabs">
         <a href="javascript:void(0)" class="product-info-tab product-info-tab-on" data-tab="overview">Overview</a>
-        {% if product.metafields.my_fields.whatinclude != blank %}
+        {% if product.metafields.my_fields.what_s_included != blank %}
       	<a href="javascript:void(0)" class="product-info-tab" data-tab="whatsIncluded">What’s Included</a>
       	{% endif %}
       	{% if product.metafields.my_fields.materials != blank %}
@@ -679,10 +679,10 @@
     </div>
     {%- endif -%}
     
-    {% if product.metafields.my_fields.whatinclude != blank %}
+    {% if product.metafields.my_fields.what_s_included != blank %}
     <div class="product-info-details hideMe" id="pid-whatsIncluded">
     <section>
-      	{{ product.metafields.my_fields.whatinclude }}
+      	{{ product.metafields.my_fields.what_s_included }}
     </section>
     </div>
   	{% endif %}
@@ -740,19 +740,12 @@
 {% render 'product-recommendations' %}
 
   <section class="yotpo-containers section-{{ section.id }}-padding">
-    <h2>Reviews and Questions</h2>
-  	<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
-    <section>
-      <h2>Feel the #Saunaspace Love</h2>
-      <div
-      class="yotpo yotpo-pictures-widget"
-      data-gallery-id="{{product.metafields.yotpo-gallery.yotpogallery}}">
-    </div>
+    <h2 id="reviews-and-questions">Reviews and Questions</h2>
+    {% render 'product-page' %}
 
-    </section>
+
   </section>
 
-{% render 'product-page' %}
 <script>
 $(document).ready(function() {
 

@@ -279,6 +279,7 @@
 .customer .pagination li {
   flex: 1 1;
   max-width: 4rem;
+  list-style: none;
 }
 
 .customer .pagination li:not(:last-child) {
@@ -728,6 +729,12 @@ li[data-address] > h2 {
 .addresses input[type='checkbox'] {
   margin-top: 2rem;
   margin-left: 0;
+  height: 2rem;
+  width: 2rem;
+}
+
+.addresses label {
+  display: inline-block;
 }
 
 @media only screen and (min-width: 750px) {
