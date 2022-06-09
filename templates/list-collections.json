@@ -15,7 +15,7 @@
         "db6e65a5-65d0-4610-900c-974cfd9c2b41": {
           "type": "collection_list",
           "settings": {
-            "col_item": "Targeted Therapy",
+            "col_item": "Photon Therapy",
             "deal_sub_txt": "",
             "collection_title": "targeted",
             "collection_img": "shopify:\/\/shop_images\/cat-targeted-therapy.webp"
@@ -98,7 +98,7 @@
     "1650397031f96ab846": {
       "type": "featured-collection",
       "settings": {
-        "title": "Targeted Therapy",
+        "title": "Photon Therapy",
         "heading_size": "h1",
         "sub_title": "Portable infrared therapy.",
         "view_btn": "Learn More",

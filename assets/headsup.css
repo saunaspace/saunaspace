@@ -344,7 +344,7 @@ h2, h3 {
     margin-bottom:0px;
     border-radius:0px;
     width:100%;
-    padding: 10rem 1rem;
+    padding: 10rem 1rem 0;
     position:relative;
 }
 .how-it-works [class^="col"] {
@@ -354,6 +354,9 @@ h2, h3 {
 @media (max-width: 45em) {
   .how-it-works [class^="col"] {
     height: auto;
+}
+.how-it-works {
+  padding-bottom: 10rem;
 }
 }
 
