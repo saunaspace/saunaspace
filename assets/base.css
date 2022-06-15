@@ -1733,7 +1733,7 @@ details[open] > .share-button__fallback {
 
 .field__label,
 .customer .field label {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   left: calc(var(--inputs-border-width) + 2rem);
   top: calc(1rem + var(--inputs-border-width));
   margin-bottom: 0;
@@ -3936,6 +3936,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	padding: 1em 0; 
 	font-size: 1.6rem; 
 	cursor: pointer; 
+	border-radius: 0 !important;
 	margin: 0 auto;
 }
 
@@ -6367,4 +6368,8 @@ a#cart-icon-bubble {
     font-family: 'UntitledSans', sans-serif!important;
     font-size: 1.5rem!important;
 	text-transform: uppercase !important;
+}
+
+.jJiCHk.jJiCHk span, #smsb-button-field-subscribe {
+	padding: 0 !important;
 }
