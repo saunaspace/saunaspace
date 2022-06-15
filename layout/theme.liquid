@@ -509,7 +509,9 @@
       src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=667"
     ></script>
     <!--Gorgias Chat Widget End-->
-  </head>
+  <script>var scaaffCheck = false;</script>
+{{ 'sca_affiliate.js' | asset_url | script_tag }}
+</head>
 
   <body class="gradient">
      <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -662,7 +664,6 @@ function myFunction() {
         });
       });
     </script>
-    <script>Shopify.money_format = "{{ shop.money_format }}";</script>
     {% if shop.metafields.qimify_minicart.script_src %}
 <script type="text/javascript" src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{shop.permanent_domain }}" async="async"></script>
 {% endif %}

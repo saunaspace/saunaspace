@@ -66,9 +66,6 @@
     color: #fff !important;
   }
 
-  .dark .account table td:first-of-type a {
-    box-shadow: 0 0 0 0.1rem rgb(255 255 255 / 20%);
-  }
 
   .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,
   .dark .page-anchor:hover, .dark .rcat-link-on, .dark .util-nav-link:hover, .dark .nav-cart:hover, .dark .sf-link:hover span, .dark .color-choice-on,

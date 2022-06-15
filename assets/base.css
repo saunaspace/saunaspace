@@ -1700,6 +1700,9 @@ details[open] > .share-button__fallback {
   padding: 0 2rem;
   margin: var(--inputs-border-width);
   min-height: calc(var(--inputs-border-width) * 2);
+  padding: 1rem 1.5rem 1rem 2rem;
+  border: 1px solid #d9d9d9;
+  font-family: IBM Plex Mono,monospace!important;
 }
 
 /* Field */
@@ -1761,7 +1764,9 @@ details[open] > .share-button__fallback {
 .customer .field input:focus,
 .customer .field input:not(:placeholder-shown),
 .customer .field input:-webkit-autofill {
-  padding: 2.2rem 1.5rem 0.8rem 2rem;
+  /* padding: 2.2rem 1.5rem 0.8rem 2rem; */
+  padding-bottom: 0.3571428571em;
+  padding-left: 2rem;
   margin: var(--inputs-border-width);
 }
 

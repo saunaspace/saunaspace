@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "affiliate-empty": {
+      "type": "sca-affiliate-empty",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "affiliate-empty"
+  ]
+}

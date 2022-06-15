@@ -230,7 +230,8 @@
           	  
               {%- when 'price' -%}
               <div class="no-js-hidden single-page-price" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+                <!-- {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%} -->
+                {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
           	  </div>
               {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
                 <div class="product__tax caption rte">
@@ -538,7 +539,20 @@
                     <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
                 
             </div>
-            {% if product.metafields.my_fields.thirty_day_returns != true %}
+            {% if product.metafields.my_fields.not_eligible_for_return == true %}  
+              <div class="warranty-trial">
+                <div class="pwt product-warranty">
+                  {% if product.metafields.my_fields.custom_warranty == blank %}
+                  10-year Warranty
+                  {% else %}
+                    {{ product.metafields.my_fields.custom_warranty }}-year Warranty
+                  {% endif %}
+                </div>
+                <div class="pw">
+                  Not Eligible for Return
+                </div>
+              </div>
+            {% else if product.metafields.my_fields.thirty_day_returns != true %}
               <div class="warranty-trial">
                   <div class="pwt product-warranty">
                     
@@ -550,7 +564,7 @@
                   </div><div class="pwt product-trial">100-day Trial</div>
               </div>
             {% endif %}
-            
+           
             {% render 'pay-over-time' %}
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}
@@ -736,17 +750,27 @@
   	{% if product.metafields.my_fields.features_section_4 != blank %}
 		{{ product.metafields.my_fields.features_section_4 }}
     {% endif %}
-    
-{% render 'product-recommendations' %}
+    {% render 'product-recommendations' %}
 
-  <section class="yotpo-containers section-{{ section.id }}-padding">
-    <h2 id="reviews-and-questions">Reviews and Questions</h2>
-    {% render 'product-page' %}
+    {% unless product.tags contains 'Refurbished' %}
+  
+      <section class="yotpo-containers section-{{ section.id }}-padding">
+        <h2 id="reviews-and-questions">Reviews and Questions</h2>
+      </section>
+  {% endunless %}
 
 
-  </section>
+  {% if product.tags contains 'Refurbished' %}
+  <style>
+    .yotpo-main-widget, .yotpo.bottomLine {
+      display: none !important;
+    }
+  </style>
+   {% endif %}
+  {% render 'product-page' %}
 
 <script>
+
 $(document).ready(function() {
 
 
@@ -844,18 +868,18 @@ function isEmpty( el ){
 $(document).on('click','label',function(){
   	//console.log('data is changed')
   setTimeout(function(){
-    var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
-    var dcolor = $('.bcpo-images .bcpo-value').text();
-    console.log('current color is: '+dcolor );
-    $('.stickyBG .price-item').text(damount);
-    $('.stickyBG .sac-color').text(dcolor);
+    // var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
+    // var dcolor = $('.bcpo-images .bcpo-value').text();
+    // console.log('current color is: '+dcolor );
+    // $('.stickyBG .price-item').text(damount);
+    // $('.stickyBG .sac-color').text(dcolor);
 
     
   },200)
 });
-$(document).on('click','#sacText',function(){
-  $('.product-form__submit').click();
-});
+// $(document).on('click','#sacText',function(){
+//   $('.product-form__submit').click();
+// });
 
 updateUC(1)
 function updateUC(p) {
@@ -865,26 +889,26 @@ function updateUC(p) {
   $("#bpImg").attr("src",ucArr[p-1]);
 }
       
-function formatPlug (plug) {
-  if (!plug.id) {
-    return plug.text;
-  }
-  var plugPath='';
-  if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
-  if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
-  if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-  if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-  if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
-  if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
-  if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-  var $plug = $(
-    '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
-  );
-  return $plug;
-};
+// function formatPlug (plug) {
+//   if (!plug.id) {
+//     return plug.text;
+//   }
+//   var plugPath='';
+//   if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
+//   if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
+//   if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+//   if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+//   if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
+//   if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
+//   if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+//   var $plug = $(
+//     '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
+//   );
+//   return $plug;
+// };
 </script>
 
-<script src="{{ 'lite-yt-embed.js' | asset_url }}"></script>
+<script src="{{ 'lite-yt-embed.js' | asset_url }}" async></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

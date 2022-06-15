@@ -661,25 +661,21 @@
 </section>
 {% render 'product-recommendations' %}
 
-<section class="yotpo-containers section-{{ section.id }}-padding">
-  <h2 id="reviews-and-questions">Reviews and Questions</h2>
-  {% render 'product-page' %}
+{% unless product.tags contains 'Refurbished' %}
+  <section class="yotpo-containers section-{{ section.id }}-padding">
 
-
-</section>
+    <h2 id="reviews-and-questions">Reviews and Questions</h2>
+    </section>
+{% endunless %}
+{% render 'product-page' %}
 
 
 {%- if product.media.size > 0 -%}
   <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
-{% include 'product-page' %}
 <script>
 
-function potMore(f) {
-	$(".pot-col").addClass("hideMe");
-	$("#" + f + "Col").removeClass("hideMe");
-}
 let options = {
 	root: null,
 	rootMargin: '-20px 0px 0px 0px', 
