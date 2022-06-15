@@ -6105,8 +6105,11 @@ span[data-ml]::before {
 	 position: relative;
 	 aspect-ratio: 8.5 / 10;
  }
- form#product-form-installment {
+ .product form#product-form-installment {
     min-height: auto !important;
+	display: none;
+    height: 0;
+    visibility: hidden;
 }
 #bcpo {
 	flex-wrap: wrap;
@@ -6363,7 +6366,7 @@ a#cart-icon-bubble {
 }
 
 .fyZGqv.fyZGqv > div[type="button"] {
-	padding: 1em 1.5em !important;
+	padding: 1em 1.5em 1.9em 1.5em !important;
     font-weight: 700!important;
     font-family: 'UntitledSans', sans-serif!important;
     font-size: 1.5rem!important;
