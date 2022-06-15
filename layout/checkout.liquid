@@ -191,7 +191,13 @@
         Shopify.Checkout.OrderStatus.addContentBox(
           '<h2 class="ordernotesh3">Order notes</h2><p style="margin-top: 10px">' + order_note + '</p>'
         )
-		{% endif %}      
+		{% endif %}
+
+        
+        $('[data-title-text="Refund policy"]').text(function () {
+          return $(this).text().replace("Refund policy", "Shipping & Returns"); 
+        });
+        
 
         document.addEventListener('DOMContentLoaded', function() {
                document.querySelector('img[alt="Bread"]').setAttribute('src', 'https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-now-finance-over-time.png?v=1640116210');
