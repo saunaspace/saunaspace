@@ -419,9 +419,10 @@
   "shopify": {
     "checkout": {
       "shop_policies": {
-        "refund_policy": "Shipping & Returns",
+        "refund_policy": "Refunds",
         "privacy_policy": "Privacy",
-        "terms_of_service": "Terms"
+        "terms_of_service": "Terms",
+        "shipping_policy": "Shipping"
       }
     }
   }
