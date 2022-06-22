@@ -41,7 +41,6 @@
     {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}" />
     {% endif %} {% render 'meta-tags' %}
-    {{ 'gocart.css' | asset_url | stylesheet_tag }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
@@ -534,9 +533,6 @@
       </li>
     </ul>
 
-
-    {{ 'gocart.js' | asset_url | script_tag }}
-
     <script>
       window.shopUrl = "{{ request.origin }}";
       window.routes = {
@@ -709,16 +705,6 @@ $(document).ajaxComplete(function(event, request, settings){
   }
 })
   {% endif %}
-</script>
-{% section 'go-cart' %}
-<script>
-  var goCart = new GoCart(
-    {
-    cartMode: 'mini-cart', //drawer or mini-cart  
-    drawerDirection: 'right', //cart drawer from left or right
-    displayModal: true, //display success modal when adding product to cart
-}
-  );
 </script>
   </body>
 </html>
