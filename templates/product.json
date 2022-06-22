@@ -58,6 +58,15 @@
         "padding_bottom": 12
       }
     },
+    "1655484432f5608f86": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<p> <img src=\"https:\/\/cdn-icons-png.flaticon.com\/512\/1670\/1670915.png\" style=\"height:25px;float:left;margin-right:10px;padding-bottom: 4px;\"\/>\nGet it between <strong><span id=\"fromDate\"><\/span> - <span id=\"toDate\"><\/span><\/strong><\/p>\n{{ '\/\/cdnjs.cloudflare.com\/ajax\/libs\/datejs\/1.0\/date.min.js' | script_tag }}\n<script>\nvar fromDate = Date.today().addDays(5);\nif (fromDate.is().saturday() || fromDate.is().sunday()) {\nfromDate = fromDate.next().monday();\n}\nvar toDate = Date.today().addDays(10);\nif (toDate.is().saturday() || toDate.is().sunday()) {\ntoDate = toDate.next().monday();\n}\ndocument.getElementById('fromDate').innerHTML = fromDate.toString('dddd MMMM dS');\ndocument.getElementById('toDate').innerHTML = toDate.toString('dddd MMMM dS');\n<\/script>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -77,6 +86,7 @@
   },
   "order": [
     "main",
+    "1655484432f5608f86",
     "product-recommendations"
   ]
 }
