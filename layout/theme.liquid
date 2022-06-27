@@ -509,6 +509,8 @@
     <!--Gorgias Chat Widget End-->
   <script>var scaaffCheck = false;</script>
 {{ 'sca_affiliate.js' | asset_url | script_tag }}
+
+{% render 'sca-aff-refer-customer' %}
 </head>
 
   <body class="gradient">
@@ -704,5 +706,6 @@ $(document).ajaxComplete(function(event, request, settings){
 })
   {% endif %}
 </script>
+    {% include 'fa_translate_core' %}
   </body>
 </html>

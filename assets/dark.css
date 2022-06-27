@@ -11,6 +11,15 @@
   background: #555;
 }
 
+.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select {
+  background: #000;
+  color: #fff;
+}
+
+.dark .field__label, .dark .customer .field label, .dark .addresses label {
+  color: #999;
+}
+
   .stuck .logo, .sticky .logo {
     background-image: url(logo_symbol.svg);
     top: 8px;
