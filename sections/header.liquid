@@ -252,8 +252,9 @@ and (min-width: 750px) { .section-header { margin-bottom:
       </div>
       
     </div>
-    <a href="javascript:void(0)" class="nav-right">
-      <a
+
+      {% render 'go-cart-button' %}
+      <!-- <a
         href="{{ routes.cart_url }}"
         class="header__icon header__icon--cart link focus-inset nav-cart aa"
         id="cart-icon-bubble"
@@ -275,10 +276,10 @@ and (min-width: 750px) { .section-header { margin-bottom:
             <span class="cart-price"> {{ cart.total_price | money }}</span>
         </div> 
         {%- endif -%}
-      </a>
+      </a> -->
        
       <div class="nav-full-cart hideMe"></div>
-    </a>
+  
   </div>
   <!--nav-wrap-->
 </div>

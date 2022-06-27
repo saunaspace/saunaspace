@@ -42,6 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    {{ 'gocart.css' | asset_url | stylesheet_tag }}
     {{
       content_for_header
     }}
@@ -667,7 +668,7 @@ function myFunction() {
     {% if shop.metafields.qimify_minicart.script_src %}
 <script type="text/javascript" src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{shop.permanent_domain }}" async="async"></script>
 {% endif %}
-
+{{ 'gocart.js' | asset_url | script_tag }}
 <script>
   {% if product %}
   var _learnq = _learnq || [];
@@ -705,6 +706,16 @@ $(document).ajaxComplete(function(event, request, settings){
   }
 })
   {% endif %}
+</script>
+{% section 'go-cart' %}
+<script>
+  var goCart = new GoCart(
+    {
+    cartMode: 'mini-cart', //drawer or mini-cart  
+    drawerDirection: 'right', //cart drawer from left or right
+    displayModal: true, //display success modal when adding product to cart
+}
+  );
 </script>
   </body>
 </html>
