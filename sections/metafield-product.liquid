@@ -234,14 +234,15 @@
                 {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
           	  </div>
             
-              <div {{ block.shopify_attributes }}>
-                {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                  {{ form | payment_terms }}
-                {%- endform -%}
-              </div>
-              
-            
+              {% assign hide_shop_pay = true %}
+              {% if hide_shop_pay == false %}
+                <div {{ block.shopify_attributes }}>
+                  {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    {{ form | payment_terms }}
+                  {%- endform -%}
+                </div>
+                {% endif %}
         </div><!--product-text-->
 
         {% if product.metafields.my_fields.color_varies_text == true %}
@@ -493,7 +494,7 @@
                   </div>
                 {%- endform -%}
               </product-form>
-     <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
+              <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
                 <div class="op-30day">This item is currently out of stock but we are making more. You can pre-order this and we will ship as soon as it is ready.</div>
             </div>
             {% if product.metafields.my_fields.why_we_love_it != blank %}
