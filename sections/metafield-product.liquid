@@ -58,8 +58,7 @@
               {{ product.title | escape }}
             </h1>
 
-            {% assign id_name = 'add-to-cart-' | append: product.handle | append: '-' | append: collection.handle | append: '-' | append: section.id %}
-   
+            
 
 <section class="page-width section-{{ section.id }}-padding">
   <div class="product product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
@@ -235,14 +234,15 @@
                 {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
           	  </div>
             
-              <div {{ block.shopify_attributes }}>
-                {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                  {{ form | payment_terms }}
-                {%- endform -%}
-              </div>
-              
-            
+              {% assign hide_shop_pay = true %}
+              {% if hide_shop_pay == false %}
+                <div {{ block.shopify_attributes }}>
+                  {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    {{ form | payment_terms }}
+                  {%- endform -%}
+                </div>
+                {% endif %}
         </div><!--product-text-->
 
         {% if product.metafields.my_fields.color_varies_text == true %}
@@ -472,16 +472,16 @@
                     <button
                       type="submit"
                       name="add"
-                      class="js-go-cart-add-to-cart product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
-                      
+                        <span>
                           {%- if product.selected_or_first_available_variant.available -%}
                             {{ 'products.product.add_to_cart' | t }}
                           {%- else -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- endif -%}
-                 
+                        </span>
                         <div class="loading-overlay__spinner hidden">
                           <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                             <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
@@ -494,7 +494,7 @@
                   </div>
                 {%- endform -%}
               </product-form>
-     <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
+              <div class="preorder-box hideMe" style="display: none !important;"><!--pre-order turned off per client request 3/28/22 -->
                 <div class="op-30day">This item is currently out of stock but we are making more. You can pre-order this and we will ship as soon as it is ready.</div>
             </div>
             {% if product.metafields.my_fields.why_we_love_it != blank %}
