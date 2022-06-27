@@ -5,12 +5,10 @@
   <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;</script>
     <script>
       const colorScheme = localStorage.getItem("color-scheme") || "light-mode";
+      
     </script>
-    
-    <link    rel="stylesheet"   href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css" />
-    <script>
-      var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;
-    </script>
+	<script>var wetheme = {moneyFormat: {{ shop.money_format  | json }}};</script>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -41,7 +39,6 @@
     {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}" />
     {% endif %} {% render 'meta-tags' %}
-    {{ 'gocart.css' | asset_url | stylesheet_tag }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
@@ -512,6 +509,8 @@
     <!--Gorgias Chat Widget End-->
   <script>var scaaffCheck = false;</script>
 {{ 'sca_affiliate.js' | asset_url | script_tag }}
+
+{% render 'sca-aff-refer-customer' %}
 </head>
 
   <body class="gradient">
@@ -533,9 +532,6 @@
         {{ "accessibility.refresh_page" | t }}
       </li>
     </ul>
-
-
-    {{ 'gocart.js' | asset_url | script_tag }}
 
     <script>
       window.shopUrl = "{{ request.origin }}";
@@ -710,15 +706,6 @@ $(document).ajaxComplete(function(event, request, settings){
 })
   {% endif %}
 </script>
-{% section 'go-cart' %}
-<script>
-  var goCart = new GoCart(
-    {
-    cartMode: 'mini-cart', //drawer or mini-cart  
-    drawerDirection: 'right', //cart drawer from left or right
-    displayModal: true, //display success modal when adding product to cart
-}
-  );
-</script>
+    {% include 'fa_translate_core' %}
   </body>
 </html>
