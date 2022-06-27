@@ -131,11 +131,14 @@ and (min-width: 750px) { .section-header { margin-bottom:
 <div class="overlay hideMe"></div>
 <div class="util-nav">
   <a href="/" class="logo nav-mobile"></a>
+ 
   <a href="/pages/financing" class="util-nav-link">Financing</a>
   <a href="https://help.sauna.space" class="util-nav-link">Support & FAQ</a>
   <a href="/pages/contact" class="util-nav-link">Contact Us</a>
   <a href="/account" class="util-nav-link">Login</a>
   <a href="javascript:void(0)" class="util-nav-link goDark">Dark Mode</a>
+  <div style="top: 1px;" class="transcy-switcher-manual util-nav-link transcy-desktop hidden"></div>
+
   <input type="checkbox" id="ham" class="hiddenCB" /><label
     class="hamb-label"
     for="ham"
@@ -161,9 +164,11 @@ and (min-width: 750px) { .section-header { margin-bottom:
     <a href="javascript:void(0)" class="ham-link nav-link-arrow goDark"
       >Dark Mode</a
     >
+
   </div>
 </div>
 <div class="navBG" id="topNavBG">
+  <div class="transcy-switcher-manual transcy-mobile hidden"></div>
   <div class="nav-wrap">
     <div class="nav-left">
       <a href="/" class="logo"></a>
@@ -234,6 +239,7 @@ and (min-width: 750px) { .section-header { margin-bottom:
             </g>
           </svg>
         </a>
+        
         <a href="/pages/reviews" class="nav-link nl-reviews hideMobile">
           Reviews
         </a>
@@ -244,8 +250,12 @@ and (min-width: 750px) { .section-header { margin-bottom:
           100 Day Home Trial
         </a>
       </div>
+      
     </div>
+    
+   
     <a href="javascript:void(0)" class="nav-right">
+      
       <a
         href="{{ routes.cart_url }}"
         class="header__icon header__icon--cart link focus-inset nav-cart aa"
@@ -269,6 +279,7 @@ and (min-width: 750px) { .section-header { margin-bottom:
         </div> 
         {%- endif -%}
       </a>
+       
       <div class="nav-full-cart hideMe"></div>
     </a>
   </div>

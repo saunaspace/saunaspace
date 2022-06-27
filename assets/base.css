@@ -6105,12 +6105,7 @@ span[data-ml]::before {
 	 position: relative;
 	 aspect-ratio: 8.5 / 10;
  }
- .product form#product-form-installment {
-    min-height: auto !important;
-	display: none;
-    height: 0;
-    visibility: hidden;
-}
+
 #bcpo {
 	flex-wrap: wrap;
 	padding: 0 1em;
@@ -6375,4 +6370,13 @@ a#cart-icon-bubble {
 
 .jJiCHk.jJiCHk span, #smsb-button-field-subscribe {
 	padding: 0 !important;
+}
+
+.transcy-switcher-manual .transcy-switcher-item-primary {
+	font-size: 12px !important;
+}
+
+.transcy-switcher-dropdown.transcy-switcher-position__top_right [data-show="1"] .transcy-switcher-content, .transcy-switcher-dropdown.transcy-switcher-position__top_left [data-show="1"] .transcy-switcher-content {
+	box-shadow: 0 0 5px 1px rgb(0 0 0 / 14%);
+    border-radius: 2px;
 }
