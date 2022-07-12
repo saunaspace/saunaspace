@@ -9,16 +9,15 @@
     <title>{{ page_title }}</title>
 
     {{ content_for_header }}
-
-    {{ checkout_stylesheets }}
+	{{ checkout_stylesheets }}
     {{ checkout_scripts }}
-    {% include 'bread-checkout-options' %}
+    
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://shopify.getbread.com/static/a1d10d47-e53e-49a4-b7c6-b5884a5aa307/checkout.js" type="application/javascript"></script>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">    
+    
     <style>
-        .section__title.order-notes {
-      	display: inline-block;
+      .section__title.order-notes {
+        display: inline-block;
         margin-top: 2rem;
         margin-bottom: 1rem;
         width: 100%;
@@ -27,27 +26,26 @@
       .product td {
         border: none;
       }
-
       .product-thumbnail {
         border: none;
         background: transparent;
       }
-
       .product-thumbnail::after {
         border: none;
       }
-     [data-select-gateway="62750589128"] .radio__label__accessory, .content .shopify-cleanslate .paypalLight, .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:nth-child(2), .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:last-child,  .pickup-instructions {
+      [data-select-gateway="62750589128"] .radio__label__accessory, 
+      .content .shopify-cleanslate .paypalLight, 
+      .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:nth-child(2), 
+      .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6:last-child {
         display: none !important;
-		}
-      [data-select-gateway="62750589128"] img {
-      
-      	margin-left: -11px;
+      }    
+      [data-select-gateway="62750589128"] img { 
+        margin-left: -11px;
       }
-       .content .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6 {
-       	margin-right: 0!important;
-         max-width: none !important;
-       }
-
+      .content .shopify-cleanslate .kEwctmM5pguv6XkPR8mx6 {
+        margin-right: 0!important;
+        max-width: none !important;
+      }
   	  .page--logo-main body {
         font-family: 'IBM Plex Mono', monospace !important;
         font-weight: 400;
@@ -68,17 +66,22 @@
         flex-flow: row;
         justify-content: flex-start !important;
       }
- 
-      .page--logo-main .btn {
+      .page--logo-main .btn,
+      .btn--subdued {
         border-radius: 0 !important;
         text-transform:  uppercase !important;
         font-family: 'Work Sans', sans-serif !important;
         font-weight: 600;
+        color: #fff;
       }
-      .page--logo-main .step__footer__continue-btn:hover {
+      .page--logo-main .step__footer__continue-btn:hover,
+      .btn--subdued:hover {
         background-color: #fff;
         border: 1px solid #c67a26;
         color: #c67a26;
+      }
+      .arrive-button__regular {
+        font-weight: 700;
       }
       .page--logo-main .field__input {
         border-radius: 0 !important;
@@ -90,26 +93,22 @@
       img[alt="PayPal"] {
         height:18px;
       }
-      .policy-list__item, .step__footer__previous-link, #continue_button {
+      .step__footer__previous-link, #continue_button {
         text-transform: capitalize;
       }
-
       .checkout-checkbox {
       	-webkit-appearance: checkbox;
         -moz-appearance: checkbox;
         appearance: checkbox;
         margin: 1rem .5rem 1rem .1rem;
       }
-
-    
-    .main__footer .policy-list__item  a {
-      color: #000; 
-      text-decoration: underline;
-  	}
-      
-    .btn, .sp-modal-toggle {
-      background: #C67A26; 
-    }
+      .main__footer .policy-list__item  a {
+        color: #000; 
+        text-decoration: underline;
+  	  }  
+      .btn, .sp-modal-toggle {
+        background: #C67A26; 
+      }
     </style>
     
     <!-- Hotjar  -->
@@ -123,13 +122,11 @@
             a.appendChild(r);
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-  	<!-- End of Hotjar  -->
-    
+  	<!-- End of Hotjar  -->   
     <!-- SMSBump opt-in  --> 
   	{% include 'smsbump_checkout_marketing_subscription' %}
 	<!-- End of SMSBump opt-in  --> 
-    
-</head>
+  </head>
   <body>
     {{ skip_to_content_link }}
 
@@ -151,20 +148,17 @@
           </div>
           <div class="main__content">
             {{ content_for_layout }}
-            <script>
-       
-                Checkout.$(document).on('page:load', function() {
-                  let cart_note_input = '<h2 class="section__title order-notes" style="margin-left: 8px" id="section-delivery-title">Order Notes</h2><textarea name="checkout[note]" placeholder="Enter order notes here like signature not required or hold my order, etc..." value="{{checkout.note}}" data-cart-notes-textarea maxlength="160" class="field__input" style="margin: 0 5px 3rem; width: 98%">{{ checkout.note }}</textarea>'
-//                   Checkout.$('.address-fields').append(cart_note_input)    
-                  Checkout.$(cart_note_input).insertAfter('.address-fields');
-                });
-                
-              </script>
+            <script>  
+              Checkout.$(document).on('page:load', function() {
+                let cart_note_input = '<h2 class="section__title order-notes" style="margin-left: 8px" id="section-delivery-title">Order Notes</h2><textarea name="checkout[note]" placeholder="Enter order notes here like signature not required or hold my order, etc..." value="{{checkout.note}}" data-cart-notes-textarea maxlength="160" class="field__input" style="margin: 0 5px 3rem; width: 98%">{{ checkout.note }}</textarea>'
+//                 Checkout.$('.address-fields').append(cart_note_input)    
+                Checkout.$(cart_note_input).insertAfter('.address-fields');
+                }); 
+            </script>
           </div>
           <div class="main__footer">
             {{ content_for_footer }}
-          </div>
-         
+          </div>        
         </div>
         <div class="sidebar" role="complementary">
           <div class="sidebar__header">
@@ -175,16 +169,14 @@
           </div>
         </div>
       </div>
-    </div>
-    
+    </div>  
 
     {{ tracking_code }}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-      (function($){
-        
+      (function($){        
         {% if checkout.note%}
          var order_note = '{{checkout.note}}'
 
@@ -196,14 +188,13 @@
         
         $('[data-title-text="Refund policy"]').text(function () {
           return $(this).text().replace("Refund policy", "Shipping & Returns"); 
-        });
-        
+        });   
 
         document.addEventListener('DOMContentLoaded', function() {
                document.querySelector('img[alt="Bread"]').setAttribute('src', 'https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-now-finance-over-time.png?v=1640116210');
             });
       })(jQuery);
 	</script>
-
+    
   </body>
 </html>
