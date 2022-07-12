@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
-  <link rel="stylesheet" href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css">
-  <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;</script>
+    <link
+      rel="stylesheet"
+      href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css"
+    />
+    <script>
+      var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;
+    </script>
     <script>
       const colorScheme = localStorage.getItem("color-scheme") || "light-mode";
-      
     </script>
-	<script>var wetheme = {moneyFormat: {{ shop.money_format  | json }}};</script>
+    <script>
+      var wetheme = {moneyFormat: {{ shop.money_format  | json }}};
+    </script>
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -42,6 +48,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'affiliate.js' | asset_url }}" async></script>
+
     {{
       content_for_header
     }}
@@ -63,11 +71,12 @@
         vopoHead.parentNode.insertBefore(script, vopoHead);
       })();
     </script>
-<style>
-  variant-radios {
-    display: none !important;
-  }
-  </style>
+
+    <style>
+      variant-radios {
+        display: none !important;
+      }
+    </style>
 
     {% style %}
     {{
@@ -443,12 +452,19 @@
     }}
 
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-W5T77Q7');</script>
-  <!-- End Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-W5T77Q7");
+    </script>
+    <!-- End Google Tag Manager -->
 
     {%- unless settings.type_body_font.system? -%}
     <link
@@ -483,7 +499,6 @@
       }
     </script>
 
-  
     <!-- Hotjar Tracking Code for sauna.space -->
     <script>
       (function (h, o, t, j, a, r) {
@@ -507,21 +522,37 @@
       src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=667"
     ></script>
     <!--Gorgias Chat Widget End-->
-  <script>var scaaffCheck = false;</script>
-{{ 'sca_affiliate.js' | asset_url | script_tag }}
+    <script>
+      var scaaffCheck = false;
+    </script>
+    {{
+      "sca_affiliate.js" | asset_url | script_tag
+    }}
 
-{% render 'sca-aff-refer-customer' %}
-</head>
+    {% render 'sca-aff-refer-customer' %}
+  </head>
 
   <body class="gradient">
-     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
-    </a> 
+    </a>
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe  src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"  height="0" width="0"  style="display: none; visibility: hidden" ></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
- {% section 'header' %}
-    <main id="MainContent"  class="content-for-layout focus-none"  role="main"  tabindex="-1" >
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {% section 'header' %}
+    <main
+      id="MainContent"
+      class="content-for-layout focus-none"
+      role="main"
+      tabindex="-1"
+    >
       {{ content_for_layout }}
     </main>
 
@@ -568,38 +599,35 @@
     ></script>
     {%- endif -%}
     <script>
+      const mediaQueryList = window.matchMedia("(max-width: 767px)");
 
-const mediaQueryList = window.matchMedia('(max-width: 767px)');
+      if (mediaQueryList.matches) {
+        console.log("Window is max 767px");
+      } else {
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function () {
+          myFunction();
+        };
 
-if(mediaQueryList.matches) {
-  console.log('Window is max 767px');
-}
-else {
-      // When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
+        // Get the header
+        var header = document.getElementById("topNavBG");
+        var mains = document.getElementById("MainContent");
 
-// Get the header
-var header = document.getElementById("topNavBG");
-      var mains = document.getElementById("MainContent");
+        // Get the offset position of the navbar
+        var sticky = header.offsetTop;
 
-// Get the offset position of the navbar
-var sticky = header.offsetTop;
-
-// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-    mains.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-    mains.classList.remove("sticky");
-  }
-}
-}
-
-
-
-</script>
+        // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            mains.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+            mains.classList.remove("sticky");
+          }
+        }
+      }
+    </script>
     <script>
       //https://www.ditdot.hr/en/dark-mode-website-tutorial
       let darkModeState = false;
@@ -665,47 +693,52 @@ function myFunction() {
       });
     </script>
     {% if shop.metafields.qimify_minicart.script_src %}
-<script type="text/javascript" src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{shop.permanent_domain }}" async="async"></script>
-{% endif %}
+    <script
+      type="text/javascript"
+      src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{
+        shop.permanent_domain
+      }}"
+      async="async"
+    ></script>
+    {% endif %}
 
-<script>
-  {% if product %}
-  var _learnq = _learnq || [];
-function addedToCart() {
-  fetch(`${window.location.origin}/cart.js`)
-  .then(res => res.clone().json().then(data => {
-    var cart = {
-      total_price: data.total_price/100,
-      $value: data.total_price/100,
-      total_discount: data.total_discount,
-      original_total_price: data.original_total_price/100,
-      items: data.items
-    }
-    if (item !== 'undefined') {
-      cart = Object.assign(cart, item)
-    }
-    _learnq.push(['track', 'Added to Cart', cart])
-  }))
-} 
-(function (ns, fetch) {
-  ns.fetch = function() {
-    const response = fetch.apply(this, arguments);
-    response.then(res => {
-      if (`${window.location.origin}/cart/add.js`
-      	.includes(res.url)) {
-        	addedToCart()
+    <script>
+        {% if product %}
+        var _learnq = _learnq || [];
+      function addedToCart() {
+        fetch(`${window.location.origin}/cart.js`)
+        .then(res => res.clone().json().then(data => {
+          var cart = {
+            total_price: data.total_price/100,
+            $value: data.total_price/100,
+            total_discount: data.total_discount,
+            original_total_price: data.original_total_price/100,
+            items: data.items
+          }
+          if (item !== 'undefined') {
+            cart = Object.assign(cart, item)
+          }
+          _learnq.push(['track', 'Added to Cart', cart])
+        }))
       }
-    });
-    return response
-  }
-}(window, window.fetch))
-$(document).ajaxComplete(function(event, request, settings){
-  if(settings.url == "/cart/add.js"){
-      addedToCart()
-  }
-})
-  {% endif %}
-</script>
-    {% include 'fa_translate_core' %}
+      (function (ns, fetch) {
+        ns.fetch = function() {
+          const response = fetch.apply(this, arguments);
+          response.then(res => {
+            if (`${window.location.origin}/cart/add.js`
+            	.includes(res.url)) {
+              	addedToCart()
+            }
+          });
+          return response
+        }
+      }(window, window.fetch))
+      $(document).ajaxComplete(function(event, request, settings){
+        if(settings.url == "/cart/add.js"){
+            addedToCart()
+        }
+      })
+        {% endif %}
+    </script>
   </body>
 </html>

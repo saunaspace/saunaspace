@@ -1,4 +1,7 @@
-.customer h1, .customer h2, .customer h3, .customer h4 {
+.customer h1,
+.customer h2,
+.customer h3,
+.customer h4 {
   text-transform: capitalize;
   font-weight: 700;
 }
@@ -15,12 +18,15 @@
     max-width: 47.8rem;
   }
 }
-.field__label, .customer .field label, .addresses label {
-  font-family: 'IBM Plex Mono', monospace !important;
+.field__label,
+.customer .field label,
+.addresses label {
+  font-family: "IBM Plex Mono", monospace !important;
   font-weight: 400;
 }
-.field__input, .customer .field input {
-  font-family: 'IBM Plex Mono', monospace !important;
+.field__input,
+.customer .field input {
+  font-family: "IBM Plex Mono", monospace !important;
   font-weight: 400;
   background-color: white;
   padding-bottom: 0.3571428571em;
@@ -28,7 +34,8 @@
   border-color: #d9d9d9;
 }
 
-.customer .field input:focus, .customer .field input:hover {
+.customer .field input:focus,
+.customer .field input:hover {
   outline: none;
   border-color: #c67a26;
   -webkit-box-shadow: 0 0 0 1px #c67a26;
@@ -230,7 +237,7 @@
 /* works around colspan phantom border issues */
 .customer thead::after,
 .customer tfoot::before {
-  content: ' ';
+  content: " ";
   height: 0.1rem;
   width: 100%;
   display: block;
@@ -338,7 +345,7 @@
 }
 
 .customer .pagination li [aria-current]::after {
-  content: '';
+  content: "";
   display: block;
   width: 2rem;
   height: 0.01rem;
@@ -356,7 +363,7 @@
   width: fit-content;
 }
 
-.login a[href='#recover'] {
+.login a[href="#recover"] {
   margin-left: 0;
   margin-right: 0;
 }
@@ -389,6 +396,8 @@
 
 #recover:target {
   display: block;
+  box-shadow: none;
+  outline: none;
 }
 
 #recover:target + div {
@@ -409,15 +418,18 @@
   margin-bottom: 0;
 }
 
-.activate button[name='decline'],
+.activate button[name="decline"],
 .addresses li > button,
 .addresses form button[type] {
-  background-color: rgba(var(--color-background), var(--alpha-button-background));
+  background-color: rgba(
+    var(--color-background),
+    var(--alpha-button-background)
+  );
   color: rgb(var(--color-link));
 }
 
 @media only screen and (min-width: 750px) {
-  .activate button[name='decline'] {
+  .activate button[name="decline"] {
     margin-top: inherit;
     margin-left: 1rem;
   }
@@ -629,7 +641,6 @@
   text-decoration: underline;
 }
 
-
 .order tbody tr:first-of-type td:first-of-type > div {
   display: flex;
   flex-direction: column;
@@ -705,8 +716,8 @@
   margin-right: 1rem;
 }
 
-label[for='AddressCountryNew'],
-label[for='AddressProvinceNew'] {
+label[for="AddressCountryNew"],
+label[for="AddressProvinceNew"] {
   display: block;
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
@@ -734,11 +745,11 @@ li[data-address] {
   list-style: none;
 }
 
-.addresses [aria-expanded='false'] ~ div[id] {
+.addresses [aria-expanded="false"] ~ div[id] {
   display: none;
 }
 
-.addresses [aria-expanded='true'] ~ div[id] {
+.addresses [aria-expanded="true"] ~ div[id] {
   display: block;
 }
 
@@ -762,7 +773,7 @@ li[data-address] > h2 {
   margin-bottom: 0;
 }
 
-.addresses input[type='checkbox'] {
+.addresses input[type="checkbox"] {
   margin-top: 2rem;
   margin-left: 0;
   height: 2rem;
