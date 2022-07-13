@@ -222,6 +222,7 @@
   .go-cart-item__info-wrapper {
     position: relative;
     display: flex;
+    font-weight: normal;
   }
   .go-cart-item__info {
     max-width: 250px;
