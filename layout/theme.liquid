@@ -22,6 +22,7 @@
 
     <link rel="canonical" href="{{ canonical_url }}" />
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin />
+    {{ 'gocart.js' | asset_url | script_tag }}
 
     {%- if settings.favicon != blank -%}
     <link
@@ -693,68 +694,7 @@
         });
       });
     </script>
-    {% if shop.metafields.qimify_minicart.script_src %}
-<<<<<<< HEAD
-<script type="text/javascript" src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{shop.permanent_domain }}" async="async"></script>
-{% endif %}
-{{ 'gocart.js' | asset_url | script_tag }}
-<script>
-  {% if product %}
-  var _learnq = _learnq || [];
-function addedToCart() {
-  fetch(`${window.location.origin}/cart.js`)
-  .then(res => res.clone().json().then(data => {
-    var cart = {
-      total_price: data.total_price/100,
-      $value: data.total_price/100,
-      total_discount: data.total_discount,
-      original_total_price: data.original_total_price/100,
-      items: data.items
-    }
-    if (item !== 'undefined') {
-      cart = Object.assign(cart, item)
-    }
-    _learnq.push(['track', 'Added to Cart', cart])
-  }))
-} 
-(function (ns, fetch) {
-  ns.fetch = function() {
-    const response = fetch.apply(this, arguments);
-    response.then(res => {
-      if (`${window.location.origin}/cart/add.js`
-      	.includes(res.url)) {
-        	addedToCart()
-      }
-    });
-    return response
-  }
-}(window, window.fetch))
-$(document).ajaxComplete(function(event, request, settings){
-  if(settings.url == "/cart/add.js"){
-      addedToCart()
-  }
-})
-  {% endif %}
-</script>
-{% section 'go-cart' %}
-<script>
-  var goCart = new GoCart(
-    {
-    cartMode: 'mini-cart', //drawer or mini-cart  
-    drawerDirection: 'right', //cart drawer from left or right
-    displayModal: false, //display success modal when adding product to cart
-}
-  );
-</script>
-=======
-    <script
-      type="text/javascript"
-      src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{
-        shop.permanent_domain
-      }}"
-      async="async"
-    ></script>
-    {% endif %}
+
 
     <script>
         {% if product %}
@@ -794,6 +734,15 @@ $(document).ajaxComplete(function(event, request, settings){
       })
         {% endif %}
     </script>
->>>>>>> origin/main
+    {% section 'go-cart' %}
+    <script>
+      var goCart = new GoCart(
+        {
+        cartMode: 'mini-cart', //drawer or mini-cart  
+        drawerDirection: 'right', //cart drawer from left or right
+        displayModal: false, //display success modal when adding product to cart
+    }
+      );
+    </script>
   </body>
 </html>
