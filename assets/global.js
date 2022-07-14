@@ -1013,3 +1013,6 @@ window.addEventListener("resize", function() {
 // 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
 // });
 
+$('.go-cart__overlay.is-open').on('click', function(){
+  console.log('overlay clicked');
+})
