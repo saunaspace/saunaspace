@@ -907,6 +907,7 @@ if(navigator.userAgent.indexOf('MSIE')!==-1
 $(".nav-right").on("click",function() {
 	closeMegaNav();
 	if(cartOpen) {
+    console.log("cart is open");
 		$(".nav-full-cart").addClass("hideMe");
 		$(".overlay").addClass("hideMe");
 		cartOpen=false
@@ -917,23 +918,26 @@ $(".nav-right").on("click",function() {
 	}
 });
 
-$(".overlay").on("click",function() {
-	closeMegaNav();
-	$(".nav-full-cart").addClass("hideMe");
-	cartOpen=false
-});
+// $(".overlay").on("click",function() {
+// 	closeMegaNav();
+// 	$(".nav-full-cart").addClass("hideMe");
+// 	cartOpen=false
+// });
 
 //opens or closes the mega-nav
 $(".nav-link").on("click",function() {
 	var n=$(this).attr("id");
 	$(".nav-full-cart").addClass("hideMe");
 	$(".mega-nav").addClass("hideMe");
+  cartOpen=false
 	if(currentNavOpen==n) {
 		closeMegaNav();
-		$(".overlay").addClass("hideMe");
+    cartOpen=false
+		// $(".overlay").addClass("hideMe");
 	} else {
-		$(".overlay").removeClass("hideMe");
+		// $(".overlay").removeClass("hideMe");
 		currentNavOpen=n;
+    cartOpen=false
 		navOpen=true;
 		$(".nav-close").addClass("hideMe");
 		$(".nav-arrow").removeClass("hideMe");
@@ -1013,6 +1017,10 @@ window.addEventListener("resize", function() {
 // 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
 // });
 
-$('.go-cart__overlay.is-open').on('click', function(){
-  console.log('overlay clicked');
-})
+
+(function($){
+  $('.overlay').on('click', function(){
+    console.log('overlay clicked');
+  });
+
+})(jQuery);
