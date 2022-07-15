@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@bornfight/gocart": "^1.0.9",
-    "node-sass": "^2.1.1"
-  }
-}
