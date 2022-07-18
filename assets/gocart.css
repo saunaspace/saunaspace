@@ -86,7 +86,7 @@
     right: 0;
     z-index: 40;
     width: 480px;
-    height: 480px;
+    height: auto;
     background-color: #FFFAF4;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -188,7 +188,7 @@
   }
   .go-cart-mini-cart__content {
     position: relative;
-    height: 330px;
+    height: auto;
     overflow: hidden;
     overflow-y: scroll;
     padding: 0 30px;
