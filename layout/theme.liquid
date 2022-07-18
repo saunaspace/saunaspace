@@ -22,8 +22,7 @@
 
     <link rel="canonical" href="{{ canonical_url }}" />
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin />
-    {{ 'gocart.js' | asset_url | script_tag }}
-
+    <script src="{{ 'gocart.js' | asset_url }}" async></script>
     {%- if settings.favicon != blank -%}
     <link
       rel="icon"
@@ -734,15 +733,15 @@
       })
         {% endif %}
     </script>
-    {% section 'go-cart' %}
-    <script>
-      var goCart = new GoCart(
-        {
-        cartMode: 'mini-cart', //drawer or mini-cart  
-        drawerDirection: 'right', //cart drawer from left or right
-        displayModal: false, //display success modal when adding product to cart
-    }
-      );
-    </script>
+{% section 'go-cart' %}
+<script>
+  var goCart = new GoCart(
+    {
+    cartMode: 'mini-cart', //drawer or mini-cart  
+    drawerDirection: 'right', //cart drawer from left or right
+    displayModal: false, //display success modal when adding product to cart
+}
+  );
+</script>
   </body>
 </html>
