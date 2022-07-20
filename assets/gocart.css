@@ -82,10 +82,10 @@
     position: absolute;
     box-shadow: 0 0 17px 1px rgb(21 19 19 / 25%);
     border-radius: 3px;
-    top: 100%;
+    top: 185%;
     right: 0;
     z-index: 40;
-    width: 480px;
+    width: 400px;
     height: auto;
     background-color: #FFFAF4;
     -webkit-transition: all 0.3s ease-in-out;
@@ -223,29 +223,43 @@
     position: relative;
     display: flex;
     font-weight: normal;
+    min-height: 110px;
+    height: auto;
   }
   .go-cart-item__info {
     max-width: 250px;
     line-height: 1.18;
-    padding: 10px 10px 10px 30px;
+    padding: 0px 10px 0px 30px;
   }
   .go-cart-item__image {
     width: 90px;
-    height: 110px;
+    height: 75px;
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
   }
   .go-cart-item__title {
     vertical-align: top;
+    font-family: work sans;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
   }
+
+  .go-cart-item__title:hover {
+    text-decoration: underline;
+    text-decoration-thickness: auto;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+  }
+
   .go-cart-item__variant {
     position: relative;
     top: 5px;
+    font-family: work sans;
   }
   .go-cart-item__quantity {
-    position: absolute;
-    bottom: 10px;
+    margin-top: 1rem;
     display: flex;
     align-items: center;
   }
@@ -259,7 +273,10 @@
     text-align: center;
     font-size: 1rem;
     color: #000;
-    border: none;
+    border-top: 1px solid #C67A26;
+    border-bottom: 1px solid #C67A26;
+    border-left: none;
+    border-right: none;
     outline: none;
     -moz-appearance: textfield;
   }
@@ -277,10 +294,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #f5f5f5;
+    border: 1px solid #C67A26;
     font-size: 1rem;
     padding: 0 5px;
-    margin: 0 2px;
+    margin: 0;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -319,3 +336,24 @@
     visibility: hidden;
   }
   /*# sourceMappingURL=index.css.map */
+
+  .go-cart-mini-cart__subtotal-price.js-go-cart-mini-cart-subtotal {
+    font-family: lft-etica-mono,sans-serif;
+    font-weight: normal;
+  }
+
+  .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
+    background-color: #fffaf4;
+    top: -10px;
+    content: '';
+    display: block;
+    height: 40px;
+    left: 80%;
+    margin-left: 10px;
+    position: absolute;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 40px;
+    z-index: -1;
+  }
