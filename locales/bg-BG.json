@@ -7,7 +7,7 @@
       "login_form_password_placeholder": "Вашата парола",
       "login_form_error": "Неправилна парола.",
       "login_form_submit": "Въведете",
-      "admin_link_html": "Вие ли сте собственикът на магазина? <a href=\"\/admin\" class=\"link underlined-link\">Влезте тук<\/a>",
+      "admin_link_html": "Вие ли сте собственикът на магазина? <a href=\"/admin\" class=\"link underlined-link\">Влезте тук</a>",
       "powered_by_shopify_html": "Този магазин ще се поддържа от {{ shopify }}"
     },
     "social": {
@@ -129,8 +129,8 @@
         "view_store_info": "Вижте информация за магазина",
         "check_other_stores": "Проверка за наличност в други магазини",
         "pick_up_available": "Възможност за взимане",
-        "pick_up_available_at_html": "Възможност за взимане от <span class=\"color-foreground\">{{ location_name }}<\/span>",
-        "pick_up_unavailable_at_html": "В момента няма възможност за взимане от <span class=\"color-foreground\">{{ location_name }}<\/span>",
+        "pick_up_available_at_html": "Възможност за взимане от <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_unavailable_at_html": "В момента няма възможност за взимане от <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Не може да се зареди възможността за взимане",
         "refresh": "Обнови"
       },
@@ -146,7 +146,9 @@
       },
       "view_full_details": "Покажи пълните подробности",
       "include_taxes": "С включени данъци.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Доставката<\/a> се изчислява при плащане."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Доставката</a> се изчислява при плащане.",
+      "choose_options": "Изберете опции",
+      "choose_product_options": "Изберете опции за {{ product_name }}"
     },
     "modal": {
       "label": "Мултимедийна галерия"
@@ -154,7 +156,7 @@
     "facets": {
       "apply": "Приложи",
       "clear": "Изчисти",
-      "clear_all": "Изчисти всички",
+      "clear_all": "Премахване на всички",
       "from": "От",
       "filter_and_sort": "Филтриране и сортиране",
       "filter_by_label": "Филтър:",
@@ -176,7 +178,10 @@
       "sort_button": "Сортиране",
       "sort_by_label": "Сортиране по:",
       "to": "Към",
-      "clear_filter": "Изчисти филтъра"
+      "clear_filter": "Премахване на филтъра",
+      "filter_selected_accessibility": "{{ type }} ({{ count }} избрани филтъра)",
+      "show_more": "Покажи повече",
+      "show_less": "Покажи по-малко"
     }
   },
   "templates": {
@@ -206,7 +211,8 @@
         "send": "Изпрати",
         "post_success": "Благодарим, че се свързахте с нас. Ще се свържем с вас възможно най-скоро.",
         "error_heading": "Коригирайте следното:",
-        "phone": "Телефонен номер"
+        "phone": "Телефонен номер",
+        "title": "Формуляр за контакт"
       }
     },
     "404": {
@@ -233,21 +239,22 @@
       "empty": "Количката ви е празна.",
       "cart_error": "При актуализирането на количката ви възникна грешка. Опитайте отново.",
       "cart_quantity_error_html": "Можете да добавите само {{ quantity }} броя от този артикул в количката си.",
-      "taxes_and_shipping_policy_at_checkout_html": "Данъците и <a href=\"{{ link }}\">доставката<\/a> се изчисляват при плащане",
+      "taxes_and_shipping_policy_at_checkout_html": "Данъците и <a href=\"{{ link }}\">доставката</a> се изчисляват при плащане",
       "taxes_included_but_shipping_at_checkout": "Данъците са включени, а доставката се изчислява при плащане",
-      "taxes_included_and_shipping_policy_html": "С включени данъци. <a href=\"{{ link }}\">Доставката<\/a> се изчислява при плащане.",
+      "taxes_included_and_shipping_policy_html": "С включени данъци. <a href=\"{{ link }}\">Доставката</a> се изчислява при плащане.",
       "taxes_and_shipping_at_checkout": "Данъците и доставката се изчисляват при плащане",
       "headings": {
         "product": "Продукт",
         "price": "Цена",
         "total": "Обща сума",
-        "quantity": "Количество"
+        "quantity": "Количество",
+        "image": "Изображение на продукта"
       },
       "update": "Актуализиране",
       "note": "Специални инструкции за поръчката",
       "login": {
         "title": "Имате профил?",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Влезте<\/a> за по-бързо преминаване към плащане."
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Влезте</a> за по-бързо преминаване към плащане."
       }
     },
     "footer": {
@@ -260,7 +267,8 @@
     },
     "featured_collection": {
       "view_all": "Покажи всички",
-      "view_all_label": "Покажи всички продукти в колекция {{ collection_name }}"
+      "view_all_label": "Покажи всички продукти в колекция {{ collection_name }}",
+      "slider": "Плъзгач"
     },
     "collection_list": {
       "view_all": "Покажи всички"
@@ -268,7 +276,7 @@
     "collection_template": {
       "title": "Колекция",
       "empty": "Не са открити продукти",
-      "use_fewer_filters_html": "Използвайте по-малко филтри или <a class=\"{{ class }}\" href=\"{{ link }}\">изчистете всички<\/a>"
+      "use_fewer_filters_html": "Използвайте по-малко филтри или <a class=\"{{ class }}\" href=\"{{ link }}\">премахнете всички</a>"
     },
     "video": {
       "load_video": "Зареждане на видео: {{ description }}"
@@ -287,10 +295,10 @@
     }
   },
   "localization": {
-    "country_label": "Държава\/регион",
+    "country_label": "Държава/регион",
     "language_label": "Език",
     "update_language": "Актуализиране на езика",
-    "update_country": "Актуализиране на държава\/регион"
+    "update_country": "Актуализиране на държава/регион"
   },
   "customer": {
     "account_fallback": "Профил",
@@ -309,7 +317,7 @@
       "address1": "Адрес 1",
       "address2": "Адрес 2",
       "city": "Град",
-      "country": "Държава\/регион",
+      "country": "Държава/регион",
       "province": "Провинция",
       "phone": "Телефон",
       "set_default": "Задаване като адрес по подразбиране",
@@ -364,7 +372,7 @@
     },
     "reset_password": {
       "title": "Подновяване на паролата за профила",
-      "subtext": "Въведете нова парола за {{ email }}",
+      "subtext": "Въведете нова парола",
       "password": "Парола",
       "password_confirm": "Потвърждаване на паролата",
       "submit": "Подновяване на паролата"
