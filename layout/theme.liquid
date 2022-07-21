@@ -1,6 +1,13 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
+    <link
+    rel="stylesheet"
+    href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css"
+  />
+  <script>
+    var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;
+  </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,12 +33,36 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
+    <script src="{{ 'gocart.js' | asset_url }}" async></script>
 
     {% render 'meta-tags' %}
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     {{ content_for_header }}
+    <script id="vopo-head">
+      (function () {
+        if (
+          ((document.documentElement.innerHTML.includes("asyncLoad") &&
+            !document.documentElement.innerHTML.includes(
+              "\/obscure" + "-escarpment-2240"
+            )) ||
+            (window.bcpo && bcpo.disabled)) &&
+          !window.location.href.match(/[&?]yesbcpo/)
+        )
+          return;
+        var script = document.createElement("script");
+        script.src =
+          "https://obscure-escarpment-2240.herokuapp.com/js/best_custom_product_options.js?shop={{shop.permanent_domain}}";
+        var vopoHead = document.getElementById("vopo-head");
+        vopoHead.parentNode.insertBefore(script, vopoHead);
+      })();
+    </script>
 
+    <style>
+      variant-radios {
+        display: none !important;
+      }
+    </style>
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
@@ -309,5 +340,15 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    {% section 'go-cart' %}
+<script>
+  var goCart = new GoCart(
+    {
+    cartMode: 'mini-cart', //drawer or mini-cart  
+    drawerDirection: 'right', //cart drawer from left or right
+    displayModal: false, //display success modal when adding product to cart
+}
+  );
+</script>
   </body>
 </html>
