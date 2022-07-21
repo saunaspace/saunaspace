@@ -1,23 +1,23 @@
 <script>
-    $(document).ready(function() {
-        console.log('prod running');
-    setTimeout(
-      function() { 
-        $( $('.bcpo-title') ).each(function( i ) {
-        if ( $(this).text() == "Plug Type:" ) {
-            $(this).addClass('plug-' + i);
-            $(this).text('Select your plug type:');
-        } else if( $(this).text() == "Curtain Type:" || $(this).text() == "Type:" ) {
-            $(this).text('Select your curtain type:');
-            $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
-        } else if( $(this).text() == "Voltage:") {
-          $(this).text('Select a Voltage.');
+  $(document).ready(function() {
+      console.log('prod running');
+  setTimeout(
+    function() { 
+      $( $('.bcpo-title') ).each(function( i ) {
+      if ( $(this).text() == "Plug Type:" ) {
+          $(this).addClass('plug-' + i);
+          $(this).text('Select your plug type:');
+      } else if( $(this).text() == "Curtain Type:" || $(this).text() == "Type:" ) {
+          $(this).text('Select your curtain type:');
           $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
-        } else if( $(this).text() == "Size:") {
-          $(this).text('Select a Size.');
-          $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
-        }
-    
-    })}, 700);
+      } else if( $(this).text() == "Voltage:") {
+        $(this).text('Select a Voltage.');
+        $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
+      } else if( $(this).text() == "Size:") {
+        $(this).text('Select a Size.');
+        $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
+      }
+  
+  })}, 700);
 });
 </script>

@@ -285,7 +285,7 @@ body,
 .color-inverse,
 .color-accent-1,
 .color-accent-2 {
-  color: rgba(var(--color-foreground), 0.75);
+  color: #000;
   background-color: rgb(var(--color-background));
 }
 
@@ -3011,7 +3011,6 @@ section:not(.shopify-section) {
 .nav-cart {
 	font-weight: 700;
 	font-family: lft-etica-mono,sans-serif;
-	margin: 0 0 17px 0;
 	font-size: 1.6rem;
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 25px;

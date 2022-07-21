@@ -1,5 +1,5 @@
 <!--cart button-->
-<div class="go-cart__trigger {% if template != 'cart' %}js-go-cart-trigger{% endif %} nav-cart">
+<div class="go-cart__trigger {% if template != 'cart' %}js-go-cart-trigger{% endif %} nav-cart nav-link">
 
     <span class="js-go-cart-counter">{{- cart.item_count -}}</span> <span class="go-cart-mini-cart__subtotal-price js-go-cart-bubble-mini-cart-subtotal"></span>
 
@@ -23,12 +23,8 @@
             <!--go cart mini cart buttons-->
             <div class="go-cart-mini-cart__footer js-go-cart-mini-cart-footer">
 
-                <a href="/checkout/" class="go-cart__button">
+                <a href="/cart/" class="go-cart__button btn">
                     Proceed to checkout
-                </a>
-
-                <a href="/cart/" class="go-cart__button">
-                    View cart
                 </a>
 
             </div>
