@@ -41,6 +41,8 @@
       }
     }
   {%- endstyle -%}
+  <script>(function () { if (window.bcpo_data && bcpo_data.virtual_options && bcpo_data.virtual_options.length) { return; } var script = document.createElement('script'); script.src = "{{ 'product-form.js' | asset_url }}"; document.head.appendChild(script); })();</script>
+
 
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 

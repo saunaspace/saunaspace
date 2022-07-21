@@ -82,6 +82,7 @@
     position: absolute;
     box-shadow: 0 0 17px 1px rgb(21 19 19 / 25%);
     border-radius: 3px;
+    border: 1px solid #C67A26;
     top: 185%;
     right: 0;
     z-index: 40;
@@ -113,6 +114,7 @@
       width: 100%;
     text-align: center;
     cursor: pointer;
+    font-family: "UntitledSans", sans-serif;
   }
   .go-cart-modal {
     position: relative;
@@ -344,16 +346,18 @@
 
   .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
     background-color: #fffaf4;
-    top: -10px;
+    top: -12px; 
+    height: 22px; 
+    width: 22px; 
+    border-top: 1px solid #C67A26;
+    border-left: 1px solid #C67A26;
     content: '';
     display: block;
-    height: 40px;
     left: 80%;
     margin-left: 10px;
     position: absolute;
     -ms-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
-    width: 40px;
     z-index: -1;
   }
