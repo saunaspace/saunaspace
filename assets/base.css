@@ -3128,6 +3128,8 @@ section:not(.shopify-section) {
 	background-repeat: no-repeat;
 	background-size: 13px;
 	background-position: 50% 50%;
+	display: inline-block;
+	vertical-align: middle;
 }
 	
 .nav-links {
