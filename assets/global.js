@@ -750,6 +750,7 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
+    console.log('variant change');
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
@@ -765,9 +766,23 @@ class VariantSelects extends HTMLElement {
       this.updateVariantInput();
       this.renderProductInfo();
       this.updateShareUrl();
+      this.updateVariantLeadTime(this.currentVariant);
     }
   }
-
+  updateVariantLeadTime(currentVariant){
+    //find all the variant descriptions with the data attribute that we added
+    console.log('variant lead time');
+    const variants = document.querySelectorAll('[data-variant-id]')
+  
+    variants.forEach( function(variant) {
+      //hide all variant descriptions
+      variant.style.display = 'none';
+      if(variant.dataset.variantId == currentVariant.id){
+        //if current variant unhide the variant description
+        variant.style.display = 'block'
+      }
+      });
+  }
   updateOptions() {
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
@@ -1029,5 +1044,16 @@ window.addEventListener("resize", function() {
   $('.overlay').on('click', function(){
     console.log('overlay clicked');
   });
+
+console.log('running');
+var mini_cart = $('.go-cart__mini-cart');
+
+$('.js-go-cart-mini-close').on('click', function(e){
+  e.stopPropagation();
+
+    mini_cart.removeClass('is-open');
+});
+
+
 
 })(jQuery);
