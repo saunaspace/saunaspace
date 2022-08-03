@@ -3892,15 +3892,23 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	background: #FFFAF4;
 }
 
-.yc-col-head, .ycc-lineitem {
+.yc-col-head, .ycc-lineitem, .cbb-shipping-rates-calculator-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 	border-bottom: 1px solid #939393;
 	padding-bottom: 20px;
 	margin-bottom: 20px;
+	color: #000 !important;
 }
-
+.cbb-shipping-rates-calculator {
+	flex: 0 0 calc(33.33% - 3rem) !important;
+	width: auto !important;
+	margin: 0 !important;
+}
+.cbb-shipping-rates-calculator-country-select {
+	width: 100% !important;
+}
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
 	
 	.ycc-lineitem .etica-bold { font-size: 2rem; }
@@ -4205,7 +4213,11 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		font-size: 16px !important;
 	}
 	
-	.stickyBG-visible { transform: translateY(-92px); transition: transform .25s;     z-index: 1;}
+	.stickyBG-visible { 
+		transform: translateY(-92px); 
+		transition: transform .25s;     
+		z-index: 4;
+	}
 
 .sac-product {
 	font-weight: 700;
@@ -4311,7 +4323,10 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	margin-bottom: 1em;
 }
 
-	.product-text h1 + p { margin-top: -1.5em; }
+	.product-text h1 + p { 
+		margin-top: -1.5em; 
+		text-align: center;
+	}
 
 		.product-text h1 + p.product-price { margin: 0; }
 	.product-text .btn { display: block; padding: 1em 0; }

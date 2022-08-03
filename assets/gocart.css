@@ -96,6 +96,13 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+
+@media (max-width: 650px) {
+  .go-cart__mini-cart {
+    right: -20%;
+  }
+}
+
   .go-cart__mini-cart.is-open {
     opacity: 1;
     visibility: visible;
@@ -392,6 +399,7 @@
     border-bottom: 1px solid;
     font-weight: normal;
     position: relative;
+    text-align: left;
   }
   .js-cart-added {
     display: inline-block;
