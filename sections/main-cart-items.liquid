@@ -26,15 +26,7 @@
 	
 		<div class="yc-head-wrap {% if cart == empty %} is-empty{% endif %}">
 			<div class="yc-head">Your Cart</div>
-			<div class="yc-top-checkout">
-				<div class="yctc-text">
-					<div class="yctc-total etica-bold">Estimated Total: <span class="cartTotal cartTotalTop">{{ cart.total_price | money_with_currency }}</span></div>
-					<div class="fineprint">Shipping and tax are calculated at checkout.</div>
-				</div>
-				<form action="/checkout" method="post">
-					<input type="submit" class="btn btn-checkout" value="Check Out" />
-				</form>
-			</div>
+			
 		</div>
 
 
@@ -215,7 +207,7 @@
 
                       <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
                         <a href="{{ item.url_to_remove }}" class="button button--tertiary" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
-                          Remove
+                          {% render 'icon-remove' %}
                         </a>
                       </cart-remove-button>
                     </div>
