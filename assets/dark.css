@@ -11,7 +11,7 @@
   background: #555;
 }
 
-.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select {
+.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
   background: #000;
   color: #fff;
 }
@@ -66,7 +66,7 @@
   .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
   .dark .opening li::marker, .dark .opening span,
   .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title
   {
     color: #fff !important;
   }

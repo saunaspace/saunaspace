@@ -237,7 +237,12 @@
     {%- if settings.predictive_search_enabled -%}
       <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
-
+    {{
+      "brian.css" | asset_url | stylesheet_tag
+    }}
+    {{
+      "dark.css" | asset_url | stylesheet_tag
+    }}
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     if (Shopify.designMode) {
       document.documentElement.classList.add('shopify-design-mode');
@@ -303,7 +308,13 @@
 
     {% section 'footer' %}
 
-    <script src="//app.shippingratescalculator.com/js/core/main.min.js?timestamp=1659105740&shop=saunadev.myshopify.com" defer></script>
+    <script src="//app.shippingratescalculator.com/js/core/main.min.js?timestamp=1659448892&shop=saunadev.myshopify.com" defer></script>
+
+    
+
+    
+
+    
 
     
 
@@ -366,6 +377,69 @@
 }
   );
 </script>
+<script>
+  //https://www.ditdot.hr/en/dark-mode-website-tutorial
+  let darkModeState = false;
 
+  const buttons = document.querySelectorAll(".goDark");
+
+  // MediaQueryList object
+  const useDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+
+  // Toggles the "dark" class
+  function toggleDarkMode(state) {
+    document.documentElement.classList.toggle("dark", state);
+    darkModeState = state;
+    if(state) {
+      $(".goDark").html("Light Mode");
+    } else {
+      $(".goDark").html("Dark Mode");
+    }
+    {% comment %} $.post("/res/setDarkMode.asp",{darkmode:state}); {% endcomment %}
+  }
+
+  // Sets localStorage state
+  function setDarkModeLocalStorage(state) {
+    localStorage.setItem("dark", state);
+    {% comment %} $.post("/res/setDarkMode.asp",{darkmode:state}); {% endcomment %}
+  }
+
+  var preferenceSet=false;
+
+  // Initial setting
+  if(localStorage.getItem("dark") === "true") {
+    toggleDarkMode(true);
+    preferenceSet=true;
+  }
+
+  if(localStorage.getItem("dark") === "false") {
+    toggleDarkMode(false);
+    preferenceSet=true;
+  }
+
+  if(useDark.matches && !preferenceSet) {
+    console.log("system")
+    toggleDarkMode(true);
+  }
+
+
+
+  // Listen for changes in the OS settings.
+  // Note: the arrow function shorthand works only in modern browsers,
+  // for older browsers define the function using the function keyword.
+  useDark.addListener((evt) => toggleDarkMode(evt.matches));
+
+  // Toggles the "dark" class on click and sets localStorage state
+
+  buttons.forEach(function(b) {
+    b.addEventListener("click", () => {
+      darkModeState = !darkModeState;
+
+      toggleDarkMode(darkModeState);
+      setDarkModeLocalStorage(darkModeState);
+    });
+  });
+</script>
   </body>
 </html>
