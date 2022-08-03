@@ -3897,13 +3897,22 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	background: #FFFAF4;
 }
 
-.yc-col-head, .ycc-lineitem {
+.yc-col-head, .ycc-lineitem, .cbb-shipping-rates-calculator-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
 	border-bottom: 1px solid #939393;
 	padding-bottom: 20px;
 	margin-bottom: 20px;
+	color: #000 !important;
+}
+.cbb-shipping-rates-calculator {
+	flex: 0 0 calc(33.33% - 3rem) !important;
+	width: auto !important;
+	margin: 0 !important;
+}
+.cbb-shipping-rates-calculator-country-select {
+	width: 100% !important;
 }
 
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
@@ -6227,7 +6236,7 @@ a#cart-icon-bubble {
     transform: translateY(-16px);
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(-16px);
+    transform: translateY(32px);
     z-index: 333 !important;
 }
   @media only screen and (min-width 991px) and (max-width 1100px){    

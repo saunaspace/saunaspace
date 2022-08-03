@@ -14,7 +14,7 @@
         </cart-note>
       {%- endif -%}
      
-        <div class="yc-col">
+        <div class="yc-col  cart-pay-over-time">
           <div class="yc-col-head yc-acc">Pay Over Time</div>
           <div class="ycf-box hideMe">
             <div class="yc-financing">
@@ -40,19 +40,6 @@
             <p class="fineprint">Check your eligibility in minutes at checkout.</p>
           </div>
         </div>
-        <div class="yc-col">
-          <div class="yc-col-head yc-acc">Shipping</div>
-          <div class="yc-shipping hideMe">
-            <cms id="cms1">
-  
-  
-  
-  <p>All U.S. orders are sent via FedEx. International orders may be sent via FedEx or DHL Express.</p>
-  <p>SaunaSpace offers free shipping for all orders over $200 in Canada and the contiguous United States. Estimates for all other orders are available in checkout after providing your shipping destination.</p>
-  </cms>
-            <!-- <p class="debug">Weight: <span class="cartWeight">7</span> lbs</p> -->
-          </div>
-        </div>
         <div class="yc-col yc-col-checkout">
           <div class="yc-col-head">Your Order <span class="ycc-items">{{ cart.item_count }} item(s)</span></div>
           <!--
@@ -67,7 +54,19 @@
           {%- when 'subtotal' -%}
           <div class="js-contents" {{ block.shopify_attributes }}>
             <div class="totals">
-                  <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">{{ cart.total_price | money_with_currency }}</span><div class="fineprint">Shipping and tax are calculated at checkout.</div></div>
+                  <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">
+                    {{ cart.total_price | money_with_currency }}</span>
+                    <div class="fineprint">
+                      {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                      {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                    {%- elsif cart.taxes_included -%}
+                      {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                    {%- elsif shop.shipping_policy.body != blank -%}
+                      {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                    {%- else -%}
+                      {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                    {%- endif -%}
+                    </div></div>
                 </div>
 
                 <div>
