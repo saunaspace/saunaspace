@@ -517,12 +517,12 @@
                         <div style="width: 100%;">
                       {% endif %}
                         <strong>Order Processing:</strong> <span id="orderProcessing">
-                          <!-- {% if product.metafields.my_fields.lead_time != blank %}
+                          {% if product.metafields.my_fields.lead_time != blank %}
                          {{ product.metafields.my_fields.lead_time }}.
                          {% else %}
                           1–3 days.
-                          {% endif %} -->
-                          {% assign current_variant = product.selected_or_first_available_variant %}
+                          {% endif %}
+                          <!-- {% assign current_variant = product.selected_or_first_available_variant %}
                           {% for variant in product.variants %}
                           <div class="variant__description" data-variant-id="{{variant.id}}" {% if product.selected_or_first_available_variant.id == variant.id %} 
                           style="display: block;"  
@@ -533,7 +533,7 @@
                         {% endfor %}
                         <style>.variant__description {
                           display:none;
-                        }</style>
+                        }</style> -->
                         </span>            
                         </div>
                         {% if product.metafields.my_fields.thirty_day_returns == true %}
