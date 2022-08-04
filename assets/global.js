@@ -8,7 +8,7 @@ function getFocusableElements(container) {
 
 document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
   summary.setAttribute('role', 'button');
-  summary.setAttribute('aria-expanded', 'false');
+  summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'));
 
   if(summary.nextElementSibling.getAttribute('id')) {
     summary.setAttribute('aria-controls', summary.nextElementSibling.id);
@@ -313,6 +313,7 @@ class MenuDrawer extends HTMLElement {
   onSummaryClick(event) {
     const summaryElement = event.currentTarget;
     const detailsElement = summaryElement.parentNode;
+    const parentMenuElement = detailsElement.closest('.has-submenu');
     const isOpen = detailsElement.hasAttribute('open');
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -328,6 +329,7 @@ class MenuDrawer extends HTMLElement {
       setTimeout(() => {
         detailsElement.classList.add('menu-opening');
         summaryElement.setAttribute('aria-expanded', true);
+        parentMenuElement && parentMenuElement.classList.add('submenu-open');
         !reducedMotion || reducedMotion.matches ? addTrapFocus() : summaryElement.nextElementSibling.addEventListener('transitionend', addTrapFocus);
       }, 100);
     }
@@ -346,9 +348,12 @@ class MenuDrawer extends HTMLElement {
     if (event === undefined) return;
 
     this.mainDetailsToggle.classList.remove('menu-opening');
-    this.mainDetailsToggle.querySelectorAll('details').forEach(details =>  {
+    this.mainDetailsToggle.querySelectorAll('details').forEach(details => {
       details.removeAttribute('open');
       details.classList.remove('menu-opening');
+    });
+    this.mainDetailsToggle.querySelectorAll('.submenu-open').forEach(submenu => {
+      submenu.classList.remove('submenu-open');
     });
     document.body.classList.remove(`overflow-hidden-${this.dataset.breakpoint}`);
     removeTrapFocus(elementToFocus);
@@ -367,6 +372,8 @@ class MenuDrawer extends HTMLElement {
   }
 
   closeSubmenu(detailsElement) {
+    const parentMenuElement = detailsElement.closest('.submenu-open');
+    parentMenuElement && parentMenuElement.classList.remove('submenu-open');
     detailsElement.classList.remove('menu-opening');
     detailsElement.querySelector('summary').setAttribute('aria-expanded', false);
     removeTrapFocus(detailsElement.querySelector('summary'));
@@ -432,7 +439,7 @@ class ModalDialog extends HTMLElement {
     super();
     this.querySelector('[id^="ModalClose-"]').addEventListener(
       'click',
-      this.hide.bind(this)
+      this.hide.bind(this, false)
     );
     this.addEventListener('keyup', (event) => {
       if (event.code.toUpperCase() === 'ESCAPE') this.hide();
@@ -443,7 +450,7 @@ class ModalDialog extends HTMLElement {
       });
     } else {
       this.addEventListener('click', (event) => {
-        if (event.target.nodeName === 'MODAL-DIALOG') this.hide();
+        if (event.target === this) this.hide();
       });
     }
   }
@@ -466,6 +473,7 @@ class ModalDialog extends HTMLElement {
 
   hide() {
     document.body.classList.remove('overflow-hidden');
+    document.body.dispatchEvent(new CustomEvent('modalClosed'));
     this.removeAttribute('open');
     removeTrapFocus(this.openedBy);
     window.pauseAllMedia();
@@ -537,7 +545,7 @@ class SliderComponent extends HTMLElement {
     this.sliderItemsToShow = Array.from(this.sliderItems).filter(element => element.clientWidth > 0);
     if (this.sliderItemsToShow.length < 2) return;
     this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
-    this.slidesPerPage = Math.floor(this.slider.clientWidth / this.sliderItemOffset);
+    this.slidesPerPage = Math.floor((this.slider.clientWidth - this.sliderItemsToShow[0].offsetLeft) / this.sliderItemOffset);
     this.totalPages = this.sliderItemsToShow.length - this.slidesPerPage + 1;
     this.update();
   }
@@ -565,7 +573,7 @@ class SliderComponent extends HTMLElement {
 
     if (this.enableSliderLooping) return;
 
-    if (this.isSlideVisible(this.sliderItemsToShow[0])) {
+    if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
       this.prevButton.setAttribute('disabled', 'disabled');
     } else {
       this.prevButton.removeAttribute('disabled');
@@ -742,6 +750,7 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
+    console.log('variant change');
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
@@ -757,9 +766,23 @@ class VariantSelects extends HTMLElement {
       this.updateVariantInput();
       this.renderProductInfo();
       this.updateShareUrl();
+      this.updateVariantLeadTime(this.currentVariant);
     }
   }
-
+  updateVariantLeadTime(currentVariant){
+    //find all the variant descriptions with the data attribute that we added
+    console.log('variant lead time');
+    const variants = document.querySelectorAll('[data-variant-id]')
+  
+    variants.forEach( function(variant) {
+      //hide all variant descriptions
+      variant.style.display = 'none';
+      if(variant.dataset.variantId == currentVariant.id){
+        //if current variant unhide the variant description
+        variant.style.display = 'block'
+      }
+      });
+  }
   updateOptions() {
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
@@ -780,6 +803,7 @@ class VariantSelects extends HTMLElement {
     mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true);
 
     const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
+    if (!modalContent) return;
     const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
     modalContent.prepend(newMediaModal);
   }
@@ -791,12 +815,12 @@ class VariantSelects extends HTMLElement {
 
   updateShareUrl() {
     const shareButton = document.getElementById(`Share-${this.dataset.section}`);
-    if (!shareButton) return;
+    if (!shareButton || !shareButton.updateUrl) return;
     shareButton.updateUrl(`${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
   updateVariantInput() {
-    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment`);
+    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`);
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
       input.value = this.currentVariant.id;
@@ -825,14 +849,12 @@ class VariantSelects extends HTMLElement {
   }
 
   renderProductInfo() {
-    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
+    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`)
       .then((response) => response.text())
       .then((responseText) => {
-        const id = `price-${this.dataset.section}`;
         const html = new DOMParser().parseFromString(responseText, 'text/html')
-        const destination = document.getElementById(id);
-        const source = html.getElementById(id);
-
+        const destination = document.getElementById(`price-${this.dataset.section}`);
+        const source = html.getElementById(`price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`);
         if (source && destination) destination.innerHTML = source.innerHTML;
 
         const price = document.getElementById(`price-${this.dataset.section}`);
@@ -847,7 +869,6 @@ class VariantSelects extends HTMLElement {
     if (!productForm) return;
     const addButton = productForm.querySelector('[name="add"]');
     const addButtonText = productForm.querySelector('[name="add"] > span');
-
     if (!addButton) return;
 
     if (disable) {
@@ -907,6 +928,7 @@ if(navigator.userAgent.indexOf('MSIE')!==-1
 $(".nav-right").on("click",function() {
 	closeMegaNav();
 	if(cartOpen) {
+    console.log("cart is open");
 		$(".nav-full-cart").addClass("hideMe");
 		$(".overlay").addClass("hideMe");
 		cartOpen=false
@@ -917,23 +939,26 @@ $(".nav-right").on("click",function() {
 	}
 });
 
-$(".overlay").on("click",function() {
-	closeMegaNav();
-	$(".nav-full-cart").addClass("hideMe");
-	cartOpen=false
-});
+// $(".overlay").on("click",function() {
+// 	closeMegaNav();
+// 	$(".nav-full-cart").addClass("hideMe");
+// 	cartOpen=false
+// });
 
 //opens or closes the mega-nav
 $(".nav-link").on("click",function() {
 	var n=$(this).attr("id");
 	$(".nav-full-cart").addClass("hideMe");
 	$(".mega-nav").addClass("hideMe");
+  cartOpen=false
 	if(currentNavOpen==n) {
 		closeMegaNav();
-		$(".overlay").addClass("hideMe");
+    cartOpen=false
+		// $(".overlay").addClass("hideMe");
 	} else {
-		$(".overlay").removeClass("hideMe");
+		// $(".overlay").removeClass("hideMe");
 		currentNavOpen=n;
+    cartOpen=false
 		navOpen=true;
 		$(".nav-close").addClass("hideMe");
 		$(".nav-arrow").removeClass("hideMe");
@@ -1013,3 +1038,22 @@ window.addEventListener("resize", function() {
 // 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
 // });
 
+
+
+(function($){
+  $('.overlay').on('click', function(){
+    console.log('overlay clicked');
+  });
+
+console.log('running');
+var mini_cart = $('.go-cart__mini-cart');
+
+$('.js-go-cart-mini-close').on('click', function(e){
+  e.stopPropagation();
+
+    mini_cart.removeClass('is-open');
+});
+
+
+
+})(jQuery);
