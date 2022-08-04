@@ -11,7 +11,7 @@
   background: #555;
 }
 
-.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select {
+.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
   background: #000;
   color: #fff;
 }
@@ -55,7 +55,7 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .product-media-modal, .dark .eufhEh.eufhEh  {
+  .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number  {
     background-color: #000;
   }
 
@@ -66,6 +66,7 @@
   .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
   .dark .opening li::marker, .dark .opening span,
   .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number 
   .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .yc-col-head, .dark .totals *, 
   .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, .dark .cbb-shipping-rates-rate-item, .dark .cbb-shipping-rates-calculator-change-shipping-address, .dark .cbb-shipping-rates-calculator-country-select, .dark .cbb-shipping-rates-calculator-region-select, .dark .cbb-shipping-rates-calculator-zip-code
   {
