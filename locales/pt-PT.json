@@ -7,7 +7,7 @@
       "login_form_password_placeholder": "A sua palavra-passe",
       "login_form_error": "Palavra-passe errada!",
       "login_form_submit": "Entrar",
-      "admin_link_html": "É o proprietário da loja? <a href=\"/admin\" class=\"link underlined-link\">Inicie a sessão aqui</a>",
+      "admin_link_html": "É o proprietário da loja? <a href=\"\/admin\" class=\"link underlined-link\">Inicie a sessão aqui<\/a>",
       "powered_by_shopify_html": "Esta loja irá contar com tecnologia {{ shopify }}"
     },
     "social": {
@@ -82,8 +82,7 @@
       "read_more_title": "Ler mais: {{ title }}",
       "comments": {
         "one": "{{ count }} comentário",
-        "other": "{{ count }} comentários",
-        "many": "{{ count }} comentários"
+        "other": "{{ count }} comentários"
       },
       "moderated": "Tenha em atenção que os comentários necessitam de ser aprovados antes de serem publicados.",
       "comment_form_title": "Deixe um comentário",
@@ -130,8 +129,8 @@
         "view_store_info": "Ver informações da loja",
         "check_other_stores": "Verificar a disponibilidade noutras lojas",
         "pick_up_available": "Recolha disponível",
-        "pick_up_available_at_html": "Recolha disponível em <span class=\"color-foreground\">{{ location_name }}</span>",
-        "pick_up_unavailable_at_html": "Recolha atualmente indisponível em <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_available_at_html": "Recolha disponível em <span class=\"color-foreground\">{{ location_name }}<\/span>",
+        "pick_up_unavailable_at_html": "Recolha atualmente indisponível em <span class=\"color-foreground\">{{ location_name }}<\/span>",
         "unavailable": "Não foi possível carregar a disponibilidade de recolha",
         "refresh": "Atualizar"
       },
@@ -147,9 +146,7 @@
       },
       "view_full_details": "Ver detalhes completos",
       "include_taxes": "Imposto incluído.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Envio</a> calculado na finalização da compra.",
-      "choose_options": "Escolher opções",
-      "choose_product_options": "Escolha opções para {{ product_name }}"
+      "shipping_policy_html": "<a href=\"{{ link }}\">Envio<\/a> calculado na finalização da compra."
     },
     "modal": {
       "label": "Galeria de conteúdo multimédia"
@@ -157,35 +154,29 @@
     "facets": {
       "apply": "Aplicar",
       "clear": "Limpar",
-      "clear_all": "Remover tudo",
+      "clear_all": "Limpar tudo",
       "from": "De",
       "filter_and_sort": "Filtrar e ordenar",
       "filter_by_label": "Filtrar:",
       "filter_button": "Filtro",
       "filters_selected": {
         "one": "{{ count }} selecionada",
-        "other": "{{ count }} selecionada",
-        "many": "{{ count }} selecionada"
+        "other": "{{ count }} selecionada"
       },
       "max_price": "O preço mais alto é {{ price }}",
       "product_count": {
         "one": "{{ product_count }} de {{ count }} produto",
-        "other": "{{ product_count }} de {{ count }} produtos",
-        "many": "{{ product_count }} de {{ count }} produtos"
+        "other": "{{ product_count }} de {{ count }} produtos"
       },
       "product_count_simple": {
         "one": "{{ count }} produto",
-        "other": "{{ count }} produtos",
-        "many": "{{ count }} produtos"
+        "other": "{{ count }} produtos"
       },
       "reset": "Repor",
       "sort_button": "Ordenar",
       "sort_by_label": "Ordenar por:",
       "to": "Para",
-      "clear_filter": "Remover filtro",
-      "filter_selected_accessibility": "{{ type }} ({{ count }} filtros selecionados)",
-      "show_more": "Mostrar mais",
-      "show_less": "Mostrar menos"
+      "clear_filter": "Limpar filtro"
     }
   },
   "templates": {
@@ -194,16 +185,14 @@
       "page": "Página",
       "results_with_count": {
         "one": "{{ count }} resultado",
-        "other": "{{ count }} resultados",
-        "many": "{{ count }} resultados"
+        "other": "{{ count }} resultados"
       },
       "title": "Resultados da pesquisa",
       "products": "Produtos",
       "search_for": "Procurar por \"{{ terms }}\"",
       "results_with_count_and_term": {
         "one": "{{ count }} resultado encontrado para “{{ terms }}”",
-        "other": "{{ count }} resultado encontrado para “{{ terms }}”",
-        "many": "{{ count }} resultado encontrado para “{{ terms }}”"
+        "other": "{{ count }} resultado encontrado para “{{ terms }}”"
       }
     },
     "cart": {
@@ -217,8 +206,7 @@
         "comment": "Comentário",
         "send": "Enviar",
         "post_success": "Obrigado por entrar em contacto connosco. Responder-lhe-emos logo que possível.",
-        "error_heading": "Ajuste o seguinte:",
-        "title": "Formulário de contacto"
+        "error_heading": "Ajuste o seguinte:"
       }
     },
     "404": {
@@ -232,8 +220,7 @@
       "menu": "Menu",
       "cart_count": {
         "one": "{{ count }} item",
-        "other": "{{ count }} itens",
-        "many": "{{ count }} itens"
+        "other": "{{ count }} itens"
       }
     },
     "cart": {
@@ -247,21 +234,20 @@
       "empty": "O seu carrinho está vazio",
       "cart_error": "Ocorreu um erro ao atualizar o seu carrinho. Tente novamente.",
       "cart_quantity_error_html": "É possível adicionar apenas {{ quantity }} unidade(s) deste item ao carrinho.",
-      "taxes_and_shipping_policy_at_checkout_html": "Impostos e <a href=\"{{ link }}\">shipping</a> calculados na finalização da compra",
+      "taxes_and_shipping_policy_at_checkout_html": "Impostos e <a href=\"{{ link }}\">shipping<\/a> calculados na finalização da compra",
       "taxes_included_but_shipping_at_checkout": "Imposto incluído e envio calculado na finalização da compra",
-      "taxes_included_and_shipping_policy_html": "Imposto incluído. <a href=\"{{ link }}\">Envio</a> calculado na finalização da compra.",
+      "taxes_included_and_shipping_policy_html": "Imposto incluído. <a href=\"{{ link }}\">Envio<\/a> calculado na finalização da compra.",
       "taxes_and_shipping_at_checkout": "Impostos e envio calculados na finalização da compra",
       "headings": {
         "product": "Produto",
         "price": "Preço",
         "total": "Total",
-        "quantity": "Quantidade",
-        "image": "Imagem de produto"
+        "quantity": "Quantidade"
       },
       "update": "Atualizar",
       "login": {
         "title": "Tem uma conta?",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Inicie sessão</a> para finalizar a compra mais rápido."
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Inicie sessão<\/a> para finalizar a compra mais rápido."
       }
     },
     "footer": {
@@ -274,8 +260,7 @@
     },
     "featured_collection": {
       "view_all": "Ver tudo",
-      "view_all_label": "Ver todos os produtos da coleção {{ collection_name }}",
-      "slider": "Slider"
+      "view_all_label": "Ver todos os produtos da coleção {{ collection_name }}"
     },
     "collection_list": {
       "view_all": "Ver tudo"
@@ -283,7 +268,7 @@
     "collection_template": {
       "title": "Coleção",
       "empty": "Nenhum produto encontrado",
-      "use_fewer_filters_html": "Utilizar menos filtros ou <a class=\"{{ class }}\" href=\"{{ link }}\">remover tudo</a>"
+      "use_fewer_filters_html": "Usar menos filtros ou <a class=\"{{ class }}\" href=\"{{ link }}\">limpar tudo<\/a>"
     },
     "video": {
       "load_video": "Carregar vídeo: {{ description }}"
@@ -302,10 +287,10 @@
     }
   },
   "localization": {
-    "country_label": "País/região",
+    "country_label": "País\/região",
     "language_label": "Idioma",
     "update_language": "Atualizar idioma",
-    "update_country": "Atualizar país/região"
+    "update_country": "Atualizar país\/região"
   },
   "customer": {
     "account": {
@@ -334,7 +319,7 @@
       "address1": "Endereço1",
       "address2": "Endereço 2",
       "city": "Localidade",
-      "country": "País/região",
+      "country": "País\/região",
       "province": "Província",
       "zip": "Código postal",
       "phone": "Telefone",
@@ -410,7 +395,7 @@
     },
     "reset_password": {
       "title": "Repor palavra-passe da conta",
-      "subtext": "Insira uma nova palavra-passe",
+      "subtext": "Insira uma nova palavra-passe para {{ email }}",
       "password": "Palavra-passe",
       "password_confirm": "Confirmar palavra-passe",
       "submit": "Repor palavra-passe"

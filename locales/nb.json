@@ -7,7 +7,7 @@
       "login_form_password_placeholder": "Passordet ditt",
       "login_form_error": "Feil passord!",
       "login_form_submit": "Gå inn",
-      "admin_link_html": "Er du butikkeieren? <a href=\"/admin\" class=\"link underlined-link\">Logg inn her</a>",
+      "admin_link_html": "Er du butikkeieren? <a href=\"\/admin\" class=\"link underlined-link\">Logg inn her<\/a>",
       "powered_by_shopify_html": "Denne butikken vil bli drevet av {{ shopify }}"
     },
     "social": {
@@ -129,8 +129,8 @@
         "view_store_info": "Vis butikkinformasjon",
         "check_other_stores": "Sjekk tilgjengelighet i andre butikker",
         "pick_up_available": "Henting tilgjengelig",
-        "pick_up_available_at_html": "Henting tilgjengelig hos <span class=\"color-foreground\">{{ location_name }}</span>",
-        "pick_up_unavailable_at_html": "Henting er for øyeblikket ikke tilgjengelig hos <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_available_at_html": "Henting tilgjengelig hos <span class=\"color-foreground\">{{ location_name }}<\/span>",
+        "pick_up_unavailable_at_html": "Henting er for øyeblikket ikke tilgjengelig hos <span class=\"color-foreground\">{{ location_name }}<\/span>",
         "unavailable": "Kunne ikke laste inn hentetilgjengelighet",
         "refresh": "Oppdater"
       },
@@ -146,9 +146,7 @@
       },
       "view_full_details": "Vis alle detaljer",
       "include_taxes": "Avgift inkludert.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Frakt</a> beregnes ved kassen.",
-      "choose_options": "Velg alternativer",
-      "choose_product_options": "Velg alternativer for {{ product_name }}"
+      "shipping_policy_html": "<a href=\"{{ link }}\">Frakt<\/a> beregnes ved kassen."
     },
     "modal": {
       "label": "Mediegalleri"
@@ -178,10 +176,7 @@
       "sort_button": "Sorter",
       "sort_by_label": "Sorter etter:",
       "to": "Til",
-      "clear_filter": "Fjern filter",
-      "filter_selected_accessibility": "{{ type }} ({{ count }} filtre valgt)",
-      "show_more": "Vis mer",
-      "show_less": "Vis færre"
+      "clear_filter": "Fjern filter"
     }
   },
   "templates": {
@@ -211,8 +206,7 @@
         "comment": "Kommentar",
         "send": "Send",
         "post_success": "Takk for at du kontaktet oss. Vi vil svare deg så snart som mulig.",
-        "error_heading": "Juster følgende:",
-        "title": "Kontaktskjema"
+        "error_heading": "Juster følgende:"
       }
     },
     "404": {
@@ -240,21 +234,20 @@
       "empty": "Handlekurven din er tom",
       "cart_error": "Det oppstod en feil under oppdateringen av handlekurven din. Prøv på nytt.",
       "cart_quantity_error_html": "Du kan bare legge {{ quantity }} av denne varen i handlekurven.",
-      "taxes_and_shipping_policy_at_checkout_html": "Avgifter og <a href=\"{{ link }}\">frakt</a> beregnes i kassen",
+      "taxes_and_shipping_policy_at_checkout_html": "Avgifter og <a href=\"{{ link }}\">frakt<\/a> beregnes i kassen",
       "taxes_included_but_shipping_at_checkout": "Inkludert avgift og frakt beregnes i kassen",
-      "taxes_included_and_shipping_policy_html": "Inkludert avgifter. <a href=\"{{ link }}\">Frakt</a> beregnes ved kassen.",
+      "taxes_included_and_shipping_policy_html": "Inkludert avgifter. <a href=\"{{ link }}\">Frakt<\/a> beregnes ved kassen.",
       "taxes_and_shipping_at_checkout": "Avgifter og frakt beregnes i kassen",
       "headings": {
         "product": "Produkt",
         "price": "Pris",
         "total": "Totalt",
-        "quantity": "Antall",
-        "image": "Produktbilde"
+        "quantity": "Antall"
       },
       "update": "Oppdater",
       "login": {
         "title": "Har du en konto?",
-        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Logg på</a> for å betale raskere."
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Logg på<\/a> for å betale raskere."
       }
     },
     "footer": {
@@ -267,8 +260,7 @@
     },
     "featured_collection": {
       "view_all": "Vis alle",
-      "view_all_label": "Vis alle produktene i {{ collection_name }}-samlingen",
-      "slider": "Glidefelt"
+      "view_all_label": "Vis alle produktene i {{ collection_name }}-samlingen"
     },
     "collection_list": {
       "view_all": "Vis alle"
@@ -276,7 +268,7 @@
     "collection_template": {
       "title": "Samling",
       "empty": "Ingen produkter funnet",
-      "use_fewer_filters_html": "Bruk færre filtre eller <a class=\"{{ class }}\" href=\"{{ link }}\">fjern alle</a>"
+      "use_fewer_filters_html": "Bruk færre filtre eller <a class=\"{{ class }}\" href=\"{{ link }}\">tøm alle<\/a>"
     },
     "video": {
       "load_video": "Last inn video: {{ description }}"
@@ -295,10 +287,10 @@
     }
   },
   "localization": {
-    "country_label": "Land/region",
+    "country_label": "Land\/region",
     "language_label": "Språk",
     "update_language": "Oppdater språk",
-    "update_country": "Oppdater land/region"
+    "update_country": "Oppdater land\/region"
   },
   "customer": {
     "account": {
@@ -327,7 +319,7 @@
       "address1": "Adresse 1",
       "address2": "Adresse 2",
       "city": "Sted",
-      "country": "Land/region",
+      "country": "Land\/region",
       "province": "Provins",
       "zip": "Postnummer",
       "phone": "Telefon",
@@ -403,7 +395,7 @@
     },
     "reset_password": {
       "title": "Tilbakestill kontopassord",
-      "subtext": "Angi et nytt passord",
+      "subtext": "Skriv inn et nytt passord for {{ email }}",
       "password": "Passord",
       "password_confirm": "Bekreft passord",
       "submit": "Tilbakestill passord"
