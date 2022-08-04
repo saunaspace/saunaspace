@@ -3,12 +3,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "bade94a2-52ba-41e1-a99c-375d1b88b3ac": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews-photos\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -29,7 +23,12 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "dropdown"
+            "picker_type": "button"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
           }
         },
         "buy_buttons": {
@@ -40,17 +39,17 @@
         }
       },
       "block_order": [
-        "bade94a2-52ba-41e1-a99c-375d1b88b3ac",
         "title",
         "caption",
         "price",
         "variant_picker",
+        "quantity_selector",
         "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": true,
-        "gallery_layout": "thumbnail_slider",
-        "media_size": "medium",
+        "gallery_layout": "thumbnail",
+        "media_size": "large",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": false,
