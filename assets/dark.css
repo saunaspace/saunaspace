@@ -55,7 +55,7 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .product-media-modal, .dark .eufhEh.eufhEh  {
+  .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number  {
     background-color: #000;
   }
 
@@ -66,7 +66,7 @@
   .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
   .dark .opening li::marker, .dark .opening span,
   .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number 
   {
     color: #fff !important;
   }
