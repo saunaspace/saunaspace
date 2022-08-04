@@ -37,3 +37,7 @@
     grid-column-gap: 2rem;
   }
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
