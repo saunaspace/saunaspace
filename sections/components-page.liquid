@@ -1,3 +1,6 @@
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}	
 
 <div class="photo-headerBG noMargin" style="background-image:url({{ 'sauna-components.jpg' | asset_url }}); background-position: 50% 0; ">
 		<div class="ph-width">
@@ -99,128 +102,30 @@
 
 <section>
 	<h2 class="alignLeft">Shop Sauna Components</h2>
-
-		<div class="product-tiles">
-				<!--the include below is looking for rsRP -->
-				
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a id="rpsauna-enclosure-kit" href="/products/sauna-enclosure-kit#natural" data-url="/products/sauna-enclosure-kit"><img src="{{ 'sauna-enclosure-kit-natural-tile.jpg' | asset_url }}" alt="Sauna Enclosure Kit" class="pt-img img9" loading="lazy" /></a>
-								<a href="/products/sauna-enclosure-kit" class="pt-name">Sauna Enclosure Kit</a>
-								<div class="color-choices">
-								
-									<div class="ccrp p9 c11 color-choice-on" data-productID="9" data-productCode="sauna-enclosure-kit" data-colorPrice="$1,779.99" data-colorCode="natural"><div class="color-choice" style="background-image:url({{ 'natural.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p9 c12 color-choice-off" data-productID="9" data-productCode="sauna-enclosure-kit" data-colorPrice="$1,979.99" data-colorCode="indigo"><div class="color-choice" style="background-image:url({{ 'indigo.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p9 c33 color-choice-off" data-productID="9" data-productCode="sauna-enclosure-kit" data-colorPrice="$1,979.99" data-colorCode="dark-chocolate"><div class="color-choice" style="background-image:url({{ 'dark-chocolate.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p9 c34 color-choice-off" data-productID="9" data-productCode="sauna-enclosure-kit" data-colorPrice="$1,979.99" data-colorCode="stone"><div class="color-choice" style="background-image:url({{ 'stone.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p9 c35 color-choice-off" data-productID="9" data-productCode="sauna-enclosure-kit" data-colorPrice="$2,279.99" data-colorCode="turmeric"><div class="color-choice" style="background-image:url({{ 'turmeric.jpg' | asset_url }})"></div></div>
-								
-								</div><!--color-choices-->
-						
-							<p class="pt-price etica price9">$1,779.99</p>
-						
-					</div>
 	
-		
+	<ul id="product-grid" data-id="{{ section.id }}" class="
+  grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+  {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+    grid--{{ section.settings.columns_desktop }}-col-desktop
+  {% endif %}">
+  {% for product in collections.sauna-components.products %}
+    {% assign lazy_load = false %}
+    {%- if forloop.index > 2 -%}
+      {%- assign lazy_load = true -%}
+    {%- endif -%}
 
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a href="/products/shower-sauna-conversion-kit" ><img src="{{ 'shower-sauna-conversion-kit-tile.jpg' | asset_url }}" alt="Shower Sauna Conversion Kit" class="pt-img" loading="lazy"  /></a>
-							<a href="/products/shower-sauna-conversion-kit" class="pt-name">Shower Sauna Conversion Kit</a>
-						
-							<p class="pt-price etica price41">$1,999.99</p>
-						
-					</div>
-	
-		
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a href="/products/tungsten-infrared-sauna-panel" ><img src="{{ 'tungsten-infrared-sauna-panel-tile.jpg' | asset_url }}" alt="Tungsten Infrared Sauna Panel" class="pt-img"  loading="lazy" /></a>
-							<a href="/products/tungsten-infrared-sauna-panel" class="pt-name">Tungsten Infrared Sauna Panel</a>
-						
-							<p class="pt-price etica price17">$999.99</p>
-						
-					</div>
-	
-		
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a href="/products/tungsten-pedestal" ><img src="{{ 'tungsten-pedestal-tile.jpg' | asset_url }}" alt="Tungsten Pedestal" class="pt-img"  loading="lazy" /></a>
-							<a href="/products/tungsten-pedestal" class="pt-name">Tungsten Pedestal</a>
-						
-							<p class="pt-price etica price7">$249.99</p>
-						
-					</div>
-	
-		
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a href="/products/sauna-stool" ><img src="{{ 'sauna-stool-tile.jpg' | asset_url }}" alt="Sauna Stool" class="pt-img" loading="lazy"  /></a>
-							<a href="/products/sauna-stool" class="pt-name">Sauna Stool</a>
-						
-							<p class="pt-price etica price8">$249.99</p>
-						
-					</div>
-	
-		
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a id="rpemf-shield" href="/products/emf-shield#natural" data-url="/products/emf-shield"><img src="{{ 'emf-shield-natural-tile.jpg' | asset_url }}" alt="EMF Shield" class="pt-img img11" loading="lazy"  /></a>
-								<a href="/products/emf-shield" class="pt-name">EMF Shield</a>
-								<div class="color-choices">
-								
-									<div class="ccrp p11 c21 color-choice-on" data-productID="11" data-productCode="emf-shield" data-colorPrice="$2,769.99" data-colorCode="natural"><div class="color-choice" style="background-image:url({{ 'natural.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p11 c22 color-choice-off" data-productID="11" data-productCode="emf-shield" data-colorPrice="$2,809.99" data-colorCode="indigo"><div class="color-choice" style="background-image:url({{ 'indigo.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p11 c23 color-choice-off" data-productID="11" data-productCode="emf-shield" data-colorPrice="$2,809.99" data-colorCode="dark-chocolate"><div class="color-choice" style="background-image:url({{ 'dark-chocolate.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p11 c24 color-choice-off" data-productID="11" data-productCode="emf-shield" data-colorPrice="$2,809.99" data-colorCode="stone"><div class="color-choice" style="background-image:url({{ 'stone.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p11 c25 color-choice-off" data-productID="11" data-productCode="emf-shield" data-colorPrice="$2,869.99" data-colorCode="turmeric"><div class="color-choice" style="background-image:url({{ 'turmeric.jpg' | asset_url }})"></div></div>
-								
-								</div><!--color-choices-->
-						
-							<p class="pt-price etica price11">$2,769.99</p>
-						
-					</div>
-	
-		
-
-				<!--	<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a id="rpsauna-cover-set" href="/products/sauna-cover-set#natural" data-url="/products/sauna-cover-set"><img src="{{ 'sauna-cover-set-natural-tile.jpg' | asset_url }}" alt="Sauna Cover Set" class="pt-img img10"  loading="lazy" /></a>
-								<a href="/products/sauna-cover-set" class="pt-name">Sauna Cover Set</a>
-								<div class="color-choices">
-								
-									<div class="ccrp p10 c19 color-choice-on" data-productID="10" data-productCode="sauna-cover-set" data-colorPrice="$1,229.99" data-colorCode="natural"><div class="color-choice" style="background-image:url({{ 'natural.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p10 c20 color-choice-off" data-productID="10" data-productCode="sauna-cover-set" data-colorPrice="$1,429.99" data-colorCode="indigo"><div class="color-choice" style="background-image:url({{ 'indigo.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p10 c30 color-choice-off" data-productID="10" data-productCode="sauna-cover-set" data-colorPrice="$1,429.99" data-colorCode="dark-chocolate"><div class="color-choice" style="background-image:url({{ 'dark-chocolate.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p10 c31 color-choice-off" data-productID="10" data-productCode="sauna-cover-set" data-colorPrice="$1,429.99" data-colorCode="stone"><div class="color-choice" style="background-image:url({{ 'stone.jpg' | asset_url }})"></div></div>
-								
-									<div class="ccrp p10 c32 color-choice-off" data-productID="10" data-productCode="sauna-cover-set" data-colorPrice="$1,729.99" data-colorCode="turmeric"><div class="color-choice" style="background-image:url({{ 'turmeric.jpg' | asset_url }})"></div></div>
-								
-								</div>
-						
-							<p class="pt-price etica price10">$1,229.99</p>
-						
-					</div> -->
-	
-		
-		</div>
-
+    <li class="grid__item">
+      {% render 'card-product',
+        card_product: product,
+        media_aspect_ratio: section.settings.image_ratio,
+        show_secondary_image: section.settings.show_secondary_image,
+        show_vendor: section.settings.show_vendor,
+        show_rating: section.settings.show_rating,
+        lazy_load: lazy_load
+      %}
+    </li>
+  {%- endfor -%}
+</ul>
 
 </section>
 
