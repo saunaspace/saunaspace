@@ -366,6 +366,7 @@
   .is-invisible {
     opacity: 0;
     visibility: hidden;
+    height: 0;
   }
   /*# sourceMappingURL=index.css.map */
 
