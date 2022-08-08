@@ -48,7 +48,7 @@
                   {%- if line_item.url != blank -%}
                     <a href="{{ line_item.url }}">
                       {{ line_item.title }}<br /><br />
-                      <img src="{{ line_item.image | img_url: '220x220', crop: 'center' }}"
+                      <img src="{{ line_item.image | image_url: '220x220', crop: 'center' }}"
                       class="cart-item__image"
                       alt="{{ line_item.image.alt | escape }}"
                       loading="lazy"
@@ -60,7 +60,7 @@
                     <p>{{ line_item.title }}
                       <a href="{{ line_item.url }}">
                         {{ line_item.title }}<br /><br />
-                        <img src="{{ line_item.image | img_url: '220x220', crop: 'center' }}"
+                        <img src="{{ line_item.image | image_url: '220x220', crop: 'center' }}"
                         class="cart-item__image"
                         alt="{{ line_item.image.alt | escape }}"
                         loading="lazy"

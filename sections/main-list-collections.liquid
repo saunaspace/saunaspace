@@ -9,7 +9,7 @@
   {% for block in section.blocks %}
       {% if block.type == "collection_list" %}
           {% if block.settings.col_item != blank %}
-          <a href="javascript:void(0)" class="product-category" style="background-image:url({{ block.settings.collection_img | img_url : 'master'  }})" data-cat="{{ block.settings.collection_title.title | handle }}" onclick="filterProducts('{{ block.settings.collection_title.title | handle }}')">
+          <a href="javascript:void(0)" class="product-category" style="background-image:url({{ block.settings.collection_img | image_url : 'master'  }})" data-cat="{{ block.settings.collection_title.title | handle }}" onclick="filterProducts('{{ block.settings.collection_title.title | handle }}')">
               <div><span>{{ block.settings.col_item }}</span></div>
             </a>
           {% endif %}
