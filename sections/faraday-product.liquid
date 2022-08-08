@@ -428,13 +428,13 @@
                 </div>
                 <div class="pot-col-100 hideMe" id="splititCol">
                     <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy" /></a>
-                    <img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" />
+                    <img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" loading="lazy"  />
                     <span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
                     <p class="fineprint">You can choose this option at checkout.</p>
                 </div>
                 <div class="pot-col-100 hideMe" id="breadCol">
                     <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15"  loading="lazy"/></a>
-                    <img src="{{ 'shop-pay.svg' | asset_url }}" width="70" alt="Bread Financing" />
+                    <img src="{{ 'shop-pay.svg' | asset_url }}" width="70" alt="Bread Financing" loading="lazy"  />
                     <span data-ml="breadText"><ul><li>Starting at 0% APR for 6 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Subject to approval of credit application. Rates range from 0% to 29.99% APR, resulting in, for example, 24 monthly payments of $46.14 at 9.99% APR, per $1,000 borrowed. APRs will vary depending on credit qualifications, loan amount, and term. Bread<sup>®</sup>&nbsp;pay-over-time plans are loans made by Comenity Capital Bank.</p></span>
                     <p class="fineprint">Check your eligibility in minutes at checkout.</p>
                 </div>
@@ -1066,7 +1066,7 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
     {% if seo_media -%}
       {%- assign media_size = seo_media.preview_image.width | append: 'x' -%}
       "image": [
-        {{ seo_media | img_url: media_size | prepend: "https:" | json }}
+        {{ seo_media | image_url: media_size | prepend: "https:" | json }}
       ],
     {%- endif %}
     "description": {{ product.description | strip_html | json }},
@@ -1569,4 +1569,4 @@ function onChangestickyAddToCart(changes, observerstickyAddToCart) {
   ]
 }
 {% endschema %}
-<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_image_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>

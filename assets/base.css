@@ -1082,10 +1082,6 @@ summary::-webkit-details-marker {
     margin-right: 1.5rem;
   }
 
-  .grid--2-col-tablet-down .grid__item {
-   // width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
-  }
-
   .slider--tablet.grid--peek.grid--2-col-tablet-down .grid__item,
   .grid--peek .grid__item {
     width: calc(50% - var(--grid-mobile-horizontal-spacing) - 3rem);
@@ -1117,10 +1113,6 @@ summary::-webkit-details-marker {
 
   .slider--tablet.grid--peek .grid__item:last-of-type {
     margin-right: 1.5rem;
-  }
-
-  .grid--2-col-tablet-down .grid__item {
-    //width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
   }
 
   .grid--1-col-tablet-down.grid--peek .grid__item {
@@ -2337,11 +2329,7 @@ input[type='checkbox'] {
   vertical-align: middle;
 }
 
-.header__icon,
-.header__icon--cart .icon {
-  /* height: auto;
-  width: auto; */
-}
+
 .cart-count-bubble > span {
     font-size: 1.6rem;
 }
@@ -4162,7 +4150,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	    padding: 0 10px;
     margin: 0;
 }
-}
+
 .product__media-wrapper {
 	    margin: 0;
     padding: 0;
@@ -4344,7 +4332,6 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	.color-choice { flex-shrink: 0; margin: 0 8px; width: 30px; height: 30px; border-radius: 15px; background-repeat: no-repeat; background-size: 100%; }
 	.color-choice-off { width: 40px; height: 40px; border: 1px solid transparent; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
 	.color-choice-on { width: 40px; height: 40px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
-	.colorNotAvailable {  }
 
 .colorNotAvailable { position: relative;}
 
@@ -6238,7 +6225,7 @@ a#cart-icon-bubble {
     transform: translateY(32px);
     z-index: 333 !important;
 }
-  @media only screen and (min-width 991px) and (max-width 1100px){    
+  @media only screen and (min-width: 991px) and (max-width: 1100px) {    
       
       #bcpo:not(.g-card) .bcpo-dropdown {
     display: block !important;
