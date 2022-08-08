@@ -58,7 +58,7 @@
               {{ product.title | escape }}
             </h1>
 
-            
+            {% assign id_name = 'add-to-cart-' | append: product.handle | append: '-' | append: collection.handle | append: '-' | append: section.id %}
 
 <section class="page-width section-{{ section.id }}-padding">
   <div class="product product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
@@ -472,16 +472,16 @@
                     <button
                       type="submit"
                       name="add"
-                      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
-                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                      class="js-go-cart-add-to-cart product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                                          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
-                        <span>
+                   
                           {%- if product.selected_or_first_available_variant.available -%}
                             {{ 'products.product.add_to_cart' | t }}
                           {%- else -%}
                             {{ 'products.product.sold_out' | t }}
                           {%- endif -%}
-                        </span>
+                     
                         <div class="loading-overlay__spinner hidden">
                           <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                             <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
@@ -522,6 +522,18 @@
                          {% else %}
                           1–3 days.
                           {% endif %}
+                          <!-- {% assign current_variant = product.selected_or_first_available_variant %}
+                          {% for variant in product.variants %}
+                          <div class="variant__description" data-variant-id="{{variant.id}}" {% if product.selected_or_first_available_variant.id == variant.id %} 
+                          style="display: block;"  
+                        {% endif %} > 
+                            
+                            <p>{{ variant.metafields.custom.lead_time }}</p>
+                          </div>
+                        {% endfor %}
+                        <style>.variant__description {
+                          display:none;
+                        }</style> -->
                         </span>            
                         </div>
                         {% if product.metafields.my_fields.thirty_day_returns == true %}
@@ -854,24 +866,6 @@ function isEmpty( el ){
   $('.stickyBG .sac-color').text(dcolor);
   }
 }, 800)
-
-
-//change in price
-$(document).on('click','label',function(){
-  	//console.log('data is changed')
-  setTimeout(function(){
-    // var damount = $('.price__regular .price-item[data-amount]').attr('data-amount');
-    // var dcolor = $('.bcpo-images .bcpo-value').text();
-    // console.log('current color is: '+dcolor );
-    // $('.stickyBG .price-item').text(damount);
-    // $('.stickyBG .sac-color').text(dcolor);
-
-    
-  },200)
-});
-// $(document).on('click','#sacText',function(){
-//   $('.product-form__submit').click();
-// });
 
 updateUC(1)
 function updateUC(p) {
