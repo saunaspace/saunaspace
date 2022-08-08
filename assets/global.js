@@ -1013,3 +1013,20 @@ window.addEventListener("resize", function() {
 // 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
 // });
 
+(function($){
+  $('.overlay').on('click', function(){
+    console.log('overlay clicked');
+  });
+
+console.log('running');
+var mini_cart = $('.go-cart__mini-cart');
+
+$('.js-go-cart-mini-close').on('click', function(e){
+  e.stopPropagation();
+
+    mini_cart.removeClass('is-open');
+});
+
+
+
+})(jQuery);
