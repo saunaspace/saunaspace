@@ -368,6 +368,7 @@
     {%- endif -%}
     {% section 'go-cart' %}
 <script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
   var goCart = new GoCart(
     {
     cartMode: 'mini-cart', //drawer or mini-cart  
@@ -375,6 +376,7 @@
     displayModal: false, //display success modal when adding product to cart
 }
   );
+});
 </script>
 <script>
   //https://www.ditdot.hr/en/dark-mode-website-tutorial
