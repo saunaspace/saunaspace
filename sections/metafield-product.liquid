@@ -944,7 +944,7 @@ function updateUC(p) {
     {% if seo_media -%}
       {%- assign media_size = seo_media.preview_image.width | append: 'x' -%}
       "image": [
-        {{ seo_media | img_url: media_size | prepend: "https:" | json }}
+        {{ seo_media | image_url: media_size | prepend: "https:" | json }}
       ],
     {%- endif %}
     "description": {{ product.description | strip_html | json }},

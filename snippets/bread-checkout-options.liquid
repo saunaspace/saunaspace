@@ -30,7 +30,7 @@
         name: '{{ line_item.title }}',
         price: {{ line_item.price }},
         sku: '{{ line_item.sku }}',
-        imageUrl: 'https:{{ line_item.variant.image | img_url }}',
+        imageUrl: 'https:{{ line_item.variant.image | image_url }}',
         detailUrl: '{{ line_item.variant.url }}',
         quantity: {{ line_item.quantity }}
       });
