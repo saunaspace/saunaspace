@@ -66,7 +66,7 @@
   .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
   .dark .opening li::marker, .dark .opening span,
   .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .yc-col-head, .dark .totals *, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number,
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .yc-col-head, .dark .totals *, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .cbb-shipping-rates-note,
   .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, .dark .cbb-shipping-rates-rate-item, .dark .cbb-shipping-rates-calculator-change-shipping-address, .dark .cbb-shipping-rates-calculator-country-select, .dark .cbb-shipping-rates-calculator-region-select, .dark .cbb-shipping-rates-calculator-zip-code
   {
     color: #fff !important;
