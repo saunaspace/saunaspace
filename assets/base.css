@@ -706,16 +706,15 @@ summary::-webkit-details-marker {
 }
 
 *:focus-visible {
-  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline: none;
   outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  box-shadow: none;
 }
 
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline: (var(--color-foreground), 0.5);
   outline-offset: 0.3rem;
   box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
     0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
@@ -3899,8 +3898,28 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	width: auto !important;
 	margin: 0 !important;
 }
-.cbb-shipping-rates-calculator-country-select {
-	width: 100% !important;
+.cbb-shipping-rates-calculator-zip-code {
+	border: 1px solid #939393;
+}
+
+.cbb-shipping-rates-calculator-chooser {
+	margin-bottom: 0px;
+}
+
+.cbb-shipping-rates-calculator-change-shipping-address {
+	margin-top: 0px;
+	padding: 20px 0px 7px 0px;
+}
+
+.cbb-shipping-rates-calculator-country-select, .cbb-shipping-rates-calculator-region-select {    
+	width: 100% !important; 
+	border: 1px solid #939393;
+	-webkit-appearance: none !important;
+	line-height: 1.5 !important;
+}
+
+.cbb-shipping-rates-rate-item {
+	list-style-type: none !important;
 }
 
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
