@@ -3903,12 +3903,12 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 
 .cbb-shipping-rates-calculator-chooser {
-	margin-bottom: 0px;
+	margin-bottom: 0 !important;
 }
 
 .cbb-shipping-rates-calculator-change-shipping-address {
-	margin-top: 0px;
-	padding: 20px 0px 7px 0px;
+	margin-top: 0px !important;
+	padding: 20px 0px 7px 0px !important;
 }
 
 .cbb-shipping-rates-calculator-country-select, .cbb-shipping-rates-calculator-region-select {    
