@@ -1,3 +1,7 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}	
 
 
 <img src="{{ 'targeted-therapy.jpg' | asset_url }}" style="display: none;" loading="lazy" />
@@ -82,41 +86,32 @@
 		<section>
 			<h2 class="alignLeft">Shop Photon Therapy</h2>
 				<div class="product-tiles">
-						<!--the include below is looking for rsRP -->
-						
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a href="/products/photon-infrared-therapy-light" ><img src="{{ 'photon-infrared-therapy-light-tile.jpg' | asset_url }}" alt="Photon Infrared Therapy Light" class="pt-img" /></a>
-							<a href="/products/photon-infrared-therapy-light" class="pt-name">Photon Infrared Therapy Light</a>
-						
-							<p class="pt-price etica price3">$349.99</p>
-						
-					</div>
-	
+				
 		
-
-					<div class="product-tile" style="flex-shrink: 0;">
+						<ul id="product-grid" data-id="{{ section.id }}" class="
+						grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+						{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+						  grid--{{ section.settings.columns_desktop }}-col-desktop
+						{% endif %}">
 						
-							<a href="/products/photon-desk-arm" ><img src="{{ 'photon-desk-arm-tile.jpg' | asset_url }}" alt="Photon Desk Arm" class="pt-img"  loading="lazy"/></a>
-							<a href="/products/photon-desk-arm" class="pt-name">Photon Desk Arm</a>
-						
-							<p class="pt-price etica price4">$249.99</p>
-						
-					</div>
-	
-		
-
-					<div class="product-tile" style="flex-shrink: 0;">
-						
-							<a href="/products/photon-soft-case" ><img src="{{ 'photon-soft-case-tile.jpg' | asset_url }}" alt="Photon Soft Case" class="pt-img" loading="lazy" /></a>
-							<a href="/products/photon-soft-case" class="pt-name">Photon Soft Case</a>
-						
-							<p class="pt-price etica price5">$279.99</p>
-						
-					</div>
-	
-		
+						{% for product in collections.targeted.products %}
+						  {% assign lazy_load = false %}
+						  {%- if forloop.index > 2 -%}
+							{%- assign lazy_load = true -%}
+						  {%- endif -%}
+					  
+						  <li class="grid__item">
+							{% render 'card-product',
+							  card_product: product,
+							  media_aspect_ratio: section.settings.image_ratio,
+							  show_secondary_image: section.settings.show_secondary_image,
+							  show_vendor: section.settings.show_vendor,
+							  show_rating: section.settings.show_rating,
+							  lazy_load: lazy_load
+							%}
+						  </li>
+						{%- endfor -%}
+					  </ul>
 				</div>
 		</section>
 {% javascript %}
