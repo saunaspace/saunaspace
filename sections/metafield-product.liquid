@@ -516,24 +516,22 @@
                       {% else %}
                         <div style="width: 100%;">
                       {% endif %}
-                        <strong>Order Processing:</strong> <span id="orderProcessing">
-                          {% if product.metafields.my_fields.lead_time != blank %}
-                         {{ product.metafields.my_fields.lead_time }}.
-                         {% else %}
-                          1–3 days.
-                          {% endif %}
-                          <!-- {% assign current_variant = product.selected_or_first_available_variant %}
+                        <strong>Order Processing:</strong> <span id="orderProcessing" style="display: inline-block;">
+                          {% assign current_variant = product.selected_or_first_available_variant %}
                           {% for variant in product.variants %}
-                          <div class="variant__description" data-variant-id="{{variant.id}}" {% if product.selected_or_first_available_variant.id == variant.id %} 
+                          <span class="variant__description" data-variant-id="{{variant.id}}" {% if product.selected_or_first_available_variant.id == variant.id %} 
                           style="display: block;"  
                         {% endif %} > 
-                            
-                            <p>{{ variant.metafields.custom.lead_time }}</p>
-                          </div>
+                        {% if variant.metafields.custom.lead_time != blank %}
+                            {{ variant.metafields.custom.lead_time }}
+                            {% else %}
+                            1–3 days.
+                            {% endif %}
+                          </span>
                         {% endfor %}
                         <style>.variant__description {
                           display:none;
-                        }</style> -->
+                        }</style>
                         </span>            
                         </div>
                         {% if product.metafields.my_fields.thirty_day_returns == true %}
