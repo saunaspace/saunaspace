@@ -381,6 +381,36 @@
 });
 </script>
 <script>
+  const mediaQueryList = window.matchMedia("(max-width: 767px)");
+
+  if (mediaQueryList.matches) {
+    console.log("Window is max 767px");
+  } else {
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function () {
+      myFunction();
+    };
+
+    // Get the header
+    var header = document.getElementById("topNavBG");
+    var mains = document.getElementById("MainContent");
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+        mains.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+        mains.classList.remove("sticky");
+      }
+    }
+  }
+</script>
+<script>
   //https://www.ditdot.hr/en/dark-mode-website-tutorial
   let darkModeState = false;
 
@@ -454,15 +484,12 @@
     ></script>
     {% endif %}
 
-  <script src="//app.shippingratescalculator.com/js/core/main.min.js?timestamp=1660067178&shop=saunaspace.myshopify.com" defer></script>
+  <script src="//app.shippingratescalculator.com/js/core/main.min.js?timestamp=1660137591&shop=saunaspace.myshopify.com" defer></script>
 
   
 
   
 
-  
-
-  
 
   
 
