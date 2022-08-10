@@ -1001,7 +1001,6 @@ $(".cc").on("click",function() {
 });
 
 $(document).on('click','.ccrp',function() {
-  console.log('swatch selected');
 	whichProduct=$(this).attr("data-productID");
 	whichProductCode=$(this).attr("data-productCode");
 	whichColor=$(this).attr("data-colorCode");
@@ -1009,10 +1008,8 @@ $(document).on('click','.ccrp',function() {
 	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
 	$(this).addClass("color-choice-on");
 	$(".img" + whichProduct).attr("srcset",whichImage);
-  console.log(whichProduct);
   $(this).parent().parent().find(".price-item.price-item--regular").html($(this).attr("data-colorOriginalPrice"));
 	$(this).parent().parent().find(".price-item.price-item--sale").html("From " + $(this).attr("data-colorPrice"));
-  console.log($(this).attr("data-colorPrice"));
 	tileLink="rp" + whichProductCode;
 	baseURL=$("#" + tileLink).attr("data-url");
 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
