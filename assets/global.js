@@ -985,33 +985,35 @@ window.addEventListener("resize", function() {
 	currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
 });
 
-// $(".cc").on("click",function() {
-// 	whichProduct=$(this).attr("data-productID")
-// 	whichProductCode=$(this).attr("data-productCode")
-// 	whichColor=$(this).attr("data-colorCode")
-// 	tileLink=whichProductCode;
-// 	baseURL=$("#" + tileLink).attr("data-url")
-// 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
-	
-// 	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
-// 	$(this).addClass("color-choice-on");
-// 	$(".img" + whichProduct).attr("src","/assets/" + whichProductCode + "-" + whichColor + "-tile.jpg");
-// 	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
-// });
 
-// $(document).on('click','.ccrp',function() {
-// 	whichProduct=$(this).attr("data-productID");
-// 	whichProductCode=$(this).attr("data-productCode");
-// 	whichColor=$(this).attr("data-colorCode");
-//   	whichImage=$(this).attr("data-image");
-// 	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
-// 	$(this).addClass("color-choice-on");
-// 	$(".img" + whichProduct).attr("srcset",whichImage);
-// 	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
-// 	tileLink="rp" + whichProductCode;
-// 	baseURL=$("#" + tileLink).attr("data-url");
-// 	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
-// });
+$(".cc").on("click",function() {
+	whichProduct=$(this).attr("data-productID")
+	whichProductCode=$(this).attr("data-productCode")
+	whichColor=$(this).attr("data-colorCode")
+	tileLink=whichProductCode;
+	baseURL=$("#" + tileLink).attr("data-url")
+	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
+	
+	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
+	$(this).addClass("color-choice-on");
+	$(".img" + whichProduct).attr("src","/assets/" + whichProductCode + "-" + whichColor + "-tile.jpg");
+	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
+});
+
+$(document).on('click','.ccrp',function() {
+	whichProduct=$(this).attr("data-productID");
+	whichProductCode=$(this).attr("data-productCode");
+	whichColor=$(this).attr("data-colorCode");
+  	whichImage=$(this).attr("data-image");
+	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
+	$(this).addClass("color-choice-on");
+	$(".img" + whichProduct).attr("srcset",whichImage);
+	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
+	tileLink="rp" + whichProductCode;
+	baseURL=$("#" + tileLink).attr("data-url");
+	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
+});
+
 
 (function($){
   $('.overlay').on('click', function(){
