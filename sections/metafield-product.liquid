@@ -36,23 +36,7 @@
 </div> -->
 
 
-	<div class="stickyBG">
-		<div class="sticky-add-to-cart">
-			<div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
-			<div class="sac-wrap">
-				<div class="sac-price etica">
-                  	{%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
-                </div>
-              	<a href="javascript:void(0)" class="btn atc" id="sacText">
-                  {%- if product.selected_or_first_available_variant.available -%}
-                  	{{ 'products.product.add_to_cart' | t }}
-                  {%- else -%}
-                  	{{ 'products.product.sold_out' | t }}
-                  {%- endif -%}
-              	</a>
-			</div>
-      </div>
-	</div>
+
 
             <h1 class="product-name-mobile" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
@@ -467,6 +451,7 @@
                 </div>
 
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
                   <div class="product-form__buttons">
                     <button
@@ -488,6 +473,23 @@
                           </svg>
                         </div>
                     </button>
+                    <div class="stickyBG">
+                      <div class="sticky-add-to-cart">
+                        <div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
+                        <div class="sac-wrap">
+                          <div class="sac-price etica">
+                                      {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
+                                  </div>
+                                  <a href="javascript:void(0)" class="btn atc js-go-cart-add-to-cart" id="sacText">
+                                    {%- if product.selected_or_first_available_variant.available -%}
+                                      {{ 'products.product.add_to_cart' | t }}
+                                    {%- else -%}
+                                      {{ 'products.product.sold_out' | t }}
+                                    {%- endif -%}
+                                  </a>
+                        </div>
+                        </div>
+                    </div>
                     {%- if block.settings.show_dynamic_checkout -%}
                       {{ form | payment_button }}
                     {%- endif -%}

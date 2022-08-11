@@ -15,6 +15,7 @@ slider-component {
   --shadow-padding-bottom: calc(var(--shadow-vertical-offset) + var(--shadow-blur-radius));
   scroll-snap-align: start;
   flex-shrink: 0;
+  list-style: none;
   padding-bottom: 0;
 }
 

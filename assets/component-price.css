@@ -24,6 +24,7 @@
 
 .price__regular .price-item--regular {
   margin-right: 0;
+  font-size: 14px;
 }
 
 .price:not(.price--show-badge) .price-item--last:last-of-type {
@@ -81,7 +82,7 @@
 .price--on-sale .price-item--regular {
   text-decoration: line-through;
   color: rgba(var(--color-foreground), 0.75);
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .unit-price {
