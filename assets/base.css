@@ -1054,6 +1054,9 @@ summary::-webkit-details-marker {
     max-width: 100%;
   }
 }
+.product--thumbnail .product__media-item:not(.is-active), .product--thumbnail_slider .product__media-item:not(.is-active) {
+	display: none;
+}
 
 @media screen and (max-width: 749px) {
   .grid--peek.slider--mobile {
@@ -1065,9 +1068,9 @@ summary::-webkit-details-marker {
     box-sizing: content-box;
     margin: 0;
   }
-  .product--thumbnail .product__media-item:not(.is-active), .product--thumbnail_slider .product__media-item:not(.is-active) {
+  /* .product--thumbnail .product__media-item:not(.is-active), .product--thumbnail_slider .product__media-item:not(.is-active) {
 	  display: none;
-  }
+  } */
 
   .grid--peek .grid__item {
     min-width: 35%;
@@ -1193,7 +1196,7 @@ deferred-media {
 }
 
 .card-information .price-item.price-item--sale.price-item--last, .card-information .price-item.price-item--regular.pt-price.etica {
-	font-size: 16px !important;
+	font-size: 14px !important;
 }
 
 .card__content {
@@ -3914,7 +3917,8 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 .cbb-shipping-rates-calculator-country-select, .cbb-shipping-rates-calculator-region-select {    
 	width: 100% !important; 
 	border: 1px solid #939393;
-	-webkit-appearance: none !important;
+	/* -webkit-appearance: none !important; */
+	color: #000;
 	line-height: 1.5 !important;
 }
 
@@ -4211,6 +4215,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	border-bottom: 1px solid #979797;
 	z-index: 3;
 	transition: transform .25s;
+	top: 0;
 }
 
 	.sticky-add-to-cart {
@@ -4333,9 +4338,14 @@ h1.product__title, .product-text h1, .product-name-mobile {
 }
 
 	.product-text h1 + p { margin-top: -1.5em; text-align: center; }
-
+	.sac-price .price {
+		margin-bottom: 0;
+	}
 		.product-text h1 + p.product-price { margin: 0; }
 	.product-text .btn { display: block; padding: 1em 0; }
+	#sacText {
+		padding: .75em 1.5em;
+	}
 	.product-price { font-size: 2rem; }
 	.product-color { font-size: 1.4rem; display: inline-block; padding: 0 1em; margin-top: 15px; background-image: linear-gradient(#939393,#939393);  background-position: 0 50%; background-size:100% 1px; background-repeat: no-repeat;}
 		.product-color span { background: #fff; padding: 0 5px; display: inline-block;}
@@ -6240,8 +6250,8 @@ a#cart-icon-bubble {
     transform: translateY(-16px);
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(32px);
-    z-index: 333 !important;
+    transform: translateY(69px);
+    z-index: 2 !important;
 }
   @media only screen and (min-width: 991px) and (max-width: 1100px) {    
       
