@@ -34,7 +34,7 @@
     {%- if forloop.index > 2 -%}
       {%- assign lazy_load = true -%}
     {%- endif -%}
-
+    {% if product.available %}
     <li class="grid__item">
       {% render 'card-product',
         card_product: product,
@@ -45,6 +45,7 @@
         lazy_load: lazy_load
       %}
     </li>
+    {% endif %}
   {%- endfor -%}
 </ul>
 
