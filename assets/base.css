@@ -1692,6 +1692,7 @@ details[open] > .share-button__fallback {
   cursor: pointer;
   line-height: calc(1 + 0.6 / var(--font-body-scale));
   padding: 0 2rem;
+  color: #000;
   margin: var(--inputs-border-width);
   min-height: calc(var(--inputs-border-width) * 2);
   padding: 1rem 1.5rem 1rem 2rem;
