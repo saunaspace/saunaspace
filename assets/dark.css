@@ -55,10 +55,14 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
+ .dark .select__select,
+ .dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
     background-color: #000;
   }
-
+  .dark .select__select,
+  .dark .customer select {
+    background: #000;
+  }
   .dark .cbb-shipping-rates-error-message {
     background-color: #000 !important;
   }
