@@ -13,31 +13,31 @@
 					<div class="et-dates">
                         {% unless page.metafields.start-date.startdate == blank %}
                             <span class="eventStartDate">
-                                {{ page.metafields.start-date.startdate }}
+                                {{page.metafields.start-date.startdate}}
                             </span>
                         {% endunless %}
                         {% unless page.metafields.end-date.enddate == blank %}
-                        - <span class="eventEndDate">{{ page.metafields.end-date.enddate }}</span>. 
+                        - <span class="eventEndDate">{{page.metafields.end-date.enddate}}</span>. 
                         {% endunless %}
                         <span class="eventStartTime">8:00am</span> - <span class="eventEndTime">5:00pm</span></div>
 					<div class="et-location etica">
                         {% unless page.metafields.location-name.locationname == blank %}
-                            <span class="eventVenue">{{ page.metafields.location-name.locationname }}</span><br />
+                            <span class="eventVenue">{{page.metafields.location-name.locationname}}</span><br />
                         {% endunless %}
                         {% unless page.metafields.location-street-addr.locationstreetaddr == blank %}
-                            <span class="eventAddress">{{ page.metafields.location-street-addr.locationstreetaddr }}</span> 
+                            <span class="eventAddress">{{page.metafields.location-street-addr.locationstreetaddr}}</span> 
                         {% endunless %}
                         {% unless page.metafields.location-city.locationcity == blank %}
-                            <span class="eventCity">{{ page.metafields.location-city.locationcity }}</span> 
+                            <span class="eventCity">{{page.metafields.location-city.locationcity}}</span> 
                         {% endunless %}
                         {% unless page.metafields.location-state.locationstate == blank %}
-                            <span class="eventState">{{ page.metafields.location-state.locationstate }}</span> 
+                            <span class="eventState">{{page.metafields.location-state.locationstate}}</span> 
                         {% endunless %}
                         {% unless page.metafields.location-zip.locationzip == blank %}
-                            <span class="eventZip">{{ page.metafields.location-zip.locationzip }}</span>
+                            <span class="eventZip">{{page.metafields.location-zip.locationzip}}</span>
                         {% endunless %}
                         {% unless page.metafields.location-country.locationcountry == blank %}
-                         <span class="eventCountry">{{ page.metafields.location-country.locationcountry }}</span> 
+                         <span class="eventCountry">{{page.metafields.location-country.locationcountry}}</span> 
                          {% endunless %}
 					</div>
 				</div>
@@ -50,14 +50,14 @@
 					<div class="event-title">Event Details</div>
 					{{ page.content }}
                     {% unless page.metafields.event-cost.eventcost == blank %}
-                        <span class="eventCost">{{ page.metafields.event-cost.eventcost }}</span> 
+                        <span class="eventCost">{{page.metafields.event-cost.eventcost}}</span> 
                     {% endunless %}
                     {% unless page.metafields.registration-link.registrationlink == blank %}
-                        <div class="event-link-div"><a href="{{ page.metafields.registration-link.registrationlink }}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
+                        <div class="event-link-div"><a href="{{page.metafields.registration-link.registrationlink}}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
                     {% endunless %}
                 </div>
 				<div class="events-img">
-                    <img src="{{ page.metafields.event-image.eventimage }}" /></div>
+                    <img src="{{page.metafields.event-image.eventimage}}" /></div>
 			</div>
 	</section>
 	
@@ -82,42 +82,42 @@
             "name":   "{{ 'page.title' | t }}",
         {%- endif -%}
         {% unless page.metafields.start-date.startdate == blank %}
-                "startDate": "{{ page.metafields.start-date.startdate }}",
+                "startDate": "{{page.metafields.start-date.startdate}}",
         {% endunless %}
         {% unless page.metafields.end-date.enddate == blank %}
-                "endDate": "{{ page.metafields.end-date.enddate }}",
+                "endDate": "{{page.metafields.end-date.enddate}}",
         {% endunless %}
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "eventStatus": "https://schema.org/EventScheduled",
       "location": {
         "@type": "Place",
         {% unless page.metafields.location-name.locationname == blank %}
-            "name": "{{ page.metafields.location-name.locationname }}",
+            "name": "{{page.metafields.location-name.locationname}}",
         {% endunless %}
         "address": {
           "@type": "PostalAddress",
             {% unless page.metafields.location-street-addr.locationstreetaddr == blank %}
-                "streetAddress": "{{ page.metafields.location-street-addr.locationstreetaddr }}",
+                "streetAddress": "{{page.metafields.location-street-addr.locationstreetaddr}}",
             {% endunless %}
             {% unless page.metafields.location-city.locationcity == blank %}
-                "addressLocality": "{{ page.metafields.location-city.locationcity }}",
+                "addressLocality": "{{page.metafields.location-city.locationcity}}",
             {% endunless %}
             {% unless page.metafields.location-zip.locationzip == blank %}
-                "postalCode": "{{ page.metafields.location-zip.locationzip }}",
+                "postalCode": "{{page.metafields.location-zip.locationzip}}",
             {% endunless %}
             {% unless page.metafields.location-state.locationstate == blank %}
-                "addressRegion": "{{ page.metafields.location-state.locationstate }}",
+                "addressRegion": "{{page.metafields.location-state.locationstate}}",
             {% endunless %}
             {% unless page.metafields.location-country.locationcountry == blank %}
-                "addressCountry": "{{ page.metafields.location-country.locationcountry }}",
+                "addressCountry": "{{page.metafields.location-country.locationcountry}}",
             {% endunless %}
         }
       },
       "description": "{{ page.content }}",
-      "image" : ["{{ page.metafields.event-image.eventimage }}" ],
+      "image" : ["{{page.metafields.event-image.eventimage}}" ],
         {% unless page.metafields.event-cost.eventcost == blank %}
             "offers": {
-                "price": "{{ page.metafields.event-cost.eventcost }}",
+                "price": "{{page.metafields.event-cost.eventcost}}",
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/InStock",
                 "validFrom": "1/1/2022"
@@ -125,10 +125,10 @@
         {% endunless %}
 		"organizer": {
             {% unless page.metafields.organizer-name.organizername == blank %}
-			"name": "{{ page.metafields.organizer-name.organizername }}",
+			"name": "{{page.metafields.organizer-name.organizername}}",
             {% endunless %}
             {% unless page.metafields.registration-link.registrationlink == blank %}
-                "url": "{{ page.metafields.registration-link.registrationlink }}",
+                "url": "{{page.metafields.registration-link.registrationlink}}",
             {% endunless %}
 		  }
     }

@@ -20,10 +20,15 @@
   
   })}, 700);
 
-});
 
-// variant lead time metafield listener
-function bcpoChange(currentVariant) {
+  $( ".bcpo-front-image-option" ).change(function(variant) {
+    bcpoChange(variant);
+  });
+
+
+
+
+  function bcpoChange(currentVariant) {
     console.log('bcpo: ' + bcpo.variant.id);
     console.log(currentVariant.variant);
     const variants = document.querySelectorAll('[data-variant-id]')
@@ -37,4 +42,8 @@ function bcpoChange(currentVariant) {
       }
   });
 }
+
+
+
+});
 </script>
