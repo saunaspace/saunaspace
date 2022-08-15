@@ -153,7 +153,7 @@
                         </svg>
                       </div>
                     </div>
-                    <div class="cart-item__price-wrapper">
+                    <div class="cart-item__price-wrapper small-hide">
                       {%- if item.original_line_price != item.final_line_price -%}
                         <dl class="cart-item__discounted-prices">
                           <dt class="visually-hidden">
@@ -234,7 +234,7 @@
                     </div>
                   </td>
 <td class="cart-item__price">
-  <p class="cart-labels"><strong>Total Price</strong></p>
+  <p class="cart-labels"><strong>Item Price</strong></p>
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
                         <span class="visually-hidden">
@@ -252,14 +252,15 @@
                       </div>
                     {%- else -%}
                       <div class="product-option">
-                        {{ item.original_price | money }} USD
                         {% if item.variant.compare_at_price > item.variant.price %}
-  <s>{{ item.variant.compare_at_price | money }} USD</s>
-{% endif %}
+                        <s>{{ item.variant.compare_at_price | money }} USD</s>
+                      {% endif %}
+                        {{ item.original_price | money }} USD
+                
                       </div>
                     {%- endif -%}
                   </td>
-                  <td class="cart-item__totals right small-hide">
+                  <td class="cart-item__totals right">
                     <div class="loading-overlay hidden">
                       <div class="loading-overlay__spinner">
                         <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">

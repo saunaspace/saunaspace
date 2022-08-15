@@ -8,6 +8,7 @@
 .price > * {
   display: inline-block;
   vertical-align: top;
+  font-size: 14px;
 }
 
 .price.price--unavailable {
@@ -19,7 +20,7 @@
 }
 
 .price .price-item {
-  margin: 0 1rem 0 0;
+  margin: 0;
 }
 
 .price__regular .price-item--regular {
