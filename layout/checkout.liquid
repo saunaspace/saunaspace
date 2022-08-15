@@ -14,7 +14,7 @@
     
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">    
-
+    
     <style>
       .section__title.order-notes {
         display: inline-block;
@@ -124,7 +124,7 @@
     </script>
   	<!-- End of Hotjar  -->   
     <!-- SMSBump opt-in  --> 
-  	{% render 'smsbump_checkout_marketing_subscription' %}
+  	{% include 'smsbump_checkout_marketing_subscription' %}
 	<!-- End of SMSBump opt-in  --> 
   </head>
   <body>
@@ -150,7 +150,7 @@
             {{ content_for_layout }}
             <script>  
               Checkout.$(document).on('page:load', function() {
-                let cart_note_input = '<h2 class="section__title order-notes" style="margin-left: 8px" id="section-delivery-title">Order Notes</h2><textarea name="checkout[note]" placeholder="Enter order notes here like signature not required or hold my order, etc..." value="{{ checkout.note }}" data-cart-notes-textarea maxlength="160" class="field__input" style="margin: 0 5px 3rem; width: 98%">{{ checkout.note }}</textarea>'
+                let cart_note_input = '<h2 class="section__title order-notes" style="margin-left: 8px" id="section-delivery-title">Order Notes</h2><textarea name="checkout[note]" placeholder="Enter order notes here like signature not required or hold my order, etc..." value="{{checkout.note}}" data-cart-notes-textarea maxlength="160" class="field__input" style="margin: 0 5px 3rem; width: 98%">{{ checkout.note }}</textarea>'
 //                 Checkout.$('.address-fields').append(cart_note_input)    
                 Checkout.$(cart_note_input).insertAfter('.address-fields');
                 }); 
@@ -177,8 +177,8 @@
 
     <script>
       (function($){        
-        {% if checkout.note %}
-         var order_note = '{{ checkout.note }}'
+        {% if checkout.note%}
+         var order_note = '{{checkout.note}}'
 
         Shopify.Checkout.OrderStatus.addContentBox(
           '<h2 class="ordernotesh3">Order notes</h2><p style="margin-top: 10px">' + order_note + '</p>'
