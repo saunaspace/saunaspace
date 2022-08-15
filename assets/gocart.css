@@ -265,8 +265,6 @@
     text-decoration: none;
     font-weight: bold;
     white-space: break-spaces;
-    display: inline-block;
-    margin-bottom: 10px;
   }
 
   .go-cart-item__title:hover {
@@ -311,8 +309,6 @@
     border-right: none;
     outline: none;
     -moz-appearance: textfield;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
   }
   .go-cart-item__quantity-number::-webkit-inner-spin-button,
   .go-cart-item__quantity-number::-webkit-outer-spin-button {
@@ -370,7 +366,6 @@
   .is-invisible {
     opacity: 0;
     visibility: hidden;
-    height: 0;
   }
   /*# sourceMappingURL=index.css.map */
 
@@ -402,7 +397,7 @@
     font-family: work sans;
     margin: 1.5rem 3rem 0;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #939393;
+    border-bottom: 1px solid;
     font-weight: normal;
     position: relative;
     text-align: left;

@@ -146,7 +146,9 @@
       },
       "view_full_details": "Lihat detail lengkap",
       "include_taxes": "Termasuk pajak.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Biaya pengiriman<\/a> dihitung saat checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Biaya pengiriman<\/a> dihitung saat checkout.",
+      "choose_options": "Pilih opsi",
+      "choose_product_options": "Pilih opsi untuk {{ product_name }}"
     },
     "modal": {
       "label": "Galeri media"
@@ -176,7 +178,10 @@
       "sort_button": "Urutkan",
       "sort_by_label": "Urutkan berdasarkan:",
       "to": "Sampai",
-      "clear_filter": "Hapus filter"
+      "clear_filter": "Hapus filter",
+      "filter_selected_accessibility": "{{ type }} ({{ count }} filter dipilih)",
+      "show_more": "Selengkapnya",
+      "show_less": "Sembunyikan lainnya"
     }
   },
   "templates": {
@@ -206,7 +211,8 @@
         "comment": "Komentar",
         "send": "Kirim",
         "post_success": "Terima kasih sudah menghubungi kami. Kami akan segera menghubungi Anda.",
-        "error_heading": "Mohon sesuaikan:"
+        "error_heading": "Mohon sesuaikan:",
+        "title": "Formulir kontak"
       }
     },
     "404": {
@@ -242,7 +248,8 @@
         "product": "Produk",
         "price": "Harga",
         "total": "Total",
-        "quantity": "Jumlah"
+        "quantity": "Jumlah",
+        "image": "Gambar produk"
       },
       "update": "Perbarui",
       "login": {
@@ -260,7 +267,8 @@
     },
     "featured_collection": {
       "view_all": "Lihat semua",
-      "view_all_label": "Lihat semua produk dalam koleksi {{ collection_name }}"
+      "view_all_label": "Lihat semua produk dalam koleksi {{ collection_name }}",
+      "slider": "Slider"
     },
     "collection_list": {
       "view_all": "Lihat semua"
@@ -370,7 +378,7 @@
     },
     "reset_password": {
       "title": "Reset sandi akun",
-      "subtext": "Masukkan sandi baru untuk {{ email }}",
+      "subtext": "Masukkan sandi baru",
       "password": "Sandi",
       "password_confirm": "Konfirmasi sandi",
       "submit": "Reset sandi"

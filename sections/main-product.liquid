@@ -41,10 +41,10 @@
       }
     }
   {%- endstyle -%}
-  <script>(function () { if ((!document.documentElement.innerHTML.match(/asyncLoad/) || document.documentElement.innerHTML.includes('\\/obscure' + '-escarpment-2240')) && (!window.bcpo || !bcpo.disabled) && window.bcpo_data && bcpo_data.virtual_options && bcpo_data.virtual_options.length) { return; } var script = document.createElement('script'); script.src = "{{ 'product-form.js' | asset_url }}"; document.head.appendChild(script); })();</script>
+  <script>(function () { if (window.bcpo_data && bcpo_data.virtual_options && bcpo_data.virtual_options.length) { return; } var script = document.createElement('script'); script.src = "{{ 'product-form.js' | asset_url }}"; document.head.appendChild(script); })();</script>
 
 
-  <script>(function () { if ((!document.documentElement.innerHTML.match(/asyncLoad/) || document.documentElement.innerHTML.includes('\\/obscure' + '-escarpment-2240')) && (!window.bcpo || !bcpo.disabled) && window.bcpo_data && bcpo_data.virtual_options && bcpo_data.virtual_options.length) { return; } var script = document.createElement('script'); script.src = "{{ 'product-form.js' | asset_url }}"; document.head.appendChild(script); })();</script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
   {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
   {%- if first_3d_model -%}
@@ -535,7 +535,24 @@
 
               {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
 
-             
+              {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+              <pickup-availability class="product__pickup-availabilities no-js-hidden quick-add-hidden"
+                {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %} available{% endif %}
+                data-root-url="{{ routes.root_url }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                data-has-only-default-variant="{{ product.has_only_default_variant }}"
+              >
+                <template>
+                  <pickup-availability-preview class="pickup-availability-preview">
+                    {% render 'icon-unavailable' %}
+                    <div class="pickup-availability-info">
+                      <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                      <button class="pickup-availability-button link link--text underlined-link">{{ 'products.product.pickup_availability.refresh' | t }}</button>
+                    </div>
+                  </pickup-availability-preview>
+                </template>
+              </pickup-availability>
             </div>
 
             <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
@@ -579,23 +596,13 @@
           {% else %}
             <div style="width: 100%;">
           {% endif %}
-          <strong>Order Processing:</strong> <span id="orderProcessing" style="display: inline-block;">
-            {% assign current_variant = product.selected_or_first_available_variant %}
-            {% for variant in product.variants %}
-            <span class="variant__description" data-variant-id="{{variant.id}}" {% if product.selected_or_first_available_variant.id == variant.id %} 
-            style="display: block;"  
-          {% endif %} > 
-          {% if variant.metafields.custom.lead_time != blank %}
-              {{ variant.metafields.custom.lead_time }}
-              {% else %}
+            <strong>Order Processing:</strong> <span id="orderProcessing">
+              {% if product.metafields.my_fields.lead_time != blank %}
+             {{ product.metafields.my_fields.lead_time }}.
+             {% else %}
               1–3 days.
               {% endif %}
-            </span>
-          {% endfor %}
-          <style>.variant__description {
-            display:none;
-          }</style>
-          </span>     
+            </span>            
             </div>
             {% if product.metafields.my_fields.thirty_day_returns == true %}
               <div>30-Day Returns</div>
