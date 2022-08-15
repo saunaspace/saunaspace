@@ -59,6 +59,18 @@
     background-color: #000;
   }
 
+ .dark .select__select,
+ .dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
+    background-color: #000;
+  }
+  .dark .select__select,
+  .dark .customer select {
+    background: #000;
+  }
+  .dark .cbb-shipping-rates-error-message {
+    background-color: #000 !important;
+  }
+
   .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
   .dark .optimize, .dark .story blockquote, .dark .etica,
   .dark .intro p, .dark .intro a, .dark .people h3, .dark .people h2, .dark .people p,

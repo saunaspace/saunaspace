@@ -1690,12 +1690,13 @@ details[open] > .share-button__fallback {
 .select__select,
 .customer select {
   cursor: pointer;
-  line-height: calc(1 + 0.6 / var(--font-body-scale));
-  padding: 0 2rem;
+  color: #000;
   margin: var(--inputs-border-width);
-  min-height: calc(var(--inputs-border-width) * 2);
-  padding: 1rem 1.5rem 1rem 2rem;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #939393;
+	line-height: 1.5 !important;
+	background: #fff;
+	padding: 5px;
+    height: 40px;
   font-family: IBM Plex Mono,monospace!important;
 }
 
