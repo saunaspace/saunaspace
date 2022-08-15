@@ -424,7 +424,10 @@
                 <div class="atc-outOfStock">
                     
                         <p><strong>Sorry, this item is out of stock.</strong></p>
-                    <p>Please select a different color.</p>
+                        {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 %}
+                          <p>Please select a different color.</p>
+                        {% endif %}
+                   
                 </div>
             </div>
             
@@ -731,10 +734,10 @@
     
     </div>
     
-  	{% if product.metafields.my_fields.top-features != blank %}
+  	{% if product.metafields.my_fields.top_features != blank %}
     <div class="maroonBG">
     <div class="top-features">
-		{{ product.metafields.my_fields.top-features }}    
+		{{ product.metafields.my_fields.top_features }}    
     </div>
     </div>
   	{% endif %}
