@@ -6241,7 +6241,7 @@ a#cart-icon-bubble {
 }
 
 .navBG.sticky {
-	padding: 10px 0 5px;
+	padding: 10px 0 0;
 }
 
 #bcpo .bcpo-images {
@@ -6251,7 +6251,7 @@ a#cart-icon-bubble {
     transform: translateY(-16px);
 }
       main#MainContent.sticky .stickyBG.stickyBG-visible {
-    transform: translateY(69px);
+    transform: translateY(62px);
     z-index: 2 !important;
 }
   @media only screen and (min-width: 991px) and (max-width: 1100px) {    
