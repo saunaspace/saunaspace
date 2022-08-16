@@ -734,6 +734,22 @@ function updateUC(p) {
   $("#bp" + p).find("p").removeClass("hideMe");
   $("#bpImg").attr("src",ucArr[p-1]);
 }
+
+
+setInterval(function () {
+    if($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky") ) {
+      $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('#ju_Con_837251').css('display') == 'block')
+    {
+      $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
+    } else if (!$('.navBG').hasClass("sticky")) {
+        $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('.navBG').hasClass("sticky")) {
+      $('.stickyBG').css('transform', 'translateY(62px)');
+    }
+}, 1000);
+
+
 </script>
 
 {%- if first_3d_model -%}
