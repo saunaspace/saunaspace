@@ -56,7 +56,7 @@
             <div class="totals">
                   <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">
                     {{ cart.total_price | money_with_currency }}</span>
-                    <div class="fineprint">
+                    <div class="fineprint cart-fineprint">
                       {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
                       {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
                     {%- elsif cart.taxes_included -%}
@@ -153,7 +153,16 @@ $(".yc-col-head.yc-acc").on("click",function() {
 	$(this).next().toggleClass("hideMe");
 });
 
+
+
   document.addEventListener('DOMContentLoaded', function() {
+
+    var cart_fineprint = $(".cart-fineprint").text();
+    setTimeout(function() { 
+      $('<p>' + cart_fineprint + '</p>').appendTo($( '#dcodeOuterWrapper'));
+    }, 1500);
+
+
     function isIE() {
       const ua = window.navigator.userAgent;
       const msie = ua.indexOf('MSIE ');
@@ -170,6 +179,8 @@ $(".yc-col-head.yc-acc").on("click",function() {
     document.querySelector('#checkout').addEventListener('click', function(event) {
       document.querySelector('#cart').submit();
     });
+    
+
   });
 </script>
 
