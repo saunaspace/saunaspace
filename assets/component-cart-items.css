@@ -509,5 +509,29 @@ td.cart-item__price .product-option s{
 
 }
 
+.dcodeTable {
+  max-width: 100% !important;
+  display: table !important;
+  table-layout: fixed;
+}
 
+#dcodeInnerWrapper {
+  position: relative;
+}
 
+input#dcodeInput {
+  width: 73%;
+}
+
+button#dcodeSubmit {
+  position: absolute;
+  right: 0 !important;
+  left: auto;
+}
+
+#dcodeButtonLabel {
+  left: auto !important;
+  top: auto !important;
+  right: 0;
+  transform: none !important;
+}
