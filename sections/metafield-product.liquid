@@ -789,6 +789,21 @@ $(document).ready(function() {
 			$(this).attr({"target":"_blank"});
 		}
 	});
+
+
+
+  setInterval(function () {
+    if($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky") ) {
+      $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('#ju_Con_837251').css('display') == 'block')
+    {
+      $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
+    } else if (!$('.navBG').hasClass("sticky")) {
+        $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('.navBG').hasClass("sticky")) {
+      $('.stickyBG').css('transform', 'translateY(62px)');
+    }
+}, 1000);
 	
 });
 
@@ -800,6 +815,9 @@ $(".product-info-tab").on("click",function() {
 	var whichTab=$(this).attr("data-tab");
 	$("#pid-" + whichTab).removeClass("hideMe");
 });
+
+
+
 
 
 var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
