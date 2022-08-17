@@ -3804,6 +3804,12 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	font-size: 4rem;
 	font-weight: 700;
 }
+
+@media (max-width: 650px) {
+	.yc-head {
+		margin-top: 1em;
+	}
+}
 .is-empty .cart__empty-text, .is-empty .cart__warnings {
 	color: #000;
 }
