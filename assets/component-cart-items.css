@@ -544,3 +544,8 @@ button#dcodeSubmit {
     padding-bottom: 0px;
   }
 }
+
+.cart-fineprint {
+  text-align: center;
+  margin-top: 10px;
+}

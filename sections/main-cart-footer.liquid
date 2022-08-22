@@ -56,17 +56,8 @@
             <div class="totals">
                   <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">
                     {{ cart.total_price | money_with_currency }}</span>
-                    <div class="fineprint cart-fineprint">
-                      {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
-                      {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                    {%- elsif cart.taxes_included -%}
-                      {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
-                    {%- elsif shop.shipping_policy.body != blank -%}
-                      {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
-                    {%- else -%}
-                      {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
-                    {%- endif -%}
-                    </div></div>
+                   
+                  </div>
                 </div>
 
                 <div>
@@ -106,6 +97,18 @@
                 <button type="submit" id="checkout" class="cart__checkout-button button btn btn-checkout" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
                   {{ 'sections.cart.checkout' | t }}
                 </button>
+                
+              </div>
+              <div class="fineprint cart-fineprint">
+                {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- elsif cart.taxes_included -%}
+                {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+              {%- elsif shop.shipping_policy.body != blank -%}
+                {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+              {%- else -%}
+                {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+              {%- endif -%}
               </div>
 
           {%- endcase -%}
@@ -156,12 +159,6 @@ $(".yc-col-head.yc-acc").on("click",function() {
 
 
   document.addEventListener('DOMContentLoaded', function() {
-
-    var cart_fineprint = $(".cart-fineprint").text();
-    setTimeout(function() { 
-      $('<p>' + cart_fineprint + '</p>').appendTo($( '#dcodeOuterWrapper'));
-    }, 1500);
-
 
     function isIE() {
       const ua = window.navigator.userAgent;

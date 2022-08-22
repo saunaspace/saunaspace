@@ -694,16 +694,14 @@ summary::-webkit-details-marker {
 }
 
 *:focus-visible {
-  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
-}
-
+	outline: none;
+	outline-offset: 0.3rem;
+	box-shadow: none;
+  }
 /* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
 .focused,
 .no-js *:focus {
-  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline: (var(--color-foreground), 0.5);
   outline-offset: 0.3rem;
   box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
     0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
@@ -1190,7 +1188,7 @@ deferred-media {
 }
 
 .card-information .price-item.price-item--sale.price-item--last, .card-information .price-item.price-item--regular.pt-price.etica {
-	font-size: 16px !important;
+	font-size: 14px !important;
 }
 
 .card__content {
@@ -1642,7 +1640,7 @@ details[open] > .share-button__fallback {
   box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground),var(--inputs-border-opacity));
   outline: 0;
   border-radius: var(--inputs-radius);
-}
+} */
 
 .field__input:focus-visible,
 .select__select:focus-visible,
@@ -3913,9 +3911,28 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	width: auto !important;
 	margin: 0 !important;
 }
-.cbb-shipping-rates-calculator-country-select {
-	width: 100% !important;
+.cbb-shipping-rates-calculator-zip-code {
+	border: 1px solid #939393;
 }
+.cbb-shipping-rates-calculator-chooser {
+	margin-bottom: 0 !important;
+}
+.cbb-shipping-rates-calculator-change-shipping-address {
+	margin-top: 0px !important;
+	padding: 20px 0px 7px 0px !important;
+}
+.cbb-shipping-rates-calculator-country-select, .cbb-shipping-rates-calculator-region-select {    
+	width: 100% !important; 
+	border: 1px solid #939393;
+	/* -webkit-appearance: none !important; */
+	color: #000;
+	line-height: 1.5 !important;
+}
+.cbb-shipping-rates-rate-item {
+	list-style-type: none !important;
+	margin-bottom: 8px !important;
+}
+
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
 	
 	.ycc-lineitem .etica-bold { font-size: 2rem; }
@@ -4205,6 +4222,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	border-bottom: 1px solid #979797;
 	z-index: 3;
 	transition: transform .25s;
+	top: 0;
 }
 
 	.sticky-add-to-cart {
@@ -4330,10 +4348,14 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	margin-bottom: 1em;
 }
 
-	.product-text h1 + p { 
-		margin-top: -1.5em; 
-		text-align: center;
-	}
+.product-text h1 + p { margin-top: -1.5em; text-align: center; }
+.sac-price .price {
+	margin-bottom: 0;
+}
+
+#sacText {
+	padding: .75em 1.5em;
+}
 
 		.product-text h1 + p.product-price { margin: 0; }
 	.product-text .btn { display: block; padding: 1em 0; }
@@ -4638,12 +4660,11 @@ h1.product__title, .product-text h1, .product-name-mobile {
 .bottom-line-items-container .avg-score { font-family: UntitledSans, sans-serif !important; font-weight: 700; font-size: 2rem !important; color: #000 !important;  }
 .reviews-qa-label { color: #000 !important; font-size: 1.6rem !important; }
 .main-widget .rating-stars-container { height: auto !important; margin: 0 .5em !important; }
-.yotpo-regular-box.yotpo-bottomline.bottom-line-items-container { padding: 0 !important; }
+.yotpo-regular-box.yotpo-bottomline.bottom-line-items-container { padding-top: 0px; margin: 0 10px 10px 10px; }
 .yotpo .write-question-wrapper * {  font-family: UntitledSans, sans-serif !important; font-size: 1.6rem !important; }
-
+.yotpo-regular-box.yotpo-bottomline.bottom-line-items-container { padding-top: 0px; margin: 0 10px 10px 10px; }
 
 @media all and (max-width: 600px) {
-	.yotpo.yotpo-main-widget .yotpo-icon-btn, .yotpo .yotpo-modal-dialog .yotpo-icon-btn { margin-top: 40px !important; }
 	
 	.yotpo-footer { display: flex; }
 	.yotpo-helpful { margin-left: auto !important; }
@@ -6247,7 +6268,7 @@ a#cart-icon-bubble {
     transform: translateY(62px);
     z-index: 2 !important;
 }
-  @media only screen and (min-width 991px) and (max-width 1100px){    
+  @media only screen and (min-width: 991px) and (max-width: 1100px){    
       
       #bcpo:not(.g-card) .bcpo-dropdown {
     display: block !important;

@@ -172,11 +172,24 @@
         "settings": {
           "color_scheme": "background-1"
         }
+      },
+      "go-cart": {
+        "type": "go-cart",
+        "settings": {
+        }
       }
     },
     "content_for_index": [
 
-    ]
+    ],
+    "blocks": {
+      "7570552984445421165": {
+        "type": "shopify:\/\/apps\/yotpo-product-reviews-photos\/blocks\/settings\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "disabled": false,
+        "settings": {
+        }
+      }
+    }
   },
   "presets": {
     "Default": {

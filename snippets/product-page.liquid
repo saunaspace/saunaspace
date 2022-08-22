@@ -20,17 +20,33 @@
   
   })}, 700);
 
+});
 
-  $( ".bcpo-front-image-option" ).change(function(variant) {
-    bcpoChange(variant);
-  });
+function filterVariant(variant) {
+  console.log('thumbnail updated ' + variant.alt);
+  if(variant != null && variant.alt != null ) {
+    $('[data-thumbnail-color]').hide();
+    //show for selected color
+    var selected_color = variant.alt;
+    var general_color = "[data-thumbnail-color='general']";
+    var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
+    $(thumbnail_selector).show();
+    $(general_color).show();
+
+    // $(thumbnail_selector).prependTo('.list-unstyled');
+  } else {
+    //show all
+    $('[data-thumbnail-color]').show();
+  }
+}
 
 
-
-
-  function bcpoChange(currentVariant) {
-    console.log('bcpo: ' + bcpo.variant.id);
-    console.log(currentVariant.variant);
+// variant lead time metafield listener
+function bcpoChange(currentVariant) {
+    var variant_result = JSON.stringify(bcpo.variant.featured_image);
+    this.filterVariant(bcpo.variant.featured_image);
+    console.log('bcpo: ' + variant_result);
+    console.log('featured iamge: ' + bcpo.variant.featured_image);
     const variants = document.querySelectorAll('[data-variant-id]')
   
     variants.forEach( function(variant) {
@@ -42,8 +58,4 @@
       }
   });
 }
-
-
-
-});
 </script>

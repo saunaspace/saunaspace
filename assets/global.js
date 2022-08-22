@@ -744,6 +744,9 @@ class SlideshowComponent extends SliderComponent {
 customElements.define('slideshow-component', SlideshowComponent);
 
 class VariantSelects extends HTMLElement {
+
+
+
   constructor() {
     super();
     this.addEventListener('change', this.onVariantChange);
@@ -796,6 +799,7 @@ class VariantSelects extends HTMLElement {
   }
 
   updateMedia() {
+    console.log('update media ran');
     if (!this.currentVariant) return;
     if (!this.currentVariant.featured_media) return;
 
