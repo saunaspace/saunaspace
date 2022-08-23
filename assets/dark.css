@@ -132,8 +132,31 @@
   }
   .dark .yotpo a.text-m, .dark .yotpo a.text-m:hover { color: #FFF8E7 !important; }
   .dark .filters-dropdown .yotpo-dropdown-button { background: #000 !important; }
-  .dark .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text { color: #FFF8E7 !important; }
-  
+  .dark .yotpo .main-widget .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text,
+  .dark .filters-container .free-text-search-input,
+  .dark .yotpo .form-group .form-element .y-input,
+  .dark .yotpo .yotpo-nav-dropdown span:not(.yotpo-icon),
+  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.selected-item,
+  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item, 
+  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown li.list-category:hover a.non-selected-item,
+  .dark .reviews-header .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item,
+  .dark .yotpo .transparent-color-btn span.yotpo-icon, 
+  .dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .yotpo-sum, 
+  .dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful span.label-helpful, 
+  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-review .yotpo-footer .footer-actions .share-options-wrapper .share-options .social-link { 
+    color: #FFF8E7 !important; 
+  }
+
+  .dark .yotpo-drop-down-layout .yotpo-dropdown,
+  .dark div.y-slider-container,
+  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-lightbox-content-container {
+    background: #000!important;
+  }
+
+  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container.yotpo-active-display {
+    border: solid 1px #e3e3e3!important;
+  }
+
 	.dark .compare-panel-on { background: #C67A26; color: #FFF8E7; }
 	.dark .cp-shield { color: #FFF8E7; background: #6E1500; border: 0;}
     
