@@ -7,6 +7,7 @@
 .totals > * {
   font-size: 1.6rem;
   margin: 0;
+  width: 100%;
 }
 
 .totals > h2 {
