@@ -4106,6 +4106,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 
 .pr-text, .pr-img { width: 45%; position: relative; }
 
+
 .product-review {
 	display: flex;
 	justify-content: space-between;
