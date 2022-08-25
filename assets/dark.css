@@ -11,9 +11,10 @@
   background: #555;
 }
 
-.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
-  background: #000;
-  color: #fff;
+
+.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {	
+  background: #000;	
+  color: #fff;	
 }
 
 .dark .field__label, .dark .customer .field label, .dark .addresses label {
@@ -55,7 +56,6 @@
     background: rgba(67,60,60,.55);
   }
 
-  .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, 
  .dark .select__select,
  .dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
     background-color: #000;
@@ -69,6 +69,9 @@
   }
 
   .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
+  .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,	
+  .dark #dcodeButtonLabel, .dark input#dcodeInput,	
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, 
   .dark .optimize, .dark .story blockquote, .dark .etica,
   .dark .intro p, .dark .intro a, .dark .people h3, .dark .people h2, .dark .people p,
   .dark .self p, .dark .self a, .dark .self h3, .dark .openings a, .dark .opening p, 
@@ -101,6 +104,11 @@
     border-bottom: 4px solid #fff !important;
   }
 
+  .dark .dcDiscountBox {	
+    background-color: #000;	
+  }	
+
+
   .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
     filter: brightness(0) invert(1);
   }
@@ -130,7 +138,8 @@
   .dark .hasBoxes { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/boxes_white.svg); }
   .dark .arrow-link::after, .dark .nav-link-arrow::after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/nav_link_arrow_white.svg); }
   .dark .isExternalLink:after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/img/isExternalLink_white.svg); }
-  
+  .dark .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text { color: #FFF8E7 !important; }
+
   .dark .yotpo div, .dark .yotpo span, .dark .yotpo p, .dark .yotpo a, .dark .yotpo img, .dark .yotpo i, .dark .yotpo strong, .dark .yotpo sup, .dark .yotpo ul, .dark .yotpo li, .dark .yotpo form, .dark .yotpo label {
   	color: #FFF8E7 !important;
   }

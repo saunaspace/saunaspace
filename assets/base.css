@@ -4133,6 +4133,7 @@ text-underline-offset: 3px;
 #yotpo-testimonials-custom-tab .yotpo-modal-bottom-line .yotpo-bottomline {
 text-align: center;
 float: none;
+<<<<<<< HEAD
 }
 
 .yotpo.bottomLine .yotpo-bottomline .yotpo-icon-star, .yotpo.bottomLine .yotpo-bottomline .yotpo-icon-half-star, .yotpo.bottomLine .yotpo-bottomline .yotpo-icon-empty-star, .yotpo.bottomline .yotpo-bottomline .yotpo-icon-star, .yotpo.bottomline .yotpo-bottomline .yotpo-icon-half-star, .yotpo.bottomline .yotpo-bottomline .yotpo-icon-empty-star, .yotpo .yotpo-modal-bottom-line .yotpo-bottomline .yotpo-icon-star, .yotpo .yotpo-modal-bottom-line .yotpo-bottomline .yotpo-icon-half-star, .yotpo .yotpo-modal-bottom-line .yotpo-bottomline .yotpo-icon-empty-star {
@@ -4159,6 +4160,22 @@ float: none;
 
 .pr-text, .pr-img { width: 45%; position: relative; }
 
+=======
+}
+/* END YOTPO ELEMENTS OF REVIEWS PAGE */
+/* END REVIEWS PAGE */
+.product-review {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--sectionBottom);
+}
+
+	.pr-reverse { flex-direction: row-reverse;}
+
+.pr-text, .pr-img { width: 45%; position: relative; }
+
+>>>>>>> origin/main
 .prt-name {
 	font-weight: 700;
 	font-size: 2.4rem;
