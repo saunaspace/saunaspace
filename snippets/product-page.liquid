@@ -44,7 +44,7 @@ function filterVariant(variant) {
 // variant lead time metafield listener
 function bcpoChange(currentVariant) {
     var variant_result = JSON.stringify(bcpo.variant.featured_image);
-      this.filterVariant(bcpo.variant.featured_image);
+      // this.filterVariant(bcpo.variant.featured_image);
     console.log('bcpo: ' + variant_result);
     console.log('featured iamge: ' + bcpo.variant.featured_image);
     const variants = document.querySelectorAll('[data-variant-id]')
