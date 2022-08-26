@@ -423,5 +423,34 @@
       "copy_code_success": "Code copied successfully",
       "print_gift_card": "Print"
     }
+  },
+  "shopify": {
+    "checkout": {
+      "remember_me": {
+        "privacy_policy": "Privacy",
+        "terms_of_service": "Terms"
+      },
+      "shop_policies": {
+        "privacy_policy": "Privacy",
+        "terms_of_service": "Terms",
+        "shipping_policy": "Shipping",
+        "refund_policy": "Refunds"
+      },
+      "marketing": {
+        "sms": {
+          "disclaimer": {
+            "terms_of_service": "Terms"
+          }
+        }
+      }
+    }
+  },
+  "customer_accounts": {
+    "shop_policies": {
+      "privacy_policy": "Privacy",
+      "terms_of_service": "Terms",
+      "shipping_policy": "Shipping",
+      "refund_policy": "Refunds"
+    }
   }
 }
