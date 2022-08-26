@@ -3948,6 +3948,10 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	margin-bottom: 8px !important;
 }
 
+.cbb-shipping-rates-calculator-update-button {
+	width: 100%;
+}
+
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
 	
 	.ycc-lineitem .etica-bold { font-size: 2rem; }

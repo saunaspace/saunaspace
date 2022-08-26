@@ -79,7 +79,8 @@
   .dark .opening li::marker, .dark .opening span,
   .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
   .dark #dcodeButtonLabel, .dark input#dcodeInput,
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header,
+  .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, .dark .cbb-shipping-rates-rate-item, .dark .cbb-shipping-rates-calculator-change-shipping-address, .dark .cbb-shipping-rates-calculator-country-select, .dark .cbb-shipping-rates-calculator-region-select, .dark .cbb-shipping-rates-calculator-zip-code
   {
     color: #fff !important;
   }
@@ -88,38 +89,21 @@
     color: #fff !important;
   }
 
-  .dark .dcDiscountBox {
-    background-color: #000;
-  }
-
-
-  .dark .nav-link:hover, .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on, .dark .nav-arrow-link:hover,
-  .dark .page-anchor:hover, .dark .rcat-link-on, .dark .util-nav-link:hover, .dark .nav-cart:hover, .dark .sf-link:hover span, .dark .color-choice-on,
-  .dark .product-info-tabs {
-  	border-color: #fff !important; 
-  }
-
-  .dark .rcat-link:hover, .dark .product-info-tab:hover, .dark .product-info-tab-on {
-
-    border-bottom: 4px solid #fff !important;
-  }
-
-  .dark .dcDiscountBox {	
+  .dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select  {	
     background-color: #000;	
   }	
 
-
   .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
-    filter: brightness(0) invert(1);
-  }
+     filter: brightness(0) invert(1);
+  }		
   .dark .pot-close img {
     filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);
-  }
-  
+  }		  
+  		  
   .dark #bcpo .bcpo-images .bcpo-label label {
     background: #000;
-  }
-  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
+  }		 
+  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,		  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
   .dark .product-warranty, .dark .product-trial, .dark .pot-col img, .dark .nfc-close svg,
   .dark .yc-financing img, .dark .col-bordered img, .dark .col-centered img, .dark .contact-col img, .dark .event-link svg,
   .dark .hamb-label, .dark .wwli-head { 
@@ -138,15 +122,34 @@
   .dark .hasBoxes { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/boxes_white.svg); }
   .dark .arrow-link::after, .dark .nav-link-arrow::after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/nav_link_arrow_white.svg); }
   .dark .isExternalLink:after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/img/isExternalLink_white.svg); }
-  .dark .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text { color: #FFF8E7 !important; }
-
+  
   .dark .yotpo div, .dark .yotpo span, .dark .yotpo p, .dark .yotpo a, .dark .yotpo img, .dark .yotpo i, .dark .yotpo strong, .dark .yotpo sup, .dark .yotpo ul, .dark .yotpo li, .dark .yotpo form, .dark .yotpo label {
   	color: #FFF8E7 !important;
   }
   .dark .yotpo a.text-m, .dark .yotpo a.text-m:hover { color: #FFF8E7 !important; }
   .dark .filters-dropdown .yotpo-dropdown-button { background: #000 !important; }
-  .dark .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text { color: #FFF8E7 !important; }
-  
+  .dark .yotpo .main-widget .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text,
+  .dark .filters-container .free-text-search-input,
+  .dark .yotpo .form-group .form-element .y-input,
+  .dark .yotpo .yotpo-nav-dropdown span:not(.yotpo-icon),
+  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.selected-item,
+  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item, 
+  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown li.list-category:hover a.non-selected-item,
+  .dark .reviews-header .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item,
+  .dark .yotpo .transparent-color-btn span.yotpo-icon, 
+  .dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .yotpo-sum, 
+  .dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful span.label-helpful, 
+  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-review .yotpo-footer .footer-actions .share-options-wrapper .share-options .social-link { 
+    color: #FFF8E7 !important; 
+  }
+  .dark .yotpo-drop-down-layout .yotpo-dropdown,
+  .dark div.y-slider-container,
+  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-lightbox-content-container {
+    background: #000!important;
+  }
+  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container.yotpo-active-display {
+    border: solid 1px #e3e3e3!important;
+  }
 	.dark .compare-panel-on { background: #C67A26; color: #FFF8E7; }
 	.dark .cp-shield { color: #FFF8E7; background: #6E1500; border: 0;}
     
@@ -156,43 +159,32 @@
     
   .dark .qty-add, .dark .acc-term { background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff); }
   .dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
-
 	.dark .color-choice { border: 2px solid #fff; width: 28px; height: 28px; }
-
 .dark .rc-arrow-right, .dark .rc-arrow-left {
-
   filter: invert(52%) sepia(48%) saturate(726%) hue-rotate(351deg) brightness(92%) contrast(88%);
 }
-
-
 .dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label
 .dark #bcpo .bcpo-images input:checked+label, .dark #bcpo .bcpo-colors input:checked+label {
   box-shadow: inset 0 0 0 3px #fff;
     -webkit-box-shadow: inset 0 0 0 3px #fff;
     -moz-box-shadow: inset 0 0 0 3px #fff;
 }
-
 .dark #bcpo .bcpo-images label.bcpo-front-image-label {
   border-color: #fff;
   border-width: 2px;
 }
-
-
 @media (min-width: 750px) and (max-width: 990px) {
   .dark .yc-acc {
     color: #fff;
     background-image: linear-gradient(#000,#000),linear-gradient(#000,#000)
   }
 }
-
 @media (max-width: 750px) {
   .dark .yc-acc {
     color: #fff;
     background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff)
   }
-
 }
-
 .dark .gNego.gNego div, .dark .gNego.gNego a, .dark .shopify-section h1.main-page-title {
   color: #fff !important;
 }
