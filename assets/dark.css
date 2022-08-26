@@ -79,7 +79,8 @@
   .dark .opening li::marker, .dark .opening span,
   .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
   .dark #dcodeButtonLabel, .dark input#dcodeInput,
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header
+  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header,
+  .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, .dark .cbb-shipping-rates-rate-item, .dark .cbb-shipping-rates-calculator-change-shipping-address, .dark .cbb-shipping-rates-calculator-country-select, .dark .cbb-shipping-rates-calculator-region-select, .dark .cbb-shipping-rates-calculator-zip-code
   {
     color: #fff !important;
   }
@@ -88,20 +89,20 @@
     color: #fff !important;
   }
 
-  .dark .dcDiscountBox {
-    background-color: #000;
-  }
+  .dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select  {	
+    background-color: #000;	
+  }	
 
   .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
-    filter: brightness(0) invert(1);		    filter: brightness(0) invert(1);
-  }		  }
-  .dark .pot-close img {		  .dark .pot-close img {
-    filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);		    filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);
-  }		  }
+     filter: brightness(0) invert(1);
+  }		
+  .dark .pot-close img {
+    filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);
+  }		  
   		  
-  .dark #bcpo .bcpo-images .bcpo-label label {		  .dark #bcpo .bcpo-images .bcpo-label label {
-    background: #000;		    background: #000;
-  }		  }
+  .dark #bcpo .bcpo-images .bcpo-label label {
+    background: #000;
+  }		 
   .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,		  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
   .dark .product-warranty, .dark .product-trial, .dark .pot-col img, .dark .nfc-close svg,
   .dark .yc-financing img, .dark .col-bordered img, .dark .col-centered img, .dark .contact-col img, .dark .event-link svg,
