@@ -1,16 +1,15 @@
 /* https://www.ditdot.hr/en/dark-mode-website-tutorial */ 
-  .dark .gradient {
-      background: inherit;
-  }
-  .dark, .dark .navBG, .dark .rc-box, .dark .product-color span, .dark .research-links h3 {
-  	background: #000;
-  	transition: all .25s;
-  }
+.dark .gradient {
+    background: inherit;
+}
+.dark, .dark .navBG, .dark .rc-box, .dark .product-color span, .dark .research-links h3 {
+  background: #000;
+  transition: all .25s;
+}
 .dark ::selection {
   /* background: #C67A26; */
   background: #555;
 }
-
 
 .dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {	
   background: #000;	
@@ -21,145 +20,118 @@
   color: #999;
 }
 
-  .stuck .logo, .sticky .logo {
-    background-image: url(logo_symbol.svg);
-    top: 8px;
-  }
+.stuck .logo, .sticky .logo {
+  background-image: url(logo_symbol.svg);
+  top: 8px;
+}
+
+.dark .tanBG, .dark .mega-nav, .dark .compare-panel, .dark .greyBG, .dark .photo-headerBG, .dark .build-panel,
+.dark .nav-full-cart, .dark .yc-col-checkout, .dark .qty-change, .dark .health-benefit, .dark .event-box { 
+  background-color: #2A2727; 
+}
+
+.dark .util-nav-link, .dark .nav-link, .dark .nav-right, .dark .centered-text, .dark .bold-link, .dark .tcw-text, .dark h2, .dark .rc-box,
+.dark .shop-nav-head, .dark .sf-link, .dark .nav-arrow-link, .dark .nav-learn-article, .dark .nav-learn-blog, .dark .fr-text,
+.dark .rcat-link, .dark .review-cta, .dark .pr-text, .dark .trial-col, .dark .sbs-text, .dark .compare-panel,
+.dark .product-tiles, .dark .pt-name, .dark .col p, .dark .three-col-text, .dark .build-panel, .dark .pc-summary, .dark .pc-summary a,
+.dark .product-category span, .dark .product-text, .dark .product-text h1, .dark .product-name-mobile,
+.dark .pid-col-text, .dark .product-info-tab, .dark .wi, .dark .hasBoxes, .dark .pcDescription, .dark .cart-item-name,
+.dark .your-cart, .dark .yc-item-name, .dark .yc-col, .dark .yc-col-learnMore, .dark .page-anchor, .dark .acc-term, .dark .health-benefit,
+.dark .research-topics, .dark .topicLink, .dark .research-link a, .dark .research-link p, .dark .genericText, .dark .warranty-box, 
+.dark .warranty-col, .dark .legalText, .dark .fineprint, .dark .two-cols-narrow .col, .dark .contact-col, .dark .contact-cols-text,
+.dark .contact-tile, .dark .col-bordered a, .dark .event-box, .dark .event-link, .dark .event-invite, h4, .dark .sgl-text,
+.dark .sauna-types td, .dark .sauna-types th, .dark .research-links h3, .dark .darkP, .dark .header__icon, .dark .pt-price, .dark .price, .dark .card-information>.price, .dark .price--on-sale .price-item--regular, .dark td.cart-item__price .product-option, .dark .product-info-details, .dark .pot-col a, .dark .cart-count-bubble,
+  .dark td.cart-item__details .product-option, .dark .quantity__button, .dark .quantity__input, .dark .is-empty .cart__empty-text, .dark .is-empty .cart__warnings, .dark .cart__login-paragraph a {
+  color: #FFF8E7 !important;
+}
+.dark .stickyBG .pt-price, .dark .stickyBG .price {
+  color:#000 !important;
+}
+.dark .stickyBG .price--on-sale .price-item--regular{
+  color:#000 !important;
+}
+
+.dark .optimize:before, .dark .compatible:before {
+  background: rgba(67,60,60,.55);
+}
+
+.dark .select__select,
+.dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
+  background-color: #000;
+}
+.dark .select__select,
+.dark .customer select {
+  background: #000;
+}
+.dark .cbb-shipping-rates-error-message {
+  background-color: #000 !important;
+}
+
+.dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
+.dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,	
+.dark #dcodeButtonLabel, .dark input#dcodeInput,	
+.dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, 
+.dark .optimize, .dark .story blockquote, .dark .etica,
+.dark .intro p, .dark .intro a, .dark .people h3, .dark .people h2, .dark .people p,
+.dark .self p, .dark .self a, .dark .self h3, .dark .openings a, .dark .opening p, 
+.dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
+.dark .opening li::marker, .dark .opening span,
+.dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
+.dark #dcodeButtonLabel, .dark input#dcodeInput,
+.dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header,
+.dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, .dark .cbb-shipping-rates-rate-item, .dark .cbb-shipping-rates-calculator-change-shipping-address, .dark .cbb-shipping-rates-calculator-country-select, .dark .cbb-shipping-rates-calculator-region-select, .dark .cbb-shipping-rates-calculator-zip-code
+{
+  color: #fff !important;
+}
+
+.dark .gHjTpK.gHjTpK a {
+  color: #fff !important;
+}
+
+.dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select  {	
+  background-color: #000;	
+}	
+
+.dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
+   filter: brightness(0) invert(1);
+}		
+.dark .pot-close img {
+  filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);
+}		  
+        
+.dark #bcpo .bcpo-images .bcpo-label label {
+  background: #000;
+}		 
+.dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,		  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
+.dark .product-warranty, .dark .product-trial, .dark .pot-col img, .dark .nfc-close svg,
+.dark .yc-financing img, .dark .col-bordered img, .dark .col-centered img, .dark .contact-col img, .dark .event-link svg,
+.dark .hamb-label, .dark .wwli-head { 
+  filter: brightness(0) invert(1); 
+}
+
+.dark .tcg-img img:not(.tcg-photo) {
+  filter: invert(1) hue-rotate(180deg); 
+}
+
+.dark .nav-cart { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/cart_white.svg); background-repeat: no-repeat; }
+.dark .nav-learn-blog { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/isExternalLink_white.svg); }
+.dark .checkmark-list { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/checkmark.svg); }
+.dark .logo { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/sp-logo-dark.svg); }
+.dark .stuck .logo, .dark .sticky .logo { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/logo_symbol.svg); }
+.dark .hasBoxes { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/boxes_white.svg); }
+.dark .arrow-link::after, .dark .nav-link-arrow::after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/nav_link_arrow_white.svg); }
+.dark .isExternalLink:after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/img/isExternalLink_white.svg); }
+
+  .dark .compare-panel-on { background: #C67A26; color: #FFF8E7; }
+  .dark .cp-shield { color: #FFF8E7; background: #6E1500; border: 0;}
   
-  .dark .tanBG, .dark .mega-nav, .dark .compare-panel, .dark .greyBG, .dark .photo-headerBG, .dark .build-panel,
-  .dark .nav-full-cart, .dark .yc-col-checkout, .dark .qty-change, .dark .health-benefit, .dark .event-box { 
-  	background-color: #2A2727; 
-  }
-  
-  .dark .util-nav-link, .dark .nav-link, .dark .nav-right, .dark .centered-text, .dark .bold-link, .dark .tcw-text, .dark h2, .dark .rc-box,
-  .dark .shop-nav-head, .dark .sf-link, .dark .nav-arrow-link, .dark .nav-learn-article, .dark .nav-learn-blog, .dark .fr-text,
-  .dark .rcat-link, .dark .review-cta, .dark .pr-text, .dark .trial-col, .dark .sbs-text, .dark .compare-panel,
-  .dark .product-tiles, .dark .pt-name, .dark .col p, .dark .three-col-text, .dark .build-panel, .dark .pc-summary, .dark .pc-summary a,
-  .dark .product-category span, .dark .product-text, .dark .product-text h1, .dark .product-name-mobile,
-  .dark .pid-col-text, .dark .product-info-tab, .dark .wi, .dark .hasBoxes, .dark .pcDescription, .dark .cart-item-name,
-  .dark .your-cart, .dark .yc-item-name, .dark .yc-col, .dark .yc-col-learnMore, .dark .page-anchor, .dark .acc-term, .dark .health-benefit,
-  .dark .research-topics, .dark .topicLink, .dark .research-link a, .dark .research-link p, .dark .genericText, .dark .warranty-box, 
-  .dark .warranty-col, .dark .legalText, .dark .fineprint, .dark .two-cols-narrow .col, .dark .contact-col, .dark .contact-cols-text,
-  .dark .contact-tile, .dark .col-bordered a, .dark .event-box, .dark .event-link, .dark .event-invite, h4, .dark .sgl-text,
-  .dark .sauna-types td, .dark .sauna-types th, .dark .research-links h3, .dark .darkP, .dark .header__icon, .dark .pt-price, .dark .price, .dark .card-information>.price, .dark .price--on-sale .price-item--regular, .dark td.cart-item__price .product-option, .dark .product-info-details, .dark .pot-col a, .dark .cart-count-bubble,
-	.dark td.cart-item__details .product-option, .dark .quantity__button, .dark .quantity__input, .dark .is-empty .cart__empty-text, .dark .is-empty .cart__warnings, .dark .cart__login-paragraph a {
-  	color: #FFF8E7 !important;
-  }
-  .dark .stickyBG .pt-price, .dark .stickyBG .price {
-    color:#000 !important;
-  }
-  .dark .stickyBG .price--on-sale .price-item--regular{
-    color:#000 !important;
-  }
-
-  .dark .optimize:before, .dark .compatible:before {
-    background: rgba(67,60,60,.55);
-  }
-
- .dark .select__select,
- .dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
-    background-color: #000;
-  }
-  .dark .select__select,
-  .dark .customer select {
-    background: #000;
-  }
-  .dark .cbb-shipping-rates-error-message {
-    background-color: #000 !important;
-  }
-
-  .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
-  .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,	
-  .dark #dcodeButtonLabel, .dark input#dcodeInput,	
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, 
-  .dark .optimize, .dark .story blockquote, .dark .etica,
-  .dark .intro p, .dark .intro a, .dark .people h3, .dark .people h2, .dark .people p,
-  .dark .self p, .dark .self a, .dark .self h3, .dark .openings a, .dark .opening p, 
-  .dark .opening a, .dark .opening h3, .dark .opening ul, .dark .opening li, 
-  .dark .opening li::marker, .dark .opening span,
-  .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,
-  .dark #dcodeButtonLabel, .dark input#dcodeInput,
-  .dark .customer thead th, .dark .customer tbody td, .dark .customer strong, .dark .go-cart-item__title, .dark .go-cart-item__quantity-number, .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header,
-  .dark .yc-col-head, .dark .ycc-lineitem, .dark .cbb-shipping-rates-calculator-header, .dark .cbb-shipping-rates-rate-item, .dark .cbb-shipping-rates-calculator-change-shipping-address, .dark .cbb-shipping-rates-calculator-country-select, .dark .cbb-shipping-rates-calculator-region-select, .dark .cbb-shipping-rates-calculator-zip-code
-  {
-    color: #fff !important;
-  }
-
-  .dark .gHjTpK.gHjTpK a {
-    color: #fff !important;
-  }
-
-  .dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select  {	
-    background-color: #000;	
-  }	
-
-  .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
-     filter: brightness(0) invert(1);
-  }		
-  .dark .pot-close img {
-    filter: invert(95%) sepia(0%) saturate(6128%) hue-rotate(350deg) brightness(107%) contrast(100%);
-  }		  
-  		  
-  .dark #bcpo .bcpo-images .bcpo-label label {
-    background: #000;
-  }		 
-  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,		  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
-  .dark .product-warranty, .dark .product-trial, .dark .pot-col img, .dark .nfc-close svg,
-  .dark .yc-financing img, .dark .col-bordered img, .dark .col-centered img, .dark .contact-col img, .dark .event-link svg,
-  .dark .hamb-label, .dark .wwli-head { 
-  	filter: brightness(0) invert(1); 
-  }
-  
-  .dark .tcg-img img:not(.tcg-photo) {
-  	filter: invert(1) hue-rotate(180deg); 
-  }
-  
-  .dark .nav-cart { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/cart_white.svg); background-repeat: no-repeat; }
-  .dark .nav-learn-blog { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/isExternalLink_white.svg); }
-  .dark .checkmark-list { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/checkmark.svg); }
-  .dark .logo { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/sp-logo-dark.svg); }
-  .dark .stuck .logo, .dark .sticky .logo { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/logo_symbol.svg); }
-  .dark .hasBoxes { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/boxes_white.svg); }
-  .dark .arrow-link::after, .dark .nav-link-arrow::after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/nav_link_arrow_white.svg); }
-  .dark .isExternalLink:after { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/img/isExternalLink_white.svg); }
-  
-  .dark .yotpo div, .dark .yotpo span, .dark .yotpo p, .dark .yotpo a, .dark .yotpo img, .dark .yotpo i, .dark .yotpo strong, .dark .yotpo sup, .dark .yotpo ul, .dark .yotpo li, .dark .yotpo form, .dark .yotpo label {
-  	color: #FFF8E7 !important;
-  }
-  .dark .yotpo a.text-m, .dark .yotpo a.text-m:hover { color: #FFF8E7 !important; }
-  .dark .filters-dropdown .yotpo-dropdown-button { background: #000 !important; }
-  .dark .yotpo .main-widget .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text,
-  .dark .filters-container .free-text-search-input,
-  .dark .yotpo .form-group .form-element .y-input,
-  .dark .yotpo .yotpo-nav-dropdown span:not(.yotpo-icon),
-  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.selected-item,
-  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item, 
-  .dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown li.list-category:hover a.non-selected-item,
-  .dark .reviews-header .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item,
-  .dark .yotpo .transparent-color-btn span.yotpo-icon, 
-  .dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .yotpo-sum, 
-  .dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful span.label-helpful, 
-  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-review .yotpo-footer .footer-actions .share-options-wrapper .share-options .social-link { 
-    color: #FFF8E7 !important; 
-  }
-  .dark .yotpo-drop-down-layout .yotpo-dropdown,
-  .dark div.y-slider-container,
-  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-lightbox-content-container {
-    background: #000!important;
-  }
-  .dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container.yotpo-active-display {
-    border: solid 1px #e3e3e3!important;
-  }
-	.dark .compare-panel-on { background: #C67A26; color: #FFF8E7; }
-	.dark .cp-shield { color: #FFF8E7; background: #6E1500; border: 0;}
+.dark .product-category-on div span { 
+  color: #000 !important;
+}
     
-  .dark .product-category-on div span { 
-    color: #000 !important;
-  }
-    
-  .dark .qty-add, .dark .acc-term { background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff); }
-  .dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
-	.dark .color-choice { border: 2px solid #fff; width: 28px; height: 28px; }
+.dark .qty-add, .dark .acc-term { background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff); }
+.dark .qty-minus { background-image: linear-gradient(#fff,#fff) }
+.dark .color-choice { border: 2px solid #fff; width: 28px; height: 28px; }
 .dark .rc-arrow-right, .dark .rc-arrow-left {
   filter: invert(52%) sepia(48%) saturate(726%) hue-rotate(351deg) brightness(92%) contrast(88%);
 }
@@ -185,6 +157,76 @@
     background-image: linear-gradient(#fff,#fff),linear-gradient(#fff,#fff)
   }
 }
-.dark .gNego.gNego div, .dark .gNego.gNego a, .dark .shopify-section h1.main-page-title {
+
+.dark .gNego.gNego div,
+.dark .gNego.gNego a, 
+.dark .shopify-section h1.main-page-title {
   color: #fff !important;
+}
+.dark .yotpo div, 
+.dark .yotpo span, 
+.dark .yotpo p, 
+.dark .yotpo a, 
+.dark .yotpo img, 
+.dark .yotpo i, 
+.dark .yotpo strong, 
+.dark .yotpo sup, 
+.dark .yotpo ul, 
+.dark .yotpo li, 
+.dark .yotpo form, 
+.dark .yotpo label,
+.dark .yotpo a.text-m,
+.dark .yotpo a.text-m:hover,
+.dark .yotpo .main-widget .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text,
+.dark .filters-container .free-text-search-input,
+.dark .yotpo .form-group .form-element .y-input,
+.dark .yotpo .yotpo-nav-dropdown span:not(.yotpo-icon),
+.dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.selected-item,
+.dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item, 
+.dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown li.list-category:hover a.non-selected-item,
+.dark .reviews-header .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item,
+.dark .yotpo .transparent-color-btn span.yotpo-icon, 
+.dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .yotpo-sum, 
+.dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful span.label-helpful, 
+.dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-review .yotpo-footer .footer-actions .share-options-wrapper .share-options .social-link {
+  color: #FFF8E7 !important;
+}
+
+.dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons .mobile-filter-radio-button .radio-label, 
+.dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-title, 
+.dark .mobile-filters-modal .mobile-filters-modal-title .mobile-clear-all-btn,
+.dark .mobile-filters-modal .mobile-filters-modal-title .title-text {
+  color: #fff!important;
+}
+
+.dark .filters-dropdown .yotpo-dropdown-button,
+.dark .yotpo-drop-down-layout .yotpo-dropdown,
+.dark div.y-slider-container,
+.dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-lightbox-content-container,
+.dark .yotpo .yotpo-modal-base .yotpo-modal-dialog .yotpo-modal-content,
+.dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons { 
+  background: #000 !important; 
+}
+
+.dark .mobile-filters-modal .mobile-filters-footer-btn {
+  border-top: 1px solid #fff;
+  background-color: transparent;
+}
+
+.dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container.yotpo-active-display {
+  border: solid 1px #e3e3e3!important;
+}
+.dark .suggested-topics-row .suggested-topic, 
+.dark .suggested-topics-row .suggested-topic-expand {
+  background-color: transparent!important;
+}
+
+.dark .suggested-topics-row .suggested-topic .suggested-topic-text, 
+.dark .suggested-topics-row .suggested-topic-expand .suggested-topic-text {
+  background-color: transparent;
+}
+
+.dark .suggested-topics-row .suggested-topic:hover, 
+.dark .suggested-topics-row .suggested-topic-expand:hover {
+   background-color: #939393;
 }
