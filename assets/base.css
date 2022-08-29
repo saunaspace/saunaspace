@@ -4655,7 +4655,9 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	}
 }
 
-
+.standalone-bottomline {
+    justify-content: left;
+}
 .product-name-mobile { display: none; text-align: center; margin: .5em 0 0 0; padding: 0 1em; }
 .product-text .price {
 	text-align: center;
