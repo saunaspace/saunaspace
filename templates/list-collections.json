@@ -9,7 +9,7 @@
             "col_item": "Infrared Saunas",
             "deal_sub_txt": "",
             "collection_title": "saunas",
-            "collection_img": "shopify:\/\/shop_images\/cat-infrared-saunas.webp"
+            "collection_img": "{{ block.settings.collection_title.image }}"
           }
         },
         "db6e65a5-65d0-4610-900c-974cfd9c2b41": {
@@ -18,7 +18,7 @@
             "col_item": "Photon Therapy",
             "deal_sub_txt": "",
             "collection_title": "targeted",
-            "collection_img": "shopify:\/\/shop_images\/cat-targeted-therapy.webp"
+            "collection_img": "{{ block.settings.collection_title.image }}"
           }
         },
         "bc87d548-6cd2-4a69-942b-99874b3d09bb": {
@@ -26,8 +26,7 @@
           "settings": {
             "col_item": "Sauna Components",
             "deal_sub_txt": "",
-            "collection_title": "sauna-components",
-            "collection_img": "shopify:\/\/shop_images\/cat-sauna-components.webp"
+            "collection_title": "sauna-components"
           }
         },
         "2cd0567d-b5b8-4752-96d5-6db556a29c2b": {
@@ -35,8 +34,7 @@
           "settings": {
             "col_item": "Replacement Bulbs",
             "deal_sub_txt": "",
-            "collection_title": "replacement-bulbs",
-            "collection_img": "shopify:\/\/shop_images\/cat-replacement-bulbs.webp"
+            "collection_title": "replacement-bulbs"
           }
         },
         "01d88204-d4b1-4d6f-b6c7-0f14fb456db1": {
@@ -44,8 +42,7 @@
           "settings": {
             "col_item": "Merchandise",
             "deal_sub_txt": "",
-            "collection_title": "merchandise",
-            "collection_img": "shopify:\/\/shop_images\/cat-merchandise.webp"
+            "collection_title": "merchandise"
           }
         },
         "45de8b00-e31f-4297-941e-8c9c0128acb9": {
@@ -53,8 +50,7 @@
           "settings": {
             "col_item": "Products We Love",
             "deal_sub_txt": "",
-            "collection_title": "products-we-love",
-            "collection_img": "shopify:\/\/shop_images\/cat-products-we-love.webp"
+            "collection_title": "products-we-love"
           }
         }
       },
