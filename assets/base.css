@@ -6660,11 +6660,6 @@ float: none;
 	font-size: 16px;
   }
   
-  .yotpo .yotpo-comment .yotpo-header .yotpo-header-element .y-label.yotpo-user-name, 
-  .yotpo .yotpo-question .yotpo-header .yotpo-header-element .y-label.yotpo-user-name,
-  .yotpo .yotpo-question .yotpo-footer .yotpo-helpful span.y-label.label-helpful {
-  }
-  
   .reviews-header span.reviews-amount {
 	font-size: 18px;
   }
