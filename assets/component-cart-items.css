@@ -15,6 +15,7 @@ td.cart-item__details .op-30day {
 .cart-item__quantity-wrapper input.quantity__input {
     border-top: 1px solid #C67A26;
 border-bottom: 1px solid #C67A26;
+border-radius: 0 !important;
 }
 th.caption-with-letter-spacing {
     /* margin-bottom: -21px !important; */
