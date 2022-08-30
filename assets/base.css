@@ -928,7 +928,7 @@ summary::-webkit-details-marker {
 	.grid .grid__item {
 		width: auto;
 		display: inline-block;
-		margin: 0 auto;
+		margin: 0 auto 2rem;
 		max-width: none;
 	}
 }
