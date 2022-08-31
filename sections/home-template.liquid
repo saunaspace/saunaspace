@@ -1,16 +1,18 @@
 {{ 'pin-animation.css' | asset_url | stylesheet_tag }}
 
 
-<div class="st-center-element st-section-pin">
-    <div class="st-wrap-items">
-        <div class="st-frames st-f1"></div>
-        <div class="st-frames st-f2"></div>
-        <div class="st-frames st-f3"></div>
-        <div class="st-frames st-f4"></div>
-        <div class="st-frames st-f5"></div>
-        <div class="st-frames st-f6"></div>
+<div class="">
+    <div class="video-wrapper">
+        <video playsinline autoplay muted loop poster="{{ 'sauna-space-hero.png' | asset_url }}" class="bgvid">
+            <source src="{{ 'sauna-space-home-hero.mp4' | asset_url }}" type="video/webm">
+            <source src="{{ 'sauna-space-home-hero.webm' | asset_url }}" type="video/mp4">
+            <source src="{{ 'sauna-space-home-hero.ogv' | asset_url }}" type="video/ogv">
+        </video>
+      <div class="header-video">
+        <h2>CTA Headliner goes here</h2>
+        <a href="#">Shop Now</a>
+      </div>
     </div>
-
     <section>
         <div class="centered-text ct-home">
             <cms id='cms1'>
