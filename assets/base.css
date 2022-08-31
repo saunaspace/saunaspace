@@ -6403,3 +6403,38 @@ a#cart-icon-bubble {
 	box-shadow: 0 0 5px 1px rgb(0 0 0 / 14%);
     border-radius: 2px;
 }
+
+.bgvid {
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
+  
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.video-wrapper {
+	/* Telling our absolute positioned video to 
+	be relative to this element */
+	position: relative;
+  
+	height: 640px;
+  
+	/* Will not allow the video to overflow the 
+	container */
+	overflow: hidden;
+  
+	/* Centering the container's content vertically 
+	and horizontally */
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+
+  .header-video {
+	position: relative;
+	color: white;
+	text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+  }
