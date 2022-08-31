@@ -15,9 +15,6 @@ font-size: 16px;
 
 
 
-.text-m, .yotpo a.text-m {
-	font-family: lft-etica-mono,sans-serif !important;
-}
 
 
 .yotpo-nav-wrapper span { font-family:UntitledSans, sans-serif !important; color: #000 !important; text-transform: uppercase; }
@@ -90,3 +87,9 @@ font-size: 16px;
   .yotpo #write-review-tabpanel-main-widget div.yotpo-mandatory-explain {
    font-family: "UntitledSans", sans-serif!important;
   }
+
+
+  .text-m, .yotpo a.text-m {
+    font-family: lft-etica-mono,sans-serif !important;
+  }
+  
