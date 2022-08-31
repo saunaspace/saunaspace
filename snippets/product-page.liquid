@@ -36,7 +36,8 @@ function filterVariant(variant) {
           return $(this).data('media-position') >= 13;
       }).show();
     {% endif %}
-    {% if product.id == 2105476546649 or product.id == 2105477726297 %}
+    {% if product.id == 2105476546649 %}
+    console.log('emf page');
       $('[data-media-position]').filter(function () {
           return $(this).data('media-position') >= 6;
       }).show();
@@ -44,6 +45,13 @@ function filterVariant(variant) {
     {% if product.id == 2105475661913 %}
       $('[data-media-position]').filter(function () {
           return $(this).data('media-position') >= 11;
+      }).show();
+    {% endif %}
+    //emf page
+    {% if product.id == 2105477726297 %}
+    console.log('emf page');
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 7;
       }).show();
     {% endif %}
     // $(general_color).show();
