@@ -6431,6 +6431,7 @@ a#cart-icon-bubble {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 4rem;
   }
 
   .header-video {
