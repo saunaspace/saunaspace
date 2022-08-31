@@ -5715,9 +5715,7 @@ sup {
 	.shop-grid { margin-left: 0; }
 	.sg-link { margin: 5px; }
 	.mn-links { padding: 15px 0; justify-content: space-between; }
-	.nav-learn-article { margin-left: 0;}
-	.nav-cart { padding-right: 20px; background-position: 100% 0; text-align: right; line-height: 1.3em; }
-	
+	.nav-learn-article { margin-left: 0;}	
 	.yc-head-wrap { padding: 20px 0; }
 	.yc-top-checkout { flex-direction: column; align-items: flex-end;}
 	.yctc-text { margin-right: 0; }
