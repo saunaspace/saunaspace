@@ -31,7 +31,7 @@ function filterVariant(variant) {
     var general_color = "[data-thumbnail-color='general']";
     var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
     $(thumbnail_selector).show();
-    {% if product.id == 2105477365849  or product.id == 2105476743257 %}
+    {% if product.id == 2105477365849 or product.id == 2105476743257 %}
       $('[data-media-position]').filter(function () {
           return $(this).data('media-position') >= 13;
       }).show();
