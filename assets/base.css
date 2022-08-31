@@ -6017,7 +6017,7 @@ sup {
 }
 
 @media all and (max-width: 500px) {
-	.nav-cart { padding-right: 0; background: none; text-align: right; }
+	.nav-cart { padding-right: 0; text-align: right; }
 
 	.fl-col a { font-size: 1.25rem; }
 	.copyright { border-top: 1px solid #E6B711; padding-top: 20px; text-align: center;  }
