@@ -1198,7 +1198,7 @@ deferred-media {
 	font-size: 18px !important;
 }
 
-.card-information .price-item.price-item--sale.price-item--last, .card-information .price-item.price-item--regular.pt-price.etica, price-item price-item--regular {
+.card-information .price-item.price-item--sale.price-item--last, .card-information .price-item.price-item--regular.pt-price.etica, .price__regular .price-item--regular {
 	font-size: 14px !important;
 }
 
