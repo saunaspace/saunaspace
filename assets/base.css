@@ -3947,8 +3947,10 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 
 .cbb-shipping-rates-calculator-shipping-address-chooser .cbb-shipping-rates-calculator-update-button:hover {
-  border: none!important;
   box-shadow: none!important;
+}
+
+.cbb-shipping-rates-calculator-update-button-text:hover {
   text-decoration: underline!important;
   text-underline-offset: 3px;
 }
