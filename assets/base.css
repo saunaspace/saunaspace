@@ -3946,12 +3946,14 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
   	padding-left: 2px!important;
 }
 
-.cbb-shipping-rates-calculator-update-button:hover {
+.cbb-shipping-rates-calculator-shipping-address-chooser .cbb-shipping-rates-calculator-update-button:hover {
   border: none!important;
   box-shadow: none!important;
   text-decoration: underline!important;
   text-underline-offset: 3px;
 }
+
+
 
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
 	
