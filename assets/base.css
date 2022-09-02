@@ -3939,6 +3939,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 .cbb-shipping-rates-rate-item {
 	list-style-type: none !important;
 	margin-bottom: 8px !important;
+    margin-left: 0px!important;
 }
 
 .cbb-shipping-rates-calculator-update-button {
