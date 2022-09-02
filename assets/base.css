@@ -3919,7 +3919,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	margin: 0 !important;
 }
 .cbb-shipping-rates-calculator-zip-code {
-	border: 1px solid #939393;
+	border: 1px solid #939393!important;
 }
 .cbb-shipping-rates-calculator-chooser {
 	margin-bottom: 0 !important;
@@ -3930,7 +3930,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 .cbb-shipping-rates-calculator-country-select, .cbb-shipping-rates-calculator-region-select {    
 	width: 100% !important; 
-	border: 1px solid #939393;
+	border: 1px solid #939393!important;
 	/* -webkit-appearance: none !important; */
 	color: #000;
 	line-height: 1.5 !important;
