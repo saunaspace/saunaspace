@@ -3951,7 +3951,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 
 .cbb-shipping-rates-calculator-update-button-text:hover {
-  text-decoration: underline!important;
+  text-decoration: underline;
   text-underline-offset: 3px;
 }
 
