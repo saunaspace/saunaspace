@@ -3920,6 +3920,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 .cbb-shipping-rates-calculator-zip-code {
 	border: 1px solid #939393!important;
+    padding-left: 7px!important;
 }
 .cbb-shipping-rates-calculator-chooser {
 	margin-bottom: 0 !important;
@@ -3941,7 +3942,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 
 .cbb-shipping-rates-calculator-update-button {
-	width: 100%;
+  	padding-left: 2px!important;
 }
 
 	.yc-col-head span { font-weight: 400; font-size: 1.6rem;}
