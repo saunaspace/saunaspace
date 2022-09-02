@@ -106,8 +106,8 @@
   background-color: #000;	
 }	
 
-.dark .yotpo .yotpo-nav ul .yotpo-nav-tab.yotpo-active .yotpo-nav-wrapper {
-  border-bottom: 3px solid #fff !important;
+.dark .yotpo .yotpo-nav ul .yotpo-nav-tab.yotpo-active .yotpo-nav-wrapper, .dark .product-info-tab:hover, .dark .product-info-tab-on {
+  border-bottom:4px solid #fff !important;
 }
 
 .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
