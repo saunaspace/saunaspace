@@ -3981,6 +3981,10 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 .discount-box .textEntry { margin: 0 15px 0 0; }
 .discount-box button { width: 90px !important; height: 47px; background:#fff; }
 
+.dcodeTotalValue .money {
+  font-size: 20px;
+}
+
 .btn.btn-checkout { 
 	display: block; 
 	text-align: center; 
