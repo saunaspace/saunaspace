@@ -68,7 +68,7 @@
 }
 
 .dark .cbb-shipping-rates-calculator-update-button {
-  background: transparent;
+  background: transparent!important;
 }
 
 .dark .cbb-shipping-rates-calculator-update-button:hover {
@@ -78,7 +78,7 @@
 }
 
 .dark .cbb-shipping-rates-calculator-update-button-text {
-  color: #fff;
+  color: #fff!important;
 }
 
 .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
