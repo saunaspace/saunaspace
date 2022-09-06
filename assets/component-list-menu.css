@@ -23,7 +23,9 @@
     background-image: url(cart.svg);
     background-repeat: no-repeat;
 }
-
+.header-scroll .util-nav {
+  display: none;
+}
 
 .list-menu--right {
   right: 0;
