@@ -2158,6 +2158,38 @@ input[type='checkbox'] {
   transition: transform 0.15s ease-out;
 }
 
+.site-header-home {
+	position: fixed;
+	width: 100%;
+}
+
+.site-header-home .navBG {
+	border-bottom: 0;
+}
+
+.site-header-home .navBG {
+	background: transparent;
+}
+
+.site-header-home .util-nav-link, .site-header-home .nav-link {
+	color: #fff;
+}
+
+.site-header-home .nav-link:hover {
+	border-bottom: 4px solid #fff;
+}
+
+.site-header-home .nav-arrow path, .site-header-home .nav-close path {
+	stroke: #fff;
+}
+.site-header-home .nav-cart {
+    background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/cart_white.svg);
+    background-repeat: no-repeat;
+}
+.site-header-home .logo {
+	background-image: url("https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sp-logo-white.svg?v=1652789731");
+}
+
 /* Main Header Layout */
 .header-wrapper {
   display: block;
@@ -6408,34 +6440,120 @@ a#cart-icon-bubble {
 	object-fit: cover;
 	height: 100%;
 	width: 100%;
-  
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.video-wrapper:before {
+	content: '';
+	background: #000;
+	opacity: .4;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	width: 100%;
+	z-index: 2;
 }
 
 .video-wrapper {
 	/* Telling our absolute positioned video to 
 	be relative to this element */
 	position: relative;
-  
-	height: 640px;
-  
+	height: 800px;
 	/* Will not allow the video to overflow the 
 	container */
 	overflow: hidden;
-  
 	/* Centering the container's content vertically 
 	and horizontally */
-	text-align: center;
+	text-align: left;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	margin-bottom: 4rem;
+	margin: 0 auto 4rem;
+	max-width: 1920px;
+	padding-left: 5rem;
   }
 
   .header-video {
 	position: relative;
 	color: white;
-	text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+	z-index: 2;
   }
+
+  .header-video h2 {
+	text-align: left;
+  }
+
+  .header-video p {
+	color: #fff;
+	margin-bottom: 1rem;
+  }
+
+  .header-video .btn {
+	display: inline-block;
+	margin-bottom: 1rem;
+  }
+
+  .btn-video {
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .btn-video-icon {
+	position: relative;
+    width: 50px;
+    height: 50px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: #C67A26;
+    color: #fff;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+
+  .header-video .btn-video-icon:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-video-icon svg {
+	position: relative;
+    width: 6px;
+    height: 10px;
+    margin-left: 2px;
+}
+
+.btn-video-text {
+	color: #fff;
+}
