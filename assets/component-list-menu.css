@@ -2,6 +2,29 @@
     position: fixed;
     width: 100%;
 }
+
+.site-header-home .navBG.sticky {
+  background: #FFF;
+}
+
+.site-header-home .navBG.sticky .nav-link {
+  color: #000;
+}
+
+
+.site-header-home .navBG.sticky .nav-link:hover {
+	border-bottom: 4px solid #000;
+}
+
+.site-header-home .navBG.sticky .nav-arrow path, .site-header-home .navBG.sticky .nav-close path {
+	stroke: #000;
+}
+.site-header-home .navBG.sticky .nav-cart {
+    background-image: url(cart.svg);
+    background-repeat: no-repeat;
+}
+
+
 .list-menu--right {
   right: 0;
 }
