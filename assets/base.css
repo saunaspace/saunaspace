@@ -6496,6 +6496,11 @@ a#cart-icon-bubble {
 	margin-bottom: 2rem;
   }
 
+  .header-video .btn:hover {
+	color: #eee;
+	border-color: #eee;
+  }
+
   .btn-video {
 	display: -webkit-box;
     display: -webkit-flex;
