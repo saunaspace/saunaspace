@@ -113,7 +113,7 @@
   filter: invert(1) hue-rotate(180deg); 
 }
 
-.dark .nav-cart { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/cart_white.svg); background-repeat: no-repeat; }
+.dark .nav-cart, .dark .site-header-home .navBG.sticky .nav-cart { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/cart_white.svg); background-repeat: no-repeat; }
 .dark .nav-learn-blog { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/isExternalLink_white.svg); }
 .dark .checkmark-list { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/checkmark.svg); }
 .dark .logo { background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/sp-logo-dark.svg); }
@@ -229,4 +229,12 @@
 .dark .suggested-topics-row .suggested-topic:hover, 
 .dark .suggested-topics-row .suggested-topic-expand:hover {
    background-color: #939393;
+}
+
+.dark .site-header-home .navBG {
+  background: transparent;
+}
+
+.dark .site-header-home .navBG.sticky {
+  background: #000;
 }
