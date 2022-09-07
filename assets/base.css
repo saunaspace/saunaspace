@@ -3704,10 +3704,15 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 }
 
 	.centered-text p {text-align: center; max-width: 550px; margin: 0 auto; }
-	
+	.ct-home {
+		margin-bottom: 8rem;
+	}
 	.ct-home h2 { font-size: 4rem; }
-	.ct-home p { max-width: 100%; }
-
+	.ct-home p { max-width: 100%;
+	margin-bottom: 4rem; }
+.ct-home .product-tiles {
+	padding-bottom: 0;
+}
 .pull-quote {
 	width: 90%;
 	max-width: 600px;
