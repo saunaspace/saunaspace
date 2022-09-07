@@ -23,15 +23,41 @@
     </div>
     {% render 'home-page-modal' %}
 
-    <!-- <section>
-        <div class="centered-text ct-home">
-            <cms id='cms1'>
-            <h2>Transcend the Ordinary</h2>
-            <p class="etica">Rejuvenate at a cellular level with a sauna that harnesses the power of the sun. SaunaSpace combines cutting-edge infrared technology with nature’s ancient wisdom to help you find relief.</p>
-            <p style="margin-top: 2em;"><a href="/pages/infrared-saunas" class="bold-link arrow-link">See What We Mean</a></p>
-            </cms cms1>
+    <section>
+        <div class="ct-home">
+            <div class="centered-text">
+                <h2>Shop Our Products</h2>
+                <p class="etica">SaunaSpace combines cutting-edge infrared technology with nature's ancient wisdom to help you find relief.</p>
+            </div>
+            <div class="product-tiles">	
+                <ul id="product-grid" data-id="{{ section.id }}" class="
+                grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                  grid--{{ section.settings.columns_desktop }}-col-desktop
+                {% endif %}">
+                
+                {% for product in collections.targeted.products %}
+                  {% assign lazy_load = false %}
+                  {%- if forloop.index > 2 -%}
+                    {%- assign lazy_load = true -%}
+                  {%- endif -%}
+              
+                  <li class="grid__item">
+                    {% render 'card-product-simple',
+                      card_product: product,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      lazy_load: lazy_load
+                    %}
+                  </li>
+                {%- endfor -%}
+              </ul>
         </div>
-    </section> -->
+            <p style="text-align: right;"><a href="/pages/infrared-saunas" class="bold-link arrow-link">Shop All</a></p>
+        </div>
+    </section>
 </div>
 
 <section class="section-three-panels">
