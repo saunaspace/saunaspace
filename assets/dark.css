@@ -67,6 +67,20 @@
   background-color: #000 !important;
 }
 
+.dark .cbb-shipping-rates-calculator-update-button {
+  background: transparent!important;
+}
+
+.dark .cbb-shipping-rates-calculator-update-button:hover {
+  box-shadow: none!important;
+  text-decoration: underline!important;
+  text-underline-offset: 3px;
+}
+
+.dark .cbb-shipping-rates-calculator-update-button-text {
+  color: #fff!important;
+}
+
 .dark .research-links h3, .dark .what-is, .dark .story, .dark .gHjTpK.gHjTpK, .dark .compatible h2, .dark .compatible, .dark .optimize h2, 
 .dark .customer, .dark .customer h1, .dark .customer a, .dark .shopify-challenge__message,	
 .dark #dcodeButtonLabel, .dark input#dcodeInput,	
@@ -91,6 +105,10 @@
 .dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select  {	
   background-color: #000;	
 }	
+
+.dark .yotpo .yotpo-nav ul .yotpo-nav-tab.yotpo-active .yotpo-nav-wrapper, .dark .product-info-tab:hover, .dark .product-info-tab-on {
+  border-bottom:4px solid #fff !important;
+}
 
 .dark .pot-col-100 img, .dark .shopify-section .section-confirm-subscription > img, .dark .intro img, .dark .openings img, .dark .opening img {
    filter: brightness(0) invert(1);
@@ -167,7 +185,7 @@
 .dark .yotpo span, 
 .dark .yotpo p, 
 .dark .yotpo a, 
-.dark .yotpo img, 
+.dark .yotpo img,
 .dark .yotpo i, 
 .dark .yotpo strong, 
 .dark .yotpo sup, 
