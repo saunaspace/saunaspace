@@ -7,7 +7,7 @@
       if ( $(this).text() == "Plug Type:" ) {
           $(this).addClass('plug-' + i);
           $(this).text('Select your plug type:');
-      } else if( $(this).text() == "Curtain Type:" || $(this).text() == "Type:" ) {
+      } else if( $(this).text() == "Curtain Type:" ) {
           $(this).text('Select your curtain type:');
           $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
       } else if( $(this).text() == "Voltage:") {
