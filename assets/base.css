@@ -3021,6 +3021,7 @@ section:not(.shopify-section) {
 	background: url(cart.svg) no-repeat 0 0px;
 	padding-left: 25px;
 	padding-bottom: 5px;
+	margin-right: 0 !important;
 	border-bottom: 1px solid transparent;
 }
 
@@ -5860,8 +5861,8 @@ sup {
 	.hiddenCB:checked + label + .ham-links { display: block; }
 
 	.nav-link { font-size: 1.6rem; height: 30px; margin-right: 40px; }
-	.nav-cart { font-size: 1.6rem; margin-top: 1em; padding-right: 0; padding-bottom: 0; background-position: 0 0; text-align: left;}
-		.nav-cart:hover { border-bottom: 1px solid transparent;}
+	.nav-cart { font-size: 1.4rem; margin-top: 1em; padding-right: 0; padding-bottom: 0; background-position: 0 0; text-align: left;}
+		.nav-cart:hover { border-bottom: 4px solid transparent;}
 	.nav-right { padding-bottom: 0; }
 	.nav-on-top, .stuck + .nav-on-top { top: -1px; }
 	.shop-wrap { flex-direction: column; padding: 0; }
@@ -6034,7 +6035,14 @@ sup {
 }
 
 @media all and (max-width: 500px) {
-	.nav-cart { padding-right: 0; text-align: right; margin-right: -15px; min-width: 70px;}
+	.nav-cart { padding-right: 0; text-align: right; margin-right: -7px !important; min-width: 70px; right: 2%;}
+	.nav-cart.cart-is-empty {
+		min-width: 26px;
+		right: 0;
+	}
+	.cart-is-empty .go-cart__mini-cart:before {
+		left: 90.5% !important;
+	}
 
 	.fl-col a { font-size: 1.25rem; }
 	.copyright { border-top: 1px solid #E6B711; padding-top: 20px; text-align: center;  }
