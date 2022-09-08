@@ -393,6 +393,10 @@
     z-index: -1;
   }
 
+  .cart-is-empty .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
+    left: 90%;
+  }
+
   .cart-header {
     font-family: work sans;
     margin: 1.5rem 3rem 0;

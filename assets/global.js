@@ -1045,11 +1045,7 @@ window.addEventListener("resize", function() {
 
 
 (function($){
-  $('.overlay').on('click', function(){
-    console.log('overlay clicked');
-  });
 
-console.log('running');
 var mini_cart = $('.go-cart__mini-cart');
 
 $('.js-go-cart-mini-close').on('click', function(e){
