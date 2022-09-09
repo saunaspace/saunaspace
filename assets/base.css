@@ -2169,6 +2169,8 @@ input[type='checkbox'] {
   transition: transform 0.15s ease-out;
 }
 
+@media (min-width: 768px) {
+
 .site-header-home {
 	position: fixed;
 	width: 100%;
@@ -2200,7 +2202,7 @@ input[type='checkbox'] {
 .site-header-home .logo {
 	background-image: url("https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sp-logo-white.svg?v=1652789731");
 }
-
+}
 /* Main Header Layout */
 .header-wrapper {
   display: block;
