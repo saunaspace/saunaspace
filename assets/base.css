@@ -987,6 +987,12 @@ summary::-webkit-details-marker {
 	list-style: none;
 }
 
+@media (max-width: 767px) {
+	.featured-grid {
+		margin-bottom: 1em;
+	}
+}
+
 @media screen and (min-width: 750px) {
   .grid--2-col .grid__item {
     width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
