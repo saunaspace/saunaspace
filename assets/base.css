@@ -985,6 +985,7 @@ summary::-webkit-details-marker {
 
 .featured-grid {
 	list-style: none;
+	margin-bottom: 1em;
 }
 
 @media (max-width: 767px) {
