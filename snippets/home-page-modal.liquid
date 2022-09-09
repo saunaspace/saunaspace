@@ -33,16 +33,28 @@
   width: 100%; /* Could be more or less, depending on screen size */
 }
 
+@media (max-width: 767px) {
+  iframe {
+    height: 250px !important;
+}
+}
+
 /* The Close Button */
 .close {
   color: #fff;
     float: right;
     font-size: 35px;
     position: relative;
+    right: 0;
+    top: 0;
+}
+@media (min-width: 768px) {
+  /* The Close Button */
+.close {
     right: -30px;
     top: 25px;
 }
-
+}
 .close:hover,
 .close:focus {
   color: black;
