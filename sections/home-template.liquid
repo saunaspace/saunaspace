@@ -1,9 +1,9 @@
 {{ 'pin-animation.css' | asset_url | stylesheet_tag }}
 {{ 'animate.css' | asset_url | stylesheet_tag }}
-
+<link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
 <div class="">
     <div class="video-wrapper">
-        <video playsinline autoplay muted loop preload="none" poster="{{ 'sauna-space-hero.png' | asset_url }}" class="bgvid">
+        <video playsinline autoplay muted loop preload="none" poster="{{ 'sauna-space-hero.png' | asset_url }}" class="bgvid video-js vjs-fill">
             <source src="{{ 'sauna-space-home-hero.mp4' | asset_url }}" type="video/webm">
             <source src="{{ 'sauna-space-home-hero.webm' | asset_url }}" type="video/mp4">
             <source src="{{ 'sauna-space-home-hero.ogv' | asset_url }}" type="video/ogv">
@@ -27,7 +27,7 @@
       </div>
     </div>
     {% render 'home-page-modal' %}
-
+    <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <script>
     // Wrap every letter in a span
