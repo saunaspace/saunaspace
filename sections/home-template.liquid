@@ -1,5 +1,5 @@
 {{ 'pin-animation.css' | asset_url | stylesheet_tag }}
-
+{{ 'animate.css' | asset_url | stylesheet_tag }}
 
 <div class="">
     <div class="video-wrapper">
@@ -9,11 +9,16 @@
             <source src="{{ 'sauna-space-home-hero.ogv' | asset_url }}" type="video/ogv">
         </video>
       <div class="header-video">
-        <p class="subtitle">Rejuventate at the cellular level</p>
-        <h1>Incandescent<br/> Infrared Therapy</h1>
+        <p class="header-video-subtitle header-one header-slide">Rejuvenate at the cellular level</p>
+        
+        <h1 class="header-slide tlt">
+            <span class="header-one">Experience</span><br />
+            <span class="header-two">Full Spectrum</span><br/>
+            <span class="header-two">Infrared Therapy</span>
+        </h1>
         <div class="video-links">
-            <a href="/products?filter=all" class="btn btn-outline">Shop Now</a><br />
-            <button class="btn-video" id="myBtn">
+            <a href="/products?filter=all" class="btn btn-outline btn-shop header-slide">Shop Now</a><br />
+            <button class="btn-video header-slide" id="myBtn">
                 <span class="btn-video-icon">
                     <svg width="6" height="10" viewBox="0 0 6 10" xmlns="http://www.w3.org/2000/svg"><path d="M6 5l-6 5V0z" fill="currentColor" fill-rule="evenodd"></path></svg>
                 </span>
@@ -23,6 +28,52 @@
     </div>
     {% render 'home-page-modal' %}
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script>
+    // Wrap every letter in a span
+    var textWrapper = document.querySelector('h1.header-slide');
+    // textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    
+    anime.timeline({loop: false})
+      .add({
+        targets: '.header-one',
+        opacity: [0,1],
+        easing: "linear",
+        duration: 1000,
+        delay: 1000
+      }).add({
+        targets: '.header-two',
+        opacity: [0,1],
+        easing: "linear",
+        duration: 950,
+        delay: 200
+      }).add({
+        targets: '.btn-shop',
+        opacity: [0,1],
+        easing: "linear",
+        duration: 850,
+      })
+      .add({
+        targets: '.btn-video',
+        opacity: [0,1],
+        easing: "linear",
+        duration: 850,
+      });
+    </script>
+    <!-- <script src="{{ 'lettering.js' | asset_url }}" defer></script>
+    <script src="{{ 'textillate.js' | asset_url }}" defer></script>
+    <script>
+      $(function () {
+        $('.tlt').textillate({ 
+          in: { 
+            effect: 'fadeIn',
+            sync: false,
+            delay: 50,
+          },
+          type: 'word'
+        });
+    })
+    </script> -->
     <section>
         <div class="ct-home">
             <div class="centered-text">
@@ -36,13 +87,13 @@
                   grid--{{ section.settings.columns_desktop }}-col-desktop
                 {% endif %}">
                 
-                {% for product in collections.targeted.products %}
+                {% for product in collections.featured-products.products %}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
                   {%- endif -%}
               
-                  <li class="grid__item">
+                  <li class="featured-grid">
                     {% render 'card-product-simple',
                       card_product: product,
                       media_aspect_ratio: section.settings.image_ratio,
@@ -293,6 +344,8 @@
 </div>
     <p style="text-align: center; margin-top: -25px;"><a href="/pages/reviews" class="bold-link arrow-link">More Reviews</a></p>
 </div>
+
+
 
 
 {% schema %}
