@@ -2,12 +2,19 @@
 {{ 'animate.css' | asset_url | stylesheet_tag }}
 <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
 <div class="">
-    <div class="video-wrapper">
+    <div class="vidseo-wrapper">
         <video playsinline autoplay muted loop preload="auto" data-setup="{}" poster="{{ 'sauna-space-hero.png' | asset_url }}" class="bgvid video-js vjs-fill">
             <source src="{{ 'sauna-space-home-hero.mp4' | asset_url }}" type="video/webm">
             <source src="{{ 'sauna-space-home-hero.webm' | asset_url }}" type="video/mp4">
             <source src="{{ 'sauna-space-home-hero.ogv' | asset_url }}" type="video/ogv">
-        </video>
+            <p class="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a
+              web browser that
+              <a href="https://videojs.com/html5-video-support/" target="_blank"
+                >supports HTML5 video</a
+              >
+            </p>
+          </video>
       <div class="header-video">
         <p class="header-video-subtitle header-one header-slide">Rejuvenate at the cellular level</p>
         
