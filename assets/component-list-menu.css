@@ -2,6 +2,16 @@
     position: fixed;
     width: 100%;
 }
+@media (max-width: 767px) {
+  .site-header-home .navBG.sticky {
+    position: static;
+    width: 100%;
+  }
+  .site-header-home {
+    position: absolute;
+  }
+}
+
 
 .site-header-home .navBG.sticky {
   background: #FFF;
