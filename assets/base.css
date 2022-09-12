@@ -2169,6 +2169,43 @@ input[type='checkbox'] {
   transition: transform 0.15s ease-out;
 }
 
+.site-header-home {
+	position: fixed;
+	width: 100%;
+}
+
+.site-header-home .hamb-label { 
+	filter: brightness(0) invert(1); 
+  }
+
+.site-header-home .navBG {
+	border-bottom: 0;
+}
+
+.site-header-home .navBG {
+	background: transparent;
+}
+
+.site-header-home .util-nav-link, .site-header-home .nav-link {
+	color: #fff;
+}
+
+.site-header-home .nav-link:hover {
+	border-bottom: 4px solid #fff;
+}
+
+.site-header-home .nav-arrow path, .site-header-home .nav-close path {
+	stroke: #fff;
+}
+.site-header-home .nav-cart {
+    background-image: url(https://cdn.shopify.com/s/files/1/0567/1865/5531/files/cart_white.svg);
+    background-repeat: no-repeat;
+}
+.site-header-home .logo {
+	background-image: url("https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sp-logo-white.svg?v=1652789731");
+}
+
+
 @media (min-width: 768px) {
 
 .site-header-home {
