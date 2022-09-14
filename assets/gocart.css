@@ -249,7 +249,8 @@
     max-width: 250px;
     line-height: 1.18;
     text-align: left;
-    padding: 0px 10px 0px 20px;
+    padding: 0px 0 0px 20px;
+    width: 100%;
   }
   .go-cart-item__image {
     min-width: 90px;
