@@ -89,4 +89,23 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-  </script>
+Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+    get: function () {
+        return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+    }
+});
+$('body').on('click touchstart', function () {
+            const videoElement = document.getElementById('saunavid');
+            if (videoElement.playing) {
+                // video is already playing so do nothing
+                console.log('vid is already playing');
+            }
+            else {
+                // video is not playing
+                // so play video now
+                videoElement.play();
+            }
+    });
+
+
+</script>
