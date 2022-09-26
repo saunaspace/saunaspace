@@ -1125,10 +1125,6 @@ summary::-webkit-details-marker {
     margin-left: 1.5rem;
   }
 
-  .slider--tablet.grid--peek .grid__item:last-of-type {
-    margin-right: 1.5rem;
-  }
-
 
 
   .grid--1-col-tablet-down.grid--peek .grid__item {
