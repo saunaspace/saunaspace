@@ -289,6 +289,8 @@ class MenuDrawer extends HTMLElement {
 
     this.mainDetailsToggle = this.querySelector('details');
 
+    if (navigator.platform === 'iPhone') document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+
     this.addEventListener('keyup', this.onKeyUp.bind(this));
     this.addEventListener('focusout', this.onFocusOut.bind(this));
     this.bindEvents();
@@ -323,10 +325,6 @@ class MenuDrawer extends HTMLElement {
     if (detailsElement === this.mainDetailsToggle) {
       if(isOpen) event.preventDefault();
       isOpen ? this.closeMenuDrawer(event, summaryElement) : this.openMenuDrawer(summaryElement);
-
-      if (window.matchMedia('(max-width: 990px)')) {
-        document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
-      }
     } else {
       setTimeout(() => {
         detailsElement.classList.add('menu-opening');
@@ -721,17 +719,13 @@ class SlideshowComponent extends SliderComponent {
 
   setSlideVisibility() {
     this.sliderItemsToShow.forEach((item, index) => {
-      const linkElements = item.querySelectorAll('a');
+      const button = item.querySelector('a');
       if (index === this.currentPage - 1) {
-        if (linkElements.length) linkElements.forEach(button => {
-          button.removeAttribute('tabindex');
-        });
+        if (button) button.removeAttribute('tabindex');
         item.setAttribute('aria-hidden', 'false');
         item.removeAttribute('tabindex');
       } else {
-        if (linkElements.length) linkElements.forEach(button => {
-          button.setAttribute('tabindex', '-1');
-        });
+        if (button) button.setAttribute('tabindex', '-1');
         item.setAttribute('aria-hidden', 'true');
         item.setAttribute('tabindex', '-1');
       }
@@ -809,8 +803,8 @@ class VariantSelects extends HTMLElement {
     if (!this.currentVariant) return;
     if (!this.currentVariant.featured_media) return;
 
-    const mediaGalleries = document.querySelectorAll(`[id^="MediaGallery-${this.dataset.section}"]`);
-    mediaGalleries.forEach(mediaGallery => mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true));
+    const mediaGallery = document.getElementById(`MediaGallery-${this.dataset.section}`);
+    mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true);
 
     const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
     if (!modalContent) return;
@@ -924,3 +918,142 @@ class VariantRadios extends VariantSelects {
 }
 
 customElements.define('variant-radios', VariantRadios);
+
+var navOpen=false
+var currentNavOpen="";
+var isIE11=false;
+var cartOpen=false
+
+if(navigator.userAgent.indexOf('MSIE')!==-1
+|| navigator.appVersion.indexOf('Trident/') > -1){
+  isIE11=true;
+}
+
+$(".nav-right").on("click",function() {
+	closeMegaNav();
+	if(cartOpen) {
+    console.log("cart is open");
+		$(".nav-full-cart").addClass("hideMe");
+		$(".overlay").addClass("hideMe");
+		cartOpen=false
+	} else {
+		$(".nav-full-cart").removeClass("hideMe");
+		$(".overlay").removeClass("hideMe");
+		cartOpen=true
+	}
+});
+
+// $(".overlay").on("click",function() {
+// 	closeMegaNav();
+// 	$(".nav-full-cart").addClass("hideMe");
+// 	cartOpen=false
+// });
+
+//opens or closes the mega-nav
+$(".nav-link").on("click",function() {
+	var n=$(this).attr("id");
+	$(".nav-full-cart").addClass("hideMe");
+	$(".mega-nav").addClass("hideMe");
+  cartOpen=false
+	if(currentNavOpen==n) {
+		closeMegaNav();
+    cartOpen=false
+		// $(".overlay").addClass("hideMe");
+	} else {
+		// $(".overlay").removeClass("hideMe");
+		currentNavOpen=n;
+    cartOpen=false
+		navOpen=true;
+		$(".nav-close").addClass("hideMe");
+		$(".nav-arrow").removeClass("hideMe");
+		$("#" + n + " .nav-close").removeClass("hideMe");
+		$("#" + n + " .nav-arrow").addClass("hideMe");
+		$("." + n + "MN").removeClass("hideMe");
+	}
+});
+
+//close the mega-nav when clicking on the hamburger to reveal util-nav on mobile
+$(".nav-head-close, #ham").on("click",function() {
+	closeMegaNav();
+});
+
+function closeMegaNav() {
+		$(".overlay").addClass("hideMe");
+		$(".mega-nav").addClass("hideMe");
+		$(".nav-close").addClass("hideMe");
+		$(".nav-arrow").removeClass("hideMe");
+		currentNavOpen="";
+		navOpen=false;
+}
+
+var currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+function scrollReviews(v) {
+	tileSize=406; //includes right margin
+	numTiles=parseInt(currentReviewsCarouselWidth / tileSize);
+	timeToScroll=numTiles * 200;
+	moveAmt=numTiles * tileSize  * v;
+	$(".review-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
+
+"use strict";
+
+const el = document.querySelector(".navBG");
+const observer = new IntersectionObserver(([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1), {
+  threshold: [1]
+});
+observer.observe(el);
+
+window.addEventListener("resize", function() {
+	currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
+	currentThumbsCarouselWidth=$(".product-thumbs").width() + 20;
+	currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+});
+
+$(".cc").on("click",function() {
+	whichProduct=$(this).attr("data-productID")
+	whichProductCode=$(this).attr("data-productCode")
+	whichColor=$(this).attr("data-colorCode")
+	tileLink=whichProductCode;
+	baseURL=$("#" + tileLink).attr("data-url")
+	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
+	
+	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
+	$(this).addClass("color-choice-on");
+	$(".img" + whichProduct).attr("src","/assets/" + whichProductCode + "-" + whichColor + "-tile.jpg");
+	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
+});
+
+$(document).on('click','.ccrp',function() {
+	whichProduct=$(this).attr("data-productID");
+	whichProductCode=$(this).attr("data-productCode");
+	whichColor=$(this).attr("data-colorCode");
+  	whichImage=$(this).attr("data-image");
+	$(".p" + whichProduct).removeClass("color-choice-on").addClass("color-choice-off");
+	$(this).addClass("color-choice-on");
+	$(".img" + whichProduct).attr("srcset",whichImage);
+	$(".price" + whichProduct).html($(this).attr("data-colorPrice"));
+	tileLink="rp" + whichProductCode;
+	baseURL=$("#" + tileLink).attr("data-url");
+	$("#" + tileLink).attr({"href":baseURL + "#" + whichColor});
+});
+
+
+
+(function($){
+
+var mini_cart = $('.go-cart__mini-cart');
+
+$('.js-go-cart-mini-close').on('click', function(e){
+  e.stopPropagation();
+
+    mini_cart.removeClass('is-open');
+});
+
+
+
+})(jQuery);
