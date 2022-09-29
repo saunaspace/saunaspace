@@ -36,9 +36,6 @@
   padding-left: 2rem;
 }
 
-.rte li {
-  list-style: inherit;
-}
 
 .rte li:last-child {
   margin-bottom: 0;
