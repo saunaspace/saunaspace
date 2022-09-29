@@ -173,7 +173,7 @@
 .article-template__back:last-child {
   margin-bottom: 3.2rem;
 }
-.article-template__content h1 {
+h1.article-template__title {
   color: #000;
   text-transform: none;
 }
