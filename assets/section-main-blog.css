@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.article-card {
+  border-bottom: 2px solid #eee;
+}
+
 @media screen and (min-width: 750px) {
   .blog-articles {
     grid-template-columns: 1fr 1fr;
@@ -74,6 +78,18 @@
   font-family: lft-etica-mono,sans-serif;
     font-weight: 400;
     font-size: 2rem;
+}
+
+.tag-article {
+  font-family: lft-etica-mono,sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .navbar-inner {

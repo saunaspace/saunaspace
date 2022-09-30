@@ -178,12 +178,27 @@ h1.article-template__title {
   text-transform: none;
 }
 
-.article-template__content h2 {
+.article-template__content h2, .article-template__content h3, .article-template__content h4, .article-template__content h5 {
   text-align: left;
+  text-transform: none;
+  margin: .5em 0;
 }
 
 .article-template__content figcaption {
   font-size: 14px;
   color: #ddd;
   font-style: italic;
+}
+
+.article-template__content sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+  top: -.6em;
+  font-size: 10px;
+}
+
+.article-template__content sup a {
+  text-decoration: none;
 }
