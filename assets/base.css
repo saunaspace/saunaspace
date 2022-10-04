@@ -6646,3 +6646,8 @@ a#cart-icon-bubble {
 	color: #fff;
 }
 
+
+
+.text-uppercase {
+    text-transform: uppercase;
+}
