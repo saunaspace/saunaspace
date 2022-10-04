@@ -38,7 +38,7 @@
         <div class="card__information">
           <div class="text-center ">
               {%- for tag in article.tags -%}
-                <a href="/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                <a href="/blogs/wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
               {%- endfor -%}
           </div> 
           <h3 class="card__heading{% if show_excerpt %} h2{% endif %}" style="margin-top: 2rem;" class="underline-links-hover">
