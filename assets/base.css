@@ -905,6 +905,10 @@ summary::-webkit-details-marker {
 	list-style-type: none;
 }
 
+.text-uppercase {
+    text-transform: uppercase;
+}
+
 @media screen and (min-width: 750px) {
   .grid {
     column-gap: var(--grid-desktop-horizontal-spacing);

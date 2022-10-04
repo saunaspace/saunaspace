@@ -23,7 +23,7 @@
       assign ratio = media_aspect_ratio
     endif
   -%}
-  <div class="article-card-wrapper card-wrapper underline-links-hover">
+  <div class="article-card-wrapper card-wrapper ">
     {% comment %} <article aria-labelledby="Article-{{ article.id }}"> {% endcomment %}
     <div class="card article-card
       card--{{ settings.blog_card_style }}
@@ -36,12 +36,12 @@
       
       <div class="card__content">
         <div class="card__information">
-          <div class="text-center">
+          <div class="text-center ">
               {%- for tag in article.tags -%}
-                <a href="{{ article.url }}/tagged/{{ tag | handle }}" class="tag-article">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                <a href="{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
               {%- endfor -%}
           </div> 
-          <h3 class="card__heading{% if show_excerpt %} h2{% endif %}" style="margin-top: 2rem;">
+          <h3 class="card__heading{% if show_excerpt %} h2{% endif %}" style="margin-top: 2rem;" class="underline-links-hover">
             <a href="{{ article.url }}" class="full-unstyled-link">
               {{ article.title | escape }}
             </a>
