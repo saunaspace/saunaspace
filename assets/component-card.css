@@ -109,6 +109,7 @@
 
 .card:not(.ratio) > .card__content {
   grid-template-rows: max-content minmax(0,1fr) max-content auto;
+  text-align: left;
 }
 
 @media screen and (min-width: 750px) {
