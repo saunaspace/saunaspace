@@ -202,3 +202,7 @@ h1.article-template__title {
 .article-template__content sup a {
   text-decoration: none;
 }
+
+.article-template__content ol li {
+  list-style: auto;
+}
