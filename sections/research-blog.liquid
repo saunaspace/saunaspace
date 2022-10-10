@@ -67,17 +67,17 @@
                     <div class="research-links" id="byTopic">
                         <a href="#theTop" class="back-to-top"></a>
                     <!– Create a list to hold the categories –>
-                        
+                        {%- paginate blog.articles by 1000 -%}
                             <!– Loops over all the tags used in your FAQ blog –>
                             {%- for tag in blog.all_tags -%}
                                 {% assign current_tag = tag %}
+                                {% assign j = j | plus:1 %}
                                 <!– Creates a category for each tag. –>
                               
-                                    <span id="topic1" class="topicAnchor"></span>
+                                    <span id="topic{{j}}" class="topicAnchor"></span>
                                     <h3>{{ current_tag }}</h3>
                                     <div id=”{{ tag | handle }}” class=”sub-question-list”>
                                         {%- for article in blog.articles -%}
-                                            <!– If the current post has the current list’s tag, print out the FAQ –>
                                             {%- if article.tags contains current_tag -%}
                                                 <div class="research-link ">
                                                     {%- render 'research-card',
@@ -95,7 +95,7 @@
                                     </div>
                             {% endfor %}
                   
-
+                            {%- endpaginate -%}
 
                      {%- comment -%} {%- for article in blog.articles -%}
                         <div class="research-link ">
