@@ -48,6 +48,7 @@
 
 .article-card .card__heading {
   margin-bottom: 0.6rem;
+  line-height: 1.1;
 }
 
 .blog-articles .article-card .card__information,

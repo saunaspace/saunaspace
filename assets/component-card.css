@@ -87,7 +87,6 @@
 
 .card--media .card__inner .card__content {
   padding: calc(var(--card-image-padding) + 1rem);
-  position: relative;
 }
 
 .card__content {
@@ -203,6 +202,7 @@
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
     transition: transform var(--duration-long) ease;
+    cursor: pointer;
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
