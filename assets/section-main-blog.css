@@ -96,6 +96,7 @@
   display: inline-block;
   width: 100%;
   background: #6d1b10;
+  margin-bottom: -2px;
 }
 
 .navbar-center-wrapper {

@@ -1,6 +1,7 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
-{{ 'simple-grid.min.css' | asset_url | stylesheet_tag }}
-
+{{ 'headsup.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{%- render 'blog-nav' -%}
 
 <article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
   {%- for block in section.blocks -%}
