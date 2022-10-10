@@ -20,7 +20,7 @@
        
   <header {{ block.shopify_attributes }}>
             <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
-            {% if article.metafields.custom.eyebrow_statement == true %}
+            {% if article.metafields.custom.eyebrow_statement  != blank %}
               <p class="etica">{{ article.metafields.custom.eyebrow_statement }}</p>
             {%- endif -%}
             
