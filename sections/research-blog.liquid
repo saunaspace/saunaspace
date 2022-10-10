@@ -28,8 +28,7 @@
                     <a href="#theTop" class="back-to-top"></a>
                     {%- for tag in blog.all_tags -%}
                         {% assign i = i | plus:1 %}
-                            <a href="#topic{{i}}" class="topicLink">{{ tag }}</a>{% unless forloop.last %} {% endunless %}
-    
+                        <a href="#topic{{i}}" class="topicLink">{{ tag }}</a>{% unless forloop.last %} {% endunless %}
                     {%- endfor -%}
                 </div>
             </div>
@@ -60,57 +59,59 @@
                 <a href="#alphaX" class="topicLink topicLink-alpha">X</a>            
                 <a href="#alphaY" class="topicLink topicLink-alpha">Y</a>           
                 <a href="#alphaZ" class="topicLink topicLink-alpha">Z</a>
-            
-        </div>
+            </div>
         </div>
 
-  <div class="main-blog page-width section-{{ section.id }}-padding">
-    <div class="research-articles">
-      {%- for article in blog.articles -%}
-        <div class="research-link ">
-          {%- render 'research-card',
-            article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true 
-          -%}
-        </div>
-      {%- endfor -%}
-    </div>
-    <div class="topics topics-alpha hideMe" id="filterAlpha">
-        <a href="#alphaA" class="topicLink topicLink-alpha">A</a>
-        <a href="#alphaB" class="topicLink topicLink-alpha">B</a>
-        <a href="#alphaC" class="topicLink topicLink-alpha">C</a>
-        <a href="#alphaD" class="topicLink topicLink-alpha">D</a>
-        <a href="#alphaE" class="topicLink topicLink-alpha">E</a>
-        <a href="#alphaF" class="topicLink topicLink-alpha">F</a>
-        <a href="#alphaG" class="topicLink topicLink-alpha">G</a>
-        <a href="#alphaH" class="topicLink topicLink-alpha">H</a>
-        <a href="#alphaI" class="topicLink topicLink-alpha">I</a>
-        <a href="#alphaJ" class="topicLink topicLink-alpha">J</a>
-        <a href="#alphaK" class="topicLink topicLink-alpha">K</a>
-        <a href="#alphaL" class="topicLink topicLink-alpha">L</a>
-        <a href="#alphaM" class="topicLink topicLink-alpha">M</a>
-        <a href="#alphaN" class="topicLink topicLink-alpha">N</a>
-        <a href="#alphaO" class="topicLink topicLink-alpha">O</a>
-        <a href="#alphaP" class="topicLink topicLink-alpha">P</a>
-        <a href="#alphaQ" class="topicLink topicLink-alpha">Q</a>
-        <a href="#alphaR" class="topicLink topicLink-alpha">R</a>
-        <a href="#alphaS" class="topicLink topicLink-alpha">S</a>
-        <a href="#alphaT" class="topicLink topicLink-alpha">T</a>
-        <a href="#alphaU" class="topicLink topicLink-alpha">U</a>            
-        <a href="#alphaV" class="topicLink topicLink-alpha">V</a>           
-        <a href="#alphaW" class="topicLink topicLink-alpha">W</a>           
-        <a href="#alphaX" class="topicLink topicLink-alpha">X</a>            
-        <a href="#alphaY" class="topicLink topicLink-alpha">Y</a>           
-        <a href="#alphaZ" class="topicLink topicLink-alpha">Z</a>
-    
-</div>
-</div>
-  </div>
+            <div class="main-blog page-width section-{{ section.id }}-padding">
+                <div class="research-articles">
+                    <div class="research-links" id="byTopic">
+                        <a href="#theTop" class="back-to-top"></a>
+                    <!– Create a list to hold the categories –>
+                        
+                            <!– Loops over all the tags used in your FAQ blog –>
+                            {%- for tag in blog.all_tags -%}
+                                {% assign current_tag = tag %}
+                                <!– Creates a category for each tag. –>
+                              
+                                    <span id="topic1" class="topicAnchor"></span>
+                                    <h3>{{ current_tag }}</h3>
+                                    <div id=”{{ tag | handle }}” class=”sub-question-list”>
+                                        {%- for article in blog.articles -%}
+                                            <!– If the current post has the current list’s tag, print out the FAQ –>
+                                            {%- if article.tags contains current_tag -%}
+                                                <div class="research-link ">
+                                                    {%- render 'research-card',
+                                                        article: article,
+                                                        media_height: section.settings.image_height,
+                                                        media_aspect_ratio: article.image.aspect_ratio,
+                                                        show_image: section.settings.show_image,
+                                                        show_date: section.settings.show_date,
+                                                        show_author: section.settings.show_author,
+                                                        show_excerpt: true 
+                                                    -%}
+                                                    </div>
+                                            {%- endif -%}
+                                        {%- endfor -%}
+                                    </div>
+                            {% endfor %}
+                  
+
+
+                     {%- comment -%} {%- for article in blog.articles -%}
+                        <div class="research-link ">
+                        {%- render 'research-card',
+                            article: article,
+                            media_height: section.settings.image_height,
+                            media_aspect_ratio: article.image.aspect_ratio,
+                            show_image: section.settings.show_image,
+                            show_date: section.settings.show_date,
+                            show_author: section.settings.show_author,
+                            show_excerpt: true 
+                        -%}
+                        </div>
+                    {%- endfor -%}  {%- endcomment -%}
+                </div>
+            </div>
     </div>
 </section>
 
