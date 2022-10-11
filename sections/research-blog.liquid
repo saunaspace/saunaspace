@@ -101,10 +101,8 @@
                     <a href="#theTop" class="back-to-top"></a>
                     {% assign articles = blog.articles | sort: 'title' %}
                     {%- paginate articles by 1000 -%}
-                            <!– Loops over all the tags used in your FAQ blog –>
                                 {%- for article in articles -%}
                                 {% assign current_letter = article.title | strip_html | upcase | truncate: 1, '' %}
-                                <!– Creates a category for each tag. –>
                                     <span id="alpha{{current_letter}}" class="topicAnchor"></span>
                                     <h3>{{ current_letter }}</h3>
                                     <div id=”{{ tag | handle }}” class=”sub-question-list”>
