@@ -96,21 +96,38 @@
                             {% endfor %}
                   
                             {%- endpaginate -%}
-
-                     {%- comment -%} {%- for article in blog.articles -%}
-                        <div class="research-link ">
-                        {%- render 'research-card',
-                            article: article,
-                            media_height: section.settings.image_height,
-                            media_aspect_ratio: article.image.aspect_ratio,
-                            show_image: section.settings.show_image,
-                            show_date: section.settings.show_date,
-                            show_author: section.settings.show_author,
-                            show_excerpt: true 
-                        -%}
-                        </div>
-                    {%- endfor -%}  {%- endcomment -%}
                 </div>
+                <div class="research-links hideMe" id="byAlpha">
+                    <a href="#theTop" class="back-to-top"></a>
+                    {% assign articles = blog.articles | sort: 'title' %}
+                    {%- paginate articles by 1000 -%}
+                            <!– Loops over all the tags used in your FAQ blog –>
+                                {%- for article in articles -%}
+                                {% assign current_letter = article.title | strip_html | upcase | truncate: 1, '' %}
+                                <!– Creates a category for each tag. –>
+                                    <span id="alpha{{current_letter}}" class="topicAnchor"></span>
+                                    <h3>{{ current_letter }}</h3>
+                                    <div id=”{{ tag | handle }}” class=”sub-question-list”>
+                                        {%- for article in blog.articles -%}
+                                            {% assign checkArray = article.title | split:current_letter %}
+                                            {% if checkArray[0] == blank %}
+                                                <div class="research-link ">
+                                                    {%- render 'research-card',
+                                                        article: article,
+                                                        media_height: section.settings.image_height,
+                                                        media_aspect_ratio: article.image.aspect_ratio,
+                                                        show_image: section.settings.show_image,
+                                                        show_date: section.settings.show_date,
+                                                        show_author: section.settings.show_author,
+                                                        show_excerpt: true 
+                                                    -%}
+                                                    </div>
+                                            {%- endif -%}
+                                        {%- endfor -%}
+                                    </div>
+                            {% endfor %}
+                  
+                            {%- endpaginate -%}
             </div>
     </div>
 </section>
