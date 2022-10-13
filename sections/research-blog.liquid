@@ -24,13 +24,12 @@
             <input id="topi" type="radio" class="hiddenRadio" name="topicAuthor" value="Topic" checked onClick="sortBy(this.value)"><label class="inlineLabel" for="topi">Topic</label>
             <input id="auth" type="radio" class="hiddenRadio" name="topicAuthor" value="Alpha"  onClick="sortBy(this.value)"><label class="inlineLabel" for="auth">Author (A - Z)</label>
             <div class="topics" id="filterTopic">
-                <div class="research-links" id="byTopic">
-                    <a href="#theTop" class="back-to-top"></a>
+                
                     {%- for tag in blog.all_tags -%}
                         {% assign i = i | plus:1 %}
                         <a href="#topic{{i}}" class="topicLink">{{ tag }}</a>{% unless forloop.last %} {% endunless %}
                     {%- endfor -%}
-                </div>
+            
             </div>
             <div class="topics topics-alpha hideMe" id="filterAlpha">
                 <a href="#alphaA" class="topicLink topicLink-alpha">A</a>
@@ -61,80 +60,69 @@
                 <a href="#alphaZ" class="topicLink topicLink-alpha">Z</a>
             </div>
         </div>
-
-            <div class="main-blog page-width section-{{ section.id }}-padding">
-                <div class="research-articles">
-                    <div class="research-links" id="byTopic">
-                        <a href="#theTop" class="back-to-top"></a>
-                    <!– Create a list to hold the categories –>
-                        {%- paginate blog.articles by 1000 -%}
-                            <!– Loops over all the tags used in your FAQ blog –>
-                            {%- for tag in blog.all_tags -%}
-                                {% assign current_tag = tag %}
-                                {% assign j = j | plus:1 %}
-                                <!– Creates a category for each tag. –>
-                              
-                                    <span id="topic{{j}}" class="topicAnchor"></span>
-                                    <h3>{{ current_tag }}</h3>
-                                    <div id=”{{ tag | handle }}” class=”sub-question-list”>
-                                        {%- for article in blog.articles -%}
-                                            {%- if article.tags contains current_tag -%}
-                                                <div class="research-link ">
-                                                    {%- render 'research-card',
-                                                        article: article,
-                                                        media_height: section.settings.image_height,
-                                                        media_aspect_ratio: article.image.aspect_ratio,
-                                                        show_image: section.settings.show_image,
-                                                        show_date: section.settings.show_date,
-                                                        show_author: section.settings.show_author,
-                                                        show_excerpt: true 
-                                                    -%}
-                                                    </div>
-                                            {%- endif -%}
-                                        {%- endfor -%}
-                                    </div>
-                            {% endfor %}
-                  
-                            {%- endpaginate -%}
+        <div class="research-links" id="byTopic">
+          <a href="#theTop" class="back-to-top"></a>
+            {%- paginate blog.articles by 1000 -%}
+            {%- for tag in blog.all_tags -%}
+                {% assign current_tag = tag %}
+                {% assign j = j | plus:1 %}                              
+                <span id="topic{{j}}" class="topicAnchor"></span>
+                <h3>{{ current_tag }}</h3>
+                <div id=”{{ tag | handle }}” class=”sub-question-list”>
+                    {%- for article in blog.articles -%}
+                        {%- if article.tags contains current_tag -%}
+                            <div class="research-link ">
+                                {%- render 'research-card',
+                                    article: article,
+                                    media_height: section.settings.image_height,
+                                    media_aspect_ratio: article.image.aspect_ratio,
+                                    show_image: section.settings.show_image,
+                                    show_date: section.settings.show_date,
+                                    show_author: section.settings.show_author,
+                                    show_excerpt: true 
+                                -%}
+                                </div>
+                        {%- endif -%}
+                    {%- endfor -%}
                 </div>
-                <div class="research-links hideMe" id="byAlpha">
-                    <a href="#theTop" class="back-to-top"></a>
-                    {% assign articles = blog.articles | sort: 'title' %}
-                    {% assign letters = '' %}
-                    {% assign letter = blank %}
-                    {%- paginate articles by 1000 -%}
+            {% endfor %} 
+            {%- endpaginate -%}
+          </div>
+          <div class="research-links hideMe" id="byAlpha">
+            <a href="#theTop" class="back-to-top"></a>
+            {% assign articles = blog.articles | sort: 'title' %}
+            {% assign letters = '' %}
+            {% assign letter = blank %}
+            {%- paginate articles by 1000 -%}
+                {%- for article in blog.articles -%}
+                    {% assign letter = article.title | slice: 0 | upcase %}
+                    {% unless letters contains letter %}
+                      {% assign letters = letters | append: letter | append: '|' %}
+                    {% endunless %}
+                {%- endfor -%}
+                {% assign letters = letters | split: '|' | sort %}
+                {%- for current_letter in letters -%}
+                    <span id="alpha{{current_letter}}" class="topicAnchor"></span>
+                    <h3>{{ current_letter }}</h3>
                         {%- for article in blog.articles -%}
-                            {% assign letter = article.title | slice: 0 | upcase %}
-                            {% unless letters contains letter %}
-                              {% assign letters = letters | append: letter | append: '|' %}
-                            {% endunless %}
+                            {% assign checkArray = article.title | split:current_letter %}
+                            {% if checkArray[0] == blank %}
+                                <div class="research-link ">
+                                    {%- render 'research-card',
+                                        article: article,
+                                        media_height: section.settings.image_height,
+                                        media_aspect_ratio: article.image.aspect_ratio,
+                                        show_image: section.settings.show_image,
+                                        show_date: section.settings.show_date,
+                                        show_author: section.settings.show_author,
+                                        show_excerpt: true 
+                                    -%}
+                                    </div>
+                            {%- endif -%}
                         {%- endfor -%}
-                        {% assign letters = letters | split: '|' | sort %}
-                        {%- for current_letter in letters -%}
-                            <span id="alpha{{current_letter}}" class="topicAnchor"></span>
-                            <h3>{{ current_letter }}</h3>
-                            <div id=”{{ tag | handle }}” class=”sub-question-list”>
-                                {%- for article in blog.articles -%}
-                                    {% assign checkArray = article.title | split:current_letter %}
-                                    {% if checkArray[0] == blank %}
-                                        <div class="research-link ">
-                                            {%- render 'research-card',
-                                                article: article,
-                                                media_height: section.settings.image_height,
-                                                media_aspect_ratio: article.image.aspect_ratio,
-                                                show_image: section.settings.show_image,
-                                                show_date: section.settings.show_date,
-                                                show_author: section.settings.show_author,
-                                                show_excerpt: true 
-                                            -%}
-                                            </div>
-                                    {%- endif -%}
-                                {%- endfor -%}
-                            </div>
-                          {% endfor %}
-
-                    {%- endpaginate -%}
-            </div>
+                  {% endfor %}
+            {%- endpaginate -%}
+          </div>
     </div>
 </section>
 
@@ -142,6 +130,7 @@
 
 <script>
 	function sortBy(s) {
+    console.log(s);
 		$(".research-links").addClass("hideMe");
 		$(".topics").addClass("hideMe");
 		$("#by" + s).removeClass("hideMe");
