@@ -898,6 +898,74 @@ function updateUC(p) {
   $("#bp" + p).find("p").removeClass("hideMe");
   $("#bpImg").attr("src",ucArr[p-1]);
 }
+
+
+function filterVariant(variant) {
+  console.log('thumbnail updated ' + variant.alt);
+  if(variant != null && variant.alt != null ) {
+    $('[data-thumbnail-color]').hide();
+    //show for selected color
+    var selected_color = variant.alt;
+    var general_color = "[data-thumbnail-color='general']";
+    var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
+    $(thumbnail_selector).show();
+    {% if product.id == 2105477365849 or product.id == 2105476743257 %}
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 13;
+      }).show();
+    {% endif %}
+    {% if product.id == 2105476546649 %}
+    console.log('emf page');
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 6;
+      }).show();
+    {% endif %}
+    {% if product.id == 2105475661913 %}
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 11;
+      }).show();
+    {% endif %}
+    //emf page
+    {% if product.id == 2105477726297 %}
+    console.log('emf page');
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 7;
+      }).show();
+    {% endif %}
+    {% if product.id == 2105475956825 %}
+      console.log('tungsten page');
+        $('[data-media-position]').filter(function () {
+            return $(this).data('media-position') >= 10;
+        }).show();
+      {% endif %}
+    // $(general_color).show();
+    // $(thumbnail_selector).prependTo('.list-unstyled');
+  } else {
+    //show all
+    $('[data-thumbnail-color]').show();
+  }
+}
+
+
+// variant lead time metafield listener
+function bcpoChange(currentVariant) {
+    var variant_result = JSON.stringify(bcpo.variant.featured_image);
+    {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 or product.id == 2105475956825 %}
+      this.filterVariant(bcpo.variant.featured_image);
+    {% endif %}
+    console.log('bcpo: ' + variant_result);
+    console.log('featured iamge: ' + bcpo.variant.featured_image);
+    const variants = document.querySelectorAll('[data-variant-id]')
+  
+    variants.forEach( function(variant) {
+      //hide all variant descriptions
+      variant.style.display = 'none';
+      if(variant.dataset.variantId == bcpo.variant.id){
+        //if current variant unhide the variant description
+        variant.style.display = 'block'
+      }
+  });
+}
       
 // function formatPlug (plug) {
 //   if (!plug.id) {
@@ -919,6 +987,7 @@ function updateUC(p) {
 </script>
 
 <script src="{{ 'lite-yt-embed.js' | asset_url }}" async></script>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
