@@ -689,6 +689,213 @@
 {% render 'product-page' %}
 
 
+<script>
+
+$(document).ready(function() {
+
+
+
+	$(".product-info-details a").removeAttr('target');
+	
+	$(".pid-col-text a").each(function() {
+		if($(this).attr("href").indexOf(".pdf") > 0) {
+			$(this).attr({"target":"_blank"});
+		}
+	});
+
+
+
+  setInterval(function () {
+    if($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky") ) {
+      $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('#ju_Con_837251').css('display') == 'block')
+    {
+      $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
+    } else if (!$('.navBG').hasClass("sticky")) {
+        $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('.navBG').hasClass("sticky")) {
+      $('.stickyBG').css('transform', 'translateY(62px)');
+    }
+}, 1000);
+	
+});
+
+
+$(".product-info-tab").on("click",function() {
+	$(".product-info-tab").removeClass("product-info-tab-on");
+	$(this).addClass("product-info-tab-on");
+	$(".product-info-details").addClass("hideMe");
+	var whichTab=$(this).attr("data-tab");
+	$("#pid-" + whichTab).removeClass("hideMe");
+});
+
+
+
+
+
+var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
+
+function scrollRelated(v) {
+	tileSize=295; //includes right margin
+	numTiles=parseInt(currentRelatedCarouselWidth / tileSize);
+	timeToScroll=numTiles * 200;
+	moveAmt=numTiles * tileSize  * v;
+	$(".related-carousel").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+//currentThumbsCarouselWidth is in getGallery.asp
+function scrollGallery(v) {
+	tileSize=145; //includes right margin
+	numTiles=parseInt(currentThumbsCarouselWidth / tileSize);
+	timeToScroll=numTiles * 100;
+	moveAmt=numTiles * tileSize  * v;
+	$(".product-thumbs").animate( { scrollLeft: '+=' + moveAmt }, timeToScroll);
+}
+
+function showGalleryHero(n,colorCode) {
+	if(colorCode==0) {
+		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-gallery-' | asset_url }}" + n + ".jpg"});
+	} else {
+		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-' | asset_url }}" + colorCode + "-gallery-" + n + ".jpg"});
+	}
+}
+
+
+
+let options = {
+	root: null,
+	rootMargin: '-20px 0px 0px 0px', 
+	threshold: 1.0 
+};
+function createObserver(o) {
+	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
+	window['observer' + o].observe(eval(o));
+}
+const stickyAddToCart = document.querySelector('.atcMain');
+if(window.matchMedia('(min-width: 750px)').matches) {
+	createObserver('stickyAddToCart');
+}
+
+function onChangestickyAddToCart(changes, observerstickyAddToCart) {
+		changes.forEach(change => { if (change.intersectionRatio >= 1) {
+			$(".stickyBG").removeClass("stickyBG-visible");
+			//console.log("hidden")
+		} else {
+			//console.log("visible")
+			$(".stickyBG").addClass("stickyBG-visible");
+		}
+	});
+}
+function isEmpty( el ){
+      return !$.trim(el.html())
+  }
+
+  setTimeout(function(){
+  if (isEmpty($('.bcpo-images .bcpo-value'))) {
+      // do something
+  } else {
+    var dcolor = $('.bcpo-images .bcpo-value').text();
+  console.log('current color is: '+dcolor );
+
+  $('.stickyBG .sac-color').text(dcolor);
+  }
+}, 800)
+
+updateUC(1)
+function updateUC(p) {
+  ucArr=["https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-light.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-desk-arm.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-case.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-sauna-supreme.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-better-night-light.jpg"]
+  $(".build-panels p").addClass("hideMe");
+  $("#bp" + p).find("p").removeClass("hideMe");
+  $("#bpImg").attr("src",ucArr[p-1]);
+}
+
+
+function filterVariant(variant) {
+  console.log('thumbnail updated ' + variant.alt);
+  if(variant != null && variant.alt != null ) {
+    $('[data-thumbnail-color]').hide();
+    //show for selected color
+    var selected_color = variant.alt;
+    var general_color = "[data-thumbnail-color='general']";
+    var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
+    $(thumbnail_selector).show();
+    {% if product.id == 2105477365849 or product.id == 2105476743257 %}
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 13;
+      }).show();
+    {% endif %}
+    {% if product.id == 2105476546649 %}
+    console.log('emf page');
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 6;
+      }).show();
+    {% endif %}
+    {% if product.id == 2105475661913 %}
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 11;
+      }).show();
+    {% endif %}
+    //emf page
+    {% if product.id == 2105477726297 %}
+    console.log('emf page');
+      $('[data-media-position]').filter(function () {
+          return $(this).data('media-position') >= 7;
+      }).show();
+    {% endif %}
+    {% if product.id == 2105475956825 %}
+      console.log('tungsten page');
+        $('[data-media-position]').filter(function () {
+            return $(this).data('media-position') >= 10;
+        }).show();
+      {% endif %}
+    // $(general_color).show();
+    // $(thumbnail_selector).prependTo('.list-unstyled');
+  } else {
+    //show all
+    $('[data-thumbnail-color]').show();
+  }
+}
+
+
+// variant lead time metafield listener
+function bcpoChange(currentVariant) {
+    var variant_result = JSON.stringify(bcpo.variant.featured_image);
+    {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 or product.id == 2105475956825 %}
+      this.filterVariant(bcpo.variant.featured_image);
+    {% endif %}
+    console.log('bcpo: ' + variant_result);
+    console.log('featured iamge: ' + bcpo.variant.featured_image);
+    const variants = document.querySelectorAll('[data-variant-id]')
+  
+    variants.forEach( function(variant) {
+      //hide all variant descriptions
+      variant.style.display = 'none';
+      if(variant.dataset.variantId == bcpo.variant.id){
+        //if current variant unhide the variant description
+        variant.style.display = 'block'
+      }
+  });
+}
+      
+// function formatPlug (plug) {
+//   if (!plug.id) {
+//     return plug.text;
+//   }
+//   var plugPath='';
+//   if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
+//   if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
+//   if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+//   if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+//   if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
+//   if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
+//   if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
+//   var $plug = $(
+//     '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
+//   );
+//   return $plug;
+// };
+</script>
+
 {%- if product.media.size > 0 -%}
   <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
