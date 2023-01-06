@@ -1,0 +1,126 @@
+<div class="tanBG noMargin home ">
+  <h2>{{ section.settings.heading | escape }}</h2>
+
+
+  <div class="rc-arrows">
+
+    <img
+      src="{{ 'arrow_orange.svg' | asset_url }}"
+      class="rc-arrow-right"
+      alt=""
+      onClick="scrollReviews(1);"
+      loading="lazy" />
+    <img
+      src="{{ 'arrow_orange.svg' | asset_url }}"
+      class="rc-arrow-left"
+      alt=""
+      onClick="scrollReviews(-1);"
+      loading="lazy" />
+    <div class="review-carousel">
+      {%- for block in section.blocks -%}
+        <div class="rc-box">
+          <div class="rcb-name">
+
+            <img
+              src="{{ block.settings.photo | image_url: width: 550 }}"
+              loading="lazy"
+              alt="{{ block.settings.photo.alt | escape }}"
+              width="{{ block.settings.photo.width }}"
+              height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" />
+            <div class="rcb-text">
+              {%- if block.settings.name != blank -%}
+                <div class="review-name">{{ block.settings.name | escape }}</div>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <div class="review-title etica">{{ block.settings.title | escape }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if block.settings.quote != blank -%}
+            <div class="review-text etica">
+              <p>{{ block.settings.quote | escape }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+
+      {%- endfor -%}
+    </div>
+  </div>
+  <p style="text-align: center; margin-top: -25px;">
+    <a href="/pages/reviews" class="bold-link arrow-link">More Reviews</a>
+  </p>
+</div>
+
+{%- if request.design_mode -%}
+  <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Reviews",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "default": "Our Customers Love Us",
+        "label": "Reviews"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "review",
+        "limit": 15,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "photo",
+            "label": "Customer Photo"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "default": "Customer Name",
+            "label": "Customer Name"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "default": "Customer Job Title",
+            "label": "Customer Title"
+          },
+          {
+            "type": "textarea",
+            "id": "quote",
+            "default": "Quote from customer goes here",
+            "label": "Review"
+          }, {
+            "type": "text",
+            "id": "url_link",
+            "default": "https://google.com",
+            "label": "3rd Party URL Link"
+          }, {
+            "type": "text",
+            "id": "URL_Link_Label",
+            "label": "3rd Party URL Link Name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Reviews",
+        "blocks": [
+          {
+            "type": "review"
+          }, {
+            "type": "review"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -12,9 +12,164 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe": {
+      "type": "reviews",
+      "blocks": {
+        "template--15767598465224__2e25f1d0-dfdd-46aa-91de-7f22185b7dfe-1673033427cafb452d-0": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/chris-kresser.jpg",
+            "name": "Chris Kresser",
+            "title": "M.S., L.Ac, Founder of Kresser Institute",
+            "quote": "I’m convinced that saunas are one of the most potent tools available to us for optimizing health and extending lifespan.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "template--15767598465224__2e25f1d0-dfdd-46aa-91de-7f22185b7dfe-1673033427cafb452d-1": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/harrison-butker.jpg",
+            "name": "Harrison Butker",
+            "title": "NFL Super Bowl Champion",
+            "quote": "With this season’s COVID restrictions, NFL players have been unable to use their team’s sauna. That reality, coupled with its unbeatably low EMF levels, make owning my very own Faraday Sauna and Photon a lifesaver. I am grateful for this quality product made by SaunaSpace!",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "e7719e41-e8b4-497b-a761-9c42212c7ad5": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/ragga-ragnars.jpg",
+            "name": "Ragga Ragnars",
+            "title": "Olympic Swimmer, Actor",
+            "quote": "Having my SaunaSpace Faraday in my bedroom has been an absolute game changer for me. Since I got it I have noticed an amazing improvement in how I feel, my recovery time from workouts has been cut in half and my skin is glowing...",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "97b31371-4ace-4619-b351-d54b2d829199": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/terri-hirning.jpg",
+            "name": "Terri Hirning",
+            "title": "Author",
+            "quote": "I have used several other saunas for both myself and my son who is recovered from autism. No other gave me the results or the same feeling of relief and relaxation like this. With SaunaSpace, I experience an almost immediate reduction in inflammation and a faster sweating response than with other saunas.",
+            "url_link": "Author",
+            "URL_Link_Label": ""
+          }
+        },
+        "35add396-a0a7-4282-86ae-bc72720c3fdc": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/margaret-c.jpg",
+            "name": "Margaret C.",
+            "title": "Verified Buyer",
+            "quote": "Amazing daily sweat—I love my Luminati! I get a daily dripping wet sweat in there for daily detox, amazing! It is easy to set up, easy to move and simple to use. Do it!",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "2af3d84a-e491-4d55-8ba0-421028304766": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/terry-wahls.jpg",
+            "name": "Terry Wahls",
+            "title": "MD, Founder of The Wahls Protocol",
+            "quote": "I am still very much enjoying my sauna most mornings! I definitely prefer the incandescent lamp heat over the far-infrared heaters in my old cabinet sauna.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "6d12393a-a521-4f2c-8866-21862fb121b5": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/nicole-moneer.jpg",
+            "name": "Nicole Moneer",
+            "title": "Verified Buyer",
+            "quote": "My latest addition to my natural healing toolbox 🔧⛏🔨☺️\nIncandescent Single Light Panel near-infrared heat and light therapy.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "c46125d2-11ae-439e-8682-e52e9a4ae172": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/jeannie-z.jpg",
+            "name": "Jeannie Z.",
+            "title": "Verified Buyer",
+            "quote": "Great portable red light therapy lamp. Very well-made. Not sure who loves it more, my husband and I or our cat. :)",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "5c7f1501-2e0b-4b9f-b2f7-19598f7daf16": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/david-l.jpg",
+            "name": "David L.",
+            "title": "Verified Buyer",
+            "quote": "This is hands down the number one health hack I have tried to date.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "18f5b4c6-024d-40b5-a7e1-de54ca2cef4e": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/v-capaldi.jpg",
+            "name": "V. Capaldi",
+            "title": "MS Warrior, TEDx Speaker",
+            "quote": "I have to say never in my wildest dreams would I have thought this would be so life changing.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "43beeeac-bba9-4037-b6b3-72fdc3d5bdea": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/tiphany-adams.jpg",
+            "name": "Tiphany Adams",
+            "title": "Fitness Coach",
+            "quote": "Retreating using red light therapy makes me smile because it feels like 🌞 and a mini vacation where you can release tensions and heavy thoughts while you relax.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
+        "488e22b9-6085-4f6e-a8d2-aede56cd5edd": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/bella-c.jpg",
+            "name": "Bella C.",
+            "title": "Verified Buyer",
+            "quote": "...the heat is so incredibly efficient that it allows you to get a much better sweat in far less time.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15767598465224__2e25f1d0-dfdd-46aa-91de-7f22185b7dfe-1673033427cafb452d-0",
+        "template--15767598465224__2e25f1d0-dfdd-46aa-91de-7f22185b7dfe-1673033427cafb452d-1",
+        "e7719e41-e8b4-497b-a761-9c42212c7ad5",
+        "97b31371-4ace-4619-b351-d54b2d829199",
+        "35add396-a0a7-4282-86ae-bc72720c3fdc",
+        "2af3d84a-e491-4d55-8ba0-421028304766",
+        "6d12393a-a521-4f2c-8866-21862fb121b5",
+        "c46125d2-11ae-439e-8682-e52e9a4ae172",
+        "5c7f1501-2e0b-4b9f-b2f7-19598f7daf16",
+        "18f5b4c6-024d-40b5-a7e1-de54ca2cef4e",
+        "43beeeac-bba9-4037-b6b3-72fdc3d5bdea",
+        "488e22b9-6085-4f6e-a8d2-aede56cd5edd"
+      ],
+      "settings": {
+        "heading": "Our Customers Love Us"
+      }
     }
   },
   "order": [
-    "home_template"
+    "home_template",
+    "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe"
   ]
 }
