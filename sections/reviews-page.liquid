@@ -1,455 +1,156 @@
-<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link
+  rel="stylesheet"
+  href="{{ 'section-main-page.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'">
+<link
+  rel="stylesheet"
+  href="{{ 'component-rte.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'">
 
 <noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 
 
-
-<div class="photo-headerBG" style="background-image:url({{ 'reviews.jpg' | asset_url }}); background-position: 50% 0; ">
-    <div class="ph-width">
-        <div class="ph-text">
-            <cms id='cms0'>
-            <h1>The Reviews Are In</h1>
-            <p class="etica">We’re not the only ones who believe in the power of SaunaSpace. Hear it straight from customers and experts.</p>
-            </cms cms0>
-        </div>
-    </div>
-</div>
-
-<div class="tanBG">
-    <h2>What the Experts are Saying</h2>
-    <div class="review-categories">
-            <a href="javascript:void(0)" class="product-info-tab product-info-tab-on rcat-link" data-tab="all">All</a>
-
-            <a href="javascript:void(0)" class="product-info-tab rcat-link" data-tab="medical">Medical</a>
-        
-            <a href="javascript:void(0)" class="product-info-tab rcat-link" data-tab="athletic">Athletic</a>
-
-            <a href="javascript:void(0)" class="product-info-tab rcat-link" data-tab="lifestyle">Lifestyle</a>
-        
-    </div>
-    <div class="product-info-details" id="pid-all">
-        <div id="allReviews">
-            <div class="featured-review">
-                <div class="fr-img">
-                    <img src="{{ 'chris-kresser.jpg' | asset_url }}" alt="Chris Kresser">
-                    <div class="fr-text hide-desktop">
-                        <div class="review-name">Chris Kresser</div>
-                        <div class="review-title etica">M.S., L.Ac, Founder of <a href="https://chriskresser.com/" target="_blank">Kresser Institute</a></div>
-                    </div>
-                </div>
-                <div class="fr-text">
-                    <div class="review-name hide-mobile">Chris Kresser</div>
-                    <div class="review-title etica hide-mobile">M.S., L.Ac, Founder of <a href="https://chriskresser.com/" target="_blank">Kresser Institute</a></div>
-                    <div class="review-text"><p>“I believe that near-infrared is the most therapeutic of the sauna options, and I love that Faraday not only doesn’t emit EMF or MF, it blocks out all ambient EMF for a completely ‘clean’ detox experience. I’ve noticed benefits in sleep, mood, energy, and overall vitality after just a couple of weeks of using it. I even put my far infrared sauna on Craigslist because I haven’t used it once since I got the SaunaSpace.”</p><p>SaunaSpace owner since 2018</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://chriskresser.com/how-sauna-therapy-can-prevent-reverse-chronic-disease-with-brian-richards/" target="_blank" class="review-cta arrow-link">Listen to the Podcast</a></div>
-                    
-                </div>
-            </div><!--featured-review-->
-            
-            <div class="rc-arrows noMargin">
-                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
-                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
-                <div class="review-carousel">
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'harrison-butker.jpg' | asset_url }}" alt="Harrison Butker">
-                        <div class="rcb-text">
-                            <div class="review-name">Harrison Butker</div>
-                            <div class="review-title etica">NFL Super Bowl Champion</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“With this season’s COVID restrictions, NFL players have been unable to use their team’s sauna. That reality, coupled with its unbeatably low EMF levels, make owning my very own Faraday Sauna and Photon a lifesaver. I am grateful for this quality product made by SaunaSpace!”</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://www.instagram.com/buttkicker7/" target="_blank" class="review-cta arrow-link">Follow @buttkicker7</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'ragga-ragnars.jpg' | asset_url }}" alt="Ragga Ragnars (Ragnheiður Ragnarsdóttir)">
-                        <div class="rcb-text">
-                            <div class="review-name">Ragga Ragnars (Ragnheiður Ragnarsdóttir)</div>
-                            <div class="review-title etica">Olympic Swimmer, Actor</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“Having my SaunaSpace Faraday in my bedroom has been an absolute game changer for me. I love being able to take time for myself, meditate, read, journal, or just sit in there with my thoughts. Since I got it I have noticed an amazing improvement in how I feel, my recovery time from workouts has been cut in half and my skin is glowing. I also have a Photon and it's so nice and cozy to use that while I work on my computer or read. Also my 8 year old son loves it and will sit by it and do his homework.”</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://www.instagram.com/raggaragnars/" target="_blank" class="review-cta arrow-link">Follow @raggaragnars</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'terry-wahls.jpg' | asset_url }}" alt="Terry Wahls">
-                        <div class="rcb-text">
-                            <div class="review-name">Terry Wahls</div>
-                            <div class="review-title etica">MD, Founder of <a href="https://terrywahls.com/about-the-wahls-protocol/" target="_blank">The Wahls Protocol</a></div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“I am still am very much enjoying my sauna most mornings! I definitely prefer the incandescent lamp heat over the far-infrared heaters in my old cabinet sauna."</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://terrywahls.com/near-infrared-light-and-heat-natures-most-powerful-healing-detox-solution/" target="_blank" class="review-cta arrow-link">Read the Blog Post</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'thomas-cowan.jpeg' | asset_url }}" alt="Thomas Cowan">
-                        <div class="rcb-text">
-                            <div class="review-name">Thomas Cowan</div>
-                            <div class="review-title etica">MD, Author and Founder of Dr. Cowan's Garden</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“The SaunaSpace incandescent red light lamps and saunas are a truly revolutionary technology. Akin to bring the healing wavelengths of the sun into your home, exposure to red light, incandescent light stimulates mitochondrial function and effective detoxification. I use mine every day and believe the SaunaSpace products are one of the most profound therapeutic tools available.”</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://podcasts.apple.com/us/podcast/conversations-with-dr-cowan-friends/id1530268266" target="_blank" class="review-cta arrow-link">Listen to the Podcast</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'ken-sharlin.jpeg' | asset_url }}" alt="Ken Sharlin">
-                        <div class="rcb-text">
-                            <div class="review-name">Ken Sharlin</div>
-                            <div class="review-title etica">MD, MPH, IFMP, Author</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“As a doctor passionate about helping my patients identify and treat the root causes of chronic neurological conditions, the SaunaSpace has become an essential element in my toolbox. In this demanding world of ‘eat this, not that,’ SaunaSpace invites us into its sacred, protected space, where—through the healing powers of red light and heat—all we are asked to do is just sit and breathe. We need more of that in our lives.”</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://functionalmedicine.doctor/" target="_blank" class="review-cta arrow-link">More about Ken</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'anthony-kunkel.jpeg' | asset_url }}" alt="Anthony Kunkel">
-                        <div class="rcb-text">
-                            <div class="review-name">Anthony Kunkel</div>
-                            <div class="review-title etica">Long distance runner</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>"I tore a quad muscle running a few years back, and my PT projected 8 weeks to recover. As a professional runner, that’s not acceptable for me. I was grateful to be able to hit the knee and quad multiple times a day with my Photon right at home, if just to warm it up before cross training sessions, but ultimately I was running again in just 4 weeks. I credit the majority of that miracle to my use of the Photon. With all the research I’ve seen behind near IR, it’s not surprising that it helps the root issues and helps avoid re-injury with added collagen and elastin to the area."</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://www.instagram.com/anthonykunkel/" target="_blank" class="review-cta arrow-link">Follow @anthonykunkel</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'cheyenne.jpeg' | asset_url }}" alt="JP “Young Savage” and Cheyenne “Warrior Princess” Buys">
-                        <div class="rcb-text">
-                            <div class="review-name">JP “Young Savage” and Cheyenne “Warrior Princess” Buys</div>
-                            <div class="review-title etica">UFC fighters</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>JP: "Even the days that I’m hurt, and my body’s hurt from training, I wake up, roll straight into the sauna, it wakes me up, and I can train. In my last fight, it was almost like we rehearsed it. In that quick second my brain reacted and my body just followed."</p><p>Cheyanne: "We use it religiously! In the last 2 months, my skin has cleared up…the sauna has been a major game-changer for us!"</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://www.instagram.com/cheywarprincess/" target="_blank" class="review-cta arrow-link">Follow @wrestling_jp and @CheyWarPrincess</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'rico-zulkarnain.jpeg' | asset_url }}" alt="Rico Zulkarnain">
-                        <div class="rcb-text">
-                            <div class="review-name">Rico Zulkarnain</div>
-                            <div class="review-title etica">UK's Most Successful Futsal Star</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>"Using my SaunaSpace near infrared sauna has become an integral part of my daily routine. Being an elite athlete, the benefits I’ve been experiencing both pre and post training have made a huge difference. My cardio is through the roof and my recovery times are much greater. I’m able to train twice a day and wake up the next day and get straight back into my training regime at 100%. I’m grateful to now be in a position to share SaunaSpace with the rest of Wales as we look to open our Healing Hub mid 2021. Infinite gratitude and love to the SaunaSpace fam for bringing this light into the world ❤️🙏🏽"</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://www.instagram.com/ricozulkarnain9/" target="_blank" class="review-cta arrow-link">Follow @ricozulkarnain9</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'tiphany-adams.jpg' | asset_url }}" alt="Tiphany Adams">
-                        <div class="rcb-text">
-                            <div class="review-name">Tiphany Adams</div>
-                            <div class="review-title etica">Strength coach at <a href="https://tiphanyadams.com/" target="_blank">tiphanyadams.com</a></div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>"Retreating using red light therapy makes me smile because it feels like 🌞 and a mini vacation where you can release tensions and heavy thoughts while you relax."</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://tiphanyadams.com/" target="_blank" class="review-cta arrow-link">Learn more about Tiphany</a></div>
-                    
-                </div>
-                
-                </div>
-            </div>
-                        
-            
-            <script>
-                currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
-            </script>
-</div>
-    </div>
-    <div class="product-info-details hideMe" id="pid-medical">
-        <div id="medical">
-            <div class="featured-review">
-                <div class="fr-img">
-                    <img src="{{ 'chris-kresser.jpg' | asset_url }}" alt="Chris Kresser">
-                    <div class="fr-text hide-desktop">
-                        <div class="review-name">Chris Kresser</div>
-                        <div class="review-title etica">M.S., L.Ac, Founder of <a href="https://chriskresser.com/" target="_blank">Kresser Institute</a></div>
-                    </div>
-                </div>
-                <div class="fr-text">
-                    <div class="review-name hide-mobile">Chris Kresser</div>
-                    <div class="review-title etica hide-mobile">M.S., L.Ac, Founder of <a href="https://chriskresser.com/" target="_blank">Kresser Institute</a></div>
-                    <div class="review-text"><p>“I believe that near-infrared is the most therapeutic of the sauna options, and I love that Faraday not only doesn’t emit EMF or MF, it blocks out all ambient EMF for a completely ‘clean’ detox experience. I’ve noticed benefits in sleep, mood, energy, and overall vitality after just a couple of weeks of using it. I even put my far infrared sauna on Craigslist because I haven’t used it once since I got the SaunaSpace.”</p><p>SaunaSpace owner since 2018</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://chriskresser.com/how-sauna-therapy-can-prevent-reverse-chronic-disease-with-brian-richards/" target="_blank" class="review-cta arrow-link">Listen to the Podcast</a></div>
-                    
-                </div>
-            </div><!--featured-review-->
-            
-            <div class="rc-arrows noMargin">
-                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
-                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
-                <div class="review-carousel">
-                
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'terry-wahls.jpg' | asset_url }}" alt="Terry Wahls">
-                        <div class="rcb-text">
-                            <div class="review-name">Terry Wahls</div>
-                            <div class="review-title etica">MD, Founder of <a href="https://terrywahls.com/about-the-wahls-protocol/" target="_blank">The Wahls Protocol</a></div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>"I am still am very much enjoying my sauna most mornings! I definitely prefer the incandescent lamp heat over the far-infrared heaters in my old cabinet sauna."</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://terrywahls.com/near-infrared-light-and-heat-natures-most-powerful-healing-detox-solution/" target="_blank" class="review-cta arrow-link">Read the Blog Post</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'thomas-cowan.jpeg' | asset_url }}" alt="Thomas Cowan">
-                        <div class="rcb-text">
-                            <div class="review-name">Thomas Cowan</div>
-                            <div class="review-title etica">MD, Author and Founder of Dr. Cowan's Garden</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“The SaunaSpace incandescent red light lamps and saunas are a truly revolutionary technology. Akin to bring the healing wavelengths of the sun into your home, exposure to red light, incandescent light stimulates mitochondrial function and effective detoxification. I use mine every day and believe the SaunaSpace products are one of the most profound therapeutic tools available.”</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://podcasts.apple.com/us/podcast/conversations-with-dr-cowan-friends/id1530268266" target="_blank" class="review-cta arrow-link">Listen to the Podcast</a></div>
-                    
-                </div>
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'ken-sharlin.jpeg' | asset_url }}" alt="Ken Sharlin">
-                        <div class="rcb-text">
-                            <div class="review-name">Ken Sharlin</div>
-                            <div class="review-title etica">MD, MPH, IFMP, Author</div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>“As a doctor passionate about helping my patients identify and treat the root causes of chronic neurological conditions, the SaunaSpace has become an essential element in my toolbox. In this demanding world of ‘eat this, not that,’ SaunaSpace invites us into its sacred, protected space, where—through the healing powers of red light and heat—all we are asked to do is just sit and breathe. We need more of that in our lives.”</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://functionalmedicine.doctor/" target="_blank" class="review-cta arrow-link">More about Ken</a></div>
-                    
-                </div>
-                
-                </div>
-            </div>
-                        
-            
-            <script>
-                currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
-            </script>
-            </div>
-    </div>
-    <div class="product-info-details hideMe" id="pid-athletic">
-        {% include 'reviews-athletic' %}
-    </div>
-    <div class="product-info-details hideMe" id="pid-lifestyle">
-        <div id="lifestyle">
-            <div class="featured-review">
-                <div class="fr-img">
-                    <img src="{{ 'ragga-ragnars.jpg' | asset_url }}" alt="Ragga Ragnars (Ragnheiður Ragnarsdóttir)">
-                    <div class="fr-text hide-desktop">
-                        <div class="review-name">Ragga Ragnars (Ragnheiður Ragnarsdóttir)</div>
-                        <div class="review-title etica">Olympic Swimmer, Actor</div>
-                    </div>
-                </div>
-                <div class="fr-text">
-                    <div class="review-name hide-mobile">Ragga Ragnars (Ragnheiður Ragnarsdóttir)</div>
-                    <div class="review-title etica hide-mobile">Olympic Swimmer, Actor</div>
-                    <div class="review-text"><p>“Having my SaunaSpace Faraday in my bedroom has been an absolute game changer for me. I love being able to take time for myself, meditate, read, journal, or just sit in there with my thoughts. Since I got it I have noticed an amazing improvement in how I feel, my recovery time from workouts has been cut in half and my skin is glowing. I also have a Photon and it's so nice and cozy to use that while I work on my computer or read. Also my 8 year old son loves it and will sit by it and do his homework.”</p></div>
-                    
-                    <div class="review-cta-wrap"><a href="https://www.instagram.com/raggaragnars/" target="_blank" class="review-cta arrow-link">Follow @raggaragnars</a></div>
-                    
-                </div>
-            </div><!--featured-review-->
-            
-            <div class="rc-arrows noMargin">
-                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
-                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
-                <div class="review-carousel">
-                
-                
-                <div class="rc-box">
-                    <div class="rcb-name">
-                        <img src="{{ 'tiphany-adams.jpg' | asset_url }}" alt="Tiphany Adams">
-                        <div class="rcb-text">
-                            <div class="review-name">Tiphany Adams</div>
-                            <div class="review-title etica">Strength coach at <a href="https://tiphanyadams.com/" target="_blank">tiphanyadams.com</a></div>
-                        </div>
-                    </div>
-                    <div class="review-text"><p>"Retreating using red light therapy makes me smile because it feels like 🌞 and a mini vacation where you can release tensions and heavy thoughts while you relax."</p></div>
-                    
-                        <div class="review-cta-wrap"><a href="https://tiphanyadams.com/" target="_blank" class="review-cta arrow-link">Learn more about Tiphany</a></div>
-                    
-                </div>
-                
-                </div>
-            </div>
-                        
-            
-            <script>
-                currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
-            </script>
-</div>
-    </div>
-    
-
-</div>
-
 <section>
-    <h2>Feel the #Saunaspace Love</h2>
+  <h2>Feel the #Saunaspace Love</h2>
 
-    <div class="yotpo yotpo-pictures-widget" data-gallery-id="5fff1136f22b21000f2f93bd"></div>
+  <div class="yotpo yotpo-pictures-widget" data-gallery-id="5fff1136f22b21000f2f93bd"></div>
 
-    <div class="product-review">
-        <div class="pr-img">
-            <img src="{{ 'review-faraday.jpg' | asset_url }}" alt="Faraday Infrared Sauna" />
-            <img src="{{ 'emf-blocking-badge.svg' | asset_url }}" alt="Zero EMF" class="emf" />
-        </div>
-        <div class="pr-text">
-            <div class="prt-name">Faraday Infrared Sauna</div>
-            <div id="reviewsFaraday" class="yotpo-hearts">
-                <div class="yotpo bottomLine" data-product-id="2105477365849" data-url="index.html"></div>
-            </div>
-            <p>My own little spa. It feels like a calm retreat inside and I’m energized afterwards.</p>
-            <div class="review-name">Barb  G.</div>
-            <div class="review-title etica">Verified Buyer</div>
-            <a href="/products/faraday-infrared-sauna" class="btn">Shop Faraday</a>
-        </div>
+  <div class="product-review">
+    <div class="pr-img">
+      <img src="{{ 'review-faraday.jpg' | asset_url }}" alt="Faraday Infrared Sauna" />
+      <img
+        src="{{ 'emf-blocking-badge.svg' | asset_url }}"
+        alt="Zero EMF"
+        class="emf" />
     </div>
-    
-    <div class="product-review pr-reverse">
-        <div class="pr-img">
-            <img src="{{ 'review-photon.jpg' | asset_url }}" alt="Photon Therapy Light" />
-        </div>
-        <div class="pr-text">
-            <div class="prt-name">Photon Therapy Light</div>
-            <div id="reviewsFaraday" class="yotpo-hearts">
-                <div class="yotpo bottomLine" data-product-id="2105477005401" data-url="index.html"></div>
-            </div>
-            <div id="reviewsPhoton" class="yotpo-hearts"></div>
-            <p>I love this light and use it many different ways. If I feel like I want a little more heat or some additional warmth on my feet, I put it in my sauna. It’s also great at night as opposed to harsh light or all that harmful blue light from devices.</p>
-            <div class="review-name">Bella C.</div>
-            <div class="review-title etica">Verified Buyer</div>
-            <a href="/products/photon-infrared-therapy-light" class="btn">Shop Photon</a>
-        </div>
+    <div class="pr-text">
+      <div class="prt-name">Faraday Infrared Sauna</div>
+      <div id="reviewsFaraday" class="yotpo-hearts">
+        <div
+          class="yotpo bottomLine"
+          data-product-id="2105477365849"
+          data-url="index.html"></div>
+      </div>
+      <p>My own little spa. It feels like a calm retreat inside and I’m energized afterwards.</p>
+      <div class="review-name">Barb  G.</div>
+      <div class="review-title etica">Verified Buyer</div>
+      <a href="/products/faraday-infrared-sauna" class="btn">Shop Faraday</a>
     </div>
-    
-    <div class="product-review">
-        <div class="pr-img">
-            <img src="{{ 'review-luminati.jpg' | asset_url }}" alt="Photon Therapy Light" />
-        </div>
-        <div class="pr-text">
-            <div class="prt-name">Luminati Infrared Sauna</div>
-            <div id="reviewsFaraday" class="yotpo-hearts">
-                <div class="yotpo bottomLine" data-product-id="2105476743257" data-url="index.html"></div>
-            </div>
-            <div id="reviewsLuminati" class="yotpo-hearts"></div>
-            <p>The detox from the near-infrared sauna is the best. No emf, no chemical or toxins. This will cause powerful cleansing at a deep level that you can't get with other saunas.</p>
-            <div class="review-name">Kyle H.</div>
-            <div class="review-title etica">Verified Buyer</div>
-            <a href="/products/luminati-infrared-sauna" class="btn">Shop Luminati</a>
-        </div>
+  </div>
+
+  <div class="product-review pr-reverse">
+    <div class="pr-img">
+      <img src="{{ 'review-photon.jpg' | asset_url }}" alt="Photon Therapy Light" />
     </div>
-    
-    <div class="product-review pr-reverse">
-        <div class="pr-img">
-            <img src="{{ 'review-tungsten.jpg' | asset_url }}" alt="Tungsten Sauna Panel" />
-        </div>
-        <div class="pr-text">
-            <div class="prt-name">Tungsten Sauna Panel</div>
-            <div id="reviewsFaraday" class="yotpo-hearts">
-                <div class="yotpo bottomLine" data-product-id="2105475956825" data-url="index.html"></div>
-            </div>
-            <div id="reviewsTungsten" class="yotpo-hearts"></div>
-            <p>I already owned a 2 person “full spectrum” sauna from SunLighten. I drilled a few holes and hung the SaunaSpace light. Now, I don't use any aspect of the old sauna except the shell.</p>
-            <div class="review-name">Fred H.</div>
-            <div class="review-title etica">Verified Buyer</div>
-            <a href="/products/tungsten-infrared-sauna-panel" class="btn">Shop Tungsten</a>
-        </div>
+    <div class="pr-text">
+      <div class="prt-name">Photon Therapy Light</div>
+      <div id="reviewsFaraday" class="yotpo-hearts">
+        <div
+          class="yotpo bottomLine"
+          data-product-id="2105477005401"
+          data-url="index.html"></div>
+      </div>
+      <div id="reviewsPhoton" class="yotpo-hearts"></div>
+      <p>I love this light and use it many different ways. If I feel like I want a little more heat or some additional warmth on my feet, I put it in my sauna. It’s also great at night as opposed to harsh light or all that harmful blue light from devices.</p>
+      <div class="review-name">Bella C.</div>
+      <div class="review-title etica">Verified Buyer</div>
+      <a href="/products/photon-infrared-therapy-light" class="btn">Shop Photon</a>
     </div>
-    
-    
+  </div>
+
+  <div class="product-review">
+    <div class="pr-img">
+      <img src="{{ 'review-luminati.jpg' | asset_url }}" alt="Photon Therapy Light" />
+    </div>
+    <div class="pr-text">
+      <div class="prt-name">Luminati Infrared Sauna</div>
+      <div id="reviewsFaraday" class="yotpo-hearts">
+        <div
+          class="yotpo bottomLine"
+          data-product-id="2105476743257"
+          data-url="index.html"></div>
+      </div>
+      <div id="reviewsLuminati" class="yotpo-hearts"></div>
+      <p>The detox from the near-infrared sauna is the best. No emf, no chemical or toxins. This will cause powerful cleansing at a deep level that you can't get with other saunas.</p>
+      <div class="review-name">Kyle H.</div>
+      <div class="review-title etica">Verified Buyer</div>
+      <a href="/products/luminati-infrared-sauna" class="btn">Shop Luminati</a>
+    </div>
+  </div>
+
+  <div class="product-review pr-reverse">
+    <div class="pr-img">
+      <img src="{{ 'review-tungsten.jpg' | asset_url }}" alt="Tungsten Sauna Panel" />
+    </div>
+    <div class="pr-text">
+      <div class="prt-name">Tungsten Sauna Panel</div>
+      <div id="reviewsFaraday" class="yotpo-hearts">
+        <div
+          class="yotpo bottomLine"
+          data-product-id="2105475956825"
+          data-url="index.html"></div>
+      </div>
+      <div id="reviewsTungsten" class="yotpo-hearts"></div>
+      <p>I already owned a 2 person “full spectrum” sauna from SunLighten. I drilled a few holes and hung the SaunaSpace light. Now, I don't use any aspect of the old sauna except the shell.</p>
+      <div class="review-name">Fred H.</div>
+      <div class="review-title etica">Verified Buyer</div>
+      <a href="/products/tungsten-infrared-sauna-panel" class="btn">Shop Tungsten</a>
+    </div>
+  </div>
+
 
 </section>
 
 <div class="divider"></div>
 
-    <h2>What our Customer are Saying</h2>
+<h2>What our Customer are Saying</h2>
 <section style="max-width: 800px;" class="what-customers">
-    <div id='yotpo-testimonials-custom-tab'></div>
+  <div id='yotpo-testimonials-custom-tab'></div>
 </section>
 
 <script>
 
-$(".product-info-tab").on("click",function() {
-	$(".product-info-tab").removeClass("product-info-tab-on");
-	$(this).addClass("product-info-tab-on");
-	$(".product-info-details").addClass("hideMe");
-	var whichTab=$(this).attr("data-tab");
-	$("#pid-" + whichTab).removeClass("hideMe");
-});
-
-    
-    </script>
+  $(".product-info-tab").on("click", function() {
+    $(".product-info-tab").removeClass("product-info-tab-on");
+    $(this).addClass("product-info-tab-on");
+    $(".product-info-details").addClass("hideMe");
+    var whichTab = $(this).attr("data-tab");
+    $("#pid-" + whichTab).removeClass("hideMe");
+  });
+</script>
 
 
 {% schema %}
-{
-  "name": "t:sections.main-page.name",
-  "tag": "section",
-  "class": "section",
-  "settings": [
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ]
-}
+  {
+    "name": "t:sections.main-page.name",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ]
+  }
 {% endschema %}

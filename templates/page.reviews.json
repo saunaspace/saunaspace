@@ -1,12 +1,185 @@
 {
   "sections": {
+    "df444784-24e1-47b0-88ce-ec3331f47266": {
+      "type": "filterreviews",
+      "blocks": {
+        "template--15767598366920__df444784-24e1-47b0-88ce-ec3331f47266-167304052410530c14-0": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/chris-kresser.jpg",
+            "name": "Chris Kresser",
+            "title": "<p>M.S., L.Ac, Founder of <a href=\"https:\/\/chriskresser.com\/\" target=\"_blank\">Kresser Institute<\/a><\/p>",
+            "quote": "“I believe that near-infrared is the most therapeutic of the sauna options, and I love that Faraday not only doesn’t emit EMF or MF, it blocks out all ambient EMF for a completely ‘clean’ detox experience. I’ve noticed benefits in sleep, mood, energy, and overall vitality after just a couple of weeks of using it. I even put my far infrared sauna on Craigslist because I haven’t used it once since I got the SaunaSpace.”",
+            "url_link": "https:\/\/chriskresser.com\/how-sauna-therapy-can-prevent-reverse-chronic-disease-with-brian-richards\/",
+            "URL_Link_Label": "Listen to the Podcast",
+            "owner": "2018",
+            "category": "medical",
+            "featured": true,
+            "featuredall": true
+          }
+        },
+        "42a54a7a-f994-44fd-bd8a-0265349f3109": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/harrison-butker.jpg",
+            "name": "Harrison Butker",
+            "title": "<p>NFL Super Bowl Champion<\/p>",
+            "quote": "“With this season’s COVID restrictions, NFL players have been unable to use their team’s sauna. That reality, coupled with its unbeatably low EMF levels, make owning my very own Faraday Sauna and Photon a lifesaver. I am grateful for this quality product made by SaunaSpace!”",
+            "url_link": "https:\/\/www.instagram.com\/buttkicker7\/",
+            "URL_Link_Label": "Follow @buttkicker7",
+            "owner": "",
+            "category": "athletic",
+            "featured": true,
+            "featuredall": false
+          }
+        },
+        "template--15767598366920__df444784-24e1-47b0-88ce-ec3331f47266-167304052410530c14-1": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/terry-wahls.jpg",
+            "name": "Terry Wahls",
+            "title": "<p>MD, Founder of <a href=\"https:\/\/terrywahls.com\/about-the-wahls-protocol\/\" target=\"_blank\">The Wahls Protocol<\/a><\/p>",
+            "quote": "\"I am still am very much enjoying my sauna most mornings! I definitely prefer the incandescent lamp heat over the far-infrared heaters in my old cabinet sauna.\"",
+            "url_link": "https:\/\/terrywahls.com\/near-infrared-light-and-heat-natures-most-powerful-healing-detox-solution\/",
+            "URL_Link_Label": "Read the Blog Post",
+            "owner": "",
+            "category": "medical",
+            "featured": false,
+            "featuredall": false
+          }
+        },
+        "b99f61e6-2634-476e-95eb-68a79297c1e5": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/ragga-ragnars.jpg",
+            "name": "Ragga Ragnars (Ragnheiður Ragnarsdóttir)",
+            "title": "<p>Olympic Swimmer, Actor<\/p>",
+            "quote": "“Having my SaunaSpace Faraday in my bedroom has been an absolute game changer for me. I love being able to take time for myself, meditate, read, journal, or just sit in there with my thoughts. Since I got it I have noticed an amazing improvement in how I feel, my recovery time from workouts has been cut in half and my skin is glowing. I also have a Photon and it's so nice and cozy to use that while I work on my computer or read. Also my 8 year old son loves it and will sit by it and do his homework.”",
+            "url_link": "https:\/\/www.instagram.com\/raggaragnars\/",
+            "URL_Link_Label": "Follow @raggaragnars",
+            "owner": "",
+            "category": "lifestyle",
+            "featured": true,
+            "featuredall": false
+          }
+        },
+        "5cf361d8-5cf8-41ee-a9d8-af63ccd4bfd6": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/thomas-cowan.jpg",
+            "name": "Thomas Cowan",
+            "title": "<p>MD, Author and Founder of Dr. Cowan's Garden<\/p>",
+            "quote": "“The SaunaSpace incandescent red light lamps and saunas are a truly revolutionary technology. Akin to bring the healing wavelengths of the sun into your home, exposure to red light, incandescent light stimulates mitochondrial function and effective detoxification. I use mine every day and believe the SaunaSpace products are one of the most profound therapeutic tools available.”",
+            "url_link": "https:\/\/podcasts.apple.com\/us\/podcast\/conversations-with-dr-cowan-friends\/id1530268266",
+            "URL_Link_Label": "Listen to the Podcast",
+            "owner": "",
+            "category": "medical",
+            "featured": false,
+            "featuredall": false
+          }
+        },
+        "802dc708-65be-4b4a-b89d-0275cf5ad5e3": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/ken-sharlin.jpg",
+            "name": "Ken Sharlin",
+            "title": "<p>MD, MPH, IFMP, Author<\/p>",
+            "quote": "“As a doctor passionate about helping my patients identify and treat the root causes of chronic neurological conditions, the SaunaSpace has become an essential element in my toolbox. In this demanding world of ‘eat this, not that,’ SaunaSpace invites us into its sacred, protected space, where—through the healing powers of red light and heat—all we are asked to do is just sit and breathe. We need more of that in our lives.”",
+            "url_link": "https:\/\/functionalmedicine.doctor\/",
+            "URL_Link_Label": "More about Ken",
+            "owner": "",
+            "category": "medical",
+            "featured": false,
+            "featuredall": false
+          }
+        },
+        "19e06ffc-4b78-4c0e-9681-a1b9be3883ee": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/anthony-kunkel.jpg",
+            "name": "Anthony Kunkel",
+            "title": "<p>Long distance runner<\/p>",
+            "quote": "\"I tore a quad muscle running a few years back, and my PT projected 8 weeks to recover. As a professional runner, that’s not acceptable for me. I was grateful to be able to hit the knee and quad multiple times a day with my Photon right at home, if just to warm it up before cross training sessions, but ultimately I was running again in just 4 weeks. I credit the majority of that miracle to my use of the Photon. With all the research I’ve seen behind near IR, it’s not surprising that it helps the root issues and helps avoid re-injury with added collagen and elastin to the area.\"",
+            "url_link": "https:\/\/www.instagram.com\/anthonykunkel\/",
+            "URL_Link_Label": "Follow @anthonykunkel",
+            "owner": "",
+            "category": "athletic",
+            "featured": false,
+            "featuredall": false
+          }
+        },
+        "64dc9a7a-4679-46ae-ac95-2177fa87ff42": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/cheyenne.jpg",
+            "name": "JP “Young Savage” and Cheyenne “Warrior Princess” Buys",
+            "title": "<p>UFC fighters<\/p>",
+            "quote": "JP: \"Even the days that I’m hurt, and my body’s hurt from training, I wake up, roll straight into the sauna, it wakes me up, and I can train. In my last fight, it was almost like we rehearsed it. In that quick second my brain reacted and my body just followed.\"\n\nCheyanne: \"We use it religiously! In the last 2 months, my skin has cleared up…the sauna has been a major game-changer for us!\"",
+            "url_link": "https:\/\/www.instagram.com\/cheywarprincess\/",
+            "URL_Link_Label": "Follow @wrestling_jp and @CheyWarPrincess",
+            "owner": "",
+            "category": "athletic",
+            "featured": false,
+            "featuredall": false
+          }
+        },
+        "d9e3bc78-e911-45e0-8811-f2cbf1b347fa": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/rico-zulkarnain.jpg",
+            "name": "Rico Zulkarnain",
+            "title": "<p>UK's Most Successful Futsal Star<\/p>",
+            "quote": "\"Using my SaunaSpace near infrared sauna has become an integral part of my daily routine. Being an elite athlete, the benefits I’ve been experiencing both pre and post training have made a huge difference. My cardio is through the roof and my recovery times are much greater. I’m able to train twice a day and wake up the next day and get straight back into my training regime at 100%. I’m grateful to now be in a position to share SaunaSpace with the rest of Wales as we look to open our Healing Hub mid 2021. Infinite gratitude and love to the SaunaSpace fam for bringing this light into the world ❤️🙏🏽\"",
+            "url_link": "https:\/\/www.instagram.com\/ricozulkarnain9\/",
+            "URL_Link_Label": "Follow @ricozulkarnain9",
+            "owner": "",
+            "category": "athletic",
+            "featured": false,
+            "featuredall": false
+          }
+        },
+        "d34bc945-ab29-4c80-8589-1a4208b4a9a9": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/tiphany-adams.jpg",
+            "name": "Tiphany Adams",
+            "title": "<p>Strength coach at <a href=\"https:\/\/tiphanyadams.com\/\" target=\"_blank\">tiphanyadams.com<\/a><\/p>",
+            "quote": "\"Retreating using red light therapy makes me smile because it feels like 🌞 and a mini vacation where you can release tensions and heavy thoughts while you relax.\"",
+            "url_link": "https:\/\/tiphanyadams.com\/",
+            "URL_Link_Label": "Learn more about Tiphany",
+            "owner": "",
+            "category": "lifestyle",
+            "featured": false,
+            "featuredall": false
+          }
+        }
+      },
+      "block_order": [
+        "template--15767598366920__df444784-24e1-47b0-88ce-ec3331f47266-167304052410530c14-0",
+        "42a54a7a-f994-44fd-bd8a-0265349f3109",
+        "template--15767598366920__df444784-24e1-47b0-88ce-ec3331f47266-167304052410530c14-1",
+        "b99f61e6-2634-476e-95eb-68a79297c1e5",
+        "5cf361d8-5cf8-41ee-a9d8-af63ccd4bfd6",
+        "802dc708-65be-4b4a-b89d-0275cf5ad5e3",
+        "19e06ffc-4b78-4c0e-9681-a1b9be3883ee",
+        "64dc9a7a-4679-46ae-ac95-2177fa87ff42",
+        "d9e3bc78-e911-45e0-8811-f2cbf1b347fa",
+        "d34bc945-ab29-4c80-8589-1a4208b4a9a9"
+      ],
+      "settings": {
+        "heading": "What the Experts are Saying"
+      }
+    },
     "main": {
       "type": "reviews-page",
       "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
+    "df444784-24e1-47b0-88ce-ec3331f47266",
     "main"
   ]
 }
