@@ -1,0 +1,477 @@
+
+<div class="photo-headerBG" style="background-image:url({{ 'reviews.jpg' | asset_url }}); background-position: 50% 0; ">
+    <div class="ph-width">
+        <div class="ph-text">
+            <cms id='cms0'>
+            <h1>The Reviews Are In</h1>
+            <p class="etica">We’re not the only ones who believe in the power of SaunaSpace. Hear it straight from customers and experts.</p>
+            </cms cms0>
+        </div>
+    </div>
+</div>
+
+<div class="tanBG">
+    <h2>{{ section.settings.heading | escape }}</h2>
+    <div class="review-categories">
+            <a href="javascript:void(0)" class="product-info-tab product-info-tab-on rcat-link" data-tab="all">All</a>
+
+            <a href="javascript:void(0)" class="product-info-tab rcat-link" data-tab="medical">Medical</a>
+        
+            <a href="javascript:void(0)" class="product-info-tab rcat-link" data-tab="athletic">Athletic</a>
+
+            <a href="javascript:void(0)" class="product-info-tab rcat-link" data-tab="lifestyle">Lifestyle</a>
+        
+    </div>
+    <div class="product-info-details" id="pid-all">
+        <div id="allReviews">
+            {%- for block in section.blocks -%}
+            {% if block.settings.featuredall == true %}
+
+            <div class="featured-review">
+                <div class="fr-img">
+                    <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                    loading="lazy"
+                    alt="{{ block.settings.photo.alt | escape }}"
+                    width="{{ block.settings.photo.width }}"
+                    height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                    <div class="fr-text hide-desktop">
+                        {%- if block.settings.name != blank -%}
+                            <div class="review-name">{{ block.settings.name | escape }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.title != blank -%}
+                            <div class="review-title etica">{{ block.settings.title }}</div>
+                        {%- endif -%}                    
+                    </div>
+                </div>
+                <div class="fr-text">
+                    {%- if block.settings.name != blank -%}
+                        <div class="review-name hide-mobile">{{ block.settings.name | escape }}</div>
+                    {%- endif -%}
+                    {%- if block.settings.title != blank -%}
+                        <div class="review-title etica hide-mobile">{{ block.settings.title }}</div>
+                    {%- endif -%}  
+                    {%- if block.settings.quote != blank -%}
+                        <div class="review-text">
+                            <p>{{ block.settings.quote | escape }}</p>
+                            {%- if block.settings.owner != blank -%}
+                                <p>SaunaSpace owner since {{ block.settings.owner }}</p>
+                            {%- endif -%}
+                        </div>
+                    {%- endif -%}   
+                    {%- if block.settings.url_link != blank -%}
+                        <div class="review-cta-wrap">
+                            <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                        </div>
+                    {%- endif -%}                  
+                </div>
+            </div>
+          {%- endif %}
+        {%- endfor -%}
+        <div class="rc-arrows noMargin">
+                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
+                <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
+                <div class="review-carousel">
+                    {%- for block in section.blocks -%}
+                        {% if block.settings.featuredall == false %}
+                <div class="rc-box">
+                    <div class="rcb-name">
+                        <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                        loading="lazy"
+                        alt="{{ block.settings.photo.alt | escape }}"
+                        width="{{ block.settings.photo.width }}"
+                        height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                        <div class="rcb-text">
+                            {%- if block.settings.name != blank -%}
+                            <div class="review-name">{{ block.settings.name | escape }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.title != blank -%}
+                            <div class="review-title etica">{{ block.settings.title }}</div>
+                        {%- endif -%}    
+                        </div>
+                    </div>
+                    <div class="review-text">
+                            <p>{{ block.settings.quote | escape }}</p>
+                        </div>            
+                        {%- if block.settings.url_link != blank -%}
+                        <div class="review-cta-wrap">
+                            <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                        </div>
+                    {%- endif -%}                                
+                </div>
+            {%- endif -%}   
+    {%- endfor -%}
+    <script>
+        currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+    </script>
+</div>
+</div></div>
+</div>
+<div class="product-info-details hideMe" id="pid-medical">
+        <div id="medical">
+            {%- for block in section.blocks -%}
+                {% if block.settings.featured == true and block.settings.category == 'medical' %}
+    
+                <div class="featured-review">
+                    <div class="fr-img">
+                        <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                        loading="lazy"
+                        alt="{{ block.settings.photo.alt | escape }}"
+                        width="{{ block.settings.photo.width }}"
+                        height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                        <div class="fr-text hide-desktop">
+                            {%- if block.settings.name != blank -%}
+                                <div class="review-name">{{ block.settings.name | escape }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != blank -%}
+                                <div class="review-title etica">{{ block.settings.title }}</div>
+                            {%- endif -%}                    
+                        </div>
+                    </div>
+                    <div class="fr-text">
+                        {%- if block.settings.name != blank -%}
+                            <div class="review-name hide-mobile">{{ block.settings.name | escape }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.title != blank -%}
+                            <div class="review-title etica hide-mobile">{{ block.settings.title }}</div>
+                        {%- endif -%}  
+                        {%- if block.settings.quote != blank -%}
+                            <div class="review-text">
+                                <p>{{ block.settings.quote | escape }}</p>
+                            </div>
+                        {%- endif -%}   
+                        {%- if block.settings.url_link != blank -%}
+                            <div class="review-cta-wrap">
+                                <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                            </div>
+                        {%- endif -%}                  
+                    </div>
+                </div>
+              {%- endif %}
+            {%- endfor -%}
+    
+            <div class="rc-arrows noMargin">
+                    <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
+                    <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
+                    <div class="review-carousel">
+                        {%- for block in section.blocks -%} 
+                            {% if block.settings.category == "medical" and block.settings.featured == false %}
+                   
+                    <div class="rc-box">
+                        <div class="rcb-name">
+                            <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                            loading="lazy"
+                            alt="{{ block.settings.photo.alt | escape }}"
+                            width="{{ block.settings.photo.width }}"
+                            height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                            <div class="rcb-text">
+                                {%- if block.settings.name != blank -%}
+                                <div class="review-name">{{ block.settings.name | escape }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != blank -%}
+                                <div class="review-title etica">{{ block.settings.title }}</div>
+                            {%- endif -%}    
+                            </div>
+                        </div>
+                        <div class="review-text">
+                                <p>{{ block.settings.quote | escape }}</p>
+                            </div>            
+                            {%- if block.settings.url_link != blank -%}
+                            <div class="review-cta-wrap">
+                                <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                            </div>
+                        {%- endif -%}                                
+                    </div>
+                                 
+                {% endif %}
+        {%- endfor -%}
+        <script>
+            currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+        </script>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="product-info-details hideMe" id="pid-athletic">
+        <div id="athletic">
+            {%- for block in section.blocks -%}
+                {% if block.settings.featured == true and block.settings.category == 'athletic' %}
+    
+                <div class="featured-review">
+                    <div class="fr-img">
+                        <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                        loading="lazy"
+                        alt="{{ block.settings.photo.alt | escape }}"
+                        width="{{ block.settings.photo.width }}"
+                        height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                        <div class="fr-text hide-desktop">
+                            {%- if block.settings.name != blank -%}
+                                <div class="review-name">{{ block.settings.name | escape }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != blank -%}
+                                <div class="review-title etica">{{ block.settings.title }}</div>
+                            {%- endif -%}                    
+                        </div>
+                    </div>
+                    <div class="fr-text">
+                        {%- if block.settings.name != blank -%}
+                            <div class="review-name hide-mobile">{{ block.settings.name | escape }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.title != blank -%}
+                            <div class="review-title etica hide-mobile">{{ block.settings.title }}</div>
+                        {%- endif -%}  
+                        {%- if block.settings.quote != blank -%}
+                            <div class="review-text">
+                                <p>{{ block.settings.quote | escape }}</p>
+                            </div>
+                        {%- endif -%}   
+                        {%- if block.settings.url_link != blank -%}
+                            <div class="review-cta-wrap">
+                                <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                            </div>
+                        {%- endif -%}                  
+                    </div>
+                </div>
+              {%- endif %}
+            {%- endfor -%}
+    
+            <div class="rc-arrows noMargin">
+                    <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
+                    <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
+                    <div class="review-carousel">
+                        {%- for block in section.blocks -%} 
+                            {% if block.settings.category == "athletic" and block.settings.featured == false %}
+                   
+                    <div class="rc-box">
+                        <div class="rcb-name">
+                            <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                            loading="lazy"
+                            alt="{{ block.settings.photo.alt | escape }}"
+                            width="{{ block.settings.photo.width }}"
+                            height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                            <div class="rcb-text">
+                                {%- if block.settings.name != blank -%}
+                                <div class="review-name">{{ block.settings.name | escape }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != blank -%}
+                                <div class="review-title etica">{{ block.settings.title }}</div>
+                            {%- endif -%}    
+                            </div>
+                        </div>
+                        <div class="review-text">
+                                <p>{{ block.settings.quote | escape }}</p>
+                            </div>            
+                            {%- if block.settings.url_link != blank -%}
+                            <div class="review-cta-wrap">
+                                <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                            </div>
+                        {%- endif -%}                                
+                    </div>
+                                 
+                {% endif %}
+        {%- endfor -%}
+        <script>
+            currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+        </script>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="product-info-details hideMe" id="pid-lifestyle">
+        <div id="lifestyle">
+            {%- for block in section.blocks -%}
+                {% if block.settings.featured == true and block.settings.category == 'lifestyle' %}
+                <div class="featured-review">
+                    <div class="fr-img">
+                        <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                        loading="lazy"
+                        alt="{{ block.settings.photo.alt | escape }}"
+                        width="{{ block.settings.photo.width }}"
+                        height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                        <div class="fr-text hide-desktop">
+                            {%- if block.settings.name != blank -%}
+                                <div class="review-name">{{ block.settings.name | escape }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != blank -%}
+                                <div class="review-title etica">{{ block.settings.title }}</div>
+                            {%- endif -%}                    
+                        </div>
+                    </div>
+                    <div class="fr-text">
+                        {%- if block.settings.name != blank -%}
+                            <div class="review-name hide-mobile">{{ block.settings.name | escape }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.title != blank -%}
+                            <div class="review-title etica hide-mobile">{{ block.settings.title }}</div>
+                        {%- endif -%}  
+                        {%- if block.settings.quote != blank -%}
+                            <div class="review-text">
+                                <p>{{ block.settings.quote | escape }}</p>
+                            </div>
+                        {%- endif -%}   
+                        {%- if block.settings.url_link != blank -%}
+                            <div class="review-cta-wrap">
+                                <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                            </div>
+                        {%- endif -%}                  
+                    </div>
+                </div>
+              {%- endif %}
+            {%- endfor -%}
+    
+            <div class="rc-arrows noMargin">
+                    <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-right" alt="" onclick="scrollReviews(1);">
+                    <img src="{{ 'arrow_black.svg' | asset_url }}" class="rc-arrow-left" alt="" onclick="scrollReviews(-1);">
+                    <div class="review-carousel">
+                        {%- for block in section.blocks -%} 
+                            {% if block.settings.category == "lifestyle" and block.settings.featured == false %}
+                   
+                    <div class="rc-box">
+                        <div class="rcb-name">
+                            <img src="{{ block.settings.photo | image_url: width: 550 }}"
+                            loading="lazy"
+                            alt="{{ block.settings.photo.alt | escape }}"
+                            width="{{ block.settings.photo.width }}"
+                            height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" >
+                            <div class="rcb-text">
+                                {%- if block.settings.name != blank -%}
+                                <div class="review-name">{{ block.settings.name | escape }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.title != blank -%}
+                                <div class="review-title etica">{{ block.settings.title }}</div>
+                            {%- endif -%}    
+                            </div>
+                        </div>
+                        <div class="review-text">
+                                <p>{{ block.settings.quote | escape }}</p>
+                            </div>            
+                            {%- if block.settings.url_link != blank -%}
+                            <div class="review-cta-wrap">
+                                <a href="{{ block.settings.url_link | escape }}" target="_blank" class="review-cta arrow-link">{{ block.settings.URL_Link_Label | escape }}</a>
+                            </div>
+                        {%- endif -%}                                
+                    </div>
+                                 
+                {% endif %}
+        {%- endfor -%}
+        <script>
+            currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
+        </script>
+    </div>
+    </div></div>
+    </div>
+{%- if request.design_mode -%}
+  <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+<script>
+
+  $(".product-info-tab").on("click", function() {
+    $(".product-info-tab").removeClass("product-info-tab-on");
+    $(this).addClass("product-info-tab-on");
+    $(".product-info-details").addClass("hideMe");
+    var whichTab = $(this).attr("data-tab");
+    $("#pid-" + whichTab).removeClass("hideMe");
+  });
+</script>
+{% schema %}
+  {
+    "name": "Filtered Reviews",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "default": "What the Experts are Saying",
+        "label": "Filtered Reviews"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "review",
+        "limit": 15,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "photo",
+            "label": "Customer Photo"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Customer Name"
+          },
+          {
+            "type": "richtext",
+            "id": "title",
+            "label": "Customer Title"
+          },
+          {
+            "type": "textarea",
+            "id": "quote",
+            "label": "Review"
+          }, 
+          {
+            "type": "text",
+            "id": "url_link",
+            "label": "3rd Party URL Link"
+          },
+           {
+            "type": "text",
+            "id": "URL_Link_Label",
+            "label": "3rd Party URL Link Name"
+          },
+          {
+            "type": "text",
+            "id": "owner",
+            "default": "2016",
+            "label": "Sauna Space Owner Since"
+          },
+          {
+            "type": "select",
+            "id": "category",
+            "label": "Review Category",
+            "options": [
+                {
+                "value": "medical",
+                "label": "Medical"
+                },
+                {
+                "value": "athletic",
+                "label": "Athletic"
+                },
+                {
+                "value": "lifestyle",
+                "label": "Lifestyle"
+                }
+            ]
+        },
+        {
+  "type": "checkbox",
+  "id": "featured",
+  "label": "Is this a featured review?",
+  "default": false
+},
+        {
+  "type": "checkbox",
+  "id": "featuredall",
+  "label": "Featured review that should by default when 'all' is selected",
+  "default": false
+}
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Filtered Reviews",
+        "blocks": [
+          {
+            "type": "review"
+          }, {
+            "type": "review"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

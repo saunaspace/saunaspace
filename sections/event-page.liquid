@@ -56,8 +56,16 @@
                         <div class="event-link-div"><a href="{{page.metafields.registration-link.registrationlink}}" target="_blank" class="event-link">Register <svg xmlns="http://www.w3.org/2000/svg" width="14.759" height="7.753" overflow="visible"><g fill="none" stroke="#000"><path d="M0 3.876h14M10 .376l4 3.5-4 3.5"/></g></svg></a></div>
                     {% endunless %}
                 </div>
+
 				<div class="events-img">
-                    <img src="{{page.metafields.event-image.eventimage}}" /></div>
+                    {% assign file_object = page.metafields.event-image.eventimage %} <!-- replace the "set_test" part with your actual namespace and the "file" with the key -->
+                    {% if file_object != blank %} 
+                      <a href="/pages/{{ event.handle }}" class="events-img">
+                        <img src="{{ file_object | file_url }}" alt="" lazy>
+                    </a>
+                    
+                    {% endif %}
+                   </div>
 			</div>
 	</section>
 	

@@ -16,6 +16,9 @@
       } else if( $(this).text() == "Size:") {
         $(this).text('Select a Size.');
         $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
+      } else if( $(this).text() == "Denominations:") {
+        $(this).text('Select');
+        $( "<style>#bcpo .bcpo-dropdown { order: unset;} }</style>" ).appendTo( "head" );      
       }
   
   })}, 700);
@@ -54,6 +57,12 @@ function filterVariant(variant) {
           return $(this).data('media-position') >= 7;
       }).show();
     {% endif %}
+    {% if product.id == 2105475956825 %}
+      console.log('tungsten page');
+        $('[data-media-position]').filter(function () {
+            return $(this).data('media-position') >= 8;
+        }).show();
+      {% endif %}
     // $(general_color).show();
     // $(thumbnail_selector).prependTo('.list-unstyled');
   } else {
@@ -66,7 +75,7 @@ function filterVariant(variant) {
 // variant lead time metafield listener
 function bcpoChange(currentVariant) {
     var variant_result = JSON.stringify(bcpo.variant.featured_image);
-    {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 %}
+    {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 or product.id == 2105475956825 %}
       this.filterVariant(bcpo.variant.featured_image);
     {% endif %}
     console.log('bcpo: ' + variant_result);
