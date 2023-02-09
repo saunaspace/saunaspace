@@ -1,5 +1,8 @@
 {
   "current": {
+    "checkout_logo_image": "shopify:\/\/shop_images\/ss-logo-full-4-white-bg-horizontal-lg_273e59b3-4219-4d94-88c2-5f9efde49161.png",
+    "checkout_accent_color": "#c67a26",
+    "checkout_button_color": "#c67a26",
     "colors_solid_button_labels": "#ffffff",
     "colors_accent_1": "#121212",
     "gradient_accent_1": "",
@@ -97,9 +100,6 @@
     "predictive_search_show_price": false,
     "favicon": "shopify:\/\/shop_images\/favicon.png",
     "currency_code_enabled": true,
-    "checkout_logo_image": "shopify:\/\/shop_images\/ss-logo-full-4-white-bg-horizontal-lg_273e59b3-4219-4d94-88c2-5f9efde49161.png",
-    "checkout_accent_color": "#c67a26",
-    "checkout_button_color": "#c67a26",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
