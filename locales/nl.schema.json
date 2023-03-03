@@ -1726,7 +1726,7 @@
           "name": "Aanvullende producten",
           "settings": {
             "paragraph": {
-              "content": "Als je aanvullende producten wilt selecteren, voeg je de Search en Zichtbaarheid-app toe. [Meer informatie](https://shopify.dev/themes/product-merchandising/recommendations)"
+              "content": "Als je aanvullende producten wilt selecteren, voeg je de Search en Zichtbaarheid-app toe. [Meer informatie](https:\/\/shopify.dev\/themes\/product-merchandising\/recommendations)"
             },
             "heading": {
               "label": "Koptekst"
@@ -1755,7 +1755,7 @@
               "heading": "Productkaart"
             },
             "image_ratio": {
-              "label": "Breedte-/hoogteverhouding van afbeeldingen",
+              "label": "Breedte-\/hoogteverhouding van afbeeldingen",
               "options": {
                 "option_1": "Staand",
                 "option_2": "Vierkant"

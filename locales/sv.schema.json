@@ -1726,7 +1726,7 @@
           "name": "Kompletterande produkter",
           "settings": {
             "paragraph": {
-              "content": "Lägg till appen Search & Discovery för att välja tilläggsprodukter. [Mer information](https://shopify.dev/themes/product-merchandising/recommendations)"
+              "content": "Lägg till appen Search & Discovery för att välja tilläggsprodukter. [Mer information](https:\/\/shopify.dev\/themes\/product-merchandising\/recommendations)"
             },
             "heading": {
               "label": "Rubrik"

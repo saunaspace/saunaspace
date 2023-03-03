@@ -1231,7 +1231,7 @@
               "content": "Se você incluir um link em publicações nas redes sociais, a imagem em destaque da página será exibida como na pré-visualização. [Saiba mais](https:\/\/help.shopify.com\/manual\/online-store\/images\/showing-social-media-thumbnail-images)."
             },
             "title_info": {
-              "content": "Um título e uma descrição da loja estão incluídos na prévia da imagem. [Saiba mais](https://help.shopify.com/manual/promoting-marketing/seo/adding-keywords#set-a-title-and-description-for-your-online-store)."
+              "content": "Um título e uma descrição da loja estão incluídos na prévia da imagem. [Saiba mais](https:\/\/help.shopify.com\/manual\/promoting-marketing\/seo\/adding-keywords#set-a-title-and-description-for-your-online-store)."
             },
             "text": {
               "label": "Texto"
@@ -1536,7 +1536,7 @@
               "content": "Se você incluir um link em publicações nas redes sociais, a imagem em destaque da página será exibida como na pré-visualização. [Saiba mais](https:\/\/help.shopify.com\/manual\/online-store\/images\/showing-social-media-thumbnail-images)."
             },
             "title_info": {
-              "content": "Um título e uma descrição da loja estão incluídos na prévia da imagem. [Saiba mais](https://help.shopify.com/manual/promoting-marketing/seo/adding-keywords#set-a-title-and-description-for-your-online-store)."
+              "content": "Um título e uma descrição da loja estão incluídos na prévia da imagem. [Saiba mais](https:\/\/help.shopify.com\/manual\/promoting-marketing\/seo\/adding-keywords#set-a-title-and-description-for-your-online-store)."
             },
             "text": {
               "label": "Texto"
@@ -1717,7 +1717,7 @@
           "name": "Avaliação do produto",
           "settings": {
             "paragraph": {
-              "content": "Para exibir uma avaliação, adicione um app com essa funcionalidade específica. [Saiba mais](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-rating-block)"
+              "content": "Para exibir uma avaliação, adicione um app com essa funcionalidade específica. [Saiba mais](https:\/\/help.shopify.com\/manual\/online-store\/themes\/theme-structure\/page-types#product-rating-block)"
             }
           }
         },
@@ -1725,7 +1725,7 @@
           "name": "Produtos complementares",
           "settings": {
             "paragraph": {
-              "content": "Para selecionar produtos complementares, adicione o app Search & Discovery. [Saiba mais](https://shopify.dev/themes/product-merchandising/recommendations)"
+              "content": "Para selecionar produtos complementares, adicione o app Search & Discovery. [Saiba mais](https:\/\/shopify.dev\/themes\/product-merchandising\/recommendations)"
             },
             "heading": {
               "label": "Título"
@@ -2304,7 +2304,7 @@
               "content": "Se você incluir um link em publicações nas redes sociais, a imagem em destaque da página será exibida como na pré-visualização. [Saiba mais](https:\/\/help.shopify.com\/manual\/online-store\/images\/showing-social-media-thumbnail-images)"
             },
             "title_info": {
-              "content": "O título e a descrição da loja estão incluídos na prévia da imagem. [Saiba mais](https://help.shopify.com/manual/promoting-marketing/seo/adding-keywords#set-a-title-and-description-for-your-online-store)"
+              "content": "O título e a descrição da loja estão incluídos na prévia da imagem. [Saiba mais](https:\/\/help.shopify.com\/manual\/promoting-marketing\/seo\/adding-keywords#set-a-title-and-description-for-your-online-store)"
             },
             "text": {
               "label": "Texto"
