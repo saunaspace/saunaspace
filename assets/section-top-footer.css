@@ -198,6 +198,12 @@
    padding: 10rem 2rem 6rem;
 }
 
+.footer-top .container {
+  width: 90%;
+  max-width: 1410px;
+  margin: 0 auto;
+}
+
 .footer-app-image  {
    max-width: 200px;
    margin-top: -7rem;
@@ -225,6 +231,10 @@
 
 .footer-top .fl-signup {
    width: 100%;
+}
+
+.col-last {
+  margin-left: 0;
 }
 
 /* @media (min-width: 1600px) {
