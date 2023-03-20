@@ -199,8 +199,9 @@
 }
 
 .footer-app-image  {
-   max-width: 180px;
-   margin: -7rem auto 0;
+   max-width: 200px;
+   margin-top: -7rem;
+   float: right;
 }
 
 .footer-top h4 {
@@ -222,15 +223,11 @@
    width: 140px;
 }
 
-.footer-app-image {
-   margin-top: -6rem;
-}
-
 .footer-top .fl-signup {
    width: 100%;
 }
 
-@media (min-width: 1600px) {
+/* @media (min-width: 1600px) {
 
   .col-last {
     padding-left: 4rem;
@@ -243,4 +240,4 @@
   .col-last {
     padding-left: 2.3rem;
   }
-}
+} */
