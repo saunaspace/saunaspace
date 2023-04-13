@@ -1,47 +1,95 @@
 <div class="pay-over-time">
-    <div class="pot-head">Pay Over Time</div>
-    <div class="pot-col">
-        <img src="{{ 'splitit.svg' | asset_url }}" width="60" alt="SplitIt" loading="lazy" />
-        <span data-ml="splitItSummary"><p>Monthly payments using your credit card. 0% interest.</p></span>
-        <a href="javascript:void(0)"  class="potbtn" data-pot="splitit">Learn More</a>
-    </div>
-    <div class="pot-divider"></div>
-    <div class="pot-col">
-        <img src="{{ 'shop-pay.svg' | asset_url }}" width="100" alt="Bread Financing" loading="lazy" />
-        <span data-ml="breadSummary"><p>Simple loan with semimonthly payments as low as 0% APR for 2 months.*</p></span>
-        <a href="javascript:void(0)"  class="potbtn" data-pot="bread">Learn More</a>
-    </div>
-    <div class="pot-col-100 hideMe" id="splititCol">
-        <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15" loading="lazy" /></a>
-        <img src="{{ 'splitit.svg' | asset_url }}" width="70" alt="SplitIt" />
-        <span data-ml="splitItText"><ul><li>0% interest</li><li>Monthly payments on your existing credit card</li><li>Keep earning rewards from your credit card</li><li>No credit check needed to qualify</li><li>Choose from 2-12 month payment plans.</li></ul></span>
-        <p class="fineprint">You can choose this option at checkout.</p>
-    </div>
-    <div class="pot-col-100 hideMe" id="breadCol">
-        <a href="javascript:void(0)" class="pot-close"><img src="{{ 'close.svg' | asset_url }}" alt="Close" style="width: 15" height="15"  loading="lazy"/></a>
-        <img src="{{ 'shop-pay.svg' | asset_url }}" width="100" alt="Shop Pay Installments" />
-        <span data-ml="breadText"><ul><li>4 interest-free payments every two weeks</li><li>Interest-bearing options for up to 12 months*</li><li>Traditional installment loan</li><li>Check your rate without affecting your credit score</li></ul><p>*Rates from 0% APR or 10-30% APR. Payment options through Shop Pay Installments are subject to an eligibility check and are provided by these lending partners: <a href="https://www.affirm.com/lenders" target="_blank">affirm.com/lenders</a>. Options depend on your purchase amount, and a down payment may be required. State notices to consumers <a href="https://www.affirm.com/licenses" target="_blank">affirm.com/licenses</a>.</p></span>
-        <p class="fineprint">Check your eligibility in minutes at checkout.</p>
-    </div>
+  <div class="pot-head">Pay Over Time</div>
+  <div class="pot-col">
+    <img
+      src="{{ 'splitit.svg' | asset_url }}"
+      width="60"
+      alt="SplitIt"
+      loading="lazy" />
+    <span data-ml="splitItSummary">
+      <p>Monthly payments using your credit card. 0% interest.</p>
+    </span>
+    <a
+      href="javascript:void(0)"
+      class="potbtn"
+      data-pot="splitit">Learn More</a>
+  </div>
+  <div class="pot-divider"></div>
+  <div class="pot-col">
+    <img
+      src="{{ 'shop-pay.svg' | asset_url }}"
+      width="100"
+      alt="Bread Financing"
+      loading="lazy" />
+    <span data-ml="breadSummary">
+      <p>Simple loan with semimonthly payments as low as 0% APR for 2 months.*</p>
+    </span>
+    <a
+      href="javascript:void(0)"
+      class="potbtn"
+      data-pot="bread">Learn More</a>
+  </div>
+  <div class="pot-col-100 hideMe" id="splititCol">
+    <a href="javascript:void(0)" class="pot-close"><img
+        src="{{ 'close.svg' | asset_url }}"
+        alt="Close"
+        style="width: 15"
+        height="15"
+        loading="lazy" /></a>
+    <img
+      src="{{ 'splitit.svg' | asset_url }}"
+      width="70"
+      alt="SplitIt" />
+    <span data-ml="splitItText"><p>Splitit helps consumers use their existing credit card to turn purchases into smaller, monthly payments.</p>
+    <p>The full amount of your purchase is authorized (held) on your credit card to guarantee future payments so you need to have at least that amount in available credit on your card.</p>
+    <p>The authorization amount reduces with each monthly payment you make until the balance is cleared and we renew these authorizations periodically. The previous authorization is removed as soon as we receive a new one.</p>
+    For more info,
+    <a href="https://support.splitit.com/hc/en-us/requests/new" target="_blank">Contact Splitit Support</a></span>
+    <p class="fineprint">You can choose this option at checkout.</p>
+  </div>
+  <div class="pot-col-100 hideMe" id="breadCol">
+    <a href="javascript:void(0)" class="pot-close"><img
+        src="{{ 'close.svg' | asset_url }}"
+        alt="Close"
+        style="width: 15"
+        height="15"
+        loading="lazy" /></a>
+    <img
+      src="{{ 'shop-pay.svg' | asset_url }}"
+      width="100"
+      alt="Shop Pay Installments" />
+    <span data-ml="breadText">
+      <ul>
+        <li>4 interest-free payments every two weeks</li>
+        <li>Interest-bearing options for up to 12 months*</li>
+        <li>Traditional installment loan</li>
+        <li>Check your rate without affecting your credit score</li>
+      </ul>
+      <p>*Rates from 0% APR or 10-30% APR. Payment options through Shop Pay Installments are subject to an eligibility check and are provided by these lending partners:
+        <a href="https://www.affirm.com/lenders" target="_blank">affirm.com/lenders</a>. Options depend on your purchase amount, and a down payment may be required. State notices to consumers
+        <a href="https://www.affirm.com/licenses" target="_blank">affirm.com/licenses</a>.</p>
+    </span>
+    <p class="fineprint">Check your eligibility in minutes at checkout.</p>
+  </div>
 </div>
 
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
 
-$(".pot-col-100").on("click",function() {
-	$(this).addClass("hideMe");
-	$(".pot-col").removeClass("hideMe");
-});
-
-
-$( ".potbtn" ).on( "click", potMore );
-
-function potMore() {
-    var pot_type =  $(this).attr("data-pot");
-	$(".pot-col").addClass("hideMe");
-	$("#" + pot_type + "Col").removeClass("hideMe");
-}
+    $(".pot-col-100").on("click", function() {
+      $(this).addClass("hideMe");
+      $(".pot-col").removeClass("hideMe");
+    });
 
 
-});
+    $(".potbtn").on("click", potMore);
+
+    function potMore() {
+      var pot_type = $(this).attr("data-pot");
+      $(".pot-col").addClass("hideMe");
+      $("#" + pot_type + "Col").removeClass("hideMe");
+    }
+
+
+  });
 </script>
