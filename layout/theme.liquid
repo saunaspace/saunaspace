@@ -296,6 +296,16 @@
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     {%- if settings.cart_type == 'drawer' -%}
       {%- render 'cart-drawer' -%}
@@ -550,8 +560,12 @@
       })
         {% endif %}
     </script>
+<<<<<<< HEAD
   <!-- XO-InsertCode -->
 {% include "xo-insertcode-footer" %}
 <!-- End: XO-InsertCode Footer-->
 </body>
+=======
+  </body>
+>>>>>>> origin/main
 </html>
