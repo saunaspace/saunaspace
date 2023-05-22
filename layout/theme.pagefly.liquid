@@ -281,14 +281,19 @@ If you plan to remove PageFly, please see the guide in our help center first: ht
           })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
         </script>
     
-        <!--Gorgias Chat Widget Start-->
-        <script
-          id="gorgias-chat-widget-install-v2"
-          src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=667"
-        ></script>
-        <!--Gorgias Chat Widget End-->
+        
+<!--Gorgias Chat Widget Start-->
+<script id="gorgias-chat-widget-install-v3" 
+    src="https://config.gorgias.chat/bundle-loader/01GYCBQK3GSWD8FNFA6025B88R?source=shopify1click">
+</script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
+</script>
+<!--Gorgias Chat Widget End-->
         {% render 'sca-aff-refer-customer' %}
-  </head>
+  <!-- XO-InsertCode -->
+{% include "xo-insertcode-header" %}
+<!-- End: XO-InsertCode Header-->
+</head>
 
   <body class="gradient"><div class="pagefly-container">{{ content_for_layout }}</div></body>
 </html>

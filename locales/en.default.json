@@ -444,7 +444,11 @@
         }
       },
       "delivery_options": {
-        "pick_up_in_twenty_four_hours": "Email notification sent when your order is ready for pickup"
+        "pick_up_in_twenty_four_hours": "Email notification sent when your order is ready for pickup",
+        "pick_up_in_zero_to_two_hours": "Email notification sent when your order is ready for pickup",
+        "pick_up_in_two_to_four_hours": "Email notification sent when your order is ready for pickup",
+        "pick_up_immediately": "Email notification sent when your order is ready for pickup",
+        "pick_up_next_day": "Email notification sent when your order is ready for pickup"
       }
     }
   },

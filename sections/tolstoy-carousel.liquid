@@ -1,4 +1,4 @@
-<tolstoy-carousel class="tolstoy-carousel" id="{{ section.settings.publishId }}"  data-publish-id="{{ section.settings.publishId }}"  data-product-id="{{ product.id }}">
+<tolstoy-carousel data-tags="{% for tag in product.tags -%}{{ tag }},{%- endfor %}" class="tolstoy-carousel" id="{{ section.settings.publishId }}"  data-publish-id="{{ section.settings.publishId }}"  data-product-id="{{ product.id }}">
 </tolstoy-carousel>
 
 {% schema %}
@@ -19,10 +19,4 @@
 }
 ]
   }
-{% endschema %}
-
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}
+{% endschema %}}

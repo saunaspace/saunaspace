@@ -277,12 +277,14 @@
           })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
         </script>
     
-        <!--Gorgias Chat Widget Start-->
-        <script
-          id="gorgias-chat-widget-install-v2"
-          src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=667"
-        ></script>
-        <!--Gorgias Chat Widget End-->
+        
+<!--Gorgias Chat Widget Start-->
+<script id="gorgias-chat-widget-install-v3" 
+    src="https://config.gorgias.chat/bundle-loader/01GYCBQK3GSWD8FNFA6025B88R?source=shopify1click">
+</script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
+</script>
+<!--Gorgias Chat Widget End-->
         {% render 'sca-aff-refer-customer' %}
   <!-- XO-InsertCode -->
 {% include "xo-insertcode-header" %}
@@ -296,16 +298,6 @@
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-W5T77Q7"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     {%- if settings.cart_type == 'drawer' -%}
       {%- render 'cart-drawer' -%}
