@@ -8,43 +8,70 @@
   href="{{ 'component-rte.css' | asset_url }}"
   media="print"
   onload="this.media='all'" />
-<script src="https://kit.fontawesome.com/6f1926112a.js" crossorigin="anonymous"></script>
+<script
+  src="https://kit.fontawesome.com/6f1926112a.js"
+  crossorigin="anonymous"></script>
 {{ "affiliate.css" | asset_url | stylesheet_tag }}
 
 <noscript>{{ "section-main-page.css" | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ "component-rte.css" | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ "affiliate.css" | asset_url | stylesheet_tag }}</noscript>
-
-<div class="affiliate-hero">
-  <div class="video-wrapper">
+{% assign poster_image = page.metafields.custom.hero_video_poster_image %}
+{% assign hero_video = page.metafields.custom.video_upload_for_hero_background_video %}
+<div
+  class="affiliate-hero">
+  <div
+    class="video-wrapper">
     <video
       playsinline
       autoplay
       muted
       loop
       preload="none"
-      poster="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/Screenshot_2023-05-23_at_8.41.10_AM.png?v=1684852884"
+      poster="{{ poster_image | file_url }}"
       class="bgvid"
       id="saunavid">
-      <source src="https://cdn.shopify.com/videos/c/o/v/95388cadcad64db98a8687be6fe88380.mp4" type="video/mp4">
+      <source
+        src="{{ hero_video | file_url }}"
+        type="video/mp4">
     </video>
-    <div class="header-video">
+    <div
+      class="header-video">
       <h2>
         Welcome Friends<br/>
-        Of Mike Chabot
+        Of
+        {% unless page.metafields.custom.affiliate_first_name == blank %}
+          {{ page.metafields.custom.affiliate_first_name }}
+        {% endunless %}
+        {% unless page.metafields.custom.affiliate_last_name == blank %}
+          {{ page.metafields.custom.affiliate_last_name }}
+        {% endunless %}
       </h2>
-      <p class="mono-type text-uppercase">
-        Enjoy 5% off Using Code
-        <strong>MIKE5</strong>
+      <p
+        class="mono-type text-uppercase">
+        {% unless page.metafields.custom.affiliate_discount_code_percent == blank %}
+          Enjoy
+          {{ page.metafields.custom.affiliate_discount_code_percent }}
+          off Using Code
+        {% endunless %}
+        {% unless page.metafields.custom.affiliate_discount_code == blank %}
+          <strong>{{ page.metafields.custom.affiliate_discount_code }}</strong>
+        {% endunless %}
       </p>
-      <a class="btn btn-affiliate" href="/pages/infrared-saunas">SHOP NOW</a>
+      <a
+        class="btn btn-affiliate"
+        href="/pages/infrared-saunas">SHOP NOW</a>
     </div>
   </div>
 </div>
-<div class="hero-icons">
-  <div class="container">
-    <div class="row">
-      <div class="col-3 hero-box">
+<div
+  class="hero-icons">
+  <div
+    class="container">
+    <div
+      class="row">
+      <div
+        class="col-3 hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/emf-protected.png?v=1684787266"
           alt="EMF Protection"
@@ -54,7 +81,8 @@
           Block out environmental stressors and disconnect from the world.
         </p>
       </div>
-      <div class="col-3 hero-box">
+      <div
+        class="col-3 hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/faster-sessions.png?v=1684787266"
           alt="Faster Sessions"
@@ -64,7 +92,8 @@
           Full-spectrum infrared therapy helps you sweat faster and better than traditional saunas.
         </p>
       </div>
-      <div class="col-3 hero-box">
+      <div
+        class="col-3 hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/portability.png?v=1684787266"
           alt="Portability"
@@ -74,7 +103,8 @@
           Save space with a compact sauna that stows away in minutes
         </p>
       </div>
-      <div class="col-3 hero-box">
+      <div
+        class="col-3 hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/built-to-last.png?v=1684787266"
           alt="Built-to-last"
@@ -87,29 +117,70 @@
     </div>
   </div>
 </div>
-<div class="affiliate-why">
-  <div class="container">
-    <div class="inner-content row">
-      <div class="col-5">
-        <div class="affiliate-box">
-          <h2 class="text-uppercase">Why Mike Loves SaunaSpace -</h2>
-          <p class="font-left mono-type">
-            SaunaSpace&copy;  is the only company I could find with tangible evidence for being the best.  You can't beat heat, light, grounding, and EMF protection all in one I just love my SaunaSpace&copy;.
+<div
+  class="affiliate-why">
+  <div
+    class="container">
+    <div
+      class="inner-content row">
+      <div
+        class="col-5">
+        <div
+          class="affiliate-box">
+          <h2
+            class="text-uppercase">Why
+            {% unless page.metafields.custom.affiliate_first_name == blank %}
+              {{ page.metafields.custom.affiliate_first_name }}
+            {% endunless %}
+            Loves SaunaSpace -</h2>
+          <p
+            class="font-left mono-type">
+            {% unless page.metafields.custom.affiliate_quote == blank %}
+              {{ page.metafields.custom.affiliate_quote }}
+            {% endunless %}
           </p>
-          <a href="" class="btn btn-affiliate">Shop Now</a><br/>
-          <a href="" class="btn btn-affiliate">Enjoy 5% off with Code
-            <strong>MIKE5</strong>
+
+          {% unless page.metafields.custom.internal_affiliate_link == blank %}
+            <a
+              href="{{ page.metafields.custom.internal_affiliate_link }}"
+              class="btn btn-affiliate">Shop Now</a><br/>
+          {% endunless %}
+          <a
+            href=""
+            class="btn btn-affiliate">
+            {% unless page.metafields.custom.affiliate_discount_code_percent == blank %}
+              Enjoy
+              {{ page.metafields.custom.affiliate_discount_code_percent }}
+              off Using Code
+            {% endunless %}
+            {% unless page.metafields.custom.affiliate_discount_code == blank %}
+              <strong>{{ page.metafields.custom.affiliate_discount_code }}</strong>
+            {% endunless %}
+
           </a>
         </div>
       </div>
-      <div class="col-7">
-        <div class="image-wrapper">
-          <a href="https://www.youtube.com/watch?v=WRIOjXr0X_Q" target="_blank">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/mike-chabot-video.png?v=1684853709"
-              alt=""
-              loading="lazy" />
-          </a>
+      <div
+        class="col-7">
+        <div
+          class="image-wrapper">
+          {% unless page.metafields.custom.affiliate_youtube_video == blank %}
+            <href="{{page.metafields.custom.affiliate_youtube_video}}"
+              target="_blank">
+            {% endunless %}
+            {% assign file_object = page.metafields.custom.affiliate_youtube_link_image %}
+            <!-- replace the "set_test" part with your actual namespace and the "file" with the key -->
+            {% if file_object != blank %}
+              <img
+                src="{{ file_object | file_url }}"
+                alt=""
+                lazy>
+            {% endif %}
+
+            {% unless page.metafields.custom.affiliate_youtube_video == blank %}
+            </a>
+          {% endunless %}
+
         </div>
       </div>
     </div>
@@ -117,81 +188,143 @@
 </div>
 
 
-<div class="podcast">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <img
-          src="https://placehold.co/900x900"
-          alt=""
-          class="image-podcast">
+<div
+  class="podcast">
+  <div
+    class="container">
+    <div
+      class="row">
+      <div
+        class="col-6">
+        {% assign podcast_image = page.metafields.custom.podcast_image %}
+        <!-- replace the "set_test" part with your actual namespace and the "file" with the key -->
+        {% if podcast_image != blank %}
+          <img
+            src="{{ podcast_image | file_url }}"
+            alt=""
+            class="image-podcast"
+            lazy>
+        {% endif %}
       </div>
-      <div class="col-6">
-        <h2 class="text-uppercase">Listen to Mike and Brian</h2>
+      <div
+        class="col-6">
+        <h2
+          class="text-uppercase">Listen to
+          {% unless page.metafields.custom.affiliate_first_name == blank %}
+            {{ page.metafields.custom.affiliate_first_name }}
+          {% endunless %}
+          and Brian</h2>
         <p>
           Deep dive into mental performance and optimizing lifestyle
         </p>
-        <div class="btn-podcast">
-          <div class="icon-wrapper">
-            <i class="fa-solid fa-podcast"></i>
+        {% unless page.metafields.custom.apple_podcast_link == blank %}
+          <div
+            class="btn-podcast">
+            <a
+              href="{{page.metafields.custom.apple_podcast_link}}"
+              target="_blank">
+              <div
+                class="icon-wrapper">
+                <i
+                  class="fa-solid fa-podcast"></i>
+              </div>
+              <span
+                class="">Listen on<br/><strong>Apple Podcast</strong>
+              </span>
+            </a>
           </div>
-          <span class="">Listen on<br/><strong>Apple Podcast</strong>
-          </span>
-        </div>
-        <div class="btn-podcast">
-          <div class="icon-wrapper">
-            <i class="fa-brands fa-spotify"></i>
+        {% endunless %}
+        {% unless page.metafields.custom.spotify_podcast_link == blank %}
+          <div
+            class="btn-podcast">
+            <a
+              href="{{page.metafields.custom.spotify_podcast_link}}"
+              target="_blank">
+              <div
+                class="icon-wrapper">
+                <i
+                  class="fa-brands fa-spotify"></i>
+              </div>
+              <span>Listen on<br/><strong>Spotify</strong>
+              </span>
+            </a>
           </div>
-          <span>Listen on<br/><strong>Spotify</strong>
-          </span>
-        </div>
-        <div class="btn-podcast">
-          <div class="icon-wrapper">
-            <i class="fa-brands fa-youtube"></i>
+        {% endunless %}
+        {% unless page.metafields.custom.youtube_podcast_link == blank %}
+          <div
+            class="btn-podcast">
+            <a
+              href="{{page.metafields.custom.youtube_podcast_link}}"
+              target="_blank">
+              <div
+                class="icon-wrapper">
+                <i
+                  class="fa-brands fa-youtube"></i>
+              </div>
+              <span>Watch on<br/><strong>YouTube</strong>
+              </span>
+            </a>
           </div>
-          <span>Watch on<br/><strong>YouTube</strong>
-          </span>
-        </div>
+        {% endunless %}
       </div>
     </div>
   </div>
 </div>
 
-<div class="affiliate-products">
-  <div class="container">
-    <div class="row">
-      <h2 class="text-uppercase">Mike's Favorite Products</h2>
+<div
+  class="affiliate-products">
+  <div
+    class="container">
+    <div
+      class="row">
+      <h2
+        class="text-uppercase">
+        {% unless page.metafields.custom.affiliate_first_name == blank %}
+          {{ page.metafields.custom.affiliate_first_name }}
+        {% endunless %}'s Favorite Products</h2>
     </div>
-    <div class="product-tiles">
-      <ul
-        id="product-grid"
-        data-id="{{ section.id }}"
-        class="
-                                                                              grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                                                                              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
-                                                                                grid--{{ section.settings.columns_desktop }}-col-desktop
-                                                                              {% endif %}">
 
-        {% for product in collections.featured-products.products limit: 3 %}
-          {% assign lazy_load = false %}
-          {%- if forloop.index > 2 -%}
-            {%- assign lazy_load = true -%}
-          {%- endif -%}
+    {% assign customrecommendations = page.metafields.custom.product_recommendations.value %}
 
-          <li class="featured-grid">
-            {% render 'card-product-simple'
-             , card_product: product,
-             media_aspect_ratio: section.settings.image_ratio,
-             show_secondary_image: section.settings.show_secondary_image,
-             show_vendor: section.settings.show_vendor,
-             show_rating: section.settings.show_rating,
-             lazy_load: lazy_load %}
-          </li>
-        {%- endfor -%}
-      </ul>
-    </div>
-    <p style="text-align: right;">
-      <a href="/pages/infrared-saunas" class="bold-link arrow-link">Shop All</a>
+    {% if customrecommendations != blank %}
+      <div
+        class="product-tiles">
+
+        <ul
+          id="product-grid"
+          data-id="{{ section.id }}"
+          class=" grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                                                                                                                                                                                                                                                                                                                                                                                              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                                                                                                                                                                                                                                                                                                                                                                                              grid--{{ section.settings.columns_desktop }}-col-desktop
+                                                                                                                                                                                                                                                                                                                                                                                              {% endif %}">
+          {% for singlerecommendation in customrecommendations %}
+
+            {% assign lazy_load = false %}
+            {%- if forloop.index > 2 -%}
+              {%- assign lazy_load = true -%}
+            {%- endif -%}
+
+            <li
+              class="featured-grid">
+              {% render 'card-product-simple'
+               , card_product: singlerecommendation,
+               media_aspect_ratio: section.settings.image_ratio,
+               show_secondary_image: section.settings.show_secondary_image,
+               show_vendor: section.settings.show_vendor,
+               show_rating: section.settings.show_rating,
+               lazy_load: lazy_load %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+    {% endif %}
+
+    <p
+      style="text-align: right;">
+      <a
+        href="/pages/infrared-saunas"
+        class="bold-link arrow-link">Shop All</a>
     </p>
   </div>
 </div>

@@ -462,7 +462,8 @@ h2, h3 {
   font-size: 2.8rem;
 }
 
-.btn-podcast {
+.btn-podcast a {
+  color: #fff;
   background: #C67A26;
   color: #fff;
   margin-bottom: 2rem;
@@ -470,7 +471,6 @@ h2, h3 {
   display: flex;
   align-items: center;
 }
-
 .btn-podcast span {
   font-size: 24px;
 }
