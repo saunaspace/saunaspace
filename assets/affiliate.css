@@ -236,7 +236,7 @@ h2, h3 {
 }
 .affiliate-hero .video-wrapper {
   margin: 0;
-  height: 600px;
+  height: 720px;
 }
 
 .affiliate-hero .header-video {
@@ -313,6 +313,21 @@ h2, h3 {
   position: relative;
   width: 650px;
   z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .affiliate-box {
+    width: 100%;
+    margin-left: 0;
+    padding: 3rem;
+  }
+  .affiliate-why .inner-content {
+    display: block;
+  }
+  .yt-wrapper {
+    width: 100vw;
+    margin: -5rem -3rem 0 !important;
+  }
 }
 
 .affiliate-box .btn-affiliate {
@@ -409,6 +424,33 @@ h2, h3 {
   transition: opacity 300ms ease;
 }
 
+@media (max-width: 767px) {
+  .hero-box p {
+    position: static;
+    opacity: 1;
+    font-size: 13px;
+  }
+  .hero-icons h3 {
+    font-size: 16px;
+  }
+  .hero-box {
+    min-height: 280px!important;
+  }
+  .affiliate-hero .header-video {
+    left: 0;
+    bottom: -15%;
+  }
+  .affiliate-hero h2 {
+    font-size: 26px;
+  }
+  .affiliate-hero p {
+    margin-bottom: 3rem;
+  }
+  .affiliate-hero .video-wrapper {
+    height: 450px;
+  }
+}
+ 
 .hero-box:hover p {
   opacity: 1;
   transition: opacity 300ms ease;
@@ -428,9 +470,7 @@ h2, h3 {
   .hero-icons [class^="col"] {
     height: auto;
 }
-.hero-icons {
-  padding-bottom: 10rem;
-}
+
 }
 
 .hero-icons p {
@@ -505,4 +545,18 @@ h2, h3 {
 .affiliate-products h2 {
   text-align: center;
   margin-bottom: 5rem;
+}
+
+.product-shop-all {
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .affiliate-products h2 {
+    font-size: 3rem;
+  }
+  .product-shop-all {
+    text-align: center;
+    font-size: 3rem;
+  }
 }

@@ -71,7 +71,7 @@
     <div
       class="row">
       <div
-        class="col-3 hero-box">
+        class="col-3 col-6-sm hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/emf-protected.png?v=1684787266"
           alt="EMF Protection"
@@ -82,7 +82,7 @@
         </p>
       </div>
       <div
-        class="col-3 hero-box">
+        class="col-3 col-6-sm hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/faster-sessions.png?v=1684787266"
           alt="Faster Sessions"
@@ -93,7 +93,7 @@
         </p>
       </div>
       <div
-        class="col-3 hero-box">
+        class="col-3 col-6-sm hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/portability.png?v=1684787266"
           alt="Portability"
@@ -104,7 +104,7 @@
         </p>
       </div>
       <div
-        class="col-3 hero-box">
+        class="col-3 col-6-sm hero-box">
         <img
           src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/built-to-last.png?v=1684787266"
           alt="Built-to-last"
@@ -124,7 +124,7 @@
     <div
       class="inner-content row">
       <div
-        class="col-5">
+        class="col-5 col-12-sm">
         <div
           class="affiliate-box">
           <h2
@@ -161,7 +161,7 @@
         </div>
       </div>
       <div
-        class="col-7">
+        class="col-7 col-12-sm yt-wrapper">
         <div
           class="image-wrapper">
           {% unless page.metafields.custom.affiliate_youtube_video == blank %}
@@ -294,9 +294,9 @@
           id="product-grid"
           data-id="{{ section.id }}"
           class=" grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                                                                                                                                                                                                                                                                                                                                                                                              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
-                                                                                                                                                                                                                                                                                                                                                                                              grid--{{ section.settings.columns_desktop }}-col-desktop
-                                                                                                                                                                                                                                                                                                                                                                                              {% endif %}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                                                                                                                                                                                                                                                                                                                                                                                                                                              grid--{{ section.settings.columns_desktop }}-col-desktop
+                                                                                                                                                                                                                                                                                                                                                                                                                                              {% endif %}">
           {% for singlerecommendation in customrecommendations %}
 
             {% assign lazy_load = false %}
@@ -321,7 +321,7 @@
     {% endif %}
 
     <p
-      style="text-align: right;">
+      class="product-shop-all">
       <a
         href="/pages/infrared-saunas"
         class="bold-link arrow-link">Shop All</a>
