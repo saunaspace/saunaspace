@@ -1,0 +1,230 @@
+<link
+  rel="stylesheet"
+  href="{{ 'section-main-page.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'" />
+<link
+  rel="stylesheet"
+  href="{{ 'component-rte.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'" />
+<script src="https://kit.fontawesome.com/6f1926112a.js" crossorigin="anonymous"></script>
+{{ "affiliate.css" | asset_url | stylesheet_tag }}
+
+<noscript>{{ "section-main-page.css" | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ "component-rte.css" | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ "affiliate.css" | asset_url | stylesheet_tag }}</noscript>
+
+<div class="affiliate-hero">
+  <div class="video-wrapper">
+    <video
+      playsinline
+      autoplay
+      muted
+      loop
+      preload="none"
+      poster="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/Screenshot_2023-05-23_at_8.41.10_AM.png?v=1684852884"
+      class="bgvid"
+      id="saunavid">
+      <source src="https://cdn.shopify.com/videos/c/o/v/95388cadcad64db98a8687be6fe88380.mp4" type="video/mp4">
+    </video>
+    <div class="header-video">
+      <h2>
+        Welcome Friends<br/>
+        Of Mike Chabot
+      </h2>
+      <p class="mono-type text-uppercase">
+        Enjoy 5% off Using Code
+        <strong>MIKE5</strong>
+      </p>
+      <a class="btn btn-affiliate" href="/pages/infrared-saunas">SHOP NOW</a>
+    </div>
+  </div>
+</div>
+<div class="hero-icons">
+  <div class="container">
+    <div class="row">
+      <div class="col-3 hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/emf-protected.png?v=1684787266"
+          alt="EMF Protection"
+          loading="lazy" />
+        <h3>EMF Protection</h3>
+        <p>
+          Block out environmental stressors and disconnect from the world.
+        </p>
+      </div>
+      <div class="col-3 hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/faster-sessions.png?v=1684787266"
+          alt="Faster Sessions"
+          loading="lazy" />
+        <h3>Faster Sessions</h3>
+        <p>
+          Full-spectrum infrared therapy helps you sweat faster and better than traditional saunas.
+        </p>
+      </div>
+      <div class="col-3 hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/portability.png?v=1684787266"
+          alt="Portability"
+          loading="lazy" />
+        <h3>Portability</h3>
+        <p>
+          Save space with a compact sauna that stows away in minutes
+        </p>
+      </div>
+      <div class="col-3 hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/built-to-last.png?v=1684787266"
+          alt="Built-to-last"
+          loading="lazy" />
+        <h3>Built-to-Last</h3>
+        <p>
+          Make a smart investment in a sauna made with quality materials.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="affiliate-why">
+  <div class="container">
+    <div class="inner-content row">
+      <div class="col-5">
+        <div class="affiliate-box">
+          <h2 class="text-uppercase">Why Mike Loves SaunaSpace -</h2>
+          <p class="font-left mono-type">
+            SaunaSpace&copy;  is the only company I could find with tangible evidence for being the best.  You can't beat heat, light, grounding, and EMF protection all in one I just love my SaunaSpace&copy;.
+          </p>
+          <a href="" class="btn btn-affiliate">Shop Now</a><br/>
+          <a href="" class="btn btn-affiliate">Enjoy 5% off with Code
+            <strong>MIKE5</strong>
+          </a>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="image-wrapper">
+          <a href="https://www.youtube.com/watch?v=WRIOjXr0X_Q" target="_blank">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/mike-chabot-video.png?v=1684853709"
+              alt=""
+              loading="lazy" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="podcast">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <img
+          src="https://placehold.co/900x900"
+          alt=""
+          class="image-podcast">
+      </div>
+      <div class="col-6">
+        <h2 class="text-uppercase">Listen to Mike and Brian</h2>
+        <p>
+          Deep dive into mental performance and optimizing lifestyle
+        </p>
+        <div class="btn-podcast">
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-podcast"></i>
+          </div>
+          <span class="">Listen on<br/><strong>Apple Podcast</strong>
+          </span>
+        </div>
+        <div class="btn-podcast">
+          <div class="icon-wrapper">
+            <i class="fa-brands fa-spotify"></i>
+          </div>
+          <span>Listen on<br/><strong>Spotify</strong>
+          </span>
+        </div>
+        <div class="btn-podcast">
+          <div class="icon-wrapper">
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+          <span>Watch on<br/><strong>YouTube</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="affiliate-products">
+  <div class="container">
+    <div class="row">
+      <h2 class="text-uppercase">Mike's Favorite Products</h2>
+    </div>
+    <div class="product-tiles">
+      <ul
+        id="product-grid"
+        data-id="{{ section.id }}"
+        class="
+                                                                              grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                                                                              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                                                                                grid--{{ section.settings.columns_desktop }}-col-desktop
+                                                                              {% endif %}">
+
+        {% for product in collections.featured-products.products limit: 3 %}
+          {% assign lazy_load = false %}
+          {%- if forloop.index > 2 -%}
+            {%- assign lazy_load = true -%}
+          {%- endif -%}
+
+          <li class="featured-grid">
+            {% render 'card-product-simple'
+             , card_product: product,
+             media_aspect_ratio: section.settings.image_ratio,
+             show_secondary_image: section.settings.show_secondary_image,
+             show_vendor: section.settings.show_vendor,
+             show_rating: section.settings.show_rating,
+             lazy_load: lazy_load %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <p style="text-align: right;">
+      <a href="/pages/infrared-saunas" class="bold-link arrow-link">Shop All</a>
+    </p>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "t:sections.main-page.name",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ]
+  }
+{% endschema %}
