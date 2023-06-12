@@ -58,9 +58,11 @@
           <strong>{{ page.metafields.custom.affiliate_discount_code }}</strong>
         {% endunless %}
       </p>
-      <a
-        class="btn btn-affiliate"
-        href="/pages/infrared-saunas">SHOP NOW</a>
+      {% unless page.metafields.custom.shop_now_link == blank %}
+        <a
+          class="btn btn-affiliate"
+          href="{{ page.metafields.custom.shop_now_link }}">SHOP NOW</a>
+      {% endunless %}
     </div>
   </div>
 </div>
@@ -132,7 +134,7 @@
             {% unless page.metafields.custom.affiliate_first_name == blank %}
               {{ page.metafields.custom.affiliate_first_name }}
             {% endunless %}
-            Loves SaunaSpace -</h2>
+            Loves SaunaSpace</h2>
           <p
             class="font-left mono-type">
             {% unless page.metafields.custom.affiliate_quote == blank %}
@@ -140,24 +142,11 @@
             {% endunless %}
           </p>
 
-          {% unless page.metafields.custom.internal_affiliate_link == blank %}
+          {% unless page.metafields.custom.shop_now_link == blank %}
             <a
-              href="{{ page.metafields.custom.internal_affiliate_link }}"
-              class="btn btn-affiliate">Shop Now</a><br/>
+              class="btn btn-affiliate"
+              href="{{ page.metafields.custom.shop_now_link }}">SHOP NOW</a>
           {% endunless %}
-          <a
-            href=""
-            class="btn btn-affiliate">
-            {% unless page.metafields.custom.affiliate_discount_code_percent == blank %}
-              Enjoy
-              {{ page.metafields.custom.affiliate_discount_code_percent }}
-              off Using Code
-            {% endunless %}
-            {% unless page.metafields.custom.affiliate_discount_code == blank %}
-              <strong>{{ page.metafields.custom.affiliate_discount_code }}</strong>
-            {% endunless %}
-
-          </a>
         </div>
       </div>
       <div
@@ -283,7 +272,7 @@
           {{ page.metafields.custom.affiliate_first_name }}
         {% endunless %}'s Favorite Products</h2>
     </div>
-
+    {% assign aff_id = page.metafields.custom.internal_affiliate_id %}
     {% assign customrecommendations = page.metafields.custom.product_recommendations.value %}
 
     {% if customrecommendations != blank %}
@@ -294,9 +283,9 @@
           id="product-grid"
           data-id="{{ section.id }}"
           class=" grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                                                                                                                                                                                                                                                                                                                                                                                                                                              {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
-                                                                                                                                                                                                                                                                                                                                                                                                                                              grid--{{ section.settings.columns_desktop }}-col-desktop
-                                                                                                                                                                                                                                                                                                                                                                                                                                              {% endif %}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      grid--{{ section.settings.columns_desktop }}-col-desktop
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {% endif %}">
           {% for singlerecommendation in customrecommendations %}
 
             {% assign lazy_load = false %}
@@ -312,20 +301,22 @@
                show_secondary_image: section.settings.show_secondary_image,
                show_vendor: section.settings.show_vendor,
                show_rating: section.settings.show_rating,
-               lazy_load: lazy_load %}
+               lazy_load: lazy_load,
+               affiliate_id: aff_id %}
             </li>
           {%- endfor -%}
         </ul>
       </div>
 
     {% endif %}
-
-    <p
-      class="product-shop-all">
-      <a
-        href="/pages/infrared-saunas"
-        class="bold-link arrow-link">Shop All</a>
-    </p>
+    {% unless page.metafields.custom.shop_now_link == blank %}
+      <p
+        class="product-shop-all">
+        <a
+          href="{{ page.metafields.custom.shop_now_link }}"
+          class="bold-link arrow-link">Shop All</a>
+      </p>
+    {% endunless %}
   </div>
 </div>
 

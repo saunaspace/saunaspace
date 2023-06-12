@@ -298,21 +298,32 @@ h2, h3 {
   margin: 0 auto;
 }
 
-.affiliate-why .image-wrapper:before {
+.affiliate-why .image-wrapper:after {
   content: url("https://cdn.shopify.com/s/files/1/0026/7229/6025/files/play-icon_655d7b84-35b0-4ed4-8522-44c8bb528b12.png?v=1684858568");
   display: block;
   position: absolute;
   left: 40%;
 }
 
+.affiliate-why .image-wrapper:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,.25);
+}
+
 .affiliate-box {
   background: #ca7a25;
-  padding: 4rem 5rem;
+  padding: 4rem 3rem 4rem 5rem;
   color: #fff;
   margin-left: -5rem;
   position: relative;
-  width: 650px;
-  z-index: 1;
+  width: 450px;
 }
 
 @media (max-width: 767px) {
@@ -320,6 +331,7 @@ h2, h3 {
     width: 100%;
     margin-left: 0;
     padding: 3rem;
+    z-index: 1;
   }
   .affiliate-why .inner-content {
     display: block;
