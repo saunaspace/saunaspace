@@ -110,6 +110,163 @@
       .btn, .sp-modal-toggle {
         background: #C67A26; 
       }
+      .total-line--taxes .total-line__name {
+        position: relative;
+      }
+      .tooltip-checkout {
+        bottom: 3.5rem;
+        left: -3.5rem;
+        width: 850px;
+        font-size: 15px;
+        line-height: 1.3;
+        max-width: 850px;
+      }
+      .masterTooltip {
+      	color: #8f8f8f;
+        width: 15px;
+        margin-left: .2rem;
+        transition: color 0.2s ease-in-out;
+      }
+      .masterTooltip:hover {
+      	color: #ba571b;
+      }
+      .tooltip-tax {
+      	text-align: left;
+        max-width: 400px;
+        margin-left: -5rem;
+        bottom: 2rem;
+      }
+      
+       @media (max-width: 767px) {
+        .tooltip-tax {
+          margin-left: 0;
+        }
+      }
+      .tooltip-is-active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto;
+      }
+      .tooltip:after {
+        display: none !important;
+        content: none;
+      }    
+      @media (max-width: 767px) {
+        .tooltip-checkout {
+          width: 360px;
+        }
+      }
+      .tooltip-checkout h2 {
+        font-weight: bold;
+        font-style: normal;
+        font-size: 1.45rem;
+        color: #fff;
+      }
+
+      .checkout-checkbox {
+      	-webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        appearance: checkbox;
+        margin: 1rem .5rem 1rem .1rem;
+      }
+      .ddu-label {
+        display: block;
+        position: relative;
+      }
+      .tooltip-ddu {
+        text-align: justify;
+        padding: 18px;	
+        
+      }
+      .tooltip-exw {
+        text-align: left;
+      }
+      /* popup styles */
+      .popup {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        -webkit-perspective: 1200px;
+        -moz-perspective: 1200px;
+        perspective: 1200px;
+      }
+     .popup-overlay {
+        background: rgba(0,0,0,0.75);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+     }
+     .popup-content {
+        position: absolute;
+        background: #fff;
+        width: 500px;
+        margin: -58px 0 0 -264px;
+        border-radius: 4px;
+        left: 50%;
+        top: 30%;
+        z-index: 11;
+        padding: 20px;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+     }
+     .popup-content p {
+        margin-bottom: 1rem;
+     }
+     .popup-content ul {
+        /* list-style-type: disc; */
+        margin-left: 1.5rem;
+     }
+     .close-popup {
+        display: inline-block;
+        position: absolute;
+        top: .5rem;
+        right: .5rem;
+        font-size: 26px;
+     }
+      @media (max-width: 767px) {
+        .popup-content {
+          max-width: 80%;
+          margin: 0 auto;
+          left: 1rem;
+          right: 1rem;
+          top: 10%;
+        }
+      }
+
+    /* Animations */
+    .fadeIn {
+      animation: fadeIn 0.5s ease-in both;
+      -webkit-animation: fadeIn 0.5s ease-in both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+    }
+    @-webkit-keyframes fadeIn {
+      from { opacity: 0; }
+    }
+    .fadeOut {
+      animation: fadeOut 0.5s ease-out both;
+      -webkit-animation: fadeOut 0.5s ease-out both;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+    @-webkit-keyframes fadeOut {
+      to { opacity: 0; }
+    }
     </style>
     
     
@@ -179,31 +336,102 @@
     </div>
     
 
-
+    <div id="popup_default" class="popup">
+      <div class="popup-overlay"></div>
+      <div class="popup-content">
+        <a href="#" class="close-popup" data-id="popup_default">&times;</a>
+        <h2>Customer-Arranged Shipment Using Your Shipper</h2></br>
+        The SaunaSpace Team will reach out when the order is ready, and then the customer will arrange and pay for the shipping of their product with the carrier of their choice. Click <a href="https://sauna.space/pages/shipping-and-returns" target="_blank">Here</a> for more details.
+      </div>
+    </div>
 
 
     {{ tracking_code }}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-      (function($){        
-        {% if checkout.note%}
-         var order_note = '{{checkout.note}}'
+    (function($){        
+    {% if checkout.note%}
+      var order_note = '{{checkout.note}}'
 
-        Shopify.Checkout.OrderStatus.addContentBox(
-          '<h2 class="ordernotesh3">Order notes</h2><p style="margin-top: 10px">' + order_note + '</p>'
-        )
-		{% endif %}
-
+      Shopify.Checkout.OrderStatus.addContentBox(
+        '<h2 class="ordernotesh3">Order notes</h2><p style="margin-top: 10px">' + order_note + '</p>'
+      )
+    {% endif %}
         
-        $('[data-title-text="Refund policy"]').text(function () {
-          return $(this).text().replace("Refund policy", "Shipping & Returns"); 
-        });   
+    $('[data-title-text="Refund policy"]').text(function () {
+      return $(this).text().replace("Refund policy", "Shipping & Returns"); 
+    });   
 
-        document.addEventListener('DOMContentLoaded', function() {
-               document.querySelector('img[alt="Bread"]').setAttribute('src', 'https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-now-finance-over-time.png?v=1640116210');
-            });
-      })(jQuery);
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('img[alt="Bread"]').setAttribute('src', 'https://cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-now-finance-over-time.png?v=1640116210');
+    });
+
+
+    $.fn.openPopup = function( settings ) {
+      var elem = $(this);
+      // Establish our default settings
+      var settings = $.extend({
+        anim: 'fade'
+      }, settings);
+      elem.show();
+      elem.find('.popup-content').addClass(settings.anim+'In');
+    }
+
+    $.fn.closePopup = function( settings ) {
+      var elem = $(this);
+      // Establish our default settings
+      var settings = $.extend({
+        anim: 'fade'
+      }, settings);
+      elem.find('.popup-content').removeClass(settings.anim+'In').addClass(settings.anim+'Out');
+
+      setTimeout(function(){
+        elem.hide();
+        elem.find('.popup-content').removeClass(settings.anim+'Out')
+      }, 900);
+    }
+      // Click functions for popup
+      $('.open-popup').click(function(){
+        $('#'+$(this).data('id')).openPopup({
+          anim: (!$(this).attr('data-animation') || $(this).data('animation') == null) ? 'fade' : $(this).data('animation')
+        });
+      });
+      $('.close-popup').click(function(){
+        $('#'+$(this).data('id')).closePopup({
+          anim: (!$(this).attr('data-animation') || $(this).data('animation') == null) ? 'fade' : $(this).data('animation')
+        });
+      });
+
+
+      setTimeout(function(){ 
+        //     console.log('local pickup run');
+        $(".radio__label__primary").each( function () {
+        //        console.log($(this).data("shipping-method-label-title"));
+            if ($(this).data("shipping-method-label-title") === "Customer-Arranged Shipment") {
+              console.log('EXW');
+              $(this).append('<svg aria-hidden="true" data-exw focusable="false" style="width: 20px;" data-prefix="fas" data-icon="info-circle" class="masterTooltip svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" style="width: 15px; margin-left: .4rem;" ></path></svg>');
+              $('[data-exw]').on('click', function(){
+                  console.log('exw clicked');
+                  $('#popup_default').openPopup();
+              });
+              $(this).parent('.radio__label').find('.content-box__emphasis').text('Varies');
+            } 
+        });
+        $( ".input-radio" ).change(function() {
+          if($('input[value="shopify-Customer-Arranged%20Shipment-0.00"]').is(':checked')){
+            console.log('CAS is checked');
+              $('#popup_default').openPopup();
+          }
+        });
+          if($('input[value="shopify-Customer-Arranged%20Shipment-0.00"]').is(':checked')){
+            console.log('CAS is checked');
+              $('#popup_default').openPopup();
+          }
+        }, 2000);
+
+
+  })(jQuery);
 	</script>
 
   </body>
