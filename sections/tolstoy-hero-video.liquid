@@ -176,7 +176,7 @@
       return
     }
 
-   await sendEventWithParams("clickCta")
+   await Promise.all([sendEventWithParams("sessionStart"), sendEventWithParams("clickCta")]);
    window.open(videoLink, {% if isOpenInNewTab %}'_blank'{% else %}'_self'{% endif %});
    });
     window.addEventListener("load", () => sendEventWithParams("pageView"), { once: true });
