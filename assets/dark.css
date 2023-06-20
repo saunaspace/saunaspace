@@ -129,7 +129,7 @@
 .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,		  .dark .nav-link svg, .dark .shop-all svg, .dark .nav-arrow-link svg, .dark .trial-col img,
 .dark .product-warranty, .dark .product-trial, .dark .pot-col img, .dark .nfc-close svg,
 .dark .yc-financing img, .dark .col-bordered img, .dark .col-centered img, .dark .contact-col img, .dark .event-link svg,
-.dark .hamb-label, .dark .wwli-head { 
+.dark .hamb-label, .dark .wwli-head, .dark .discounts li svg { 
   filter: brightness(0) invert(1); 
 }
 
