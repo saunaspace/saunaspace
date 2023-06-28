@@ -3750,7 +3750,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		.oc-img img { width: 100%; }
 
 .centered-text {
-	max-width: 800px;
+	max-width: 830px;
 	margin: 0 auto var(--sectionBottom) auto;
 }
 
@@ -6570,6 +6570,16 @@ a#cart-icon-bubble {
 	color: white;
 	z-index: 2;
   }
+
+  @media (min-width: 991px) {
+	.header-video {
+		position: static;
+		width: 100%;
+		max-width: 1235px;  
+		margin: 0 auto;
+	}
+  }
+
 
   .header-video h1 {
 	text-align: left;

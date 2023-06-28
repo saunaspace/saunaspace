@@ -1,82 +1,10 @@
 {{ 'pin-animation.css' | asset_url | stylesheet_tag }}
 {{ 'animate.css' | asset_url | stylesheet_tag }}
   <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
-<div class="">
-    <div class="video-wrapper">
-        <video playsinline autoplay muted loop preload="none" poster="{{ 'sauna-space-hero.png' | asset_url }}" class="bgvid" id="saunavid">
-            <source src="{{ 'sauna-space-home-hero.mp4' | asset_url }}" type="video/mp4">
-            <source src="{{ 'sauna-space-home-hero.webm' | asset_url }}" type="video/webm">
-            <source src="{{ 'sauna-space-home-hero.ogv' | asset_url }}" type="video/ogv">
-        </video>
-      <div class="header-video">
-        <p class="header-video-subtitle header-one header-slide">Rejuvenate at the cellular level</p>
-        
-        <h1 class="header-slide tlt">
-            <span class="header-one text-uppercase">Experience</span><br />
-            <span class="header-two text-uppercase">Full Spectrum</span><br/>
-            <span class="header-two text-uppercase">Infrared Therapy</span>
-        </h1>
-        <div class="video-links">
-            <a href="/products?filter=all" class="btn btn-outline btn-shop header-slide">Shop Now</a><br />
-            <button class="btn-video header-slide" id="myBtn">
-                <span class="btn-video-icon">
-                    <svg width="6" height="10" viewBox="0 0 6 10" xmlns="http://www.w3.org/2000/svg"><path d="M6 5l-6 5V0z" fill="currentColor" fill-rule="evenodd"></path></svg>
-                </span>
-                <span class="btn-video-text">Play Video</span>
-              </button>        </div>
-      </div>
-    </div>
-    {% render 'home-page-modal' %}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <script>
-    // Wrap every letter in a span
-    var textWrapper = document.querySelector('h1.header-slide');
-    // textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-    
-    anime.timeline({loop: false})
-      .add({
-        targets: '.header-one',
-        opacity: [0,1],
-        easing: "linear",
-        duration: 550,
-        delay: 300
-      }).add({
-        targets: '.header-two',
-        opacity: [0,1],
-        easing: "linear",
-        duration: 550,
-      }).add({
-        targets: '.btn-shop',
-        opacity: [0,1],
-        easing: "linear",
-        duration: 450,
-      })
-      .add({
-        targets: '.btn-video',
-        opacity: [0,1],
-        easing: "linear",
-        duration: 450,
-      });
-    </script>
-    <!-- <script src="{{ 'lettering.js' | asset_url }}" defer></script>
-    <script src="{{ 'textillate.js' | asset_url }}" defer></script>
-    <script>
-      $(function () {
-        $('.tlt').textillate({ 
-          in: { 
-            effect: 'fadeIn',
-            sync: false,
-            delay: 50,
-          },
-          type: 'word'
-        });
-    })
-    </script> -->
     <section>
         <div class="ct-home">
             <div class="centered-text">
-                <h2>Shop Our Products</h2>
+                <h2>Shop Our Saunas & Light Therapy</h2>
                 <p class="etica">SaunaSpace combines cutting-edge infrared technology with nature's ancient wisdom to help you find relief.</p>
             </div>
             <div class="product-tiles">	
@@ -184,121 +112,20 @@
 
 {% schema %}
 {
-  "name": "t:sections.video.name",
+  "name": "Home Page Static",
   "tag": "section",
   "class": "section",
   "settings": [
     {
       "type": "text",
       "id": "heading",
-      "default": "Video",
+      "default": "Home Page Static",
       "label": "t:sections.video.settings.heading.label"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "image_picker",
-      "id": "cover_image",
-      "label": "t:sections.video.settings.cover_image.label"
-    },
-    {
-      "type": "video_url",
-      "id": "video_url",
-      "accept": [
-        "youtube",
-        "vimeo"
-      ],
-      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-      "label": "t:sections.video.settings.video_url.label",
-      "placeholder": "t:sections.video.settings.video_url.placeholder",
-      "info": "t:sections.video.settings.video_url.info"
-    },
-    {
-      "type": "text",
-      "id": "description",
-      "label": "t:sections.video.settings.description.label",
-      "info": "t:sections.video.settings.description.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "t:sections.video.settings.full_width.label",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.all.colors.accent_1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.all.colors.accent_2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.all.colors.background_1.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.all.colors.background_2.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.all.colors.inverse.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.all.colors.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
     }
   ],
   "presets": [
     {
-      "name": "t:sections.video.presets.name"
+      "name": "Home Page Static"
     }
   ]
 }

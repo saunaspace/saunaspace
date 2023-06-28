@@ -1,5 +1,16 @@
 {
   "sections": {
+    "74310489-0916-4e0f-9f01-3f1872a0e298": {
+      "type": "herovideo",
+      "settings": {
+        "heading": "Rejuvenate at the cellular level",
+        "heading-animated-1": "Experience",
+        "heading-animated-2": "Full Spectrum",
+        "heading-animated-3": "Infrared Therapy",
+        "shop-link": "\/products?filter=all",
+        "posterimage": "shopify:\/\/shop_images\/sauna-space-hero.png"
+      }
+    },
     "home_template": {
       "type": "home-template",
       "settings": {
@@ -169,6 +180,7 @@
     }
   },
   "order": [
+    "74310489-0916-4e0f-9f01-3f1872a0e298",
     "home_template",
     "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe"
   ]
