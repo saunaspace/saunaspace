@@ -6526,7 +6526,7 @@ a#cart-icon-bubble {
     border-radius: 2px;
 }
 
-.bgvid {
+.video-wrapper video {
 	object-fit: cover;
 	height: 100%;
 	width: 100%;

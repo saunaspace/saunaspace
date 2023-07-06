@@ -3,25 +3,18 @@
     "74310489-0916-4e0f-9f01-3f1872a0e298": {
       "type": "herovideo",
       "settings": {
-        "heading": "Rejuvenate at the cellular level",
-        "heading-animated-1": "Experience",
-        "heading-animated-2": "Full Spectrum",
-        "heading-animated-3": "Infrared Therapy",
-        "shop-link": "\/products?filter=all",
-        "posterimage": "shopify:\/\/shop_images\/sauna-space-hero.png"
+        "heading": "Handcrafted in America",
+        "heading-animated-1": "summer",
+        "heading-animated-2": "sale",
+        "heading-animated-3": "",
+        "shop-link": "\/products\/luminati-infrared-sauna",
+        "mp4": "shopify:\/\/files\/videos\/Untitled design.mp4"
       }
     },
     "home_template": {
       "type": "home-template",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "background-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": ""
       }
     },
     "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe": {

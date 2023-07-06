@@ -1,18 +1,8 @@
 <div class="">
   <div class="video-wrapper">
-    <video
-      playsinline
-      autoplay
-      muted
-      loop
-      preload="none"
-      poster="{{ section.settings.posterimage | escape }}"
-      class="bgvid"
-      id="saunavid">
-      <source src="{{ 'sauna-space-home-hero.mp4' | asset_url }}" type="video/mp4">
-      <source src="{{ 'sauna-space-home-hero.webm' | asset_url }}" type="video/webm">
-      <source src="{{ 'sauna-space-home-hero.ogv' | asset_url }}" type="video/ogv">
-    </video>
+
+    {{ section.settings.mp4 | video_tag: autoplay: true, loop: true, muted: true, class: "testing" }}
+
     <div class="header-video">
       <p class="header-video-subtitle header-one header-slide">{{ section.settings.heading | escape }}</p>
       <h1 class="header-slide tlt">
@@ -39,7 +29,9 @@
     </div>
   </div>
 </div>
-{% render 'home-page-modal' %}
+
+{% assign video_embed = section.settings.video_link | escape %}
+{% render 'home-page-modal', video: video_embed %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script>
@@ -132,9 +124,15 @@
         "default": "/products?filter=all",
         "label": "Shop Link"
       }, {
-        "type": "image_picker",
-        "id": "posterimage",
-        "label": "Poster Image"
+        "type": "video",
+        "id": "mp4",
+        "label": "MP4 Video"
+      },
+      {
+        "type": "text",
+        "id": "video_link",
+        "default": "https://www.youtube.com/embed/ynDz9KxGhGU",
+        "label": "Full Video Embed Link"
       }
     ],
     "presets": [
