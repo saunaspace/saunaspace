@@ -549,32 +549,29 @@
                     <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
                 
             </div>
-            {% if product.metafields.my_fields.not_eligible_for_return == true %}  
-              <div class="warranty-trial">
-                <div class="pwt product-warranty">
-                  {% if product.metafields.my_fields.custom_warranty == blank %}
-                  10-year Warranty
+            {%- assign eligible_for_returns = product.metafields.my_fields.not_eligible_for_return -%}
+            {%- assign thirty_day_returns = product.metafields.my_fields.thirty_day_returns -%}
+            {%- assign custom_warranty = product.metafields.my_fields.custom_warranty -%}
+            
+            <div class="warranty-trial">
+              <div class="pwt product-warranty">
+                  {% if custom_warranty == null %}
+                    10-year warranty
                   {% else %}
-                    {{ product.metafields.my_fields.custom_warranty }}-year Warranty
+                    {{ custom_warranty }}-year Warranty
                   {% endif %}
                 </div>
                 <div class="pw">
-                  Not Eligible for Return
+                  {% if eligible_for_returns == true %}
+                    Not Eligible for Return
+                  {% endif %}
+                  {% if thirty_day_returns == true %}
+                    30-day Trial
+                  {% else %}
+                    <div class="pwt product-trial">100-day Trial</div>
+                  {% endif %}
                 </div>
-              </div>
-            {% else if product.metafields.my_fields.thirty_day_returns != true %}
-              <div class="warranty-trial">
-                  <div class="pwt product-warranty">
-                    
-                    {% if product.metafields.my_fields.custom_warranty == blank %}
-                    10-year Warranty
-                    {% else %}
-                      {{ product.metafields.my_fields.custom_warranty }}-year Warranty
-                    {% endif %}
-                  </div><div class="pwt product-trial">100-day Trial</div>
-              </div>
-            {% endif %}
-           
+            </div>           
             {% render 'pay-over-time' %}
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}

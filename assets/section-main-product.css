@@ -1287,6 +1287,8 @@ a.product__text {
   .product:not(.product--small) .thumbnail__badge {
     height: 3rem;
     width: 3rem;
+    top: 18%;
+    left: 34%;
   }
 
   .product:not(.product--small) .thumbnail__badge .icon {
