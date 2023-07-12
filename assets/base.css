@@ -4535,10 +4535,15 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	/* border-top: 1px solid #939393;
 	border-bottom: 1px solid #939393; */
 	padding: 0 1em;
-	margin-bottom: 30px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.warranty-trial {
+	border-top: 1px solid #939393;
+	padding-top: 2em;
+	margin-bottom: 30px;
 }
 
 	.product-plug { flex-wrap: wrap; }
@@ -4595,7 +4600,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 .atc-box.outOfStockClass .atc-outOfStock { display: block; }
 .atc-box.outOfStockClass .atcMain { opacity: 0; height: 0; width: 0; padding: 0; }
 
-.op-30day-box { padding-bottom: 10px; margin-bottom: 30px; border-bottom: 1px solid #939393; }
+.op-30day-box { padding-bottom: 10px; }
 .op-30day-box.outOfStockClass .op-30day { display: none; }
 
 .preorder-box { line-height: 1.2em; margin-bottom: 20px; }

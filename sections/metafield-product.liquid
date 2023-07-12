@@ -549,6 +549,9 @@
                     <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
                 
             </div>
+
+            {% unless product.title contains "Heat Lamp" %}
+
             {%- assign eligible_for_returns = product.metafields.my_fields.not_eligible_for_return -%}
             {%- assign thirty_day_returns = product.metafields.my_fields.thirty_day_returns -%}
             {%- assign custom_warranty = product.metafields.my_fields.custom_warranty -%}
@@ -566,12 +569,14 @@
                     Not Eligible for Return
                   {% endif %}
                   {% if thirty_day_returns == true %}
-                    30-day Trial
+                  <div class="pwt product-trial">30-day Trial</div>
                   {% else %}
                     <div class="pwt product-trial">100-day Trial</div>
                   {% endif %}
                 </div>
-            </div>           
+                
+            </div>  
+          {% endunless %}         
             {% render 'pay-over-time' %}
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}
