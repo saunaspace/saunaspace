@@ -112,7 +112,7 @@
               {%- if featured_media != null -%}
                 {%- capture media_index -%}
                   {%- if featured_media.media_type == 'model' -%}{%- increment model_index -%}
-                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment video_index -%}
+                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment image_index -%}
                   {%- elsif featured_media.media_type == 'image'%}{%- increment image_index -%}
                   {%- endif -%}
                 {%- endcapture -%}
@@ -146,7 +146,7 @@
                 {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
                   {%- capture media_index -%}
                     {%- if media.media_type == 'model' -%}{%- increment model_index -%}
-                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{%- increment video_index -%}
+                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{%- increment image_index -%}
                     {%- elsif media.media_type == 'image'%}{%- increment image_index -%}
                     {%- endif -%}
                   {%- endcapture -%}
@@ -907,11 +907,17 @@ function filterVariant(variant) {
     var general_color = "[data-thumbnail-color='general']";
     var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
     $(thumbnail_selector).show();
-    {% if product.id == 2105477365849 or product.id == 2105476743257 %}
+    {% if product.id == 2105476743257 %}
       $('[data-media-position]').filter(function () {
           return $(this).data('media-position') >= 13;
       }).show();
     {% endif %}
+    //faraday
+    {% if product.id == 2105477365849 %}
+    $('[data-media-position]').filter(function () {
+        return $(this).data('media-position') >= 12;
+    }).show();
+  {% endif %}
     {% if product.id == 2105476546649 %}
     console.log('emf page');
       $('[data-media-position]').filter(function () {
