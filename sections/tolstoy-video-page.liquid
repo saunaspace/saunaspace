@@ -1,0 +1,25 @@
+<tolstoy-video-page
+    id="tolstoy-tv-container"
+    class="tolstoy-video-page"
+    data-publish-id="{{ section.settings.publishId }}"
+  />
+  
+  {% schema %}
+    {
+      "name": "Tolstoy video page",
+      "settings": [
+        {
+          "type": "text",
+          "id": "publishId",
+          "label": "Publish id",
+          "default": "publishId"
+        }
+      ],
+      "presets": [
+        {
+          "name": "Tolstoy video page",
+          "category": "Tolstoy Sections"
+        }
+      ]
+    }
+  {% endschema %}

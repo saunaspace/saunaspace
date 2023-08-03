@@ -1249,7 +1249,9 @@ button.shopify-payment-button__button--unbranded {
 .shopify-payment-button__button--branded {
   z-index: auto;
 }
-
+.pid-col-img iframe {
+	max-width: 100%;
+ }
 .cart__dynamic-checkout-buttons iframe {
   box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius) rgba(var(--color-base-text), var(--shadow-opacity));
 }
@@ -2982,7 +2984,7 @@ body {
 	font-size: 1.6rem;
 }
 
-section:not(.shopify-section) {
+section:not(.shopify-section), .shopify-policy__body {
 	width: 90%;
 	max-width: 1350px;
 	margin: 0 auto;
@@ -3497,7 +3499,12 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 
 	.greyBG .col img { margin-bottom: 0;}
 
-.generic-headerBG {
+	.shopify-policy__container {
+		max-width: none;
+		padding: 0 !important;
+	}
+
+.generic-headerBG, .shopify-policy__title {
 	background: #6E1500;
 	height: 300px;
 	margin-bottom: var(--sectionBottom);
@@ -3515,6 +3522,23 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		display: flex;
 		align-items: center;
 	}
+
+	.shopify-policy__title {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		padding: 6%;
+	}
+
+	.shopify-policy__title:after {
+		content: url(logo_symbol_generic-head.svg);
+		height: 300px;
+		max-width: 1200px;
+		position: absolute;
+		right: 3%;
+		bottom: -40%;
+	}
 	
 	.gh-short { height: 100px !important;}
 	
@@ -3528,7 +3552,15 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		max-width: 700px;
 		margin-bottom: 0;
 	}
+
+	/* .shopify-policy__title h1 {
+		width: 90%;
+    max-width: 1200px;
+    text-align: left;
+    padding-left: 6%;
+	} */
 	
+  
 	.gh-text h1 + p { margin-top: 1em; font-size: 1.4rem; margin-bottom: 0; }
 	
 .photo-headerBG {
@@ -3750,7 +3782,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 		.oc-img img { width: 100%; }
 
 .centered-text {
-	max-width: 800px;
+	max-width: 830px;
 	margin: 0 auto var(--sectionBottom) auto;
 }
 
@@ -4535,10 +4567,15 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	/* border-top: 1px solid #939393;
 	border-bottom: 1px solid #939393; */
 	padding: 0 1em;
-	margin-bottom: 30px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.warranty-trial {
+	border-top: 1px solid #939393;
+	padding-top: 2em;
+	margin-bottom: 30px;
 }
 
 	.product-plug { flex-wrap: wrap; }
@@ -4595,7 +4632,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 .atc-box.outOfStockClass .atc-outOfStock { display: block; }
 .atc-box.outOfStockClass .atcMain { opacity: 0; height: 0; width: 0; padding: 0; }
 
-.op-30day-box { padding-bottom: 10px; margin-bottom: 30px; border-bottom: 1px solid #939393; }
+.op-30day-box { padding-bottom: 10px; }
 .op-30day-box.outOfStockClass .op-30day { display: none; }
 
 .preorder-box { line-height: 1.2em; margin-bottom: 20px; }
@@ -5269,8 +5306,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 
 .footer-logo {
 	margin-bottom: 40px;
-	width: 150px;
-	height: 54px;
+	width: 125px;
 }
 
 .cl-box {
@@ -5381,7 +5417,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	.btn-outline { background: none; border: 2px solid #FFF; }
 	.btn-bordered { background: none; color: #C67A26; border: 2px solid #C67A26;}
 
-.genericText {
+.genericText, .rte {
 	max-width: 650px;
 	margin-bottom: var(--sectionBottom);
 }
@@ -5413,8 +5449,18 @@ h1 {
 	font-size: 4rem;
 	margin-bottom: .5em;
 }
+
+.shopify-policy__body h2 {
+	text-align: left;
+	margin-top: 1em;
+}
+.shopify-policy__body h3 {
+	font-size: 2rem;
+}
+
 .customer h1 {
-	color: #000
+	color: #000;
+	padding: 3rem 0 2rem;
 }
 h2 {
 	font-size: 3rem;
@@ -6527,7 +6573,7 @@ a#cart-icon-bubble {
     border-radius: 2px;
 }
 
-.bgvid {
+.video-wrapper video {
 	object-fit: cover;
 	height: 100%;
 	width: 100%;
@@ -6571,6 +6617,16 @@ a#cart-icon-bubble {
 	color: white;
 	z-index: 2;
   }
+
+  @media (min-width: 991px) {
+	.header-video {
+		position: static;
+		width: 100%;
+		max-width: 1235px;  
+		margin: 0 auto;
+	}
+  }
+
 
   .header-video h1 {
 	text-align: left;

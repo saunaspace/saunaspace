@@ -1,5 +1,10 @@
 {
   "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {
+      }
+    },
     "main": {
       "type": "faraday-product",
       "blocks": {
@@ -50,9 +55,16 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {
+      }
     }
   },
   "order": [
-    "main"
+    "zp-product-header-content",
+    "main",
+    "zp-product-footer-content"
   ]
 }

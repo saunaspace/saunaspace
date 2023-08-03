@@ -1,16 +1,21 @@
 {
   "sections": {
+    "74310489-0916-4e0f-9f01-3f1872a0e298": {
+      "type": "herovideo",
+      "settings": {
+        "heading": "Rejuvenate at the Cellular Level",
+        "heading-animated-1": "Full Spectrum",
+        "heading-animated-2": "Transformation",
+        "heading-animated-3": "",
+        "shop-link": "products?filter=all",
+        "mp4": "shopify:\/\/files\/videos\/sauna-space-home-hero.mp4",
+        "video_link": "https:\/\/www.youtube.com\/embed\/B_1T3gfXdZo"
+      }
+    },
     "home_template": {
       "type": "home-template",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "background-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": ""
       }
     },
     "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe": {
@@ -82,6 +87,17 @@
             "URL_Link_Label": ""
           }
         },
+        "43beeeac-bba9-4037-b6b3-72fdc3d5bdea": {
+          "type": "review",
+          "settings": {
+            "photo": "shopify:\/\/shop_images\/tiphany-adams.jpg",
+            "name": "Tiphany Adams",
+            "title": "Fitness Coach",
+            "quote": "Retreating using red light therapy makes me smile because it feels like 🌞 and a mini vacation where you can release tensions and heavy thoughts while you relax.",
+            "url_link": "",
+            "URL_Link_Label": ""
+          }
+        },
         "6d12393a-a521-4f2c-8866-21862fb121b5": {
           "type": "review",
           "settings": {
@@ -126,17 +142,6 @@
             "URL_Link_Label": ""
           }
         },
-        "43beeeac-bba9-4037-b6b3-72fdc3d5bdea": {
-          "type": "review",
-          "settings": {
-            "photo": "shopify:\/\/shop_images\/tiphany-adams.jpg",
-            "name": "Tiphany Adams",
-            "title": "Fitness Coach",
-            "quote": "Retreating using red light therapy makes me smile because it feels like 🌞 and a mini vacation where you can release tensions and heavy thoughts while you relax.",
-            "url_link": "",
-            "URL_Link_Label": ""
-          }
-        },
         "488e22b9-6085-4f6e-a8d2-aede56cd5edd": {
           "type": "review",
           "settings": {
@@ -156,11 +161,11 @@
         "97b31371-4ace-4619-b351-d54b2d829199",
         "35add396-a0a7-4282-86ae-bc72720c3fdc",
         "2af3d84a-e491-4d55-8ba0-421028304766",
+        "43beeeac-bba9-4037-b6b3-72fdc3d5bdea",
         "6d12393a-a521-4f2c-8866-21862fb121b5",
         "c46125d2-11ae-439e-8682-e52e9a4ae172",
         "5c7f1501-2e0b-4b9f-b2f7-19598f7daf16",
         "18f5b4c6-024d-40b5-a7e1-de54ca2cef4e",
-        "43beeeac-bba9-4037-b6b3-72fdc3d5bdea",
         "488e22b9-6085-4f6e-a8d2-aede56cd5edd"
       ],
       "settings": {
@@ -169,6 +174,7 @@
     }
   },
   "order": [
+    "74310489-0916-4e0f-9f01-3f1872a0e298",
     "home_template",
     "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe"
   ]

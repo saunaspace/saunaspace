@@ -1,5 +1,10 @@
 {
   "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {
+      }
+    },
     "main": {
       "type": "metafield-product",
       "blocks": {
@@ -97,12 +102,19 @@
       "settings": {
         "section-gallery": "{{ product.metafields.my_fields.yotpo_gallery.value }}"
       }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {
+      }
     }
   },
   "order": [
+    "zp-product-header-content",
     "main",
     "product-recommendations",
     "16554159793aed08a7",
-    "1655415944b942b6c3"
+    "1655415944b942b6c3",
+    "zp-product-footer-content"
   ]
 }
