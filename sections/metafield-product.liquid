@@ -112,7 +112,7 @@
               {%- if featured_media != null -%}
                 {%- capture media_index -%}
                   {%- if featured_media.media_type == 'model' -%}{%- increment model_index -%}
-                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment video_index -%}
+                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment image_index -%}
                   {%- elsif featured_media.media_type == 'image'%}{%- increment image_index -%}
                   {%- endif -%}
                 {%- endcapture -%}
@@ -146,7 +146,7 @@
                 {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
                   {%- capture media_index -%}
                     {%- if media.media_type == 'model' -%}{%- increment model_index -%}
-                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{%- increment video_index -%}
+                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{%- increment image_index -%}
                     {%- elsif media.media_type == 'image'%}{%- increment image_index -%}
                     {%- endif -%}
                   {%- endcapture -%}
@@ -549,32 +549,34 @@
                     <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
                 
             </div>
-            {% if product.metafields.my_fields.not_eligible_for_return == true %}  
-              <div class="warranty-trial">
-                <div class="pwt product-warranty">
-                  {% if product.metafields.my_fields.custom_warranty == blank %}
-                  10-year Warranty
+
+            {% unless product.title contains "Heat Lamp" %}
+
+            {%- assign eligible_for_returns = product.metafields.my_fields.not_eligible_for_return -%}
+            {%- assign thirty_day_returns = product.metafields.my_fields.thirty_day_returns -%}
+            {%- assign custom_warranty = product.metafields.my_fields.custom_warranty -%}
+            
+            <div class="warranty-trial">
+              <div class="pwt product-warranty">
+                  {% if custom_warranty == null %}
+                    10-year warranty
                   {% else %}
-                    {{ product.metafields.my_fields.custom_warranty }}-year Warranty
+                    {{ custom_warranty }}-year Warranty
                   {% endif %}
                 </div>
                 <div class="pw">
-                  Not Eligible for Return
+                  {% if eligible_for_returns == true %}
+                    Not Eligible for Return
+                  {% endif %}
+                  {% if thirty_day_returns == true %}
+                  <div class="pwt product-trial">30-day Trial</div>
+                  {% else %}
+                    <div class="pwt product-trial">100-day Trial</div>
+                  {% endif %}
                 </div>
-              </div>
-            {% else if product.metafields.my_fields.thirty_day_returns != true %}
-              <div class="warranty-trial">
-                  <div class="pwt product-warranty">
-                    
-                    {% if product.metafields.my_fields.custom_warranty == blank %}
-                    10-year Warranty
-                    {% else %}
-                      {{ product.metafields.my_fields.custom_warranty }}-year Warranty
-                    {% endif %}
-                  </div><div class="pwt product-trial">100-day Trial</div>
-              </div>
-            {% endif %}
-           
+                
+            </div>  
+          {% endunless %}         
             {% render 'pay-over-time' %}
             <p style="font-style: italic; font-size: 1.2rem; text-align: right; margin-top: -1em;">
               {% assign current_variant = product.selected_or_first_available_variant %}
@@ -688,15 +690,28 @@
     {%- if product.description != blank -%}
   	<div class="product-info-details" id="pid-overview">
     <section>
-      {%- if product.metafields.my_fields.product_description_image != blank -%} 
+      {%- if product.metafields.my_fields.product_description_image != blank or product.metafields.custom.overview_video != blank -%} 
       <div class="pid-cols">
-				<div class="pid-col-text">{{ product.description }}</div>
+				<div class="pid-col-text">
+          {{ product.description }}
+          
+        </div>
 				<div class="pid-col-img">
-					{{product.metafields.my_fields.product_description_image | image_url: width: 800 | image_tag: width: nil }}
+          {% if product.metafields.custom.overview_video != blank %}
+            {{ product.metafields.custom.overview_video }}
+          {% endif %}
+          {% if product.metafields.my_fields.product_description_image != blank %}
+            {{product.metafields.my_fields.product_description_image | image_url: width: 800 | image_tag: width: nil }}
+          {% endif %}
 				</div>
 			</div>
       {%- else -%}
-        {{ product.description }}
+      <div class="pid-cols">
+				<div class="pid-col-text">
+          {{ product.description }}
+          
+        </div>
+        </div>
       
       {%- endif -%}
     </section>
@@ -782,10 +797,6 @@
 <script>
 
 $(document).ready(function() {
-
-
-
-	$(".product-info-details a").removeAttr('target');
 	
 	$(".pid-col-text a").each(function() {
 		if($(this).attr("href").indexOf(".pdf") > 0) {
@@ -909,11 +920,17 @@ function filterVariant(variant) {
     var general_color = "[data-thumbnail-color='general']";
     var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
     $(thumbnail_selector).show();
-    {% if product.id == 2105477365849 or product.id == 2105476743257 %}
+    {% if product.id == 2105476743257 %}
       $('[data-media-position]').filter(function () {
           return $(this).data('media-position') >= 13;
       }).show();
     {% endif %}
+    //faraday
+    {% if product.id == 2105477365849 %}
+    $('[data-media-position]').filter(function () {
+        return $(this).data('media-position') >= 12;
+    }).show();
+  {% endif %}
     {% if product.id == 2105476546649 %}
     console.log('emf page');
       $('[data-media-position]').filter(function () {

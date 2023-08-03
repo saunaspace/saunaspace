@@ -1,0 +1,144 @@
+<div class="">
+  <div class="video-wrapper">
+
+    {{ section.settings.mp4 | video_tag: autoplay: true, loop: true, muted: true, class: "testing" }}
+
+    <div class="header-video">
+      <p class="header-video-subtitle header-one header-slide">{{ section.settings.heading | escape }}</p>
+      <h1 class="header-slide tlt">
+        <span class="header-one text-uppercase">{{ section.settings.heading-animated-1 | escape }}</span><br/>
+        <span class="header-two text-uppercase">{{ section.settings.heading-animated-2 | escape }}</span><br/>
+        <span class="header-two text-uppercase">{{ section.settings.heading-animated-3 | escape }}</span>
+      </h1>
+      <div class="video-links">
+        <a href="{{ section.settings.shop-link | escape }}" class="btn btn-outline btn-shop header-slide">Shop Now</a><br/>
+        <button class="btn-video header-slide" id="myBtn">
+          <span class="btn-video-icon">
+            <svg
+              width="6"
+              height="10"
+              viewBox="0 0 6 10"
+              xmlns="http://www.w3.org/2000/svg"><path
+                d="M6 5l-6 5V0z"
+                fill="currentColor"
+                fill-rule="evenodd"></path>
+          </svg>
+        </span>
+        <span class="btn-video-text">Play Video</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+{% assign video_embed = section.settings.video_link | escape %}
+{% render 'home-page-modal', video: video_embed %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script>
+  // Wrap every letter in a span
+  var textWrapper = document.querySelector('h1.header-slide');
+
+  // textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+  anime
+    .timeline({loop: false})
+    .add({
+      targets: '.header-one',
+      opacity: [
+        0, 1
+      ],
+      easing: "linear",
+      duration: 550,
+      delay: 300
+    })
+    .add({
+      targets: '.header-two',
+      opacity: [
+        0, 1
+      ],
+      easing: "linear",
+      duration: 550
+    })
+    .add({
+      targets: '.btn-shop',
+      opacity: [
+        0, 1
+      ],
+      easing: "linear",
+      duration: 450
+    })
+    .add({
+      targets: '.btn-video',
+      opacity: [
+        0, 1
+      ],
+      easing: "linear",
+      duration: 450
+    });
+</script>
+
+{%- if request.design_mode -%}
+  <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+  <style>
+    .header-video h1 span,
+    .header-video-subtitle,
+    .btn-shop,
+    .btn-video {
+      opacity: 1;
+    }
+  </style>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Hero Video",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "default": "Rejuvenate at the cellular level",
+        "label": "Header"
+      },
+      {
+        "type": "text",
+        "id": "heading-animated-1",
+        "default": "Experience",
+        "label": "Animated Heading 1"
+      },
+      {
+        "type": "text",
+        "id": "heading-animated-2",
+        "default": "Full Spectrum",
+        "label": "Animated Heading 2"
+      },
+      {
+        "type": "text",
+        "id": "heading-animated-3",
+        "default": "Infrared Therapy",
+        "label": "Animated Heading 3"
+      }, {
+        "type": "text",
+        "id": "shop-link",
+        "default": "/products?filter=all",
+        "label": "Shop Link"
+      }, {
+        "type": "video",
+        "id": "mp4",
+        "label": "MP4 Video"
+      },
+      {
+        "type": "text",
+        "id": "video_link",
+        "default": "https://www.youtube.com/embed/ynDz9KxGhGU",
+        "label": "Full Video Embed Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Video"
+      }
+    ]
+  }
+{% endschema %}

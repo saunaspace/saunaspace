@@ -1,0 +1,297 @@
+<link
+  rel="stylesheet"
+  href="{{ 'section-main-page.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'" />
+<link
+  rel="stylesheet"
+  href="{{ 'component-rte.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'" />
+<script src="https://kit.fontawesome.com/6f1926112a.js" crossorigin="anonymous"></script>
+{{ "affiliate.css" | asset_url | stylesheet_tag }}
+
+<noscript>{{ "section-main-page.css" | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ "component-rte.css" | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ "affiliate.css" | asset_url | stylesheet_tag }}</noscript>
+{% assign poster_image = page.metafields.custom.hero_video_poster_image %}
+{% assign hero_video = page.metafields.custom.video_upload_for_hero_background_video %}
+<div class="affiliate-hero">
+  <div class="video-wrapper">
+    <video
+      playsinline
+      autoplay
+      muted
+      loop
+      preload="none"
+      poster="{{ poster_image | file_url }}"
+      class="bgvid"
+      id="saunavid">
+      <source src="{{ hero_video | file_url }}" type="video/mp4">
+    </video>
+    <div class="header-video">
+      <h2>
+        Welcome Friends<br/>
+        Of
+        {% unless page.metafields.custom.affiliate_first_name == blank %}
+          {{ page.metafields.custom.affiliate_first_name }}
+        {% endunless %}
+        {% unless page.metafields.custom.affiliate_last_name == blank %}
+          {{ page.metafields.custom.affiliate_last_name }}
+        {% endunless %}
+      </h2>
+      <p class="mono-type text-uppercase">
+        {% unless page.metafields.custom.affiliate_discount_code_percent == blank %}
+          Enjoy
+          {{ page.metafields.custom.affiliate_discount_code_percent }}
+          off Using Code
+        {% endunless %}
+        {% unless page.metafields.custom.affiliate_discount_code == blank %}
+          <strong>{{ page.metafields.custom.affiliate_discount_code }}</strong>
+        {% endunless %}
+      </p>
+      {% unless page.metafields.custom.shop_now_link == blank %}
+        <a class="btn btn-affiliate" href="{{ page.metafields.custom.shop_now_link }}">SHOP NOW</a>
+      {% endunless %}
+    </div>
+  </div>
+</div>
+<div class="hero-icons">
+  <div class="container">
+    <div class="row">
+      <div class="col-3 col-6-sm hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/emf-protected.png?v=1684787266"
+          alt="EMF Protection"
+          loading="lazy" />
+        <h3>EMF Protection</h3>
+        <p>
+          Block out environmental stressors and disconnect from the world.
+        </p>
+      </div>
+      <div class="col-3 col-6-sm hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/faster-sessions.png?v=1684787266"
+          alt="Faster Sessions"
+          loading="lazy" />
+        <h3>Faster Sessions</h3>
+        <p>
+          Full-spectrum infrared therapy helps you sweat faster and better than traditional saunas.
+        </p>
+      </div>
+      <div class="col-3 col-6-sm hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/portability.png?v=1684787266"
+          alt="Portability"
+          loading="lazy" />
+        <h3>Portability</h3>
+        <p>
+          Save space with a compact sauna that stows away in minutes
+        </p>
+      </div>
+      <div class="col-3 col-6-sm hero-box">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/built-to-last.png?v=1684787266"
+          alt="Built-to-last"
+          loading="lazy" />
+        <h3>Built-to-Last</h3>
+        <p>
+          Make a smart investment in a sauna made with quality materials.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="affiliate-why">
+  <div class="container">
+    <div class="inner-content row">
+      <div class="col-5 col-12-sm">
+        <div class="affiliate-box">
+          <h2 class="text-uppercase">Why
+            {% unless page.metafields.custom.affiliate_first_name == blank %}
+              {{ page.metafields.custom.affiliate_first_name }}
+            {% endunless %}
+            Loves SaunaSpace</h2>
+          <p class="font-left mono-type">
+            {% unless page.metafields.custom.affiliate_quote == blank %}
+              {{ page.metafields.custom.affiliate_quote }}
+            {% endunless %}
+          </p>
+
+          {% unless page.metafields.custom.shop_now_link == blank %}
+            <a class="btn btn-affiliate" href="{{ page.metafields.custom.shop_now_link }}">SHOP NOW</a>
+          {% endunless %}
+        </div>
+      </div>
+      <div class="col-7 col-12-sm yt-wrapper">
+        {% unless page.metafields.custom.affiliate_youtube_video == blank %}
+          <a href="{{page.metafields.custom.affiliate_youtube_video}}" target="_blank">
+          {% endunless %}
+          <div class="image-wrapper">
+
+            {% assign file_object = page.metafields.custom.affiliate_youtube_link_image %}
+            <!-- replace the "set_test" part with your actual namespace and the "file" with the key -->
+            {% if file_object != blank %}
+              <img
+                src="{{ file_object | file_url }}"
+                alt=""
+                lazy>
+            {% endif %}
+
+
+          </div>
+
+          {% unless page.metafields.custom.affiliate_youtube_video == blank %}
+          </a>
+        {% endunless %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if page.metafields.custom.spotify_podcast_link != blank or page.metafields.custom.youtube_podcast_link != blank or page.metafields.custom.youtube_podcast_link != blank %}
+  <div class="podcast">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          {% assign podcast_image = page.metafields.custom.podcast_image %}
+          <!-- replace the "set_test" part with your actual namespace and the "file" with the key -->
+          {% if podcast_image != blank %}
+            <img
+              src="{{ podcast_image | file_url }}"
+              alt=""
+              class="image-podcast"
+              lazy>
+          {% endif %}
+        </div>
+        <div class="col-6">
+          <h2 class="text-uppercase">Listen to
+            {% unless page.metafields.custom.affiliate_first_name == blank %}
+              {{ page.metafields.custom.affiliate_first_name }}
+            {% endunless %}
+            and Brian</h2>
+          <p>
+            Deep dive into mental performance and optimizing lifestyle
+          </p>
+          {% unless page.metafields.custom.apple_podcast_link == blank %}
+            <div class="btn-podcast">
+              <a href="{{page.metafields.custom.apple_podcast_link}}" target="_blank">
+                <div class="icon-wrapper">
+                  <i class="fa-solid fa-podcast"></i>
+                </div>
+                <span class="">Listen on<br/><strong>Apple Podcast</strong>
+                </span>
+              </a>
+            </div>
+          {% endunless %}
+          {% unless page.metafields.custom.spotify_podcast_link == blank %}
+            <div class="btn-podcast">
+              <a href="{{page.metafields.custom.spotify_podcast_link}}" target="_blank">
+                <div class="icon-wrapper">
+                  <i class="fa-brands fa-spotify"></i>
+                </div>
+                <span>Listen on<br/><strong>Spotify</strong>
+                </span>
+              </a>
+            </div>
+          {% endunless %}
+          {% unless page.metafields.custom.youtube_podcast_link == blank %}
+            <div class="btn-podcast">
+              <a href="{{page.metafields.custom.youtube_podcast_link}}" target="_blank">
+                <div class="icon-wrapper">
+                  <i class="fa-brands fa-youtube"></i>
+                </div>
+                <span>Watch on<br/><strong>YouTube</strong>
+                </span>
+              </a>
+            </div>
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="affiliate-products">
+  <div class="container">
+    <div class="row">
+      <h2 class="text-uppercase">
+        {% unless page.metafields.custom.affiliate_first_name == blank %}
+          {{ page.metafields.custom.affiliate_first_name }}
+        {% endunless %}'s Favorite Products</h2>
+    </div>
+    {% assign aff_id = page.metafields.custom.internal_affiliate_id %}
+    {% assign customrecommendations = page.metafields.custom.product_recommendations.value %}
+
+    {% if customrecommendations != blank %}
+      <div class="product-tiles">
+
+        <ul
+          id="product-grid"
+          data-id="{{ section.id }}"
+          class=" grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  grid--{{ section.settings.columns_desktop }}-col-desktop
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {% endif %}">
+          {% for singlerecommendation in customrecommendations %}
+
+            {% assign lazy_load = false %}
+            {%- if forloop.index > 2 -%}
+              {%- assign lazy_load = true -%}
+            {%- endif -%}
+
+            <li class="featured-grid">
+              {% render 'card-product-simple'
+               , card_product: singlerecommendation,
+               media_aspect_ratio: section.settings.image_ratio,
+               show_secondary_image: section.settings.show_secondary_image,
+               show_vendor: section.settings.show_vendor,
+               show_rating: section.settings.show_rating,
+               lazy_load: lazy_load,
+               affiliate_id: aff_id %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+    {% endif %}
+    {% unless page.metafields.custom.shop_now_link == blank %}
+      <p class="product-shop-all">
+        <a href="{{ page.metafields.custom.shop_now_link }}" class="bold-link arrow-link">Shop All</a>
+      </p>
+    {% endunless %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "t:sections.main-page.name",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ]
+  }
+{% endschema %}
