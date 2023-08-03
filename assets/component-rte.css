@@ -32,6 +32,7 @@
   margin-bottom: var(--media-shadow-vertical-offset);
 }
 
+<<<<<<< HEAD
 .rte ul {
   padding-left: 2rem;
 }
@@ -52,6 +53,8 @@
   color: rgb(var(--color-link));
   text-decoration-thickness: 0.2rem;
 }
+=======
+>>>>>>> origin/main
 
 .rte blockquote {
   display: inline-flex;
