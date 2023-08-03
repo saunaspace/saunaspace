@@ -11,11 +11,8 @@
     {{ content_for_header }}
 
     {{ checkout_stylesheets }}
-    {{ checkout_scripts }}
-    {% include 'bread-checkout-options' %}
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://shopify.getbread.com/static/a1d10d47-e53e-49a4-b7c6-b5884a5aa307/checkout.js" type="application/javascript"></script>
     <style>
       .section__title.order-notes {
         display: inline-block;
@@ -269,7 +266,7 @@
     }
     </style>
     
-    
+    {{ checkout_scripts }}
     <!-- Hotjar  -->
     <script>
         (function(h,o,t,j,a,r){
@@ -287,6 +284,10 @@
   	{% include 'smsbump_checkout_marketing_subscription' %}
 	<!-- End of SMSBump opt-in  --> 
     
+    <!-- ADDRESS VALIDATOR -->
+    <script async src="https://d3ox8tdk614ykk.cloudfront.net/pobox_checker.js">
+    </script>
+    <!-- End of ADDRESS VALIDATOR -->
 </head>
   <body>
     {{ skip_to_content_link }}
@@ -433,6 +434,12 @@
 
   })(jQuery);
 	</script>
-
+<!--Gorgias Chat Widget Start-->
+<script id="gorgias-chat-widget-install-v3" 
+    src="https://config.gorgias.chat/bundle-loader/01GYCBQK3GSWD8FNFA6025B88R?source=shopify1click">
+</script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
+</script>
+<!--Gorgias Chat Widget End-->
   </body>
 </html>

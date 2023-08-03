@@ -690,15 +690,28 @@
     {%- if product.description != blank -%}
   	<div class="product-info-details" id="pid-overview">
     <section>
-      {%- if product.metafields.my_fields.product_description_image != blank -%} 
+      {%- if product.metafields.my_fields.product_description_image != blank or product.metafields.custom.overview_video != blank -%} 
       <div class="pid-cols">
-				<div class="pid-col-text">{{ product.description }}</div>
+				<div class="pid-col-text">
+          {{ product.description }}
+          
+        </div>
 				<div class="pid-col-img">
-					{{product.metafields.my_fields.product_description_image | image_url: width: 800 | image_tag: width: nil }}
+          {% if product.metafields.custom.overview_video != blank %}
+            {{ product.metafields.custom.overview_video }}
+          {% endif %}
+          {% if product.metafields.my_fields.product_description_image != blank %}
+            {{product.metafields.my_fields.product_description_image | image_url: width: 800 | image_tag: width: nil }}
+          {% endif %}
 				</div>
 			</div>
       {%- else -%}
-        {{ product.description }}
+      <div class="pid-cols">
+				<div class="pid-col-text">
+          {{ product.description }}
+          
+        </div>
+        </div>
       
       {%- endif -%}
     </section>

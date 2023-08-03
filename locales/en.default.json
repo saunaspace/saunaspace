@@ -434,7 +434,8 @@
         "privacy_policy": "Privacy",
         "terms_of_service": "Terms",
         "shipping_policy": "Shipping",
-        "refund_policy": "Refunds"
+        "refund_policy": "Returns & Refunds",
+        "contact_information": "Contact Info"
       },
       "marketing": {
         "sms": {
@@ -449,6 +450,9 @@
         "pick_up_in_two_to_four_hours": "Email notification sent when your order is ready for pickup",
         "pick_up_immediately": "Email notification sent when your order is ready for pickup",
         "pick_up_next_day": "Email notification sent when your order is ready for pickup"
+      },
+      "thank_you": {
+        "contact_information_title": "Contact Info"
       }
     }
   },

@@ -3,13 +3,13 @@
     "74310489-0916-4e0f-9f01-3f1872a0e298": {
       "type": "herovideo",
       "settings": {
-        "heading": "Handcrafted in America",
-        "heading-animated-1": "summer",
-        "heading-animated-2": "sale",
+        "heading": "Rejuvenate at the Cellular Level",
+        "heading-animated-1": "Full Spectrum",
+        "heading-animated-2": "Transformation",
         "heading-animated-3": "",
-        "shop-link": "\/pages\/sauna-components",
-        "mp4": "shopify:\/\/files\/videos\/Tungste Hero.mp4",
-        "video_link": "https:\/\/www.youtube.com\/embed\/4KxCUqidQ2Q"
+        "shop-link": "products?filter=all",
+        "mp4": "shopify:\/\/files\/videos\/sauna-space-home-hero.mp4",
+        "video_link": "https:\/\/www.youtube.com\/embed\/B_1T3gfXdZo"
       }
     },
     "home_template": {

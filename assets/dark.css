@@ -11,7 +11,7 @@
   background: #555;
 }
 
-.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {	
+.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before, .dark .shopify-policy__body {	
   background: #000;	
   color: #fff;	
 }
