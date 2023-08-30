@@ -84,10 +84,6 @@
       .page--logo-main .field__input {
         border-radius: 0 !important;
       }
-      .page--logo-main #smsbump-consent-message {
-        font-family: 'Work Sans', sans-serif !important;
-        font-weight: 400;
-      }
       img[alt="PayPal"] {
         height:18px;
       }
@@ -279,15 +275,13 @@
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
   	<!-- End of Hotjar  -->
-    
-    <!-- SMSBump opt-in  --> 
-  	{% include 'smsbump_checkout_marketing_subscription' %}
-	<!-- End of SMSBump opt-in  --> 
-    
+  
     <!-- ADDRESS VALIDATOR -->
     <script async src="https://d3ox8tdk614ykk.cloudfront.net/pobox_checker.js">
     </script>
     <!-- End of ADDRESS VALIDATOR -->
+
+    <script type="application/javascript" async src="https://sdk.postscript.io/integrations/sdk-min.js"></script>
 </head>
   <body>
     {{ skip_to_content_link }}

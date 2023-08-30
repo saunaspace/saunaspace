@@ -125,7 +125,10 @@
       </div>
       <div class="col-7 col-12-sm yt-wrapper">
         {% unless page.metafields.custom.affiliate_youtube_video == blank %}
-          <a href="{{page.metafields.custom.affiliate_youtube_video}}" target="_blank">
+          <span
+            class="btn-video-text"
+            id="myBtn"
+            style="cursor: pointer;">
           {% endunless %}
           <div class="image-wrapper">
 
@@ -140,9 +143,9 @@
 
 
           </div>
-
+          {% render 'home-page-modal', video: page.metafields.custom.affiliate_youtube_video %}
           {% unless page.metafields.custom.affiliate_youtube_video == blank %}
-          </a>
+          </span>
         {% endunless %}
       </div>
     </div>
@@ -230,9 +233,9 @@
           id="product-grid"
           data-id="{{ section.id }}"
           class=" grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  grid--{{ section.settings.columns_desktop }}-col-desktop
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  {% endif %}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {% if section.settings.columns_desktop == 1 %} grid--full-width{% else %}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          grid--{{ section.settings.columns_desktop }}-col-desktop
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {% endif %}">
           {% for singlerecommendation in customrecommendations %}
 
             {% assign lazy_load = false %}
