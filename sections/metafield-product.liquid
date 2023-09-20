@@ -112,7 +112,7 @@
               {%- if featured_media != null -%}
                 {%- capture media_index -%}
                   {%- if featured_media.media_type == 'model' -%}{%- increment model_index -%}
-                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment video_index -%}
+                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment image_index -%}
                   {%- elsif featured_media.media_type == 'image'%}{%- increment image_index -%}
                   {%- endif -%}
                 {%- endcapture -%}
@@ -549,11 +549,17 @@
                     <p class="fineprint oos-fineprint"  style="width: 100%; margin-top: .5em; ">Processing time is an estimate of time between your order being placed and your product being shipped.</p>
                 
             </div>
-            {% if product.metafields.my_fields.not_eligible_for_return == true %}  
-              <div class="warranty-trial">
-                <div class="pwt product-warranty">
-                  {% if product.metafields.my_fields.custom_warranty == blank %}
-                  10-year Warranty
+
+            {% unless product.title contains "Heat Lamp" %}
+
+            {%- assign eligible_for_returns = product.metafields.my_fields.not_eligible_for_return -%}
+            {%- assign thirty_day_returns = product.metafields.my_fields.thirty_day_returns -%}
+            {%- assign custom_warranty = product.metafields.my_fields.custom_warranty -%}
+            
+            <div class="warranty-trial">
+              <div class="pwt product-warranty">
+                  {% if custom_warranty == null %}
+                    10-year warranty
                   {% else %}
                     {{ custom_warranty }}-year Warranty
                   {% endif %}

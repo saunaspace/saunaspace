@@ -32,29 +32,6 @@
   margin-bottom: var(--media-shadow-vertical-offset);
 }
 
-<<<<<<< HEAD
-.rte ul {
-  padding-left: 2rem;
-}
-
-
-.rte li:last-child {
-  margin-bottom: 0;
-}
-
-.rte a {
-  color: rgba(var(--color-link), var(--alpha-link));
-  text-underline-offset: 0.3rem;
-  text-decoration-thickness: 0.1rem;
-  transition: text-decoration-thickness var(--duration-short) ease;
-}
-
-.rte a:hover {
-  color: rgb(var(--color-link));
-  text-decoration-thickness: 0.2rem;
-}
-=======
->>>>>>> origin/main
 
 .rte blockquote {
   display: inline-flex;
