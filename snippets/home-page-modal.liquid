@@ -1,112 +1,109 @@
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      
-      <iframe width="100%" height="475" src="{{ video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <iframe
+      width="100%"
+      height="475"
+      src="{{ video }}"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
   </div>
 
-  <style>
-    /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 100; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+</div>
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: transparent;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  max-width: 800px;
-  width: 100%; /* Could be more or less, depending on screen size */
-}
+<style>
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
 
-@media (max-width: 767px) {
-  iframe {
-    height: 250px !important;
-}
-}
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: transparent;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    max-width: 800px;
+    width: 100%; /* Could be more or less, depending on screen size */
+  }
 
-/* The Close Button */
-.close {
-  color: #fff;
+  @media(max-width: 767px) {
+    iframe {
+      height: 250px !important;
+    }
+  }
+
+  /* The Close Button */
+  .close {
+    color: #fff;
     float: right;
     font-size: 35px;
     position: relative;
     right: 0;
     top: 0;
-}
-@media (min-width: 768px) {
-  /* The Close Button */
-.close {
-    right: -30px;
-    top: 25px;
-}
-}
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-  </style>
-
-  <script>
-    // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
   }
-}
-Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
-    get: function () {
-        return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+  @media(min-width: 768px) {
+    /* The Close Button */
+    .close {
+      right: -30px;
+      top: 25px;
     }
-});
-$('body').on('click touchstart', function () {
-            const videoElement = document.getElementById('saunavid');
-            if (videoElement.playing) {
-                // video is already playing so do nothing
-                console.log('vid is already playing');
-            }
-            else {
-                // video is not playing
-                // so play video now
-                videoElement.play();
-            }
-    });
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
 
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
 
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    console.log('close clicked');
+    modal.style.display = "none";
+
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    } else if (event.target == span) {
+      modal.style.display = "none";
+    }
+  }
+  Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+    get: function() {
+      return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+    }
+  });
 </script>
