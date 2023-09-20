@@ -141,3 +141,16 @@
     }
   }
 }
+
+
+.blog-articles .article-card__image-wrapper {
+  width: 100%;
+  position: relative !important;
+}
+
+.card .media.media--hover-effect>img:only-child, .card-wrapper .media.media--hover-effect>img:only-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative !important;
+}
