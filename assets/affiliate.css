@@ -338,7 +338,11 @@ h2, h3 {
   }
   .yt-wrapper {
     width: 100vw;
+<<<<<<< HEAD
     margin: 2rem -3rem 0 !important;
+=======
+    margin: -5rem -3rem 0 !important;
+>>>>>>> origin/dev
   }
 }
 
