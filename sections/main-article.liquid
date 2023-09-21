@@ -120,9 +120,9 @@
       
       // Include the footnote link if available
       if (footnoteLink) {
-        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></span> ${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
+        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}. </a></span> ${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
       } else {
-        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></span> ${footnoteContent}`;
+        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}. </a></span> ${footnoteContent}`;
       }
       
       // Append the new footnote to the footnotes container
