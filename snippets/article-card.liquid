@@ -75,6 +75,11 @@
                 <span>{{ article.author }}</span>
               {%- endif -%}
             </div>
+            <div class="">
+              {%- for tag in article.tags -%}
+                <a href="/blogs/wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+              {%- endfor -%}
+          </div> 
             {%- if show_excerpt -%}
               {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
                 <p class="article-card__excerpt rte-width">
@@ -101,11 +106,7 @@
       </div>
       <div class="card__content">
         <div class="card__information">
-          <div class="">
-              {%- for tag in article.tags -%}
-                <a href="/blogs/wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-              {%- endfor -%}
-          </div> 
+         
         </div>
         {%- if show_badge -%}
           <div class="card__badge {{ settings.badge_position }}">
