@@ -5417,11 +5417,14 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	.btn-outline { background: none; border: 2px solid #FFF; }
 	.btn-bordered { background: none; color: #C67A26; border: 2px solid #C67A26;}
 
-.genericText, .rte {
+.genericText {
 	max-width: 650px;
 	margin-bottom: var(--sectionBottom);
 }
-
+.rte {
+	max-width: 900px;
+	margin-bottom: var(--sectionBottom);
+}
 	.genericText h2 { scroll-margin-top: 70px; text-align: left; font-size: 2.4rem; text-transform: none; padding-bottom: .5em; border-bottom: 1px solid #939393; margin: 1em 0; }
 	.genericText h3 { font-size: 1.6rem; text-transform: none; margin-top: 2em; line-height: 1.4em; }
 	.genericText p + h2 { margin-top: 2em; }

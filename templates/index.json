@@ -1,16 +1,21 @@
 {
   "sections": {
+    "d67d3b37-d9ad-4363-9c7b-ede00ad89aa9": {
+      "type": "herovideo",
+      "settings": {
+        "heading": "Rejuvenate at the cellular level",
+        "heading-animated-1": "Experience",
+        "heading-animated-2": "Full Spectrum",
+        "heading-animated-3": "Infrared Therapy",
+        "shop-link": "\/products?filter=all",
+        "mp4": "shopify:\/\/files\/videos\/bcd31a71298749a9a9fbbb5c6e4a7883.mp4",
+        "video_link": "https:\/\/www.youtube.com\/embed\/ynDz9KxGhGU"
+      }
+    },
     "home_template": {
       "type": "home-template",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "background-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": ""
       }
     },
     "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe": {
@@ -169,6 +174,7 @@
     }
   },
   "order": [
+    "d67d3b37-d9ad-4363-9c7b-ede00ad89aa9",
     "home_template",
     "2e25f1d0-dfdd-46aa-91de-7f22185b7dfe"
   ]

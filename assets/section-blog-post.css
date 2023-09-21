@@ -20,7 +20,9 @@
 .article-template__hero-medium {
   height: 22rem;
 }
-
+#footnotes-container li {
+  padding-bottom: 20px;
+}
 .article-template__hero-large {
   height: 33rem;
 }
@@ -212,6 +214,7 @@ h1.article-template__title {
   text-align: center;
   padding: 10vh 1rem;
   position: relative;
+  z-index: -1;
 }
 
 .article-header:before {
@@ -227,7 +230,6 @@ h1.article-template__title {
 
 .article-header .page-width {
   position: relative;
-  z-index: 3;
   color: #fff;
 }
 
