@@ -116,13 +116,13 @@
       el.appendChild(footnoteNumber);
   
       // Create a new element for the footnote content at the bottom
-      const newFootnote = document.createElement('div');
+      const newFootnote = document.createElement('p');
       
       // Include the footnote link if available
       if (footnoteLink) {
-        newFootnote.innerHTML = `<sup id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></sup> ${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
+        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></span> ${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
       } else {
-        newFootnote.innerHTML = `<sup id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></sup> ${footnoteContent}`;
+        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></span> ${footnoteContent}`;
       }
       
       // Append the new footnote to the footnotes container
