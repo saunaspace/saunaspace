@@ -89,6 +89,44 @@
   </div>
 </article>
  
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('footnotes');
+  // Select all <sup> tags with a data-footnote attribute
+  const footnoteElements = document.querySelectorAll('sup[data-footnote]');
+  
+  // Get the footnotes container
+  const footnotesContainer = document.getElementById('footnotes-container');
+  
+  // Initialize a counter for footnote numbers
+  let counter = 1;
+
+  footnoteElements.forEach((el, index) => {
+    // Get the footnote content from the data-footnote attribute
+    const footnoteContent = el.getAttribute('data-footnote');
+    
+    // Create a new element for the footnote number
+    const footnoteNumber = document.createElement('a');
+    footnoteNumber.innerHTML = counter;
+    footnoteNumber.href = `#footnote-${counter}`;
+    footnoteNumber.id = `ref-footnote-${counter}`;
+    
+    // Insert the footnote number inside the <sup> tag
+    el.appendChild(footnoteNumber);
+
+    // Create a new element for the footnote content at the bottom
+    const newFootnote = document.createElement('div');
+    newFootnote.innerHTML = `<sup id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}</a></sup> ${footnoteContent}`;
+    
+    // Append the new footnote to the footnotes container
+    footnotesContainer.appendChild(newFootnote);
+    
+    // Increment the counter
+    counter++;
+  });
+});
+
+{% endjavascript %}
 
 
 {% schema %}
