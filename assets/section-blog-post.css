@@ -20,7 +20,9 @@
 .article-template__hero-medium {
   height: 22rem;
 }
-
+#footnotes-container li {
+  padding-bottom: 20px;
+}
 .article-template__hero-large {
   height: 33rem;
 }
