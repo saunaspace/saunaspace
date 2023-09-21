@@ -99,19 +99,7 @@
           {%- endif -%}
         </div>
       </div>
-      <div class="card__content">
-        <div class="card__information">
-          <div class="">
-              {%- for tag in article.tags -%}
-                <a href="/blogs/wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-              {%- endfor -%}
-          </div> 
-          <h3 class="card__heading{% if show_excerpt %} h2{% endif %}" style="margin-top: 2rem;" class="underline-links-hover">
-            <a href="{{ article.url }}" class="full-unstyled-link">
-              {{ article.title | escape }}
-            </a>
-          </h3>
-        </div>
+    
         {%- if show_badge -%}
           <div class="card__badge {{ settings.badge_position }}">
             <span class="badge color-background-1">{{ 'blogs.article.blog' | t }}</span>
