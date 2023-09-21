@@ -74,7 +74,7 @@
         {%- when 'content'-%}
           <div class="article-template__content page-width page-width--narrow rte" itemprop="articleBody" {{ block.shopify_attributes }}>
               {{ article.content }}
-              <div id="footnotes-container"></div>
+              <ul id="footnotes-container"></ul>
           </div>
           
 
@@ -116,13 +116,13 @@
       el.appendChild(footnoteNumber);
   
       // Create a new element for the footnote content at the bottom
-      const newFootnote = document.createElement('p');
+      const newFootnote = document.createElement('li');
       
       // Include the footnote link if available
       if (footnoteLink) {
-        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}. </a></span> ${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
+        newFootnote.innerHTML = `${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
       } else {
-        newFootnote.innerHTML = `<span id="footnote-${counter}"><a href="#ref-footnote-${counter}">${counter}. </a></span> ${footnoteContent}`;
+        newFootnote.innerHTML = `${footnoteContent}`;
       }
       
       // Append the new footnote to the footnotes container
