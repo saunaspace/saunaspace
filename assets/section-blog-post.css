@@ -189,7 +189,7 @@ h1.article-template__title {
 
 .article-template__content figcaption {
   font-size: 14px;
-  color: #ddd;
+  margin-top: 1rem;
   font-style: italic;
 }
 
