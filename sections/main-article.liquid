@@ -125,7 +125,8 @@ In 2023, he brings a refreshing approach to natural living, biohacking and natur
       const precedingTextLink = document.createElement('a');
       precedingTextLink.href = `#footnote-${counter}`;
       if (precedingTextElement) {
-        precedingTextElement.innerHTML = '';
+        console.log(precedingTextElement.innerHTML);
+       // precedingTextElement.innerHTML = '';
         precedingTextElement.appendChild(precedingTextLink);
       }
       // Create a new element for the footnote number
