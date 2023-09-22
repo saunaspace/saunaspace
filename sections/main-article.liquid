@@ -76,18 +76,30 @@
               {{ article.content }}
               <ol id="footnotes-container"></ol>
           </div>
-          
-
-        
+          <div class="article-template__back element-margin-top center">
+            <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
+              <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+              {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+            </a>
+          </div>
+      <div class="article-author">
+        <div class="container">
+          <div class="author-bio row">
+            <div class="col-4">
+              <img src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/brian-richards-profile-1-vert.jpg?v=1695402655" alt="Brian Richards, CEO and Founder of SaunaSpace">
+            </div>
+            <div class="col-8">
+              <h2>About the Author</h2>
+              <p>2008 Brian transformed his health by creating his own incandescent electric light bath. In 2013, he founded SaunaSpace®, a company that combines cutting-edge incandescent  infrared technology with the age-old practice of sauna. 
+In 2023, he brings a refreshing approach to natural living, biohacking and natural health transformation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     {%- endcase -%}
   {%- endfor -%}
 
-  <div class="article-template__back element-margin-top center">
-    <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
-      <span class="icon-wrap">{% render 'icon-arrow' %}</span>
-      {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
-    </a>
-  </div>
+
 </article>
  
 <script>
