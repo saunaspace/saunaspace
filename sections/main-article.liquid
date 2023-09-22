@@ -124,11 +124,13 @@ In 2023, he brings a refreshing approach to natural living, biohacking and natur
       // Create a new anchor element to make the preceding text clickable
       const precedingTextLink = document.createElement('a');
       precedingTextLink.href = `#footnote-${counter}`;
+      // Copy the text from the span to the new anchor element
       if (precedingTextElement) {
-        console.log(precedingTextElement.innerHTML);
-       // precedingTextElement.innerHTML = '';
+        precedingTextLink.innerHTML = precedingTextElement.innerHTML;
+        precedingTextElement.innerHTML = '';
         precedingTextElement.appendChild(precedingTextLink);
       }
+    
       // Create a new element for the footnote number
       const footnoteNumber = document.createElement('a');
       footnoteNumber.innerHTML = counter;
