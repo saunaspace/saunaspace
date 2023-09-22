@@ -146,9 +146,9 @@ In 2023, he brings a refreshing approach to natural living, biohacking and natur
       
       // Include the footnote link if available
       if (footnoteLink) {
-        newFootnote.innerHTML = `${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a>`;
+        newFootnote.innerHTML = `<span id="footnote-${counter}">${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a></span>`;
       } else {
-        newFootnote.innerHTML = `${footnoteContent}`;
+        newFootnote.innerHTML = `<span id="footnote-${counter}">${footnoteContent}</span>`;
       }
       
       // Append the new footnote to the footnotes container
