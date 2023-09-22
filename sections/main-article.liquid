@@ -118,17 +118,26 @@ In 2023, he brings a refreshing approach to natural living, biohacking and natur
       const footnoteContent = el.getAttribute('data-footnote');
       const footnoteLink = el.getAttribute('data-footnote-link');
       
+      // Get the text immediately before the <sup> element (optional)
+      const precedingTextElement = el.previousElementSibling;
+      const precedingText = precedingTextElement ? precedingTextElement.textContent : '';
+      
       // Create a new element for the footnote number
       const footnoteNumber = document.createElement('a');
       footnoteNumber.innerHTML = counter;
       footnoteNumber.href = `#footnote-${counter}`;
       footnoteNumber.id = `ref-footnote-${counter}`;
+
       
       // Insert the footnote number inside the <sup> tag
       el.appendChild(footnoteNumber);
   
       // Create a new element for the footnote content at the bottom
       const newFootnote = document.createElement('li');
+
+      // Include the footnote link and preceding text if available
+      let footnoteFullContent = precedingText ? `${precedingText}: ${footnoteContent}` : footnoteContent;
+
       
       // Include the footnote link if available
       if (footnoteLink) {
