@@ -15,7 +15,7 @@
 <div class="article-header" style="background: url('{{ article.image | image_url }}') center/cover no-repeat; margin-top: 0;">
   <div class="page-width page-width--narrow">
     {%- for tag in article.tags -%}
-      <a href="/blogs/wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+      <a href="/blogs/the_wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
     {%- endfor -%}
        
   <header {{ block.shopify_attributes }}>
