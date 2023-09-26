@@ -77,7 +77,7 @@
             </div>
             <div class="">
               {%- for tag in article.tags -%}
-                <a href="/blogs/the_wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                <a href="/blogs/the-wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
               {%- endfor -%}
           </div> 
             {%- if show_excerpt -%}
