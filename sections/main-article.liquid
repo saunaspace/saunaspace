@@ -3,85 +3,99 @@
 {{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
 {%- render 'blog-nav' -%}
 
-<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+<article
+  class="article-template"
+  itemscope
+  itemtype="http://schema.org/BlogPosting">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when '@app' -%}
+      <div class="page-width page-width--narrow">
+        {% render block %}
+      </div>
+      {%- when 'featured_image' -%}
+
+      <div class="article-header" style="background: url('{{ article.image | image_url }}') center/cover no-repeat; margin-top: 0;">
         <div class="page-width page-width--narrow">
-          {% render block %}
-        </div>
-      {%- when 'featured_image'-%}
-   
-<div class="article-header" style="background: url('{{ article.image | image_url }}') center/cover no-repeat; margin-top: 0;">
-  <div class="page-width page-width--narrow">
-    {%- for tag in article.tags -%}
-      <a href="/blogs/the_wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-    {%- endfor -%}
-       
-  <header {{ block.shopify_attributes }}>
+          {%- for tag in article.tags -%}
+            <a href="/blogs/the_wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>
+            {% unless forloop.last %},
+            {% endunless %}
+          {%- endfor -%}
+
+          <header {{ block.shopify_attributes }}>
             <h1 class="article-template__title" itemprop="headline">{{ article.title | escape }}</h1>
-            {% if article.metafields.custom.eyebrow_statement  != blank %}
+            {% if article.metafields.custom.eyebrow_statement != blank %}
               <p class="etica">{{ article.metafields.custom.eyebrow_statement }}</p>
             {%- endif -%}
-            
-              <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
-           
-              <span class="caption-with-letter-spacing" itemprop="author" itemscope itemtype="http://schema.org/Person">
-                <span itemprop="name">{{ article.author }}</span>
-              </span>
-            
+
+            <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
+
+            <span
+              class="caption-with-letter-spacing"
+              itemprop="author"
+              itemscope
+              itemtype="http://schema.org/Person">
+              <span itemprop="name">{{ article.author }}</span>
+            </span>
+
           </header>
-            <div class="article-template__social-sharing" {{ block.shopify_attributes }}>
-              <share-button class="share-button" {{ block.shopify_attributes }}>
-                <button class="share-button__button hidden">
+          <div class="article-template__social-sharing" {{ block.shopify_attributes }}>
+            <share-button class="share-button" {{ block.shopify_attributes }}>
+              <button class="share-button__button hidden">
+                {% render 'icon-share' %}
+                {{ block.settings.share_label | escape }}
+              </button>
+              <details id="Details-{{ block.id }}-{{ section.id }}">
+                <summary class="share-button__button">
                   {% render 'icon-share' %}
                   {{ block.settings.share_label | escape }}
-                </button>
-                <details id="Details-{{ block.id }}-{{ section.id }}">
-                  <summary class="share-button__button">
-                    {% render 'icon-share' %}
-                    {{ block.settings.share_label | escape }}
-                  </summary>
-                  <div id="Article-share-{{ section.id }}" class="share-button__fallback motion-reduce">
-                    <div class="field">
-                      <span id="ShareMessage-{{ section.id }}" class="share-button__message hidden" role="status">
-                      </span>
-                      <input type="text"
-                            class="field__input"
-                            id="url"
-                            value="{{ request.origin | append: article.url }}"
-                            placeholder="{{ 'general.share.share_url' | t }}"
-                            onclick="this.select();"
-                            readonly
-                      >
-                      <label class="field__label" for="url">{{ 'general.share.share_url' | t }}</label>
-                    </div>
-                    <button class="share-button__close hidden no-js-hidden">
-                      {% render 'icon-close' %}
-                      <span class="visually-hidden">{{ 'general.share.close' | t }}</span>
-                    </button>
-                    <button class="share-button__copy no-js-hidden">
-                      {% render 'icon-clipboard' %}
-                      <span class="visually-hidden">{{ 'general.share.copy_to_clipboard' | t }}</span>
-                    </button>
+                </summary>
+                <div id="Article-share-{{ section.id }}" class="share-button__fallback motion-reduce">
+                  <div class="field">
+                    <span
+                      id="ShareMessage-{{ section.id }}"
+                      class="share-button__message hidden"
+                      role="status"></span>
+                    <input
+                      type="text"
+                      class="field__input"
+                      id="url"
+                      value="{{ request.origin | append: article.url }}"
+                      placeholder="{{ 'general.share.share_url' | t }}"
+                      onclick="this.select();"
+                      readonly>
+                    <label class="field__label" for="url">{{ 'general.share.share_url' | t }}</label>
                   </div>
-                </details>
-              </share-button>
-              <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
-            </div>
-          </div>  
+                  <button class="share-button__close hidden no-js-hidden">
+                    {% render 'icon-close' %}
+                    <span class="visually-hidden">{{ 'general.share.close' | t }}</span>
+                  </button>
+                  <button class="share-button__copy no-js-hidden">
+                    {% render 'icon-clipboard' %}
+                    <span class="visually-hidden">{{ 'general.share.copy_to_clipboard' | t }}</span>
+                  </button>
+                </div>
+              </details>
+            </share-button>
+            <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
+          </div>
         </div>
-        {%- when 'content'-%}
-          <div class="article-template__content page-width page-width--narrow rte" itemprop="articleBody" {{ block.shopify_attributes }}>
-              {{ article.content }}
-              <ol id="footnotes-container"></ol>
-          </div>
-          <div class="article-template__back element-margin-top center">
-            <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
-              <span class="icon-wrap">{% render 'icon-arrow' %}</span>
-              {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
-            </a>
-          </div>
+      </div>
+      {%- when 'content' -%}
+      <div
+        class="article-template__content page-width page-width--narrow rte"
+        itemprop="articleBody"
+        {{ block.shopify_attributes }}>
+        {{ article.content }}
+        <ol id="footnotes-container"></ol>
+      </div>
+      <div class="article-template__back element-margin-top center">
+        <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
+          <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+          {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+        </a>
+      </div>
       <div class="article-author">
         <div class="container">
           <div class="author-bio row">
@@ -90,8 +104,8 @@
             </div>
             <div class="col-8">
               <h2>About the Author</h2>
-              <p>2008 Brian transformed his health by creating his own incandescent electric light bath. In 2013, he founded SaunaSpace®, a company that combines cutting-edge incandescent  infrared technology with the age-old practice of sauna. 
-In 2023, he brings a refreshing approach to natural living, biohacking and natural health transformation.</p>
+              <p>2008 Brian transformed his health by creating his own incandescent electric light bath. In 2013, he founded SaunaSpace®, combining cutting-edge incandescent  infrared technology with the age-old practice of sauna. 
+                In 2023, he brings a refreshing approach to natural living, biohacking and natural health transformation.</p>
             </div>
           </div>
         </div>
@@ -101,153 +115,148 @@ In 2023, he brings a refreshing approach to natural living, biohacking and natur
 
 
 </article>
- 
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+
     // Select all <sup> tags with a data-footnote attribute
     const footnoteElements = document.querySelectorAll('sup[data-footnote]');
-    
+
     // Get the footnotes container
     const footnotesContainer = document.getElementById('footnotes-container');
-    
+
     // Initialize a counter for footnote numbers
     let counter = 1;
-  
+
     footnoteElements.forEach((el, index) => {
+
       // Get the footnote content and link from the data attributes
       const footnoteContent = el.getAttribute('data-footnote');
       const footnoteLink = el.getAttribute('data-footnote-link');
-      
-    // Get the text immediately before the <sup> element (in this case, it's wrapped in a <span>)
+
+      // Get the text immediately before the <sup> element (in this case, it's wrapped in a <span>)
       const precedingTextElement = el.previousElementSibling;
-    
+
       // Create a new anchor element to make the preceding text clickable
       const precedingTextLink = document.createElement('a');
       precedingTextLink.href = `#footnote-${counter}`;
+
       // Copy the text from the span to the new anchor element
       if (precedingTextElement) {
         precedingTextLink.innerHTML = precedingTextElement.innerHTML;
         precedingTextElement.innerHTML = '';
         precedingTextElement.appendChild(precedingTextLink);
       }
-    
+
       // Create a new element for the footnote number
       const footnoteNumber = document.createElement('a');
       footnoteNumber.innerHTML = counter;
       footnoteNumber.href = `#footnote-${counter}`;
       footnoteNumber.id = `ref-footnote-${counter}`;
 
-      
+
       // Insert the footnote number inside the <sup> tag
       el.appendChild(footnoteNumber);
-  
+
       // Create a new element for the footnote content at the bottom
       const newFootnote = document.createElement('li');
-      
+
       // Include the footnote link if available
       if (footnoteLink) {
         newFootnote.innerHTML = `<span id="footnote-${counter}">${footnoteContent} <a href="${footnoteLink}" target="_blank">[source]</a></span>`;
       } else {
         newFootnote.innerHTML = `<span id="footnote-${counter}">${footnoteContent}</span>`;
       }
-      
+
       // Append the new footnote to the footnotes container
       footnotesContainer.appendChild(newFootnote);
-      
+
       // Increment the counter
       counter++;
     });
   });
-  
 </script>
 
 
 {% schema %}
-{
-  "name": "t:sections.main-article.name",
-  "tag": "section",
-  "class": "section",
-  "blocks": [
-    {
-      "type": "@app"
-    },
-    {
-      "type": "featured_image",
-      "name": "t:sections.main-article.blocks.featured_image.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "image_height",
-          "options": [
-            {
-              "value": "adapt",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
-            },
-            {
-              "value": "small",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
-            },
-            {
-              "value": "medium",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
-            },
-            {
-              "value": "large",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
-            }
-          ],
-          "default": "adapt",
-          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
-          "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
-        }
-      ]
-    },
-    {
-      "type": "title",
-      "name": "t:sections.main-article.blocks.title.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "blog_show_date",
-          "default": true,
-          "label": "t:sections.main-article.blocks.title.settings.blog_show_date.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "blog_show_author",
-          "default": false,
-          "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
-        }
-      ]
-    },
-    {
-      "type": "content",
-      "name": "t:sections.main-article.blocks.content.name",
-      "limit": 1
-    },
-    {
-      "type": "share",
-      "name": "t:sections.main-article.blocks.share.name",
-      "limit": 2,
-      "settings": [
-        {
-          "type": "text",
-          "id": "share_label",
-          "label": "t:sections.main-article.blocks.share.settings.text.label",
-          "default": "Share"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-article.blocks.share.settings.title_info.content"
-        }
-      ]
-    }
-  ]
-}
+  {
+    "name": "t:sections.main-article.name",
+    "tag": "section",
+    "class": "section",
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "featured_image",
+        "name": "t:sections.main-article.blocks.featured_image.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "select",
+            "id": "image_height",
+            "options": [
+              {
+                "value": "adapt",
+                "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
+              }, {
+                "value": "small",
+                "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
+              }, {
+                "value": "medium",
+                "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
+              }, {
+                "value": "large",
+                "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
+              }
+            ],
+            "default": "adapt",
+            "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
+            "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "name": "t:sections.main-article.blocks.title.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "blog_show_date",
+            "default": true,
+            "label": "t:sections.main-article.blocks.title.settings.blog_show_date.label"
+          }, {
+            "type": "checkbox",
+            "id": "blog_show_author",
+            "default": false,
+            "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
+          }
+        ]
+      },
+      {
+        "type": "content",
+        "name": "t:sections.main-article.blocks.content.name",
+        "limit": 1
+      }, {
+        "type": "share",
+        "name": "t:sections.main-article.blocks.share.name",
+        "limit": 2,
+        "settings": [
+          {
+            "type": "text",
+            "id": "share_label",
+            "label": "t:sections.main-article.blocks.share.settings.text.label",
+            "default": "Share"
+          }, {
+            "type": "paragraph",
+            "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
+          }, {
+            "type": "paragraph",
+            "content": "t:sections.main-article.blocks.share.settings.title_info.content"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}
