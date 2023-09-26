@@ -20,9 +20,17 @@
 
 <div class="header-blog">
 
+{% if current_tags.size > 0 %}
+<div class="tag-header">
+  <p>Category</p>
+  <h1>{{ current_tags.first }}</h1>
+  </div>
+{% else %}
   <p>Brian Richards Presents:</p>
   <h1>The Wavelength</h1>
   <p>Powered by SaunaSpace</p>
+{% endif %}
+
 
 </div>
 

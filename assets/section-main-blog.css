@@ -159,3 +159,34 @@
   padding-left: 0;
   padding-right: 0;
 }
+
+.tag-header {
+  background: url('https://cdn.shopify.com/s/files/1/0026/7229/6025/files/SS40-1-of-1_1512x_0126b0cb-6e90-4278-b713-c8f6ff1b17f4.jpg?v=1695741114') no-repeat center;
+  color: #fff;
+  padding: 120px 0;
+  position: relative;
+}
+
+.tag-header:before {
+  position: absolute;
+  content: '';
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,.4);
+}
+
+.tag-header h1 {
+  color: #fff;
+  z-index: 1;
+  position: relative;
+}
+
+.tag-header p {
+  font-size: 10px;
+  text-transform: uppercase;
+  position: relative;
+}
