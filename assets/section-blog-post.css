@@ -215,7 +215,7 @@ h1.article-template__title {
   text-align: center;
   padding: 10vh 1rem;
   position: relative;
-  z-index: -1;
+  z-index: 1;
 }
 
 .article-header:before {
