@@ -66,7 +66,7 @@
 
 .header-blog {
   text-align: center;
-  margin: 5rem auto 0;
+  margin: 0 auto 5rem;
 }
 
 .header-blog h1 {
@@ -161,23 +161,17 @@
 }
 
 .tag-header {
-  background: url('https://cdn.shopify.com/s/files/1/0026/7229/6025/files/SS40-1-of-1_1512x_0126b0cb-6e90-4278-b713-c8f6ff1b17f4.jpg?v=1695741114') no-repeat center;
+  background: #c67a26;
   color: #fff;
-  padding: 120px 0;
+  padding: 13vh 1rem;
   position: relative;
 }
 
-.tag-header:before {
-  position: absolute;
-  content: '';
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,.4);
+.tag-header-main {
+  padding: 13vh 1rem;
+  position: relative;
 }
+
 
 .tag-header h1 {
   color: #fff;
@@ -189,4 +183,19 @@
   font-size: 10px;
   text-transform: uppercase;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .ratio {
+    flex-flow: column;
+  }
+  .card__inner.ratio {
+    width: 100% !important
+  }
+  .card__media, .card .media {
+    position: relative !important;
+  }
+  .article-card__image--medium .ratio:before {
+    padding-bottom: 1rem !important;
+  }
 }
