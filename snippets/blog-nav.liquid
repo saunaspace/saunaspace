@@ -1,150 +1,180 @@
-<div class="navbar-inner">
-    <div class="container">
-  
-        <div class="navbar-center-wrapper">
-        <div class="navbar-collapse collapse">
-            <ul id="menu-header-menu-1" class="nav">
-                <li id="mgt-menu-item-613" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                    <a title="Blog Home" href="/blogs/the-wavelength/">Blog Home</a>
-                </li>
-                    <li id="mgt-menu-item-612" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                        <a title="Sauna Science" href="/blogs/the-wavelength/tagged/sauna-science/">Sauna Science</a>
-                    </li>
-                    <li id="mgt-menu-item-472" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                        <a title="Products" href="/blogs/the-wavelength/tagged/products/">Products</a>
-                    </li>
-                    <li id="mgt-menu-item-611" class="menu-item menu-item-type-taxonomy menu-item-object-category">
-                        <a title="Lifestyle" href="/blogs/the-wavelength/tagged/lifestyle/">Lifestyle</a>
-                    </li>
-                </ul>
-            </div>                  
-        </div>
+<div class="navbar-inner stickyBG">
+  <div class="container">
+
+    <div class="navbar-center-wrapper">
+      <div class="navbar-collapse collapse">
+        <ul id="menu-header-menu-1" class="nav">
+          <li id="mgt-menu-item-613" class="menu-item menu-item-type-taxonomy menu-item-object-category">
+            <a title="Blog Home" href="/blogs/the-wavelength/">Blog Home</a>
+          </li>
+          <li id="mgt-menu-item-612" class="menu-item menu-item-type-taxonomy menu-item-object-category">
+            <a title="Sauna Science" href="/blogs/the-wavelength/tagged/sauna-science/">Sauna Science</a>
+          </li>
+          <li id="mgt-menu-item-472" class="menu-item menu-item-type-taxonomy menu-item-object-category">
+            <a title="Products" href="/blogs/the-wavelength/tagged/products/">Products</a>
+          </li>
+          <li id="mgt-menu-item-611" class="menu-item menu-item-type-taxonomy menu-item-object-category">
+            <a title="Lifestyle" href="/blogs/the-wavelength/tagged/lifestyle/">Lifestyle</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
+</div>
 
 
+<header role="banner" class="banner">
+  <nav class="nav" role="navigation">
+    <ul class="nav__list">
+      <li>
+        <input
+          id="group-1"
+          type="checkbox"
+          hidden />
+        <label for="group-1">
+          <span class="fa fa-angle-right"></span>Blog Menu</label>
+        <ul class="group-list">
+          <li>
+            <a title="Blog Home" href="/blogs/the-wavelength/">Blog Home</a>
+          </li>
+          <li>
+            <a title="Sauna Science" href="/blogs/the-wavelength/tagged/sauna-science/">Sauna Science</a>
+          </li>
+          <li>
+            <a title="Products" href="/blogs/the-wavelength/tagged/products/">Products</a>
+          </li>
+          <li>
+            <a title="Lifestyle" href="/blogs/the-wavelength/tagged/lifestyle/">Lifestyle</a>
+          </li>
+        </ul>
+      </li>
 
-  <header role="banner" class="banner">
-    <nav class="nav" role="navigation">
-      <ul class="nav__list">
-        <li>
-          <input id="group-1" type="checkbox" hidden />
-          <label for="group-1"><span class="fa fa-angle-right"></span>Blog Menu</label>
-          <ul class="group-list">
-            <li><a title="Blog Home" href="/blogs/the-wavelength/">Blog Home</a></li>
-                <li><a title="Sauna Science" href="/blogs/the-wavelength/tagged/sauna-science/">Sauna Science</a></li>
-                <li><a title="Products" href="/blogs/the-wavelength/tagged/products/">Products</a></li>
-                <li><a title="Lifestyle" href="/blogs/the-wavelength/tagged/lifestyle/">Lifestyle</a></li>
-          </ul>
-        </li>
-        
-      </ul>
-    </nav>
-  </header>
+    </ul>
+  </nav>
+</header>
 
-  <style>
-@media(min-width: 991px) {
+<style>
+  @media(min-width: 991px) {
     header.banner {
-        display: none;
+      display: none;
     }
-}
+  }
 
-@media(max-width: 990px) {
+  @media(max-width: 990px) {
     .navbar-inner {
-        display: none;
+      display: none;
     }
-}
+  }
 
-/**
+  /**
  * Hidden fallback
  */
-[hidden] {
-  display: none !important;
-  visibility: hidden;
-}
-/**
+  [hidden] {
+    display: none !important;
+    visibility: hidden;
+  }
+  /**
  * Styling navigation
  */
-header.banner {
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 100%;
-  background: #6d1c0f;
-  box-shadow: 0 3px 12px rgba(0,0,0,.25);
-}
+  header.banner {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100%;
+    background: #6d1c0f;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  }
 
-header.banner nav {
+  header.banner nav {
     display: block;
-}
+  }
 
-header.banner nav ul {
+  header.banner nav ul {
     text-align: center;
-}
-/**
+  }
+  /**
  * Styling top level items
  */
-.nav a,
-.nav label {
-  display: block;
-  padding: .85rem;
-  color: #fff;
-  transition: all .25s ease-in;
-}
-.nav label {cursor: pointer;}
-/**
+  .nav a,
+  .nav label {
+    display: block;
+    padding: 0.85rem;
+    color: #fff;
+    transition: all 0.25s ease-in;
+  }
+  .nav label {
+    cursor: pointer;
+  }
+  /**
  * Styling first level lists items
  */
-.group-list a,
-.group-list label {
- border-bottom: 1px solid #eee;
- display: block;
- text-decoration: none;
-}
+  .group-list a,
+  .group-list label {
+    border-bottom: 1px solid #eee;
+    display: block;
+    text-decoration: none;
+  }
 
-.nav__list li {
+  .nav__list li {
     list-style: none;
     margin-left: 0;
     display: block;
-}
-/**
+  }
+  /**
  * Styling second level list items
  */
-.sub-group-list a,
-.sub-group-list label {
-  padding-left: 4rem;
-  background: #353535;
-}
-/**
+  .sub-group-list a,
+  .sub-group-list label {
+    padding-left: 4rem;
+    background: #353535;
+  }
+  /**
  * Styling third level list items
  */
-.sub-sub-group-list a,
-.sub-sub-group-list label {
-  padding-left: 6rem;
-  background: #454545;
-}
-/**
+  .sub-sub-group-list a,
+  .sub-sub-group-list label {
+    padding-left: 6rem;
+    background: #454545;
+  }
+  /**
  * Hide nested lists
  */
-.group-list,
-.sub-group-list,
-.sub-sub-group-list {
-  height: 100%;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .5s ease-in-out;
-}
- 
-.nav__list input[type=checkbox]:checked + label + ul {
-	/* reset the height when checkbox is checked */
-  max-height: 1000px;
-}
-/**
+  .group-list,
+  .sub-group-list,
+  .sub-sub-group-list {
+    height: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+
+  .nav__list input[type=checkbox]:checked + label + ul {
+    /* reset the height when checkbox is checked */
+    max-height: 1000px;
+  }
+  /**
  * Rotating chevron icon
  */
-label > span {
-  float: right;
-  transition: transform .65s ease;
-}
-.nav__list input[type=checkbox]:checked + label > span {transform: rotate(90deg);}
+  label > span {
+    float: right;
+    transition: transform 0.65s ease;
+  }
+  .nav__list input[type=checkbox]:checked + label > span {
+    transform: rotate(90deg);
+  }
+</style>
 
-  </style>
+<script>
+
+
+  setInterval(function() {
+    if ($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky")) {
+      $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('#ju_Con_837251').css('display') == 'block') {
+      $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
+    } else if (!$('.navBG').hasClass("sticky")) {
+      $('.stickyBG').css('transform', 'translateY(-252px)');
+    } else if ($('.navBG').hasClass("sticky")) {
+      $('.stickyBG').css('transform', 'translateY(62px)');
+    }
+  }, 1000);
+</script>

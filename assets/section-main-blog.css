@@ -179,3 +179,18 @@
   text-transform: uppercase;
   position: relative;
 }
+
+@media (max-width: 768px) {
+  .ratio {
+    flex-flow: column;
+  }
+  .card__inner.ratio {
+    width: 100% !important
+  }
+  .card__media, .card .media {
+    position: relative !important;
+  }
+  .article-card__image--medium .ratio:before {
+    padding-bottom: 1rem !important;
+  }
+}

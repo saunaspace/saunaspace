@@ -265,3 +265,12 @@
 .dark .site-header-home .navBG.sticky {
   background: #000;
 }
+
+
+.dark .tag-header {
+  background: #2a2727
+}
+
+.dark .header-blog h1 {
+  color: #fff;
+}
