@@ -167,6 +167,11 @@
   position: relative;
 }
 
+.tag-header-main {
+  padding: 13vh 1rem;
+  position: relative;
+}
+
 
 .tag-header h1 {
   color: #fff;

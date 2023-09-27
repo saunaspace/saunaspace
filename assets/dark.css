@@ -274,3 +274,12 @@
 .dark .header-blog h1 {
   color: #fff;
 }
+
+.dark .article-template__content a {
+  color: #c67a26 !important;
+}
+
+.dark .article-template__content a:hover {
+  text-decoration: underline !important;
+  color: #c67a26 !important;
+}
