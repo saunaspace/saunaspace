@@ -201,5 +201,6 @@
 }
 
 .blog-description {
-  padding: 0 30rem
+  max-width: 63ch;
+  margin: 0 auto;
 }
