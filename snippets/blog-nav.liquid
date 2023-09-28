@@ -1,4 +1,4 @@
-<div class="navbar-inner stickyBG">
+<div class="navbar-inner stickyBG blog-nav">
   <div class="container">
 
     <div class="navbar-center-wrapper">
@@ -66,6 +66,10 @@
     }
   }
 
+
+  .blog-nav.stickyBG {
+    transform: translateY(93px);
+  }
   /**
  * Hidden fallback
  */
@@ -168,13 +172,13 @@
 
   setInterval(function() {
     if ($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky")) {
-      $('.stickyBG').css('transform', 'translateY(-252px)');
+      $('.stickyBG').css('transform', 'translateY(93px)');
     } else if ($('#ju_Con_837251').css('display') == 'block') {
       $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
     } else if (!$('.navBG').hasClass("sticky")) {
-      $('.stickyBG').css('transform', 'translateY(-252px)');
+      $('.stickyBG').css('transform', 'translateY(93px)');
     } else if ($('.navBG').hasClass("sticky")) {
       $('.stickyBG').css('transform', 'translateY(62px)');
     }
-  }, 1000);
+  }, 10);
 </script>
