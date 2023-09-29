@@ -3016,7 +3016,7 @@ section:not(.shopify-section), .shopify-policy__body {
 
 .nav-on-top {
 	position: fixed;
-	z-index: 3;
+	z-index: 999;
 	left: 0; right: 0;
 	margin: auto;
 	width: 100%;

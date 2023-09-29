@@ -23,36 +23,6 @@
 </div>
 
 
-<header role="banner" class="banner">
-  <nav class="nav" role="navigation">
-    <ul class="nav__list">
-      <li>
-        <input
-          id="group-1"
-          type="checkbox"
-          hidden />
-        <label for="group-1">
-          <span class="fa fa-angle-right"></span>Blog Menu</label>
-        <ul class="group-list">
-          <li>
-            <a title="Blog Home" href="/blogs/the-wavelength/">Blog Home</a>
-          </li>
-          <li>
-            <a title="Science" href="/blogs/the-wavelength/tagged/science/">Science</a>
-          </li>
-          <li>
-            <a title="Products" href="/blogs/the-wavelength/tagged/products/">Products</a>
-          </li>
-          <li>
-            <a title="Lifestyle" href="/blogs/the-wavelength/tagged/lifestyle/">Lifestyle</a>
-          </li>
-        </ul>
-      </li>
-
-    </ul>
-  </nav>
-</header>
-
 <style>
   @media(min-width: 991px) {
     header.banner {
@@ -64,11 +34,25 @@
     .navbar-inner {
       display: none;
     }
+
+    .blog-nav ul li {
+      display: inline-block;
+      padding: 10px;
+    }
+    .blog-nav .container {
+      width: 100% !important;
+    }
   }
 
-
-  .blog-nav.stickyBG {
-    transform: translateY(93px);
+  @media(max-width: 768px) {
+    .blog-nav ul li {
+      display: inline-block;
+      padding: 8px 0;
+    }
+    .blog-nav ul li a {
+      padding: 2px 10px;
+      font-size: 14px;
+    }
   }
   /**
  * Hidden fallback
@@ -165,10 +149,6 @@
   }
   .nav__list input[type=checkbox]:checked + label > span {
     transform: rotate(90deg);
-  }
-
-  .blog-nav.stickyBG li {
-    padding: 10px !important;
   }
 </style>
 
