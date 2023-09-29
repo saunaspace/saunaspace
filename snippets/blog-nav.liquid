@@ -1,4 +1,4 @@
-<div class="navbar-inner stickyBG blog-nav">
+<div class="navbar-inner blog-nav">
   <div class="container">
 
     <div class="navbar-center-wrapper">
@@ -95,6 +95,7 @@
   header.banner nav ul {
     text-align: center;
   }
+
   /**
  * Styling top level items
  */
@@ -165,20 +166,29 @@
   .nav__list input[type=checkbox]:checked + label > span {
     transform: rotate(90deg);
   }
+
+  .blog-nav.stickyBG li {
+    padding: 10px !important;
+  }
 </style>
 
 <script>
 
+  // Cache elements for performance
+  const mainHeader = document.getElementById('shopify-section-header');
+  const subMenu = document.getElementsByClassName('blog-nav');
 
-  setInterval(function() {
-    if ($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky")) {
-      $('.stickyBG').css('transform', 'translateY(93px)');
-    } else if ($('#ju_Con_837251').css('display') == 'block') {
-      $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
-    } else if (!$('.navBG').hasClass("sticky")) {
-      $('.stickyBG').css('transform', 'translateY(93px)');
-    } else if ($('.navBG').hasClass("sticky")) {
-      $('.stickyBG').css('transform', 'translateY(62px)');
-    }
-  }, 10);
+  // Function to update sub-menu position
+  function updateSubMenuPosition() {
+    const mainHeaderHeight = mainHeader.offsetHeight;
+
+    // Update sub-menu top position
+    subMenu.style.top = `${mainHeaderHeight}px`;
+  }
+
+  // Attach scroll event
+  window.addEventListener('scroll', updateSubMenuPosition);
+
+  // Initial position update
+  updateSubMenuPosition();
 </script>

@@ -246,6 +246,13 @@
   
   </div>
   <!--nav-wrap-->
+
+  {% comment %} blog nav {% endcomment %}
+  {% if request.path contains '/blogs/the-wavelength' %}
+  <!-- Your code for this specific blog archive page here -->
+  {%- render 'blog-nav' -%}
+{% endif %}
+  
 </div>
 
 <div class="nav-on-top">
