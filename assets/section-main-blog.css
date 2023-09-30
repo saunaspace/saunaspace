@@ -199,3 +199,9 @@
     padding-bottom: 1rem !important;
   }
 }
+
+.blog-description {
+  max-width: 63ch;
+  margin: 0 auto;
+}
+

@@ -1,7 +1,6 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 {{ 'headsup.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
-{%- render 'blog-nav' -%}
 
 <article
   class="article-template"
@@ -18,7 +17,7 @@
       <div class="article-header" style="background: url('{{ article.image | image_url }}') center/cover no-repeat; margin-top: 0;">
         <div class="page-width page-width--narrow">
           {%- for tag in article.tags -%}
-            <a href="/blogs/the_wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>
+            <a href="/blogs/the-wavelength/tagged/{{ tag | handle }}" class="tag-article ">{{ tag }}</a>
             {% unless forloop.last %},
             {% endunless %}
           {%- endfor -%}
