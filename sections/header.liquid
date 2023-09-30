@@ -246,6 +246,13 @@
   
   </div>
   <!--nav-wrap-->
+
+  {% comment %} blog nav {% endcomment %}
+  {% if request.path contains '/blogs/the-wavelength' %}
+  <!-- Your code for this specific blog archive page here -->
+  {%- render 'blog-nav' -%}
+{% endif %}
+  
 </div>
 
 <div class="nav-on-top">
@@ -458,7 +465,7 @@
           ></span>
         </a>
         <a
-          href="https://blog.sauna.space"
+          href="/blogs/wavelength"
           class="nav-learn-blog"
           target="_blank"
           >See all blog articles</a
@@ -649,21 +656,24 @@ customElements.define('sticky-header',
       "id": "logo_position",
       "options": [
         {
-          "value": "middle-left",
-          "label": "t:sections.header.settings.logo_position.options__1.label"
-        },
-        {
           "value": "top-left",
           "label": "t:sections.header.settings.logo_position.options__2.label"
         },
         {
           "value": "top-center",
           "label": "t:sections.header.settings.logo_position.options__3.label"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.header.settings.logo_position.options__1.label"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.header.settings.logo_position.options__4.label"
         }
       ],
       "default": "middle-left",
-      "label": "t:sections.header.settings.logo_position.label",
-      "info": "t:sections.header.settings.logo_position.info"
+      "label": "t:sections.header.settings.logo_position.label"
     },
     {
       "type": "link_list",
@@ -700,6 +710,26 @@ customElements.define('sticky-header',
       "default": true,
       "label": "t:sections.header.settings.enable_sticky_header.label",
       "info": "t:sections.header.settings.enable_sticky_header.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.mobile_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_logo_position",
+      "options": [
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.mobile_logo_position.options__1.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.mobile_logo_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.header.settings.mobile_logo_position.label"
     },
     {
       "type": "header",

@@ -550,7 +550,7 @@
                 
             </div>
 
-            {% unless product.title contains "Heat Lamp" or product.title contains "B-Grade ThermaLight" %}
+            {% unless product.title contains "Heat Lamp" %}
 
             {%- assign eligible_for_returns = product.metafields.my_fields.not_eligible_for_return -%}
             {%- assign thirty_day_returns = product.metafields.my_fields.thirty_day_returns -%}

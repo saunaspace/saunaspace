@@ -10,7 +10,7 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
 /* << TriplePixel :: end*/
 </script>{% render 'pagefly-head' %}
   <link rel="stylesheet" href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css">
-  <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData;</script>
+  <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{cart | json}}; bcpo.ogFormData = FormData; bcpo.money_with_currency_format = {{ shop.money_with_currency_format  | json }};bcpo.money_format = {{ shop.money_format  | json }};</script>
     <link
     rel="stylesheet"
     href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css"
@@ -88,7 +88,6 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
-
       :root {
         --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
@@ -311,28 +310,6 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
 
     {% section 'footer' %}
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
       <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
@@ -462,7 +439,6 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
   }
 
 
-
   // Listen for changes in the OS settings.
   // Note: the arrow function shorthand works only in modern browsers,
   // for older browsers define the function using the function keyword.
@@ -489,63 +465,7 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
     ></script>
     {% endif %}
 
-  <script src="//shipping-rates-calculator.incubate.dev/js/core/main.min.js?timestamp=1694439138&shop=saunaspace.myshopify.com" defer></script>
-
-<script src="//app.shippingratescalculator.com/js/core/main.min.js?timestamp=1692982574&shop=saunaspace.myshopify.com" defer></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+  <script src="//app.shippingratescalculator.com/js/core/main.min.js?timestamp=1689801771&shop=saunaspace.myshopify.com" defer></script>
 
   
 

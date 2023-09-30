@@ -87,7 +87,6 @@
 
 .card--media .card__inner .card__content {
   padding: calc(var(--card-image-padding) + 1rem);
-  position: relative;
 }
 
 .card__content {
@@ -109,6 +108,7 @@
 
 .card:not(.ratio) > .card__content {
   grid-template-rows: max-content minmax(0,1fr) max-content auto;
+  text-align: left;
 }
 
 @media screen and (min-width: 750px) {
@@ -169,7 +169,6 @@
   bottom: 0;
   content: "";
   left: 0;
-  position: absolute;
   right: 0;
   top: 0;
   z-index: 1;
@@ -203,6 +202,7 @@
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
     transition: transform var(--duration-long) ease;
+    cursor: pointer;
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,

@@ -905,6 +905,10 @@ summary::-webkit-details-marker {
 	list-style-type: none;
 }
 
+.text-uppercase {
+    text-transform: uppercase;
+}
+
 @media screen and (min-width: 750px) {
   .grid {
     column-gap: var(--grid-desktop-horizontal-spacing);
@@ -1123,10 +1127,6 @@ summary::-webkit-details-marker {
 
   .slider--tablet.grid--peek .grid__item:first-of-type {
     margin-left: 1.5rem;
-  }
-
-  .slider--tablet.grid--peek .grid__item:last-of-type {
-    margin-right: 1.5rem;
   }
 
 
@@ -3016,7 +3016,7 @@ section:not(.shopify-section), .shopify-policy__body {
 
 .nav-on-top {
 	position: fixed;
-	z-index: 3;
+	z-index: 999;
 	left: 0; right: 0;
 	margin: auto;
 	width: 100%;
@@ -5417,11 +5417,14 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	.btn-outline { background: none; border: 2px solid #FFF; }
 	.btn-bordered { background: none; color: #C67A26; border: 2px solid #C67A26;}
 
-.genericText, .rte {
+.genericText {
 	max-width: 650px;
 	margin-bottom: var(--sectionBottom);
 }
-
+.rte {
+	max-width: 900px;
+	margin-bottom: var(--sectionBottom);
+}
 	.genericText h2 { scroll-margin-top: 70px; text-align: left; font-size: 2.4rem; text-transform: none; padding-bottom: .5em; border-bottom: 1px solid #939393; margin: 1em 0; }
 	.genericText h3 { font-size: 1.6rem; text-transform: none; margin-top: 2em; line-height: 1.4em; }
 	.genericText p + h2 { margin-top: 2em; }

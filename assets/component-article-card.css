@@ -48,6 +48,7 @@
 
 .article-card .card__heading {
   margin-bottom: 0.6rem;
+  line-height: 1.1;
 }
 
 .blog-articles .article-card .card__information,
@@ -139,4 +140,17 @@
       margin-bottom: 7rem;
     }
   }
+}
+
+
+.blog-articles .article-card__image-wrapper {
+  width: 100%;
+  position: relative !important;
+}
+
+.card .media.media--hover-effect>img:only-child, .card-wrapper .media.media--hover-effect>img:only-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative !important;
 }

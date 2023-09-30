@@ -20,7 +20,9 @@
 .article-template__hero-medium {
   height: 22rem;
 }
-
+#footnotes-container li {
+  padding-bottom: 20px;
+}
 .article-template__hero-large {
   height: 33rem;
 }
@@ -61,7 +63,8 @@
 
 @media screen and (min-width: 750px) {
   .article-template header {
-    margin-top: 5rem;
+    padding-top: 2rem;
+    margin-top: 0;
   }
 }
 
@@ -79,6 +82,7 @@
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  margin-bottom: 1rem;
 }
 
 .article-template__link .icon-wrap {
@@ -173,3 +177,102 @@
 .article-template__back:last-child {
   margin-bottom: 3.2rem;
 }
+h1.article-template__title {
+  color: #000;
+  text-transform: none;
+}
+
+.article-template__content h2, .article-template__content h3, .article-template__content h4, .article-template__content h5 {
+  text-align: left;
+  text-transform: none;
+  margin: .5em 0;
+}
+
+.article-template__content figcaption {
+  font-size: 14px;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.article-template__content sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+  top: -.6em;
+  font-size: 10px;
+}
+
+.article-template__content sup a {
+  text-decoration: none;
+}
+
+.article-template__content ol li {
+  list-style: auto;
+}
+
+.article-header {
+  text-align: center;
+  padding: 10vh 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.article-header:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, .4);
+}
+
+.article-header .page-width {
+  position: relative;
+  color: #fff;
+}
+
+.article-header a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: lft-etica-mono, sans-serif !important;
+  font-size: 1.3rem;
+}
+
+.share-button details {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.share-button__button {
+  color: #fff;
+}
+
+h1.article-template__title {
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 3rem !important;
+}
+.article-author {
+  background: #c67a26;
+  color: #fff;
+}
+.author-bio img {
+  max-width: 100%;
+}
+
+.author-bio {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+@media (max-width: 425px) {
+  .author-bio {
+    display: block;
+  }
+}
+
