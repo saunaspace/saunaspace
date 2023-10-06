@@ -203,6 +203,7 @@
   }
   .go-cart-mini-cart {
     position: relative;
+    color: #333;
   }
   .go-cart-mini-cart__content {
     position: relative;
@@ -251,6 +252,7 @@
     text-align: left;
     padding: 0px 0 0px 20px;
     width: 100%;
+    color: #333;
   }
   .go-cart-item__image {
     min-width: 90px;
