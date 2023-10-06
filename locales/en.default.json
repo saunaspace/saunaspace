@@ -454,6 +454,9 @@
       },
       "thank_you": {
         "contact_information_title": "Contact Info"
+      },
+      "contact": {
+        "phone_tooltip": "Send me updates about my order! Message and data rates apply. View our Terms of Service [https:\/\/sauna.space\/policies\/terms-of-service] and Privacy Policy [https:\/\/sauna.space\/policies\/privacy-policy]*"
       }
     }
   },
