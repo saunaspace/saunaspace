@@ -42,7 +42,7 @@
   endif
 -%}
 
-<div id="{{ section.settings.collection.title | handle }}" class="color-{{ section.settings.color_scheme }} isolate gradient {{ section.settings.collection.title | handle }} collection_Div">
+<div id="{{ section.settings.collection.title | handle }}" class="color-{{ section.settings.color_scheme }} isolate gradient {{ section.settings.collection.title | handle }} collection_Div" style="max-width: 1200px; margin: 0 auto;">
   <div class="collection page-width{% if show_mobile_slider %} page-width-desktop{% endif %} section-{{ section.id }}-padding">
     {%- unless section.settings.title == blank -%}
       <div class="title-wrapper-with-link{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% endif %} title-wrapper--no-top-margin">

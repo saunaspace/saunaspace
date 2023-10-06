@@ -11,12 +11,12 @@
   background: #555;
 }
 
-.dark .field__input, .dark .customer .field input, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before, .dark .shopify-policy__body {	
+.dark .field__input, .dark .customer .field input, .dark .go-cart-mini-cart, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before, .dark .shopify-policy__body {	
   background: #000;	
   color: #fff;	
 }
 
-.dark .field__label, .dark .customer .field label, .dark .addresses label {
+.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info {
   color: #999;
 }
 
