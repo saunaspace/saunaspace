@@ -173,19 +173,27 @@
         "padding_bottom": 36
       }
     },
-    "7dfd2c02-fceb-4df1-8ac2-8fec71c61a20": {
-      "type": "custom-liquid",
+    "1697043523f57cc30a": {
+      "type": "apps",
+      "blocks": {
+        "56e7b5de-9b31-439b-9626-316ce280f7be": {
+          "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/media-grid\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "56e7b5de-9b31-439b-9626-316ce280f7be"
+      ],
       "settings": {
-        "custom_liquid": "{% render 'okendo-reviews-media-grid' %}",
-        "color_scheme": "background-1",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "include_margins": true
       }
     }
   },
   "order": [
     "df444784-24e1-47b0-88ce-ec3331f47266",
     "main",
-    "7dfd2c02-fceb-4df1-8ac2-8fec71c61a20"
+    "1697043523f57cc30a"
   ]
 }
