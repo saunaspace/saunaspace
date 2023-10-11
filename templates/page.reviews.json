@@ -66,7 +66,6 @@
         "5cf361d8-5cf8-41ee-a9d8-af63ccd4bfd6": {
           "type": "review",
           "settings": {
-            "photo": "shopify:\/\/shop_images\/thomas-cowan.jpg",
             "name": "Thomas Cowan",
             "title": "<p>MD, Author and Founder of Dr. Cowan's Garden<\/p>",
             "quote": "“The SaunaSpace incandescent red light lamps and saunas are a truly revolutionary technology. Akin to bring the healing wavelengths of the sun into your home, exposure to red light, incandescent light stimulates mitochondrial function and effective detoxification. I use mine every day and believe the SaunaSpace products are one of the most profound therapeutic tools available.”",
@@ -81,7 +80,6 @@
         "802dc708-65be-4b4a-b89d-0275cf5ad5e3": {
           "type": "review",
           "settings": {
-            "photo": "shopify:\/\/shop_images\/ken-sharlin.jpg",
             "name": "Ken Sharlin",
             "title": "<p>MD, MPH, IFMP, Author<\/p>",
             "quote": "“As a doctor passionate about helping my patients identify and treat the root causes of chronic neurological conditions, the SaunaSpace has become an essential element in my toolbox. In this demanding world of ‘eat this, not that,’ SaunaSpace invites us into its sacred, protected space, where—through the healing powers of red light and heat—all we are asked to do is just sit and breathe. We need more of that in our lives.”",
@@ -96,7 +94,6 @@
         "19e06ffc-4b78-4c0e-9681-a1b9be3883ee": {
           "type": "review",
           "settings": {
-            "photo": "shopify:\/\/shop_images\/anthony-kunkel.jpg",
             "name": "Anthony Kunkel",
             "title": "<p>Long distance runner<\/p>",
             "quote": "\"I tore a quad muscle running a few years back, and my PT projected 8 weeks to recover. As a professional runner, that’s not acceptable for me. I was grateful to be able to hit the knee and quad multiple times a day with my Photon right at home, if just to warm it up before cross training sessions, but ultimately I was running again in just 4 weeks. I credit the majority of that miracle to my use of the Photon. With all the research I’ve seen behind near IR, it’s not surprising that it helps the root issues and helps avoid re-injury with added collagen and elastin to the area.\"",
@@ -111,7 +108,6 @@
         "64dc9a7a-4679-46ae-ac95-2177fa87ff42": {
           "type": "review",
           "settings": {
-            "photo": "shopify:\/\/shop_images\/cheyenne.jpg",
             "name": "JP “Young Savage” and Cheyenne “Warrior Princess” Buys",
             "title": "<p>UFC fighters<\/p>",
             "quote": "JP: \"Even the days that I’m hurt, and my body’s hurt from training, I wake up, roll straight into the sauna, it wakes me up, and I can train. In my last fight, it was almost like we rehearsed it. In that quick second my brain reacted and my body just followed.\"\n\nCheyanne: \"We use it religiously! In the last 2 months, my skin has cleared up…the sauna has been a major game-changer for us!\"",
@@ -126,7 +122,6 @@
         "d9e3bc78-e911-45e0-8811-f2cbf1b347fa": {
           "type": "review",
           "settings": {
-            "photo": "shopify:\/\/shop_images\/rico-zulkarnain.jpg",
             "name": "Rico Zulkarnain",
             "title": "<p>UK's Most Successful Futsal Star<\/p>",
             "quote": "\"Using my SaunaSpace near infrared sauna has become an integral part of my daily routine. Being an elite athlete, the benefits I’ve been experiencing both pre and post training have made a huge difference. My cardio is through the roof and my recovery times are much greater. I’m able to train twice a day and wake up the next day and get straight back into my training regime at 100%. I’m grateful to now be in a position to share SaunaSpace with the rest of Wales as we look to open our Healing Hub mid 2021. Infinite gratitude and love to the SaunaSpace fam for bringing this light into the world ❤️🙏🏽\"",
@@ -172,14 +167,25 @@
     },
     "main": {
       "type": "reviews-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "7dfd2c02-fceb-4df1-8ac2-8fec71c61a20": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% render 'okendo-reviews-media-grid' %}",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "df444784-24e1-47b0-88ce-ec3331f47266",
-    "main"
+    "main",
+    "7dfd2c02-fceb-4df1-8ac2-8fec71c61a20"
   ]
 }
