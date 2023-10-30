@@ -1,0 +1,28 @@
+.oke-stars-foreground, .oke-stars-foreground svg, .oke-stars-background svg, .oke-stars-background {
+   height: 12px;
+}
+
+.oke-stars, .oke-sr-stars {
+   line-height: 0 !important;
+   height: 12px;
+}
+
+.oke-sr-coun, .oke-sr-count-number, .oke-sr-label-text, .oke-reviewContent-body, .oke-bodyText {
+   font-family: lft-etica-mono,sans-serif!important;
+   font-size: 13px;
+}
+
+.oke-w-reviewer-avatar, .oke-qw-question-avatar, .oke-qw-answer-avatar  {
+   display: none !important;
+}
+
+
+
+.oke-w-review-side {
+   border: none !important;
+   background: transparent !important;
+}
+
+.product__info-container .okeReviews.oke-sr {
+   margin-bottom: 1rem !important;
+}

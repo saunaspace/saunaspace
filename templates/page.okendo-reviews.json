@@ -2,13 +2,43 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "79eddc16-8580-4a01-a633-2e7b69edba38": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<h1 class=\"center oke-header\">Reviews<\/h1>",
+        "color_scheme": "background-1",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    },
+    "1696867178b5954e69": {
+      "type": "apps",
+      "blocks": {
+        "aab14dba-c90a-4efc-989d-91b7377f8e05": {
+          "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "",
+            "widget_type": "reviews_widget"
+          }
+        }
+      },
+      "block_order": [
+        "aab14dba-c90a-4efc-989d-91b7377f8e05"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "79eddc16-8580-4a01-a633-2e7b69edba38",
+    "1696867178b5954e69"
   ]
 }
