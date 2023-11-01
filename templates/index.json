@@ -154,16 +154,6 @@
             "url_link": "",
             "URL_Link_Label": ""
           }
-        },
-        "37f4edcb-e2e6-4d59-96fd-36b560858757": {
-          "type": "review",
-          "settings": {
-            "name": "Customer Name",
-            "title": "Customer Job Title",
-            "quote": "Quote from customer goes here",
-            "url_link": "https:\/\/google.com",
-            "URL_Link_Label": ""
-          }
         }
       },
       "block_order": [
