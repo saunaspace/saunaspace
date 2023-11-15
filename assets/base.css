@@ -373,7 +373,7 @@ body,
 }
 
 ::selection {
-  background-color: rgba(198, 122, 38, .9);
+	background-color: rgba(198, 122, 38, .9);
 }
 
 .text-body {

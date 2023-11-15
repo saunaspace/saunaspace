@@ -5,11 +5,11 @@
       "settings": {
         "heading": "Rejuvenate at the cellular level",
         "heading-animated-1": "Experience",
-        "heading-animated-2": "Full Spectrum",
-        "heading-animated-3": "Infrared Therapy",
-        "shop-link": "\/products?filter=all",
-        "mp4": "shopify:\/\/files\/videos\/bcd31a71298749a9a9fbbb5c6e4a7883.mp4",
-        "video_link": "https:\/\/www.youtube.com\/embed\/ynDz9KxGhGU"
+        "heading-animated-2": "Full spectrum",
+        "heading-animated-3": "transformation",
+        "shop-link": "products?filter=all",
+        "mp4": "shopify:\/\/files\/videos\/sauna-space-home-hero.mp4",
+        "video_link": "https:\/\/www.youtube.com\/embed\/B_1T3gfXdZo?si=5TND5Epmk7fr4S8B"
       }
     },
     "home_template": {
@@ -111,6 +111,7 @@
         },
         "5c7f1501-2e0b-4b9f-b2f7-19598f7daf16": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "photo": "shopify:\/\/shop_images\/david-l.jpg",
             "name": "David L.",
@@ -144,6 +145,7 @@
         },
         "488e22b9-6085-4f6e-a8d2-aede56cd5edd": {
           "type": "review",
+          "disabled": true,
           "settings": {
             "photo": "shopify:\/\/shop_images\/bella-c.jpg",
             "name": "Bella C.",
