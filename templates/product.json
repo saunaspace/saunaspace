@@ -8,7 +8,7 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "5c938937-6fa4-4396-9693-db1053c3a9a2": {
+        "86c38789-545c-413f-890e-667c27e24e20": {
           "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/star-rating\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
           "settings": {
             "product": "{{product}}"
@@ -45,7 +45,7 @@
         }
       },
       "block_order": [
-        "5c938937-6fa4-4396-9693-db1053c3a9a2",
+        "86c38789-545c-413f-890e-667c27e24e20",
         "title",
         "caption",
         "price",
@@ -81,10 +81,17 @@
         "padding_bottom": 28
       }
     },
-    "1696867058bd0f01d9": {
+    "166086294781e2c8c5": {
       "type": "apps",
       "blocks": {
-        "dc7ba8e8-4c3f-46bd-857a-106e68a4d2c2": {
+        "b5b46f27-fc26-4578-a85e-7ff900dad903": {
+          "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "3fadda32-940d-472a-adf3-ce40f20ae47c": {
           "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
           "settings": {
             "product": "{{product}}",
@@ -93,26 +100,9 @@
         }
       },
       "block_order": [
-        "dc7ba8e8-4c3f-46bd-857a-106e68a4d2c2"
+        "b5b46f27-fc26-4578-a85e-7ff900dad903",
+        "3fadda32-940d-472a-adf3-ce40f20ae47c"
       ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "166086294781e2c8c5": {
-      "type": "apps",
-      "blocks": {
-        "b5b46f27-fc26-4578-a85e-7ff900dad903": {
-          "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-          "settings": {
-            "product": "{{product}}"
-          }
-        }
-      },
-      "block_order": [
-        "b5b46f27-fc26-4578-a85e-7ff900dad903"
-      ],
-      "disabled": true,
       "settings": {
         "include_margins": true
       }
@@ -127,7 +117,6 @@
     "zp-product-header-content",
     "main",
     "product-recommendations",
-    "1696867058bd0f01d9",
     "166086294781e2c8c5",
     "zp-product-footer-content"
   ]
