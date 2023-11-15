@@ -172,14 +172,100 @@
     },
     "main": {
       "type": "reviews-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "734ed0c6-23e2-4709-b3e3-e20458c749f6": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15767598366920__734ed0c6-23e2-4709-b3e3-e20458c749f6-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Feel the #Saunaspace Love<\/h2>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "template--15767598366920__734ed0c6-23e2-4709-b3e3-e20458c749f6-heading-1"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "1700050126212aba9f": {
+      "type": "apps",
+      "blocks": {
+        "f08112b5-703e-41da-b50a-b3ab9a12e0b2": {
+          "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/media-grid\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "f08112b5-703e-41da-b50a-b3ab9a12e0b2"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "7857736f-82f2-47fa-b11d-072b8ce45293": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15767598366920__7857736f-82f2-47fa-b11d-072b8ce45293-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>What Our Customers Are Saying<\/h2>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "template--15767598366920__7857736f-82f2-47fa-b11d-072b8ce45293-heading-1"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "1700050223ee4521b7": {
+      "type": "apps",
+      "blocks": {
+        "9f49e972-f468-4090-b67f-2fb6c4716372": {
+          "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "",
+            "widget_type": "reviews_widget"
+          }
+        }
+      },
+      "block_order": [
+        "9f49e972-f468-4090-b67f-2fb6c4716372"
+      ],
+      "settings": {
+        "include_margins": true
       }
     }
   },
   "order": [
     "df444784-24e1-47b0-88ce-ec3331f47266",
-    "main"
+    "main",
+    "734ed0c6-23e2-4709-b3e3-e20458c749f6",
+    "1700050126212aba9f",
+    "7857736f-82f2-47fa-b11d-072b8ce45293",
+    "1700050223ee4521b7"
   ]
 }
