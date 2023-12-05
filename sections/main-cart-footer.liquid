@@ -65,7 +65,7 @@
                 </div>
 
                 <div>
-                  {%- if cart.cart_level_discount_applications.size > 0 -%}
+                  {% comment %} {%- if cart.cart_level_discount_applications.size > 0 -%}
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                       {%- for discount in cart.cart_level_discount_applications -%}
                         <li class="discounts__discount discounts__discount--position">
@@ -75,7 +75,7 @@
                         </li>
                       {%- endfor -%}
                     </ul>
-                  {%- endif -%}
+                  {%- endif -%} {% endcomment %}
                 </div>
 
                 <!-- <small class="tax-note caption-large rte">
@@ -144,7 +144,7 @@
 {% endjavascript %}
 
 <script>
-
+  (function($){
 function potMore(f) {
 	$(".yc-financing").addClass("hideMe");
 	$("#" + f + "Col").removeClass("hideMe");
@@ -160,7 +160,7 @@ $(".yc-col-head.yc-acc").on("click",function() {
 	$(this).next().toggleClass("hideMe");
 });
 
-
+})(jQuery);
 
   document.addEventListener('DOMContentLoaded', function() {
 
