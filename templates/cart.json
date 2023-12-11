@@ -26,6 +26,9 @@
         "subtotal",
         "buttons"
       ],
+      "custom_css": [
+
+      ],
       "settings": {
         "show_cart_note": false
       }

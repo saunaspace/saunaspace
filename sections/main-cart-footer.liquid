@@ -13,7 +13,9 @@
           <textarea class="text-area field__input" name="note" form="cart" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
-     
+      <div class="yc-col  cart-pay-over-time">
+      <div class="docapp-cart-with-shipping-summary"></div>
+      </div>
         <div class="yc-col  cart-pay-over-time">
           <div class="yc-col-head yc-acc">Pay Over Time</div>
           <div class="ycf-box hideMe">
@@ -44,6 +46,7 @@
             <p class="fineprint">Check your eligibility in minutes at checkout.</p>
           </div>
         </div>
+     
         <div class="yc-col yc-col-checkout">
           <div class="yc-col-head yc-col-head-checkout">Your Order <span class="ycc-items js-contents" {{ block.shopify_attributes }}>{{ cart.item_count }} item(s)</span></div>
           <!--
@@ -56,28 +59,16 @@
           {%- when '@app' -%}
           {% render block %}
           {%- when 'subtotal' -%}
+            <div class="docapp-cart-with-coupon-summary"></div>
           <div class="js-contents" {{ block.shopify_attributes }}>
-            <div class="totals">
+            {% comment %} <div class="totals">
                   <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">
                     {{ cart.total_price | money_with_currency }}</span>
                    
                   </div>
-                </div>
+                </div> {% endcomment %}
 
-                <div>
-                  {%- if cart.cart_level_discount_applications.size > 0 -%}
-                    <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                      {%- for discount in cart.cart_level_discount_applications -%}
-                        <li class="discounts__discount discounts__discount--position">
-                          {%- render 'icon-discount' -%}
-                          {{ discount.title }}
-                          (-{{ discount.total_allocated_amount | money }})
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
-                </div>
-
+          
                 <!-- <small class="tax-note caption-large rte">
                   {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
                     {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}

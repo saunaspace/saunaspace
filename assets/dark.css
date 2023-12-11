@@ -104,8 +104,8 @@
   color: #fff !important;
 }
 
-.dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select  {	
-  background-color: #000;	
+.dark .dcDiscountBox, .dark .cbb-shipping-rates-calculator-region-select, .dark .docapp-coupon-input .docapp-coupon-input--bean-container--bean  {	
+  background-color: #000 !important;	
 }	
 
 .dark .et-location.etica, .dark .et-location.etica span {
@@ -187,40 +187,41 @@
 .dark .shopify-section h1.main-page-title {
   color: #fff !important;
 }
-.dark .yotpo div, 
-.dark .yotpo span, 
-.dark .yotpo p, 
-.dark .yotpo a, 
-.dark .yotpo img,
-.dark .yotpo i, 
-.dark .yotpo strong, 
-.dark .yotpo sup, 
-.dark .yotpo ul, 
-.dark .yotpo li, 
-.dark .yotpo form, 
-.dark .yotpo label,
-.dark .yotpo a.text-m,
-.dark .yotpo a.text-m:hover,
-.dark .yotpo .main-widget .write-question-review-buttons-container .write-question-review-button .write-question-review-button-text,
-.dark .filters-container .free-text-search-input,
-.dark .yotpo .form-group .form-element .y-input,
-.dark .yotpo .yotpo-nav-dropdown span:not(.yotpo-icon),
-.dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.selected-item,
-.dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item, 
-.dark .filters-container .yotpo-drop-down-layout .yotpo-dropdown li.list-category:hover a.non-selected-item,
-.dark .reviews-header .yotpo-drop-down-layout .yotpo-dropdown .list-category a.non-selected-item,
-.dark .yotpo .transparent-color-btn span.yotpo-icon, 
-.dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful .yotpo-sum, 
-.dark .yotpo .yotpo-review .yotpo-footer .yotpo-helpful span.label-helpful, 
-.dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-review .yotpo-footer .footer-actions .share-options-wrapper .share-options .social-link {
-  color: #FFF8E7 !important;
-}
 
 .dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons .mobile-filter-radio-button .radio-label, 
 .dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-title, 
 .dark .mobile-filters-modal .mobile-filters-modal-title .mobile-clear-all-btn,
-.dark .mobile-filters-modal .mobile-filters-modal-title .title-text {
-  color: #fff!important;
+.dark .mobile-filters-modal .mobile-filters-modal-title .title-text,
+.dark .docapp-coupon-input input[type=text].docapp-coupon-input--input,
+.dark .docapp-coupon-input .docapp-coupon-input--savings,
+.dark .docapp-coupon-input .docapp-coupon-input--bean-container--bean,
+.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button,
+.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover,
+.dark .docapp-cart-with-coupon-summary .docapp-cart-subtotal,
+.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button-text,
+.dark .docapp-cart-with-coupon-summary .docapp-cart-item span, .dark .docapp-cart-with-coupon-summary .docapp-cart-item strong,
+.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button, 
+.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text,
+.dark .docapp-cart-with-shipping-summary .docapp-cart-subtotal.acc-term,
+.dark .docapp-cart-with-shipping-summary .docapp-cart-subtotal,
+.dark .docapp-cart-with-shipping-summary .docapp-cart-shipping,
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates-title,
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate, 
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate div, 
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate label,
+.dark .docapp-cart-with-shipping-summary .docapp-est-total,
+.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button,
+.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text
+{
+  color: #fff !important;
+}
+
+
+.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover, .dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text:hover
+.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button:hover,
+.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text:hover
+{
+  color: #eee !important;
 }
 
 .dark .filters-dropdown .yotpo-dropdown-button,
@@ -240,9 +241,11 @@
   border-bottom: 1px solid #fff!important;
 }
 
-.dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container.yotpo-active-display {
-  border: solid 1px #e3e3e3!important;
+
+.dark .docapp-coupon-input input[type=text].docapp-coupon-input--input {
+  border-bottom: 1px solid #939393 !important;
 }
+
 .dark .suggested-topics-row .suggested-topic, 
 .dark .suggested-topics-row .suggested-topic-expand {
   background-color: transparent!important;

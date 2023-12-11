@@ -207,8 +207,14 @@
           "show_preview_data": true
         }
       },
-      "10274677211107884116": {
-        "type": "shopify:\/\/apps\/shipping-rates-calculator\/blocks\/app-embed-block\/de9da91b-8d51-4359-81df-b8b0288464c7",
+      "5140161176031010482": {
+        "type": "shopify:\/\/apps\/all-in-1-shipping-on-cart\/blocks\/instant-load\/6fdcf202-26c0-4288-be36-8b389f5d262c",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "17327048248777170309": {
+        "type": "shopify:\/\/apps\/all-in-1-discount-on-cart\/blocks\/instant-load\/f428e1ae-8a34-4767-8189-f8339f3ab12b",
         "disabled": false,
         "settings": {
         }
