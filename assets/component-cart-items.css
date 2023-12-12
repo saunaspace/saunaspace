@@ -114,7 +114,7 @@ max-width: calc(10rem / var(--font-body-scale));
 
 @media screen and (min-width: 750px) {
 .cart__footer.yc-cols > div {
-  flex: 0 0 calc(33.33% - 3rem);
+  flex: 0 0 calc(50% - 3rem);
   width: auto;
   margin: 0;
 }

@@ -223,52 +223,47 @@ cart-items {
 }
 
 
-
+.docapp-coupon-input,
+.docapp-cart-with-shipping-summary, .docapp-single-shipping-calculator {
+  max-width: 100% !important;
+}
 .docapp-coupon-input .docapp-coupon-input--bean-container--bean {
   padding: 10px !important;
   border-radius: 0 !important;
-  background: transparent !important;
+  background: #fff !important;
 }
 
-#shopify-block-3babba30-d8cc-4fdb-8aa6-86d8b73c0231
-  .docapp-coupon-input--button, .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button, .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button {
-  background-color: transparent !important;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-    border-bottom-color: #939393 !important;
-  color: #000 !important;
-  padding-right: 0;
+
+@media(min-width: 750px) and (max-width: 990px) {
+  .docapp-cart-with-shipping-summary .docapp-cart-item strong, .docapp-cart-with-shipping-summary .docapp-cart-item span {
+    font-size: 14px !important;
+  }
 }
 
-.docapp-coupon-input .docapp-coupon-input--message-container.docapp-alert-success {
-  //display: none;
-}
-
-.docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button, .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text {
-  color: #000 !important;
-}
-
-.docapp-coupon-input input[type=text].docapp-coupon-input--input {
-  background: transparent;
-  border-top: none !important;
-  border-left: none !important;
+.docapp-coupon-input input[type=text].docapp-coupon-input--input, 
+.docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button {
+   background: transparent !important;
+       border-top: none !important;
+    border-left: none !important;
   border-right: none !important;
-  padding-left: 0 !important;
-  border-bottom: 1px solid #939393 !important;
+  padding: 0 !important;
+  color: #000 !important;
+    border-bottom: 1px solid #939393 !important;
 }
 
-.docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover, .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button:hover, .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text:hover {
+.docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button:hover {
   background: transparent !important;
   border-top-color: transparent !important;
-  /* border-bottom: 1px solid #939393 !important; */
+  border-bottom: 1px solid #939393 !important;
   color:#000 !important;
   text-align: right !important;
 }
-.docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text, .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button {
+.docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text {
   text-align: right !important;
+  color: #000 !important;
 }
-.docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover, .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover .docapp-coupon-input--button-text {
+
+.docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button:hover .docapp-coupon-input--button-text {
   color: #000 !important;
 
 }
@@ -283,7 +278,8 @@ cart-items {
   font-size: 2rem;
 }
 
-/* cart estimated shipping calculator */
-.docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates {
-  background: transparent !important;
+.docapp-coupon-input .docapp-coupon-input--message-container {
+  border-radius: 0 !important;
+  border: none !important;
+  padding: .5rem 1rem !important;
 }

@@ -16,8 +16,9 @@
   color: #fff;	
 }
 
-.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info {
-  color: #999;
+.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info,
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate label {
+  color: #999 !important;
 }
 
 .stuck .logo, .sticky .logo {
@@ -56,7 +57,9 @@
 .dark .optimize:before, .dark .compatible:before {
   background: rgba(67,60,60,.55);
 }
-
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates {
+  background: transparent !important;
+}
 .dark .select__select,
 .dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
   background-color: #000;
@@ -65,8 +68,11 @@
 .dark .customer select {
   background: #000;
 }
-.dark .cbb-shipping-rates-error-message {
+.dark .docapp-coupon-input .docapp-coupon-input--message-container {
   background-color: #000 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  color: #eee !important;
 }
 
 .dark .cbb-shipping-rates-calculator-update-button {
@@ -195,31 +201,21 @@
 .dark .docapp-coupon-input input[type=text].docapp-coupon-input--input,
 .dark .docapp-coupon-input .docapp-coupon-input--savings,
 .dark .docapp-coupon-input .docapp-coupon-input--bean-container--bean,
-.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button,
-.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover,
-.dark .docapp-cart-with-coupon-summary .docapp-cart-subtotal,
-.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button-text,
-.dark .docapp-cart-with-coupon-summary .docapp-cart-item span, .dark .docapp-cart-with-coupon-summary .docapp-cart-item strong,
-.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button, 
-.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text,
-.dark .docapp-cart-with-shipping-summary .docapp-cart-subtotal.acc-term,
+.dark .docapp-cart-with-shipping-summary .docapp-coupon-input--input-container .docapp-coupon-input--button,
+.dark .docapp-cart-with-shipping-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover,
 .dark .docapp-cart-with-shipping-summary .docapp-cart-subtotal,
+.dark .docapp-cart-with-shipping-summary .docapp-cart-discount,
 .dark .docapp-cart-with-shipping-summary .docapp-cart-shipping,
 .dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates-title,
-.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate, 
-.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate div, 
-.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate label,
-.dark .docapp-cart-with-shipping-summary .docapp-est-total,
-.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button,
-.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text
+.dark .docapp-cart-with-shipping-summary .docapp-coupon-input--input-container .docapp-coupon-input--button-text,
+.dark .docapp-cart-with-shipping-summary .docapp-cart-item span, .dark .docapp-cart-with-shipping-summary .docapp-cart-item strong,
+.dark .docapp-cart-with-shipping-summary .docapp-coupon-input--input-container .docapp-coupon-input--button, .dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text
 {
   color: #fff !important;
 }
 
 
-.dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button:hover, .dark .docapp-cart-with-coupon-summary .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text:hover
-.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button:hover,
-.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text:hover
+.dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button:hover, .dark .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text:hover
 {
   color: #eee !important;
 }
@@ -278,11 +274,31 @@
   color: #fff;
 }
 
-.dark .article-template__content a {
+.dark .article-template__content a,
+.dark .docapp-with-discount span.docapp-shipping--button-text strong {
   color: #c67a26 !important;
 }
 
 .dark .article-template__content a:hover {
   text-decoration: underline !important;
   color: #c67a26 !important;
+}
+
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--button {
+  background: transparent !important;
+}
+
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--button:hover strong {
+  color: #fff !important;
+}
+
+
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--input, 
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--input input[type="text"].docapp-shipping-calculator--input-city, 
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--input input[type="text"].docapp-shipping-calculator--input-zip, 
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--input select.docapp-shipping-calculator--select, 
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--button,
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates {
+  background: transparent !important;
+  color: #fff !important;
 }

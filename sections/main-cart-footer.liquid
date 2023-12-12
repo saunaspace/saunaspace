@@ -13,9 +13,6 @@
           <textarea class="text-area field__input" name="note" form="cart" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
-      <div class="yc-col  cart-pay-over-time">
-      <div class="docapp-cart-with-shipping-summary"></div>
-      </div>
         <div class="yc-col  cart-pay-over-time">
           <div class="yc-col-head yc-acc">Pay Over Time</div>
           <div class="ycf-box hideMe">
@@ -59,7 +56,7 @@
           {%- when '@app' -%}
           {% render block %}
           {%- when 'subtotal' -%}
-            <div class="docapp-cart-with-coupon-summary"></div>
+            <div class="docapp-cart-with-shipping-summary"></div>
           <div class="js-contents" {{ block.shopify_attributes }}>
             {% comment %} <div class="totals">
                   <div class="ycc-lineitem"><strong>Estimated Total</strong><span class="etica-bold cartTotal totals__subtotal-value">
