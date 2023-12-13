@@ -4606,8 +4606,8 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	#otherPlugs { position: absolute; width: 100%;}
 */	
 	.pwt { background-repeat: no-repeat; min-height: 42px; background-size: contain; display: flex; align-items: center; text-align: left;  }
-	.product-warranty { background-image: url(warranty.svg); padding-left: 50px; }
-	.product-trial { background-image: url(one-hundred-day-trial.svg); padding-left: 60px; }
+	.product-warranty { background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/warranty.svg?v=1702414160; padding-left: 50px; }
+	.product-trial { background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/one-hundred-day-trial.svg?v=1702414202); padding-left: 60px; }
 
 .size-box {
 	margin: 30px 0;

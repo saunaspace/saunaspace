@@ -202,7 +202,7 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '' %}
+            {% render 'price', use_variant: true, product: card_product, price_class: '' %}
           </div>
         </div>
         <div class="card__badge {{ settings.badge_position }}">
