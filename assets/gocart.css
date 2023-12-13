@@ -222,6 +222,7 @@
   .mini-discount .docapp-coupon-input .docapp-coupon-input--bean-container--bean {
     align-items: center;
     border-radius: 0px;
+    background: #fff !important;
     color: #000;
   }
 
