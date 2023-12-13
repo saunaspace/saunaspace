@@ -268,24 +268,24 @@
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
                         <span class="visually-hidden">
-                          {{ 'products.product.price.regular_price' | t }} USD
+                          {{ 'products.product.price.regular_price' | t }} 
                         </span>
                         <s class="cart-item__old-price product-option">
-                          {{- item.original_price | money -}} USD
+                          {{- item.original_price | money -}} 
                         </s>
                         <span class="visually-hidden">
-                          {{ 'products.product.price.sale_price' | t }} USD
+                          {{ 'products.product.price.sale_price' | t }} 
                         </span>
                         <strong class="cart-item__final-price product-option">
-                          {{ item.final_price | money }} USD
+                          {{ item.final_price | money }} 
                         </strong>
                       </div>
                     {%- else -%}
                       <div class="product-option">
                         {% if item.variant.compare_at_price > item.variant.price %}
-                        <s>{{ item.variant.compare_at_price | money }} USD</s>
+                        <s>{{ item.variant.compare_at_price | money }} </s>
                       {% endif %}
-                        {{ item.original_price | money }} USD
+                        {{ item.original_price | money }} 
                 
                       </div>
                     {%- endif -%}
@@ -304,23 +304,23 @@
                       {%- if item.original_line_price != item.final_line_price -%}
                         <dl class="cart-item__discounted-prices">
                           <dt class="visually-hidden">
-                            {{ 'products.product.price.regular_price' | t }} USD
+                            {{ 'products.product.price.regular_price' | t }} 
                           </dt>
                           <dd>
                             <s class="cart-item__old-price price price--end">
-                              {{ item.original_line_price | money }} USD
+                              {{ item.original_line_price | money }} 
                             </s>
                           </dd>
                           <dt class="visually-hidden">
-                            {{ 'products.product.price.sale_price' | t }} USD
+                            {{ 'products.product.price.sale_price' | t }} 
                           </dt>
                           <dd class="price price--end">
-                            {{ item.final_line_price | money }} USD
+                            {{ item.final_line_price | money }} 
                           </dd>
                         </dl>
                       {%- else -%}
                         <span class="price price--end">
-                          <strong>{{ item.original_line_price | money }} USD </strong>
+                          <strong>{{ item.original_line_price | money }}  </strong>
                         </span>
                       {%- endif -%}
 
