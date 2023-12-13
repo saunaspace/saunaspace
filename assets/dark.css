@@ -11,13 +11,15 @@
   background: #555;
 }
 
-.dark .field__input, .dark .customer .field input, .dark .go-cart-mini-cart, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before, .dark .shopify-policy__body {	
+.dark .field__input, 
+.dark .customer .field input, 
+.dark .go-cart-mini-cart, .dark .select__select, .dark .customer select, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before, .dark .shopify-policy__body {	
   background: #000;	
   color: #fff;	
 }
 
 .dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info {
-  color: #999 !important;
+  color: #fff !important;
 }
 
 .stuck .logo, .sticky .logo {
@@ -46,12 +48,35 @@
   {
   color: #FFF8E7 !important;
 }
-.dark .stickyBG .pt-price, .dark .stickyBG .price {
+.dark .stickyBG .pt-price, .dark .stickyBG .price,
+.dark .stickyBG .price--on-sale .price-item--regular {
   color:#000 !important;
 }
-.dark .stickyBG .price--on-sale .price-item--regular{
-  color:#000 !important;
-}
+
+.dark .field__input, 
+.dark .customer .field input, 
+.dark .go-cart-mini-cart, 
+.dark .select__select, 
+.dark .customer select, 
+.dark .go-cart__mini-cart, 
+.dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open:before, 
+.dark .shopify-policy__body 
+{
+  background: #2a2727;
+  color: #fff;
+  }
+
+
+  .dark .mini-discount .docapp-coupon-input input[type=text].docapp-coupon-input--input {
+    background: transparent !important;
+    border-bottom: 1px solid #fff!important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important; 
+    color: #fff;
+    display: block;
+    width: auto;
+  }
 
 .dark .optimize:before, .dark .compatible:before {
   background: rgba(67,60,60,.55);
@@ -60,8 +85,14 @@
   background: transparent !important;
 }
 .dark .select__select,
-.dark .customer select, .dark .product-media-modal, .dark .eufhEh.eufhEh, .dark .go-cart-item__quantity-number, .dark .go-cart__mini-cart, .dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
-  background-color: #000;
+.dark .customer select, 
+.dark .product-media-modal, 
+.dark .eufhEh.eufhEh, 
+.dark .go-cart-mini-cart,
+.dark .go-cart-item__quantity-number, 
+.dark .go-cart__mini-cart, 
+.dark .go-cart__mini-cart.js-go-cart-mini-cart.is-open::before {
+  background-color: #2a2727;
 }
 .dark .select__select,
 .dark .customer select {
@@ -222,8 +253,9 @@
 }
 
 
+
 .dark div.y-slider-container,
-.dark .docapp-coupon-input input[type=text].docapp-coupon-input--input,
+.dark .mini-discount.docapp-coupon-input input[type=text].docapp-coupon-input--input,
 .dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons { 
   background: #000 !important; 
 }

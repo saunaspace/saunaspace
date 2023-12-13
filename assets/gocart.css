@@ -215,19 +215,16 @@
 
   .mini-discount .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button {
     background: transparent !important;
-    border-color: #C67A26 !important; 
   }
 
-  .mini-discount .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text {
-    color: #C67A26 !important; 
-  } 
+
 
   .mini-discount .docapp-coupon-input .docapp-coupon-input--bean-container--bean {
     align-items: center;
-    background-color: #fff;
     border-radius: 0px;
     color: #000;
   }
+
 
 
   .go-cart-mini-cart__subtotal {
