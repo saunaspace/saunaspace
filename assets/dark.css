@@ -16,8 +16,7 @@
   color: #fff;	
 }
 
-.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info,
-.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate label {
+.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info {
   color: #999 !important;
 }
 
@@ -206,6 +205,8 @@
 .dark .docapp-cart-with-shipping-summary .docapp-cart-subtotal,
 .dark .docapp-cart-with-shipping-summary .docapp-cart-discount,
 .dark .docapp-cart-with-shipping-summary .docapp-cart-shipping,
+.dark .docapp-cart-with-shipping-summary .docapp-shipping-rate label,
+.dark .docapp-coupon-input input[type=text].docapp-coupon-input--input::placeholder,
 .dark .docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates-title,
 .dark .docapp-cart-with-shipping-summary .docapp-coupon-input--input-container .docapp-coupon-input--button-text,
 .dark .docapp-cart-with-shipping-summary .docapp-cart-item span, .dark .docapp-cart-with-shipping-summary .docapp-cart-item strong,

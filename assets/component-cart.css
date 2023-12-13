@@ -233,6 +233,13 @@ cart-items {
   background: #fff !important;
 }
 
+.docapp-cart-with-shipping-summary .docapp-shipping-calculator--rates, .docapp-single-shipping-calculator .docapp-shipping-calculator--rates {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px 10px;
+  padding: 11px 0px 11px 11px;
+}
+
 
 @media(min-width: 750px) and (max-width: 990px) {
   .docapp-cart-with-shipping-summary .docapp-cart-item strong, .docapp-cart-with-shipping-summary .docapp-cart-item span {

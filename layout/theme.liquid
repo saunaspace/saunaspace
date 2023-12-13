@@ -239,22 +239,12 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'okendo.css' | asset_url |  stylesheet_tag }}
-    {% comment %} {%- unless settings.type_body_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%}
-    {%- unless settings.type_header_font.system? -%}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-    {%- endunless -%} {% endcomment %}
 
     {%- if settings.predictive_search_enabled -%}
       <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
     {%- endif -%}
-    {{
-      "brian.css" | asset_url | stylesheet_tag
-    }}
-    {{
-      "dark.css" | asset_url | stylesheet_tag
-    }}
+    {{ "brian.css" | asset_url | stylesheet_tag }}
+    {{ "dark.css" | asset_url | stylesheet_tag }}
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     if (Shopify.designMode) {
       document.documentElement.classList.add('shopify-design-mode');
@@ -448,15 +438,6 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
         });
       });
     </script>
-    {% if shop.metafields.qimify_minicart.script_src %}
-    <script
-      type="text/javascript"
-      src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{
-        shop.permanent_domain
-      }}"
-      async="async"
-    ></script>
-    {% endif %}
 
 <script>
         {% if product %}

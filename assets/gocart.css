@@ -205,13 +205,23 @@
     position: relative;
     color: #333;
   }
-  .go-cart-mini-cart__content {
+  .go-cart-mini-cart__content, .mini-discount {
     position: relative;
     height: auto;
     overflow: hidden;
     overflow-y: scroll;
     padding: 0 30px;
   }
+
+  .mini-discount .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button {
+    background: transparent !important;
+    border-color: #C67A26 !important; 
+  }
+
+  .mini-discount .docapp-coupon-input .docapp-coupon-input--input-container .docapp-coupon-input--button .docapp-coupon-input--button-text {
+    color: #C67A26 !important; 
+  } 
+
   .go-cart-mini-cart__subtotal {
     align-items: center;
     height: 50px;
