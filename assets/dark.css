@@ -221,11 +221,9 @@
   color: #eee !important;
 }
 
-.dark .filters-dropdown .yotpo-dropdown-button,
-.dark .yotpo-drop-down-layout .yotpo-dropdown,
+
 .dark div.y-slider-container,
-.dark .yotpo-lightbox.yotpo-lightbox-new.yotpo .yotpo-modal.yotpo-modal-active .yotpo-lightbox-container .yotpo-lightbox-content-container,
-.dark .yotpo .yotpo-modal-base .yotpo-modal-dialog .yotpo-modal-content,
+.dark .docapp-coupon-input input[type=text].docapp-coupon-input--input,
 .dark .mobile-filters-modal .mobile-filters-container .mobile-single-filter .mobile-filter-radio-buttons { 
   background: #000 !important; 
 }
