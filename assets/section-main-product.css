@@ -1338,8 +1338,8 @@ a.product__text {
   height: 2rem;
   width: 2rem;
   left: auto;
-  right: calc(0.4rem + var(--media-border-width));
-  top: calc(0.4rem + var(--media-border-width));
+  right: 50%;
+  top: 25%;
 }
 
 @media screen and (min-width: 750px) {

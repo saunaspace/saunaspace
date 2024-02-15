@@ -564,14 +564,16 @@
                     {{ custom_warranty }}-year Warranty
                   {% endif %}
                 </div>
-                <div class="pw">
+                <div class="pwt">
                   {% if eligible_for_returns == true %}
-                    Not Eligible for Return
+                    <div class="pwt product-trial">Not Eligible for Return</div>
                   {% endif %}
-                  {% if thirty_day_returns == true %}
-                  <div class="pwt product-trial">30-day Trial</div>
-                  {% else %}
-                    <div class="pwt product-trial">100-day Trial</div>
+                  {% if eligible_for_returns == blank or eligible_for_returns == false %}
+                    {% if thirty_day_returns == true %}
+                    <div class="pwt product-trial">30-day Trial</div>
+                    {% else %}
+                      <div class="pwt product-trial">100-day Trial</div>
+                    {% endif %}
                   {% endif %}
                 </div>
                 
