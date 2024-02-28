@@ -5307,7 +5307,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 
 .footer-logo {
 	margin-bottom: 40px;
-	width: 125px;
+	width: 165px;
 }
 
 .cl-box {
@@ -6718,7 +6718,10 @@ a#cart-icon-bubble {
 }
 
 
-
 .text-uppercase {
     text-transform: uppercase;
+}
+
+.shopify-pc__banner__dialog {
+  width: 50% !important;
 }
