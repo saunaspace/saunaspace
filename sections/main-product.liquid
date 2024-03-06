@@ -1,4 +1,5 @@
-
+<script src="{{ 'custom-bundel.js' | asset_url }}" defer="defer"></script>
+{% render 'bundle_popup' %}
 <!-- <section class="page-width section-{{ section.id }}-padding"> -->
 
 <section
@@ -6,6 +7,85 @@
   class="page-width section-{{ section.id }}-padding"
   data-section="{{ section.id }}"
 >
+<style>
+.customclassForPrice .price__regular{
+  display:none;
+}
+.complete_bundle .required{
+  order:1;
+}
+  .complete_bundle .optional{
+    order:2;
+  }
+  .complete_bundle h5.optional{
+    margin:1.5rem 0 1rem 0; 
+  }
+  input.optional_checkbox {
+    cursor: pointer;
+  }
+.bundle_item.optional select, .bundle_item.optional label, .option-main select, .option-main label {
+    margin-top: 5px;
+    width:-webkit-fill-available;
+}
+.bundle_item.optional label, .option-main label{
+  font-size:small;
+  font-weight:400;
+}
+
+  /* custom dropdown */
+  .custom-dropdown .dropbtn {
+    background-color: #fff;
+    color: #333;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.custom-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 185px;
+    overflow-x: scroll;
+}
+
+.custom-dropdown .dropdown-content small {
+    display: flex;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    justify-content: flex-start;
+    align-items: center;
+    background:white;
+}
+
+.custom-dropdown .dropdown-content small:hover {
+  background-color: #F9F3ED;
+}
+
+.custom-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+  /* .custom-dropdown *::-webkit-scrollbar{
+    width:unset;
+  } */
+  /* custom dropdown ends */
+  </style>
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -41,7 +121,7 @@
   {%- endif -%}
 
 
-  <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+  <div data-product-id="{{ product.id }}" class="product mineClass {% unless template contains 'custombundle'  %}customclassForPrice{% endunless %} product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}">
       <media-gallery
         id="MediaGallery-{{ section.id }}"
@@ -475,7 +555,9 @@
                   </script>
                 </variant-radios>
               {%- else -%}
-                <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {% comment %}
+                {% if template contains 'custombundle' %}
+                    <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
                       <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -484,12 +566,14 @@
                       </label>
                       <div class="select">
                         <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                          class="select__select"
+                          class="select__select retrive_selected_option"
                           name="options[{{ option.name | escape }}]"
                           form="{{ product_form_id }}"
                         >
+                       
                           {%- for value in option.values -%}
-                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                            
+                            <option  value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
                               {{ value }}
                             </option>
                           {%- endfor -%}
@@ -503,6 +587,68 @@
                     {{ product.variants | json }}
                   </script>
                 </variant-selects>
+                {% else %}
+                  {% endcomment %}
+                    <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                      {%- for option in product.options_with_values -%}
+                        
+                          <div  {% if option.name contains "color" or option.name contains "Color"%} style="display:none;"{% endif %} class="product-form__input product-form__input--dropdown">
+                          <label  {% if option.name contains "color" or option.name contains "Color"%} style="display:none;"{% endif %} class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                            <!-- todoupdate other variant options text within liquid instead of jquery -->
+                            {% if option.name == 'Size' %} Select a size. {% else %} {{ option.name }}  {% endif %}
+                          </label>
+                          <div class="select" {% if option.name contains "color" or option.name contains "Color"%} style="display:none;"{% endif %}>
+                            <select id="Option-{{ section.id }}-{{ forloop.index0 }} "
+                              class="select__select retrive_selected_option"
+                              data-option-parent="{{ option.name | escape }}"
+                              name="options[{{ option.name | escape }}]"
+                              form="{{ product_form_id }}"
+                            >
+                              {%- for value in option.values -%}
+                                <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                  {{ value }}
+                                </option>
+                              {%- endfor -%}
+                            </select>
+                            {% render 'icon-caret' %}
+                          </div>
+                        </div>
+                      {%- endfor -%}
+    
+                      <script data-custom-attribute="custom-value" type="application/json">
+                        {{ product.variants | json }}
+                      </script>
+                    </variant-selects>
+                    <variant-radios-custom>
+                        {%- for option in product.options_with_values -%}
+                          {% if option.name contains "color" or option.name contains "Color" %}
+                        	  <label class="form__label colorLable" style="padding:0; margin:10px 0 0 0; font-size: 1.6rem; display: flex; justify-content: center; align-items: center; gap: 5px" for="Option-{{ section.id }}">
+                                <svg height="3" width="20" xmlns="http://www.w3.org/2000/svg"> <line x1="20" y1="0" x2="" y2="0" style="stroke:black;stroke-width:2" /> </svg>
+                                  {{ option.name }}
+                                    :
+                                  {{ option.values[0] }}
+                                <svg height="3" width="20" xmlns="http://www.w3.org/2000/svg"> <line x1="20" y1="0" x2="" y2="0" style="stroke:black;stroke-width:2" /> </svg>
+                              </label>
+                        	  <fieldset class="custom-product-option-color" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                        		{%- for value in option.values -%}
+                        		  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="padding:0; margin:3px 5px;" >
+                                    {% for link in linklists.colors.links %}
+                                      {% if link.title == value %}
+                            			<img class="forColorSelect" data-product-id="{{ product.id }}" style="height:40px; width:40px; border-radius:50%; padding:1px;" {{ forloop.index }} src="{{ link.url }}" alt="{{ value }}">  
+                                      {% endif %}
+                        			{% endfor %}
+                        		  {% comment %} { { value }} {% endcomment %}
+                        		  </label>
+                        		{%- endfor -%}
+                        	  </fieldset>
+                        	{% endif %}
+                        
+                        {%- endfor -%}
+                    </variant-radios-custom>
+                {% comment %}
+                  {% endif %}
+                {% endcomment %}
+                  
               {%- endif -%}
             {%- endunless -%}
 
@@ -515,8 +661,7 @@
                       <option
                         {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
                         {% if variant.available == false %}disabled{% endif %}
-                        value="{{ variant.id }}"
-                      >
+                        value="{{ variant.id }}" >
                         {{ variant.title }}
                         {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
                         - {{ variant.price | money | strip_html }}
@@ -584,21 +729,222 @@
 
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+
+
+                  
+                      {% assign product_metafield = product.metafields.custom_bundle_handle.custom_bundle_handle_value %}
+                      {% assign discount_meta = product.metafields.custom_bundle_discount.custom_discount_value %}
+                      {% assign handles_array = product_metafield  | split: ',' %}
+                    
+                      {% assign check =  %}
+                      {% unless template contains 'custombundle' %}
+                      {% for handleEle in handles_array %}
+                        {% assign parts = handleEle | split: '----' %}
+                         {% assign handle = parts[0] |strip %}
+                        {% assign optional = parts[1] |strip  %}
+                         {% assign bproduct = all_products[handle]  %}
+                         {% assign title = bproduct.selected_or_first_available_variant.title %}
+                         <input
+                            type="hidden"
+                          {%if optional == '1' %}
+                            disabled="disabled"
+                          {% endif %}
+                            name="properties[{{ bproduct.title }}]"
+                            id="title_index_{{ forloop.index }}"
+                            value="{% if title=="Default Title" %}Default Variant{% else %} {{ title }} {% endif %}"
+                          >
+                       {% endfor %}
+                      {% if product_metafield != blank %}
+                        <input type="hidden" name="properties[_bundle]" value="true" >
+                        <input type="hidden" id="optinalIds" name="_optionalVariants" value="empty" >
+                        <input type="hidden" name="properties[_price_array]" id="price_array" value="" >
+                        <input type="hidden" name="properties[_child__varinats]" id="child_varinats" value="" >
+                        {% assign discount_parts = discount_meta | split: '----' %}
+                        <input type="hidden" name="properties[_discount]" id="discount_hidden" value="{{ discount_parts[0] }}" >
+                        <input type="hidden" name="properties[_discount_type]" id="discount_type_hidden" value="{{ discount_parts[1] }}" >
+                      {% endif %}
+
+                    {% endunless %}
+                  
                   <div class="product-form__buttons">
                     {% if product.selected_or_first_available_variant.available == false %}
-                    <div class="atc-outOfStock">
-						
+                    <div class="atc-outOfStock 21342">
                       <p><strong>Sorry, this item is out of stock.</strong></p>
+                    </div>
+                  {% else %}
+                   <div class="complete_bundle" style=" display: flex; flex-direction: column; ">
+                    {% assign handles_array = product_metafield | split: ',' %}
+                    {% if product_metafield %}
+                      <p class="p_1-bold">Your bundle:</p>
+                      <p class="p_1">Edit to mix and match colors or sizes.</p>
+                    {% endif %}
+                    {% assign isFirst = true %}
+                      {% unless template contains 'custombundle' %}
+                        {% for handleEle in handles_array %}
+                          {% assign parts = handleEle | split: '----' %}
+                          {% assign handle = parts[0] |strip %}
+                          {% assign optional = parts[1] |strip %}
+                          {% assign handle = handle |strip  %}
+                          {% assign bproduct = all_products[handle] %}
+                          {%if optional == '0' %}
+                            <div class="bundle_item required" data-checked="0" data-variant="{{ bproduct.selected_or_first_available_variant.id }}" data-price="{{ bproduct.selected_or_first_available_variant.price | divided_by: 100 }}">
+                            {% assign option_names = '' %}
+                            {% for variant_options in bproduct.options_with_values %}
+                              {% assign option_names = option_names | append: variant_options.name %}
+                              {% unless forloop.last %}
+                                {% assign option_names = option_names | append: ' / ' %}
+                              {% endunless %}
+                            {% endfor %}
+                              <div class="hidden-variants" data-options="{{ option_names }}"  data-product-image="{{ bproduct.featured_image.src | product_img_url: 'medium' }}"  style="display:none;">
+                            {% for variant in bproduct.variants %}
+                            <span class="hidden-variant-title" data-variant-id="{{ variant.id }}" data-variant-image="{{  variant.image.src | img_url: 'master' }}" data-variant-price="{{ variant.price | divided_by:100 }}" data-variant-title="{{ variant.title }}">{{ variant.title }}</span>
+                            {% endfor %}
+                            </div>
+                            <img
+                                class="varImage"
+                                src="{{ bproduct.featured_image.src | product_img_url: 'medium' }}"
+                                alt="{{ bproduct.title }}"
+                                width=""
+                                height=""
+                              >
+                              <div class="option-main detail_{{ forloop.index }}">
+                                <b class="title">{{ bproduct.title }}</b>
+                                  {% for option in bproduct.options_with_values %}
+                                    {% comment %}<p {% if option.name=="Title" %} style="display:none" {% endif %} data-trim-option="{{  option.name | strip  }}" data-option="{{ option.name  | strip  }}" class="{{ option.name | strip  }}" ><span class="key_bold">{{ option.name | strip  }} </span>:<span class="key_value" id="index_title_option_{{ forloop.index }}"> {{  option.values[0] }}</span></p>{% endcomment %}
+                                    <label style="display:none" {% if option.name=="Title" %}  {% endif %} data-trim-option="{{  option.name | strip  }}" data-option="{{ option.name  | strip  }}" class="{{ option.name | strip  }}">{{ option.name | strip  }}</label>
+                                    {% if option.name contains "Title" %}
+                                         <p style="display:none">Default Variant</p>
+                                      {% else %}
+                                      <div data-option-dropdown="{{ option.name }}" class="custom-dropdown">
+                                        <div class="dropbtn">
+                                          {% if option.name contains "color" or option.name contains "Color" %}
+                                              {% for link in linklists.colors.links %}
+                                                {% if link.title == option.values[0] %}
+                                                  <img style="width: 30px; height: 30px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
+                                                {% endif %}
+                                              {% endfor %}
+                                          {% else %}
+                                            <span>{{ option.values[0] }}</span>
+                                          {% endif %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>
+                                        </div>
+                                        <div data-option-name="{{ option.name }}" class="dropdown-content">
+                                         {% for opt in option.values %}
+                                          {% if option.name contains 'color' or option.name contains 'Color' %}
+                                            {% for link in linklists.colors.links %}
+                                                {% if link.title == opt %}
+                                                  <small><img src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span></small>
+                                                 {% endif %}
+                                            {% endfor %}
+                                          {% else %}
+                                              <small><span>{{ opt }}</span></small>
+                                          {% endif %}
+                                        {% endfor %}
+                                         </div>
+                                      </div>
+                                      <select style="display:none" data-trim-option="{{  option.name | strip  }}" data-option="{{ option.name  | strip  }}" class="requiredSelect {{ option.name | strip  }}">
+                                        {% for opt in option.values %}
+                                          {% if option.name contains 'color' or option.name contains 'Color' %}
+                                            {% for link in linklists.colors.links %}
+                                                {% if link.title == opt %}
+                                                  <option name="{{ opt }}" value="{{ opt }}" data-thumbnail="{{ link.url }}">{{ opt }}</option>
+                                                {% endif %}
+                                              {% endfor %}
+                                            {% else %}
+                                              <option name="{{ opt }}" value="{{ opt }}">{{ opt }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                      </select>
+                                      {% endif %}
+                                    
+                                  {% endfor %}
+                              </div>
+                              <a href="javascript:;" style="display:none !important" data-id="{{ bproduct.selected_or_first_available_variant.id }}" data-handle="{{ bproduct.handle }}" data-child="{{ forloop.index }}" class="edit_btn" id="openPopup edit_button_{{ forloop.index }}">
+                                Edit
+                              </a>
+                            </div>
+                          {% else %}
+                              {% if isFirst == true %}
+                                <h5 class="optional">Optinal Products With Bundle</h5>
+                                {% assign isFirst = false %}
+                              {% endif %}
+                              <div class="bundle_item optional" data-variant="{{ bproduct.selected_or_first_available_variant.id }}" data-checked="1" data-price="{{ bproduct.selected_or_first_available_variant.price | divided_by: 100 }}">
+                              <input class=optional_checkbox type="checkbox" data-index="{{ forloop.index }}" name="optional" value="{{ handle }}">
+                                <div class="hidden-variants" data-options="{{ option_names }}"  data-product-image="{{ bproduct.featured_image.src | product_img_url: 'medium' }}"  style="display:none;">
+                                {% for variant in bproduct.variants %}
+                                <span class="hidden-variant-title" data-variant-id="{{ variant.id }}" data-variant-image="{{  variant.image.src | img_url: 'master' }}" data-variant-price="{{ variant.price | divided_by:100 }}" data-variant-title="{{ variant.title }}">{{ variant.title }}</span>
+                                {% endfor %}
+                              </div>
+                                
+                              <img
+                                class="varImage"
+                                src="{{ bproduct.featured_image.src | product_img_url: 'medium' }}"
+                                alt="{{ bproduct.title }}"
+                                width=""
+                                height=""
+                              >
+                              <div class="option-main detail_{{ forloop.index }}">
+                                <b class="title">{{ bproduct.title }}</b>
+                                  {% for option in bproduct.options_with_values %}
+                                    
+                                    {% comment %}<p {% if option.name=="Title" %} style="display:none" {% endif %} class="{{ option.name }}" ><span class="key_bold">{{ option.name }}</span>:<span id="index_title_option_{{ forloop.index }}"> {{  option.values[0] }}</span></p>{% endcomment %}
+                                    <label style="display:none" {% if option.name=="Title" %}  {% endif %} data-trim-option="{{  option.name | strip  }}" data-option="{{ option.name  | strip  }}" class="{{ option.name | strip  }}">{{ option.name | strip  }}</label>
+                                    {% if option.name contains "Title" %}
+                                      <p style="display:none;">Default Variant</p>
+                                      {% else %}
+                                       <div data-option-dropdown="{{ option.name }}" class="custom-dropdown">
+                                        <div class="dropbtn">
+                                           {% if option.name contains "color" or option.name contains "Color" %}
+                                              {% for link in linklists.colors.links %}
+                                                {% if link.title == option.values[0] %}
+                                                  <img style="width: 30px; height: 30px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
+                                                {% endif %}
+                                              {% endfor %}
+                                          {% else %}
+                                            <span>{{ option.values[0] }}</span>
+                                          {% endif %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>
+                                        </div>
+                                        <div data-option-name="{{ option.name }}" class="dropdown-content">
+                                         {% for opt in option.values %}
+                                          {% if option.name contains 'color' or option.name contains 'Color' %}
+                                            {% for link in linklists.colors.links %}
+                                                {% if link.title == opt %}
+                                                  <small><img src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span></small>
+                                                 {% endif %}
+                                            {% endfor %}
+                                          {% else %}
+                                              <small><span>{{ opt }}</span></small>
+                                          {% endif %}
+                                        {% endfor %}
+                                         </div>
+                                      </div>
+                                      <select style="display:none" data-trim-option="{{  option.name | strip  }}" data-option="{{ option.name  | strip  }}" class="optinalSelect {{ option.name }}">
+                                      {% for opt in option.values %}
+                                        <option name="{{ opt }}" value="{{ opt }}">{{ opt }}</option>
+                                      {% endfor %}
+                                      </select>
+                                      {% endif %}
+                                  {% endfor %}
+                              </div>
+                              <a href="javascript:;" style="display:none;" data-id="{{ bproduct.selected_or_first_available_variant.id }}" data-handle="{{ bproduct.handle }}" data-child="{{ forloop.index }}" class="edit_btn" id="openPopup edit_button_{{ forloop.index }}">
+                                Edit
+                              </a>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      {% endunless %}
+                    </div>
+
+
+                      
                     
-                  </div>
-                    
-                    {% else %}
-                    <button
-                    type="submit"
-                    name="add"
-                    class="js-go-cart-add-to-cart product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
-                                        {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                  >
+                    {% unless template contains 'custombundle' %}
+                        <button
+                        type="submit"
+                        name="add"
+                        class="js-go-cart-add-to-cart product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                                            {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
                           <span>
                             {%- if product.selected_or_first_available_variant.available -%}
                               {{ 'products.product.add_to_cart' | t }}
@@ -612,8 +958,67 @@
                             </svg>
                           </div>
                       </button>
+                  {% endunless %}
+                  {% if template contains 'custombundle' %}
+                         <button  class="selection_button {{ template.name }}" type="submit" name="change_detail" >Make Selection</button>
+                  {% endif %}
+
+<style>
+.selection_button{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    background: #C67A26;
+    padding: 0.75em 1.5em;
+    text-decoration: none;
+    border: 0;
+    appearance: none;
+    line-height: 1.2em;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+html.dark .complete_bundle .p_1-bold,html.dark .complete_bundle .p_1,html.dark .complete_bundle .option-main p, html.dark .complete_bundle .option-main span, html.dark .complete_bundle .option-main b, html.dark .complete_bundle .bundle_item.optional b.title, html.dark .complete_bundle .bundle_item.required a, html.dark .complete_bundle .bundle_item.optional a{
+    color: white;
+}
+html.dark .complete_bundle .bundle_item.required, html.dark .complete_bundle .bundle_item.optional,html.dark .modal-content{
+  background:black;
+  border:1px solid #939393;
+}
+html.dark .complete_bundle .custom-dropdown .dropbtn{
+  background-color: #333;
+    color: #fff;
+}
+html.dark .complete_bundle .custom-dropdown .dropdown-content small{
+   background-color: #333;
+    color: #fff;
+}
+  html.dark .complete_bundle .custom-dropdown .dropdown-content small:hover{
+   background-color: #A8A8A8;
+    color: #fff;
+}
+.bundle_item.required b.title, .bundle_item.optional b.title{
+    font-size: small;
+    font-weight: 600;
+    margin: 10px 0;
+    width: 100%;
+}
+.bundle_item.required p,.bundle_item.required span, .bundle_item.optional p, .bundle_item.optional span{
+    font-size: 14px;
+    font-weight: 300;
+    margin: 5px 0;
+}
+</style>
+
                     {% endif %}
-                    <div class="stickyBG">
+                  {% unless template contains 'custombundle'  %}
+                    <div class="stickyBG" style="display:none !important;">
                       <div class="sticky-add-to-cart">
                         <div class="sac-product">{{ product.title | escape }}<span class="sac-color"></span></div>
                         <div class="sac-wrap">
@@ -630,6 +1035,7 @@
                         </div>
                         </div>
                     </div>
+                    {% endunless %}
                     {%- if block.settings.show_dynamic_checkout -%}
                       {{ form | payment_button }}
                     {%- endif -%}
@@ -731,6 +1137,7 @@
       </div>
     </div>
   </div>
+{% unless template contains 'custombundle' %}
 <section>
   {%- if product.metafields.my_fields.sidebar_description != true -%}
 		<div class="pcDescription">       
@@ -739,6 +1146,7 @@
 			</div>
   {%- endif -%}
 	</section>
+ {% endunless %}
   <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
     <div
       class="product-media-modal__dialog"
@@ -816,20 +1224,31 @@
 
 {% render 'product-recommendations' %}
 
+{% unless template contains 'custombundle' %}
 {% unless product.tags contains 'Refurbished' %}
   <section class="yotpo-containers section-{{ section.id }}-padding">
 
     <h2 id="reviews-and-questions">Reviews and Questions</h2>
     </section>
 {% endunless %}
+{% endunless %}
 {% render 'product-page' %}
 
+{% if product.available %}
+  {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 or product.id == 2105475956825  or product.id == 6809896288299%}
+   
+  <script>
+    var currentVariant = {{ product.selected_or_first_available_variant | json }};
+    
+    console.log("currentVariant::::"+currentVariant.title);
+    this.filterVariant(currentVariant.featured_image);
 
+  </script>
+    {% endif %}
+{% endif %}
 <script>
 
 $(document).ready(function() {
-
-
 
 	$(".product-info-details a").removeAttr('target');
 	
@@ -838,8 +1257,6 @@ $(document).ready(function() {
 			$(this).attr({"target":"_blank"});
 		}
 	});
-
-
 
   setInterval(function () {
     if($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky") ) {
@@ -946,63 +1363,430 @@ function updateUC(p) {
 }
 
 
-function filterVariant(variant) {
+function filterVariant(variant, PID) {
   console.log('thumbnail updated ' + variant.alt);
-  if(variant != null && variant.alt != null ) {
+  if (variant != null && variant.alt != null) {
     $('[data-thumbnail-color]').hide();
-    //show for selected color
+    
+    // Show for selected color
     var selected_color = variant.alt;
-    var general_color = "[data-thumbnail-color='general']";
     var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
     $(thumbnail_selector).show();
-    {% if product.id == 2105477365849 or product.id == 2105476743257 %}
-      $('[data-media-position]').filter(function () {
+    
+    // Apply additional filtering based on product ID
+    switch (PID) {
+      case 2105477365849:
+      case 2105476743257:
+        $('[data-media-position]').filter(function() {
           return $(this).data('media-position') >= 13;
-      }).show();
-    {% endif %}
-    {% if product.id == 2105476546649 %}
-    console.log('emf page');
-      $('[data-media-position]').filter(function () {
-          return $(this).data('media-position') >= 6;
-      }).show();
-    {% endif %}
-    {% if product.id == 2105475661913 %}
-      $('[data-media-position]').filter(function () {
-          return $(this).data('media-position') >= 11;
-      }).show();
-    {% endif %}
-    //emf page
-    {% if product.id == 2105477726297 %}
-    console.log('emf page');
-      $('[data-media-position]').filter(function () {
-          return $(this).data('media-position') >= 7;
-      }).show();
-    {% endif %}
-    {% if product.id == 2105475956825 %}
-      console.log('tungsten page');
-        $('[data-media-position]').filter(function () {
-            return $(this).data('media-position') >= 10;
         }).show();
-      {% endif %}
-    // $(general_color).show();
-    // $(thumbnail_selector).prependTo('.list-unstyled');
+        break;
+      case 2105476546649:
+        console.log('emf page');
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 6;
+        }).show();
+        break;
+      case 2105475661913:
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 11;
+        }).show();
+        break;
+      case 2105477726297:
+        console.log('emf page');
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 7;
+        }).show();
+        break;
+      case 2105475956825:
+        console.log('tungsten page');
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 10;
+        }).show();
+        break;
+    }
   } else {
-    //show all
+    // Show all thumbnails if variant is not selected
     $('[data-thumbnail-color]').show();
   }
 }
 
 
 // variant lead time metafield listener
+
+var previousTitle = null;
+// console.log("currentVariant::"+currentVariant);
 function bcpoChange(currentVariant) {
     var variant_result = JSON.stringify(bcpo.variant.featured_image);
     {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 or product.id == 2105475956825 %}
-      this.filterVariant(bcpo.variant.featured_image);
+      var productID = product.id;
+      this.filterVariant(bcpo.variant.featured_image, productID);
     {% endif %}
-    console.log('bcpo: ' + variant_result);
-    console.log('featured iamge: ' + bcpo.variant.featured_image);
-    const variants = document.querySelectorAll('[data-variant-id]')
+    
+    var currentVarjson = JSON.stringify(bcpo.variant);
+    var currentVar = bcpo.variant;
+    if (previousTitle == null) {
+         previousTitle = currentVar.title;
+    } 
+    var options_length = $('.customclassForPrice').find('.single-option-selector').length;
+    var optionsdIV = $('.customclassForPrice').find('.single-option-selector');
+    var optionsText = [];
+    optionsdIV.each(function(index, option) { 
+        var optionText = $(option).closest(".single-option-selector").siblings('.bcpo-label').find('.bcpo-title').text().trim().replace(':', '');
+        optionsText.push(optionText);
+    });
+    console.log(optionsText);
+    console.log('current variant :'+ currentVarjson);
+    console.log('Previous variant title: ' + previousTitle);
+    console.log('Current variant title: ' + currentVar.title);
+    var changeInfo = getChangedIndexValue(currentVar.title, previousTitle);
+    console.log('changeInfo as JSON:', JSON.stringify(changeInfo));
+    if (changeInfo.indexes && changeInfo.parts) {
+      console.log("double changed");
+      for (var i = 0; i < changeInfo.indexes.length; i++) {
+          // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
+          console.log("value :" + changeInfo.parts[i]);
+          console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
+          $('.bundle_item.required').each(function() {
+              var $optionMain = $(this).find('.option-main');
+              var $selectTags = $optionMain.find('select').filter(function() {
+                  return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
+              });
+              var siblingSelectTags = $selectTags.siblings('select[data-trim-option]');
+              console.log("siblingSelectTags");
+              console.log(siblingSelectTags);
+              console.log("siblingSelectTags.length");
+              console.log(siblingSelectTags.length);
+          });
+          console.log("next changed option and value");
+      }
+    }
+    else{
+    console.log("single changed");
+    console.log("Index of the changed part: " + changeInfo.index);
+    console.log("option changed :" + optionsText[changeInfo.index - 1]);
+    console.log("Previous value: " + changeInfo.previousValue);
+    // console.log("Current value: " + changeInfo.currentValue);
+      $('.bundle_item.required').each(function() {
+        var $optionMain = $(this).find('.option-main');
+        var $selectTags = $optionMain.find('select').filter(function() {
+          return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.index - 1]) !== -1;
+        });
+        var siblingSelectTags = $selectTags.siblings('select[data-trim-option]');
+        console.log("siblingSelectTags");
+        console.log(siblingSelectTags);
+        console.log("siblingSelectTags.length");
+        console.log(siblingSelectTags.length);
+        var valuesArray = [];
+        if (siblingSelectTags.length > 0) {
+          console.log("have more then one options");
+          siblingSelectTags.each(function() {
+            var text = $(this).val().trim();
+            valuesArray.push(text);
+          });
+          console.log("other Values are:: "+ valuesArray);
+          console.log("day ends");
+          
+        }else{
+          console.log("have only one option");
+              $selectTags.each(function() {
+              var $seletTag = $(this);
+              var selectedOption = $seletTag.val();
+              console.log("BundleOption:::::: "+selectedOption);
+               if(selectedOption.trim() != changeInfo.previousValue ){
+                  console.log("NEED CHANGE OPTION VALUES");
+                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                  hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      console.log("here we are innn");
+                      console.log(variantTitle);
+                      console.log(changeInfo.previousValue);
+                      if (variantTitle == changeInfo.previousValue) {
+                          var variantId = $(this).data('variant-id');
+                          var variantPrice = $(this).data('variant-price');
+                          var variantImage = $(this).data('variant-image');
+                          console.log("Variant Title: " + variantTitle);
+                          console.log("Variant ID: " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                          console.log("Variant Image: " + variantImage);
+                          $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                          $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                          $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                          return false;
+                      }
+                  });
+               }else{
+                  console.log("values already matched no change needed");
+               }
+          });
+        }
+      });
+    }
+    //for model selection
+    {% comment %}
+     if (changeInfo.indexes && changeInfo.parts) {
+        for (var i = 0; i < changeInfo.indexes.length; i++) {
+            // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
+          console.log("value :" + changeInfo.parts[i]);
+          console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
+           $('.bundle_item.required').each(function() {
+                 var $optionMain = $(this).find('.option-main');
+          var $pTags = $optionMain.find('p').filter(function() {
+              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
+          });
+          var siblingPTags = $pTags.siblings('p[data-trim-option]');
+             
+              
+             console.log(siblingPTags.length);
+            var valuesArray = [];
+            if (siblingPTags.length > 0){
+              console.log("greater then 1 so make logic");
+              console.log("greater then 0");
+              siblingPTags.each(function() {
+              var text = $(this).find('.key_value').text().trim();
+              valuesArray.push(text);
+              });
+              console.log("other Values are:: "+ valuesArray);
+              $pTags.each(function(index) {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+             var selector = null;
+             var siblingPTitle = $pTag.siblings('b.title').text();
+             if (siblingPTitle != null || siblingPTitle != "") {
+                 siblingPTitle = siblingPTitle.trim();
+                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+             }
+             console.log("siblingPTitle");
+              var iddd = $(this).find('.key_value').attr('id');
+              console.log("iddd");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.parts[i] ){
+                console.log('not matched');
+                var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                hiddenVar.each(function() {
+                  var variantTitle = $(this).data('variant-title');
+                  var variantId = $(this).data('variant-id');
+                  var variantPrice = $(this).data('variant-price');
+                  var variantImage = $(this).data('variant-image');
+                  var match = valuesArray.every(function(value){
+                      return variantTitle.includes(value);
+                  }) && variantTitle.includes(changeInfo.parts[i]);
+                  if (match) {
+                      console.log("Vneeeeeeeeeeeeeeeeee");
+                      console.log("Variant ID:" + variantId);
+                      console.log("Variant Price: " + variantPrice);
+                    $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                    $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                    $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                    $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                    // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
+                    $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
+                    if (siblingPTitle != null || siblingPTitle != "") {
+                     selector.val(variantTitle);
+                    }
+                  }
+                });
+              }else{
+                console.log('matched');
+              }
+              return false;
+              });
+            }
+          else{
+              console.log("contains only one option!");
+              $pTags.each(function() {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+              var selector = null;
+              var siblingPTitle = $pTag.siblings('b.title').text();
+              if (siblingPTitle != null || siblingPTitle != "") {
+                  siblingPTitle = siblingPTitle.trim();
+                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+              }
+              var iddd = $(this).find('.key_value').attr('id');
+              console.log("iddd");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.parts[i] ){
+                  console.log('not matched');
+                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                  hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      if (variantTitle == changeInfo.parts[i]) {
+                          var variantId = $(this).data('variant-id');
+                          var variantPrice = $(this).data('variant-price');
+                          var variantImage = $(this).data('variant-image');
+                        
+                          console.log("Variant ID: " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                  });
+              }else{
+                  console.log('matched');
+              }
+                return false;
+          });
+          }
+            });
+        }
+    }
+     else {
+        console.log("Index of the changed part: " + changeInfo.index);
+        console.log("option changed :" + optionsText[changeInfo.index - 1]);
+        console.log("Previous value: " + changeInfo.previousValue);
+        // console.log("Current value: " + changeInfo.currentValue);
+       $('.bundle_item.required').each(function() {
+          var $optionMain = $(this).find('.option-main');
+          var $pTags = $optionMain.find('p').filter(function() {
+              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.index - 1]) !== -1;
+          });
+          var siblingPTags = $pTags.siblings('p[data-trim-option]');
+         console.log(siblingPTags);
+         console.log(siblingPTags.length);
+          var valuesArray = [];
+          if (siblingPTags.length > 0) {
+              console.log("greater then 0");
+              siblingPTags.each(function() {
+                  var text = $(this).find('.key_value').text().trim();
+                  valuesArray.push(text);
+              });
+              console.log("other Values are:: "+ valuesArray);
+              $pTags.each(function() {
+                console.log("BundleOptions matched!");
+                var $pTag = $(this);
+                var selector = null;
+                var siblingPTitle = $pTag.siblings('b.title').text();
+                if (siblingPTitle != null || siblingPTitle != "") {
+                    siblingPTitle = siblingPTitle.trim();
+                    selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+                }
+                console.log("siblingPTitle");
+                var iddd = $(this).find('.key_value').attr('id');
+                console.log("iddd");
+                console.log(iddd);
+                var selectedOption = $pTag.text();
+                var titleee = selectedOption.split(':');
+                console.log(titleee[1]);
+                if(titleee[1].trim() != changeInfo.previousValue ){
+                    console.log('not matched');
+                    var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                    hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      var variantId = $(this).data('variant-id');
+                      var variantPrice = $(this).data('variant-price');
+                      var variantImage= $(this).data('variant-image');
+
+                      var match = valuesArray.every(function(value){
+                          return variantTitle.includes(value);
+                      }) && variantTitle.includes(changeInfo.previousValue);
+                      if (match) {
+                          console.log("Vneeeeeeeeeeeeeeeeee");
+                          console.log("Variant ID:     " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        // $($pTag).text(optionsText[changeInfo.index - 1] +' :'+ changeInfo.previousValue);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
+                        $pTag.addClass(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                    });
+                }else{
+                    console.log('matched');
+                }
+                  return false;
+            });
+          }else{
+              console.log("contains only one option!");
+              $pTags.each(function() {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+              var iddd = $(this).find('.key_value').attr('id');
+              var selector = null;
+                var siblingPTitle = $pTag.siblings('b.title').text();
+                if (siblingPTitle != null || siblingPTitle != "") {
+                    siblingPTitle = siblingPTitle.trim();
+                    selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+                }
+              console.log("siblingPTitle");
+              console.log("iddd");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.previousValue ){
+                  console.log('not matched');
+                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                  hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      if (variantTitle == changeInfo.previousValue) {
+                          var variantId = $(this).data('variant-id');
+                          var variantPrice = $(this).data('variant-price');
+                          var variantImage = $(this).data('variant-image');
+                          console.log("Variant ID: " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
+                        $pTag.addClass(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                  });
+              }else{
+                  console.log('matched');
+              }
+                return false;
+          });
+          }
+          
+         });
+    }
+    {% endcomment %}
+    previousTitle = currentVar.title;
   
+    const variants = document.querySelectorAll('[data-variant-id]');
+    // setTimeout(updatePriceArray, 2000);
+    // setTimeout(updatePrices, 2500);
+
     variants.forEach( function(variant) {
       //hide all variant descriptions
       variant.style.display = 'none';
@@ -1012,24 +1796,48 @@ function bcpoChange(currentVariant) {
       }
   });
 }
-      
-// function formatPlug (plug) {
-//   if (!plug.id) {
-//     return plug.text;
-//   }
-//   var plugPath='';
-//   if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
-//   if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
-//   if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-//   if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-//   if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
-//   if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
-//   if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-//   var $plug = $(
-//     '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
-//   );
-//   return $plug;
-// };
+    
+function getChangedIndexValue(previousTitle, currentTitle) { 
+    var previousTitleArray = previousTitle.split(' / ');
+    var currentTitleArray = currentTitle.split(' / ');
+    var maxLength = Math.max(previousTitleArray.length, currentTitleArray.length);
+    var result = {};
+
+    if (previousTitle === currentTitle) {
+        result.indexes = [];
+        result.parts = [];
+        for (var i = 0; i < maxLength; i++) {
+            result.indexes.push(i + 1);
+            result.parts.push(previousTitleArray[i]);
+        }
+    } 
+    else {
+        var firstIndexChanged = false;
+        for (var i = 0; i < maxLength; i++) {
+            if (i >= previousTitleArray.length || i >= currentTitleArray.length) {
+                break;
+            }
+            if (previousTitleArray[i] !== currentTitleArray[i]) {
+                result.index = i + 1;
+                result.previousValue = previousTitleArray[i];
+                result.currentValue = currentTitleArray[i];
+                firstIndexChanged = true;
+                break;
+            }
+        }
+
+        if (!firstIndexChanged && previousTitleArray.length !== currentTitleArray.length) {
+            var changedTitle = previousTitleArray.length < currentTitleArray.length ? currentTitleArray : previousTitleArray;
+            result.index = maxLength + 1;
+            result.changedValue = changedTitle[maxLength];
+        } else if (!firstIndexChanged) {
+            result.index = null;
+            result.changedValue = null;
+        }
+    }
+
+    return result;
+}
 </script>
 
 {%- if product.media.size > 0 -%}

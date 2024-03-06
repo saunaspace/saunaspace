@@ -1,5 +1,11 @@
-
-
+span.key_bold {
+    font-weight: 500;
+    font-family: system-ui;
+}
+p.Type,.Color {
+    margin:0.6rem 0;
+    font-size: 75%;
+}
 section.yotpo-containers .yotpo.yotpo-main-widget {
     border-bottom: 1px solid #979797;
     padding-bottom: 60px;
@@ -421,6 +427,7 @@ fieldset.product-form__input .form__label {
 
 .product-form__submit {
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .no-js .product-form__submit.button--secondary {
@@ -1338,8 +1345,8 @@ a.product__text {
   height: 2rem;
   width: 2rem;
   left: auto;
-  right: 50%;
-  top: 25%;
+  right: calc(0.4rem + var(--media-border-width));
+  top: calc(0.4rem + var(--media-border-width));
 }
 
 @media screen and (min-width: 750px) {
@@ -1390,3 +1397,96 @@ a.product__text {
   margin-left: 1.2rem;
   flex-shrink: 0;
 }
+
+
+//Custom CSS
+.bundle_item{
+  margin-bottom: 1rem;
+}
+.bundle_item img{
+  display: block;
+  width: 30%;
+  height: auto;
+  border-radius: 50px;
+  margin-right: 1rem;
+  /* margin: auto; */
+}
+.bundle_item {
+    gap: 0.6rem;
+    list-style: none;
+    display: flex;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background-color: #f9f3ed;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.option-main{
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4%;
+}
+.bundle_item.optional select,.option-main select{
+    padding:.4em 1.5em .4em .4em;
+    appearance: none;
+    background-origin: content-box;
+    background-position: right -1em center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    box-sizing: border-box;
+    padding-right: 1.5em;
+}
+.edit_btn{
+  color: #283455;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: inline-block;
+  position: relative;
+  /* align-self: baseline; */
+  margin-left: auto;
+  padding-right: 0.5rem;
+  font-size: small;
+  text-decoration: underline;
+}
+.edit_btn a{
+  color: #283455;
+}
+.detail{
+  float: right;
+  text-align: left;
+  width: 17rem;
+}
+.detail p{
+  display: block;
+  letter-spacing: -0.00874rem;
+  font-size: smaller;
+}
+.title{
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.01rem;
+  font-size: 1.2rem;
+  color: #283455;
+}
+.size{
+  margin-top: 1em;
+  color: #283455;
+}
+.color{
+  color: #283455;
+}
+.complete_bundle{
+  text-align: left;
+}
+.p_1-bold{
+  font-weight: bold;
+  color: #283455;
+}
+.p_1{
+  color: #283455;
+}
+

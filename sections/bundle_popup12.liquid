@@ -7,13 +7,8 @@
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'custom-bundel.js' | asset_url }}" defer="defer"></script>
- {% render 'bundle_popup' %} 
 
 {%- style -%}
-  span.campare_at_price {
-    text-decoration: line-through;
-  }
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -47,20 +42,7 @@
     onload="this.media='all'"
   >
 {%- endif -%}
-<style>
-.complete_bundle .required{
-  order:1;
-}
-  .complete_bundle .optional{
-  order:2;
-}
-   .complete_bundle h5.optional{
-     margin:1.5rem 0 1rem 0; 
-   }
-  input.optional_checkbox {
-    cursor: pointer;
- }
-</style>
+
 <!--
   <div class="free-shippingBG">
       <section class="free-shipping">Free shipping and returns in the contiguous US and Canada on orders over $200.</section>
@@ -75,13 +57,13 @@
   | append: section.id
 %}
 
-<section class="page-width section-{{ section.id }}-padding {% if template.name contains 'custombundle'  %} ForTemplateName {% endif %}" {% if template.name contains 'custombundle'  %} data-template="{{ template.name }}"  {% endif %}>
+<section class="page-width section-{{ section.id }}-padding Size-page-contaner">
   {% comment %}
     <h1 class="metafld">{{ product.metafields.custom.bundles_test }}</h1>
     <h2>{{all_products['tungsten-pedestal'].title}}</h2>
   {% endcomment %}
 
-  <div class="product {% unless template contains 'custombundle'  %}customclassForPrice{% endunless %} {{ template.name }} product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+  <div class="S-contaner product product-wrap product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
       <media-gallery
         id="MediaGallery-{{ section.id }}"
@@ -648,7 +630,7 @@
                   </div>
                 </noscript>
               {%- when 'buy_buttons' -%}
-                 <div {{ block.shopify_attributes }}>
+                <div {{ block.shopify_attributes }}>
                   <product-form class="product-form">
                     <div class="product-form__error-message-wrapper" role="alert" hidden>
                       <svg
@@ -679,112 +661,51 @@
                         value="{{ product.selected_or_first_available_variant.id }}"
                         disabled
                       >
-                      {% assign product_metafield = product.metafields.custom_bundle_handle.custom_bundle_handle_value %}
-
-                      {% if template.name contains 'product' and product_metafield != blank  %}
-                        {% assign discount_meta = product.metafields.custom_bundle_discount.custom_discount_value %}
-                        {% assign handles_array = product_metafield  | split: ', ' %}
-                        {% assign check =  %}
-                        {% for handleEle in handles_array %}
-                          {% assign parts = handleEle | split: '----' %}
-                          {% assign handle = parts[0] |strip %}
-                          {% assign optional = parts[1] |strip %}
-                          {% assign bproduct = all_products[handle]  %}
-                          {% assign title = bproduct.selected_or_first_available_variant.title %}
-                           <input
-                              type="hidden"
-                            {%if optional == '1' %}
-                              disabled="disabled"
-                            {% endif %}
-                              name="properties[{{ bproduct.title }}]"
-                              id="title_index_{{ forloop.index }}"
-                              value="{% if title=="Default Title" %}Default Variant{% else %} {{ title }} {% endif %}"
-                            >
-                       {% endfor %}
-
-                      {% if product_metafield != blank %}
-                        <input type="hidden" name="properties[_bundle]" value="true" >
-                        <input type="hidden" name="properties[_price_array]" id="price_array" value="" >
-                        <input type="hidden" name="properties[_child__varinats]" id="child_varinats" value="" >
-                        {% assign discount_parts = discount_meta | split: '----' %}
-                        <input type="hidden" name="properties[_discount]" id="discount_hidden" value="{{ discount_parts[0] }}" >
-                        <input type="hidden" name="properties[_discount_type]" id="discount_type_hidden" value="{{ discount_parts[1] }}" >
-                      {% endif %}
-                      {% endif %}
-                        
                       <div class="product-form__buttons">
-                        <!-- { % if product.selected_or_first_available_variant.available == false %}
+                        {% if product.selected_or_first_available_variant.available == false %}
                           <div class="atc-outOfStock">
                             <p><strong>Sorry, this item is out of stock.</strong></p>
                           </div>
-                        { % else %} -->
-                      {% if template.name contains 'product' and product_metafield != blank  %}
-                        <div class="complete_bundle" style=" display: flex; flex-direction: column; ">
-                          {% assign handles_array = product_metafield | split: ', ' %}
-                           
-                          {% if product_metafield %}
-                            <p class="p_1-bold">Your bundle:</p>
-                            <p class="p_1">Edit to mix and match colors or sizes.</p>
-                          {% endif %}
-                          {% assign isFirst = true %}
-                        {% for handleEle in handles_array %}
-                            {% assign parts = handleEle | split: '----' %}
-                            {% assign handle = parts[0] |strip %}
-                            {% assign optional = parts[1] |strip %}
-                            {% assign handle = handle |strip  %}
-                            {% assign bproduct = all_products[handle] %}
-                            {%if optional == '0' %}
-                            <div class="bundle_item required" data-checked="0" data-variant="{{ bproduct.selected_or_first_available_variant.id }}" data-price="{{ bproduct.selected_or_first_available_variant.price | divided_by: 100 }}">
-                              <img
-                                src="{{ bproduct.featured_image.src | product_img_url: 'medium' }}"
-                                alt="{{ bproduct.title }}"
-                                width=""
-                                height=""
-                              >
-                              <div class="detail_{{ forloop.index }}">
-                                <b class="title">{{ bproduct.title }}</b>
-                                  {% for option in bproduct.options_with_values %}
-                                    
-                                    <p {% if option.name=="Title" %} style="display:none" {% endif %} class="{{ option.name }}" ><span class="key_bold">{{ option.name }} </span>:<span id="index_title_option_{{ forloop.index }}"> {{  option.values[0] }}</span></p>
-                                  {% endfor %}
-                              </div>
-                              <a href="javascript:;" data-id="{{ bproduct.selected_or_first_available_variant.id }}" data-handle="{{ bproduct.handle }}" data-child="{{ forloop.index }}" class="edit_btn" id="openPopup edit_button_{{ forloop.index }}">
-                                Edit
-                              </a>
-                            </div>
-                          {% else %}
-                              {% if isFirst == true %}
-                              <h5 class="optional">Optinal Products With Bundle</h5>
-                                {% assign isFirst = false %}
-                              {% endif %}
-                            <div class="bundle_item optional" data-variant="{{ bproduct.selected_or_first_available_variant.id }}" data-checked="1" data-price="{{ bproduct.selected_or_first_available_variant.price | divided_by: 100 }}">
-                              <input class=optional_checkbox type="checkbox" data-index="{{ forloop.index }}" name="optional" value="{{ handle }}">
-                              <img
-                                src="{{ bproduct.featured_image.src | product_img_url: 'medium' }}"
-                                alt="{{ bproduct.title }}"
-                                width=""
-                                height=""
-                              >
-                              <div class="detail_{{ forloop.index }}">
-                                <b class="title">{{ bproduct.title }}</b>
-                                  {% for option in bproduct.options_with_values %}
-                                    
-                                    <p {% if option.name=="Title" %} style="display:none" {% endif %} class="{{ option.name }}" ><span class="key_bold">{{ option.name }}</span>:<span id="index_title_option_{{ forloop.index }}"> {{  option.values[0] }}</span></p>
-                                  {% endfor %}
-                              </div>
-                              <a href="javascript:;" data-id="{{ bproduct.selected_or_first_available_variant.id }}" data-handle="{{ bproduct.handle }}" data-child="{{ forloop.index }}" class="edit_btn" id="openPopup edit_button_{{ forloop.index }}">
-                                Edit
-                              </a>
-                            </div>
-                              
-                          {% endif %}
-                                  
-                          {% endfor %}
-                                       
-                        </div>
-                      {% endif %}
 
-                       {% if template.name contains 'product' and product_metafield != blank  %}
+                        {% else %}
+
+
+
+
+                          
+                          <div class="complete_bundle">
+                            {% assign product_metafield = product.metafields.custom.bundles_test %}
+                            {% assign handles_array = product_metafield | split: ',' %}
+                            {% if product_metafield %}
+                              <p class="p_1-bold">Your bundle:</p>
+                              <p class="p_1">Edit to mix and match colors or sizes.</p>
+                            {% endif %}
+                            {% for handle in handles_array %}
+                              {% assign product = all_products[handle] %}
+                              <div class="bundle_item">
+                                <img
+                                  src="{{ product.featured_image.src | product_img_url: 'medium' }}"
+                                  alt="{{ product.title }}"
+                                  width=""
+                                  height=""
+                                >
+                                <div class="detail">
+                                  <p class="title">{{ product.title }}</p>
+                                  <p class="size">{{ product.options[0] }} : {{  product.selected_or_first_available_variant.option1 }}</p>
+                                  <!-- <p class="color">{{ product.options[1] }} : {{  product.selected_or_first_available_variant.option2 }}</p> -->
+                                </div>
+                                <button class="edit_btn" data-title="{{ product.title }}">
+                                  <a href="{{ handle }}">Edit</a>
+                                </button>
+                              </div>
+                            {% endfor %}
+                          </div>
+
+
+
+
+                          
+
                           <button
                             type="submit"
                             name="add"
@@ -792,7 +713,7 @@
                             {% if product.selected_or_first_available_variant.available == false %}
                               disabled
                             {% endif %}
-                            >
+                          >
                             {%- if product.selected_or_first_available_variant.available -%}
                               {{ 'products.product.add_to_cart' | t }}
                             {%- else -%}
@@ -812,13 +733,8 @@
                               </svg>
                             </div>
                           </button>
-                         {% endif %}
-     
-                          
-                        <!-- { % endif %} -->
-                  {% unless template contains 'custombundle'  %}
-
-                        <div class="stickyBG" style="display:none !important;">
+                        {% endif %}
+                        <div class="stickyBG">
                           <div class="sticky-add-to-cart">
                             <div class="sac-product">
                               {{ product.title | escape -}}
@@ -843,8 +759,6 @@
                             </div>
                           </div>
                         </div>
-                    {% endunless %}
-                    
                         {%- if block.settings.show_dynamic_checkout -%}
                           {{ form | payment_button }}
                         {%- endif -%}
@@ -1201,6 +1115,8 @@
   		}
   	});
 
+
+
     setInterval(function () {
       if($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky") ) {
         $('.stickyBG').css('transform', 'translateY(-252px)');
@@ -1358,8 +1274,7 @@
     }
   }
 
-var previousTitle = null;
-        
+
   // variant lead time metafield listener
   function bcpoChange(currentVariant) {
       var variant_result = JSON.stringify(bcpo.variant.featured_image);
@@ -1367,278 +1282,9 @@ var previousTitle = null;
         this.filterVariant(bcpo.variant.featured_image);
       {% endif %}
       console.log('bcpo: ' + variant_result);
-        
-      var currentVarjson = JSON.stringify(bcpo.variant);
-        var currentVar = bcpo.variant; 
-        if (previousTitle == null) {
-             previousTitle = currentVar.title;
-        } 
-        var options_length = $('.customclassForPrice').find('.single-option-selector').length;
-        var optionsdIV = $('.customclassForPrice').find('.single-option-selector');
-        var optionsText = [];
-        optionsdIV.each(function(index, option) { 
-            var optionText = $(option).closest(".single-option-selector").siblings('.bcpo-label').find('.bcpo-title').text().trim().replace(':', '');
-            optionsText.push(optionText);
-        });
-        console.log(optionsText);
-        console.log('current variant '+ currentVarjson);
-        console.log('Previous variant title: ' + previousTitle);
-        console.log('Current variant title: ' + currentVar.title);
-        var changeInfo = getChangedIndexValue(currentVar.title, previousTitle);
-        console.log('changeInfo as JSON:', JSON.stringify(changeInfo));
-    
-         if (changeInfo.indexes && changeInfo.parts) {
-            for (var i = 0; i < changeInfo.indexes.length; i++) {
-                // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
-              console.log("value :" + changeInfo.parts[i]);
-              console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
-               $('.bundle_item.required').each(function() {
-                     var $optionMain = $(this).find('.option-main');
-              var $pTags = $optionMain.find('p').filter(function() {
-                  return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
-              });
-              var siblingPTags = $pTags.siblings('p[data-trim-option]');
-                 
-                  
-                 console.log(siblingPTags.length);
-                var valuesArray = [];
-                if (siblingPTags.length > 0){ 
-                  console.log("greater then 1 so make logic");
-                  console.log("greater then 0");
-                  siblingPTags.each(function() {
-                  var text = $(this).find('.key_value').text().trim();
-                  valuesArray.push(text);
-                  });
-                  console.log("other Values are:: "+ valuesArray);
-                  $pTags.each(function(index) {
-                  console.log("BundleOptions matched!");
-                  var $pTag = $(this);
-                 var selector = null;
-                 var siblingPTitle = $pTag.siblings('b.title').text();
-                 if (siblingPTitle != null || siblingPTitle != "") {
-                     siblingPTitle = siblingPTitle.trim();
-                      selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-                 }
-                 console.log("siblingPTitle");
-                  var iddd = $(this).find('.key_value').attr('id');
-                  console.log("iddd");
-                  console.log(iddd);
-                  var selectedOption = $pTag.text();
-                  var titleee = selectedOption.split(' : ');
-                  console.log(titleee[1]);
-                  
-                  if(titleee[1] != changeInfo.parts[i] ){
-                    console.log('not matched');
-                    var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                    hiddenVar.each(function() {
-                      var variantTitle = $(this).data('variant-title');
-                      var variantId = $(this).data('variant-id');
-                      var variantPrice = $(this).data('variant-price');
-                      var match = valuesArray.every(function(value){
-                          return variantTitle.includes(value);
-                      }) && variantTitle.includes(changeInfo.parts[i]);
-                      if (match) {
-                          console.log("Vneeeeeeeeeeeeeeeeee");
-                          console.log("Variant ID:" + variantId);
-                          console.log("Variant Price: " + variantPrice);
-                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                        // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
-                        $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
-                        if (siblingPTitle != null || siblingPTitle != "") {
-                         selector.val(variantTitle);
-                        }
-                      }
-                    });
-                  }else{
-                    console.log('matched');
-                  }
-                  return false;
-                  });
-                }
-              else{
-                  console.log("contains only one option!");
-                  $pTags.each(function() {
-                  console.log("BundleOptions matched!");
-                  var $pTag = $(this);
-                  var selector = null;
-                  var siblingPTitle = $pTag.siblings('b.title').text();
-                  if (siblingPTitle != null || siblingPTitle != "") {
-                      siblingPTitle = siblingPTitle.trim();
-                      selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-                  }
-                  var iddd = $(this).find('.key_value').attr('id');
-                  console.log("iddd");
-                  console.log(iddd);
-                  var selectedOption = $pTag.text();
-                  var titleee = selectedOption.split(' : ');
-                  console.log(titleee[1]);
-                  
-                  if(titleee[1] != changeInfo.parts[i] ){
-                      console.log('not matched');
-                      var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                      hiddenVar.each(function() {
-                          var variantTitle = $(this).data('variant-title');
-                          if (variantTitle == changeInfo.parts[i]) {
-                              var variantId = $(this).data('variant-id');
-                              var variantPrice = $(this).data('variant-price');
-                              console.log("Variant ID: " + variantId);
-                              console.log("Variant Price: " + variantPrice);
-                            $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                            $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                            $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                            // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
-                            $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
-                            $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
-                            $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
-                            $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
-                            $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
-                            if (siblingPTitle != null || siblingPTitle != "") {
-                            selector.val(variantTitle);
-                            }
-                          }
-                      });
-                  }else{
-                      console.log('matched');
-                  }
-                    return false;
-              });
-              }
-                });
-            }
-        }
-         else {
-            console.log("Index of the changed part: " + changeInfo.index);
-            console.log("option changed :" + optionsText[changeInfo.index - 1]);
-            console.log("Previous value: " + changeInfo.previousValue);
-            // console.log("Current value: " + changeInfo.currentValue);
-           $('.bundle_item.required').each(function() {
-              var $optionMain = $(this).find('.option-main');
-              var $pTags = $optionMain.find('p').filter(function() {
-                  return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.index - 1]) !== -1;
-              });
-              var siblingPTags = $pTags.siblings('p[data-trim-option]');
-             console.log(siblingPTags);
-             console.log(siblingPTags.length);
-              var valuesArray = [];
-              if (siblingPTags.length > 0) {
-                  console.log("greater then 0");
-                  siblingPTags.each(function() {
-                      var text = $(this).find('.key_value').text().trim();
-                      valuesArray.push(text);
-                  });
-                  console.log("other Values are:: "+ valuesArray);
-                  $pTags.each(function() {
-                    console.log("BundleOptions matched!");
-                    var $pTag = $(this);
-                    var selector = null;
-                    var siblingPTitle = $pTag.siblings('b.title').text();
-                    if (siblingPTitle != null || siblingPTitle != "") {
-                        siblingPTitle = siblingPTitle.trim();
-                        selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-                    }
-                    console.log("siblingPTitle");
-                    var iddd = $(this).find('.key_value').attr('id');
-                    console.log("iddd");
-                    console.log(iddd);
-                    var selectedOption = $pTag.text();
-                    var titleee = selectedOption.split(' : ');
-                    console.log(titleee[1]);
-                    if(titleee[1] != changeInfo.previousValue ){
-                        console.log('not matched');
-                        var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                        hiddenVar.each(function() {
-                          var variantTitle = $(this).data('variant-title');
-                          var variantId = $(this).data('variant-id');
-                          var variantPrice = $(this).data('variant-price');
-                          var match = valuesArray.every(function(value){
-                              return variantTitle.includes(value);
-                          }) && variantTitle.includes(changeInfo.previousValue);
-                          if (match) {
-                              console.log("Vneeeeeeeeeeeeeeeeee");
-                              console.log("Variant ID:     " + variantId);
-                              console.log("Variant Price: " + variantPrice);
-                            $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                            $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                            $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                            // $($pTag).text(optionsText[changeInfo.index - 1] +' :'+ changeInfo.previousValue);
-                            $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
-                            $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
-                            $pTag.addClass(optionsText[changeInfo.index - 1]);
-                            $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
-                            $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
-                            if (siblingPTitle != null || siblingPTitle != "") {
-                            selector.val(variantTitle);
-                            }
-                          }
-                        });
-                    }else{
-                        console.log('matched');
-                    }
-                      return false;
-                });
-              }
-              else{
-                  console.log("contains only one option!");
-                  $pTags.each(function() {
-                  console.log("BundleOptions matched!");
-                  var $pTag = $(this);
-                  var iddd = $(this).find('.key_value').attr('id');
-                  var selector = null;
-                    var siblingPTitle = $pTag.siblings('b.title').text();
-                    if (siblingPTitle != null || siblingPTitle != "") {
-                        siblingPTitle = siblingPTitle.trim();
-                        selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-                    }
-                  console.log("siblingPTitle");
-                  console.log("iddd");
-                  console.log(iddd);
-                  var selectedOption = $pTag.text();
-                  var titleee = selectedOption.split(' : ');
-                  console.log(titleee[1]);
-                  
-                  if(titleee[1] != changeInfo.previousValue ){
-                      console.log('not matched');
-                      var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                      hiddenVar.each(function() {
-                          var variantTitle = $(this).data('variant-title');
-                          if (variantTitle == changeInfo.previousValue) {
-                              var variantId = $(this).data('variant-id');
-                              var variantPrice = $(this).data('variant-price');
-                              console.log("Variant ID: " + variantId);
-                              console.log("Variant Price: " + variantPrice);
-                            $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                            $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                            $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                            $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
-                            $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
-                            $pTag.addClass(optionsText[changeInfo.index - 1]);
-                            $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
-                            $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
-                            if (siblingPTitle != null || siblingPTitle != "") {
-                            selector.val(variantTitle);
-                            }
-                          }
-                      });
-                  }else{
-                      console.log('matched');
-                  }
-                    return false;
-              });
-              }
-              
-             });
-        }
-        previousTitle = currentVar.title;
-        
       console.log('featured iamge: ' + bcpo.variant.featured_image);
       const variants = document.querySelectorAll('[data-variant-id]')
-      updatePrices();
+
       variants.forEach( function(variant) {
         //hide all variant descriptions
         variant.style.display = 'none';
@@ -1760,8 +1406,6 @@ var previousTitle = null;
     {% endif %}
   }
 </script>
-
-
 
 {% schema %}
 {

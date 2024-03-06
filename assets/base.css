@@ -1081,7 +1081,6 @@ summary::-webkit-details-marker {
   .grid--peek.slider--mobile .grid__item {
     box-sizing: content-box;
     margin: 0;
-	 width: 100%;
   }
   .product--thumbnail .product__media-item:not(.is-active), .product--thumbnail_slider .product__media-item:not(.is-active) {
 	  display: none;
@@ -4375,7 +4374,7 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 	padding: 10px 0;
 	width: 100%;
 	border-bottom: 1px solid #979797;
-	z-index: 3;
+	z-index: -1;
 	transition: transform .25s;
 	top: 0;
 }
@@ -4485,6 +4484,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	font-weight: 700; 
 	padding-bottom: 1em; 
 	margin-bottom: 0;
+    line-height: normal;
  }
 
 @media (min-width: 991px) {
@@ -4607,7 +4607,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 	#otherPlugs { position: absolute; width: 100%;}
 */	
 	.pwt { background-repeat: no-repeat; min-height: 42px; background-size: contain; display: flex; align-items: center; text-align: left;  }
-	.product-warranty { background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/warranty.svg?v=1702414160); padding-left: 50px; }
+	.product-warranty { background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/warranty.svg?v=1702414160; padding-left: 50px; }
 	.product-trial { background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/one-hundred-day-trial.svg?v=1702414202); padding-left: 60px; }
 
 .size-box {
@@ -5605,8 +5605,8 @@ a { color: #C67A26; }
 }
 
 
-* {
-  scrollbar-color: transparent transparent; /* thumb and track color */
+/* * {
+  scrollbar-color: transparent transparent;
   scrollbar-width: 0px;
 }
 
@@ -5626,7 +5626,7 @@ a { color: #C67A26; }
 * {
   -ms-overflow-style: none;
 }
-
+ */
 .cbLabel {
 	text-transform: none;
 	margin-right: 20px;
@@ -6722,3 +6722,4 @@ a#cart-icon-bubble {
 .text-uppercase {
     text-transform: uppercase;
 }
+

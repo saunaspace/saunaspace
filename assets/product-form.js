@@ -26,19 +26,46 @@ if (!customElements.get('product-form')) {
       delete config.headers['Content-Type'];
 
       const formData = new FormData(this.form);
+      
       if (this.cart) {
         formData.append('sections', this.cart.getSectionsToRender().map((section) => section.id));
         formData.append('sections_url', window.location.pathname);
         this.cart.setActiveElement(document.activeElement);
       }
       config.body = formData;
-
-      fetch(`${routes.cart_add_url}`, config)
+      console.log("config!!!");
+      let check = false;
+      let optinal = "empty";
+       for (let entry of formData.entries()) {
+          const [name, value] = entry;
+          if(name== "_optionalVariants" && value !== "empty" ){
+            if(check == false){
+              console.log(name, value);
+              check  = true;
+              optinal = value;
+            }
+          }
+        }
+      console.log("ready to check::"+ check);
+     
+      fetch("/cart/add.js", config)
         .then((response) => response.json())
         .then((response) => {
+          console.log("Both Executed!");
+           if(check == true){
+              console.log("ready to call!");
+              let uniqueId = this.generateUniqueID();
+              setTimeout(() => {
+                      var response = this.optinaladdcart(optinal, uniqueId); 
+                      console.log(response);
+                }, 2000);
+            }
+            // this.openCart();
+          
           if (response.status) {
-            this.handleErrorMessage(response.description);
 
+          
+            this.handleErrorMessage(response.description);
             const soldOutMessage = this.submitButton.querySelector('.sold-out-message');
             if (!soldOutMessage) return;
             this.submitButton.setAttribute('aria-disabled', true);
@@ -71,8 +98,62 @@ if (!customElements.get('product-form')) {
           if (!this.error) this.submitButton.removeAttribute('aria-disabled');
           this.querySelector('.loading-overlay__spinner').classList.add('hidden');
         });
+     
     }
-
+    generateUniqueID() {
+      console.log("ID passed");
+      const timestamp = new Date().getTime();
+      const additionalString = 'UNIQUE';
+      const randomNumber = Math.floor(Math.random() * 1000);
+      const uniqueID = `${timestamp}-${additionalString}-${randomNumber}`;
+      return uniqueID;
+    }
+    // openCart() {
+    //     $('.go-cart__mini-cart.js-go-cart-mini-cart').addClass('is-open');
+    //     setTimeout(() => {
+    //         $('.go-cart__mini-cart.js-go-cart-mini-cart').removeClass('is-open');
+    //     }, 2000);
+    // }
+    optinaladdcart(optinal, uniqueID){
+      console.log("Optinal passed");
+      
+      if (optinal == "empty") {
+        console.log("optinal null!");
+      } else {
+        console.log("optinal have values!");
+        let arrayOfNumbers = optinal.split(',');
+        let formData = {
+            'items': []
+        };
+        for (let i = 0; i < arrayOfNumbers.length; i++) {
+            let number = arrayOfNumbers[i].trim();
+            console.log(number);
+            let item = {
+                'id': number,
+                'quantity': 1, 
+                'properties': {
+                    'unique_id': uniqueID
+                }
+            };
+          formData.items.push(item);
+        }
+        console.log(formData);
+                window.fetch("/cart/add.js", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                  console.log(response);
+                    return response.json();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+      }
+}
     handleErrorMessage(errorMessage = false) {
       this.errorMessageWrapper = this.errorMessageWrapper || this.querySelector('.product-form__error-message-wrapper');
       if (!this.errorMessageWrapper) return;
@@ -86,3 +167,4 @@ if (!customElements.get('product-form')) {
     }
   });
 }
+

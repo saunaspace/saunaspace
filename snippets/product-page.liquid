@@ -1,6 +1,7 @@
 <script>
   $(document).ready(function() {
       console.log('prod running');
+      // console.log('prod running'+bcpo.variant);
   setTimeout(
     function() { 
       $( $('.bcpo-title') ).each(function( i ) {
@@ -78,10 +79,436 @@ function bcpoChange(currentVariant) {
     {% if product.id == 2105477365849 or product.id == 2105476743257 or product.id == 2105475661913 or product.id == 2105476546649 or product.id == 2105477726297 or product.id == 2105475956825 %}
       this.filterVariant(bcpo.variant.featured_image);
     {% endif %}
-    console.log('bcpo: ' + variant_result);
-    console.log('featured iamge: ' + bcpo.variant.featured_image);
-    const variants = document.querySelectorAll('[data-variant-id]')
+    console.log("new fucntion!!!!");
+    var currentVarjson = JSON.stringify(bcpo.variant);
+    var currentVar = bcpo.variant;
+    if (previousTitle == null) {
+         previousTitle = currentVar.title;
+    } 
+    var options_length = $('.customclassForPrice').find('.single-option-selector').length;
+    var optionsdIV = $('.customclassForPrice').find('.single-option-selector');
+    var optionsText = [];
+    optionsdIV.each(function(index, option) { 
+        var optionText = $(option).closest(".single-option-selector").siblings('.bcpo-label').find('.bcpo-title').text().trim().replace(':', '');
+        optionsText.push(optionText);
+    });
+    console.log(optionsText);
+    console.log('current variant '+ currentVarjson);
+    console.log('Previous variant title: ' + previousTitle);
+    console.log('Current variant title: ' + currentVar.title);
+    var changeInfo = getChangedIndexValue(currentVar.title, previousTitle);
+    console.log('changeInfo as JSON:', JSON.stringify(changeInfo));
+
+     if (changeInfo.indexes && changeInfo.parts) {
+        for (var i = 0; i < changeInfo.indexes.length; i++) {
+            // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
+          console.log("value :" + changeInfo.parts[i]);
+          console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
+           $('.bundle_item.required').each(function() {
+                 var $optionMain = $(this).find('.option-main');
+          var $pTags = $optionMain.find('p').filter(function() {
+              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
+          });
+          var siblingPTags = $pTags.siblings('p[data-trim-option]');
+             
+              
+             console.log(siblingPTags.length);
+            var valuesArray = [];
+            if (siblingPTags.length > 0){ 
+              console.log("greater then 1 so make logic");
+              console.log("greater then 0");
+              siblingPTags.each(function() {
+              var text = $(this).find('.key_value').text().trim();
+              valuesArray.push(text);
+              });
+              console.log("other Values are:: "+ valuesArray);
+              $pTags.each(function(index) {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+             var selector = null;
+             var siblingPTitle = $pTag.siblings('b.title').text();
+             if (siblingPTitle != null || siblingPTitle != "") {
+                 siblingPTitle = siblingPTitle.trim();
+                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+             }
+             console.log("siblingPTitle");
+              var iddd = $(this).find('.key_value').attr('id');
+              console.log("iddd6543");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(selectedOption);
+              console.log(titleee[1]);
+              
+              if(titleee[1] != changeInfo.parts[i] ){
+                console.log('not matched');
+                var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                hiddenVar.each(function() {
+                  var variantTitle = $(this).data('variant-title');
+                  var variantId = $(this).data('variant-id');
+                  var variantPrice = $(this).data('variant-price');
+                  var variantImage = $(this).data('variant-image');
+                  var match = valuesArray.every(function(value){
+                      return variantTitle.includes(value);
+                  }) && variantTitle.includes(changeInfo.parts[i]);
+                  if (match) {
+                      console.log("Vneeeeeeeeeeeeeeeeee");
+                      console.log("Variant ID:" + variantId);
+                      console.log("Variant Price: " + variantPrice);
+                    $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                    $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                    $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                    $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                    // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
+                    $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
+                    if (siblingPTitle != null || siblingPTitle != "") {
+                     selector.val(variantTitle);
+                    }
+                  }
+                });
+              }else{
+                console.log('matched');
+              }
+              return false;
+              });
+            }
+          else{
+              console.log("contains only one option!");
+              $pTags.each(function() {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+              var selector = null;
+              var siblingPTitle = $pTag.siblings('b.title').text();
+              if (siblingPTitle != null || siblingPTitle != "") {
+                  siblingPTitle = siblingPTitle.trim();
+                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+              }
+              var iddd = $(this).find('.key_value').attr('id');
+              console.log("iddd234567876543");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.parts[i] ){
+                  console.log('not matched');
+                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                  hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      if (variantTitle == changeInfo.parts[i]) {
+                          var variantId = $(this).data('variant-id');
+                          var variantPrice = $(this).data('variant-price');
+                          var variantImage = $(this).data('variant-image');
+                        
+                          console.log("Variant ID: " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                  });
+              }else{
+                  console.log('matched');
+              }
+                return false;
+          });
+          }
+            });
+        }
+    }
+     else {
+        console.log("Index of the changed part: " + changeInfo.index);
+        console.log("option changed :" + optionsText[changeInfo.index - 1]);
+        console.log("Previous value: " + changeInfo.previousValue);
+        // console.log("Current value: " + changeInfo.currentValue);
+       $('.bundle_item.required').each(function() {
+          var $optionMain = $(this).find('.option-main');
+          var $pTags = $optionMain.find('p').filter(function() {
+              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.index - 1]) !== -1;
+          });
+          var siblingPTags = $pTags.siblings('p[data-trim-option]');
+         console.log(siblingPTags);
+         console.log(siblingPTags.length);
+          var valuesArray = [];
+     if (changeInfo.indexes && changeInfo.parts) {
+        for (var i = 0; i < changeInfo.indexes.length; i++) {
+            // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
+          console.log("value :" + changeInfo.parts[i]);
+          console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
+           $('.bundle_item.required').each(function() {
+                 var $optionMain = $(this).find('.option-main');
+          var $pTags = $optionMain.find('p').filter(function() {
+              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
+          });
+          var siblingPTags = $pTags.siblings('p[data-trim-option]');
+             
+              
+             console.log(siblingPTags.length);
+            var valuesArray = [];
+            if (siblingPTags.length > 0){ 
+              console.log("greater then 1 so make logic");
+              console.log("greater then 0");
+              siblingPTags.each(function() {
+              var text = $(this).find('.key_value').text().trim();
+              valuesArray.push(text);
+              });
+              console.log("other Values are:: "+ valuesArray);
+              $pTags.each(function(index) {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+             var selector = null;
+             var siblingPTitle = $pTag.siblings('b.title').text();
+             if (siblingPTitle != null || siblingPTitle != "") {
+                 siblingPTitle = siblingPTitle.trim();
+                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+             }
+             console.log("siblingPTitle");
+              var iddd = $(this).find('.key_value').attr('id');
+              console.log("iddd123");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.parts[i] ){
+                console.log('not matched');
+                var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                hiddenVar.each(function() {
+                  var variantTitle = $(this).data('variant-title');
+                  var variantId = $(this).data('variant-id');
+                  var variantPrice = $(this).data('variant-price');
+                  var variantImage = $(this).data('variant-image');
+                  var match = valuesArray.every(function(value){
+                      return variantTitle.includes(value);
+                  }) && variantTitle.includes(changeInfo.parts[i]);
+                  if (match) {
+                      console.log("Vneeeeeeeeeeeeeeeeee");
+                      console.log("Variant ID:" + variantId);
+                      console.log("Variant Price: " + variantPrice);
+                    $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                    $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                    $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                    $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                    // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
+                    $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
+                    $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
+                    if (siblingPTitle != null || siblingPTitle != "") {
+                     selector.val(variantTitle);
+                    }
+                  }
+                });
+              }else{
+                console.log('matched');
+              }
+              return false;
+              });
+            }
+          else{
+              console.log("contains only one option!");
+              $pTags.each(function() {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+              var selector = null;
+              var siblingPTitle = $pTag.siblings('b.title').text();
+              if (siblingPTitle != null || siblingPTitle != "") {
+                  siblingPTitle = siblingPTitle.trim();
+                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+              }
+              var iddd = $(this).find('.key_value').attr('id');
+              console.log("iddd456");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.parts[i] ){
+                  console.log('not matched');
+                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                  hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      if (variantTitle == changeInfo.parts[i]) {
+                          var variantId = $(this).data('variant-id');
+                          var variantPrice = $(this).data('variant-price');
+                          var variantImage = $(this).data('variant-image');
+                        
+                          console.log("Variant ID: " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                  });
+              }else{
+                  console.log('matched');
+              }
+                return false;
+          });
+          }
+            });
+        }
+    }
+     else {
+        console.log("Index of the changed part: " + changeInfo.index);
+        console.log("option changed :" + optionsText[changeInfo.index - 1]);
+        console.log("Previous value: " + changeInfo.previousValue);
+        // console.log("Current value: " + changeInfo.currentValue);
+       $('.bundle_item.required').each(function() {
+          var $optionMain = $(this).find('.option-main');
+          var $pTags = $optionMain.find('p').filter(function() {
+              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.index - 1]) !== -1;
+          });
+          var siblingPTags = $pTags.siblings('p[data-trim-option]');
+         console.log(siblingPTags);
+         console.log(siblingPTags.length);
+          var valuesArray = [];
+          if (siblingPTags.length > 0) {
+              console.log("greater then 0");
+              siblingPTags.each(function() {
+                  var text = $(this).find('.key_value').text().trim();
+                  valuesArray.push(text);
+              });
+              console.log("other Values are:: "+ valuesArray);
+              $pTags.each(function() {
+                console.log("BundleOptions matched!");
+                var $pTag = $(this);
+                var selector = null;
+                var siblingPTitle = $pTag.siblings('b.title').text();
+                if (siblingPTitle != null || siblingPTitle != "") {
+                    siblingPTitle = siblingPTitle.trim();
+                    selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+                }
+                console.log("siblingPTitle");
+                var iddd = $(this).find('.key_value').attr('id');
+                console.log("iddd789");
+                console.log(iddd);
+                var selectedOption = $pTag.text();
+                var titleee = selectedOption.split(':');
+                console.log(titleee[1]);
+                if(titleee[1].trim() != changeInfo.previousValue ){
+                    console.log('not matched');
+                    var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                    hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      var variantId = $(this).data('variant-id');
+                      var variantPrice = $(this).data('variant-price');
+                      var variantImage= $(this).data('variant-image');
+
+                      var match = valuesArray.every(function(value){
+                          return variantTitle.includes(value);
+                      }) && variantTitle.includes(changeInfo.previousValue);
+                      if (match) {
+                          console.log("Vneeeeeeeeeeeeeeeeee");
+                          console.log("Variant ID:     " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        // $($pTag).text(optionsText[changeInfo.index - 1] +' :'+ changeInfo.previousValue);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
+                        $pTag.addClass(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                    });
+                }else{
+                    console.log('matched');
+                }
+                  return false;
+            });
+          }
+          else{
+              console.log("contains only one option!");
+              $pTags.each(function() {
+              console.log("BundleOptions matched!");
+              var $pTag = $(this);
+              var iddd = $(this).find('.key_value').attr('id');
+              var selector = null;
+                var siblingPTitle = $pTag.siblings('b.title').text();
+                if (siblingPTitle != null || siblingPTitle != "") {
+                    siblingPTitle = siblingPTitle.trim();
+                    selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
+                }
+              console.log("siblingPTitle");
+              console.log("iddd01112");
+              console.log(iddd);
+              var selectedOption = $pTag.text();
+              var titleee = selectedOption.split(':');
+              console.log(titleee[1]);
+              
+              if(titleee[1].trim() != changeInfo.previousValue ){
+                  console.log('not matched');
+                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                  hiddenVar.each(function() {
+                      var variantTitle = $(this).data('variant-title');
+                      if (variantTitle == changeInfo.previousValue) {
+                          var variantId = $(this).data('variant-id');
+                          var variantPrice = $(this).data('variant-price');
+                          var variantImage = $(this).data('variant-image');
+                          console.log("Variant ID: " + variantId);
+                          console.log("Variant Price: " + variantPrice);
+                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
+                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
+                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
+                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
+                        $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
+                        $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
+                        $pTag.addClass(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
+                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
+                        if (siblingPTitle != null || siblingPTitle != "") {
+                        selector.val(variantTitle);
+                        }
+                      }
+                  });
+              }else{
+                  console.log('matched');
+              }
+                return false;
+          });
+          }
+          
+         });
+    }
+       });
+    }
+    previousTitle = currentVar.title;
   
+    const variants = document.querySelectorAll('[data-variant-id]');
+    setTimeout(updatePriceArray, 2000);
+    setTimeout(updatePrices, 2500);
+
     variants.forEach( function(variant) {
       //hide all variant descriptions
       variant.style.display = 'none';
@@ -91,4 +518,46 @@ function bcpoChange(currentVariant) {
       }
   });
 }
+function getChangedIndexValue(previousTitle, currentTitle) { 
+    var previousTitleArray = previousTitle.split(' / ');
+    var currentTitleArray = currentTitle.split(' / ');
+    var maxLength = Math.max(previousTitleArray.length, currentTitleArray.length);
+    var result = {};
+
+    if (previousTitle === currentTitle) {
+        result.indexes = [];
+        result.parts = [];
+        for (var i = 0; i < maxLength; i++) {
+            result.indexes.push(i + 1);
+            result.parts.push(previousTitleArray[i]);
+        }
+    } 
+    else {
+        var firstIndexChanged = false;
+        for (var i = 0; i < maxLength; i++) {
+            if (i >= previousTitleArray.length || i >= currentTitleArray.length) {
+                break;
+            }
+            if (previousTitleArray[i] !== currentTitleArray[i]) {
+                result.index = i + 1;
+                result.previousValue = previousTitleArray[i];
+                result.currentValue = currentTitleArray[i];
+                firstIndexChanged = true;
+                break;
+            }
+        }
+
+        if (!firstIndexChanged && previousTitleArray.length !== currentTitleArray.length) {
+            var changedTitle = previousTitleArray.length < currentTitleArray.length ? currentTitleArray : previousTitleArray;
+            result.index = maxLength + 1;
+            result.changedValue = changedTitle[maxLength];
+        } else if (!firstIndexChanged) {
+            result.index = null;
+            result.changedValue = null;
+        }
+    }
+
+    return result;
+}
+  
 </script>

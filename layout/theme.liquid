@@ -3,13 +3,6 @@
   <head>
 <link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
 <link rel='preconnect dns-prefetch' href='https://conf.config-security.com/' crossorigin />
-<link rel='preconnect dns-prefetch' href='https://whale.camera/' crossorigin />
-<script>
-/* >> TriplePixel :: start*/
-window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"2.12",plat:"SHOPIFY",isHeadless:false},function(W,H,A,L,E,_,B,N){function O(U,T,P,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,P?(H.open("POST",U,!0),H.setRequestHeader("Content-Type","text/plain")):H.open("GET",U,!0),H.send(JSON.stringify(P||{})),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):P||(N[B]=R)):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1,P))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1,L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)};try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push({u:location.href,r:document.referrer,t:Date.now(),id:L()}),A.setItem(H+"U",JSON.stringify(E))}catch(e){}var i,m,p;A.getItem('"!nC`')||(_=A,A=N,A[H]||(E=A[H]=function(t,e,a){return void 0===a&&(a=[]),"State"==t?E.s:(W=L(),(E._q=E._q||[]).push([W,t,e].concat(a)),W)},E.s="Installed",E._q=[],E.ch=W,B="configSecurityConfModel",N[B]=1,O("https://conf.config-security.com/model",5),i=L(),m=A[atob("c2NyZWVu")],_.setItem("di_pmt_wt",i),p={id:i,action:"profile",avatar:_.getItem("auth-security_rand_salt_"),time:m[atob("d2lkdGg=")]+":"+m[atob("aGVpZ2h0")],host:A.TriplePixelData.TripleName,plat:A.TriplePixelData.plat,url:window.location.href,ref:document.referrer,ver:A.TriplePixelData.ver},O("https://api.config-security.com/event",5,p),O("https://whale.camera/live/dot.txt",5)))}}("","TriplePixel",localStorage);
-/* << TriplePixel :: end*/
-</script>
-<link rel='preconnect dns-prefetch' href='https://triplewhale-pixel.web.app/' crossorigin />
 <link rel='preconnect dns-prefetch' href='https://triplewhale-pixel.web.app/' crossorigin />
 <script>
 /* >> TriplePixel :: start*/
@@ -18,6 +11,7 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
 </script>{% render 'pagefly-head' %}
   <link rel="stylesheet" href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css">
   <script>var bcpo_product={{ product | json }}; {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} {% if shop.metafields.bcpo.bcpo_settings %} var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}var inventory_quantity = [];{% for v in product.variants %}inventory_quantity.push({{ v.inventory_quantity }});{% endfor %}if(bcpo_product) { for (var i = 0; i < bcpo_product.variants.length; i += 1) { bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; }}window.bcpo = window.bcpo || {}; bcpo.cart = {{ cart | json }}; bcpo.ogFormData = FormData; bcpo.money_with_currency_format = {{ shop.money_with_currency_format | json }};bcpo.money_format = {{ shop.money_format | json }};</script>
+  <script>if (window.bcpo) bcpo.disabled = true;</script>
     <link
     rel="stylesheet"
     href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css"
@@ -59,29 +53,15 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     {%- render 'header-scripts.zipifypages', renderctx: 'thm' -%}{{ content_for_header }}
-    <script id="vopo-head">
-      (function () {
-        if (
-          ((document.documentElement.innerHTML.includes("asyncLoad") &&
-            !document.documentElement.innerHTML.includes(
-              "\/obscure" + "-escarpment-2240"
-            )) ||
-            (window.bcpo && bcpo.disabled)) &&
-          !window.location.href.match(/[&?]yesbcpo/)
-        )
-          return;
-        var script = document.createElement("script");
-        script.src =
-          "https://obscure-escarpment-2240.herokuapp.com/js/best_custom_product_options.js?shop={{shop.permanent_domain}}";
-        var vopoHead = document.getElementById("vopo-head");
-        vopoHead.parentNode.insertBefore(script, vopoHead);
-      })();
-    </script>
+    
 
     <style>
-      variant-radios {
+      /* variant-radios {
         display: none !important;
-      }
+      } */
+      /* .js-go-cart-modal-fail,.go-cart-modal{
+        display:none;
+      } */
     </style>
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -448,11 +428,13 @@ window.TriplePixelData={TripleName:"saunaspace.myshopify.com",ver:"1.9.0"},funct
     </script>
 
 <script>
-        {% if product %}
-        var _learnq = _learnq || [];
+      {% if product %}
+      var _learnq = _learnq || [];
       function addedToCart() {
         fetch(`${window.location.origin}/cart.js`)
         .then(res => res.clone().json().then(data => {
+          
+          
           var cart = {
             total_price: data.total_price/100,
             $value: data.total_price/100,

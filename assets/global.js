@@ -745,8 +745,6 @@ customElements.define('slideshow-component', SlideshowComponent);
 
 class VariantSelects extends HTMLElement {
 
-
-
   constructor() {
     super();
     this.addEventListener('change', this.onVariantChange);
@@ -754,24 +752,467 @@ class VariantSelects extends HTMLElement {
 
   onVariantChange() {
     console.log('variant change');
+    // console.log('variant'+this);
+    
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
     this.updatePickupAvailability();
-    this.removeErrorMessage();
+    // this.removeErrorMessage();
 
     if (!this.currentVariant) {
       this.toggleAddButton(true, '', true);
       this.setUnavailable();
     } else {
+      console.log("currentVariant Global id"+this.currentVariant);
+      var productId = $(".mineClass").attr('data-product-id');
+      console.log("currentProduct Global id"+ productId);
+      if (
+        productId == 2105477365849 ||
+        productId == 2105476743257 ||
+        productId == 2105475661913 ||
+        productId == 2105476546649 ||
+        productId == 2105477726297 ||
+        productId == 2105475956825 ||
+        productId == 6809896288299
+      ) {
+        var currentVariant = this.currentVariant;
+        this.filterVariant(currentVariant.featured_image, productId);
+      }
+      console.log("currentVariant Global ends"+this.currentVariant);
+      
       this.updateMedia();
+      // var elements = document.querySelectorAll('.ForTemplateName');
+      // var check = 0;
+      // elements.forEach(function(element) {
+      // var dataTemplateValue = element.getAttribute('data-template');
+      //   if(check == 0){
+      //   if (dataTemplateValue == 'custombundle') {
+      //     this.updateURL();
+      //     check = 1;
+      //   }
+      //   }
+      // });
       this.updateURL();
+      
       this.updateVariantInput();
       this.renderProductInfo();
       this.updateShareUrl();
       this.updateVariantLeadTime(this.currentVariant);
     }
+     this.changeVariantfunction();
+     this.bundleItmesShange();
+     this.updatePriceArray();
+     this.updatePrices();
   }
+  changeVariantfunction(){
+  var previousTitle = null;
+  var currentTitle = this.getCurrentTitle();
+  if (previousTitle == null) {
+           previousTitle = currentTitle;
+      } 
+  console.log("currentTitleNew"+ currentTitle);
+  console.log("previousTitleNew"+ previousTitle);
+  var optionsText = [];
+    $(".select__select.retrive_selected_option").each(function(index, option) { 
+        var optionText = $(this).attr('data-option-parent');
+        optionsText.push(optionText);
+    });
+  console.log(optionsText);
+  var changeInfo = getChangedIndexValue(currentTitle, previousTitle);
+  console.log('changeInfo as JSON:', JSON.stringify(changeInfo));
+  if (changeInfo.indexes && changeInfo.parts) {
+      console.log("double changed");
+      for (var i = 0; i < changeInfo.indexes.length; i++) {
+            // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
+            console.log("value :" + changeInfo.parts[i]);
+            console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
+            $('.bundle_item.required').each(function() {
+                var $optionMain = $(this).find('.option-main');
+                var $selectTags = $optionMain.find('select').filter(function() {
+                    return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
+                });
+                var siblingSelectTags = $selectTags.siblings('select[data-trim-option]');
+                console.log("siblingSelectTags");
+                console.log(siblingSelectTags);
+                console.log("siblingSelectTags.length");
+                console.log(siblingSelectTags.length);
+                var valuesArray = [];
+                if (siblingSelectTags.length > 0){
+                    console.log("greater then 1 so make logic");
+                    siblingSelectTags.each(function() {
+                      var text = $(this).val();
+                      valuesArray.push(text);
+                    });
+                    console.log("other Values are:: "+ valuesArray);
+                    $selectTags.each(function() {
+                      var $selectTag = $(this);
+                      console.log("$selectTag Val");
+                      console.log($selectTag.val());
+                      if($selectTag.val() != changeInfo.parts[i] ){
+                           console.log("need to change because child is not like parent");
+                            var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                            hiddenVar.each(function() {
+                              var variantTitle = $(this).data('variant-title');
+                              var variantId = $(this).data('variant-id');
+                              var variantPrice = $(this).data('variant-price');
+                              var variantImage = $(this).data('variant-image');
+                              var match = valuesArray.every(function(value){
+                                  return variantTitle.includes(value);
+                              }) && variantTitle.includes(changeInfo.parts[i]);
+                              if (match) {
+                                  console.log("Vneeeeeeeeeeeeeeeeee");
+                                  console.log("Variant Title: " + variantTitle);
+                                    console.log("Variant ID: " + variantId);
+                                    console.log("Variant Price: " + variantPrice);
+                                    console.log("Variant Image: " + variantImage);
+                                    $($selectTag).val(changeInfo.parts[i]);
+                                    var dropdownContent = $('div[data-option-name="'+optionsText[changeInfo.indexes[i] - 1]+'"].dropdown-content small');
+                                
+                                    dropdownContent.each(function() {
+                                          var $small = $(this);
+                                          var spanText = $small.find('span').text();
+                                          console.log("spanText: " + spanText);
+                                      
+                                          if (spanText === changeInfo.parts[i]) {
+                                              console.log('matched');
+                                              var imageUrl = $small.find('img').attr('src');
+                                              var $dropbtn = dropdownContent.closest('.dropdown-content').siblings('.dropbtn');
+                                              console.log($dropbtn);
+                                              if (imageUrl) {
+                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                              } else {
+                                                  $dropbtn.html('<span>'+changeInfo.parts[i]+'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                              }
+                                              return false; 
+                                          }
+                                      });
+                                    bundleItmesShange();
+                              }else{
+                                  console.log("eeerrrrrrrrrr");
+                              }
+                            });
+                      }else{
+                        console.log('no neeeded change');
+                      }
+                      return false;
+                    });
+                 }
+                 else{
+                    console.log("less then one");
+                     $selectTags.each(function() {
+                        console.log("BundleOptions matched!");
+                        var $selectTag = $(this);
+                         console.log("$selectTag Val");
+                         console.log($selectTag.val());
+                         if($selectTag.val() != changeInfo.parts[i] ){
+                           console.log("need to change because child is not like parent");
+                            var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
+                            hiddenVar.each(function() {
+                                var variantTitle = $(this).data('variant-title');
+                                if (variantTitle == changeInfo.parts[i]) {
+                                    var variantId = $(this).data('variant-id');
+                                    var variantPrice = $(this).data('variant-price');
+                                    var variantImage = $(this).data('variant-image');
+                                    console.log("Variant Title: " + variantTitle);
+                                    console.log("Variant ID: " + variantId);
+                                    console.log("Variant Price: " + variantPrice);
+                                    console.log("Variant Image: " + variantImage);
+                                    $($selectTag).val(variantTitle);
+                                    var dropdownContent = $('div[data-option-name="'+optionsText[changeInfo.indexes[i] - 1]+'"].dropdown-content small');
+                                    dropdownContent.each(function() {
+                                          var $small = $(this);
+                                          var spanText = $small.find('span').text();
+                                          if (spanText === variantTitle) {
+                                              console.log('matched');
+                                              var imageUrl = $small.find('img').attr('src');
+                                              var $dropbtn = dropdownContent.closest('.dropdown-content').siblings('.dropbtn');
+                                              console.log($dropbtn);
+                                              if (imageUrl) {
+                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                              } else {
+                                                  $dropbtn.html('<span>'+ variantTitle +'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                              }
+                                              return false;
+                                          }
+                                      });
+                                    bundleItmesShange();
+                                }
+                            });
+                         }else{
+                           console.log("no need to change");
+                         }                        
+                     });
+                 }
+            });
+            console.log("next changed option and value");
+        }
+  }
+  else{
+      console.log("single changed");
+  }
+  previousTitle = currentTitle;
+}
+  getChangedIndexValue(previousTitle, currentTitle) { 
+    var previousTitleArray = previousTitle.split(' / ');
+    var currentTitleArray = currentTitle.split(' / ');
+    var maxLength = Math.max(previousTitleArray.length, currentTitleArray.length);
+    var result = {};
+
+    if (previousTitle === currentTitle) {
+        result.indexes = [];
+        result.parts = [];
+        for (var i = 0; i < maxLength; i++) {
+            result.indexes.push(i + 1);
+            result.parts.push(previousTitleArray[i]);
+        }
+    } 
+    else {
+        var firstIndexChanged = false;
+        for (var i = 0; i < maxLength; i++) {
+            if (i >= previousTitleArray.length || i >= currentTitleArray.length) {
+                break;
+            }
+            if (previousTitleArray[i] !== currentTitleArray[i]) {
+                result.index = i + 1;
+                result.previousValue = previousTitleArray[i];
+                result.currentValue = currentTitleArray[i];
+                firstIndexChanged = true;
+                break;
+            }
+        }
+
+        if (!firstIndexChanged && previousTitleArray.length !== currentTitleArray.length) {
+            var changedTitle = previousTitleArray.length < currentTitleArray.length ? currentTitleArray : previousTitleArray;
+            result.index = maxLength + 1;
+            result.changedValue = changedTitle[maxLength];
+        } else if (!firstIndexChanged) {
+            result.index = null;
+            result.changedValue = null;
+        }
+    }
+
+    return result;
+}
+  getCurrentTitle() {
+    var resultStrings = $('.select__select.retrive_selected_option').map(function() {
+      return $(this).find('option:selected').text().trim(); // Trim whitespace
+    }).get();
+  
+    return resultStrings.length === 1 ? resultStrings[0] : resultStrings.join(' / ');
+  }
+  filterVariant(variant, PID) {
+  console.log('thumbnail updated ' + variant.alt);
+  if (variant != null && variant.alt != null) {
+    $('[data-thumbnail-color]').hide();
+    
+    // Show for selected color
+    var selected_color = variant.alt;
+    var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
+    $(thumbnail_selector).show();
+    
+    // Apply additional filtering based on product ID
+    switch (PID) {
+      case 2105477365849:
+      case 2105476743257:
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 13;
+        }).show();
+        break;
+      case 2105476546649:
+        console.log('emf page');
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 6;
+        }).show();
+        break;
+      case 2105475661913:
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 11;
+        }).show();
+        break;
+      case 2105477726297:
+        console.log('emf page');
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 7;
+        }).show();
+        break;
+      case 2105475956825:
+        console.log('tungsten page');
+        $('[data-media-position]').filter(function() {
+          return $(this).data('media-position') >= 10;
+        }).show();
+        break;
+    }
+  } else {
+    // Show all thumbnails if variant is not selected
+    $('[data-thumbnail-color]').show();
+  }
+}
+  bundleItmesShange(){
+  $('.bundle_item').each(function() {
+    var optionValues = [];
+    $(this).find('select[data-trim-option]').each(function() {
+        optionValues.push($(this).val());
+    });
+    if (optionValues.length > 0) {
+        var resultString = optionValues.join(' / ');
+        // Loop through each .hidden-variants .hidden-variant-title element
+        $('.hidden-variants .hidden-variant-title').each(function() {
+            // Check if the text of the current element matches resultString
+            if ($(this).text() === resultString) {
+                // If it matches, retrieve the associated data attributes and log them
+                var variantId = $(this).data('variant-id');
+                var variantPrice = $(this).data('variant-price');
+                var variantImage = $(this).data('variant-image');
+                console.log("cureent text:", $(this).text())
+                console.log("Variant ID:", variantId);
+                
+                console.log("Variant Price:", variantPrice);
+                console.log("Variant Image:", variantImage);
+                if (variantImage.includes("no-image-")) {
+                      console.log("Variant Image contains 'no-image-'");
+                      variantImage =  $(this).closest(".hidden-variants").attr('data-product-image');
+                      console.log("imageee"+ variantImage);
+                    
+                  } else {
+                      console.log("Variant Image does not contain 'no-image-'");
+                  }
+                $(this).closest('.bundle_item').attr('data-variant', variantId);
+                $(this).closest('.bundle_item').attr('data-price', variantPrice);
+
+                // Update the src and alt attributes of the variant image
+                var $variantImage = $(this).closest('.bundle_item').find('.varImage');
+                $variantImage.attr('src', variantImage);
+                $variantImage.attr('alt', $(this).text());
+                optianlItmesChange();
+            }
+        });
+    }
+});
+}
+  optianlItmesChange(){
+  $('.bundle_item.optional').each(function() {
+    var optionValues = [];
+    $(this).find('select[data-trim-option]').each(function() {
+        optionValues.push($(this).val());
+    });
+    if (optionValues.length > 0) {
+        var resultString = optionValues.join(' / ');
+        console.log("we are here");
+        $(this).find('.hidden-variants .hidden-variant-title').each(function() {
+            if ($(this).text() === resultString) {
+                var variantId = $(this).data('variant-id');
+                var variantPrice = $(this).data('variant-price');
+                var variantImage = $(this).data('variant-image');
+                console.log("cureent text:", $(this).text())
+                console.log("Variant ID:", variantId);
+                
+                console.log("Variant Price:", variantPrice);
+                console.log("Variant Image:", variantImage);
+              
+                if (variantImage.includes("no-image-")) {
+                      console.log("Variant Image contains 'no-image-'");
+                     variantImage =  $(this).closest(".hidden-variants").attr('data-product-image');
+                    
+                      console.log("imageee"+ variantImage);
+                    
+                  } else {
+                      console.log("Variant Image does not contain 'no-image-'");
+                  }
+                $(this).closest('.bundle_item.optional').attr('data-variant', variantId);
+                $(this).closest('.bundle_item.optional').attr('data-price', variantPrice);
+
+                // Update the src and alt attributes of the variant image
+                var $variantImage = $(this).closest('.bundle_item.optional').find('.varImage');
+                $variantImage.attr('src', variantImage);
+                $variantImage.attr('alt', $(this).text());
+            }
+        });
+    }
+});
+}
+  updatePriceArray() { 
+    console.log(".bundle_item.required");
+    console.log($(".bundle_item.required").length);
+    var array_string = "";
+    var variant_array_string = "";
+    $(".bundle_item.required").each(function() {
+        if ($(this).attr("data-checked") == '0') {
+            var price = $(this).attr("data-price");
+            var child_variant = $(this).attr("data-variant");
+
+            if (price !== undefined) {
+                array_string += price + ", ";
+            }
+          if (child_variant !== undefined) {
+            variant_array_string += child_variant + ", ";
+          }
+        }
+    });
+    array_string = array_string.slice(0, -2);
+    variant_array_string = variant_array_string.slice(0, -2);
+    console.log(array_string);
+    $("#price_array").val(array_string);
+    console.log("variant_array_string form function!");
+    console.log(variant_array_string);
+    $("#child_varinats").val(variant_array_string);
+}
+  updatePrices() {
+  const b_discount = parseFloat($("#discount_hidden").val());
+  const b_type = $("#discount_type_hidden").val();
+  let b_price = $("#price_array").val();
+  console.log("Price Array:", b_price);
+  // const p_price_item = parseInt($('.customclassForPrice .price__regular .price-item--regular').attr('data-price'));
+  // var p_price_item = $(".customclassForPrice .price__regular .price-item--regular").attr("data-amount");
+  var p_price_item;
+  var $priceItem = $(".customclassForPrice .price__regular .price-item--regular");
+  if ($priceItem.attr("data-amount")) {
+      p_price_item = $priceItem.attr("data-amount");
+  } else {
+      p_price_item = $priceItem.attr("data-price");
+  }
+  console.log("Price:currency::"+p_price_item);
+  p_price_item = parseFloat(p_price_item.replace(/[^\d.]/g, ""));
+  const child_varianid = $("#child_varinats").val();
+  console.log("Price:::", p_price_item);
+  console.log("variantid:", child_varianid);
+  this.updateRegularPrice(b_discount, b_type, b_price, p_price_item, child_varianid);
+}
+  updateRegularPrice(b_discount, b_type, b_price, p_price_item, child_varianid) {
+  let final_price = 0;
+  let priceArray = b_price.split(",").map(Number);
+  let variantArray = child_varianid.split(",").map(Number);
+  console.log(priceArray);
+  let sum_price = priceArray.reduce((sum, price) => sum + Number(price), 0);
+  let total_price = p_price_item + sum_price;
+  // Calculate final price based on discount type
+  if (b_type === "percentage") {
+    final_price = total_price - (total_price * (b_discount || 0)) / 100;
+  } else if (b_type === "fixed") {
+    final_price = total_price - b_discount;
+  }
+      // Format final_price with commas
+    var formattedFinalPrice = final_price.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+    
+    // Format total_price with commas
+    var formattedTotalPrice = total_price.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+  console.log("compare at price:++++++++" + formattedTotalPrice);
+  console.log("price:++++++++++++" + formattedFinalPrice);
+    setTimeout(function() {
+      $(".customclassForPrice .price__regular .price-item.price-item--regular").text("$" + formattedFinalPrice  + " USD");
+      $(".campare_at_price").text("$" + formattedTotalPrice  + " USD");
+      $(".campare_at_price").css("text-decoration", "line-through");
+      $(".customclassForPrice .price__regular").css("display","block");
+      console.log("Ends");
+    },2000);
+}
+  
   updateVariantLeadTime(currentVariant){
     //find all the variant descriptions with the data attribute that we added
     console.log('variant lead time');
@@ -787,7 +1228,9 @@ class VariantSelects extends HTMLElement {
       });
   }
   updateOptions() {
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    console.log(Array);
+    this.options = Array.from(document.querySelectorAll('select.retrive_selected_option'), (select) => select.value);
+    console.log(this.options);
   }
 
   updateMasterId() {
@@ -800,21 +1243,29 @@ class VariantSelects extends HTMLElement {
 
   updateMedia() {
     console.log('update media ran');
+    console.log(this.currentVariant.featured_media);
     if (!this.currentVariant) return;
     if (!this.currentVariant.featured_media) return;
+    var element = document.querySelector('variant-selects');
+    var dataSectionValue = element.getAttribute('data-section');
 
-    const mediaGallery = document.getElementById(`MediaGallery-${this.dataset.section}`);
-    mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true);
+    const mediaGallery = document.getElementById(`MediaGallery-${dataSectionValue}`);
+    // const mediaGallery = document.querySelectorAll('media-gallery');
+    console.log('mediaGallery' + mediaGallery);
+    
+    mediaGallery.setActiveMedia(`${dataSectionValue}-${this.currentVariant.featured_media.id}`, true);
 
-    const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
+    const modalContent = document.querySelector(`#ProductModal-${dataSectionValue} .product-media-modal__content`);
     if (!modalContent) return;
     const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
     modalContent.prepend(newMediaModal);
   }
 
   updateURL() {
-    if (!this.currentVariant || this.dataset.updateUrl === 'false') return;
-    window.history.replaceState({ }, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
+    var element = document.querySelector('variant-selects');
+    var dataSectionValue = element.getAttribute('data-url');
+    if (!this.currentVariant || dataSectionValue === 'false') return;
+    window.history.replaceState({ }, '', `${dataSectionValue}?variant=${this.currentVariant.id}`);
   }
 
   updateShareUrl() {
@@ -874,7 +1325,6 @@ class VariantSelects extends HTMLElement {
     const addButton = productForm.querySelector('[name="add"]');
     const addButtonText = productForm.querySelector('[name="add"] > span');
     if (!addButton) return;
-
     if (disable) {
       addButton.setAttribute('disabled', 'disabled');
       if (text) addButtonText.textContent = text;
@@ -887,6 +1337,8 @@ class VariantSelects extends HTMLElement {
   }
 
   setUnavailable() {
+    console.log("setUnavailable");
+    console.log(this.dataset.section);
     const button = document.getElementById(`product-form-${this.dataset.section}`);
     const addButton = button.querySelector('[name="add"]');
     const addButtonText = button.querySelector('[name="add"] > span');
@@ -897,9 +1349,11 @@ class VariantSelects extends HTMLElement {
   }
 
   getVariantData() {
-    this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
+   this.variantData = this.variantData || JSON.parse($('[type="application/json"][data-custom-attribute="custom-value"]').text());
+    console.log(this.variantData);
     return this.variantData;
   }
+  
 }
 
 customElements.define('variant-selects', VariantSelects);
@@ -984,7 +1438,7 @@ function closeMegaNav() {
 		$(".nav-arrow").removeClass("hideMe");
 		currentNavOpen="";
 		navOpen=false;
-}
+} 
 
 var currentReviewsCarouselWidth=$(".review-carousel").width() + 40;
 function scrollReviews(v) {
