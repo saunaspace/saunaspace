@@ -387,7 +387,7 @@
                 </div>
                 <!-- product-text -->
 
-                {% if product.metafields.my_fields.color_varies_text == true %}
+                {% comment %} {% if product.metafields.my_fields.color_varies_text == true %}
                   <style>
                     .single-page-price .price__container::after {
                       content: "price varies by color";
@@ -398,7 +398,7 @@
                       font-size: 16px;
                     }
                   </style>
-                {% endif %}
+                {% endif %} {% endcomment %}
                 {% if product.metafields.my_fields.sidebar_description == true %}
                   {{ product.description }}
                 {% endif %}
@@ -1256,8 +1256,6 @@
   	}
   }
 
-
-
   let options = {
   	root: null,
   	rootMargin: '-20px 0px 0px 0px',
@@ -1307,7 +1305,7 @@
 
 
   function filterVariant(variant) {
-    console.log('thumbnail updated ' + variant.alt);
+    console.log('thumbnail updated in metafield-product ' + variant.alt);
     if(variant != null && variant.alt != null ) {
       $('[data-thumbnail-color]').hide();
       //show for selected color
@@ -1350,7 +1348,7 @@
               return $(this).data('media-position') >= 10;
           }).show();
         {% endif %}
-      // $(general_color).show();
+       $(general_color).show();
       // $(thumbnail_selector).prependTo('.list-unstyled');
     } else {
       //show all
@@ -1649,23 +1647,6 @@ var previousTitle = null;
     });
   }
 
-  // function formatPlug (plug) {
-  //   if (!plug.id) {
-  //     return plug.text;
-  //   }
-  //   var plugPath='';
-  //   if(plug.element.value=="US") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M4.28 4.335h1.205v4.16H4.28zM9.915 4.585h1.205v3.66H9.915z"/><circle cx="7.775" cy="10.97" r=".88"/>'}
-  //   if(plug.element.value=="UK") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M6.92 3.18h1.705v3.66H6.92zM2.775 10.095h3.16V11.3h-3.16zM9.67 10.095h3.16V11.3H9.67z"/>'}
-  //   if(plug.element.value=="SW") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-  //   if(plug.element.value=="EU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><path d="M7.11 12.75v-1.625a.57.57 0 01.565-.565h0a.57.57 0 01.575.565s0 0 0 0v1.625M8.25 2.57v1.61a.57.57 0 01-.57.57h-.005 0a.57.57 0 01-.565-.565V2.57"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-  //   if(plug.element.value=="AU") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><path d="M7.08 8.13h1.205v3.66H7.08z"/><path d="M2.619 6.51L5.207 3.92l.852.853L3.47 7.362zM9.301 4.778l.852-.852 2.588 2.588-.852.852z" />'}
-  //   if(plug.element.value=="BR") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="10.82" cy="7.66" r=".62"/><circle cx="7.68" cy="6.685" r=".62"/><circle cx="4.475" cy="7.66" r=".62"/><path d="M11.74 9.995H3.62l-1.5-2.33 1.5-2.33h8.12l1.5 2.33z"/>'}
-  //   if(plug.element.value=="IN") { plugPath='<path d="M1.65.5h12.025c.635 0 1.15.515 1.15 1.15v12.025a1.15 1.15 0 01-1.15 1.15H1.65a1.15 1.15 0 01-1.15-1.15V1.65C.5 1.015 1.015.5 1.65.5z"/><circle cx="7.665" cy="7.665" r="5.19"/><circle cx="4.855" cy="7.665" r=".88"/><circle cx="7.665" cy="4.855" r="1.205"/><circle cx="10.47" cy="7.665" r=".88"/>'}
-  //   var $plug = $(
-  //     '<span><svg xmlns="http://www.w3.org/2000/svg" width="15.325" height="15.325" overflow="visible"><g fill="none" stroke-width=".75" stroke="#000" stroke-linecap="round" stroke-linejoin="round">' + plugPath + '</g></svg> ' + plug.text + '</span>'
-  //   );
-  //   return $plug;
-  // };
 </script>
 
 <script src="{{ 'lite-yt-embed.js' | asset_url }}" async></script>

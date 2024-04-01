@@ -27,7 +27,7 @@
 });
 
 function filterVariant(variant) {
-  console.log('thumbnail updated ' + variant.alt);
+  console.log('thumbnail updated in product-page ' + variant.alt);
   if(variant != null && variant.alt != null ) {
     $('[data-thumbnail-color]').hide();
     //show for selected color
@@ -64,7 +64,7 @@ function filterVariant(variant) {
             return $(this).data('media-position') >= 8;
         }).show();
       {% endif %}
-    // $(general_color).show();
+    $(general_color).show();
     // $(thumbnail_selector).prependTo('.list-unstyled');
   } else {
     //show all

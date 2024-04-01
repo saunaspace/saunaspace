@@ -369,7 +369,7 @@
                 </div>
                 <!-- product-text -->
 
-                {% if product.metafields.my_fields.color_varies_text == true %}
+                {% comment %} {% if product.metafields.my_fields.color_varies_text == true %}
                   <style>
                     .single-page-price .price__container::after {
                       content: "price varies by color";
@@ -380,7 +380,7 @@
                       font-size: 16px;
                     }
                   </style>
-                {% endif %}
+                {% endif %} {% endcomment %}
                 {% if product.metafields.my_fields.sidebar_description == true %}
                   {{ product.description }}
                 {% endif %}

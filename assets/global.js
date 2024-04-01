@@ -880,7 +880,7 @@ class VariantSelects extends HTMLElement {
                                               var $dropbtn = dropdownContent.closest('.dropdown-content').siblings('.dropbtn');
                                               console.log($dropbtn);
                                               if (imageUrl) {
-                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 50px; height: 50px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               } else {
                                                   $dropbtn.html('<span>'+changeInfo.parts[i]+'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               }
@@ -929,7 +929,7 @@ class VariantSelects extends HTMLElement {
                                               var $dropbtn = dropdownContent.closest('.dropdown-content').siblings('.dropbtn');
                                               console.log($dropbtn);
                                               if (imageUrl) {
-                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 50px; height: 50px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               } else {
                                                   $dropbtn.html('<span>'+ variantTitle +'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               }
@@ -1002,12 +1002,12 @@ class VariantSelects extends HTMLElement {
     return resultStrings.length === 1 ? resultStrings[0] : resultStrings.join(' / ');
   }
   filterVariant(variant, PID) {
-  console.log('thumbnail updated ' + variant.alt);
+  console.log('thumbnail updated in global.js ' + variant.alt);
   if (variant != null && variant.alt != null) {
     $('[data-thumbnail-color]').hide();
-    
     // Show for selected color
     var selected_color = variant.alt;
+    var general_color = "[data-thumbnail-color='general']";
     var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
     $(thumbnail_selector).show();
     
@@ -1043,6 +1043,7 @@ class VariantSelects extends HTMLElement {
         }).show();
         break;
     }
+    $(general_color).show();
   } else {
     // Show all thumbnails if variant is not selected
     $('[data-thumbnail-color]').show();

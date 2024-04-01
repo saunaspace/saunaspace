@@ -168,7 +168,8 @@ div#bcpo-select-option-0 ul li span {
 }
 
 .product__info-wrapper .price__regular .price-item--regular  {
-  font-size: 18px !important;
+  font-size: 14px !important;
+  letter-spacing: .5px;
 }
 
 @media screen and (min-width: 750px) {

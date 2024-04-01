@@ -12,7 +12,7 @@ $(document).ready(function () {
   if (n_type == "fixed" && n_discount != null && n_discount > 0) {
     console.log("you got discount of $" + n_discount.toFixed(2) + ".");
     $(".price__container").after(
-      '<span style=" color: #d8661f; padding-left: 5px;">bundle savings + $' +
+      '<span style=" color: #d8661f;" class="price-savings">bundle savings + $' +
         n_discount.toFixed(2) +
         " off</span>"
     );
@@ -20,7 +20,7 @@ $(document).ready(function () {
   if (n_type == "percentage" && n_discount != null && n_discount > 0) {
     console.log("you got discount of " + n_discount.toFixed(2) + "%");
     $(".price__container").after(
-      '<span style=" color: #d8661f; padding-left: 5px;">bundle savings + ' +
+      '<span style=" color: #d8661f;" class="price-savings">bundle savings + ' +
         n_discount.toFixed(2) +
         "% off</span>"
     );
@@ -101,7 +101,7 @@ $(document).ready(function () {
       var imageUrl = $(this).find('img').attr('src');
       var $dropbtn = $(this).closest('.custom-dropdown').find('.dropbtn');
       if (imageUrl) {
-          $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+          $dropbtn.html('<img src="' + imageUrl + '" style="width: 50px; height: 50px; border-radius: 50%;"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
       } else {
           $dropbtn.html('<span>'+ newvalue +'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
       }
@@ -123,7 +123,7 @@ $(document).ready(function () {
       var imageUrl = $(this).find('img').attr('src');
       var $dropbtn = $(this).closest('.custom-dropdown').find('.dropbtn');
       if (imageUrl) {
-          $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;">');
+          $dropbtn.html('<img src="' + imageUrl + '" style="width: 50px; height: 50px; border-radius: 50%;">');
       } else {
           $dropbtn.html('<span>'+ newvalue +'</span> ');
       }
@@ -454,7 +454,7 @@ function changeVariantfunction(){
                                               var $dropbtn = dropdownContent.closest('.dropdown-content').siblings('.dropbtn');
                                               console.log($dropbtn);
                                               if (imageUrl) {
-                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 50px; height: 50px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               } else {
                                                   $dropbtn.html('<span>'+changeInfo.parts[i]+'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               }
@@ -503,7 +503,7 @@ function changeVariantfunction(){
                                               var $dropbtn = dropdownContent.closest('.dropdown-content').siblings('.dropbtn');
                                               console.log($dropbtn);
                                               if (imageUrl) {
-                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 30px; height: 30px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
+                                                  $dropbtn.html('<img src="' + imageUrl + '" style="width: 50px; height: 50px; border-radius: 50%;"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               } else {
                                                   $dropbtn.html('<span>'+ variantTitle +'</span> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 12 12" class="icon--down-arrow"><path fill="#283455" d="M1.465 5.407c-.257-.26-.255-.68.004-.938.26-.26.68-.26.94 0l2.885 2.882c.39.39 1.023.39 1.413 0l2.886-2.882c.26-.259.68-.259.94 0 .258.259.26.678.003.938L7.426 8.56c-.784.793-2.064.793-2.847 0L1.465 5.407z"></path></svg>');
                                               }

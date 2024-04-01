@@ -449,7 +449,7 @@ blockquote {
 
 .product-form__input.product-form__input--dropdown label.form__label{
   font-size: 1.6rem;
-  margin-bottom: 0;
+  margin-bottom: 8px;
   }
 .color-foreground {
   color: rgb(var(--color-foreground));
@@ -1715,7 +1715,7 @@ details[open] > .share-button__fallback {
   color: #000;
   margin: var(--inputs-border-width);
   border: 1px solid #939393;
-	line-height: 1.5 !important;
+	line-height: normal;
 	background: #fff;
 	padding: 5px;
     height: 40px;
@@ -4478,13 +4478,22 @@ a.shop-nav-head:hover { border-bottom: 1px solid #000; }
 
 h1.product__title, .product-text h1, .product-name-mobile { 
 	color: #000;
-	text-align: center; 
+	text-align: left; 
 	text-transform: none; 
-	font-size: 3.2rem; 
+	font-size: 2.5rem; 
 	font-weight: 700; 
-	padding-bottom: 1em; 
+	padding-bottom: 1rem; 
+	letter-spacing: .1px;
 	margin-bottom: 0;
     line-height: normal;
+ }
+
+
+ #price-template--15297913356331__main {
+	text-align: left;
+ }
+ .price .price-savings {
+	display: block;
  }
 
 @media (min-width: 991px) {
@@ -4496,7 +4505,7 @@ h1.product__title, .product-text h1, .product-name-mobile {
 
 .product-name-mobile { display: none; text-align: center; margin: .5em 0 0 0; padding: 0 1em; }
 .product-text .price {
-	text-align: center;
+	text-align: left;
 	font-family: lft-etica-mono,sans-serif;
 	font-weight: 400;
 	display: inline-block;

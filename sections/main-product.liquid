@@ -68,6 +68,11 @@
     background:white;
 }
 
+.custom-dropdown .dropdown-content small img {
+  width: 25px !important;
+  height: 25px !important;
+}
+
 .custom-dropdown .dropdown-content small:hover {
   background-color: #F9F3ED;
 }
@@ -395,7 +400,7 @@
                 {%- endform -%}
               </div>
               {% endif %}
-            {% if product.metafields.my_fields.color_varies_text == true %}
+            {% comment %} {% if product.metafields.my_fields.color_varies_text == true %}
               <style>
                .product__info-wrapper .price .price__container::after {
                   content: "price varies by color";
@@ -407,7 +412,7 @@
                 }
 
               </style>
-             {% endif %}
+             {% endif %} {% endcomment %}
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
@@ -589,7 +594,33 @@
                 </variant-selects>
                 {% else %}
                   {% endcomment %}
-                    <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                                      <variant-radios-custom>
+                        {%- for option in product.options_with_values -%}
+                          {% if option.name contains "color" or option.name contains "Color" %}
+                        	  <label class="form__label colorLable" style="padding:0; margin:10px 0 8px 0; font-size: 1.6rem; display: flex; align-items: center; gap: 5px" for="Option-{{ section.id }}">
+                                <svg height="3" width="20" xmlns="http://www.w3.org/2000/svg"> <line x1="20" y1="0" x2="" y2="0" style="stroke:black;stroke-width:2" /> </svg>
+                                  {{ option.name }}
+                                    :
+                                  {{ option.values[0] }}
+                                <svg height="3" width="20" xmlns="http://www.w3.org/2000/svg"> <line x1="20" y1="0" x2="" y2="0" style="stroke:black;stroke-width:2" /> </svg>
+                              </label>
+                        	  <fieldset class="custom-product-option-color" style="display: flex; flex-wrap: wrap;">
+                        		{%- for value in option.values -%}
+                        		  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="padding:0; margin:3px 5px 8px;" >
+                                    {% for link in linklists.colors.links %}
+                                      {% if link.title == value %}
+                            			<img class="forColorSelect" data-product-id="{{ product.id }}" style="height:35px; width:35px; border-radius:50%; padding:1px;" {{ forloop.index }} src="{{ link.url }}" alt="{{ value }}">  
+                                      {% endif %}
+                        			{% endfor %}
+                        		  {% comment %} { { value }} {% endcomment %}
+                        		  </label>
+                        		{%- endfor -%}
+                        	  </fieldset>
+                        	{% endif %}
+                        
+                        {%- endfor -%}
+                    </variant-radios-custom>
+                    <variant-selects style=" margin-top: 10px;text-align: left;" class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                       {%- for option in product.options_with_values -%}
                         
                           <div  {% if option.name contains "color" or option.name contains "Color"%} style="display:none;"{% endif %} class="product-form__input product-form__input--dropdown">
@@ -619,32 +650,7 @@
                         {{ product.variants | json }}
                       </script>
                     </variant-selects>
-                    <variant-radios-custom>
-                        {%- for option in product.options_with_values -%}
-                          {% if option.name contains "color" or option.name contains "Color" %}
-                        	  <label class="form__label colorLable" style="padding:0; margin:10px 0 0 0; font-size: 1.6rem; display: flex; justify-content: center; align-items: center; gap: 5px" for="Option-{{ section.id }}">
-                                <svg height="3" width="20" xmlns="http://www.w3.org/2000/svg"> <line x1="20" y1="0" x2="" y2="0" style="stroke:black;stroke-width:2" /> </svg>
-                                  {{ option.name }}
-                                    :
-                                  {{ option.values[0] }}
-                                <svg height="3" width="20" xmlns="http://www.w3.org/2000/svg"> <line x1="20" y1="0" x2="" y2="0" style="stroke:black;stroke-width:2" /> </svg>
-                              </label>
-                        	  <fieldset class="custom-product-option-color" style="display: flex; flex-wrap: wrap; justify-content: center;">
-                        		{%- for value in option.values -%}
-                        		  <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="padding:0; margin:3px 5px;" >
-                                    {% for link in linklists.colors.links %}
-                                      {% if link.title == value %}
-                            			<img class="forColorSelect" data-product-id="{{ product.id }}" style="height:40px; width:40px; border-radius:50%; padding:1px;" {{ forloop.index }} src="{{ link.url }}" alt="{{ value }}">  
-                                      {% endif %}
-                        			{% endfor %}
-                        		  {% comment %} { { value }} {% endcomment %}
-                        		  </label>
-                        		{%- endfor -%}
-                        	  </fieldset>
-                        	{% endif %}
-                        
-                        {%- endfor -%}
-                    </variant-radios-custom>
+
                 {% comment %}
                   {% endif %}
                 {% endcomment %}
@@ -820,7 +826,7 @@
                                           {% if option.name contains "color" or option.name contains "Color" %}
                                               {% for link in linklists.colors.links %}
                                                 {% if link.title == option.values[0] %}
-                                                  <img style="width: 30px; height: 30px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
+                                                  <img style="width: 50px; height: 50px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
                                                 {% endif %}
                                               {% endfor %}
                                           {% else %}
@@ -897,7 +903,7 @@
                                            {% if option.name contains "color" or option.name contains "Color" %}
                                               {% for link in linklists.colors.links %}
                                                 {% if link.title == option.values[0] %}
-                                                  <img style="width: 30px; height: 30px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
+                                                  <img style="width: 50px; height: 50px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
                                                 {% endif %}
                                               {% endfor %}
                                           {% else %}
@@ -1283,9 +1289,6 @@ $(".product-info-tab").on("click",function() {
 });
 
 
-
-
-
 var currentRelatedCarouselWidth=$(".related-carousel").width() + 40;
 
 function scrollRelated(v) {
@@ -1312,8 +1315,6 @@ function showGalleryHero(n,colorCode) {
 		$("#galleryHero").attr({"src":"{{ 'faraday-infrared-sauna-' | asset_url }}" + colorCode + "-gallery-" + n + ".jpg"});
 	}
 }
-
-
 
 let options = {
 	root: null,
@@ -1364,12 +1365,12 @@ function updateUC(p) {
 
 
 function filterVariant(variant, PID) {
-  console.log('thumbnail updated ' + variant.alt);
   if (variant != null && variant.alt != null) {
+    console.log('thumbnail updated in main-product ' + variant.alt);
     $('[data-thumbnail-color]').hide();
-    
     // Show for selected color
     var selected_color = variant.alt;
+    var general_color = "[data-thumbnail-color='general']";
     var thumbnail_selector = '[data-thumbnail-color="' + selected_color + '"]';
     $(thumbnail_selector).show();
     
@@ -1405,6 +1406,8 @@ function filterVariant(variant, PID) {
         }).show();
         break;
     }
+    $(general_color).show();
+    $(general_color).addClass('ccccccccccccccc');
   } else {
     // Show all thumbnails if variant is not selected
     $('[data-thumbnail-color]').show();
@@ -1522,270 +1525,10 @@ function bcpoChange(currentVariant) {
         }
       });
     }
-    //for model selection
-    {% comment %}
-     if (changeInfo.indexes && changeInfo.parts) {
-        for (var i = 0; i < changeInfo.indexes.length; i++) {
-            // console.log(changeInfo.parts[i] + " " + changeInfo.indexes[i]);
-          console.log("value :" + changeInfo.parts[i]);
-          console.log("option changed :" + optionsText[changeInfo.indexes[i] - 1]);
-           $('.bundle_item.required').each(function() {
-                 var $optionMain = $(this).find('.option-main');
-          var $pTags = $optionMain.find('p').filter(function() {
-              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.indexes[i] - 1]) !== -1;
-          });
-          var siblingPTags = $pTags.siblings('p[data-trim-option]');
-             
-              
-             console.log(siblingPTags.length);
-            var valuesArray = [];
-            if (siblingPTags.length > 0){
-              console.log("greater then 1 so make logic");
-              console.log("greater then 0");
-              siblingPTags.each(function() {
-              var text = $(this).find('.key_value').text().trim();
-              valuesArray.push(text);
-              });
-              console.log("other Values are:: "+ valuesArray);
-              $pTags.each(function(index) {
-              console.log("BundleOptions matched!");
-              var $pTag = $(this);
-             var selector = null;
-             var siblingPTitle = $pTag.siblings('b.title').text();
-             if (siblingPTitle != null || siblingPTitle != "") {
-                 siblingPTitle = siblingPTitle.trim();
-                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-             }
-             console.log("siblingPTitle");
-              var iddd = $(this).find('.key_value').attr('id');
-              console.log("iddd");
-              console.log(iddd);
-              var selectedOption = $pTag.text();
-              var titleee = selectedOption.split(':');
-              console.log(titleee[1]);
-              
-              if(titleee[1].trim() != changeInfo.parts[i] ){
-                console.log('not matched');
-                var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                hiddenVar.each(function() {
-                  var variantTitle = $(this).data('variant-title');
-                  var variantId = $(this).data('variant-id');
-                  var variantPrice = $(this).data('variant-price');
-                  var variantImage = $(this).data('variant-image');
-                  var match = valuesArray.every(function(value){
-                      return variantTitle.includes(value);
-                  }) && variantTitle.includes(changeInfo.parts[i]);
-                  if (match) {
-                      console.log("Vneeeeeeeeeeeeeeeeee");
-                      console.log("Variant ID:" + variantId);
-                      console.log("Variant Price: " + variantPrice);
-                    $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                    $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
-                    $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                    $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                    // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
-                    $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
-                    $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
-                    $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
-                    $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
-                    $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
-                    if (siblingPTitle != null || siblingPTitle != "") {
-                     selector.val(variantTitle);
-                    }
-                  }
-                });
-              }else{
-                console.log('matched');
-              }
-              return false;
-              });
-            }
-          else{
-              console.log("contains only one option!");
-              $pTags.each(function() {
-              console.log("BundleOptions matched!");
-              var $pTag = $(this);
-              var selector = null;
-              var siblingPTitle = $pTag.siblings('b.title').text();
-              if (siblingPTitle != null || siblingPTitle != "") {
-                  siblingPTitle = siblingPTitle.trim();
-                  selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-              }
-              var iddd = $(this).find('.key_value').attr('id');
-              console.log("iddd");
-              console.log(iddd);
-              var selectedOption = $pTag.text();
-              var titleee = selectedOption.split(':');
-              console.log(titleee[1]);
-              
-              if(titleee[1].trim() != changeInfo.parts[i] ){
-                  console.log('not matched');
-                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                  hiddenVar.each(function() {
-                      var variantTitle = $(this).data('variant-title');
-                      if (variantTitle == changeInfo.parts[i]) {
-                          var variantId = $(this).data('variant-id');
-                          var variantPrice = $(this).data('variant-price');
-                          var variantImage = $(this).data('variant-image');
-                        
-                          console.log("Variant ID: " + variantId);
-                          console.log("Variant Price: " + variantPrice);
-                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
-                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                        // $($pTag).text(optionsText[changeInfo.indexes[i] - 1] +' :'+ changeInfo.parts[i]);
-                        $pTag.attr('data-trim-option', optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.attr('data-option', optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.addClass(optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.find('.key_bold').text(optionsText[changeInfo.indexes[i] - 1]);
-                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.parts[i]);
-                        if (siblingPTitle != null || siblingPTitle != "") {
-                        selector.val(variantTitle);
-                        }
-                      }
-                  });
-              }else{
-                  console.log('matched');
-              }
-                return false;
-          });
-          }
-            });
-        }
-    }
-     else {
-        console.log("Index of the changed part: " + changeInfo.index);
-        console.log("option changed :" + optionsText[changeInfo.index - 1]);
-        console.log("Previous value: " + changeInfo.previousValue);
-        // console.log("Current value: " + changeInfo.currentValue);
-       $('.bundle_item.required').each(function() {
-          var $optionMain = $(this).find('.option-main');
-          var $pTags = $optionMain.find('p').filter(function() {
-              return $(this).attr('data-trim-option').indexOf(optionsText[changeInfo.index - 1]) !== -1;
-          });
-          var siblingPTags = $pTags.siblings('p[data-trim-option]');
-         console.log(siblingPTags);
-         console.log(siblingPTags.length);
-          var valuesArray = [];
-          if (siblingPTags.length > 0) {
-              console.log("greater then 0");
-              siblingPTags.each(function() {
-                  var text = $(this).find('.key_value').text().trim();
-                  valuesArray.push(text);
-              });
-              console.log("other Values are:: "+ valuesArray);
-              $pTags.each(function() {
-                console.log("BundleOptions matched!");
-                var $pTag = $(this);
-                var selector = null;
-                var siblingPTitle = $pTag.siblings('b.title').text();
-                if (siblingPTitle != null || siblingPTitle != "") {
-                    siblingPTitle = siblingPTitle.trim();
-                    selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-                }
-                console.log("siblingPTitle");
-                var iddd = $(this).find('.key_value').attr('id');
-                console.log("iddd");
-                console.log(iddd);
-                var selectedOption = $pTag.text();
-                var titleee = selectedOption.split(':');
-                console.log(titleee[1]);
-                if(titleee[1].trim() != changeInfo.previousValue ){
-                    console.log('not matched');
-                    var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                    hiddenVar.each(function() {
-                      var variantTitle = $(this).data('variant-title');
-                      var variantId = $(this).data('variant-id');
-                      var variantPrice = $(this).data('variant-price');
-                      var variantImage= $(this).data('variant-image');
 
-                      var match = valuesArray.every(function(value){
-                          return variantTitle.includes(value);
-                      }) && variantTitle.includes(changeInfo.previousValue);
-                      if (match) {
-                          console.log("Vneeeeeeeeeeeeeeeeee");
-                          console.log("Variant ID:     " + variantId);
-                          console.log("Variant Price: " + variantPrice);
-                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
-                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                        // $($pTag).text(optionsText[changeInfo.index - 1] +' :'+ changeInfo.previousValue);
-                        $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
-                        $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
-                        $pTag.addClass(optionsText[changeInfo.index - 1]);
-                        $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
-                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
-                        if (siblingPTitle != null || siblingPTitle != "") {
-                        selector.val(variantTitle);
-                        }
-                      }
-                    });
-                }else{
-                    console.log('matched');
-                }
-                  return false;
-            });
-          }else{
-              console.log("contains only one option!");
-              $pTags.each(function() {
-              console.log("BundleOptions matched!");
-              var $pTag = $(this);
-              var iddd = $(this).find('.key_value').attr('id');
-              var selector = null;
-                var siblingPTitle = $pTag.siblings('b.title').text();
-                if (siblingPTitle != null || siblingPTitle != "") {
-                    siblingPTitle = siblingPTitle.trim();
-                    selector = $('input[type="hidden"][name="properties[' + siblingPTitle + ']"]');
-                }
-              console.log("siblingPTitle");
-              console.log("iddd");
-              console.log(iddd);
-              var selectedOption = $pTag.text();
-              var titleee = selectedOption.split(':');
-              console.log(titleee[1]);
-              
-              if(titleee[1].trim() != changeInfo.previousValue ){
-                  console.log('not matched');
-                  var hiddenVar = $(this).closest($optionMain).siblings('.hidden-variants').find('.hidden-variant-title');
-                  hiddenVar.each(function() {
-                      var variantTitle = $(this).data('variant-title');
-                      if (variantTitle == changeInfo.previousValue) {
-                          var variantId = $(this).data('variant-id');
-                          var variantPrice = $(this).data('variant-price');
-                          var variantImage = $(this).data('variant-image');
-                          console.log("Variant ID: " + variantId);
-                          console.log("Variant Price: " + variantPrice);
-                        $(this).closest(".bundle_item.required").attr('data-variant', variantId);
-                        $(this).closest(".bundle_item.required").find('img').attr("src", variantImage);
-                        $(this).closest(".bundle_item.required").attr('data-price', variantPrice);
-                        $(this).closest(".bundle_item.required").find("a.edit_btn").attr('data-id', variantId);
-                        $pTag.attr('data-trim-option', optionsText[changeInfo.index - 1]);
-                        $pTag.attr('data-option', optionsText[changeInfo.index - 1]);
-                        $pTag.addClass(optionsText[changeInfo.index - 1]);
-                        $pTag.find('.key_bold').text(optionsText[changeInfo.index - 1]);
-                        $pTag.find('.key_value').attr('id', iddd).text(changeInfo.previousValue);
-                        if (siblingPTitle != null || siblingPTitle != "") {
-                        selector.val(variantTitle);
-                        }
-                      }
-                  });
-              }else{
-                  console.log('matched');
-              }
-                return false;
-          });
-          }
-          
-         });
-    }
-    {% endcomment %}
     previousTitle = currentVar.title;
   
     const variants = document.querySelectorAll('[data-variant-id]');
-    // setTimeout(updatePriceArray, 2000);
-    // setTimeout(updatePrices, 2500);
 
     variants.forEach( function(variant) {
       //hide all variant descriptions
@@ -1844,57 +1587,6 @@ function getChangedIndexValue(previousTitle, currentTitle) {
   <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
-<script>
-
-let options = {
-	root: null,
-	rootMargin: '-20px 0px 0px 0px', 
-	threshold: 1.0 
-};
-function createObserver(o) {
-	window['observer' + o] = new IntersectionObserver(window['onChange' + o], options);
-	window['observer' + o].observe(eval(o));
-}
-const stickyAddToCart = document.querySelector('.atcMain');
-if(window.matchMedia('(min-width: 750px)').matches) {
-	createObserver('stickyAddToCart');
-}
-
-function onChangestickyAddToCart(changes, observerstickyAddToCart) {
-		changes.forEach(change => { if (change.intersectionRatio >= 1) {
-			$(".stickyBG").removeClass("stickyBG-visible");
-			console.log("hidden ad")
-		} else {
-			console.log("visible af")
-			$(".stickyBG").addClass("stickyBG-visible");
-		}
-	});
-}
-
-updateUC(1)
-function updateUC(p) {
-  ucArr=["https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-light.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-desk-arm.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-case.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-sauna-supreme.jpg","https://cdn.shopify.com/s/files/1/0567/1865/5531/t/3/assets/targeted-therapy-better-night-light.jpg"]
-  $(".build-panels p").addClass("hideMe");
-  $("#bp" + p).find("p").removeClass("hideMe");
-  $("#bpImg").attr("src",ucArr[p-1]);
-}
-
-
-setInterval(function () {
-    if($('#ju_Con_837251').css('display') == 'block' && !$('.navBG').hasClass("sticky") ) {
-      $('.stickyBG').css('transform', 'translateY(-252px)');
-    } else if ($('#ju_Con_837251').css('display') == 'block')
-    {
-      $('main#MainContent.sticky .stickyBG.stickyBG-visible').css('transform', 'translateY(102px)');
-    } else if (!$('.navBG').hasClass("sticky")) {
-        $('.stickyBG').css('transform', 'translateY(-252px)');
-    } else if ($('.navBG').hasClass("sticky")) {
-      $('.stickyBG').css('transform', 'translateY(62px)');
-    }
-}, 1000);
-
-
-</script>
 
 {%- if first_3d_model -%}
 <script type="application/json" id="ProductJSON-{{ product.id }}">
@@ -1935,11 +1627,6 @@ setInterval(function () {
   endif
 -%}
 
-
-
-
-
- 
 
 <script type="application/ld+json">
   {
