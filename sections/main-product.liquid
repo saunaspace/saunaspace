@@ -8,6 +8,14 @@
   data-section="{{ section.id }}"
 >
 <style>
+  .price__regular .price-item--regular{font-weight:700}
+  .product__info-container .okeReviews.oke-sr {
+    margin-bottom: 1.5rem !important;
+    text-align: left;
+  }
+.product-text .price, .price-main-div {
+  text-align: left
+  }
 .customclassForPrice .price__regular{
   display:none;
 }
@@ -387,7 +395,7 @@
               <p>{{ product.vendor | escape }}</p>
             {%- endif -%}
           {%- when 'price' -%}
-            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+            <div class="no-js-hidden price-main-div" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
               {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
             </div>
           
@@ -560,40 +568,7 @@
                   </script>
                 </variant-radios>
               {%- else -%}
-                  {% comment %}
-                {% if template contains 'custombundle' %}
-                    <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
-                  {%- for option in product.options_with_values -%}
-                    <div class="product-form__input product-form__input--dropdown">
-                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-                        <!-- todo: update other variant options text within liquid instead of jquery -->
-                        {% if option.name == 'Size' %} Select a size. {% else %} {{ option.name }}  {% endif %}
-                      </label>
-                      <div class="select">
-                        <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                          class="select__select retrive_selected_option"
-                          name="options[{{ option.name | escape }}]"
-                          form="{{ product_form_id }}"
-                        >
-                       
-                          {%- for value in option.values -%}
-                            
-                            <option  value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
-                              {{ value }}
-                            </option>
-                          {%- endfor -%}
-                        </select>
-                        {% render 'icon-caret' %}
-                      </div>
-                    </div>
-                  {%- endfor -%}
-
-                  <script type="application/json">
-                    {{ product.variants | json }}
-                  </script>
-                </variant-selects>
-                {% else %}
-                  {% endcomment %}
+               
                                       <variant-radios-custom>
                         {%- for option in product.options_with_values -%}
                           {% if option.name contains "color" or option.name contains "Color" %}
@@ -620,7 +595,7 @@
                         
                         {%- endfor -%}
                     </variant-radios-custom>
-                    <variant-selects style=" margin-top: 10px;text-align: left;" class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                    <variant-selects style=" margin-top: 20px;text-align: left;" class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                       {%- for option in product.options_with_values -%}
                         
                           <div  {% if option.name contains "color" or option.name contains "Color"%} style="display:none;"{% endif %} class="product-form__input product-form__input--dropdown">
@@ -782,7 +757,7 @@
                     {% assign handles_array = product_metafield | split: ',' %}
                     {% if product_metafield %}
                       <p class="p_1-bold">Your bundle:</p>
-                      <p class="p_1">Edit to mix and match colors or sizes.</p>
+                      <p class="p_1">Confirm your bundle options below.</p>
                     {% endif %}
                     {% assign isFirst = true %}
                       {% unless template contains 'custombundle' %}
@@ -826,7 +801,7 @@
                                           {% if option.name contains "color" or option.name contains "Color" %}
                                               {% for link in linklists.colors.links %}
                                                 {% if link.title == option.values[0] %}
-                                                  <img style="width: 50px; height: 50px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
+                                                  <img style="width: 25px; height: 25px; border-radius: 50%;" src="{{ link.url }}" alt="{{ link.title }}"><span>{{ link.title }}</span>
                                                 {% endif %}
                                               {% endfor %}
                                           {% else %}

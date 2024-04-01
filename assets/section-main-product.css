@@ -214,14 +214,14 @@ div#bcpo-select-option-0 ul li span {
 
 @media screen and (min-width: 990px) {
   .product--large:not(.product--no-media) .product__media-wrapper {
-    max-width: 65%;
-    width: calc(65% - var(--grid-desktop-horizontal-spacing) / 2);
+    max-width: 55%;
+    width: calc(55% - var(--grid-desktop-horizontal-spacing) / 2);
   }
 
   .product--large:not(.product--no-media) .product__info-wrapper {
     padding: 0 0 0 4rem;
-    max-width: 35%;
-    width: calc(35% - var(--grid-desktop-horizontal-spacing) / 2);
+    max-width: 45%;
+    width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
   }
 
   .product--large:not(.product--no-media).product--right .product__info-wrapper {
@@ -1405,12 +1405,12 @@ a.product__text {
   margin-bottom: 1rem;
 }
 .bundle_item img{
-  display: block;
-  width: 30%;
-  height: auto;
-  border-radius: 50px;
-  margin-right: 1rem;
-  /* margin: auto; */
+   display: block;
+    max-width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    margin-right: 1rem;
+    width: 30%;
 }
 .bundle_item {
     gap: 0.6rem;
