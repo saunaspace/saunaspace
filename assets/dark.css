@@ -18,7 +18,7 @@
   color: #fff;	
 }
 
-.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info {
+.dark .field__label, .dark .customer .field label, .dark .addresses label, .dark .go-cart-item__info, .dark .oke-sr-label-text, .dark .oke-sr-count-number {
   color: #fff !important;
 }
 
@@ -66,7 +66,14 @@
   color: #fff;
   }
 
-
+.dark .go-cart-mini-cart__content {
+  background:   linear-gradient(#2a2727 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), #2a2727 70%) 0 100%, 
+  radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background:   linear-gradient(#2a2727 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), #2a2727 70%) 0 100%, 
+  radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: #2a2727;
+}
   .dark .mini-discount .docapp-coupon-input input[type=text].docapp-coupon-input--input {
     background: transparent !important;
     border-bottom: 1px solid #fff!important;

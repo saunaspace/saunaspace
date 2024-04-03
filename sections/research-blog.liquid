@@ -26,6 +26,7 @@
             <div class="topics" id="filterTopic">
                 
                     {%- for tag in blog.all_tags -%}
+                        {% assign i = 0 %}
                         {% assign i = i | plus:1 %}
                         <a href="#topic{{i}}" class="topicLink">{{ tag }}</a>{% unless forloop.last %} {% endunless %}
                     {%- endfor -%}
@@ -62,10 +63,11 @@
         </div>
         <div class="research-links" id="byTopic">
           <a href="#theTop" class="back-to-top"></a>
-            {%- paginate blog.articles by 1000 -%}
+            {%- paginate blog.articles by 1200 -%}
             {%- for tag in blog.all_tags -%}
                 {% assign current_tag = tag %}
-                {% assign j = j | plus:1 %}                              
+                {% assign j = 0 %}
+                {% assign j = j | plus:1 %}
                 <span id="topic{{j}}" class="topicAnchor"></span>
                 <h3>{{ current_tag }}</h3>
                 <div id=”{{ tag | handle }}” class=”sub-question-list”>
@@ -93,7 +95,7 @@
             {% assign articles = blog.articles | sort: 'title' %}
             {% assign letters = '' %}
             {% assign letter = blank %}
-            {%- paginate articles by 1000 -%}
+            {%- paginate articles by 1200 -%}
                 {%- for article in blog.articles -%}
                     {% assign letter = article.title | slice: 0 | upcase %}
                     {% unless letters contains letter %}

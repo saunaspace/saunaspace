@@ -21,7 +21,7 @@
       "type": "apps",
       "blocks": {
         "aab14dba-c90a-4efc-989d-91b7377f8e05": {
-          "type": "shopify:\/\/apps\/okendo-product-reviews-ugc\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "type": "shopify:\/\/apps\/okendo\/blocks\/reviews-widget\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
           "settings": {
             "product": "",
             "widget_type": "reviews_widget"
