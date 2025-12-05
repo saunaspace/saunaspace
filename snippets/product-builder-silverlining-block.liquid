@@ -1,0 +1,111 @@
+{% liquid
+    assign sl_make_default = block.settings.set_sl_default
+    assign sl_product = block.settings.silverlining_product
+    if product.selected_variant
+        for option in product.options_with_values
+            if option.name == "SilverLining"
+                if option.selected_value contains "No"
+                    assign sl_make_default = false
+                else
+                    assign sl_make_default = true
+                endif
+            endif
+        endfor
+    endif
+%}
+
+
+{% if sl_product != blank %}
+    {% if block.settings.mobile_image != blank %}
+    <div class="product-build__variant-media media media--3-4 large-up-hide">
+        <img src="{{ block.settings.mobile_image | image_url: width: 400 }}" alt="panel option image" />
+    </div>
+    {% endif %}
+
+    <div class="product-build__variant-content">
+        <h3 class="product-build__variant-title">{{ block.settings.block_text | default: "SilverLining™" }}</h3>
+        {% if block.settings.block_description != blank %}
+        <div class="product-build__variant-description">
+            <p>{{ block.settings.block_description }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    {% liquid 
+        assign sl_product_variant = sl_product.selected_or_first_available_variant
+        assign sl_product_image = block.settings.silverlining_image | default: sl_product.featured_image
+        assign sl_option_name = block.settings.sl_option_name | default: "SilverLining"
+        assign sl_option_val = block.settings.sl_option_val | default: "SilverLining"
+        assign sl_option_decline_val = block.settings.sl_decline_option_val | default: "No SilverLining"
+    %}
+    <ul class="product-build__variant-pills product-build__variant-pills--grow sl-options silverlining-options js-variant-options" data-variant="{{ sl_option_name }}" data-sl-option-val="{{ sl_option_val }}" data-sl-option-decline-val="{{ sl_option_decline_val }}">
+        <li class="silverlining-option select-sl">
+            <input type="hidden" name="silverlining_product" value="{{ sl_product_variant.id }}" data-price="{{ sl_product_variant.price | money_without_currency }}" data-title="{{ sl_product_variant.title }}" id="silverlining_product_input" />
+            <input type="radio" name="silverlining_option"{% if sl_make_default %} checked="true"{% endif %} id="sl_option_select_input" class="product-option-radio option--silverlining option--sliverlining-option--select" />
+            <label class="product-build__variant-pill product-build__variant-pill--large" for="sl_option_select_input">
+                <span class="option-img" style="background-image: url({{ sl_product_image | image_url: width: 500, height: 500 }});"></span>
+                {% assign item_title = sl_product.metafields.custom.custom_title | default: sl_product.title %}
+                <span class="product-build__variant-pill-text">
+                {{ item_title  | truncate: 22 }}
+                </span>
+                
+                {% if block.settings.sl_badge != blank %}
+                <span class="product-build__variant-pill-tag">{{ block.settings.sl_badge }}</span>
+                {% endif %}
+            </label>
+
+            <span class="select-sl-text product-build__variant-pill-text">
+                YES, SilverLining™<br><em>Optimal healing. Minimal interference</em>
+            </span>
+        </li>
+
+        <li class="silverlining-option decline-sl">
+            <input type="radio" name="silverlining_option"{% if sl_make_default != true %} checked="true"{% endif %} id="sl_option_decline_input" class="product-option-radio option-deselect" />
+            <label class="product-build__variant-pill product-build__variant-pill--large{% if sl_make_default != true %} isSelected{% endif %}" for="sl_option_decline_input">
+                <span class="product-build__variant-pill-text">No SilverLining™ today, thanks.</span>
+            </label>
+        </li>
+    </ul>
+
+    {% if block.settings.silverlining_icon != blank %}
+    <div class="silverlining-sticky-icon">
+        <img src="{{ block.settings.silverlining_icon | image_url: width: 150 }}" alt="silverlining option" />
+        {% liquid
+        if block.settings.silverlinings_icon_mobile == blank
+            assign mobile_icon = "https://cdn.shopify.com/s/files/1/0026/7229/6025/files/silver-lining-product-builder-logo-circle.svg?v=1759356219&width=100"
+        else
+            assign mobile_icon = block.settings.silverlining_icon_mobile | image_url: width: 100
+        endif
+        %}
+        <img src="{{ mobile_icon }}" alt="silverlining option" />
+    </div>
+    {% endif %}
+
+
+    {% comment %}<!-- SilverLining Modal -->{% endcomment %}
+    {% if block.settings.modal_content != blank %}
+    <modal-opener class="product-build__modal-opener" data-modal="#silverLining-panel-modal">
+        <button class="link product-build__modal-opener-button" type="button" aria-haspopup="dialog">
+        <span>{{ block.settings.modal_button_title | default: "Why SilverLining™?" }}</span>
+        <i>{%- render 'icon-plus' -%}</i>
+        </button>
+    </modal-opener>
+
+    {%- capture modal_content -%}
+        {{ block.settings.modal_content }}
+    {%- endcapture -%}
+
+    {% assign modal_title = block.settings.modal_button_title | default: "Why SilverLining™?" %}
+    {%-
+        render 'modal-dialog',
+        id: 'silverLining-panel-modal',
+        title: modal_title,
+        content: modal_content,
+        class: 'product-build__modal-dialog',
+        show_close_label: true,
+    -%}
+    {% endif %}
+    {% comment %}<!-- endif block.settingsmodal_content != blank -->{% endcomment %}
+
+{% endif %}
+{% comment %}<!-- endif sl_product != blank -->{% endcomment %}

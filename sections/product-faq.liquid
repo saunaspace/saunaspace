@@ -1,0 +1,654 @@
+{%- if section.blocks.size > 0 -%}
+
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+
+  {{- 'section-product-faq.css' | asset_url | stylesheet_tag -}}
+
+  {%-
+    liquid
+    capture styles
+      if section.settings.video != blank or section.settings.background_image != blank
+        echo ' product-faq--has-background '
+      endif
+
+      if section.settings.overlay_background_mobile
+        echo ' product-faq--overlay-background-on-mobile '
+      endif
+
+      echo color_scheme
+    endcapture
+  -%}
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-product-faq-" | append: section.index
+    endif
+  %}
+
+  <section
+    class="product-faq {{ styles }}"
+    data-id="{{- section.id -}}"
+    id="{{ sec_id }}"
+  >
+    <div class="container">
+      <div class="product-faq__background{% if section.settings.background_video_mobile != blank or section.settings.background_image_mobile != blank %} small-hide{% endif %}">
+        {%- if section.settings.video != blank -%}
+          {{- section.settings.video | media_tag: autoplay: true, muted: true, loop: true, controls: false -}}
+        {%- elsif section.settings.background_image != blank -%}
+          {%- render 'image', image: section.settings.background_image -%}
+        {%- endif -%}
+      </div><!-- /.product-faq__background -->
+
+      {%- if section.settings.background_video_mobile != blank or section.settings.background_image_mobile -%}
+        <div class="product-faq__background large-up-hide">
+          {%- if section.settings.background_video_mobile != blank -%}
+            {{- section.settings.background_video_mobile | media_tag: autoplay: true, muted: true, loop: true, controls: false -}}
+          {%- elsif section.settings.background_image_mobile != blank -%}
+            {%- render 'image', image: section.settings.background_image_mobile -%}
+          {%- endif -%}
+        </div><!-- /.product-faq__background -->
+      {%- endif -%}
+
+      <div class="product-faq__inner product-faq__inner--{{ section.settings.container_alignment }}{% if section.settings.content_width != 'fullwidth' %} product-faq__inner--narrow{% endif %}">
+        {%- if section.settings.title != blank -%}
+          <div class="product-faq__head product-faq__head--{{- section.settings.title_alignment -}}">
+            <h2 class="product-faq__title h2-small-desktop">{{- section.settings.title | escape -}}</h2><!-- /.product-faq__title -->
+          </div><!-- /.product-faq__head -->
+        {%- endif -%}
+
+        <div class="product-faq__body">
+          {%- if section.settings.content != blank -%}
+            <div class="product-faq__content {{ section.settings.content_alignment }}">
+              {{ section.settings.content | rich_text }}
+            </div><!-- /.product-faq__content -->
+          {%- endif -%}
+
+          {%- assign gallery_blocks = section.blocks | where: 'type', 'gallery-media' -%}
+
+          {%- if gallery_blocks.size > 0 -%}
+            {% comment %}<script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer"></script>{% endcomment %}
+            <script src="{{- 'slider-default.js' | asset_url -}}" defer="defer"></script>
+            <script src="{{- 'gallery-opener.js' | asset_url -}}" defer="defer"></script>
+
+            {% comment %}{{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+            {{- 'component-gallery-modal.css' | asset_url | stylesheet_tag -}}
+            {{- 'component-gallery-item.css' | asset_url | stylesheet_tag -}}
+
+            <div class="product-faq__gallery">
+              {%- for block in gallery_blocks -%}
+                <gallery-opener
+                  class="product-faq__gallery-media overflow-hidden relative"
+                  data-modal="#Gallery-Modal-{{- section.id -}}"
+                  data-index="{{ forloop.index0 }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <button
+                    type="button"
+                    class="product-faq__gallery-media-button"
+                    aria-label="{{- block.settings.hover_text -}}"
+                    aria-haspopup="dialog"
+                  ></button><!-- /.product-faq__gallery-media-button -->
+
+                  <div class="media media--rounded">
+                    {%- if block.settings.image != blank -%}
+                      {%- render 'image' with image: block.settings.image -%}
+                    {%- else -%}
+                      {{- 'image' | placeholder_svg_tag -}}
+                    {%- endif -%}
+                  </div><!-- /.media -->
+
+                  <div class="product-faq__gallery-media-overlay">
+                    <div class="product-faq__gallery-media-overlay-inner flex flex--justify flex--center">
+                      {%- if block.settings.hover_text != blank -%}
+                        <p class="product-faq__gallery-media-text medium-hide small-hide">
+                          {{- block.settings.hover_text | escape -}}
+                        </p><!-- /.product-faq__gallery-media-text -->
+                      {%- endif -%}
+
+                      <span class="product-faq__gallery-media-icon icon">
+                        {%- render 'icon-plus-large' -%}
+                      </span><!-- /.product-faq__gallery-media-icon -->
+                    </div><!-- /.product-faq__gallery-media-overlay-inner -->
+                  </div><!-- /.product-faq__gallery-media-overlay -->
+                </gallery-opener><!-- /.product-faq__gallery-media -->
+              {%- endfor -%}
+            </div><!-- /.product-faq__gallery -->
+
+            <modal-dialog
+              id="Gallery-Modal-{{- section.id -}}"
+              class="gallery-modal motion-reduce"
+            >
+              <div
+                role="dialog"
+                aria-label="{{- 'accessibility.gallery' | t -}}"
+                aria-modal="true"
+                class="gallery-modal__wrapper motion-reduce"
+                tabindex="-1"
+              >
+                <div class="gallery-modal__inner">
+                  <div class="gallery-modal__head">
+                    <button
+                      id="ModalClose-Gallery-Modal-{{- section.id -}}"
+                      type="button"
+                      class="gallery-modal__close"
+                    >
+                      <span class="gallery-modal__close-icon icon">
+                        {%- render 'icon-close-alt' -%}
+                      </span>
+                      <span class="gallery-modal__close-text">
+                        {{- 'accessibility.close' | t -}}
+                      </span>
+                    </button>
+                  </div>
+                  <slider-default
+                    class="gallery-modal__body block"
+                    data-effect="fade"
+                    data-rewind
+                  >
+                    <div class="gallery-modal__slider">
+                      <div class="swiper" data-slider>
+                        <div class="swiper-wrapper">
+                          {%- for block in gallery_blocks -%}
+                            <div class="swiper-slide">
+                              <div class="gallery-item">
+                                <div class="gallery-item__media">
+                                  <div class="media media--rounded-large">
+                                    {%- if block.settings.image != blank -%}
+                                      {%- render 'image' with image: block.settings.image -%}
+                                    {%- else -%}
+                                      {{- 'image' | placeholder_svg_tag -}}
+                                    {%- endif -%}
+                                  </div>
+                                </div>
+                                <div class="gallery-item__content">
+                                  {%- if block.settings.title != blank -%}
+                                    <h4 class="gallery-item__title">
+                                      {{- block.settings.title | escape -}}
+                                    </h4>
+                                  {%- endif -%}
+                                  {%- if block.settings.content != blank -%}
+                                    <div class="gallery-item__entry">
+                                      <p>{{- block.settings.content | escape | newline_to_br -}}</p>
+                                    </div>
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                            </div>
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    </div>
+                    {%- if gallery_blocks.size > 1 -%}
+                      <div class="gallery-modal__thumbs overflow-hidden relative" data-thumbs>
+                        <div class="swiper swiper--spacing" data-thumbs-slider>
+                          <div class="swiper-wrapper">
+                            {%- for block in gallery_blocks -%}
+                              <div class="swiper-slide">
+                                <div class="media media--rounded-small">
+                                  {%- if block.settings.image != blank -%}
+                                    {%- render 'image' with image: block.settings.image -%}
+                                  {%- else -%}
+                                    {{- 'image' | placeholder_svg_tag -}}
+                                  {%- endif -%}
+                                </div>
+                              </div>
+                            {%- endfor -%}
+                          </div>
+                        </div>
+                        <div class="gallery-modal__thumbs-arrows small-hide">
+                          <div class="gallery-modal__thumbs-arrow" data-prev>
+                            {%- render 'icon-arrow-left-alt' -%}
+                          </div>
+                          <div class="gallery-modal__thumbs-arrow" data-next>
+                            {%- render 'icon-arrow-right-alt' -%}
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </slider-default>
+                </div>
+              </div>
+            </modal-dialog>
+            
+            {%- endif -%}
+            
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'separator' -%}
+                  {%- if block.settings.title != blank -%}
+                    <h4 class="product-faq__separator-title">
+                      {{- block.settings.title -}}
+                    </h4>
+                  {%- endif -%}
+                {%- when 'faq' -%}
+                  {%- if block.settings.question == blank or block.settings.answer == blank -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  <details class="product-faq__accordion product-faq__accordion--{{ block.settings.type }}"{% if forloop.first and section.settings.keep_accordions_closed != true %} open{% endif %} {{ block.shopify_attributes }}>
+                    <summary>
+                      {{- block.settings.question | escape -}}
+                      {%- if block.settings.type == 'info' -%}
+                        {%- render 'icon-chevron-down-thin' -%}
+                      {%- else -%}
+                        {%- render 'icon-plus-large' -%}
+                      {%- endif -%}
+                    </summary>
+                    <div>
+                      {{- block.settings.answer -}}
+                    </div>
+                  </details>
+                {%- when 'topic' -%}
+                  ...
+              {%- endcase -%}
+            {%- endfor -%}
+            </div><!-- /.product-faq__body -->
+            
+            {%- assign link_blocks = section.blocks | where: 'type', 'link' -%}
+            
+            {%- if link_blocks.size > 0 -%}
+              <ul class="product-faq__links list-unstyled{% if section.settings.alt_links_view %} product-faq__links--alt{% endif %}">
+                {%- for block in link_blocks -%}
+                  {%- if block.settings.title == blank or block.settings.url == blank -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  <li {{ block.shopify_attributes }}>
+                    <a href="{{- block.settings.url -}}">
+                      {%- if block.settings.type == 'download' -%}
+                        {%- render 'icon-download' -%}
+                      {%- elsif block.settings.type == 'question' -%}
+                        {%- render 'icon-question' -%}
+                      {%- else -%}
+                        {%- render 'icon-redirect' -%}
+                      {%- endif -%}
+                      <span>
+                        {{- block.settings.title | escape -}}
+                        {%- if block.settings.subtext != blank -%}
+                          <small>{{- block.settings.subtext | escape -}}</small>
+                        {%- endif -%}
+                      </span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul><!-- /.product-faq__links -->
+            {%- endif -%}
+            
+            {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+              <div class="product-faq__actions product-faq__actions--{{ section.settings.button_alignment }}">
+                {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'orange-hover button--large-desktop' -%}
+              </div><!-- /.product-faq__actions -->
+            {%- endif -%}
+      </div><!-- /.product-faq__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.product-faq -->
+
+  {% style %}
+    [data-id="{{- section.id -}}"] {
+      --color-background: {{ color_scheme_settings.background }};
+      --color-text: {{ color_scheme_settings.text }};
+      --color-button_primary_bg: {{ color_scheme_settings.button_primary_bg }};
+      --color-button_primary_text: {{ color_scheme_settings.button_primary_text }};
+      --color-button_secondary_bg: {{ color_scheme_settings.button_secondary_bg }};
+      --color-button_secondary_text: {{ color_scheme_settings.button_secondary_text }};
+    }
+  {% endstyle %}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Product FAQ",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      },
+      {
+        "type": "text",
+        "id": "last_updated",
+        "label": "Last Updated",
+        "info": "Used as the dateModified in the FAQ structured data. Format: YYYY-MM-DD"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image"
+      },
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image_mobile",
+        "label": "Background image - Mobile"
+      },
+      {
+        "type": "video",
+        "id": "background_video_mobile",
+        "label": "Background video - Mobile",
+        "info": "Overwrites Mobile image"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlay_background_mobile",
+        "label": "Overlay background on mobile",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_width",
+        "label": "Content width",
+        "options": [
+          {
+            "value": "narrow",
+            "label": "Narrow"
+          },
+          {
+            "value": "fullwidth",
+            "label": "Full width"
+          }
+        ],
+        "default": "fullwidth"
+      },
+      {
+        "type": "text_alignment",
+        "id": "container_alignment",
+        "label": "Container alignment",
+        "default": "left"
+      },
+      {
+        "type": "checkbox",
+        "id": "keep_accordions_closed",
+        "label": "Keep first accordion closed",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "alt_links_view",
+        "label": "Alternative links view",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text_alignment",
+        "id": "title_alignment",
+        "label": "Title alignment",
+        "default": "center"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text_alignment",
+        "id": "content_alignment",
+        "label": "Content alignment",
+        "default": "left"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text_alignment",
+        "id": "button_alignment",
+        "label": "Button alignment",
+        "default": "center"
+      },
+      {
+        "type": "text",
+        "id": "about_entities",
+        "label": "About Entities",
+        "info": "Comma-separated list of entity names (e.g., infrared therapy, detox)"
+      },
+      {
+        "type": "text",
+        "id": "mentions_entities",
+        "label": "Mentioned Entities",
+        "info": "Comma-separated list of entity names (e.g., incandescent bulb, Faraday cage)"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "separator",
+        "name": "Separator title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      },
+      {
+        "type": "faq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "text",
+            "id": "question",
+            "label": "Question"
+          },
+          {
+            "type": "richtext",
+            "id": "answer",
+            "label": "Answer"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Answer Style",
+            "options": [
+              {
+                "value": "info",
+                "label": "Info"
+              },
+              {
+                "value": "resource",
+                "label": "Resource"
+              }
+            ],
+            "default": "info"
+          }
+        ]
+      },
+      {
+        "type": "link",
+        "name": "Resource link",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtext",
+            "label": "Subtext"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "options": [
+              {
+                "value": "download",
+                "label": "Download"
+              },
+              {
+                "value": "redirect",
+                "label": "Redirect"
+              },
+              {
+                "value": "question",
+                "label": "Question"
+              }
+            ],
+            "default": "redirect"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      },
+      {
+        "type": "gallery-media",
+        "name": "Gallery media",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "hover_text",
+            "label": "Hover text"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading goes here"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "default": "Content goes here"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Core Product FAQ"
+      }
+    ]
+  }
+{% endschema %}
+
+{% assign faqs = section.blocks | where: "type", "faq" %}
+
+{%- assign about_raw = section.settings.about_entities | default: '' | replace: '\r\n', ',' | replace: '\n', ',' | replace: '\r', ',' -%}
+{%- assign mentions_raw = section.settings.mentions_entities | default: '' | replace: '\r\n', ',' | replace: '\n', ',' | replace: '\r', ',' -%}
+
+{%- assign about_split = about_raw | split: ',' -%}
+{%- assign mentions_split = mentions_raw | split: ',' -%}
+
+{%- capture about_json -%}
+  {%- assign comma = '' -%}
+  {%- for a in about_split -%}
+    {%- assign cleaned = a | strip -%}
+    {%- if cleaned != '' -%}
+      {{ comma }}{ "@type": "Thing", "name": {{ cleaned | json }} }
+      {%- assign comma = ',' -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture mentions_json -%}
+  {%- assign comma = '' -%}
+  {%- for m in mentions_split -%}
+    {%- assign cleaned = m | strip -%}
+    {%- if cleaned != '' -%}
+      {{ comma }}{ "@type": "Thing", "name": {{ cleaned | json }} }
+      {%- assign comma = ',' -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if about_json != '' -%}
+  {%- assign has_about = true -%}
+{%- else -%}
+  {%- assign has_about = false -%}
+{%- endif -%}
+
+{%- if mentions_json != '' -%}
+  {%- assign has_mentions = true -%}
+{%- else -%}
+  {%- assign has_mentions = false -%}
+{%- endif -%}
+
+{% if faqs.size > 0 %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "{% if template contains 'product' %}{{ request.origin }}/products/{{ product.handle }}#faq-{{ product.handle }}{% elsif page %}{{ request.origin }}{{ page.url }}#faq-{{ page.handle }}{% else %}{{ request.origin }}{{ request.path }}#faq{% endif %}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{% if product %}{{ product.url | absolute_url }}{% elsif page %}{{ page.url | absolute_url }}{% else %}{{ request.origin }}{{ request.path }}{% endif %}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ settings.logo | image_url: width: 600 | absolute_url | json }}
+    },
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ]
+  },
+  "dateModified": "{{ section.settings.last_updated | date: '%Y-%m-%d' }}"{% if has_about or has_mentions %},{% endif %}
+  {% if has_about %}
+  "about": [{{ about_json }}]{% if has_mentions %},{% endif %}
+  {% endif %}
+  {% if has_mentions %}
+  "mentions": [{{ mentions_json }}],
+  {% endif %}
+  "mainEntity": [
+    {% for block in faqs %}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.answer | strip_html | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}

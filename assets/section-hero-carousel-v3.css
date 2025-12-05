@@ -1,0 +1,214 @@
+.hero-carousel-v3 {
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #C4C4C4;
+}
+
+.hero-carousel-v3:before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -60%);
+  width: 160%;
+  height: 100vw;
+  min-height: 60rem;
+  border-radius: 50%;
+  background-image: radial-gradient(closest-side, #FF3A00, transparent);
+}
+
+hero-carousel-v3 {
+  padding: 0 3rem !important;
+  display: block !important;
+}
+
+.hero-carousel-v3 .container {
+  max-width: 161rem;
+}
+
+.hero-carousel-v3__wrapper {
+  display: block;
+  margin-top: 27rem;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-carousel-v3__wrapper {
+    margin-top: 14rem;
+  }
+}
+
+.hero-carousel-v3 .swiper-slide {
+  width: 35rem;
+  aspect-ratio: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-carousel-v3 .swiper-slide {
+    width: 20rem;
+  }
+}
+
+.hero-carousel-v3__slide {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-carousel-v3__slide > :first-child {
+  /* container */
+
+  flex: 1;
+  width: 100%;
+}
+
+.hero-carousel-v3__background,
+.hero-carousel-v3__media {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 1rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+   Content
+   ========================================================================== */
+
+
+.hero-carousel-v3__content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  height: 100%;
+  padding-block: 15rem 7.2rem;
+  font-size: calc(var(--fsbase) * 2.1);
+  font-weight: 500;
+  text-align: center;
+  color: #2C2621;
+}
+
+[data-slider] .hero-carousel-v3__content {
+  opacity: 0;
+  transform: translateY(5rem);
+  transition: opacity var(--duration-long), transform var(--duration-long);
+  transition-delay: var(--duration-default);
+}
+
+[data-slider] .swiper-slide-active .hero-carousel-v3__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-carousel-v3__title {
+  margin-bottom: 10rem;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-carousel-v3__title {
+    margin-bottom: 2.2rem;
+  }
+}
+
+.hero-carousel-v3 .hero-carousel-v3__actions {
+  margin: 10rem 0 8rem;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-carousel-v3 .hero-carousel-v3__actions {
+    margin: 4rem 0;
+  }
+
+  .hero-carousel-v3__content {
+    padding-block: 5.5rem;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}
+
+/* Content width */
+.hero-carousel-v3__content .hero-carousel-v3__content-wrapper {
+  width: 100%;
+  max-width: 54.6rem;
+}
+
+.hero-carousel-v3__content--width-narrow .hero-carousel-v3__content-wrapper {
+  max-width: 49.8rem;
+}
+
+.hero-carousel-v3__content--width-wide .hero-carousel-v3__content-wrapper {
+  max-width: 68.2rem;
+}
+
+/*
+   Content text
+   ========================================================================== */
+
+.hero-carousel-v3__heading {
+  margin-block: 0 3.4rem;
+  font-size: calc(var(--fsbase) * 5.4);
+}
+
+@media screen and (max-width: 767px) {
+  .hero-carousel-v3__heading {
+    font-size: calc(var(--fsbase) * 2.8);
+    margin-bottom: 1.8rem;
+  }
+}
+
+.hero-carousel-v3__body {
+  font-size: calc(var(--fsbase) * 1.8);
+  line-height: 2;
+  margin-bottom: 4rem;
+}
+
+.hero-carousel-v3__body ul,
+.hero-carousel-v3__body ol {
+  list-style-position: inside;
+}
+
+.hero-carousel-v3__body ol li::marker {
+  font-weight: 700;
+  font-size: calc(var(--fsbase) * 2.4);
+}
+
+.hero-carousel-v3__body strong,
+.hero-carousel-v3__body h6 {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: calc(var(--fsbase) * 2.4);
+  margin-bottom: 2.1rem;
+}
+
+.hero-carousel-v3__body p + h6,
+.hero-carousel-v3__body p + strong {
+  margin-top: 6.8rem;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-carousel-v3__body {
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 1.66;
+    margin-bottom: 2.4rem;
+  }
+
+  .hero-carousel-v3__body strong,
+  .hero-carousel-v3__body h6 {
+    font-size: calc(var(--fsbase) * 1.6);
+    margin-bottom: 1.1rem;
+  }
+
+  .hero-carousel-v3__body ol li::marker {
+    font-size: calc(var(--fsbase) * 1.6);
+  }
+
+  .hero-carousel-v3__body p + h6,
+  .hero-carousel-v3__body p + strong {
+    margin-top: 3rem;
+  }
+}
+
+.hero-carousel-v3__link {
+  color: inherit;
+}

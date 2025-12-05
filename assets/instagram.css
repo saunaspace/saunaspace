@@ -1,0 +1,72 @@
+/* ==========================================================================
+   .instagram
+   ========================================================================== */
+
+.instagram {
+  overflow: hidden;
+}
+
+.instagram__items {
+  display: flex;
+}
+
+.instagram__item {
+  flex: 0 0 25%;
+}
+
+.instagram .shopify-block.shopify-app-block {
+  flex-grow: 1;
+}
+
+.instagram__placeholders {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.instagram__placeholder {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #dfc8ab;
+}
+
+.instagram__placeholder img,
+.instagram__placeholder svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile */
+@media only screen and (max-width: 749px) {
+  .instagram__items {
+    flex-wrap: wrap;
+  }
+
+  .instagram__item {
+    flex: 0 0 100%;
+  }
+
+  .instagram .shopify-block.shopify-app-block {
+    width: 100%;
+    min-height: 131px;
+  }
+
+  .instagram__placeholders {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .instagram__placeholder {
+    flex: 1 0 33%;
+    height: 130px;
+  }
+
+  .instagram__placeholder:nth-child(1) {
+    flex: 0 0 100%;
+    height: 150px;
+  }
+}

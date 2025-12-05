@@ -1,0 +1,203 @@
+{%- if section.settings.image != blank and section.settings.title != blank -%}
+  <section
+    class="page-hero-v2{% if section.settings.fixed_height %} page-hero-v2--fixed{% endif %}"
+    id="section-page-hero-v2-{{ section.index }}"
+    style="--desktop-height: {{ section.settings.custom_height_desktop }}px;--mobile-height: {{ section.settings.custom_height_mobile }}px;"
+  >
+    <div class="page-hero-v2__media media media--transparent{% if section.settings.image_mobile != blank %} small-hide medium-hide{% endif %}">
+      {%- render 'image', image: section.settings.image -%}
+    </div><!-- /.page-hero-v2__media media media--transparent -->
+
+    {%- if section.settings.image_mobile != blank -%}
+      <div class="page-hero-v2__media media media--transparent large-up-hide">
+        {%- render 'image', image: section.settings.image_mobile -%}
+      </div><!-- /.page-hero-v2__media media media--transparent -->
+    {%- endif -%}
+
+    <div class="page-hero-v2__content">
+      <div class="page-hero-v2__wrapper">
+        <div class="container">
+          <h1 class="page-hero-v2__title">
+            {{- section.settings.title | escape -}}
+          </h1><!-- /.page-hero-v2__title -->
+
+          {%- if section.settings.content != blank -%}
+            <p class="page-hero-v2__entry">
+                {{- section.settings.content | newline_to_br -}}
+            </p><!-- /.page-hero-v2__entry -->
+          {%- endif -%}
+
+          {%- if section.settings.location != blank -%}
+            <p class="page-hero-v2__entry page-hero-v2__location">
+              <i>
+                {%- render 'icon-pin-current-color' -%}
+              </i>
+
+              <span>
+                {{- section.settings.location -}}
+              </span>
+            </p><!-- /.page-hero-v2__entry -->
+          {%- endif -%}
+        </div><!-- /.container -->
+      </div><!-- /.page-hero-v2__wrapper -->
+    </div><!-- /.page-hero-v2__content -->
+  </section><!-- /.page-hero-v2 -->
+{%- endif -%}
+
+{% style %}
+  .page-hero-v2 {
+    color: #f4f0e0;
+    aspect-ratio: 1920 / 583;
+    position: relative;
+    z-index: 4;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .page-hero-v2--fixed {
+      aspect-ratio: unset;
+      min-height: var(--desktop-height, 54rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .page-hero-v2__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .page-hero-v2__content {
+    text-align: center;
+    height: 100%;
+    padding-top: 11rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-hero-v2__wrapper {
+    max-width: 100rem;
+  }
+
+  .page-hero-v2__title {
+    font-size: calc(var(--fsbase) * 6);
+    line-height: 1.433333;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .page-hero-v2__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 1.714286;
+    margin: 1rem 0 0;
+  }
+
+  .page-hero-v2__location {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-hero-v2__location i {
+    line-height: 0;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .page-hero-v2 {
+      aspect-ratio: 393 / 558;
+    }
+
+    .page-hero-v2--fixed {
+      aspect-ratio: unset;
+      min-height: var(--mobile-height, 35.8rem);
+    }
+
+    .page-hero-v2__content {
+      align-items: flex-end;
+      padding-top: 5rem;
+    }
+
+    .page-hero-v2--fixed .page-hero-v2__content {
+      min-height: var(--mobile-height, 35.8rem);
+    }
+
+    .page-hero-v2__wrapper {
+      max-width: 30.3rem;
+      padding: 4.7rem 0 3.5rem;
+    }
+
+    .page-hero-v2__title {
+      font-size: calc(var(--fsbase) * 2.8);
+      margin-bottom: 4rem;
+    }
+
+    .page-hero-v2__entry {
+      font-size: calc(var(--fsbase) * 1.4);
+      margin: 2rem 0 0;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Page hero v2",
+    "settings": [
+
+      {
+        "type": "checkbox",
+        "id": "fixed_height",
+        "label": "Fixed height",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "custom_height_desktop",
+        "label": "Custom height in px(Desktop)",
+        "default": 540
+      },
+      {
+        "type": "number",
+        "id": "custom_height_mobile",
+        "label": "Custom height in px(Mobile)",
+        "default": 358
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image - mobile"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "location",
+        "label": "Location"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "content"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Page hero v2"
+      }
+    ]
+  }
+{% endschema %}

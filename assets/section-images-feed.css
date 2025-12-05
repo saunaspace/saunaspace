@@ -1,0 +1,115 @@
+/* prettier-ignore */
+/*.shopify-section--image-and-text-v4 + .shopify-section--images-feed .images-feed {
+  padding-top: 0;
+}*/
+
+.images-feed {
+  padding: 14.1rem 0 7.1rem;
+}
+
+.images-feed__head-content {
+  max-width: 78.2rem;
+  margin: 0 auto 8.5rem;
+}
+
+.images-feed__title {
+  margin-bottom: 4.1rem;
+}
+
+.images-feed__entry {
+  margin-bottom: 3.9rem;
+  line-height: 2;
+}
+
+.images-feed__body {
+  padding: 0 4rem;
+}
+
+.images-feed__slider {
+  --slides-gutter: 3.1rem;
+
+  max-width: 98.9rem;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.images-feed__slider .swiper-slide {
+  max-width: calc(50% - var(--slides-gutter) / 2);
+}
+
+.images-feed__slider .swiper-slide--small {
+  max-width: calc(28.66% - var(--slides-gutter) / 2);
+}
+
+.images-feed__media {
+  min-height: 30rem;
+  border-radius: 1rem;
+}
+
+@media screen and (min-width: 990px) {
+  .images-feed__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+  }
+}
+
+@media screen and (max-width: 1399px) {
+  .images-feed {
+    padding: 8rem 0 6rem;
+  }
+
+  .images-feed__head-content {
+    margin-bottom: 6rem;
+  }
+
+  .images-feed__title {
+    margin-bottom: 3.2rem;
+  }
+
+  .images-feed__entry {
+    margin-bottom: 3rem;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .images-feed {
+    padding: 2rem 0;
+  }
+
+  .images-feed__head-content {
+    margin-bottom: 3rem;
+  }
+
+  .images-feed__title {
+    max-width: 30rem;
+    margin: 0 auto 2.4rem;
+  }
+
+  .images-feed__entry {
+    margin-bottom: 2.4rem;
+    line-height: 1.667;
+  }
+
+  .images-feed__slider .swiper-slide {
+    max-width: calc(70.13% - var(--slides-gutter) / 2);
+  }
+
+  .images-feed__slider .swiper-slide--small {
+    max-width: calc(40.42% - var(--slides-gutter) / 2);
+  }
+
+  .images-feed__media {
+    min-height: 13.4rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .images-feed__slider {
+    --slides-gutter: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .images-feed__body {
+    padding: 0 var(--page-gutter);
+  }
+}

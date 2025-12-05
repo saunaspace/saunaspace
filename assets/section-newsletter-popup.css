@@ -1,0 +1,128 @@
+newsletter-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-modals);
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  will-change: visibility, opacity;
+  transition: visibility var(--duration-default),
+    opacity var(--duration-default);
+}
+
+newsletter-popup[open] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.newsletter-popup__wrapper {
+  width: 100%;
+  max-width: 117rem;
+  position: relative;
+  margin: 1.6rem;
+  border: 0.1rem solid var(--color-subdued);
+  background-color: var(--color-background-secondary);
+}
+
+.newsletter-popup__close {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  min-width: 4.8rem;
+  min-height: 4.8rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.newsletter-popup__grid {
+  grid-auto-rows: 1fr;
+  gap: 0;
+}
+
+.newsletter-popup__content {
+  height: 100%;
+  flex-direction: column;
+  padding: 4.5rem 2rem;
+}
+
+.newsletter-popup__title {
+  margin-block: 0 2.7rem;
+}
+
+.newsletter-popup__form {
+  padding-top: 2rem;
+  width: 100%;
+  max-width: 40rem;
+}
+
+@media screen and (max-width: 750px) {
+  newsletter-popup.flex {
+    align-items: flex-start;
+  }
+
+  .newsletter-popup__grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: initial;
+  }
+
+  .newsletter-popup__image {
+    grid-row: 1 / 2;
+  }
+
+  .newsletter-popup__media {
+    padding-bottom: 50%;
+  }
+
+  .newsletter-popup__close {
+    top: calc(50vw + 0.8rem);
+    left: auto;
+    right: 0.8rem;
+    transform: translateY(-50%);
+  }
+
+  .newsletter-popup__content {
+    min-height: 70vw;
+    grid-row: 2 / 3;
+  }
+}
+
+/* Newsleter popup - image right */
+
+.newsletter-popup--image-left .newsletter-popup__grid {
+  direction: rtl;
+}
+
+.newsletter-popup--image-left .newsletter-popup__grid * {
+  direction: initial;
+}
+
+/* Newsleter popup - image top */
+
+.newsletter-popup--image-top .newsletter-popup__wrapper {
+  max-width: 70rem;
+}
+
+.newsletter-popup--image-top .newsletter-popup__grid {
+  grid-template-columns: 1fr;
+  grid-auto-rows: initial;
+}
+
+.newsletter-popup--image-top .newsletter-popup__image {
+  grid-row: 1 / 2;
+}
+
+.newsletter-popup--image-top .newsletter-popup__media {
+  padding-bottom: 50%;
+}
+
+.newsletter-popup--image-top .newsletter-popup__content {
+  grid-row: 2 / 3;
+}

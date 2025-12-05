@@ -1,0 +1,90 @@
+{{- 'component-cart-items.css' | asset_url | stylesheet_tag -}}
+
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+<cart-items class="cart{% unless cart != empty %} cart--empty{% endunless %}" id="{{- section.id -}}">
+  <div class="container">
+    <div class="cart__head">
+      <h1 class="cart__title h2">
+        {{- 'cart.title' | t -}}
+      </h1><!-- /.cart__title h2 -->
+    </div><!-- /.cart__head center -->
+
+    <div class="cart__body">
+      {%- if cart != empty -%}
+        <form action="{{- routes.cart_url -}}" class="cart__contents" method="post" id="cart">
+          <div class="cart__items" id="main-cart-items" data-id="{{- section.id -}}">
+            <table class="cart-items">
+              <thead class="cart-items__head">
+                <tr class="cart-items__row">
+                  <th class="cart-items__cell cart-items__cell--item caption regular" colspan="2" scope="col">{{- 'cart.item' | t -}}</th>
+
+                  <th class="cart-items__cell cart-items__cell--price caption regular" colspan="1" scope="col">{{- 'cart.price' | t -}}</th>
+
+                  <th class="cart-items__cell cart-items__cell--quantity caption regular" colspan="1" scope="col">{{- 'cart.quantity' | t -}}</th>
+
+                  <th class="cart-items__cell cart-items__cell--total caption regular" colspan="1" scope="col">{{- 'cart.total' | t -}}</th>
+                </tr><!-- /.cart-items__row -->
+              </thead><!-- /.cart-items__head -->
+
+              <tbody class="cart-items__body">
+                {%- for line_item in cart.items -%}
+                  {%- render 'line-item', line_item: line_item -%}
+                {%- endfor -%}
+              </tbody><!--/.cart-items__body  -->
+
+              <tfoot class="cart-items__foot">
+                <tr class="cart-items__row">
+                  <td class="cart-items__cell" colspan="5">
+                    <div class="cart-footer-content-wrap">
+
+                      <div class="cart-footer-col col--po">
+                        <div class="cart-footer-payment-options">
+                          <div class="cart-footer-po-header">
+                            <h5 class="cart-footer-heading">Flexible Payment Options</h5>
+                          </div>
+
+                          <div class="cart-footer-po cart-footer-po--splitit">
+                            {%- render 'icon-split-it' -%} <span>Monthly payments using your credit card. 0% APR interest.</span>
+                            <a href="https://sauna.space/pages/financing" class="po-cta link-underline{% if settings.splitit_information_content != blank %} js-splitit-trigger{% endif %}">
+                              Learn More
+                            </a>
+                          </div>
+                          <div class="cart-footer-po cart-footer-po--truemed">
+                            {%- render 'icon-truemed' -%} <span>Pay with HSA/FSA Save an average of 30%</span>
+                            <a href="https://sauna.space/pages/truemed-hsa-fsa-payment" class="po-cta link-underline js-truemed-trigger">Learn More</a>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="cart-footer-col col-summary">
+                        <div class="cart-footer-summary-header">
+                          <h5 class="cart-footer-heading">Your Order</h5>
+                        </div>
+                        {%- render 'cart-summary' -%}
+                      </div>
+                  </td><!-- /.cart-items__cell -->
+                </tr><!-- /.cart-items__row -->
+              </tfoot><!-- /.cart-items__foot -->
+            </table><!-- /.cart-items -->
+          </div><!-- /#main-cart-items.cart__items -->
+        </form><!-- /.cart__contents -->
+      {%- else -%}
+        <div class="cart__empty center">
+          <h2 class="cart__empty-title h3 regular">{{- 'cart.empty' | t -}}</h2><!-- /.cart__empty-title -->
+
+          {%- assign value = 'cart.continue_shopping' | t -%}
+          {%- render 'button', type: 'link', href: routes.collections_url, value: value -%}
+          {%- assign value = nil -%}
+        </div><!-- /.cart__empty center -->
+      {%- endif -%}
+    </div>
+  </div><!-- /.container -->
+</cart-items>
+
+{% schema %}
+{
+  "name": "t:sections.cart.name",
+  "tag": "section"
+}
+{% endschema %}

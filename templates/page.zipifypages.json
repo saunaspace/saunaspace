@@ -3,8 +3,7 @@
   "sections": {
     "content": {
       "type": "page-content-zipifypages",
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [

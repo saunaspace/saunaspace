@@ -1,0 +1,104 @@
+{% comment %}
+    Renders a product feed
+
+    Accepts:
+    - style?: {String} Style, default is 'default'
+    - title?: {String} Title text, default is blank
+    - subtitle?: {String} Pre title text, default is blank
+    - button_text?: {String} Button text, default is blank
+    - button_url?: {String} Button url, default is blank
+    - heading_size?: {String} Heading size, default is h4 - h1|h2|h3|h4|h5|h6
+    - autoplay?: {Boolean} Autoplay slider, default is false
+    - autoplay_speed?: {Number} Slider autoplay speed in seconds, default is 5
+    - resources: {Array[Objects]} Product objects array
+    - products_count: {Number} Products count
+    - show_placeholder_cards: {Boolean} Show placeholder product cards, if no resources are selected
+
+    Usage:
+    {%- render 'products-feed', resources: collection.products -%}
+{% endcomment %}
+
+{%- liquid
+  assign style = style | default: 'default'
+  assign autoplay = autoplay | default: false
+  assign autoplay_speed = autoplay_speed | default: 5
+  assign resources = resources | default: nil
+  assign heading_size = heading_size | default: 'h4'
+  assign attr = attr | default: ''
+  assign products_count = products_count | default: 10
+  assign show_placeholder_cards = show_placeholder_cards | default: false
+-%}
+
+<link rel="stylesheet" href="{{ 'component-products-feed.css' | asset_url }}" media="print" onload="this.media='all'">
+{% comment %}<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">{% endcomment %}
+
+<noscript>
+  {{- 'component-products-feed.css' | asset_url | stylesheet_tag -}}
+  {% comment %}{{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+</noscript>
+
+{% comment %}<script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>{% endcomment %}
+<script src="{{- 'products-carousel.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+<products-carousel
+  class="products-feed products-feed--{{- style -}}"
+  {% if autoplay %}
+    data-autoplay
+    data-autoplay-speed="{{ autoplay_speed | times: 1000 }}"
+  {% endif %}
+>
+  <div class="container container--fullwidth">
+    <div class="products-feed__wrapper">
+      <div class="products-feed__head">
+        {%- if subtitle != blank -%}
+          <p class="products-feed__pre-title">
+            {{ subtitle }}
+          </p>
+        {%- endif -%}
+
+        {%- if title != blank -%}
+          <h3 class="products-feed__title {{ heading_size }}">
+            {{- title -}}
+          </h3><!-- /.products-feed__title -->
+        {%- endif -%}
+      </div><!-- /.products-feed__head -->
+
+      <div class="products-feed__body relative" data-container-products>
+        {%- capture slider_html -%}
+          {%- if resources or show_placeholder_cards -%}
+            <div class="products-feed__list swiper" data-slider>
+              <div class="swiper-wrapper">
+                {%- for resource in resources limit: products_count -%}
+                  <div class="swiper-slide">
+                    {%- render 'card-product', product_ref: resource -%}
+                  </div>
+                {%- else -%}
+                  {%- if show_placeholder_cards -%}
+                    {%- for i in (1..products_count) -%}
+                      <div class="swiper-slide">
+                        {%- render 'card-product' -%}
+                      </div>
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div><!-- /.swiper-wrapper -->
+            </div><!-- /.products-feed__list -->
+
+            <div class="swiper-arrows">
+              <button class="swiper-arrow swiper-arrow--prev"></button><!-- /.swiper-arrow -->
+              <button class="swiper-arrow swiper-arrow--next"></button><!-- /.swiper-arrow -->
+            </div><!-- /.swiper-arrows -->
+          {%- endif -%}
+        {%- endcapture -%}
+
+        {{- slider_html -}}
+      </div><!-- /.products-feed__body -->
+
+      {%- if button_text != blank and button_url != blank -%}
+        <div class="products-feed__actions center">
+          {%- render 'button', type: 'link', href: button_url, style: 'outlined', value: button_text -%}
+        </div><!-- /.products-feed__actions center -->
+      {%- endif -%}
+    </div><!-- /.products-feed__wrapper -->
+  </div><!-- /.container -->
+</products-carousel>

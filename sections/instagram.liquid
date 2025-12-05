@@ -1,0 +1,118 @@
+{%-
+  liquid
+  assign blocks = section.blocks
+  assign custom_blocks = blocks | where: 'type', 'insta'
+  assign app_blocks = blocks | where: 'type', '@app'
+-%}
+
+<link rel="stylesheet" href="{{ 'instagram.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'instagram-block.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'instagram.css' | asset_url | stylesheet_tag -}}
+  {{- 'instagram-block.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+<section class="instagram" id="section-instagram-{{ section.index }}">
+  {%- if blocks.size > 0 -%}
+    <div class="instagram__items">
+      {%- for custom_block in custom_blocks -%}
+        {%-
+          liquid
+          assign title = custom_block.settings.title
+          assign bg_color = custom_block.settings.bg_color
+          assign bg_image = custom_block.settings.bg_image
+          assign url = custom_block.settings.url
+        -%}
+
+        {% style %}
+          #custom-insta-block-{{- section.id -}}-{{- forloop.index0 -}} {
+            --color-bg: {{ bg_color }};
+          }
+        {% endstyle %}
+
+        <div class="instagram__item">
+          <div class="instagram-block" id="custom-insta-block-{{- section.id -}}-{{- forloop.index0 -}}">
+            <a href="{{- url | escape -}}" class="instagram-block__link">
+              <i class="ico">
+                {%- render 'icon-instafeed' -%}
+              </i><!-- /.ico -->
+            </a><!-- /.instagram-block__link -->
+
+            {%- if bg_image != blank -%}
+              <div class="instagram-block__bg-image">
+                {%- render 'image', image: bg_image -%}
+              </div><!-- /.instagram-block__bg-image -->
+            {%- endif -%}
+
+            {%- if title != blank -%}
+              <div class="instagram-block__title">
+                {{- title | escape -}}
+              </div><!-- /.instagram-block__title -->
+            {%- endif -%}
+          </div><!-- /.instagram-block -->
+        </div><!-- /.instagram__item -->
+      {%- endfor -%}
+
+      {%- for block in app_blocks -%}
+        {%- render block -%}
+      {%- endfor -%}
+    </div><!-- /.instagram__items -->
+  {%- else -%}
+    <div class="instagram__placeholders">
+      {%- for placeholder in (1..4) -%}
+        <div class="instagram__placeholder">
+          {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+        </div><!-- /.instagram__placeholder -->
+      {%- endfor -%}
+    </div><!-- /.instagram__placeholders -->
+  {%- endif -%}
+</section><!-- /.instagram -->
+
+{% schema %}
+{
+  "name": "Instagram",
+  "settings": [],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "insta",
+      "name": "Custom Instagram block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Background image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL",
+          "info": "https://www.instagram.com/saunaspace/"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram"
+    },
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

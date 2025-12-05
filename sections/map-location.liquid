@@ -1,0 +1,171 @@
+{%- if section.settings.title != blank and section.settings.address != blank and section.settings.image != blank -%}
+  <section class="map-location" id="section-map-location-{{ section.index }}">
+    <div class="container">
+      <div class="map-location__inner">
+        <div class="map-location__content">
+          <h2 class="map-location__title">
+            {{- section.settings.title | escape -}}
+          </h2>
+
+          {%- if section.settings.content != blank -%}
+            <p class="map-location__entry">
+              {{- section.settings.content | escape | newline_to_br -}}
+            </p><!-- /.map-location__entry -->
+          {%- endif -%}
+
+          <p class="map-location__address">
+            {%- render 'icon-pin' -%}
+
+            {{- section.settings.address | escape -}}
+          </p><!-- /.map-location__address -->
+
+          {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+            <a href="{{- section.settings.link_url -}}" class="link-dot">
+              {{- section.settings.link_text | escape -}}
+            </a>
+          {%- endif -%}
+        </div><!-- /.map-location__content -->
+
+        <div class="map-location__media">
+          <div class="media media--transparent media--aspect-ratio">
+            {%- render 'image', image: section.settings.image -%}
+          </div><!-- /.media -->
+        </div><!-- /.map-location__media -->
+      </div><!-- /.map-location__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.map-location -->
+{%- endif -%}
+
+{% style %}
+  .map-location {
+    color: #f4f0e0;
+    background: linear-gradient(to right, #231110 50%, #431712);
+    aspect-ratio: 1920 / 892;
+  }
+
+  .map-location .container {
+    max-width: 158rem;
+    height: 100%;
+  }
+
+  .map-location__inner {
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  }
+
+  .map-location__media,
+  .map-location__content {
+    flex: 1;
+    min-width: 50%;
+  }
+
+  .map-location__content {
+    padding-right: 15rem;
+  }
+
+  .map-location__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.44;
+    font-weight: 500;
+    margin: 0 0 2rem;
+  }
+
+  .map-location__entry {
+    font-size: calc(var(--fsbase) * 1.8);
+    line-height: 1.777778;
+    font-weight: 500;
+    margin: 0 0 2.9rem;
+  }
+
+  .map-location__address {
+    font-weight: 500;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .map-location .link-dot {
+    color: currentColor;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .map-location {
+      background: linear-gradient(to bottom, #231110 50%, #431712);
+      aspect-ratio: initial;
+      padding: 5rem 0;
+    }
+
+    .map-location__inner {
+      display: block;
+    }
+
+    .map-location__content {
+      padding: 0 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .map-location__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      margin: 0 0 1.5rem;
+    }
+
+    .map-location__entry {
+      font-size: calc(var(--fsbase) * 1.2);
+      margin: 0 0 2.5rem;
+    }
+
+    .map-location__address {
+      font-size: calc(var(--fsbase) * 1.4);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Map location",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "address",
+        "label": "Address"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Map location"
+      }
+    ]
+  }
+{% endschema %}

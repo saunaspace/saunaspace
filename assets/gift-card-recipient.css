@@ -1,0 +1,18 @@
+.recipient-fields {
+  display: none;
+}
+
+.recipient-fields__field:last-child {
+  margin-bottom: 2rem;
+}
+
+.recipient-form > input[type='checkbox']:checked ~ .recipient-fields {
+  display: block;
+}
+
+.recipient-form
+  > input[type='checkbox']:not(:checked, :disabled)
+  ~ .recipient-fields,
+.recipient-email-label {
+  display: none;
+}

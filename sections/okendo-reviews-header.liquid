@@ -1,0 +1,96 @@
+{%- capture background_style -%}
+  {%- case section.settings.background_option -%}
+    {%- when 'inherit' -%}
+      background-color: inherit;
+    {%- when 'none' -%}
+      background-color: transparent;
+    {%- when 'custom' -%}
+      background-color: {{ section.settings.background_color }};
+  {%- endcase -%}
+{%- endcapture -%}
+
+<div class="okendo-reviews-header-wrapper" style="{{ background_style | strip }}">
+  <section id="{{ section.settings.section_id | escape }}" class="okendo-reviews-header" style="text-align: {{ section.settings.text_align }}; padding: {{ section.settings.spacing_top }}px 0 {{ section.settings.spacing_bottom }}px;">
+    {%- assign current_product = product | default: all_products[section.settings.product_override] -%}
+    {%- assign review_count = current_product.metafields.reviews.rating_count -%}
+    {%- if section.settings.title != blank or current_product -%}
+      <h2 class="okendo-review-heading">
+        {%- if current_product and review_count -%}
+          <span class="okendo-review-count">{{ review_count }} </span>
+        {%- endif -%}
+        {{ section.settings.title | default: 'Reviews from Happy Customers' }}
+      </h2>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Okendo Reviews Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Text",
+      "default": "Reviews from Happy Customers"
+    },
+    {
+      "type": "product",
+      "id": "product_override",
+      "label": "Associated Product",
+      "info": "Used on Learn pages or non-product pages to show the review count for a product"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "number",
+      "id": "spacing_top",
+      "label": "Spacing top (px)",
+      "default": 60
+    },
+    {
+      "type": "number",
+      "id": "spacing_bottom",
+      "label": "Spacing bottom (px)",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "background_option",
+      "label": "Background Style",
+      "options": [
+        { "value": "inherit", "label": "Theme default (inherit)" },
+        { "value": "none", "label": "Transparent (none)" },
+        { "value": "custom", "label": "Custom color" }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Custom background color",
+      "default": "#f0e7da",
+      "info": "Applies only if Background Style: Custom Color is selected above"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Okendo Reviews Header"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,177 @@
+{%- assign accordions_markup = '' -%}
+
+{%- capture accordions_markup -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.title == blank or block.settings.content == blank -%}
+      {%- continue -%}
+    {%- endif -%}
+
+    <details class="faq-secondary__accordion faq-secondary__accordion--{{- block.settings.type -}}">
+      <summary>
+        {{- block.settings.title | escape -}}
+        <div class="chevron">
+          {%- render 'icon-chevron-down' -%}
+        </div>
+      </summary>
+
+      <div>
+        {{- block.settings.content -}}
+      </div>
+    </details><!-- /.faq-secondary__accordion -->
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if accordions_markup != '' -%}
+  {% style %}
+    [data-id="section-faq-{{- section.id -}}"] {
+      --color-background: {{ color_scheme_settings.background }};
+      --color-text: {{ color_scheme_settings.text }};
+      --color-button_primary_bg: {{ color_scheme_settings.button_primary_bg }};
+      --color-button_primary_text: {{ color_scheme_settings.button_primary_text }};
+      --color-button_secondary_bg: {{ color_scheme_settings.button_secondary_bg }};
+      --color-button_secondary_text: {{ color_scheme_settings.button_secondary_text }};
+    }
+  {% endstyle %}
+
+  {{- 'section-faq-secondary.css' | asset_url | stylesheet_tag -}}
+
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-faq-" | append: section.index
+    endif
+  %}
+
+  <section class="faq-secondary{% if section.settings.background_video != blank or section.settings.background_image != blank %} faq-secondary--has-background{% endif %} {{ color_scheme }}" data-id="{{- section.id -}}" id="{{- sec_id -}}">
+    <div class="faq-secondary__inner">
+      <div class="faq-secondary__head">
+        {%- if section.settings.background_video != blank or section.settings.background_image != blank -%}
+          <div class="faq-secondary__background media">
+            {%-
+              liquid
+              if section.settings.background_video != blank
+                echo section.settings.background_video | media_tag: autoplay: true, muted: true, loop: true, controls: false
+              else
+                render 'image', image: section.settings.background_image
+              endif
+            -%}
+          </div><!-- /.faq-secondary__background -->
+        {%- endif -%}
+
+        {%- if section.settings.title != blank -%}
+          <h2 class="faq-secondary__title">{{- section.settings.title | escape -}}</h2><!-- /.faq-secondary__title -->
+        {%- endif -%}
+      </div><!-- /.faq-secondary__head -->
+
+      <div class="faq-secondary__body">
+        <div class="container">
+          <div class="faq-secondary__body-inner">
+            <div class="faq-secondary__accordions">
+              {{- accordions_markup -}}
+            </div>
+
+            {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+              <div class="faq-secondary__actions faq-secondary__actions--{{ section.settings.button_alignment }}">
+                <a href="{{- section.settings.button_url -}}" class="faq-secondary__link link-dot">
+                  {{- section.settings.button_text -}}
+                </a>
+              </div><!-- /.faq-secondary__actions -->
+            {%- endif -%}
+          </div>
+        </div>
+      </div><!-- /.faq-secondary__body -->
+    </div><!-- /.faq-secondary__inner -->
+  </section><!-- /.faq-secondary -->
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "FAQ v2",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image"
+      },
+      {
+        "type": "video",
+        "id": "background_video",
+        "label": "Background video"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text_alignment",
+        "id": "button_alignment",
+        "label": "Button alignment",
+        "default": "center"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>Content</p>"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "FAQ v2",
+        "blocks": [
+          {
+            "type": "item"
+          },
+          {
+            "type": "item"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

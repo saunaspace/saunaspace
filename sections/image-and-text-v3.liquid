@@ -1,0 +1,256 @@
+{%- if section.settings.image != blank and section.settings.content != blank -%}
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-image-and-text-v3-" | append: section.index
+    endif
+  %}
+  <section
+    class="image-and-text-v3 image-and-text-v3--{{ section.settings.image_size }}{% if section.settings.flip_content %} image-and-text-v3--flip{% endif %}"
+    data-id="{{- section.id -}}"
+    id="{{ sec_id }}"
+  >
+    <div class="image-and-text-v3__col">
+      <div class="image-and-text-v3__image media media--transparent">
+        {%- render 'image', image: section.settings.image -%}
+      </div><!-- /.image-and-text-v3__image -->
+    </div><!-- /.image-and-text-v3__col -->
+
+    <div class="image-and-text-v3__col">
+      <div class="image-and-text-v3__content">
+        <div class="image-and-text-v3__wrapper">
+          {%- if section.settings.title != blank -%}
+            <h2 class="image-and-text-v3__title image-and-text-v3__title--{{ section.settings.title_size }}">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.image-and-text-v3__title -->
+          {%- endif -%}
+
+          <p class="image-and-text-v3__entry">
+            {{- section.settings.content | escape | newline_to_br -}}
+          </p><!-- /.image-and-text-v3__entry -->
+
+          {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+            <a href="{{- section.settings.link_url -}}" class="link-dot">
+              {{- section.settings.link_text | escape -}}
+            </a>
+          {%- endif -%}
+        </div><!-- /.image-and-text-v3__wrapper -->
+      </div><!-- /.image-and-text-v3__content -->
+    </div><!-- /.image-and-text-v3__col -->
+  </section><!-- /.image-and-text-v3 -->
+{%- endif -%}
+
+{% style %}
+  [data-id="{{- section.id -}}"] {
+    --color-background: {{ color_scheme_settings.background }};
+    --color-text: {{ color_scheme_settings.text }};
+  }
+
+  .image-and-text-v3 {
+    background-color: var(--color-background);
+    display: flex;
+    flex-flow: row wrap;
+    aspect-ratio: 1920 / 980;
+  }
+
+  .image-and-text-v3--flip {
+    flex-flow: row-reverse wrap;
+  }
+
+  .image-and-text-v3__col {
+    flex: 1;
+    min-width: 50%;
+  }
+
+  .image-and-text-v3--smaller .image-and-text-v3__col:first-child {
+    padding-left: 11vw;
+  }
+
+  .image-and-text-v3--smaller.image-and-text-v3--flip .image-and-text-v3__col:first-child {
+    padding-left: 0;
+    padding-right: 11vw;
+  }
+
+  .image-and-text-v3__image,
+  .image-and-text-v3__content {
+    height: 100%;
+  }
+
+  .image-and-text-v3__content {
+    color: var(--color-text);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-and-text-v3__wrapper {
+    max-width: 68rem;
+    padding: 4rem;
+    margin: 0 auto;
+  }
+
+  .image-and-text-v3__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.44;
+    font-weight: 500;
+    margin: 0 0 5rem;
+  }
+
+  .image-and-text-v3__title--smaller {
+    font-size: calc(var(--fsbase) * 4.8);
+    line-height: 1.5;
+    margin: 0 0 5.7rem;
+  }
+
+  .image-and-text-v3__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 2;
+  }
+
+  .image-and-text-v3 .link-dot {
+    color: var(--color-text);
+    margin-top: 5.7rem;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .image-and-text-v3 {
+      display: block;
+      padding: 2rem;
+    }
+
+    .image-and-text-v3__image {
+      aspect-ratio: 353 / 282;
+      border-radius: 1rem;
+      margin-bottom: 4.5rem;
+    }
+
+    .image-and-text-v3--smaller .image-and-text-v3__image {
+      aspect-ratio: 321 / 459;
+    }
+
+    .image-and-text-v3--smaller .image-and-text-v3__col:first-child {
+      padding-left: 0;
+    }
+
+    .image-and-text-v3--smaller.image-and-text-v3--flip .image-and-text-v3__col:first-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .image-and-text-v3__wrapper {
+      max-width: 60rem;
+      padding: 0 2rem 4.5rem;
+    }
+
+    .image-and-text-v3__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      line-height: 1.5;
+      margin: 0 0 2.1rem;
+    }
+
+    .image-and-text-v3__entry {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+
+    .image-and-text-v3 .link-dot {
+      margin-top: 3rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Image and text V3",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme-2",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "flip_content",
+        "label": "Flip image/content",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Image size",
+        "options": [
+          {
+            "value": "50-50",
+            "label": "50/50"
+          },
+          {
+            "value": "smaller",
+            "label": "Smaller"
+          }
+        ],
+        "default": "50-50"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "select",
+        "id": "title_size",
+        "label": "Title size",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "smaller",
+            "label": "Smaller"
+          }
+        ],
+        "default": "normal"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image and text V3"
+      }
+    ]
+  }
+{% endschema %}

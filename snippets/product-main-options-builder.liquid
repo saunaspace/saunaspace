@@ -1,0 +1,281 @@
+{% comment %}<!-- For the hearth, glow, and bulb products -->{% endcomment %}
+<div class="product__variants">
+{% for block in section.blocks %}
+
+  {% comment %}<!-- Bulbs (Model variant) -->{% endcomment %}
+  {% if block.type == "bulb-variant" %}
+    {% liquid
+    assign variant_name = block.settings.variant_name | default: "Model"
+    for _option in product.options_with_values
+        if _option.name == variant_name
+            assign option = _option
+        endif
+    endfor
+    %}
+    {% if option != blank %}
+    <div class="product__variants-row product__variants-row--options" data-variant="{{ variant_name }}">
+        <div class="product__variants-label">
+            {{ block.settings.panel_title | default: "Bulb Count" }}{% comment %} {% render 'icon-info' %}{% endcomment %}
+        </div><!-- /.product__variants-label -->
+
+        <div class="product__variants-content">
+            <ul class="product__variants-options list-unstyled">
+                {% for opt in option.values %}
+                {% liquid
+                    assign opt_lc = opt | downcase
+                    if opt_lc contains "quartet"
+                        assign panel_image = block.settings.quartet_image
+                    elsif opt_lc contains "trio"
+                        assign panel_image = block.settings.trio_image
+                    endif
+                %}
+                <li class="product__variants-option">
+                    <input type="radio" class="variant-option-radio" name="{{ variant_name }}"{% if option.selected_value == opt %} checked="true"{% endif %} value="{{ opt }}" id="bulb-option--{{ product.handle }}--{{ opt | handleize }}" />
+                    <label class="variant-option-label" for="bulb-option--{{ product.handle }}--{{ opt | handleize }}">
+                        <span class="option-img">
+                            <img src="{{ panel_image | image_url: width: 500, height: 500 }}" alt="select {{ opt }}" />
+                        </span>
+                        <span class="option-title">{{ opt }}{% if opt_lc contains "quartet" and block.settings.price_difference != blank %}<br>{{ block.settings.price_difference }}{% endif %}</span>
+                    </label>
+                </li><!-- /.product__variants-option -->
+                {% endfor %}
+            </ul><!-- /.product__variants-options -->
+        </div><!-- /.product__variants-content -->
+    </div><!-- /.product__variants-row product__variants-row--options-->
+    {% endif %}
+
+  {% comment %}<!-- Plugs -->{% endcomment %}
+  {% elsif block.type == "plug-variant" %}
+    {% liquid
+    assign variant_name = block.settings.variant_name | default: "Plug"
+    for _option in product.options_with_values
+        if _option.name == variant_name
+            assign option = _option
+        endif
+    endfor
+    %}
+    {% if option != blank %}
+    <div class="product__variants-row product__variants-row--dropdown" data-variant="{{ variant_name }}">
+        <div class="product__variants-label">
+            {{ block.settings.panel_title | default: "Plug" }}{% comment %} {% render 'icon-info' %}{% endcomment %}
+        </div><!-- /.product__variants-label -->
+
+        <div class="product__variants-content">
+            <details>
+                <summary><span data-current-selected-plug>{{ option.selected_value | replace: " Adapter", "" }}</span> {% render 'icon-chevron-dropdown' %}</summary>
+                <div>
+                    <ul class="list-unstyled">
+                        {% assign opt = null %}
+                        {% for plug_type in shop.metaobjects.plug_types.values %}
+                            {% for _opt in option.values %}
+                                {% liquid
+                                    comment
+                                     - Find the option that matches the current plug type
+                                    endcomment
+                                    assign opt_name = _opt | replace: " Adapter", "" | downcase
+                                    assign plug_type_name = plug_type.label | downcase
+                                    if opt_name == plug_type_name
+                                        assign opt = _opt
+                                    endif
+                                %}
+                            {% endfor %}
+                        <li class="product__variants-option" data-plug-option="{{ opt }}" data-plug-type-label="{{ plug_type.label }}">
+                            <input type="radio" class="{% if opt != blank %}variant-option-radio plug-option-radio{% endif %}" name="{{ variant_name }}"{% if option.selected_value == opt %} checked="true"{% endif %} value="{{ opt }}" id="plug-option--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}" />
+                            <label class="variant-option-label" for="plug-option--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}">
+                                {{ plug_type.label }} {{ plug_type.icon_dropdown_html }}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul><!-- /.list-unstyled -->
+                </div>
+            </details>
+        </div><!-- /.product__variants-content -->
+    </div>
+    {% endif %}
+
+  {% comment %}<!-- Variant Dropdown -->{% endcomment %}
+  {% elsif block.type == "variant-dropdown" %}
+    {% liquid
+    assign variant_name = block.settings.variant_name | default: product.options[0]
+    if variant_name != blank
+        for _option in product.options_with_values
+            if _option.name == variant_name
+                assign option = _option
+            endif
+        endfor
+    endif
+    %}
+    {% if product.has_only_default_variant != true and variant_name != blank and option != blank %}
+    <div class="product__variants-row product__variants-row--dropdown variant-option-with-dropdown" data-variant="{{ variant_name }}">
+        <div class="product__variants-label">
+            {{ block.settings.panel_title | default: "Select an Option" }}{% comment %} {% render 'icon-info' %}{% endcomment %}
+        </div><!-- /.product__variants-label -->
+
+        <div class="product__variants-content">
+            <details>
+                <summary><span data-current-selected-option>{{ option.selected_value }}</span> {% render 'icon-chevron-dropdown' %}</summary>
+                <div>
+                    <ul class="list-unstyled product-variant-dropdown-options">
+                        {% for opt in option.values %}
+                        <li class="product__variants-option" data-option="{{ opt }}">
+                            <input type="radio" class="{% if opt != blank %}variant-option-radio dropdown-option-radio{% endif %}" name="{{ variant_name }}"{% if option.selected_value == opt %} checked="true"{% endif %} value="{{ opt }}" id="dropdown-option--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}" />
+                            <label class="variant-option-label" for="dropdown-option--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}">
+                                {{ opt }}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul><!-- /.list-unstyled -->
+                </div>
+            </details>
+        </div>
+    </div>
+    {% endif %}
+
+
+  {% comment %}<!-- Addons -->{% endcomment %}
+  {% elsif block.type == "addon-products" %}
+    {% assign addon_products = block.settings.addon_products %}
+    {% if addon_products != blank %}
+    <div class="product__variants-row product__variants-row--addons">
+        <div class="product__variants-label">
+          {{ block.settings.panel_title | default: "Add-Ons" }}{% comment %} {% render 'icon-info' %}{% endcomment %}
+        </div><!-- /.product__variants-label -->
+    
+        <div class="product__variants-content">
+            <ul class="product__variants-addons list-unstyled">
+                {% for addon in addon_products %}
+                    {% liquid
+                        assign item_title = addon.metafields.custom.custom_title | default: addon.title
+                        assign modal_id = 'accessories-product-modal--' | append: addon.handle
+                    %}
+                    <li class="addon-option-item" type="button" data-product="{{ addon.title }}"{% if addon.available != true %} disabled{% endif %} data-product-handle="{{ addon.handle }}">
+                        <input type="checkbox" class="optional-accessory-select" name="{{ addon.title }}" data-id="" data-price="" data-compare-price="" id="accs_product_{{ addon.handle }}" data-default-id="{{ addon.selected_or_first_available_variant.id }}" data-default-price="{{ addon.selected_or_first_available_variant.price | money_without_currency }}" data-default-compare-price="{{ addon.selected_or_first_available_variant.compare_at_price | money_without_currency }}" />
+                        <label class="accessory-label-cnt js-accessory-label-selector" data-for="accs_product_{{ addon.handle }}">
+                            <span class="option-img opt-img-accessory-product" data-style="background-image: url( {{ addon.featured_image | image_url: width: 250 }})">
+                                <img src="{{ addon.featured_image | image_url: width: 250 }}" alt="{{ addon.featured_image.alt }}" />
+                                <i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+                                        <g transform="translate(-1363.83 -2689.247)"><line id="Line_1936" data-name="Line 1936" x2="10" transform="translate(1363.83 2694.5)" fill="none" stroke="currentColor" stroke-width="2"/><line id="Line_1937" data-name="Line 1937" x2="10" transform="translate(1368.83 2689.247) rotate(90)" fill="none" stroke="currentColor" stroke-width="2"/></g>
+                                    </svg>
+                                </i>
+                            </span>
+                            <span class="product-build__variant-pill-text">{{ addon.title | truncate: 30 }}</span>
+                        </label>
+
+                        {% unless addon.has_only_default_variant %}
+                        {% for option in addon.options_with_values %}
+                            {% liquid
+                            assign swatch_count = option.values | map: 'swatch' | compact | size
+                            assign variant_container_classes = "access-product__variants-row"
+                            if swatch_count < 1
+                                assign variant_container_classes = variant_container_classes | append: " access-product__variants-row--dropdown access-variant-option-with-dropdown"
+                            else
+                                assign variant_container_classes = variant_container_classes | append: " access-product__variants-row--swatches"
+                            endif
+                            %}
+                            <div class="{{ variant_container_classes }}" data-variant="{{ option.name }}">
+                                {% if swatch_count < 1 %}
+                                {% comment %}Dropdown{% endcomment %}
+                                {% comment %}
+                                <select class="addon-option-dropdown" name="addon-option__{{ addon.handle }}--{{ option.name | handleize }}">
+                                    {% for opt in option.values %}
+                                    <option class="access-product__variants-option" value="{{ opt }}"{% if option.selected_value == opt %} selected{% endif %}>{{ opt }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% endcomment %}
+                                <div class="product__variants-content">
+                                    <details>
+                                        <summary><span data-current-selected-option>{{ option.selected_value }}</span> {% render 'icon-chevron-dropdown' %}</summary>
+                                        <div>
+                                            <ul class="list-unstyled product-variant-dropdown-options">
+                                                {% for opt in option.values %}
+                                                <li class="access-product__variants-option" data-option="{{ opt }}">
+                                                    <input type="radio" class="access-variant-option-radio access-dropdown-option-radio" name="addon-prod--{{ option.name }}"{% if option.selected_value == opt %} checked="true"{% endif %} value="{{ opt }}" id="dropdown-option-addon--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}" />
+                                                    <label class="variant-option-label" for="dropdown-option-addon--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}">
+                                                        {{ opt }}
+                                                    </label>
+                                                </li>
+                                                {% endfor %}
+                                            </ul><!-- /.list-unstyled -->
+                                        </div>
+                                    </details>
+                                </div>
+                                {% else %}
+                                {% comment %}Swatches{% endcomment %}
+                                <ul class="product-build__variant-pills product-build__variant-pills--color product-variant-swatch-options" data-variant="Color">
+                                    {% for opt in option.values %}
+                                    {%- liquid
+                                    assign swatch_value = null
+                                    if opt.swatch.image
+                                        assign image_url = opt.swatch.image | image_url: width: 100
+                                        assign swatch_value = 'url(' | append: image_url | append: ')'
+                                    elsif opt.swatch.color
+                                        assign swatch_value = 'rgb(' | append: opt.swatch.color.rgb | append: ')'
+                                    endif
+                                    # echo "<!-- swatch color: "
+                                    # echo opt | json
+                                    # echo " -->"
+                                    -%}
+                                    <li>
+                                        <input type="radio" class="color-option product-option-radio option--color access-dropdown-option-radio"{% if option.selected_value == opt %} checked="true"{% endif %} name="color_addon-{{ addon.handle }}" value="{{ opt }}" id="addon-{{ addon.handle }}_color_option-{{ opt | handleize }}" />
+                                        <label class="product-build__variant-pill" data-option-name="{{ option.name }}" data-option-value="{{ opt }}" for="addon-{{ addon.handle }}_color_option-{{ opt | handleize }}">
+                                            <span class="option-img" style="background:{{ swatch_value }};"></span>
+                                            <span class="product-build__variant-pill-text">
+                                            <em>{{ opt }}</em>
+                                            </span>
+                                        </label><!-- /.product-build__variant-pill -->
+                                    </li>
+                                    {% endfor %}
+                                </ul><!-- /.product-build__variant-pills -->
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        {% assign option_names = "" %}
+                        {% for option in addon.options_with_values %}
+                            {% assign option_names = option_names | append: option.name %}
+                            {% unless forloop.last %}
+                            {% assign option_names = option_names | append: ' / ' %}
+                            {% endunless %}
+                        {% endfor %}
+                        <select class="addon-product-variant-selector" style="display:none;" data-product="{{ addon.title }}" data-product-handle="{{ addon.handle }}" data-options="{{ option_names }}">
+                            {% for variant in addon.variants %}
+                            <option {% if forloop.index == 1 %}selected="selected" {% endif %} data-image-url="{{ variant.image | img_url:'master' }}" data-price="{{ variant.price | money_without_currency }}" data-compare-price="{{ variant.compare_at_price | money_without_currency }}" data-variant="{{ variant.title }}" value="{{ variant.id }}">{{ variant.title }}</option>
+                            {% endfor %}
+                        </select>
+                        {% endunless %}
+                        
+                        <div class="qty-container js-accs-default-qty">
+                            <button class="qty-btn" data-action="decrease">−</button>
+                            <input type="text" class="qty-input" min="0" value="1" readonly>
+                            <button class="qty-btn" data-action="increase">+</button>
+                        </div>
+                        
+                        <span class="modal-trigger-wrap">
+                            <modal-opener class="accessories-product-modal-trigger" data-modal="#{{ modal_id }}">
+                                <button class="link" type="button" aria-haspopup="dialog">Learn More{% comment %}<!-- REMOVED 6.11.25 {{ addon.price | money_with_currency }} -->{% endcomment %}</button>
+                            </modal-opener>
+                        </span>
+                    </li>
+                    {%- capture modal_content -%}
+                        {% render 'accessories-product-quickview', product: addon, item_title: item_title, section: section %}
+                    {%- endcapture -%}
+                    {%-
+                        render 'modal-dialog',
+                        id: modal_id,
+                        title: item_title,
+                        content: modal_content,
+                        class: 'product-build__modal-dialog accessories-quickview-modal',
+                        show_close_label: true,
+                    -%}
+                {% endfor %}
+
+            </ul><!-- /.product__variants-addons list-unstyled -->
+        </div><!-- /.product__variants-content -->
+    </div><!-- /.product__variants-row product__variants-row--addons -->
+    {% endif %}
+
+  {% endif %}
+
+{% endfor %}{%  comment  %}<!-- Endfor section.blocks -->{% endcomment %}
+</div>

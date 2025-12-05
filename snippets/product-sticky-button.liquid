@@ -1,0 +1,30 @@
+<script src="{{- 'product-sticky-button.js' | asset_url -}}" defer="defer"></script>
+
+<product-sticky-button class="product-sticky-button medium-hide small-hide" tabindex="-1">
+  <div class="product-sticky-button__media media">
+    {%- if product.metafields.custom.sticky_button_image -%}
+      {%- render 'image' with image: product.metafields.custom.sticky_button_image -%}
+    {%- elsif product.featured_media -%}
+      {%- render 'image' with image: product.featured_media -%}
+    {%- else -%}
+      {{- 'product-1' | placeholder_svg_tag -}}
+    {%- endif -%}
+
+    <div class="product-sticky-button__media-overlay">
+      {%- render 'icon-plus' -%}
+    </div><!-- /.product-sticky-button__media-overlay -->
+  </div><!-- /.product-sticky-button__media -->
+
+  <div class="product-sticky-button__content">
+    <p class="product-sticky-button__title">
+      {{- product.title | escape -}}
+    </p><!-- /.product-sticky-button__title -->
+
+    <div class="product-sticky-button__price">
+      {%- render 'price', product_ref: product -%}
+    </div><!-- /.product-sticky-button__price -->
+
+    {% comment %}{% render 'product-order-processing-disclaimer', is_sticky_product: true %}{% endcomment %}
+    {% render 'product-shipping-disclaimer', is_sticky_product: true %}
+  </div><!-- /.product-sticky-button__content -->
+</product-sticky-button>

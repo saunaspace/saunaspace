@@ -1,15 +1,58 @@
 {
-    "sections": {
-      "main": {
-        "type": "legal-page",
-        "settings": {
-          "padding_top": 36,
-          "padding_bottom": 36
-        }
+  "sections": {
+    "banner": {
+      "type": "page-banner",
+      "settings": {
+        "heading": "",
+        "content": "",
+        "background_image": "shopify:\/\/shop_images\/Group_3284_b24211bb-5926-484b-a702-080c3251bec6.png"
       }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "richtext_content_d4wP7E": {
+      "type": "richtext-content",
+      "blocks": {
+        "content_Wandjj": {
+          "type": "content",
+          "settings": {
+            "spacing_top": 100,
+            "spacing_bottom": 70,
+            "spacing_top_mobile": 50,
+            "spacing_bottom_mobile": 16,
+            "font_size": 21,
+            "font_size_mobile": 14,
+            "alt_bullets": false,
+            "content": "<h2>Always consult a health care provider who is knowledgeable in sauna use before using a sauna.<\/h2><h2><\/h2>"
+          }
+        },
+        "content_VtGDrR": {
+          "type": "content",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 110,
+            "spacing_top_mobile": 0,
+            "spacing_bottom_mobile": 120,
+            "font_size": 21,
+            "font_size_mobile": 14,
+            "alt_bullets": false,
+            "content": "<p>Saunas are powerful devices and monitoring your progress by a professional trained in sauna use is always advisable.<br\/><br\/>Sauna therapy can be dangerous and even fatal for some people under some circumstances. If you are considering sauna therapy, you must first seek the advice of your health care provider about sauna therapy and should also become educated as to the proper use of sauna, preparations for doing sauna therapy, as well as fully understanding the risks involved in sauna therapy.<br\/><br\/>Risks include but are not limited to: cardiac failure, stroke, fainting, headache, nausea, weakness, rashes, hot flashes, dehydration, exacerbation of neurological symptoms, and even death. Variables of sauna therapy such as health condition of user, duration of sauna therapy, proper hydration, electrolyte and mineral balance and restoration must be properly considered and heeded before proceeding with sauna therapy.<br\/><br\/>SaunaSpace LLC (hereafter “SaunaSpace®”) Products are not registered with the United States Food and Drug Administration (FDA) as a Medical Devices. Consult your licensed health care provider to see if the SaunaSpace®'s Products are right for you. SaunaSpace® and\/or its partners, associates, etc. are not liable for the use of SaunaSpace® Products nor any incidental or consequential damages. Under no circumstances shall SaunaSpace® Products or any of its representatives be held liable for injury to any persons or damage to any property. Some states do not allow exclusion or limitation of incidental or consequential damages, so the above limitations or exclusions may not apply to you.<br\/><br\/>The FDA requires us to inform you that this Product is not intended to diagnose or treat any disease or medical problem and is not a substitute for regular medical care from a licensed health care provider.<br\/><br\/>SaunaSpace® Products must be used as directed in the Product Operation Manual.<\/p>"
+          }
+        }
       },
-    "order": [
-      "main"
-    ]
-  }
-  
+      "block_order": [
+        "content_Wandjj",
+        "content_VtGDrR"
+      ],
+      "disabled": true,
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "richtext_content_d4wP7E"
+  ]
+}

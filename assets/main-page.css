@@ -1,0 +1,82 @@
+
+.main-page {
+  padding: 14rem 0 13rem;
+  font-weight: 500;
+  line-height: 2;
+  font-size: calc(var(--fsbase) * 2.1);
+}
+
+@media (max-width: 767px) {
+  .main-page {
+    padding: 5rem 0;
+    font-size: calc(var(--fsbase) * 1.4);
+  }
+}
+
+.main-page .container {
+  max-width: calc(151.9rem + var(--page-gutter) + var(--page-gutter));
+}
+
+@media (max-width: 767px) {
+  .main-page .container {
+    --page-gutter: 4rem;
+  }
+}
+
+.main-page .container > *:first-child {
+  margin-top: 0;
+}
+
+.main-page ul li::marker {
+  color: #FF3A00;
+}
+
+.main-page hr {
+  margin: 2.2rem 0;
+}
+
+.main-page h3 {
+  line-height: calc(1.333 / var(--font-heading-scale));
+}
+
+.main-page :is(h1,h2,h3,h4,h5,h6) {
+  margin-block: 0.75em;
+}
+
+.main-page :is(h4,h5,h6) {
+  font-family: var(--font-body-family);
+  font-weight: 600;
+}
+
+.main-page h4 {
+  font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 3));
+}
+
+@media only screen and (max-width: 749px) {
+  .main-page h4 {
+    font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 1.8));
+    line-height: calc(1.6 / var(--font-heading-scale));
+  }
+}
+
+.main-page h5 {
+  font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 2.4));
+}
+
+@media only screen and (max-width: 749px) {
+  .main-page h5 {
+    font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 1.6));
+    line-height: calc(1.6 / var(--font-heading-scale));
+  }
+}
+
+.main-page h5 {
+  font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 2.1));
+}
+
+@media only screen and (max-width: 749px) {
+  .main-page h5 {
+    font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 1.4));
+    line-height: calc(1.6 / var(--font-heading-scale));
+  }
+}

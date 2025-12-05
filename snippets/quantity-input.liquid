@@ -1,0 +1,47 @@
+{% comment %}
+    Renders quantity input field with controls
+    Accepts:
+    - product_ref {Object} Liquid product object
+    - value {Integer} Quantity value. Defaults to 1
+    - name {String} Input name. Accepts 'quantity' or 'updates[]'
+    - min {Integer} Minimum value. Defaults to 1
+    - index {Integer} Index of the cart line_item
+    - hide_label {Boolean} Hide label
+    - compact {Boolean} Use compact mode
+    - context {String} Context that the input belongs to
+    - class {String} Additional class
+
+    Usage:
+    {% render 'quantity-input', product_ref: product %}
+
+{% endcomment %}
+
+{%- assign class = class | default: '' -%}
+
+<quantity-input
+  class="quantity{% if compact %} quantity--compact{% endif %} field{% if class %} {{ class }}{% endif %}"
+>
+  <label for="ProductQuantity-{{- index | default: product_ref.id -}}-{{- context -}}" class="{% if hide_label %}visually-hidden{% else %}field__label{% endif %}">
+    {{- 'products.product.quantity.label' | t -}}:
+  </label>
+
+  <div class="quantity__wrapper">
+    <button class="quantity__button" name="decrement" type="button">
+      –
+    </button>
+
+    <input
+      class="quantity__input"
+      type="number"
+      name="{{- name | default: 'quantity' -}}"
+      id="ProductQuantity-{{- index | default: product_ref.id -}}-{{- context -}}"
+      min="{{- min | default: 1 -}}"
+      value="{{- value | default: 1 -}}"
+      {% if index %}data-index="{{- index -}}"{% endif %}
+    >
+
+    <button class="quantity__button" name="increment" type="button">
+      +
+    </button>
+  </div><!-- /.quantity__wrapper -->
+</quantity-input><!-- /.quantity.field -->

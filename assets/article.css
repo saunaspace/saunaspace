@@ -1,0 +1,108 @@
+/* ==========================================================================
+   .article
+   ========================================================================== */
+
+/*
+   .article__image
+   ========================================================================== */
+
+.article__image {
+  position: relative;
+  aspect-ratio: 1 / 0.629;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: block;
+}
+
+.article__image img,
+.article__image svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*
+   .article__title
+   ========================================================================== */
+
+.article__title {
+  display: block;
+  font-size: calc(var(--fsbase) * 2.4);
+  font-family: var(--font-body-family);
+  line-height: 1.5;
+  font-weight: 600;
+  margin-bottom: 1.9rem;
+  text-decoration: none;
+  color: var(--color-headings);
+  transition: color var(--duration-default) var(--timing-default);
+}
+
+@media (hover: hover) AND (pointer: fine) {
+  .article__title:hover,
+  .article__title:focus-within {
+    color: var(--color-red);
+  }
+}
+
+/*
+   .article__tags
+   ========================================================================== */
+
+.article__tags {
+  text-transform: capitalize;
+  color: var(--color-paragraphs);
+  opacity: 0.5;
+  font-size: calc(var(--fsbase) * 1.8);
+  line-height: 1;
+  margin-bottom: 2.4rem;
+}
+
+.article__tags ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Mobile */
+@media only screen and (max-width: 749px) {
+  .article:not(.article--small) {
+    text-align: center;
+  }
+
+  .article:not(.article--small) .article__inner {
+    max-width: 90.3%;
+    margin: 0 auto;
+  }
+
+  .article__image {
+    margin-bottom: 1.5rem;
+  }
+
+  .article__title {
+    font-size: calc(var(--fsbase) * 1.6);
+    margin-bottom: 1.5rem;
+  }
+
+  .article__tags {
+    font-size: calc(var(--fsbase) * 1.4);
+    margin-bottom: 0.9rem;
+  }
+
+  .article__link {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+
+  .article--small .article__title {
+    font-size: calc(var(--fsbase) * 1.4);
+  }
+
+  .article--small .article__tags {
+    font-size: calc(var(--fsbase) * 1);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}

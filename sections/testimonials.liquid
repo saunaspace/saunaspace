@@ -1,0 +1,181 @@
+{%-
+  liquid
+  assign section_heading = section.settings.heading
+  assign slides = section.blocks | where: 'type', 'slide'
+  assign slides_markup = ''
+-%}
+
+<script src="{{ 'slider-testimonials.js' | asset_url }}" defer="defer"></script>
+
+<link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'slider-testimonials.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'testimonials.css' | asset_url | stylesheet_tag -}}
+  {{- 'slider-testimonials.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+{%- capture slides_markup -%}
+  {%- for slide in slides -%}
+    <div class="slide swiper-slide">
+      {%-
+        liquid
+        assign image = slide.settings.image
+        assign heading = slide.settings.heading
+        assign subheading = slide.settings.subheading
+        assign content = slide.settings.content
+      -%}
+
+      <div class="slide__bg">
+        {%- if image != blank -%}
+          {%- render 'image', image: image -%}
+        {%- else -%}
+          {%- echo 'image' | placeholder_svg_tag: 'placeholder-svg' -%}
+        {%- endif -%}
+      </div><!-- /.slide__bg -->
+
+      <div class="slide__inner">
+        {%- if heading != blank -%}
+          <h5 class="slide__heading h5">
+            {{ heading | escape }}
+          </h5><!-- /.slide__heading h5 -->
+        {%- endif -%}
+
+        {%- if subheading != blank -%}
+          <div class="slide__subheading">
+            {{- subheading | escape -}}
+          </div><!-- /.slide__subheading -->
+        {%- endif -%}
+
+        {%- if content != blank -%}<!-- {{ content }} -->
+          <div class="slide__content rte p3">
+            <p>{{ content | replace: "</p><p>", "[linebreak]" | strip_html | newline_to_br | replace: "[linebreak]", "<br /><br />" }}</p>
+          </div><!-- /.slide__content rte -->
+        {%- endif -%}
+      </div><!-- /.slide__inner -->
+    </div><!-- /.slide -->
+  {%- endfor -%}
+{%- endcapture -%}
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-testimonials-" | append: section.index
+  endif
+%}
+<section class="testimonials" id="{{ sec_id }}">
+  <div class="container container--fullwidth">
+    {%- if section_heading != blank -%}
+      <h2 class="testimonials__heading">
+        {{- section_heading | escape -}}
+      </h2><!-- /.testimonials__heading -->
+    {%- endif -%}
+
+    {%- if slides_markup != blank -%}
+      <slider-testimonials class="slider-testimonials">
+        <div class="slider-testimonials__clip swiper" data-clip>
+          <div class="slider-testimonials__slides swiper-wrapper">
+            {{- slides_markup -}}
+          </div><!-- /.slider-testimonials__slides swiper-wrapper -->
+
+          <div class="slider-testimonials__buttons" data-buttons>
+            <div class="swiper-button-prev">
+              <i class="ico">
+                {%- render 'icon-arrow-left' -%}
+              </i><!-- /.ico -->
+            </div>
+
+            <div class="swiper-button-next">
+              <i class="ico">
+                {%- render 'icon-arrow-right' -%}
+              </i><!-- /.ico -->
+            </div>
+          </div><!-- /.slider-testimonials__buttons -->
+        </div><!-- /.slider-testimonials__clip swiper -->
+      </slider-testimonials><!-- /.slider-testimonials -->
+    {%- endif -%}
+  </div><!-- /.container container--fullwidth -->
+</section><!-- /.testimonials -->
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "settings": {
+        "heading": "Heading Goes Here"
+      },
+      "blocks": [
+				{
+					"type": "slide",
+					"settings": {
+						"heading": "Heading Goes Here",
+            "subheading": "Subheading",
+            "content": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.</p>"
+					}
+				},
+				{
+					"type": "slide",
+					"settings": {
+						"heading": "Heading Goes Here",
+            "subheading": "Subheading",
+            "content": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.</p>"
+					}
+				},
+				{
+					"type": "slide",
+					"settings": {
+						"heading": "Heading Goes Here",
+            "subheading": "Subheading",
+            "content": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.</p>"
+					}
+				}
+			]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

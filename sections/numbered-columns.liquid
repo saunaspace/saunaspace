@@ -1,0 +1,112 @@
+{{- 'section-numbered-cols.css' | asset_url | stylesheet_tag -}}
+{{- 'component-column-numbered-card.css' | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign _section = section.settings
+  assign _blocks = section.blocks
+  assign title = _section.title
+
+  if request.visual_preview_mode
+    assign title = 'Title goes here'
+  endif
+-%}
+<div class="numbered-cols relative overflow-hidden">
+  <div class="container">
+    {%- if title != blank -%}
+      <h2 class="numbered-cols__title">
+        {{- title | escape -}}
+      </h2><!-- /.numbered-cols__title -->
+    {%- endif -%}
+
+    {%- if _blocks.size > 0 -%}
+      <ul class="numbered-cols__cols list-unstyled">
+        {%- for block in _blocks -%}
+          {%- assign _block = block.settings -%}
+
+          {%- if _block.title != blank or _block.content != blank -%}
+            <li>
+              <div
+                class="column-numbered-card"
+                {{ block.shopify_attributes }}
+              >
+                <div class="column-numbered-card__number">
+                  <span>
+                    {{- forloop.index -}}
+                  </span>
+                </div><!-- /.column-numbered-card__number -->
+
+                <div class="column-numbered-card__body">
+                  {%- if _block.title != blank -%}
+                    <h4 class="column-numbered-card__title h5">
+                      {{- _block.title -}}
+                    </h4><!-- /.column-numbered-card -->
+                  {%- endif -%}
+
+                  {%- if _block.content != blank -%}
+                    <div class="column-numbered-card__content">
+                      {{- _block.content | escape | newline_to_br -}}
+                    </div><!-- /.column-numbered-card -->
+                  {%- endif -%}
+                </div><!-- /.column-numbered-card__body -->
+              </div><!-- /.column-numbered-card -->
+            </li><!-- /.numbered-cols__col -->
+          {%- endif -%}
+        {%- endfor -%}
+      </ul><!-- /.numbered-cols__cols -->
+    {%- endif -%}
+  </div><!-- /.container -->
+</div><!-- /.numbered-cols -->
+
+{% schema %}
+{
+  "name": "Numbered columns",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Title goes here"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "name": "Block",
+      "type": "block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Title goes here"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora, fuga!"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Numbered columns",
+      "blocks": [
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

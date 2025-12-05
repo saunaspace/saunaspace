@@ -1,0 +1,163 @@
+{{- 'section-content-2-columns.css' | asset_url | stylesheet_tag -}}
+{{- 'component-column-logo-card.css' | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign _section = section.settings
+  assign _blocks = section.blocks
+  assign title = _section.title
+  assign content = _section.content
+  assign content_sm = _section.content_sm
+
+  if request.visual_preview_mode
+    assign title = 'Title goes here'
+    assign content = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, tempore.'
+    assign content_sm = 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+  endif
+
+  if title != blank or content != blank or content2 != blank
+    assign has_content = true
+  endif
+-%}
+<div class="content-2-columns relative overflow-hidden">
+  <div class="container">
+    <div class="content-2-columns__arrow-down small-hide">
+      <a href="#target-{{ section.id }}" aria-label="{{ 'accessibility.go_to_options' | t }}">
+        {%- render 'icon-chevron-down-thin' -%}
+      </a>
+    </div><!-- /.content-2-columns__arrow-down -->
+
+    {%- if has_content -%}
+      <div class="content-2-columns__content relative">
+        {%- if title != blank -%}
+          <h2 class="content-2-columns__title">
+            {{- title | escape -}}
+          </h2><!-- /.content-2-columns__title -->
+        {%- endif -%}
+
+        {%- if content != blank -%}
+          <p class="content-2-columns__body">
+            {{- content | escape | newline_to_br -}}
+          </p><!-- /.content-2-columns__body -->
+        {%- endif -%}
+
+        {%- if content_sm != blank -%}
+          <p class="content-2-columns__body-sm">
+            {{- content_sm | escape | newline_to_br -}}
+          </p><!-- /.content-2-columns__body -->
+        {%- endif -%}
+      </div><!-- /.content-2-columns__content -->
+    {%- endif -%}
+
+    <div class="content-2-columns__arrow-down medium-hide large-up-hide">
+      <a href="#target-{{ section.id }}" aria-label="{{ 'accessibility.go_to_options' | t }}">
+        {%- render 'icon-chevron-down-thin' -%}
+      </a>
+    </div><!-- /.content-2-columns__arrow-down -->
+
+    {%- if _blocks.size > 0 -%}
+      <ul
+        class="content-2-columns__cols list-unstyled"
+        id="target-{{ section.id }}"
+      >
+        {%- for block in _blocks -%}
+          {%- assign _block = block.settings -%}
+
+          {%- if _block.logo != blank or _block.content != blank -%}
+            <li>
+              <div
+                class="column-logo-card"
+                {{ block.shopify_attributes }}
+              >
+                {%- if _block.logo != blank -%}
+                  <div
+                    class="column-logo-card__logo media media--aspect-ratio media--transparent"
+                    style="--max-width: {{ _block.logo_width }}px;--max-width-mobile: {{ _block.logo_width_mobile }}px;"
+                  >
+                    {%- render 'image', image: _block.logo -%}
+                  </div><!-- /.content-2-columns__image -->
+                {%- endif -%}
+
+                {%- if _block.content != blank -%}
+                  <div class="column-logo-card__content">
+                    {{- _block.content | escape | newline_to_br | replace: '<br />', '<hr>' -}}
+                  </div><!-- /.column-logo-card -->
+                {%- endif -%}
+              </div><!-- /.column-logo-card -->
+            </li><!-- /.content-2-columns__col -->
+          {%- endif -%}
+        {%- endfor -%}
+      </ul><!-- /.content-2-columns__cols -->
+    {%- endif -%}
+  </div><!-- /.container -->
+</div><!-- /.content-2-columns -->
+
+{% schema %}
+{
+  "name": "Content with columns",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "content_sm",
+      "label": "Smaller content"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "block",
+      "type": "Block",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "range",
+          "id": "logo_width",
+          "min": 100,
+          "max": 300,
+          "step": 2,
+          "unit": "px",
+          "label": "Logo width",
+          "default": 152
+        },
+        {
+          "type": "range",
+          "id": "logo_width_mobile",
+          "min": 60,
+          "max": 260,
+          "step": 2,
+          "unit": "px",
+          "label": "Logo mobile width",
+          "default": 82
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "info": "Use new lines to separate content."
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Content with columns"
+    }
+  ]
+}
+{% endschema %}

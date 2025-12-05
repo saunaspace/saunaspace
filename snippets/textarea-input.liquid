@@ -1,0 +1,48 @@
+{% comment %}
+  Renders textarea input form element
+  Accepts:
+  - id {String} ID of the input element
+  - label {String} Label of the input element
+  - name {String} Name of the input element
+  - placeholder {String} Placeholder of the input element
+  - body {String} Body of the input element
+  - max {Number} Max charecters allowed
+  - required {Boolean} Whether the input element is required or not
+
+  Usage:
+  {%- render 'textarea-input',
+    id: 'textarea-input',
+    label: 'Textarea Input',
+    name: 'textarea-input',
+    placeholder: 'Enter text here',
+    body: 'Enter text here'
+  -%}
+{% endcomment %}
+
+{%- assign required = required | default: false -%}
+
+<div class="field field--textarea">
+  {%- if label and id -%}
+    <label class="field__label" for="{{- id -}}">
+      {{ label }}
+
+      {% if required %}
+        <span class="color-red" aria-hidden="true">*</span>
+      {%- endif -%}
+    </label>
+  {%- endif -%}
+
+  <textarea
+    rows="4"
+    {%- if id %} id="{{- id -}}"{% endif %}
+    {%- if name %} name="{{- name -}}"{% endif %}
+    {%- if placeholder %} placeholder="{{- placeholder -}}"{% endif %}
+    {%- if max %} maxlength="{{ max }}"{%- endif -%}
+    {%- if required %} required{% endif %}
+    class="field__input"
+  >
+    {%- if body -%}
+      {{- body -}}
+    {%- endif -%}
+  </textarea>
+</div><!-- /.field field--textarea -->

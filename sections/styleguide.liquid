@@ -1,0 +1,508 @@
+{% # theme-check-disable %}
+{% comment %}
+  Section used only as refference to global elements styles.
+{% endcomment %}
+
+{{- 'section-styleguide.css' | asset_url | stylesheet_tag -}}
+
+<div class="styleguide">
+  <div class="container">
+    <h2 class="styleguide__title"><u>Headings</u></h2>
+
+    <p class="styleguide__info">Helper class names:
+      <span class="styleguide__badge">.center .right</span>
+      <span class="styleguide__badge">.light .regular .medium .bold</span>
+      <span class="styleguide__badge">.uppercase</span>
+    </p>
+
+    <hr>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.h1</span></p>
+
+    <p class="h1 color-headings">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.h2</span></p>
+
+    <p class="h2 color-headings">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.h3</span></p>
+
+    <p class="h3 color-headings">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.h4</span></p>
+
+    <p class="h4 color-headings">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.h5</span></p>
+
+    <p class="h5 color-headings">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.h6</span></p>
+
+    <p class="h6 color-headings">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Subheadings</u></h2>
+
+    <p class="styleguide__info">Helper class names:
+      <span class="styleguide__badge">.center .right</span>
+      <span class="styleguide__badge">.light .regular .medium .bold</span>
+      <span class="styleguide__badge">.uppercase</span>
+    </p>
+
+    <hr>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.sh .sh--1</span></p>
+
+    <p class="sh sh--1 color-headings">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, nihil deserunt quis, perspiciatis voluptatem quod, placeat rem id ab commodi officiis tenetur fugiat? Sed, adipisci? Optio iusto velit maiores numquam.
+    </p><!-- /.sh sh--1 -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.sh .sh--2</span></p>
+
+    <p class="sh sh--2 color-headings">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, nihil deserunt quis, perspiciatis voluptatem quod, placeat rem id ab commodi officiis tenetur fugiat? Sed, adipisci? Optio iusto velit maiores numquam.
+    </p><!-- /. sh sh--2 -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.sh .sh--3</span></p>
+
+    <p class="sh sh--3 color-headings">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, nihil deserunt quis, perspiciatis voluptatem quod, placeat rem id ab commodi officiis tenetur fugiat? Sed, adipisci? Optio iusto velit maiores numquam.
+    </p><!-- /. sh sh--3 -->
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Paragraphs</u></h2>
+
+    <p class="styleguide__info">Helper class names:
+      <span class="styleguide__badge">.center .right</span>
+      <span class="styleguide__badge">.light .regular .medium .bold</span>
+      <span class="styleguide__badge">.uppercase</span>
+    </p>
+
+    <hr>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.p1</span></p>
+
+    <p class="p1">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, nihil deserunt quis, perspiciatis voluptatem quod, placeat rem id ab commodi officiis tenetur fugiat? Sed, adipisci? Optio iusto velit maiores numquam.
+    </p><!-- /.p1 -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.p2</span></p>
+
+    <p class="p2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, nihil deserunt quis, perspiciatis voluptatem quod, placeat rem id ab commodi officiis tenetur fugiat? Sed, adipisci? Optio iusto velit maiores numquam.
+    </p><!-- /.p2 -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.p3</span></p>
+
+    <p class="p3">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, nihil deserunt quis, perspiciatis voluptatem quod, placeat rem id ab commodi officiis tenetur fugiat? Sed, adipisci? Optio iusto velit maiores numquam.
+    </p><!-- /.p3 -->
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Button links</u></h2>
+
+    <hr>
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.link</span></p>
+
+    <div class="mt-l mb-l">
+      <a href="{{ request.path }}" class="link">Shop now</a>
+    </div><!-- /.mt-l mb-l -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.button</span></p>
+
+    <div class="mt-l mb-l">
+      {%- render 'button',
+        type: 'link',
+        href: request.path,
+        value: 'Shop Now',
+      -%}
+    </div><!-- /.mt-l mb-l -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.button :disabled</span></p>
+
+    <div class="mt-l mb-l">
+      {%- render 'button',
+        type: 'link',
+        href: request.path,
+        value: 'Shop Now',
+        disabled: true
+      -%}
+    </div><!-- /.mt-l mb-l -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.button .button--secondary</span></p>
+
+    <div class="mt-l mb-l">
+      {%- render 'button',
+        type: 'link',
+        href: request.path,
+        value: 'Shop Now',
+        style: 'secondary'
+      -%}
+    </div><!-- /.mt-l mb-l -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.button .button--secondary :disabled</span></p>
+
+    <div class="mt-l mb-l">
+      {%- render 'button',
+        type: 'link',
+        href: request.path,
+        value: 'Shop Now',
+        style: 'secondary',
+        disabled: true,
+      -%}
+    </div><!-- /.mt-l mb-l -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.button .button--outlined</span></p>
+
+    <div class="mt-l mb-l">
+      {%- render 'button',
+        type: 'link',
+        href: request.path,
+        value: 'Shop Now',
+        style: 'outlined'
+      -%}
+    </div><!-- /.mt-l mb-l -->
+
+    <p class="styleguide__info">Class name: <span class="styleguide__badge">.button .button--outlined :disabled</span></p>
+
+    <div class="mt-l mb-l">
+      {%- render 'button',
+        type: 'link',
+        href: request.path,
+        value: 'Shop Now',
+        style: 'outlined',
+        disabled: true,
+      -%}
+    </div><!-- /.mt-l mb-l -->
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Forms</u></h2>
+
+    <hr>
+
+    {%- capture options_html -%}
+      <option value="" disabled selected hidden>Select</option>
+
+      <option value="option-1">Option 1</option>
+
+      <option value="option-2">Option 2</option>
+
+      <option value="option-3">Option 3</option>
+    {%- endcapture -%}
+
+    <form>
+      <div class="styleguide__info form-row">Success state:</div>
+
+      <h3 class="h4">{{- 'contact.form.success' | t -}}</h3><!-- /.h4 -->
+
+      <div class="styleguide__info form-row">Errors state:</div>
+
+      <div class="color-red">
+        <div class="errors">
+          <ul>
+            <li>Placeholder error text</li>
+            <li>Placeholder error text</li>
+          </ul>
+        </div>
+      </div><!-- /.color-red -->
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class names:
+          <span class="styleguide__badge">.form-row</span> >
+          <span class="styleguide__badge">.field</span>,
+          <span class="styleguide__badge">.field.has-error</span>,
+          <span class="styleguide__badge">.select-input</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        {%- render 'text-input',
+          type: 'text',
+          placeholder: 'Placeholder',
+          label: 'Label',
+          id: 'text-input-2'
+        -%}
+      </div>
+
+      <div class="form-row">
+        {%- render 'text-input',
+          type: 'text',
+          placeholder: 'Placeholder',
+          label: 'Label',
+          id: 'text-input-2',
+          has_error: true,
+          message: 'Error message'
+        -%}
+      </div>
+
+
+      <div class="form-row">
+        {%- render 'select-input',
+          name: 'select-input',
+          options: options_html,
+          required: true,
+          label: 'Label',
+          id: 'select-2'
+        -%}
+      </div><!-- /.mt-l mb-l -->
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name: <span class="styleguide__badge">.form-row .form-row--double</span>
+        </div>
+      </div>
+
+      <div class="form-row form-row--double">
+        {%-
+          liquid
+          assign label = 'contact.form.name' | t
+          assign placeholder = 'contact.form.name' | t
+          capture attr
+            echo 'autocomplete="name"'
+          endcapture
+          assign value = ''
+          render 'text-input', id: 'ContactForm-name', label: label, name: 'contact[Name]', placeholder: placeholder, attr: attr, value: value
+        -%}
+
+        {%-
+          liquid
+          assign label = 'contact.form.email' | t | append: ' <span class="color-red" aria-hidden="true">*</span>'
+          assign placeholder = 'contact.form.email' | t
+          capture attr
+            echo 'autocomplete="email"'
+            echo 'spellcheck="false"'
+            echo 'autocapitalize="off"'
+            echo 'aria-required="true"'
+          endcapture
+          assign value = ''
+          if form.errors contains 'email'
+            assign error = form.errors.translated_fields['email'] | capitalize | append: ' ' | append: form.errors.messages['email']
+            assign has_error = true
+          endif
+          render 'text-input', id: 'ContactForm-email', type: 'email', label: label, name: 'contact[email]', placeholder: placeholder, attr: attr, value: value, has_error: has_error, message: error
+        -%}
+      </div><!-- /.form-row form-row--double -->
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name:
+          <span class="styleguide__badge">.field .field--textarea</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        {%-
+          liquid
+          assign label = 'contact.form.message' | t
+          assign placeholder = 'contact.form.message' | t
+          assign name = 'contact[' | append: label | append: ']'
+          render 'textarea-input', id: 'ContactForm-body', label: label, name: name, placeholder: placeholder, body: form.body
+        -%}
+      </div><!-- /.form-row -->
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name: <span class="styleguide__badge">.checkbox</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="checkbox">
+          <input
+            type="checkbox"
+            name="checkbox-1"
+            id="checkbox-1"
+            checked
+          >
+
+          <label for="checkbox-1">Placeholder</label>
+        </div><!-- /.checkbox -->
+      </div>
+
+      <div class="form-row">
+        <div class="checkbox">
+          <input
+            type="checkbox"
+            name="checkbox-2"
+            id="checkbox-2"
+          >
+
+          <label for="checkbox-2">Placeholder</label>
+        </div><!-- /.checkbox -->
+      </div>
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name:
+          <span class="styleguide__badge">.checkbox :disabled</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="checkbox">
+          <input
+            type="checkbox"
+            name="checkbox-3"
+            id="checkbox-3"
+            disabled
+          >
+
+          <label for="checkbox-3">Placeholder</label>
+        </div><!-- /.checkbox -->
+      </div>
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name:
+          <span class="styleguide__badge">.radio</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="radio">
+          <input
+            type="radio"
+            id="radio1"
+            name="radio-placeholder"
+            value="radio-1"
+          >
+          <label for="radio1">
+            Placeholder
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="radio">
+          <input
+            type="radio"
+            id="radio2"
+            name="radio-placeholder"
+            value="radio-2"
+          >
+          <label for="radio2">
+            Placeholder
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="radio">
+          <input
+            type="radio"
+            id="radio3"
+            name="radio-placeholder"
+            value="radio-3"
+          >
+          <label for="radio3">
+            Placeholder
+          </label>
+        </div>
+      </div>
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name:
+          <span class="styleguide__badge">.radio :disabled</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="radio">
+          <input
+            type="radio"
+            id="radio4"
+            name="radio-placeholder"
+            value="radio-4"
+            disabled
+          >
+          <label for="radio4">
+            Placeholder
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        {% render 'quantity-input' %}
+      </div><!-- /.mt-l mb-l -->
+
+
+      <div class="styleguide__info form-row">
+        <div>
+          Class name:
+          <span class="styleguide__badge">.quantity .quantity--compact</span>
+        </div>
+      </div>
+      <div class="form-row">
+        {% render 'quantity-input', compact: true %}
+      </div><!-- /.mt-l mb-l -->
+    </form>
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Product card</u></h2>
+
+    <hr>
+
+    <div class="mt-l mb-l styleguide__card-holder">
+      {%- assign _product = all_products | where: 'available', true | first -%}
+      {%- render 'card-product', product_ref: _product -%}
+    </div><!-- /.mt-l mb-l -->
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Collection card</u></h2>
+
+    <hr>
+
+    <div class="mt-l mb-l styleguide__card-holder">
+      {%-
+        liquid
+        assign collection = collections['test-collection-1']
+        render 'card-collection', heading: collection.title, image: collection.featured_image, url: collection.url
+      -%}
+    </div><!-- /.mt-l mb-l -->
+  </div><!-- /.container -->
+
+  <div class="container">
+    <hr>
+
+    <h2 class="styleguide__title"><u>Pagination</u></h2>
+
+    <hr>
+
+    <div class="mt-l pb-l">
+      {% paginate collections by 1 %}
+        {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+      {% endpaginate %}
+    </div><!-- /.mt-l pb-l -->
+  </div><!-- /.container -->
+</div><!-- /.styleguide -->
+{% # theme-check-enable %}
+
+{% schema %}
+{
+  "name": "Styleguide",
+  "settings": [
+  ]
+}
+{% endschema %}

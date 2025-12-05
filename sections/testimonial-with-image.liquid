@@ -1,0 +1,226 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-testimonial-with-image-" | append: section.index
+  endif
+%}
+{%- if section.settings.title != blank and section.settings.name != blank -%}
+  <section class="testimonial-with-image" id="{{ sec_id }}">
+    <div class="testimonial-with-image__col">
+      <div class="testimonial-with-image__content">
+        <div class="testimonial-with-image__wrapper">
+          <div class="container">
+            {%- if section.settings.avatar != blank -%}
+              <div class="testimonial-with-image__avatar">
+                {{- section.settings.avatar | image_url: width: 360 | image_tag: width: nil -}}
+              </div><!-- /.testimonial-with-image__avatar -->
+            {%- endif -%}
+
+            <h2 class="testimonial-with-image__title">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.testimonial-with-image__title -->
+
+            <p class="testimonial-with-image__name">
+              {{- section.settings.name | escape -}}
+            </p><!-- /.testimonial-with-image__name -->
+
+            {%- if section.settings.role != blank -%}
+              <p class="testimonial-with-image__role">
+                {{- section.settings.role | escape -}}
+              </p><!-- /.testimonial-with-image__role -->
+            {%- endif -%}
+          </div><!-- /.container -->
+        </div><!-- /.testimonial-with-image__wrapper -->
+
+        <div class="testimonial-with-image__accent media media--transparent">
+          <img src="{{- 'pattern-background.png' | asset_url -}}">
+        </div><!-- /.testimonial-with-image__accent -->
+      </div><!-- /.testimonial-with-image__content -->
+    </div><!-- /.testimonial-with-image__col -->
+
+    {%- if section.settings.image != blank -%}
+      <div class="testimonial-with-image__col">
+        <div class="testimonial-with-image__image media">
+          {%- render 'image', image: section.settings.image -%}
+        </div><!-- /.testimonial-with-image__image -->
+      </div><!-- /.testimonial-with-image__col -->
+    {%- endif -%}
+  </section><!-- /.testimonial-with-image -->
+{%- endif -%}
+
+{% style %}
+  .testimonial-with-image {
+    background-color: #f0e7da;
+    display: flex;
+    flex-flow: row wrap;
+    aspect-ratio: 16 / 9;
+  }
+
+  .testimonial-with-image__col {
+    min-width: 50%;
+    flex: 1;
+  }
+
+  .testimonial-with-image__image {
+    height: 100%;
+  }
+
+  .testimonial-with-image__avatar {
+    width: 18rem;
+    aspect-ratio: 180 / 189;
+    display: block;
+    border-radius: 1rem;
+    margin: 0 auto 4.2rem;
+    overflow: hidden;
+  }
+
+  .testimonial-with-image__content {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+  }
+
+  .testimonial-with-image__accent {
+    width: 100%;
+    height: 19.4rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .testimonial-with-image__wrapper {
+    max-width: 60.4rem;
+    padding: 4rem;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .testimonial-with-image__title {
+    color: #2c2621;
+    font-size: calc(var(--fsbase) * 3);
+    line-height: 1.6;
+    font-weight: 500;
+    margin: 0 0 4.2rem;
+  }
+
+  .testimonial-with-image__role,
+  .testimonial-with-image__name {
+    font-size: calc(var(--fsbase) * 1.6);
+    line-height: 2.25;
+  }
+
+  .testimonial-with-image__name {
+    color: #2c2621;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 1.2rem;
+  }
+
+  .testimonial-with-image__role {
+    font-weight: 400;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .testimonial-with-image {
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      aspect-ratio: initial;
+    }
+
+    .testimonial-with-image__wrapper {
+      padding: 0 2rem 10.2rem;
+    }
+
+    .testimonial-with-image__image {
+      height: auto;
+      aspect-ratio: 393 / 221;
+    }
+
+    .testimonial-with-image__col {
+      width: 100%;
+      min-width: auto;
+      flex: none;
+    }
+
+    .testimonial-with-image__title {
+      font-size: calc(var(--fsbase) * 1.8);
+      line-height: 1.777778;
+      margin: 0 0 2rem;
+    }
+
+    .testimonial-with-image__role,
+    .testimonial-with-image__name {
+      font-size: calc(var(--fsbase) * 1.4);
+      line-height: 1;
+    }
+
+    .testimonial-with-image__name {
+      margin: 0 0 1rem;
+    }
+
+    .testimonial-with-image__accent {
+      height: 8.3rem;
+    }
+
+    .testimonial-with-image__avatar {
+      width: 12rem;
+      aspect-ratio: 1;
+      margin-top: -6rem;
+      margin-bottom: 4rem;
+      box-shadow: 0.5rem 0.5rem 0.8rem #00000060;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Testimonial with image",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "name",
+        "label": "Name"
+      },
+      {
+        "type": "text",
+        "id": "role",
+        "label": "Role"
+      },
+      {
+        "type": "image_picker",
+        "id": "avatar",
+        "label": "Avatar"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Testimonial with image"
+      }
+    ]
+  }
+{% endschema %}

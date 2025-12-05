@@ -1,0 +1,148 @@
+{{- 'section-richtext-content.css' | asset_url | stylesheet_tag -}}
+{%- assign _blocks = section.blocks -%}
+
+<section class="richtext-content">
+  <div class="container">
+    {%- for block in _blocks -%}
+      {%- liquid
+        assign _block = block.settings
+
+        capture styles
+          echo '--desktop-font: '
+          echo _block.font_size | append: 'px;'
+          echo '--mobile-font: '
+          echo _block.font_size_mobile | append: 'px;'
+
+          echo '--spacing-top: '
+          echo _block.spacing_top | append: 'px;'
+          echo '--spacing-bottom: '
+          echo _block.spacing_bottom | append: 'px;'
+
+          echo '--spacing-top-mobile: '
+          echo _block.spacing_top_mobile | append: 'px;'
+          echo '--spacing-bottom-mobile: '
+          echo _block.spacing_bottom_mobile | append: 'px;'
+        endcapture
+      -%}
+
+      {%- if _block.content != blank -%}
+        <div
+          class="
+            richtext-content__block rte
+            {% if _block.alt_bullets %}alt-bullets{% endif %}
+            {% case _block.text_align %}
+              {% when 'center' %}text-center
+              {% when 'right' %}text-right
+              {% else %}text-left
+            {% endcase %}
+          "
+          style="text-align: {{ _block.text_align }}; {{ styles }}"
+          {{ block.shopify_attributes }}
+        >
+          {{- _block.content -}}
+        </div><!-- /.richtext-content__block -->
+      {%- endif -%}
+    {%- endfor -%}
+  </div><!-- /.container -->
+</section><!-- /.richtext-content -->
+
+{% schema %}
+{
+  "name": "Rich text content",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Content",
+      "type": "content",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Spacing"
+        },
+        {
+          "type": "number",
+          "id": "spacing_top",
+          "label": "Spacing top",
+          "default": 0
+        },
+        {
+          "type": "number",
+          "id": "spacing_bottom",
+          "label": "Spacing bottom",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Mobile Spacing"
+        },
+        {
+          "type": "number",
+          "id": "spacing_top_mobile",
+          "label": "spacing top",
+          "default": 0
+        },
+        {
+          "type": "number",
+          "id": "spacing_bottom_mobile",
+          "label": "Spacing bottom",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 12,
+          "max": 48,
+          "step": 1,
+          "unit": "px",
+          "label": "Base font size",
+          "info": "Does not apply to headings.",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 12,
+          "max": 48,
+          "step": 1,
+          "unit": "px",
+          "label": "Mobile base font size",
+          "info": "Does not apply to headings.",
+          "default": 14
+        },
+        {
+          "type": "checkbox",
+          "id": "alt_bullets",
+          "label": "Alternative list styling",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text content",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

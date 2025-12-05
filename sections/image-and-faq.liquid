@@ -1,0 +1,868 @@
+{%- if section.settings.image != blank and section.settings.title != blank -%}
+  {%-
+    liquid
+    assign accordions_markup = ''
+    assign links_markup = ''
+  -%}
+
+  {%- capture accordions_markup -%}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'topic' -%}
+          {%- if block.settings.title == blank or block.settings.content == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          <details class="image-and-faq__accordion image-and-faq__accordion--{{- block.settings.type -}}">
+            <summary>
+              {{- block.settings.title | escape -}}
+
+              <i
+                class="icon {% if block.settings.type == 'info' %}icon--info{% endif %}"
+              >
+                {%- if block.settings.type == 'info' -%}
+                  {%- render 'icon-chevron-down-thin' -%}
+                {%- else -%}
+                  {%- render 'icon-plus-large' -%}
+                {%- endif -%}
+              </i>
+            </summary>
+
+            <div>
+              {{- block.settings.content -}}
+            </div>
+          </details><!-- /.image-and-faq__accordion -->
+      {%- endcase -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- capture links_markup -%}
+    {%- assign link_blocks = section.blocks | where: 'type', 'link' -%}
+
+    {%- if link_blocks.size > 0 -%}
+      <ul class="image-and-faq__links list-unstyled">
+        {%- for block in link_blocks -%}
+          {%- if block.settings.title == blank or block.settings.url == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          <li>
+            <a href="{{- block.settings.url -}}">
+              {%- if block.settings.type == 'download' -%}
+                {%- render 'icon-download' -%}
+              {%- else -%}
+                {%- render 'icon-redirect' -%}
+              {%- endif -%}
+
+              <span>
+                {{- block.settings.title | escape -}}
+
+                {%- if block.settings.subtext != blank -%}
+                  <small>{{- block.settings.subtext | escape -}}</small>
+                {%- endif -%}
+              </span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul><!-- /.image-and-faq__links -->
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- capture body_text_markup -%}
+    {%- assign body_text_blocks = section.blocks | where: 'type', 'body-text' -%}
+
+    {%- if body_text_blocks.size > 0 -%}
+      {%- for block in body_text_blocks -%}
+        <div
+          class="image-and-faq__item"
+          {{ block.shopify_attributes }}
+        >
+          {%-
+            liquid
+            if block.settings.heading == blank and block.settings.content == blank
+              continue
+            endif
+          -%}
+
+          {%- if block.settings.heading != blank -%}
+            <p class="image-and-faq__item-heading bold">
+              {{- block.settings.heading | escape -}}
+            </p><!-- /.image-and-faq__item-heading -->
+          {%- endif -%}
+
+          {%- if block.settings.content != blank -%}
+            <p class="image-and-faq__item-body">
+              {{- block.settings.content | escape | newline_to_br -}}
+            </p><!-- /.image-and-faq__item-body -->
+          {%- endif -%}
+        </div><!-- /.image-and-faq__item -->
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- capture rich_text_markup -%}
+    {%- assign rich_text_blocks = section.blocks | where: 'type', 'rich_text' -%}
+
+    {%- if rich_text_blocks.size > 0 -%}
+      {%- for block in rich_text_blocks -%}
+        <div
+          class="image-and-faq__richtext"
+          {{ block.shopify_attributes }}
+        >
+          {%-
+            liquid
+            if block.settings.heading == blank and block.settings.content == blank
+              continue
+            endif
+          -%}
+
+          {%- if block.settings.heading != blank -%}
+            <p class="image-and-faq__richtext-heading bold">
+              {{- block.settings.heading | escape -}}
+            </p><!-- /.image-and-faq__richtext-heading -->
+          {%- endif -%}
+
+          {%- if block.settings.content != blank -%}
+            <div class="image-and-faq__richtext-body rte">
+              {{- block.settings.content -}}
+            </div><!-- /.image-and-faq__richtext-body -->
+          {%- endif -%}
+        </div><!-- /.image-and-faq__richtext -->
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-image-and-faq-" | append: section.index
+    endif
+  %}
+
+  <section
+    class="image-and-faq{% if section.settings.flip_content %} image-and-faq--flip{% endif %}{% if section.settings.video != blank %} image-and-faq--video{% endif %}{% if section.settings.full_width_mobile %} image-and-faq--mobile-full{% endif %}{% if section.settings.stacked_desktop %} image-and-faq--stacked{% endif %}"
+    data-id="{{- section.id -}}"
+    id="{{ sec_id }}"
+  >
+    <div class="container">
+      <div class="image-and-faq__inner">
+        {%- if section.settings.oembed != blank or section.settings.video != blank -%}
+        <deferred-media class="image-and-faq__video deferred-media js-open-in-modalXXXREMOVED" data-video="{{ section.settings.oembed | default: section.settings.video.sources[1].url }}"{% if section.settings.oembed != blank%} data-video-id="{{ section.settings.oembed.id }}" data-oembed-type="{{ section.settings.oembed.type }}"{% endif %}>
+            <button class="deferred-media__button" id="Deferred-Poster-Modal-{{- section.id -}}" type="button">
+              <span class="media media--transparent" style="aspect-ratio: {{ section.settings.animation_oembed_aspect_ratio }};">
+                {%- if section.settings.image != blank -%}
+                  {%- render 'image', image: section.settings.image -%}
+                {%- else -%}
+                  {%- render 'image', image: section.settings.video.preview_image -%}
+                {%- endif -%}
+              </span>
+
+              {%- render 'icon-play' -%}
+            </button>
+
+            <template>
+              <div class="deferred-media__wrapper" style="aspect-ratio: {{ section.settings.animation_oembed_aspect_ratio }};">
+                {%- if section.settings.oembed != blank -%}
+                  {% render 'video-oembed', video: section.settings.oembed, autoplay: true, controls: true, aspect_ratio: section.settings.animation_oembed_aspect_ratio %}
+                {%- else -%}
+                  {{- section.settings.video | media_tag: autoplay: true, muted: false, loop: true, controls: true -}}
+                {%- endif -%}
+              </div><!-- /.deferred-media__wrapper -->
+            </template>
+          </deferred-media><!-- /.deferred-media -->
+        {%- else -%}
+          <div class="image-and-faq__media media">
+            {%- if section.settings.title_on_image_mobile -%}
+              <h2
+                class="image-and-faq__title-mobile medium-hide large-up-hide"
+                style="color: {{ section.settings.title_on_image_mobile_color }}"
+              >
+                {{- section.settings.title | escape -}}
+              </h2><!-- /.image-and-faq__title -->
+            {%- endif -%}
+
+            {%- render 'image', image: section.settings.image -%}
+          </div><!-- /.image-and-faq__media -->
+        {%- endif -%}
+
+        <div class="image-and-faq__content">
+          <div class="image-and-faq__wrapper">
+            <h2 class="image-and-faq__title {% if section.settings.title_on_image_mobile %} small-hide{% endif %}">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.image-and-faq__title -->
+
+            {%- if section.settings.content != blank -%}
+              <p class="image-and-faq__entry">
+                {{- section.settings.content | escape | newline_to_br -}}
+              </p><!-- /.image-and-faq__entry -->
+            {%- endif -%}
+
+            {%- if accordions_markup != '' -%}
+              <div class="image-and-faq__accordions">
+                {{- accordions_markup -}}
+              </div>
+            {%- endif -%}
+
+            {%- if links_markup != '' -%}
+              <div class="image-and-faq__links">
+                {{- links_markup -}}
+              </div>
+            {%- endif -%}
+
+            {%- if body_text_markup != '' -%}
+              <div class="image-and-faq__items">
+                {{- body_text_markup -}}
+              </div>
+            {%- endif -%}
+
+            {%- if rich_text_markup != '' -%}
+              <div class="image-and-faq__items">
+                {{- rich_text_markup -}}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+              {%- if section.settings.display_button_as_link -%}
+                <a href="{{ section.settings.button_url }}" class="link-dot">
+                  {{- section.settings.button_text | escape -}}
+                </a><!-- /.link-dot -->
+              {%- else -%}
+                {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'outlined' -%}
+              {%- endif -%}
+            {%- endif -%}
+          </div><!-- /.image-and-faq__wrapper -->
+        </div><!-- /.image-and-faq__content -->
+      </div><!-- /.image-and-faq__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.image-and-faq -->
+{%- endif -%}
+
+{% style %}
+  [data-id="{{- section.id -}}"] {
+    --color-background: {{ color_scheme_settings.background }};
+    --color-text: {{ color_scheme_settings.text }};
+  }
+
+  .image-and-faq {
+    color: var(--color-text);
+    background-color: var(--color-background);
+    padding: 7.1rem 0 14rem;
+  }
+
+  .image-and-faq__title-mobile {
+    z-index: 10;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .image-and-faq--flip .image-and-faq__inner {
+    direction: rtl;
+  }
+
+  .image-and-faq--flip .image-and-faq__inner > * {
+    direction: ltr;
+  }
+
+  .image-and-faq .container {
+    max-width: 162rem;
+  }
+
+  .image-and-faq__inner {
+    display: grid;
+    grid-template-columns: 62.5rem auto;
+    gap: 2.6rem;
+  }
+  .image-and-faq--stacked .image-and-faq__inner {
+    grid-template-columns: auto;
+  }
+
+  .image-and-faq__media {
+    aspect-ratio: 625 / 695;
+    border-radius: 1rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .image-and-faq:has(.image-and-faq__richtext) .image-and-faq__media {
+      aspect-ratio: unset;
+    }
+  }
+
+  .image-and-faq .deferred-media .media,
+  .image-and-faq .deferred-media__wrapper {
+    aspect-ratio: 625/1008;
+  }
+
+  .image-and-faq__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.2rem;
+    border: 0.1rem solid #c4c4c4;
+    border-radius: 1rem;
+  }
+
+  .image-and-faq__wrapper {
+    max-width: 67rem;
+    width: 100%;
+  }
+  .image-and-faq--stacked .image-and-faq__wrapper {
+    max-width: 100%;
+  }
+
+  .image-and-faq__title {
+    max-width: 48rem;
+    font-size: calc(var(--fsbase) * 6);
+    line-height: 1.444444;
+    font-weight: 500;
+    margin: 0 0 3.5rem;
+  }
+  .image-and-faq--stacked .image-and-faq__title {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .image-and-faq--video .image-and-faq__title {
+    font-size: calc(var(--fsbase) * 5.4);
+  }
+
+  .image-and-faq__entry {
+    font-size: calc(var(--fsbase) * 1.8);
+    line-height: 2;
+    margin: 0;
+  }
+
+  .image-and-faq .button,
+  .image-and-faq .link-dot {
+    margin-top: 5.2rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-and-faq__richtext-heading {
+      font-size: calc(var(--fsbase) * 2.1);
+    }
+  }
+
+  .image-and-faq__richtext-body :is(ul, ol) {
+    margin: 4rem 0;
+  }
+
+  .image-and-faq__richtext-body :is(ul, ol) li::marker {
+    color: #FF3A00;
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-and-faq__richtext-body :is(ul, ol) {
+      margin: 2rem 0 4rem;
+    }
+  }
+
+  /* Accordions */
+  .image-and-faq__accordion:not(:first-child) {
+    border-top: 0.1rem solid var(--color-border);
+  }
+
+  .image-and-faq__accordion summary {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 2;
+    font-weight: 600;
+    padding: 1.3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1.9rem;
+  }
+
+  .image-and-faq__accordion summary + * {
+    font-weight: 500;
+  }
+
+  .image-and-faq__accordion svg {
+    width: 1.8rem;
+  }
+
+  .image-and-faq__accordion[open] {
+    padding-bottom: 2.6rem;
+  }
+
+  .image-and-faq__accordion[open] .icon--info svg {
+    display: none;
+  }
+
+  .image-and-faq__accordion[open] .icon--info:before {
+    content: '—';
+    line-height: 1;
+  }
+
+  .image-and-faq__accordion[open] svg {
+    transform: rotate(180deg);
+  }
+
+  .image-and-faq__accordion[open] svg circle {
+    fill: #FF3A00;
+  }
+
+  .image-and-faq__accordion[open] svg:has(circle) line {
+    display: none;
+  }
+
+  /* Links */
+  .image-and-faq__links {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0 10rem;
+    margin-top: 5.6rem;
+  }
+
+  .image-and-faq__links a {
+    padding-block: 2.6rem;
+    color: currentColor;
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 1;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .image-and-faq__links a small {
+    color: #cba378;
+    font-size: calc(var(--fsbase) * 1.4);
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .image-and-faq__links a svg {
+    width: 4.8rem;
+    height: 4.8rem;
+    padding: 1.6rem;
+    border: 0.1rem solid #a8a6a0;
+    border-radius: 0.5rem;
+  }
+
+  .image-and-faq__links a span {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @container (max-width: 1023px) {
+    .image-and-faq__links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-and-faq__links li:nth-of-type(2) ~ li {
+      border-top: 0.1rem solid #b1b1b1;
+    }
+  }
+
+  @container (max-width: 649px) {
+    .image-and-faq__links {
+      display: block;
+      margin-top: 0;
+    }
+
+    .image-and-faq__links li:nth-of-type(2) ~ li {
+      border-top: 0;
+    }
+
+    .image-and-faq__links li {
+      border-bottom: 0.1rem solid #b1b1b1;
+    }
+
+    .image-and-faq__links a {
+      padding: 1.6rem 1rem 1rem 0;
+      flex-direction: row-reverse;
+      font-size: calc(var(--fsbase) * 1.8);
+      font-weight: 700;
+    }
+
+    .image-and-faq__links a small {
+      display: none;
+    }
+
+    .image-and-faq__links a span {
+      flex: 1;
+    }
+
+    .image-and-faq__links a svg {
+      color: #f4f0e0;
+      background-color: #2c2621;
+      width: 3rem;
+      height: 3rem;
+      padding: 9px;
+      border: none;
+    }
+  }
+
+  @media screen and (max-width: 1360px) {
+    .image-and-faq__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .image-and-faq__media {
+      aspect-ratio: initial;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .image-and-faq__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .image-and-faq--mobile-full .container {
+      padding: 0;
+    }
+
+    .image-and-faq--mobile-full .image-and-faq__content {
+      border: none;
+    }
+
+    .image-and-faq__media {
+      aspect-ratio: 393 / 221;
+    }
+
+    .image-and-faq .deferred-media .media,
+    .image-and-faq .deferred-media__wrapper {
+      aspect-ratio: 353 / 353;
+    }
+
+    .image-and-faq--mobile-full .image-and-faq__media {
+      border-radius: 0;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-and-faq {
+      padding: 2rem 0;
+    }
+
+    .image-and-faq__media {
+      padding-bottom: 100%;
+      border-radius: 1rem;
+      aspect-ratio: initial;
+    }
+
+    .image-and-faq__content {
+      padding: 3rem 2rem;
+    }
+
+    .image-and-faq__inner {
+      gap: 2rem;
+    }
+
+    .image-and-faq--mobile-full .image-and-faq__inner {
+      gap: 0;
+    }
+
+    .image-and-faq--video .image-and-faq__title,
+    .image-and-faq__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      max-width: none;
+      margin: 0 0 1.5rem;
+    }
+
+    .image-and-faq__entry {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+
+    .image-and-faq .button,
+    .image-and-faq .link-dot {
+      margin-top: 2.4rem;
+    }
+
+    .image-and-faq__accordion summary {
+      font-size: calc(var(--fsbase) * 1.4);
+      line-height: 1.35;
+      font-weight: 900;
+      padding: 2rem 1rem 2rem 0;
+    }
+
+    .image-and-faq__accordion:first-child summary {
+      padding-top: 0.3rem;
+    }
+
+    .image-and-faq__accordion summary + * {
+      line-height: 1.65;
+    }
+
+    .image-and-faq__accordion svg {
+      width: 1.4rem;
+    }
+
+    .image-and-faq__accordion svg:has(circle) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .image-and-faq__accordion[open] {
+      padding-bottom: 1.5rem;
+    }
+
+    .image-and-faq__accordion[open] summary {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .image-and-faq__item-heading {
+    margin-block: 0 1rem;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .image-and-faq__item-body {
+    line-height: 1.77;
+  }
+  @media (min-width: 1023.2px) {
+    .image-and-faq__item-heading {
+      font-size: calc(var(--fsbase) * 2.4);
+    }
+    .image-and-faq__item-body {
+      font-size: calc(var(--fsbase) * 1.8);
+    }
+  }
+
+  .image-and-faq__item + .image-and-faq__item {
+    border-top: 0.1rem solid #C4C4C4;
+    padding-top: 3.2rem;
+    margin-top: 2.8rem;
+  }
+
+  @media (min-width: 768px) {
+    .shopify-section:has(.image-and-faq) + .shopify-section.team {
+      padding-top: 0;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Image and FAQ",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme-2",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "title_on_image_mobile",
+        "label": "Title on image on mobile",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "title_on_image_mobile_color",
+        "label": "Title mobile on image",
+        "info": "Works only when title is on image on mobile.",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "checkbox",
+        "id": "stacked_desktop",
+        "label": "Stack on desktop",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width_mobile",
+        "label": "Fill width on mobile",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "flip_content",
+        "label": "Flip image/content",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video",
+        "info": "Overwrites image"
+      },
+      {
+        "type": "video_url",
+        "id": "oembed",
+        "label": "Oembed video",
+        "info": "Overrides video above",
+        "accept": [
+          "vimeo",
+          "youtube"
+        ]
+      },
+      {
+        "type": "text",
+        "id": "animation_oembed_aspect_ratio",
+        "label": "Oembed aspect ratio",
+        "default": "16/9",
+        "info": "[WIDTH]/[HEIGHT] ex: 16/9"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_button_as_link",
+        "label": "Display button as link",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "topic",
+        "name": "Topic",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "options": [
+              {
+                "value": "info",
+                "label": "Info"
+              },
+              {
+                "value": "resource",
+                "label": "Resource"
+              }
+            ],
+            "default": "info"
+          }
+        ]
+      },
+      {
+        "type": "link",
+        "name": "Resource link",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtext",
+            "label": "Subtext"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "options": [
+              {
+                "value": "download",
+                "label": "Download"
+              },
+              {
+                "value": "redirect",
+                "label": "Redirect"
+              }
+            ],
+            "default": "redirect"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      },
+      {
+        "type": "body-text",
+        "name": "Body text",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      },
+      {
+        "type": "rich_text",
+        "name": "Rich text",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image and FAQ"
+      }
+    ]
+  }
+{% endschema %}

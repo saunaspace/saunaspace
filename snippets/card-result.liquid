@@ -1,0 +1,24 @@
+{% comment %}
+    Renders a result card
+    Accepts:
+    - result: {Object}  Liquid object (article/page)
+    - class: {String} CSS class to apply to the card
+    Usage:
+    {%- render 'card-result', result: result, class: 'grid__item' -%}
+{% endcomment %}
+
+<div class="card-result {{ class }}">
+  <a href="{{- result.url -}}" class="media media--portrait">
+    <span class="visually-hidden">{{- result.title | escape -}}</span>
+
+    {%- if result.image -%}
+      {%- render 'image', image: result.image -%}
+    {%- endif -%}
+  </a>
+
+  <h4 class="caption">
+    <a href="{{- result.url -}}" class="full-unstyled-link">{{- result.title | escape -}}</a>
+  </h4><!-- /.caption -->
+
+  <span class="badge">{{- result.object_type | capitalize -}}</span>
+</div><!-- /.card-result -->

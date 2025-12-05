@@ -1,0 +1,109 @@
+/* ------------------------------------------------------------ *\
+  Richtext - Image
+\* ------------------------------------------------------------ */
+
+.richtext-image {
+  display: flex;
+  align-items: center;
+  min-height: 54rem;
+  padding-block: 13rem;
+  width: 100%;
+  background-color: #000;
+  color: #F4F0E0;
+  text-align: center;
+}
+
+.richtext-image > .container {
+  width: 100%;
+}
+
+.richtext-image__content {
+  max-width: 100rem;
+  margin-inline: auto;
+}
+
+.richtext-image__title {
+  margin-block: 0 3.8rem;
+}
+
+.richtext-image__body {
+  max-width: 60rem;
+  margin-inline: auto;
+  font-size: calc(var(--fsbase) * 2.1);
+}
+
+.richtext-image__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+@media screen and (max-width: 1439px) {
+  .richtext-image {
+    padding-block: 8rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .richtext-image {
+    padding-block: 4rem;
+    min-height: 52.5rem;
+  }
+
+  .richtext-image__title {
+    margin-bottom: 2.4rem;
+  }
+}
+
+/*
+   Richtext image - text large
+   ========================================================================== */
+
+.richtext-image--text-large .richtext-image__title {
+  font-size: calc(var(--fsbase) * 5.4);
+}
+
+@media (max-width: 1279px) {
+  .richtext-image--text-large .richtext__title {
+    font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 4.4));
+    line-height: calc(1.25 / var(--font-heading-scale));
+  }
+}
+
+@media only screen and (max-width: 749px) {
+  .richtext-image--text-large .richtext__title {
+    font-size: calc(var(--font-heading-scale) * (var(--fsbase) * 2.4));
+    line-height: calc(1.25 / var(--font-heading-scale));
+  }
+}
+
+.richtext-image--text-large .richtext-image__body {
+  max-width: 64rem;
+  font-size: calc(var(--fsbase) * 1.8);
+}
+
+@media screen and (max-width: 749px) {
+  .richtext-image--text-large .richtext-image__body {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+  .richtext-image__body {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}
+
+/*
+   Richtext image - spacing large
+   ========================================================================== */
+
+.richtext-image--spacing-large {
+  min-height: 70rem;
+}
+
+@media screen and (max-width: 749px) {
+  .richtext-image--spacing-large {
+    min-height: 52.5rem;
+  }
+}

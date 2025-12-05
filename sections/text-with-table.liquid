@@ -1,0 +1,99 @@
+{%- if section.settings.title != blank -%}
+  {{- 'section-chart.css' | asset_url | stylesheet_tag -}}
+
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+    if color_scheme.id == "scheme-1"
+      assign color_class = "section-dark-theme"
+    elsif color_scheme.id == "scheme-2"
+      assign color_class = "section-light-theme"
+    else
+      assign color_class = "section-" | append: color_scheme.id | append: '-theme'
+    endif
+  -%}
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-chart-" | append: section.index
+    endif
+  %}
+
+  <section class="chart {{ color_class }}" data-id="{{- section.id -}}" id="{{ sec_id }}">
+    <div class="chart__inner">
+      <h2 class="chart__title">
+        {{- section.settings.title | escape -}}
+      </h2><!-- /.chart__title -->
+
+      {%- if section.settings.content != blank -%}
+        <div class="chart__entry">
+          <p>{{- section.settings.content | escape | newline_to_br -}}</p>
+        </div><!-- /.chart__entry -->
+      {%- endif -%}
+
+      {%- if section.settings.page.content != blank -%}
+      <div class="chart-content-wrap">
+        <div class="chart__content at-beginning">
+          {{- section.settings.page.content -}}
+        </div><!-- /.chart__content -->
+        <div class="chart-mobile-arrow">
+          <span>See More</span>
+        </div>
+      </div>
+      {%- endif -%}
+    </div><!-- /.chart__inner -->
+  </section><!-- /.chart -->
+{%- endif -%}
+
+{% style %}
+  [data-id="{{- section.id -}}"] {
+    --color-background: {{ color_scheme_settings.background }};
+    --color-text: {{ color_scheme_settings.text }};
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Text with table",
+    "class": "sec--text-w-table",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Entry"
+      },
+      {
+        "type": "page",
+        "id": "page",
+        "label": "Page",
+        "info": "Page to pull table elements from."
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Text with table"
+      }
+    ]
+  }
+{% endschema %}

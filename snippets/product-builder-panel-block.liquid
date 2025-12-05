@@ -1,0 +1,70 @@
+{% if block.settings.mobile_image != blank %}
+<div class="product-build__variant-media media media--3-4 large-up-hide">
+    <img src="{{ block.settings.mobile_image | image_url: width: 400 }}" alt="panel option image" />
+</div>
+{% endif %}
+
+<div class="product-build__variant-content">
+    <h3 class="product-build__variant-title">{{ block.settings.block_text | default: "SuperSauna" }}</h3>
+    {% if block.settings.block_description != blank %}
+    <div class="product-build__variant-description">
+        <p>{{ block.settings.block_description }}</p>
+    </div>
+    {% endif %}
+</div>
+
+{% for option in product.options_with_values %}
+    {% if option.name == "Panel" %}
+    <ul class="product-build__variant-pills product-build__variant-pills--panel product-build__variant-pills--grow panelOption js-variant-options" data-variant="Panel">
+        {% for opt in option.values %}
+        {% liquid
+            assign opt_lc = opt | downcase
+            if opt_lc contains "supersauna"
+                assign panel_image = block.settings.ss_image
+                assign badge = block.settings.ss_badge
+            elsif opt_lc contains "classic"
+                assign panel_image = block.settings.classic_image
+                assign badge = block.settings.classic_badge
+            endif
+        %}
+        <li>
+            <input type="radio" class="panel-option product-option-radio option--panel"{% if option.selected_value == opt %} checked="true"{% endif %} name="panel" value="{{ opt }}" id="panel-option--{{ opt | handleize }}">
+            <label class="product-build__variant-pill" data-option-name="{{ option.name }}" data-option-value="{{ opt }}" for="panel-option--{{ opt | handleize }}">
+                <span class="option-img" style="background-image: url({{ panel_image | image_url: width: 500, height: 500 }});"></span>
+                <span class="product-build__variant-pill-text">
+                    <em>{{ opt }}</em>
+                </span>
+                {% if badge != blank %}
+                <span class="product-build__variant-pill-tag">{{ badge }}</span>
+                {% endif %}
+            </label><!-- /.product-build__variant-pill -->
+        </li>
+        {% endfor %}
+    </ul><!-- /.product-build__variant-pills -->
+    {% endif %}
+{% endfor %}
+
+
+{% comment %}<!-- Panels Modal -->{% endcomment %}
+{% if block.settings.modal_content != blank  %}
+<modal-opener class="product-build__modal-opener" data-modal="#panel-block-modal">
+    <button class="link product-build__modal-opener-button" type="button" aria-haspopup="dialog">
+        <span>{{ block.settings.modal_button_title | default: "Need help choosing your intensity level?" }}</span>
+        <i>{%- render 'icon-plus' -%}</i>
+    </button>
+</modal-opener>
+
+{%- capture modal_content -%}
+    {{ block.settings.modal_content }}
+{%- endcapture -%}
+
+{% assign modal_title = block.settings.modal_button_title | default: "Need help choosing your intensity level?" %}
+{%-
+    render 'modal-dialog',
+    id: 'panel-block-modal',
+    title: modal_title,
+    content: modal_content,
+    class: 'product-build__modal-dialog',
+    show_close_label: true,
+-%}
+{% endif %}

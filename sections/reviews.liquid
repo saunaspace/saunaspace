@@ -1,126 +1,245 @@
-<div class="tanBG noMargin home ">
-  <h2>{{ section.settings.heading | escape }}</h2>
+{%-
+  liquid
+  assign reviews = section.blocks | where: 'type', 'review'
+  assign heading = section.settings.heading
+  assign button_text = section.settings.button_text | default: "Learn More"
+  assign button_url = section.settings.button_url
+  assign bg_image = section.settings.bg_image
+  assign slides_content_markup = ''
+  assign slides_avatar_markup = ''
+  assign slides_info_markup = ''
+-%}
 
+{{- 'reviews.css' | asset_url | stylesheet_tag -}}
+{% comment %}{{- 'modal-dialog.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+<script src="{{ 'app-reviews.js' | asset_url }}" defer="defer"></script>
 
-  <div class="rc-arrows">
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-reviews-" | append: section.index
+  endif
+%}
 
-    <img
-      src="{{ 'arrow_orange.svg' | asset_url }}"
-      class="rc-arrow-right"
-      alt=""
-      onClick="scrollReviews(1);"
-      loading="lazy" />
-    <img
-      src="{{ 'arrow_orange.svg' | asset_url }}"
-      class="rc-arrow-left"
-      alt=""
-      onClick="scrollReviews(-1);"
-      loading="lazy" />
-    <div class="review-carousel">
-      {%- for block in section.blocks -%}
-        <div class="rc-box">
-          <div class="rcb-name">
-
-            <img
-              src="{{ block.settings.photo | image_url: width: 550 }}"
-              loading="lazy"
-              alt="{{ block.settings.photo.alt | escape }}"
-              width="{{ block.settings.photo.width }}"
-              height="{{ block.settings.photo.width | divided_by: block.settings.photo.aspect_ratio | round }}" />
-            <div class="rcb-text">
-              {%- if block.settings.name != blank -%}
-                <div class="review-name">{{ block.settings.name | escape }}</div>
-              {%- endif -%}
-              {%- if block.settings.title != blank -%}
-                <div class="review-title etica">{{ block.settings.title | escape }}</div>
-              {%- endif -%}
-            </div>
-          </div>
-
-          {%- if block.settings.quote != blank -%}
-            <div class="review-text etica">
-              <p>{{ block.settings.quote | escape }}</p>
-            </div>
-          {%- endif -%}
+{%- if reviews.size > 0 -%}
+  <section class="reviews reviews-v2" id="{{ sec_id }}">
+    <div class="container container--extra-large">
+      <app-reviews class="app-reviews">
+        {%- if heading != blank -%}
+        <div class="reviews-header">
+          <h2 class="h1 reviews__heading">{{- heading | escape -}}</h2>
         </div>
+        {%- endif -%}
 
-      {%- endfor -%}
-    </div>
-  </div>
-  <p style="text-align: center; margin-top: -25px;">
-    <a href="/pages/reviews" class="bold-link arrow-link">More Reviews</a>
-  </p>
-</div>
+        <div class="reviews-slider swiper">
+          <div class="swiper-wrapper">
 
-{%- if request.design_mode -%}
-  <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+            {%- for review in reviews -%}
+            {%-
+              liquid
+              assign image = review.settings.image
+              assign name = review.settings.name
+              assign title = review.settings.title
+              assign product_name = review.settings.product_name
+              assign content = review.settings.content
+              assign video = review.settings.video
+            -%}
+            <div class="swiper-slide review-slide">
+              <div class="slide-col col-image">
+                <div class="col-inner-wrap">
+
+                  {%- if bg_image != blank -%}
+                  <div class="reviews__bg-image">
+                    {%- render 'image', image: bg_image -%}
+                  </div>
+                  {%- endif -%}
+                  <div class="img-cnt">
+                    {%- if image != blank -%}
+                      {%- render 'image', image: image -%}
+                    {%- elsif image == blank and bg_image == blank -%}
+                      {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+                    {%- endif -%}
+                  </div>
+
+                  <div class="content-wrap">
+                    {% if name != blank or product_name != blank %}
+                    <div class="review-author-info">
+                      {% if name != blank %}<strong class="review-author">{{- name | escape -}}</strong>{% endif %}
+                      {% if product_name != blank %}<span class="review-title">{{- product_name | escape | newline_to_br -}}</span>{% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    {%- if video != blank -%}
+                      {%-
+                        liquid
+                        assign modal_id = 'review-' | append: section.id | append: '-' | append: forloop.index0
+                        assign video_title = video.alt | default: 'Video'
+                      -%}
+            
+                      {%- capture video_content -%}
+                      <deferred-media class="deferred-media">
+                        <button class="deferred-media__button" id="Deferred-Poster-Modal-{{- media.id -}}" type="button">
+                          <span class="media media--portrait">
+                            {{- 'image' |  placeholder_svg_tag -}}
+                          </span>
+          
+                          {%- render 'icon-play' -%}
+                        </button>
+          
+                        <template>
+                          <div class="deferred-media__wrapper">
+                            {{- video | video_tag: image_size: '2048x', autoplay: true, loop: true, controls: true, preload: 'none' -}}
+                          </div>
+                        </template>
+                      </deferred-media>
+                      {%- endcapture -%}
+            
+                      <modal-opener class="product-selector__size-link p4" data-modal="#{{- modal_id -}}">
+                        <button class="link-dot" type="button" aria-haspopup="dialog">
+                          {{- 'reviews.button_video_label' | t -}}
+                        </button>
+                      </modal-opener>
+            
+                      {%-
+                        render 'modal-dialog',
+                        id: modal_id,
+                        title: video_title,
+                        content: video_content
+                      -%}
+                    {%- endif -%}
+                  </div><!-- /.content-wrap -->
+
+                </div>
+              </div><!-- /.slide-col col-image -->
+              
+              <div class="slide-col col-content">
+                {%- if content != blank -%}
+                <div class="content-cnt">
+                  {% if title != blank %}
+                  <h5 class="review-title"><strong>{{ title | newline_to_br }}</strong></h5>
+                  {% endif %}
+                  {% comment %}<!-- <p> -->{{ content | replace: "</p><p>", "[linebreak]" | strip_html | newline_to_br | replace: "[linebreak]", "<br /><br />" }}<!-- </p> -->{% endcomment %}
+                  <div class="review-content">{{ content }}</div>
+                </div>
+                {%- endif -%}
+                {% if button_url != blank %}
+                <a href="{{ button_url }}" class="image-and-text__button button button--orange-hover button--large-desktop slide-cta">{{ button_text }}</a>
+                {% endif %}
+              </div>
+            </div>
+            {%- endfor -%}
+
+          </div>
+        </div><!-- /.reviews-slider swiper -->
+
+        <div class="slider-nav-cnt">
+          <div class="swiper-button-prev slider-nav"></div>
+          {% if button_url != blank %}
+          <a href="{{ button_url }}" class="image-and-text__button button button--orange-hover button--large-desktop">{{ button_text }}</a>
+          {% endif %}
+          <div class="swiper-button-next slider-nav"></div>
+        </div>
+      </app-reviews>
+    </div><!-- /.container container--fullwidth -->
+  </section><!-- /.reviews -->
 {%- endif -%}
 
 {% schema %}
-  {
-    "name": "Reviews",
-    "tag": "section",
-    "class": "section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "heading",
-        "default": "Our Customers Love Us",
-        "label": "Reviews"
-      }
-    ],
-    "blocks": [
-      {
-        "type": "review",
-        "name": "review",
-        "limit": 15,
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "photo",
-            "label": "Customer Photo"
-          },
-          {
-            "type": "text",
-            "id": "name",
-            "default": "Customer Name",
-            "label": "Customer Name"
-          },
-          {
-            "type": "text",
-            "id": "title",
-            "default": "Customer Job Title",
-            "label": "Customer Title"
-          },
-          {
-            "type": "textarea",
-            "id": "quote",
-            "default": "Quote from customer goes here",
-            "label": "Review"
-          }, {
-            "type": "text",
-            "id": "url_link",
-            "default": "https://google.com",
-            "label": "3rd Party URL Link"
-          }, {
-            "type": "text",
-            "id": "URL_Link_Label",
-            "label": "3rd Party URL Link Name"
+{
+  "name": "Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background element"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product"
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Review Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Review Content"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "name": "Name Goes Here",
+            "product_name": "Product Name",
+            "title": "Title goes here",
+            "content": "<p>“Content goes here.”<\/p>"
           }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Reviews",
-        "blocks": [
-          {
-            "type": "review"
-          }, {
-            "type": "review"
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Name Goes Here",
+            "product_name": "Product Name",
+            "title": "Title goes here",
+            "content": "<p>“Content goes here.”<\/p>"
           }
-        ]
-      }
-    ]
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
   }
+}
 {% endschema %}

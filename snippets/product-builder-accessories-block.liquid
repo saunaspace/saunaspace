@@ -1,0 +1,108 @@
+{% if block.settings.mobile_image != blank %}
+<div class="product-build__variant-media media media--3-4 large-up-hide">
+    <img src="{{ block.settings.mobile_image | image_url: width: 400 }}" alt="panel option image" />
+</div>
+{% endif %}
+
+<div class="product-build__variant-content">
+    <h3 class="product-build__variant-title">{{ block.settings.block_text }}</h3>
+    <div class="product-build__variant-description">
+        <p>{{ block.settings.block_description }}</p>
+    </div>
+</div>
+
+{% liquid
+comment
+    assign accessories_products = block.settings.product_list_optional
+    assign accessories_options = null
+    for option in product.options_with_values
+        if option.name == "Accessories"
+            assign accessories_options = option
+        endif
+    endfor
+endcomment
+%}
+{% comment %}
+{% if accessories_options != blank and accessories_products != blank and accessories_products.count > 0 %}
+{% endcomment %}
+{%  comment  %}
+<select id="accessories-options" style="display:none;">
+    {% for opt in accessories_options.values %}
+    <option value="{{ opt }}"{% if opt contains "+" %} data-multi-option{% endif %}>{{ opt }}</option>
+    {% endfor %}
+</select>
+{% endcomment %}
+
+{% assign accessories_products = block.settings.product_list_optional %}
+{% if accessories_products != blank and accessories_products.count > 0 %}
+<ul class="product-build__variant-pills js-variant-options accessoriesOption product-build__variant-pills--optionalproducts product-build__variant-pills--landscape product-build__variant-pills--stretch" data-variant="Accessories">
+    {% for accs_product in accessories_products %}
+        {% liquid
+        assign item_title = accs_product.metafields.custom.custom_title | default: accs_product.title
+        assign modal_id = 'accessories-product-modal--' | append: accs_product.handle
+        assign corresponding_option_name = accs_product.metafields.custom.accessory_variant_name
+        assign product_badge = accs_product.metafields.custom.bundle_badge
+        %}
+    <li type="button" data-product="{{ accs_product.title }}" data-product-handle="{{ accs_product.handle }}">
+        <input type="checkbox" class="optional-accessory-select" name="{{ accs_product.title }}" data-id="" data-price="" data-compare-price="" id="accs_product_{{ accs_product.handle }}" data-default-id="{{ accs_product.selected_or_first_available_variant.id }}" data-default-price="{{ accs_product.selected_or_first_available_variant.price | money_without_currency }}" data-default-compare-price="{{ accs_product.selected_or_first_available_variant.compare_at_price | money_without_currency }}" />
+        <label class="product-build__variant-pill product-build__variant-pill--square js-accessory-label-selector" data-for="accs_product_{{ accs_product.handle }}">
+            <span class="option-img opt-img-accessory-product" style="background-image: url( {{ accs_product.featured_image | image_url: width: 250 }})">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+                        <g transform="translate(-1363.83 -2689.247)"><line id="Line_1936" data-name="Line 1936" x2="10" transform="translate(1363.83 2694.5)" fill="none" stroke="currentColor" stroke-width="2"/><line id="Line_1937" data-name="Line 1937" x2="10" transform="translate(1368.83 2689.247) rotate(90)" fill="none" stroke="currentColor" stroke-width="2"/></g>
+                    </svg>
+                </i>
+            </span>
+            <span class="product-build__variant-pill-text">{{ accs_product.title | truncate: 30 }}</span>
+        </label>
+        <div class="qty-container js-accs-default-qty">
+            <button class="qty-btn" data-action="decrease">−</button>
+            <input type="text" class="qty-input" min="0" value="1" readonly>
+            <button class="qty-btn" data-action="increase">+</button>
+        </div>
+        <span class="modal-trigger-wrap">
+            <modal-opener class="accessories-product-modal-trigger" data-modal="#{{ modal_id }}">
+                <button class="link" type="button" aria-haspopup="dialog">Learn More</button>
+            </modal-opener>
+        </span>
+        {% if product_badge != blank %}
+        <span class="product-build__variant-pill-tag">{{ product_badge }}</span>
+        {% endif %}
+        {%- capture modal_content -%}
+            {% render 'accessories-product-quickview', product: accs_product, item_title: item_title, section: section %}
+        {%- endcapture -%}
+        {%-
+            render 'modal-dialog',
+            id: modal_id,
+            title: item_title,
+            content: modal_content,
+            class: 'product-build__modal-dialog accessories-quickview-modal',
+            show_close_label: true,
+        -%}
+    </li>
+    {% endfor %}
+</ul><!-- /.product-build__variant-pills -->
+{% endif %}
+
+{% if block.settings.modal_content != blank %}
+<modal-opener class="product-build__modal-opener" data-modal="#accessories-block-modal">
+    <button class="link product-build__modal-opener-button" type="button" aria-haspopup="dialog">
+        <span>{{ block.settings.modal_button_title | default: "Why should you upgrade?" }}</span>
+        <i>{%- render 'icon-plus' -%}</i>
+    </button>
+</modal-opener>
+
+{%- capture modal_content -%}
+    {{ block.settings.modal_content }}
+{%- endcapture -%}
+
+{% assign modal_title = block.settings.modal_button_title | default: "Why should you upgrade?" %}
+{%-
+    render 'modal-dialog',
+    id: 'accessories-block-modal',
+    title: modal_title,
+    content: modal_content,
+    class: 'product-build__modal-dialog',
+    show_close_label: true,
+-%}
+{% endif %}

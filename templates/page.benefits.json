@@ -1,15 +1,14 @@
 {
-    "sections": {
-      "main": {
-        "type": "benefits-page",
-        "settings": {
-          "padding_top": 28,
-          "padding_bottom": 28
-        }
+  "sections": {
+    "main": {
+      "type": "full-spec-sauna-health-ben",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
       }
-    },
-    "order": [
-      "main"
-    ]
-  }
-  
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

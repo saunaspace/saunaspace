@@ -1,0 +1,199 @@
+{{- 'section-content-with-faq.css' | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign _section = section.settings
+  assign _blocks = section.blocks
+
+  capture section_classes
+    echo 'content-faq'
+
+    if _section.border_bottom
+      echo ' border-bottom'
+    endif
+
+    if _section.border_top
+      echo ' border-top'
+    endif
+
+    if _section.add_bullets
+      echo ' content-faq--bullets'
+    endif
+
+    if _section.wide_section
+      echo ' content-faq--wide'
+    endif
+
+    if _section.border_first_block
+      echo ' content-faq--border-first-block'
+    endif
+
+    if _section.border_last_block
+      echo ' content-faq--border-last-block'
+    endif
+  endcapture
+-%}
+
+<section
+  class="{{ section_classes }}"
+  style="--content-align: {{ _section.content_alignment }};"
+>
+  <div class="container">
+    <div class="content-faq__header">
+      {%- if _section.title != blank -%}
+        <h2 class="content-faq__title">
+          {{ _section.title }}
+        </h2>
+      {%- endif -%}
+
+      {%- if _section.content != blank -%}
+        <div class="content-faq__text">
+          {{ _section.content }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if _blocks.size > 0 -%}
+      <ul class="content-faq__list list-unstyled">
+        {% for block in _blocks %}
+          {%- assign _block = block.settings -%}
+          <li
+            class="content-faq__block"
+            {{ block.shopify_attributes }}
+          >
+            {%- if _block.title != blank -%}
+              <h3 class="content-faq__block-title">
+                {{ _block.title }}
+              </h3>
+            {%- endif -%}
+
+            {%- if _block.description != blank -%}
+              <div class="content-faq__block-description">
+                {{ _block.description }}
+              </div>
+            {%- endif -%}
+          </li>
+        {% endfor %}
+      </ul>
+    {%- endif -%}
+
+    {%- if _section.footer_text != blank -%}
+      <div class="content-faq__footer">
+        {{ _section.footer_text }}
+      </div><!-- /.content-faq__footer -->
+    {%- endif -%}
+  </div><!-- /.container -->
+</section>
+
+{% schema %}
+{
+  "name": "Content with faq",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "border_top",
+      "label": "Add border top",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "border_bottom",
+      "label": "Add border bottom",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "border_first_block",
+      "label": "Add top border to first question",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "border_last_block",
+      "label": "Add bottom border to last question",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "add_bullets",
+      "label": "Add bullets to questions",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "wide_section",
+      "label": "Wider section",
+      "info": "Increase the max width of the section",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Best Benefits Under the Sun"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Our mission is to create more wellness in the world—not just for our customers, but for our employees as well."
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Footer text"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Sauna"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>At 1-year, receive your own SaunaSpace Sauna to boost your immunity and support your overall health.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content with faq",
+      "blocks": [
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

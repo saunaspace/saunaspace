@@ -1,0 +1,185 @@
+{% comment %}
+  Renders gift card recipient form.
+  Accepts:
+  - product: {Object} product object.
+  - form: {Object} the product form object.
+  - section: {Object} section to which this snippet belongs.
+
+  Usage:
+  {% render 'gift-card-recipient-form', product: product, form: form, section: section %}
+{% endcomment %}
+
+<div class="product__recipient">
+  {%- assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]' -%}
+
+  <script src="{{ 'recipient-form.js' | asset_url }}" defer="defer"></script>
+  <recipient-form
+    class="recipient-form"
+    data-section-id="{{ section.id }}"
+    data-product-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  >
+    <input
+      id="Recipient-checkbox-{{ section.id }}"
+      type="checkbox"
+      name="{{ gift_card_recipient_control_flag }}"
+      disabled
+    >
+
+    <label class="recipient-checkbox" for="Recipient-checkbox-{{ section.id }}">
+      <span>{{ 'recipient.form.checkbox' | t }}</span>
+    </label>
+
+    <div
+      class="product-form__recipient-error-message-wrapper"
+      role="alert"
+      {% unless form.errors %}
+        hidden
+      {% endunless %}
+    >
+      <h2 class="form__message" tabindex="-1" autofocus js-recipient-form-erro>
+        <span class="error-message">{{ 'recipient.form.error_heading' | t }}</span>
+      </h2>
+
+      <ul>
+        {%- if form.errors -%}
+          {%- for field in form.errors -%}
+            <li>
+              {%- if field == 'form' -%}
+                {{ form.errors.messages[field] }}
+              {%- else -%}
+                <a href="#Recipient-{{ field }}-{{ section.id }}">
+                  {{ form.errors.messages[field] }}
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </div>
+    <p
+      id="Recipient-fields-live-region-{{ section.id }}"
+      class="visually-hidden"
+      data-collapsed="{{ 'recipient.form.collapsed' | t }}"
+      data-expanded="{{ 'recipient.form.expanded' | t }}"
+      role="status"
+    ></p>
+
+    <div class="recipient-fields">
+      <div class="recipient-fields__field">
+        {%- liquid
+          assign label = 'recipient.form.email_label' | t
+          assign placeholder = 'recipient.form.email' | t
+          assign id = 'Recipient-email-' | append: section.id
+          assign message = nil
+          assign name = 'recipient.form.email_property' | t | prepend: 'properties[' | append: ']'
+
+          if form.errors contains 'email'
+            assign message = form.errors.messages.email
+            capture attr
+              echo 'aria-invalid="true"'
+            endcapture
+          endif
+
+          render 'text-input', label: label, placeholder: placeholder, id: id, attr: attr, name: name, message: message, type: 'email', required: true
+
+          assign label = nil
+          assign placeholder = nil
+          assign attr = nil
+          assign message = nil
+          assign name = nil
+        -%}
+
+        <small class="field__error" js-recipient-form-error id="RecipientForm-email-error-{{ section.id }}"><span class="error-message"></span></small>
+      </div>
+
+      <div class="recipient-fields__field">
+        {%- liquid
+          assign label = 'recipient.form.name_label' | t
+          assign placeholder = 'recipient.form.name' | t
+          assign id = 'Recipient-name-' | append: section.id
+          assign message = nil
+          assign name = 'recipient.form.name_property' | t | prepend: 'properties[' | append: ']'
+
+          if form.errors contains 'name'
+            assign message = form.errors.messages.name
+            capture attr
+              echo 'aria-invalid="true"'
+            endcapture
+          endif
+
+          render 'text-input', label: label, placeholder: placeholder, id: id, attr: attr, name: name, message: message
+
+          assign label = nil
+          assign placeholder = nil
+          assign attr = nil
+          assign message = nil
+          assign name = nil
+        -%}
+
+        <small class="field__error" js-recipient-form-error id="RecipientForm-name-error-{{ section.id }}"><span class="error-message"></span></small>
+      </div>
+
+      <div class="recipient-fields__field">
+        {%- liquid
+          assign label = 'recipient.form.message_label' | t
+          assign placeholder = 'recipient.form.message' | t
+          assign id = 'Recipient-message-' | append: section.id
+          assign name = 'recipient.form.message_property' | t | prepend: 'properties[' | append: ']'
+
+          render 'textarea-input', label: label, placeholder: placeholder, id: id, name: name, max: 200,
+
+          assign label = nil
+          assign placeholder = nil
+          assign id = nil
+          assign name = nil
+        -%}
+
+        <small class="field__error" js-recipient-form-error id="RecipientForm-message-error-{{ section.id }}"><span class="error-message"></span></small>
+      </div>
+
+      <div class="recipient-fields__field">
+        {%- liquid
+          assign label = 'recipient.form.send_on_label' | t
+          assign placeholder = 'recipient.form.send_on' | t
+          assign id = 'Recipient-send-on-' | append: section.id
+          assign message = nil
+          assign attr = 'pattern="\d{4}-\d{2}-\d{2}"'
+          assign name = 'recipient.form.send_on_property' | t | prepend: 'properties[' | append: ']'
+
+          if form.errors contains 'send_on'
+            assign message = form.errors.messages.send_on
+            capture attr
+              echo attr
+              echo 'aria-invalid="true"'
+            endcapture
+          endif
+
+          render 'text-input', label: label, placeholder: placeholder, id: id, attr: attr, name: name, message: message, type: 'date'
+
+          assign label = nil
+          assign placeholder = nil
+          assign attr = nil
+          assign message = nil
+          assign name = nil
+        -%}
+
+        <small class="field__error" js-recipient-form-error id="RecipientForm-send_on-error-{{ section.id }}"><span class="error-message"></span></small>
+      </div>
+    </div>
+
+    <input
+      type="hidden"
+      name="{{ gift_card_recipient_control_flag }}"
+      value="if_present"
+      id="Recipient-control-{{ section.id }}"
+    >
+
+    <input
+      type="hidden"
+      name="properties[__shopify_offset]"
+      value=""
+      id="Recipient-timezone-offset-{{ section.id }}"
+      disabled
+    >
+  </recipient-form>
+</div>

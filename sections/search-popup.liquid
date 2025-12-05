@@ -1,0 +1,33 @@
+{{- 'search-popup.css' | asset_url | stylesheet_tag -}}
+
+<div id="search-popup" class="search-popup js-search-popup">
+    <button class="search-popup__close js-search-popup-close" aria-label="Close popup">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14.142" height="14.142" viewBox="0 0 14.142 14.142">
+            <line y2="14" transform="translate(12.021 2.121) rotate(45)" fill="none" stroke="#2C2621" stroke-linecap="round" stroke-width="3"></line>
+            <path d="M0,0V14" transform="translate(2.121 2.121) rotate(-45)" fill="none" stroke="#2C2621" stroke-linecap="round" stroke-width="3"></path>
+        </svg>
+        <span class="close-text">Close</span>
+    </button>
+
+    <predictive-search class="predictive-search">
+        <div class="predictive-search-header">
+            <div class="container">
+                <h2 class="predictive-search-title h2">
+                    {{- 'search.title' | t -}}
+                </h2><!-- /.collection-hero__title h2 -->
+
+                {% render 'form-search', namespace: 'Main-Search', input_attr: 'role="combobox"' %}
+            </div><!-- /.container -->
+        </div><!-- /.collection-hero -->
+
+        <predictive-search-results class="predictive-search-results"></predictive-search-results>
+        
+    </predictive-search>
+</div>
+
+
+{% schema %}
+    {
+    "name": "Search Popup"
+    }
+{% endschema %}

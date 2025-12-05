@@ -1,0 +1,147 @@
+{% comment %}
+    Renders facets (filtering and sorting)
+    Accepts:
+    - results: {Object} Collection or Search object
+    - enable_filtering: {Boolean} Show filtering when true
+    - enable_sorting: {Boolean} Show sorting when true
+    - section_id: {String} ID of the section to render facets in
+    - class: {String} Custom wrapper class
+    Usage:
+    {%- render 'facets', results: collection, enable_filtering: true, enable_sorting: true -%}
+{% endcomment %}
+
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  assign total_active_values = 0
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+
+<div class="collection-facets collection-facets--bar {{ class }}">
+  <div class="collection-facets__inner">
+    <facet-filters-form class="facets" data-section-id="{{- section_id -}}">
+      <form id="FacetFiltersForm" class="facets__form">
+        {%- if results.terms -%}
+          <input type="hidden" name="q" value="{{- results.terms | escape -}}">
+          <input name="options[prefix]" type="hidden" value="last">
+        {%- endif -%}
+
+        {%- if enable_filtering and results.filters != empty -%}
+          <details class="facets-mobile large-up-hide" id="Details-facets-mobile">
+            <summary class="facets-mobile__button caption focus-offset">
+              {{- 'collection.facets.filters_button' | t -}}
+            </summary><!-- /.facets-mobile__button caption focus-offset -->
+
+            <div class="facets-mobile__wrapper">
+              <div class="facets-mobile__head flex flex--center flex--justify">
+                <p class="facets-mobile__title h5">
+                  {{- 'collection.facets.filters_title' | t -}}
+                </p><!-- /.facets-mobile__title h5 -->
+
+                <button class="facets-mobile__close" onclick="this.closest('details').querySelector('summary').click(); return false;">
+                  {%- render 'icon-close' -%}
+                </button>
+              </div><!-- /.facets-mobile__head -->
+
+              <div class="facets-mobile__body">
+                {%-
+                  liquid
+                  for filter in results.filters
+                    assign total_active_values = total_active_values | plus: filter.active_values.size
+
+                    if filter.type == 'price_range'
+                      if filter.min_value.value != nil or filter.max_value.value != nil
+                        assign total_active_values = total_active_values | plus: 1
+                      endif
+                    endif
+
+                    render 'facet', index: forloop.index, section_id: section_id, filter: filter, context: 'mobile'
+                  endfor
+                -%}
+              </div><!-- /.facets-mobile__body -->
+
+              <div class="facets-mobile__foot">
+                {%-
+                  liquid
+                  assign value = 'collection.facets.apply' | t
+                  capture attr
+                    echo 'onclick="this.closest(`details`).querySelector(`summary`).click(); return false;"'
+                  endcapture
+                  render 'button', value: value, fullwidth: true, attr: attr
+                  assign value = nil
+                  assign attr = nil
+                -%}
+              </div><!-- /.facets-mobile__foot -->
+            </div><!-- /.facets-mobile__wrapper -->
+          </details><!-- /#Details-facets-mobile.facets-mobile.large-up-hide -->
+        {%- endif -%}
+
+        {%- if results.current_vendor or results.current_type -%}
+          <input type="hidden" name="q" value="{{- results.current_vendor -}}{{- results.current_type -}}">
+        {%- endif -%}
+
+        {%- if enable_sorting -%}
+          <div class="facets__sort js-filter" data-index="sort-by">
+            <dropdown-input class="flex flex--center">
+              {%- capture select_options -%}
+                {%- for option in results.sort_options -%}
+                  {%-
+                    liquid
+                    assign is_selected = false
+                    if option.value == sort_by
+                      assign is_selected = true
+                      assign sort_option_name = option.name
+                    endif
+                  -%}
+                  <option
+                    value="{{- option.value | escape -}}"
+                    {% if is_selected %} selected="selected"{% endif %}
+                  >{{- option.name | escape -}}</option>
+                {%- endfor -%}
+              {%- endcapture -%}
+              {%- assign label_text = 'collection.facets.sort_by_label' | t | append: ': ' -%}
+
+              {% render 'select-input',
+                id: 'SortBy',
+                label: label_text,
+                name: 'sort_by',
+                options: select_options,
+              %}
+
+              <details class="disclosure-has-popup dropdown no-js-hidden">
+                <summary class="dropdown__button">
+                  <span data-label>{{- sort_option_name -}}</span>
+
+                  <span class="dropdown__icon motion-reduce">
+                    {%- render 'icon-chevron-down' -%}
+                  </span>
+                </summary>
+
+                <div class="dropdown__list motion-reduce">
+                  <ul class="list-unstyled">
+                    {%- for option in results.sort_options -%}
+                      <li class="dropdown__item {% if option.value == sort_by %} is-active{% endif %}" data-value="{{- option.value -}}">
+                        <button
+                          class="dropdown__link caption" data-value="{{- option.value -}}"
+                          {% if option.value == sort_by %} disabled{% endif %}
+                        >
+                          {{- option.name | escape -}}
+                        </button>
+                      </li><!-- /.dropdown__item -->
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </details>
+            </dropdown-input>
+          </div><!-- /.facets__sort -->
+        {%- endif -%}
+      </form><!-- /#FacetFiltersForm.facets__form.flex.flex--justify.flex--center -->
+    </facet-filters-form><!-- /.facets -->
+
+    {%- render 'facets-active', filters: results.filters, results_url: results_url, total_active_values: total_active_values -%}
+  </div><!-- /.collection-facets__inner -->
+</div><!-- /.collection-facets -->

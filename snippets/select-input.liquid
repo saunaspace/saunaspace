@@ -1,0 +1,48 @@
+{% comment %}
+  Renders select input form element
+  Accepts:
+  - id {String} ID of the input element
+  - label {String} Label of the input element
+  - name {String} Name of the input element
+  - class {String} Class of the input element
+  - options {HTML} Options to be rendered
+  - attr {HTML} Other attributes to be rendered
+
+  Usage:
+  {%- render 'select-input',
+    id: 'select-input',
+    label: 'Select Input',
+    name: 'select-input',
+    options: options_html
+  -%}
+{% endcomment %}
+
+{%-
+  liquid
+  assign id = id | default: false
+  assign label = label | default: false
+  assign name = name | default: false
+  assign class = class | default: ''
+  assign options = options | default: ''
+-%}
+
+<div class="select-input select-input--bordered {{ class }}">
+  {%- if label and id -%}
+    <label for="{{- id -}}" class="select-input__label">
+      {{- label -}}
+    </label>
+  {%- endif -%}
+
+  <div class="select-input__wrapper">
+    <select
+      {% if name %}name="{{- name -}}"{% endif %}
+      {% if id %}id="{{- id -}}"{% endif %}
+      {% if attr %}{{ attr }}{% endif %}
+      class="select-input__el"
+    >
+      {{- options -}}
+    </select>
+
+    {%- render 'icon-chevron-down' -%}
+  </div><!-- /.select-input__wrapper -->
+</div><!-- /.select-input -->

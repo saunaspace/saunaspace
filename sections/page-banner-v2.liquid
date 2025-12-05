@@ -1,0 +1,90 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "page-banner-" | append: section.index
+  endif
+%}
+{{- 'section-page-banner.css' | asset_url | stylesheet_tag -}}
+
+<div class="page-banner__main" id="{{ sec_id }}">
+  <div class="container">
+    <div class="page-banner__inner{% if section.settings.background_image != blank %} page-banner__inner--has-background{% endif %}">
+      {%- if section.settings.background_image != blank -%}
+        <div class="page-banner__background media">
+          {%-
+            liquid
+            assign image = section.settings.background_image
+            assign image_src = image | image_url: width: 375
+            capture image_srcset
+              render 'srcset', image: image
+            endcapture
+            assign image_alt = image.alt | escape
+            render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: image.width, height: image.height, focal_point: image.presentation.focal_point
+          -%}
+        </div><!-- /.page-banner__background -->
+      {%- endif -%}
+
+      <div class="page-banner__content">
+        <h1 class="page-banner__heading h2">
+          {{- section.settings.heading | default: page.title -}}
+        </h1><!-- /.page-banner__heading -->
+
+        {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+        <a href="{{ section.settings.button_url }}" class="button button--blurred">{{ section.settings.button_text }}</a>
+        {% endif %}
+
+        {%- if section.settings.content != blank -%}
+          <div class="page-banner__text">
+            {{ section.settings.content }}
+          </div><!-- /.page-banner__text -->
+        {%- endif -%}
+      </div><!-- /.page-banner__content -->
+    </div><!-- /.page-banner__inner -->
+  </div><!-- /.container -->
+</div><!-- /.page-banner__main -->
+
+{% schema %}
+{
+  "name": "Page Banner v2",
+  "class": "page-banner page-banner-v2",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Overwrites page title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+    },
+    {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Page Banner v2"
+    }
+  ]
+}
+{% endschema %}

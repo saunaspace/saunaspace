@@ -1,0 +1,8 @@
+<div class="product-mobile-atc">
+    <div class="inner-wrapper">
+        <div class="product-mobile-atc-pricing">
+            {%- render 'price', product_ref: product_ref -%}
+        </div>
+        <button class="product-mobile-atc-button button js-product-atc-trigger{% unless product_ref.selected_or_first_available_variant.available %} disabled-no-inventory{% endunless %}">Add to cart</button>
+    </div>
+</div>

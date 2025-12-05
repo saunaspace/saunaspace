@@ -1,0 +1,59 @@
+<style>
+  #sca-gift-thumbnail {
+    padding: 15px 0;
+    margin-bottom: 0px!important;
+    background-color: #f0e7da;
+  }
+  .fg-gift-thumbnail-offer-slider {
+    background-color: unset !important;
+  }
+  .fg-gift-thumbnail-container {
+    border: unset !important;
+  }
+  .fg-gift-thumbnail-offer-title {
+    font-size: 20px !important;
+    font-weight: bold !important;
+    margin: 0px 0 12px 12px;
+  }
+  .fg-gift-thumbnail-offer-time {
+    display:none!important;
+  }
+  .fg-gift-thumbnail-offer-footer {
+    justify-content: flex-start !important;
+    padding: 0 !important;
+  }
+  @media (max-width: 768px) {
+    #sca-gift-thumbnail {
+      padding: 0px;
+    }
+    .fg-gift-thumbnail-offer-title{
+      font-size: 14px!important;
+      margin-bottom: 0!important;
+    }
+    .fg-gift-thumbnail-offer-body{
+      display: inline-block;
+      margin-right: 5px!important;
+    }
+    .fg-gift-thumbnail-offer-body .fg-gift-image {
+      width: 40px!important;
+      height: 40px!important;
+    }
+    .fg-gift-thumbnail-offer-slider{
+      padding: 4px 4px 0 0!important;
+    }
+    .fg-gift-thumbnail-offer-footer{
+      font-size: 12px;
+      display: inline-block!important;
+      margin-left: 0!important;
+      vertical-align: super;
+    }
+}
+</style>
+
+<script>
+  document.addEventListener('fg-gifts:gift-icon', async (e) => {
+    setTimeout(() => {
+      document.querySelector('.fg-gift-thumbnail-offer-footer').textContent = 'Free with purchase of any sauna';
+    }, 10);
+  });
+</script>

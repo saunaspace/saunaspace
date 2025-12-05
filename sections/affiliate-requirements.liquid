@@ -1,0 +1,280 @@
+{%- assign articles_markup = '' -%}
+
+{%-
+  liquid
+  assign color_scheme = section.settings.color_scheme
+  assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+-%}
+
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-featured-articles-" | append: section.index
+  endif
+%}
+
+{%- if section.blocks.size > 0 -%}
+  {{- 'card-article.css' | asset_url | stylesheet_tag -}}
+
+  <section
+    class="affiliate-requirements featured-articles{% if section.settings.flip_content %} featured-articles--flip{% endif %}"
+    data-id="{{- section.id -}}"
+    id="{{ sec_id }}"
+  >
+    <div class="container">
+      <div class="featured-articles__inner">
+        <div class="featured-articles__aside">
+          <h2 class="featured-articles__title">
+            {{- section.settings.title | escape -}}
+          </h2><!-- /.featured-articles__title -->
+        </div><!-- /.featured-articles__aside -->
+
+        <div class="featured-articles__content">
+          <div class="featured-articles__grid">
+            {% for block in section.blocks %}
+            {% liquid
+            assign article_image = block.settings.image
+            assign article_title = block.settings.title
+            assign article_link = block.settings.url
+            %}
+            <div class="card-article card-article--simple featured-articles__grid-item">
+                <{% if article_link != blank %}a href="{{- article_link -}}"{% else %}div{% endif %} class="card-article__media-wrapper card-article__link">
+                    <div class="card-article__media media">
+                    {%-
+                        liquid
+                        if article_image != blank
+                            render 'image', image: article_image
+                        else
+                            echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+                        endif
+                    -%}
+                    </div>
+                {% if article_link != blank %}</a>{% else %}</div>{% endif %}
+
+                {%- if article_title != blank -%}
+                <h4 class="card-article__title">
+                    <{% if article_link != blank %}a href="{{- article_link -}}"{% else %}div{% endif %} class="card-article__link">{{- article_title -}}</a>
+                </h4>
+                {%- endif -%}
+
+                {% if article_link != blank %}
+                <div class="article__actions">
+                    <a href="{{- url -}}" class="article__link link-dot">
+                        {{- 'article.read_more' | t -}}
+                    </a><!-- /.article__link -->
+                </div><!-- /.article__actions -->
+                {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div><!-- /.featured-articles__content -->
+      </div><!-- /.featured-articles__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.featured-articles -->
+
+  {% style %}
+    [data-id="{{- section.id -}}"] {
+      --color-background: {{ color_scheme_settings.background }};
+      --color-text: {{ color_scheme_settings.text }};
+    }
+
+    .featured-articles {
+      color: var(--color-text);
+      background-color: var(--color-background);
+    }
+
+    .featured-articles--flip .featured-articles__inner {
+      direction: rtl;
+    }
+
+    .featured-articles--flip .featured-articles__inner > * {
+      direction: ltr;
+    }
+
+    .featured-articles--flip .featured-articles__grid-item {
+      border-left: 0;
+      border-right: 0.1rem solid #aaa;
+    }
+
+    .featured-articles .container {
+      max-width: 100%;
+      padding: 0;
+    }
+
+    .featured-articles__inner {
+      display: grid;
+      grid-template-columns: 32% 1fr;
+      gap: 2.6rem;
+    }
+
+    .featured-articles__title {
+      padding-left: 2.6rem;
+      font-size: calc(var(--fsbase) * 4.8);
+      line-height: 1.444444;
+      font-weight: 500;
+    }
+
+    .featured-articles__aside {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5rem;
+    }
+
+    .featured-articles__grid {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .featured-articles__grid-item {
+      flex: 0 0 50%;
+      border-left: 0.1rem solid #aaa;
+      padding: 7.9rem 7rem 5.1rem;
+      position: relative;
+    }
+    .featured-articles__grid-item a.card-article__link::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+    .featured-articles__grid-item .article__actions {
+      display: none;
+    }
+    .featured-articles__grid-item h4.card-article__title {
+      font-family: var(--font-body-family);
+    }
+    @media screen and (max-width: 1023px) {
+      .featured-articles__inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .featured-articles__grid-item {
+        flex: 1 0;
+        border-top: 0.1rem solid #aaa;
+      }
+
+      .featured-articles__title {
+        padding-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      .featured-articles {
+        padding: 0 0 2rem;
+      }
+
+      .featured-articles__title {
+        font-size: calc(var(--fsbase) * 2.8);
+      }
+
+      .featured-articles__grid {
+        display: block;
+      }
+
+      .featured-articles__aside {
+        position: relative;
+        z-index: 5;
+        padding: 4.8rem;
+        overflow: hidden;
+      }
+
+      .featured-articles__aside:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        z-index: -5;
+        width: 39.3rem;
+        height: 8.3rem;
+        background-image: url({{- 'section-background-element.png' | asset_img_url: '786x' -}});
+        background-size: contain;
+        background-position: center;
+        transform: translateX(-50%);
+      }
+
+      .featured-articles__grid-item {
+        padding: 2.8rem 4rem 2.8rem;
+        border-left: 0;
+      }
+    }
+  {% endstyle %}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Affiliate Requirements",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme-2",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "flip_content",
+        "label": "Flip title/content",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Heading goes here"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "max_blocks": 2,
+    "blocks": [
+      {
+        "type": "requirement",
+        "name": "Requirement",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Title Here"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link",
+            "info": "Optional."
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Affiliate Requirements",
+        "blocks": [
+          {
+            "type": "requirement"
+          },
+          {
+            "type": "requirement"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

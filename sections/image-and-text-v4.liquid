@@ -1,0 +1,151 @@
+{%- if section.settings.image != blank and section.settings.title != blank -%}
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-image-and-text-v4-" | append: section.index
+    endif
+  %}
+  <link rel="stylesheet" href="{{ 'section-image-and-text-v4.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-image-and-text-v4.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <section
+    class="image-and-text-v4{% if section.settings.flip_content_desktop %} image-and-text-v4--flip-desktop{% endif %}{% if section.settings.flip_content_mobile %} image-and-text-v4--flip-mobile{% endif %}"
+    data-id="{{- section.id -}}"
+    id="{{ sec_id }}"
+  >
+    <div class="container">
+      <div class="image-and-text-v4__inner">
+        <div class="image-and-text-v4__media media{% if section.settings.icon != blank %} image-and-text-v4__media--icon{% endif %}">
+          {%- render 'image', image: section.settings.image -%}
+        </div><!-- /.image-and-text-v4__media -->
+
+        <div class="image-and-text-v4__content{% if section.settings.icon != blank %} image-and-text-v4__content--icon{% endif %}">
+          <div class="image-and-text-v4__wrapper">
+            {%- if section.settings.icon != blank -%}
+              <div class="image-and-text-v4__icon media media--transparent media--aspect-ratio">
+                {%- assign image_src = section.settings.icon | image_url: width: 75 -%}
+                {%- render 'image' with image: section.settings.icon, src: image_src, srcset: '' -%}
+              </div><!-- /.image-and-text-v4__icon -->
+            {%- endif -%}
+
+            <h2 class="image-and-text-v4__title h2-small-desktop">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.image-and-text-v4__title -->
+
+            {%- if section.settings.content != blank -%}
+              <p class="image-and-text-v4__entry">
+                {{- section.settings.content | escape | newline_to_br -}}
+              </p><!-- /.image-and-text-v4__entry -->
+            {%- endif -%}
+
+            {%- if section.settings.address != blank -%}
+              <p class="image-with-text-v4__address">
+                {%- assign address_url_text = section.settings.address | url_encode -%}
+                <a href="https://www.google.com/maps?q={{ address_url_text }}" class="full-unstyled-link" target="_blank">
+                  {%- render 'icon-pin' -%}
+
+                  {{- section.settings.address | escape -}}
+                </a>
+              </p><!-- /.image-with-text-v4__address -->
+            {%- endif -%}
+
+            {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+              {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'outlined button--orange-hover' -%}
+            {%- endif -%}
+          </div><!-- /.image-and-text-v4__wrapper -->
+        </div><!-- /.image-and-text-v4__content -->
+      </div><!-- /.image-and-text-v4__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.image-and-text-v4 -->
+{%- endif -%}
+
+{% style %}
+  [data-id="{{- section.id -}}"] {
+    --color-background: {{ color_scheme_settings.background }};
+    --color-text: {{ color_scheme_settings.text }};
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Image and text V4",
+    "class": "shopify-section--image-and-text-v4",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme-2",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "flip_content_desktop",
+        "label": "Flip image/content on desktop",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "flip_content_mobile",
+        "label": "Flip image/content on mobile",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "address",
+        "label": "Address"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image and text V4"
+      }
+    ]
+  }
+{% endschema %}

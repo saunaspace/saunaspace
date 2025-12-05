@@ -1,0 +1,81 @@
+{{- 'section-cookie-banner.css' | asset_url | stylesheet_tag -}}
+
+<script src="{{- 'cookie-banner.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+{%- assign _section = section.settings -%}
+
+{%- if _section.text != blank
+    and _section.accept_button_text != blank
+    and _section.close_button_text != blank
+-%}
+  <cookie-banner
+    class="no-js-hidden"
+    style="--color-background: {{ _section.background_color }}; --color-text: {{ _section.text_color }};"
+    {% if request.design_mode %}
+      data-open-in-design-mode="true"
+    {% endif %}
+
+  >
+    <div class="container container--fullwidth">
+      <div class="cookie-banner__inner flex flex--justify flex--center">
+        <div class="cookie-banner__text">
+          {{ _section.text }}
+        </div><!-- /.cookie-banner__text -->
+
+        <div class="cookie-banner__actions flex flex--center">
+          {%- render 'button',
+            type: 'button',
+            style: 'outlined',
+            class: 'cookie-banner__button',
+            name: 'accept-cookies',
+            id: 'accept-cookies',
+            value: _section.accept_button_text,
+            attr: 'data-action' -%}
+
+          <a href="#" class="link" id="close-cookies" data-action>{{ _section.close_button_text }}</a><!-- /.link -->
+        </div><!-- /.cookie-banner__actions -->
+      </div><!-- /.cookie-banner__inner -->
+    </div><!-- /.container -->
+  </cookie-banner>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.cookie-banner.name",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.cookie-banner.settings.colors.background.label",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.cookie-banner.settings.colors.text.label",
+      "default": "#fff"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.cookie-banner.settings.text.label",
+      "default": "<p>We use cookies to improve user experience and analyze website traffic.</p>"
+    },
+    {
+      "type": "text",
+      "id": "accept_button_text",
+      "label": "t:sections.cookie-banner.settings.accept.label",
+      "default": "Accept"
+    },
+    {
+      "type": "text",
+      "id": "close_button_text",
+      "label": "t:sections.cookie-banner.settings.close.label",
+      "default": "Close"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["aside"]
+  }
+}
+{% endschema %}

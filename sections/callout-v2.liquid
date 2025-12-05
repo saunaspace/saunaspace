@@ -1,0 +1,202 @@
+{{- 'section-callout-secondary.css' | asset_url | stylesheet_tag -}}
+
+{%-
+  liquid
+  assign radio_buttons_markup = ''
+  assign buttons_markup = ''
+-%}
+
+{%- if section.settings.button_1_label != blank and section.settings.button_1_url != blank -%}
+  {%- capture radio_buttons_markup -%}
+    {{- radio_buttons_markup -}}
+
+    <div class="radio callout__radio">
+      <input
+        type="radio"
+        id="callout-button-1"
+        name="callout-buttons"
+        value="radio-1"
+        checked
+      >
+
+      <label for="callout-button-1">
+        {{- section.settings.button_1_label -}}
+      </label>
+    </div>
+  {%- endcapture -%}
+
+  {%- capture buttons_markup -%}
+    {{- buttons_markup -}}
+
+    <a href="{{- section.settings.button_1_url -}}" class="callout__link link-dot">
+      {{- section.settings.general_button_label | default: 'APPLY NOW' -}}
+    </a>
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if section.settings.button_2_label != blank and section.settings.button_2_url != blank -%}
+  {%- capture radio_buttons_markup -%}
+    {{- radio_buttons_markup -}}
+
+    <div class="radio callout__radio">
+      <input
+        type="radio"
+        id="callout-button-2"
+        name="callout-buttons"
+        value="radio-2"
+        {% unless section.settings.button_1_label != blank and section.settings.button_1_url != blank %}checked{% endunless %}
+      >
+
+      <label for="callout-button-2">
+        {{- section.settings.button_2_label -}}
+      </label>
+    </div>
+  {%- endcapture -%}
+
+  {%- capture buttons_markup -%}
+    {{- buttons_markup -}}
+
+    <a href="{{- section.settings.button_2_url -}}" class="callout__link link-dot">
+      {{- section.settings.general_button_label | default: 'APPLY NOW' -}}
+    </a>
+  {%- endcapture -%}
+{%- endif -%}
+
+{% if section.settings.button_1_label == blank and section.settings.button_1_url != blank and section.settings.button_2_label == blank and section.settings.button_2_url == blank %}
+  {%- capture buttons_markup -%}
+    <a href="{{- section.settings.button_1_url -}}" class="callout__link link-dot co-link--no-radios">
+      {{- section.settings.general_button_label | default: 'APPLY NOW' -}}
+    </a>
+  {% endcapture %}
+{% elsif section.settings.button_1_label == blank and section.settings.button_1_url == blank and section.settings.button_2_label == blank and section.settings.button_2_url != blank %}
+  {%- capture buttons_markup -%}
+    <a href="{{- section.settings.button_2_url -}}" class="callout__link link-dot co-link--no-radios">
+      {{- section.settings.general_button_label | default: 'APPLY NOW' -}}
+    </a>
+  {%- endcapture -%}
+{% endif %}
+
+<div class="callout-secondary sec-co-v2" id="section-section-callout-{{ section.index }}">
+  <div class="callout__background">
+    <div class="media callout__media">
+      {%-
+        liquid
+        if section.settings.image != blank
+          assign image_src = section.settings.image | image_url: width: section.settings.image.width
+          capture image_srcset
+            render 'srcset', image: section.settings.image, widths: '1024,1100,1500,1780,2000,3000,3840'
+          endcapture
+          assign image_alt = section.settings.image.alt | escape
+          render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: section.settings.image.width, height: section.settings.image.height
+        else
+          echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+        endif
+      -%}
+    </div><!-- /.media -->
+  </div><!-- /.callout__background -->
+
+  <div class="callout__inner">
+    <div class="callout__content{% if radio_buttons_markup == '' %} no-radio-btns{% endif %}">
+      <div class="container">
+        <div class="callout__body center">
+          <div class="callout__body-inner">
+            {%- if section.settings.title != blank -%}
+              <h2 class="callout__title h3">
+                {{ section.settings.title }}
+              </h2><!-- /.callout__title -->
+            {%- endif -%}
+
+            {%- if section.settings.content != blank -%}
+              <div class="callout__content rte">
+                {{ section.settings.content }}
+              </div><!-- /.callout__content -->
+            {%- endif -%}
+
+            {%- if radio_buttons_markup != '' -%}
+              <div class="callout__radio-buttons">
+                {{- radio_buttons_markup -}}
+              </div><!-- /.callout__radio-buttons -->
+            {%- endif -%}
+          </div>
+
+          {%- if buttons_markup != '' -%}
+            <div class="callout__actions">
+              {{- buttons_markup -}}
+            </div>
+          {%- endif -%}
+        </div><!-- /.callout__body -->
+      </div>
+    </div><!-- /.callout__content -->
+  </div><!-- /.callout__inner -->
+</div><!-- /.callout-secondary -->
+
+{% schema %}
+{
+  "name": "Callout v2",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "title",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "content",
+      "label": "content",
+      "default": "Content text goes here"
+    },
+    {
+      "type": "header",
+      "content": "Button one"
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "button_1_url",
+      "label": "URL"
+    },
+    {
+      "type": "header",
+      "content": "Button two"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "URL"
+    },
+    {
+      "type": "header",
+      "content": "General button"
+    },
+    {
+      "type": "text",
+      "id": "general_button_label",
+      "label": "Label",
+      "info": "Note: To only show the bottom 'General Button' without the other buttons, leave the Button 1 and Button 2 labels empty but enter a url for Button two. That will be the link to the bottom button"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Callout v2"
+    }
+  ]
+}
+{% endschema %}

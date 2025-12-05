@@ -1,0 +1,161 @@
+{% liquid
+    assign has_content = false
+    if section.blocks.size > 0
+        for block in section.blocks
+            unless block.settings.title == blank or block.settings.content == blank
+            assign has_content = true
+            endunless
+        endfor
+    endif
+%}
+
+{% if has_content == true %}
+    {{- 'section-faq.css' | asset_url | stylesheet_tag -}}
+
+    {% liquid
+      if section.settings.section_id != blank
+        assign sec_id = section.settings.section_id
+      else
+        assign sec_id = "section-faq-" | append: section.index
+      endif
+    %}
+  
+    <section
+      class="faq scheme-2"
+      data-id="{{- section.id -}}"
+      id="{{ sec_id }}"
+    >
+      <div class="container">
+  
+        <div class="faq__inner faq__inner--left">
+          {%- if section.settings.title != blank -%}
+            <div class="faq__head faq__head--{{- section.settings.title_alignment | default: "center" -}}">
+              <h2 class="faq__title h2-small-desktop">{{- section.settings.title | escape -}}</h2><!-- /.faq__title -->
+            </div><!-- /.faq__head -->
+          {%- endif -%}
+  
+          <div class="faq__body">
+            {%- if section.settings.content != blank -%}
+              <p class="faq__content {{ section.settings.content_alignment | default: "left" }}">
+                {{- section.settings.content | escape | newline_to_br -}}
+              </p><!-- /.faq__content -->
+            {%- endif -%}
+
+  
+            {%- for block in section.blocks -%}
+            {%- if block.settings.title == blank or block.settings.content == blank -%}
+            {%- continue -%}
+            {%- endif -%}
+
+            <details class="faq__accordion faq__accordion--topic"{% if forloop.first and section.settings.keep_accordions_closed != true %} open{% endif %} {{ block.shopify_attributes }}>
+                <summary>
+                    {{- block.settings.title | escape -}}
+
+                    {%- if block.settings.type == 'info' -%}
+                    {%- render 'icon-chevron-down-thin' -%}
+                    {%- else -%}
+                    {%- render 'icon-plus-large' -%}
+                    {%- endif -%}
+                </summary>
+
+                <div>
+                    {{- block.settings.content -}}
+                </div>
+            </details><!-- /.faq__accordion -->
+            {%- endfor -%}
+          </div><!-- /.faq__body -->
+  
+          {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+            <div class="faq__actions faq__actions--{{ section.settings.button_alignment | default: "center" }}">
+              {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'orange-hover button--large-desktop' -%}
+            </div><!-- /.faq__actions -->
+          {%- endif -%}
+        </div><!-- /.faq__inner -->
+      </div><!-- /.container -->
+    </section><!-- /.faq -->
+  {%- endif -%}
+  
+  {% schema %}
+    {
+      "name": "Product Details-Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product Details"
+        },
+        {
+          "type": "text_alignment",
+          "id": "title_alignment",
+          "label": "Title alignment",
+          "default": "center"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text_alignment",
+          "id": "content_alignment",
+          "label": "Content alignment",
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text_alignment",
+          "id": "button_alignment",
+          "label": "Button alignment",
+          "default": "center"
+        },
+        {
+            "type": "checkbox",
+            "id": "keep_accordions_closed",
+            "label": "Keep first accordion closed",
+            "default": false
+        },
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Section ID"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "accordion",
+          "name": "Accordion",
+          "settings": [
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Title"
+            },
+            {
+              "type": "richtext",
+              "id": "content",
+              "label": "Content"
+            }
+          ]
+        }
+      ],
+      "disabled_on": {
+        "groups": ["*"]
+      },
+      "presets": [
+        {
+          "name": "Product Details-Accordion"
+        }
+      ]
+    }
+  {% endschema %}
+  

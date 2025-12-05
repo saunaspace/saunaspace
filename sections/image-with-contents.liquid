@@ -1,0 +1,354 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-image-with-contents-" | append: section.index
+  endif
+%}
+{%- if section.blocks.size > 0 -%}
+  <section class="image-with-contents" id="{{ sec_id }}">
+    <div class="image-with-contents__image media">
+      {%- if section.settings.image != blank -%}
+        {%- if section.settings.image_mobile != blank -%}
+          {%- assign image_class = 'small-hide medium-hide' -%}
+          {%- render 'image', image: section.settings.image_mobile, class: 'large-up-hide' -%}
+        {%- endif -%}
+
+        {%- render 'image', image: section.settings.image, class: image_class -%}
+      {%- endif -%}
+    </div><!-- /.image-with-contents__image -->
+
+    <div class="image-with-contents__content">
+      <div class="container">
+        <div class="image-with-contents__wrapper">
+          {%- if section.settings.title != blank -%}
+            <h2 class="image-with-contents__title">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.image-with-contents__title -->
+          {%- endif -%}
+
+          <details class="image-with-contents__dropdown disclosure-has-popup">
+            <summary class="image-with-contents__label">
+              <span>{{- section.blocks[0].settings.title | escape -}}</span>
+
+              {%- render 'icon-chevron-menu' -%}
+            </summary>
+
+            <div class="image-with-contents__list">
+              <ul class="list-unstyled">
+                {%- for block in section.blocks -%}
+                  <li>
+                    <button
+                      type="button"
+                      class="{% if forloop.first %}is-active{% endif %}"
+                      data-handle="{{- block.settings.title | handle -}}"
+                      onclick="
+                        this.closest('details').querySelectorAll('button')
+                          .forEach(button => button.classList.toggle('is-active', button === this));
+                        this.closest('details').querySelector('summary span').textContent = this.textContent;
+                        this.closest('section').querySelectorAll('[data-rte]')
+                          .forEach(wrapper => wrapper.classList.toggle('hidden', wrapper.dataset.handle !== this.dataset.handle));
+                        this.closest('details').removeAttribute('open');
+                      "
+                    >
+                      {{- block.settings.title | escape -}}
+                    </button>
+                  </li>
+                {%- endfor -%}
+              </ul><!-- /.list-unstyled -->
+            </div><!-- /.image-with-contents__list -->
+          </details><!-- /.image-with-contents__dropdown -->
+
+          {%- for block in section.blocks -%}
+            <div
+              class="image-with-contents__rte{% unless forloop.first %} hidden{% endunless %}"
+              data-handle="{{- block.settings.title | handle -}}"
+              data-rte
+            >
+              {{- block.settings.content -}}
+            </div><!-- /.image-with-contents__rte -->
+          {%- endfor -%}
+        </div><!-- /.image-with-contents__wrapper -->
+      </div><!-- /.container -->
+    </div><!-- /.image-with-contents__content -->
+  </section><!-- /.image-with-contents -->
+{%- endif -%}
+
+{% style %}
+  .image-with-contents {
+    background-color: #f0e7da;
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+  @media (min-width: 1023px) {
+    .image-with-contents {
+      min-height: min(90vh,56.25vw);
+      padding-top: 20px;
+      aspect-ratio: initial;
+    }
+  }
+  @media (min-width: 1400px) {
+    .image-with-contents {
+      padding-top: 175px;
+    }
+  }
+
+  .image-with-contents__image {
+    position: absolute;
+    inset: 0;
+  }
+
+  .image-with-contents__content {
+    color: #f4f0e0;
+    display: flex;
+    align-items: center;
+    min-height: 100%;
+    padding: 3rem 0;
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: 1023px) {
+    .image-with-contents__content {
+      min-height: auto;
+      align-items: flex-start;
+    }
+  }
+
+  .image-with-contents__content .container {
+    width: 100%;
+  }
+
+  .image-with-contents__title {
+    text-align: center;
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.444444;
+    font-weight: 500;
+    margin: 0 0 4.8rem;
+  }
+
+  .image-with-contents__wrapper {
+    max-width: 56.8rem;
+  }
+
+  .image-with-contents__label {
+    font-size: calc(var(--fsbase) * 2.4);
+    line-height: 1;
+    font-weight: 600;
+    color: #f4f0e0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7.5rem;
+    padding: 0 3.2rem 0 2.1rem;
+    border: 0.1rem solid #5d5d5d;
+    border-radius: 1.1rem;
+  }
+
+  .image-with-contents__label span {
+    flex: 1;
+  }
+
+  .image-with-contents__label span::before {
+    content: '';
+    vertical-align: middle;
+    background-color: #ff3a00;
+    width: 1.1rem;
+    height: 1.1rem;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .image-with-contents__label svg {
+    color: #5d5d5d;
+    width: 1.5rem;
+  }
+
+  .image-with-contents__dropdown[open] .image-with-contents__label {
+    color: #2c2621;
+    background-color: #f0e7da;
+    border-color: #d6d1cb;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+  }
+
+  .image-with-contents__dropdown {
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .image-with-contents__rte {
+    font-size: calc(var(--fsbase) * 1.8);
+    line-height: 2;
+    font-weight: 600;
+  }
+
+  .image-with-contents__rte ul {
+    list-style-type: none;
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.714286;
+    padding-left: 1rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .image-with-contents__list {
+    background-color: #f0e7da;
+    width: 100%;
+    padding: 2.1rem 4.2rem 4.3rem;
+    border: 0.1rem solid #d6d1cb;
+    border-top: none;
+    border-bottom-left-radius: 1.1rem;
+    border-bottom-right-radius: 1.1rem;
+    position: absolute !important;
+    top: 100%;
+    left: 0;
+  }
+
+  .image-with-contents__list li + li {
+    margin-top: 1rem;
+  }
+
+  .image-with-contents__list button {
+    color: #2c2621;
+    background: none;
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 1;
+    font-weight: 600;
+    display: inline-block;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .image-with-contents__list button.is-active {
+    text-decoration: line-through;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-with-contents {
+      aspect-ratio: initial;
+    }
+
+    .image-with-contents__image {
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+
+    .image-with-contents__content {
+      padding: 4rem 2rem;
+    }
+
+    .image-with-contents__content,
+    .image-with-contents__label {
+      color: #2c2621;
+    }
+
+    .image-with-contents__label {
+      font-size: calc(var(--fsbase) * 1.2);
+      height: 3.8rem;
+      padding: 0 1.6rem 0 1.1rem;
+      border-radius: 0.5rem;
+    }
+
+    .image-with-contents__label span::before {
+      width: 0.5rem;
+      height: 0.5rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .image-with-contents__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      line-height: 1.458333;
+      text-align: left;
+      margin: 0 0 1.5rem;
+    }
+
+    .image-with-contents__label svg {
+      width: 0.8rem;
+    }
+
+    .image-with-contents__dropdown {
+      margin-bottom: 2.3rem;
+    }
+
+    .image-with-contents__list {
+      padding: 0.5rem 2rem 2rem;
+    }
+
+    .image-with-contents__list li + li {
+      margin-top: 0.4rem;
+    }
+
+    .image-with-contents__list button {
+      font-size: calc(var(--fsbase) * 1.4);
+    }
+
+    .image-with-contents__rte {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+
+    .image-with-contents__rte ul {
+      font-size: calc(var(--fsbase) * 1.2);
+      margin: 1rem 0 2rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Image with contents",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "content",
+        "name": "Content",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image with contents"
+      }
+    ]
+  }
+{% endschema %}

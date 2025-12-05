@@ -1,0 +1,178 @@
+{%- unless section.blocks.size == 0 -%}
+  {% comment %}{{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+  {{- 'section-hero-carousel-v3.css' | asset_url | stylesheet_tag -}}
+
+ {% comment %} <script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>{% endcomment %}
+  <script src="{{- 'hero-carousel-v3.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+  {%-
+    liquid
+    assign has_button = false
+
+    if section.settings.btn_label != blank and section.settings.btn_url != blank
+      assign has_button = true
+    endif
+  -%}
+
+  <div class="hero-carousel-v3__wrapper hero-carousel-v3__wrapper--height-{{ section.settings.height }}">
+    <hero-carousel-v3
+      class="swiper block"
+      {%- if section.blocks.size > 1 -%}data-slider{% endif %}
+    >
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="hero-carousel-v3__slide">
+              <div class="hero-carousel-v3__background">
+                <div class="media hero-carousel-v3__media media--transparent {% if block.settings.video_mobile != blank or block.settings.image_mobile != blank %}small-hide{% endif %}">
+                  {%-
+                    liquid
+                    if block.settings.video != blank
+                      echo block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false
+                    elsif block.settings.image != blank
+                      assign image_focal_point = block.settings.image.presentation.focal_point | replace: '50.0% 50.0%', '100.0% 0.0%'
+
+                      render 'image', image: block.settings.image, focal_point: image_focal_point
+                    else
+                      echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+                    endif
+                  -%}
+                </div><!-- /.media -->
+
+                {%- if block.settings.video_mobile != blank or block.settings.image_mobile != blank -%}
+                  <div class="media hero-carousel-v3__media media--transparent large-up-hide">
+                    {%-
+                      liquid
+                      if block.settings.video_mobile != blank
+                        echo block.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: true, controls: false
+                      elsif block.settings.image_mobile != blank
+                        render 'image', image: block.settings.image_mobile
+                      endif
+                    -%}
+                  </div><!-- /.media -->
+                {%- endif -%}
+              </div><!-- /.hero-carousel-v3__background -->
+            </div><!-- /.hero-carousel-v3__slide -->
+          </div><!-- /.swiper-slide -->
+        {%- endfor -%}
+      </div><!-- /.swiper-wrapper -->
+
+      <div class="swiper-pagination hero-carousel-v3__pagination{% if section.settings.hide_pagination_on_desktop %} large-up-hide{% endif %}" data-pagination></div><!-- /.swiper-pagination -->
+    </hero-carousel-v3><!-- /.hero-carousel-v3__wrapper -->
+
+    <div class="hero-carousel-v3__content">
+      <div class="container">
+        {%- if section.settings.title != blank -%}
+          <h2 class="hero-carousel-v3__title">
+            {{- section.settings.title -}}
+          </h2><!-- /.hero-carousel-v3__title -->
+        {%- endif -%}
+
+
+        {%- if has_button -%}
+          <div class="hero-carousel-v3__actions small-hide medium-hide">
+            <a
+              href="{{ section.settings.btn_url }}"
+              class="hero-carousel-v3__link link-dot"
+            >
+              {{- section.settings.btn_label | escape -}}
+            </a>
+          </div><!-- /.hero-carousel-v3__actions -->
+        {%- endif -%}
+
+        {%- if section.settings.content != blank -%}
+          <div class="hero-carousel-v3__text text-center">
+            {{- section.settings.content -}}
+          </div><!-- /.hero-carousel-v3__text -->
+        {%- endif -%}
+
+        {%- if has_button -%}
+          <div class="hero-carousel-v3__actions large-up-hide">
+            <a
+              href="{{ section.settings.btn_url }}"
+              class="hero-carousel-v3__link link-dot"
+            >
+              {{- section.settings.btn_label | escape -}}
+            </a>
+          </div><!-- /.hero-carousel-v3__actions -->
+        {%- endif -%}
+      </div><!-- /.container -->
+    </div><!-- /.hero-carousel-v3__content -->
+  </div><!-- /.hero-carousel-v3__wrapper hero-carousel-alt__wrapper--height -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Hero Carousel v3",
+  "class": "hero-carousel-v3",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Link"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Overwrites image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image Mobile"
+        },
+        {
+          "type": "video",
+          "id": "video_mobile",
+          "label": "Video Mobile",
+          "info": "Overwrites Mobile image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Carousel v3"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

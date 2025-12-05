@@ -1,0 +1,87 @@
+{{- 'section-careers-callout.css' | asset_url | stylesheet_tag -}}
+<section class="careers-callout">
+    <div class="container">
+        <div class="section-content-cnt">
+
+            {% if section.settings.bg_image != blank %}
+            <div class="bg-img-cnt">
+                {%- render 'image', image: section.settings.bg_image -%}
+            </div>
+            {% endif %}
+
+            <div class="sec-content-cnt">
+                {% if section.settings.heading != blank %}
+                <div class="sec-header">
+                    <h3 class="h2 sec-heading">{{ section.settings.heading | newline_to_br }}</h3>
+                </div>
+                {% endif %}
+
+                {% if section.settings.content != blank %}
+                <div class="sec-content">
+                    <p>{{ section.settings.content }}</p>
+                </div>
+                {% endif %}
+
+                {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+                <div class="sec-cta">
+                    <a href="{{ section.settings.button_url }}" class="careers-callout-cta link-dot">{{ section.settings.button_text }}</a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+{
+"name": "Careers Callout",
+"settings": [
+    {
+        "type": "textarea",
+        "id": "heading",
+        "label": "Heading"
+    },
+    {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+    },
+    {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+    },
+    {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background element"
+    },
+    {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+    }
+],
+"presets": [
+    {
+        "name": "Careers Callout",
+        "settings": {
+            "heading": "Be Part of Something Special",
+            "content": "We always seek passionate and talented individuals to join our team. We would love to hear from you.",
+            "button_text": "Explore careers at SaunaSpace",
+            "button_url": "/"
+        }
+    }
+],
+"disabled_on": {
+    "groups": ["*"]
+}
+}
+{% endschema %}

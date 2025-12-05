@@ -1,0 +1,156 @@
+{%  comment  %}
+{%- assign metaobject_key = section.settings.mataobject_key | default: '' -%}
+{%- unless shop.metaobjects[metaobject_key].values.size == 0 -%}
+{% endcomment %}
+
+{% assign ra_blog = blogs.infrared-sauna-light-therapy-research %}
+{%- unless ra_blog.articles.size == 0 -%}
+  <link rel="stylesheet" href="{{ 'section-research-items.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-research-items.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <script src="{{- 'research-items.js' | asset_url -}}" defer="defer" ></script>
+
+  {%- assign object_values = shop.metaobjects[metaobject_key].values | sort: 'filter_tag' -%}
+  {%- assign filter_tags = object_values | map: 'filter_tag' | uniq -%}
+  {%- assign authors = object_values | map: 'author' | uniq | sort -%}
+
+  <div class="container">
+    <research-items class="research-items__main js-research-items" data-article-count="{{ ra_blog.articles_count }}" data-blog-url="{{ ra_blog.url }}" data-blog-handle="{{ ra_blog.handle }}" data-current-filter="tag">
+      <aside class="research-items__filters" data-filters>
+        <div class="research-items__filter-radios">
+          <h3 class="research-items__filter-heading">Sort By</h3><!-- /.research-items__filter-heading -->
+
+          <div class="research-items__radio radio">
+            <input type="radio" name="filter_type" id="filter-tag" value="filter-tag" class="js-sortby" data-sortby="tag" checked>
+            <label for="filter-tag" class="radio__label">Topic</label><!-- /.radio__label -->
+          </div><!-- /.radio -->
+
+          <div class="research-items__radio radio">
+            <input type="radio" name="filter_type" id="author" value="author" class="js-sortby" data-sortby="letter">
+            <label for="author" class="radio__label">Author (A-Z)</label><!-- /.radio__label -->
+          </div><!-- /.radio -->
+        </div><!-- /.research-items__filter-radios -->
+
+        <div class="research-items__filters-toggle">
+          <button data-filters-toggle>
+            <span>Filter By:</span>
+            {%- render 'icon-chevron-down' -%}
+          </button>
+        </div><!-- /.research-items__filter-checkboxes-toggle -->
+
+        <div class="research-items__filter-checkboxes is-expanded" data-filters-collapsible>
+          <div class="research-items__filter-checkboxes-wrapper">
+            <div class="filter-type-group" data-type="tag">
+            {% for tag in ra_blog.all_tags %}
+              {% assign tag_handle = tag | handleize %}
+              <div class="research-items__checkbox checkbox" data-filter data-type="filter-tag">
+                <input type="checkbox" name="filter" id="{{ tag_handle }}" value="{{ tag }}">
+                <label for="{{ tag_handle }}">{{- tag -}}</label>
+              </div>
+            {% endfor %}
+            </div>
+
+            <div class="filter-type-group" data-type="letter">
+            {% assign letters = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" | split: "," %}
+            {% for letter in letters %}
+              <div class="research-items__checkbox checkbox" data-filter data-type="letter">
+                <input type="checkbox" name="filter" id="letter-{{ letter }}" value="{{ letter }}">
+                <label for="letter-{{ letter }}">{{- letter -}}</label>
+              </div>
+            {% endfor %}
+            </div>
+
+            {% comment %}
+            {%- for item in filter_tags -%}
+              <div class="research-items__checkbox checkbox" data-filter data-type="filter-tag">
+                <input type="checkbox" name="filter" id="{{ item | handle }}" value="{{ item | handle }}">
+
+                <label for="{{ item | handle }}">{{- item -}}</label>
+              </div><!-- /.checkbox -->
+            {%- endfor -%}
+
+            {%- for item in authors -%}
+              <div class="research-items__checkbox checkbox is-hidden" data-filter data-type="author">
+                <input type="checkbox" name="filter" id="{{ item | handle }}" value="{{ item | handle }}">
+
+                <label for="{{ item | handle }}">{{- item -}}</label>
+              </div><!-- /.checkbox -->
+            {%- endfor -%}
+            {% endcomment %}
+
+          </div><!-- /.research-items__filter-checkboxes-wrapper -->
+        </div><!-- /.research-items__filter-checkboxes -->
+      </aside>
+
+      <div class="research-items__body">
+        <div class="research-items__body-wrapper">
+          <div class="research-items__body-wrapper js-articles-container"><h3 class="articles-loading-heading">Loading...</h3></div>
+          {% comment %}
+          {%- assign topic = '' -%}
+          <div class="research-items__group" data-group>
+            {% for object in shop.metaobjects[metaobject_key].values %}
+              {%- if topic != object.filter_tag -%}
+                {%- unless forloop.first -%}
+                  {% # theme-check-disable UnclosedHTMLElement %}
+                  </div><!-- /.research-items__group -->
+                  <div class="research-items__group" data-group>
+                  {% # theme-check-enable UnclosedHTMLElement %}
+                {%- endunless -%}
+
+                <h3 class="research-items__group-heading">{{- object.filter_tag | escape -}}</h3><!-- /.research-items__group-heading -->
+                {%- assign topic = object.filter_tag -%}
+              {%- endif -%}
+
+              <div
+                class="research-items__item"
+                data-item
+                data-filter-tag="{{ object.filter_tag | handle }}"
+                data-author="{{ object.author | handle }}"
+              >
+                <h5 class="research-items__item-heading">{{- object.heading | escape -}}</h5><!-- /.research-items__item-heading -->
+
+                <div class="research-items__item-body">{{- object.description | escape | newline_to_br }}</div><!-- /.research-items__item-body -->
+              </div><!-- /.research-items__item -->
+            {% endfor %}
+          </div><!-- /.research-items__group -->
+          {% endcomment %}
+
+        </div><!-- /.research-items__body-wrapper -->
+      </div><!-- /.research-items__body -->
+
+      {% comment %}
+      <template data-see-more>
+        <button class="link-underline" data-see-more>See More</button><!-- /.link-underline -->
+      </template>
+      {% endcomment %}
+
+    </research-items><!-- /.research-items__main -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Research Items",
+  "class": "research-items",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "mataobject_key",
+      "label": "Metaobject key",
+      "default": "research_items"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Research Items",
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,27 @@
+{%- if blog.previous_article or blog.next_article -%}
+  <section class="related-articles">
+    <div class="container container--narrow">
+      <header class="related-articles__head center">
+        <p class="related-articles__title h3">
+          {{- 'article.related_articles.title' | t -}}
+        </p><!-- /.related-articles__title h3 -->
+      </header><!-- /.related-articles__head center -->
+
+      <div class="related-articles__body">
+        <div class="grid grid--2">
+          {%- if blog.previous_article -%}
+            <div class="grid__item">
+              {%- render 'card-article', article_ref: blog.previous_article -%}
+            </div><!-- /.grid__item -->
+          {%- endif -%}
+
+          {%- if blog.next_article -%}
+            <div class="grid__item">
+              {%- render 'card-article', article_ref: blog.next_article -%}
+            </div><!-- /.grid__item -->
+          {%- endif -%}
+        </div><!-- /.grid -->
+      </div><!-- /.related-articles__body -->
+    </div><!-- /.container container--narrow -->
+  </section><!-- /.related-articles -->
+{%- endif -%}

@@ -1,0 +1,139 @@
+{% assign quicklinks = page.metafields.custom.quick_links %}
+{% if quicklinks != blank and quicklinks.value.size > 0 %}
+<page-nav class="page-nav small-hide medium-hide">
+  <div class="container container--fullwidth">
+    <ul class="list-unstyled">
+      {%- for link in quicklinks.value -%}
+        {% liquid
+          assign url = link.url
+          if url contains "#"
+            assign hash = url | split: "#"
+            assign url = "#" | append: hash[1]
+          endif  
+        %}
+        <li>
+          <a href="{{- url -}}" class="inline-unstyled-link">{{- link.text | escape -}}</a>
+        </li>
+      {%- endfor -%}
+    </ul><!-- /.list-unstyled -->
+  </div><!-- /.container container--fullwidth -->
+</page-nav><!-- /.page-nav -->
+{% endif %}
+
+
+{% comment %}<!-- Original: Updated to take metafield inputs from the page -->
+{%- assign nav_link = section.settings.menu.links | where: 'url', request.path | first -%}
+{%- if nav_link.links.size > 0 -%}
+  <page-nav class="page-nav small-hide medium-hide">
+    <div class="container container--fullwidth">
+      <ul class="list-unstyled">
+        {%- for link in nav_link.links -%}
+          <li>
+            <a href="{{- link.url -}}" class="inline-unstyled-link">{{- link.title | escape -}}</a>
+          </li>
+        {%- endfor -%}
+      </ul><!-- /.list-unstyled -->
+    </div><!-- /.container container--fullwidth -->
+  </page-nav><!-- /.page-nav -->
+{%- endif -%}
+{% endcomment %}
+
+{% style %}
+  .page-nav {
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2rem);
+    width: 100%;
+    position: fixed;
+    top: var(--header-height-sticky, 7.8rem);
+    left: 0;
+    z-index: var(--z-header);
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s;
+  }
+
+  /* body:not(.scrolling-down):has(.header.is-scrolled) .page-nav { */
+  body.pagenav-active:not(.scrolling-down):not(.at-top) .page-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+  body.sticky-carousel-active:not(.at-top):has(.header.is-scrolled) .page-nav,
+  body.scrolling-down:not(.at-top):has(.header.is-scrolled) .page-nav {
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  body:has(.js-header:hover) .page-nav {
+    opacity: 0!important;
+    visibility: hidden!important;
+  }
+
+  .page-nav ul {
+    color: #faf8f2;
+    text-align: center;
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.214286;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    height: 6rem;
+  }
+
+  .page-nav a {
+    opacity: 0.4;
+    transition: opacity var(--duration-default);
+  }
+
+  .page-nav a:hover {
+    opacity: 1;
+  }
+{% endstyle %}
+
+{% javascript %}
+  class PageNav extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.links = this.querySelectorAll('a');
+      this.links.forEach(link => {
+        link.addEventListener('click', this.handleLinkClick.bind(this));
+      });
+    }
+
+    handleLinkClick(event) {
+      event.preventDefault();
+      const target = document.querySelector(event.target.getAttribute('href'));
+
+      if (!target) return;
+
+      const targetTop = target.getBoundingClientRect().top;
+      const offsetPosition = targetTop + window.scrollY;// - this.offsetHeight;//60;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  customElements.define('page-nav', PageNav);
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Page navigation",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "info": "TO BE REMOVED (using page metafield instead) 1.30.25"
+      }
+    ]
+  }
+{% endschema %}

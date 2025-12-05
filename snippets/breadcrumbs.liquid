@@ -1,0 +1,25 @@
+<nav role="navigation" aria-label="{{- 'general.breadcrumbs.label' | t -}}">
+  <ul class="list-unstyled list-flex" role="list">
+    <li>
+      <a href="{{- routes.root_url -}}" class="link">
+        {{- 'general.breadcrumbs.home' | t -}}
+      </a>
+    </li>
+
+    <li>/</li>
+
+    {%- if product and collection -%}
+      <li>
+        <a href="{{- collection.url -}}" class="link">
+          {{- collection.title | escape -}}
+        </a>
+      </li>
+
+      <li>/</li>
+    {%- endif -%}
+
+    <li>
+      <span>{{- page_title | escape -}}</span>
+    </li>
+  </ul>
+</nav>

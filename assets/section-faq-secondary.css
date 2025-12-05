@@ -1,0 +1,141 @@
+.faq-secondary .faq-secondary__head {
+  position: relative;
+  z-index: 5;
+  padding: 29.1rem 2rem;
+  overflow: hidden;
+}
+
+.faq-secondary .faq-secondary__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+}
+
+.faq-secondary .faq-secondary__background:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-color: #000;
+  opacity: 0.28;
+}
+
+.faq-secondary .faq-secondary__title {
+  font-weight: 500;
+  color: #f4f0e0;
+  text-align: center;
+}
+
+.faq-secondary__body {
+  padding: 10.1rem 0;
+}
+
+.faq-secondary__body-inner {
+  padding: 0 3.3rem;
+}
+
+.faq-secondary__accordion {
+  padding: 0.8rem 0;
+  border-bottom: 0.1rem solid #b4b2af;
+  font-weight: 400;
+  font-size: calc(var(--fsbase) * 2.1);
+  color: #2c2621;
+}
+
+.faq-secondary__accordion summary {
+  font-weight: 700;
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: calc(var(--fsbase) * 2.5);
+  line-height: 2;
+  color: #2c2621;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.faq-secondary__accordions > div > p {
+  line-height: 1.5;
+}
+
+/*
+.faq-secondary__accordion summary:before {
+  content: '•';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+}
+*/
+.faq-secondary__accordion summary .chevron {
+  transform: rotate(0deg);
+  transition: .25s;
+  transform-origin: center;
+}
+.faq-secondary__accordion[open] summary .chevron {
+  transform: rotate(180deg);
+}
+.faq-secondary__accordion summary + * {
+  padding: 0.4rem 1.4rem 0.7rem;
+  line-height: 1.6;
+}
+
+.faq-secondary__actions {
+  padding: 1.7rem 0;
+}
+
+.faq-secondary__actions--center {
+  text-align: center;
+}
+
+.faq-secondary__actions--right {
+  text-align: right;
+}
+
+.faq-secondary__link {
+  font-size: calc(var(--fsbase) * 1.6);
+}
+
+@media screen and (max-width: 749px) {
+  .faq-secondary .faq-secondary__head {
+    padding: 9.6rem 2rem;
+  }
+
+  .faq-secondary .faq-secondary__title {
+    font-size: calc(var(--fsbase) * 2.4);
+  }
+
+  .faq-secondary__body {
+    padding: 2.4rem 0 1rem;
+  }
+
+  .faq-secondary__body-inner {
+    padding: 0 2rem;
+  }
+
+  .faq-secondary__accordion {
+    padding: 1.4rem 0 1.2rem;
+    font-size: calc(var(--fsbase) * 1);
+  }
+
+  .faq-secondary__accordion summary {
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.8;
+  }
+
+  .faq-secondary__accordion summary + * {
+    padding: 0.6rem 1.4rem 0.5rem;
+    line-height: 1.5;
+  }
+
+  .faq-secondary__actions {
+    text-align: left;
+  }
+
+  .faq-secondary__link {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}

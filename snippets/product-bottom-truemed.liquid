@@ -1,0 +1,14 @@
+{% comment %}<!-- TrueMed -->{% endcomment %}
+<div class="product-build__tabs-tab" data-tab data-tab-id="3">
+    <div class="product-build__tabs-actions-wrapper">
+        <div class="product-build__summary truemed-price-summary">
+            <div class="product-build__price" role="status">
+                {%- render 'price', product_ref: product, use_variant: true -%}
+                <p>HSA/FSA-eligible with <i>{%- render 'icon-truemed' -%}</i> <a href="#" class="link js-truemed-trigger">Learn more</a></p>
+            </div>
+        </div>
+        <div class="product__actions">
+            {% render 'button', type: 'button', name: 'added', value: "Add to Cart", class: 'custom_add_to_cart', disabled: false, fullwidth: true %}
+        </div>
+    </div>
+</div><!-- /.product-build__tabs-tab -->

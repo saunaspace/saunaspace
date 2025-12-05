@@ -1,220 +1,163 @@
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
-{% if section.settings.enable_collection %}
-<section class="category_filter_box">
-  <div class="product-categories">
-    <a href="javascript:void(0)" class="product-category pc-shopAll product-category-on" data-cat="all" onclick="filterProducts('all')">
-      <div><span>Shop All</span></div>
-    </a>
-  {% for block in section.blocks %}
-      {% if block.type == "collection_list" %}
-          {% if block.settings.col_item != blank %}
-          <a href="javascript:void(0)" class="product-category" style="background-image:url({{ block.settings.collection_img | img_url : 'master'  }})" data-cat="{{ block.settings.collection_title.title | handle }}" onclick="filterProducts('{{ block.settings.collection_title.title | handle }}')">
-              <div><span>{{ block.settings.col_item }}</span></div>
-            </a>
-          {% endif %}
-      {% endif %}
-  {% endfor %}
-  {% comment %}
-    <a href="javascript:void(0)" class="product-category product-category-on" style="background-image:url(../img/cat-infrared-saunas.jpg)" data-cat="infrared-saunas" onclick="filterProducts('infrared-saunas')">
-      <div><span>Infrared Saunas</span></div>
-    </a>
+<script src="{{- 'collection-item.js' | asset_url -}}" defer="defer"></script>
+<script src="{{- 'dropdown-disclosure.js' | asset_url -}}" defer="defer"></script>
 
-    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-targeted-therapy.jpg)" data-cat="targeted-therapy" onclick="filterProducts('targeted-therapy')">
-      <div><span>Targeted Therapy</span></div>
-    </a>
+{{- 'component-card-product.css' | asset_url | stylesheet_tag -}}
+{{- 'collection.css' | asset_url | stylesheet_tag -}}
 
-    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-sauna-components.jpg)" data-cat="sauna-components" onclick="filterProducts('sauna-components')">
-      <div><span>Sauna Components</span></div>
-    </a>
+<div class="collection">
+  <div class="collection__head">
+    <div class="container container--extra-large">
+      <div class="collection__content center">
+        {% liquid
+          if section.settings.title != blank
+            assign page_title = section.settings.title
+          else
+            assign page_title = 'list_collections.title' | t
+          endif
+        %}
+        <h1 class="collection__title h2">{{ page_title }}</h1><!-- /.collection__title h2 -->
 
-    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-replacement-bulbs.jpg)" data-cat="replacement-bulbs" onclick="filterProducts('replacement-bulbs')">
-      <div><span>Replacement Bulbs</span></div>
-    </a>
+        {%- if section.settings.subheading != blank -%}
+          <div class="collection__entry rte">
+            {{ section.settings.subheading }}
+          </div><!-- /.collection__entry -->
+        {%- endif -%}
+      </div><!-- /.collection__content -->
 
-    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-merchandise.jpg)" data-cat="merchandise" onclick="filterProducts('merchandise')">
-      <div><span>Merchandise</span></div>
-    </a>
+      {%- if section.settings.collections != blank -%}
+        <nav class="collection__nav medium-hide small-hide">
+          <ul class="flex flex--center flex--justify-center list-unstyled">
+            {%- if section.settings.featured_product -%}
+              {% assign featured_product = section.settings.featured_product %}
+              {% assign featured_title = featured_product.metafields.custom.custom_title | default: featured_product.title %}
+              <li>
+                <a href="#product-featured-{{- section.settings.featured_product.handle -}}" class="collection__nav-link full-unstyled-link is-active">
+                  {{- featured_title | escape -}}
+                </a>
+              </li>
+            {%- endif -%}
 
-    <a href="javascript:void(0)" class="product-category" style="background-image:url(../img/cat-products-we-love.jpg)" data-cat="products-we-love" onclick="filterProducts('products-we-love')">
-      <div><span>Products We Love</span></div>
-    </a>
-  {% endcomment %}
-  </div>
-</section>
+            {%- for collection_ref in section.settings.collections -%}
+              <li>
+                <a href="#collection-{{- collection_ref.handle -}}" class="collection__nav-link full-unstyled-link{% if forloop.first and section.settings.featured_product == blank %} is-active{% endif %}">
+                  {{- collection_ref.title | escape -}}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul><!-- /.list-unstyled -->
+        </nav><!-- /.collection__nav -->
 
-{% style %}
-section.category_filter_box {
-	border-bottom: 1px solid #979797;
-	max-width: 1200px;
-}
-.collection_Div > div.collection {
-	padding: 20px 0;
-}
-.collection_Div .grid.product-grid{
-	column-gap: 20px;
-}
+        <dropdown-disclosure class="collection__dropdown block large-up-hide" data-close-on-click>
+          <details class="disclosure-has-popup dropdown relative no-js-hidden">
+            <summary class="dropdown__button">
+              <span>{{- 'collection.select_category' | t -}}</span>
 
-@media screen and (min-width: 990px){
-	.collection_Div .grid--4-col-desktop .grid__item {
-        max-width: 275px;
-		margin-left:0px;
-    }
-}
-{% endstyle %}
-<script>
-	function queryStr( name, url ) {
-        if (!url) url = location.href;
-        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-        var regexS = "[\\?&]"+name+"=([^&#]*)";
-        var regex = new RegExp( regexS );
-        var results = regex.exec( url );
-        return results == null ? null : results[1];
-    }
-    var getValue = queryStr('filter', window.location.href)
-  	console.log(getValue);
-  //setTimeout(function(){
-  	filterProducts(getValue);
-  //},200)
-	
-	function filterProducts(pc) {
-		$(".product-category").removeClass("product-category-on");
-		$("[data-cat=" + pc + "]").addClass("product-category-on");
-      	setTimeout(function(){
-          $(".collection_Div").addClass("hideMe");
-          if(pc=="all") {
-              $(".collection_Div").removeClass("hideMe");
-          } else {
-              $("." + pc).removeClass("hideMe");
-          }
-        },200)
-	}
-	
-	
-		
-</script>
-{% else %}
-<div class="page-width">
-  <h1 class="title title--primary">{{ section.settings.title | escape }}</h1>
-  {%- liquid
-    case section.settings.sort
-      when 'products_high' or 'products_low'
-        assign collections = collections | sort: 'all_products_count'
-      when 'date' or 'date_reversed'
-        assign collections = collections | sort: 'published_at'
-    endcase
+              <span class="dropdown__icon motion-reduce">
+                {%- render 'icon-chevron-down' -%}
+              </span>
+            </summary>
 
-    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
-      assign collections = collections | reverse
-    endif
-  -%}
-  <ul class="collection-list grid grid--1-col grid--3-col-tablet" role="list">
-    {%- for collection in collections -%}
-      <li class="collection-list__item grid__item">
-        {% render 'card-collection', card_collection: collection, media_aspect_ratio: section.settings.image_ratio, columns: 3 %}
-      </li>
-    {%- endfor -%}
-  </ul>
+            <div class="dropdown__list motion-reduce" data-links>
+              <ul class="list-unstyled">
+                {%- for collection_ref in section.settings.collections -%}
+                  <li class="dropdown__item">
+                    <a href="#collection-{{- collection_ref.handle -}}" class="dropdown__link full-unstyled-link" data-link>
+                      {{- collection_ref.title | escape -}}
+                    </a>
+                  </li><!-- /.dropdown__item -->
+                {%- endfor -%}
+              </ul>
+            </div>
+          </details>
+        </dropdown-input>
+      {%- endif -%}
+    </div><!-- /.container -->
+  </div><!-- /.collection__head -->
+
+  {%- if section.settings.featured_product -%}
+    <div class="collection__banner" id="product-featured-{{- section.settings.featured_product.handle -}}">
+      <div class="container container--extra-large">
+        {%- render 'card-product', product_ref: section.settings.featured_product, featured: true -%}
+      </div><!-- /.container -->
+    </div><!-- /.collection__banner -->
+  {%- endif -%}
+
+  <div class="collection__body">
+    <div class="container container--extra-large">
+      {%- if section.settings.collections != blank -%}
+        <div class="collection__body-items">
+          {%- for collection_ref in section.settings.collections -%}
+            <collection-item
+              class="collection__body-item block relative"
+              id="collection-{{- collection_ref.handle -}}"
+              data-items-limit="4"
+              data-breakpoint="(min-width: 750px)"
+            >
+              <div class="collection__body-item-content">
+                <h2 class="collection__body-item-title">
+                  {{- collection_ref.title | escape -}}
+                </h2><!-- /.collection__body-item-title -->
+
+                {%- if collection_ref.metafields.custom.subheading -%}
+                  <p class="collection__body-item-subtitle">
+                    {{- collection_ref.metafields.custom.subheading | escape -}}
+                  </p><!-- /.collection__body-item-subtitle -->
+                {%- endif -%}
+              </div><!-- /.collection__body-item-content -->
+
+              <div class="collection__grid list-unstyled grid grid--3" role="list" data-items>
+                {%- for product_ref in collection_ref.products -%}
+                  {%- render 'card-product', product_ref: product_ref, collection_ref: collection_ref -%}
+                {%- endfor -%}
+              </div><!-- /#product-grid.collection__grid list-unstyled grid grid--3 -->
+
+              {%- if collection_ref.products.size > 4 -%}
+                <div class="collection__body-item-overlay medium-hide large-up-hide">
+                  {%- assign value = 'collection.load_more' | t -%}
+
+                  {%- render 'button' with value: value, style: 'large-desktop button--orange-hover', attr: 'data-button-load-more' -%}
+                </div><!-- /.collection__body-item-overlay -->
+              {%- endif -%}
+            </collection-item><!-- /.collection__body-item -->
+          {%- endfor -%}
+        </div><!-- /.collection__body-items -->
+      {%- endif -%}
+    </div><!-- /.container -->
+  </div><!-- /.collection__body -->
+</div><!-- /.collection -->
+  <div id="backToTop" class="back-to-top">
+<svg xmlns="http://www.w3.org/2000/svg" width="9.721" height="15.199" viewBox="0 0 9.721 15.199">
+  <path id="Path_1150" data-name="Path 1150" d="M-20986.3,4727.945l-6.539,6.539,6.539,6.539" transform="translate(20994.957 -4726.885)" fill="none" stroke="#012800" stroke-width="3"></path>
+</svg>
 </div>
-{% endif %}
+
 {% schema %}
-{
-  "name": "t:sections.main-list-collections.name",
-  "class": "section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "t:sections.main-list-collections.settings.title.label",
-      "default": "Collections"
-    },
-    {
-      "type": "select",
-      "id": "sort",
-      "options": [
-        {
-          "value": "alphabetical",
-          "label": "t:sections.main-list-collections.settings.sort.options__1.label"
-        },
-        {
-          "value": "alphabetical_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__2.label"
-        },
-        {
-          "value": "date_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__3.label"
-        },
-        {
-          "value": "date",
-          "label": "t:sections.main-list-collections.settings.sort.options__4.label"
-        },
-        {
-          "value": "products_high",
-          "label": "t:sections.main-list-collections.settings.sort.options__5.label"
-        },
-        {
-          "value": "products_low",
-          "label": "t:sections.main-list-collections.settings.sort.options__6.label"
-        }
-      ],
-      "default": "alphabetical",
-      "label": "t:sections.main-list-collections.settings.sort.label"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.main-list-collections.settings.image_ratio.label",
-      "info": "t:sections.main-list-collections.settings.image_ratio.info"
-    },
-	{
-      "type": "checkbox",
-      "id": "enable_collection",
-      "label": "Enable Collection Filter",
-      "default": false
-    }
-  ],
-  "blocks": [
-    {
-      "type": "collection_list",
-      "name": "Collection List",
-      "settings": [
-        {
-          "type" : "text",
-          "id": "col_item",
-          "label" : "Title"
-        },
-        {
-          "type" : "text",
-          "id": "deal_sub_txt",
-          "label" : "Detail"
-        },
-        {
-          "type" : "collection",
-          "id": "collection_title",
-          "label" : "Collection"
-        },
-        {
-          "type" : "image_picker",
-          "id": "collection_img",
-          "label" : "Collection Image"
-        }
-      ]
-    }
-  ]
-}
+  {
+    "name": "Shop Our Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Shop Our Products"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "info": "Optional."
+      },
+      {
+        "type": "product",
+        "id": "featured_product",
+        "label": "Featured Product"
+      },
+      {
+        "type": "collection_list",
+        "id": "collections",
+        "label": "Collection List",
+        "info": "List the collection groups to display"
+      }
+    ]
+  }
 {% endschema %}

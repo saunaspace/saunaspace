@@ -1,0 +1,138 @@
+{% if request.page_type == 'product' %}
+  {% assign return_policy_url = request.origin | append: '/policies/refund-policy' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | strip_html | strip | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    "image": {{ product.featured_image | image_url: width: 800 | prepend: "https:" | json }},
+    "description": {{ product.description | strip_html | strip | json }},
+    "mpn": "{{ product.id }}",
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | strip_html | strip | json }}
+    },
+    {% if product.metafields.okendo.summaryData.reviewCount > 0 %}
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ product.metafields.okendo.summaryData.reviewAverageValue }}",
+        "reviewCount": "{{ product.metafields.okendo.summaryData.reviewCount }}"
+      },
+    {% elsif product.metafields.okendo.ReviewCount > 0 %}
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ product.metafields.okendo.ReviewAverageValue }}",
+        "reviewCount": "{{ product.metafields.okendo.ReviewCount }}"
+      },
+    {% endif %}
+    "offers": [
+      {% for variant in product.variants %}
+        {
+          "@type": "Offer",
+          "sku": {{ variant.sku | json }},
+          "priceCurrency": "{{ shop.currency }}",
+          "price": "{{ variant.price | money_without_currency | remove: ',' }}",
+          {% if variant.compare_at_price > variant.price %}
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "priceCurrency": "{{ shop.currency }}",
+              "price": "{{ variant.compare_at_price | money_without_currency | remove: ',' }}",
+              "priceType": "https://schema.org/strikethroughPrice"
+            },
+          {% endif %}
+          "availability": "{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "itemCondition": "https://schema.org/NewCondition",
+          "url": {{ request.origin | append: variant.url | json }},
+          "seller": {
+            "@type": "Organization",
+            "name": {{ shop.name | strip_html | strip | json }}
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "applicableCountry": ["US", "CA"],
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/FreeReturn",
+            "refundType": "https://schema.org/FullRefund",
+            "returnShippingFeesAmount": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "USD"
+            },
+            "restockingFee": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "USD"
+            },
+            "merchantReturnDays": 100,
+            "merchantReturnLink": {{ return_policy_url | json }}
+          },
+          "shippingDetails": [
+            {
+              "@type": "OfferShippingDetails",
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+              "shippingRate": { "@type": "MonetaryAmount", "value": 0, "currency": "USD" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 8, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 4, "unitCode": "DAY" }
+              }
+            },
+            {
+              "@type": "OfferShippingDetails",
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "CA" },
+              "shippingRate": { "@type": "MonetaryAmount", "value": 0, "currency": "USD" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 8, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 7, "unitCode": "DAY" }
+              }
+            },
+            {
+              "@type": "OfferShippingDetails",
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": ["GB", "IE"] },
+              "shippingRate": { "@type": "MonetaryAmount", "minValue": 30, "maxValue": 285, "currency": "USD" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 8, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 4, "unitCode": "DAY" }
+              }
+            },
+            {
+              "@type": "OfferShippingDetails",
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": ["AU", "NZ"] },
+              "shippingRate": { "@type": "MonetaryAmount", "minValue": 35, "maxValue": 410, "currency": "USD" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 8, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+              }
+            },
+            {
+              "@type": "OfferShippingDetails",
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": ["DE", "ES", "FR", "NL", "CH", "BE", "NO", "PT", "IT", "CZ"] },
+              "shippingRate": { "@type": "MonetaryAmount", "minValue": 30, "maxValue": 285, "currency": "USD" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 5, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 4, "unitCode": "DAY" }
+              }
+            },
+            {
+              "@type": "OfferShippingDetails",
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": ["AE", "SA", "IL"] },
+              "shippingRate": { "@type": "MonetaryAmount", "minValue": 40, "maxValue": 400, "currency": "USD" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 8, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+              }
+            }
+          ]
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+{% endif %}

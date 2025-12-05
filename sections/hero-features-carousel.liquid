@@ -1,0 +1,199 @@
+{%- if section.blocks.size > 0 -%}
+  {% comment %}
+  <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>
+  {% endcomment %}
+
+  <link rel="stylesheet" href="{{ 'section-hero-features-carousel.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{- 'hero-features-carousel.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-hero-features-carousel-" | append: section.index
+    endif
+
+    assign slide_count = section.blocks.size
+    assign scroll_adjustment = "0.65"
+  %}
+
+  <hero-features-carousel class="hero-features-carousel" id="{{ sec_id }}" data-slide-count="{{ slide_count }}" style="--slideCount: {{ slide_count }};--scrollAdjustment:{{ scroll_adjustment }};">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title == blank or block.settings.image == blank or block.settings.content == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          <div class="swiper-slide">
+            <div class="hero-features-carousel__item">
+              <div class="hero-features-carousel__media media">
+                {%- if block.settings.image_mobile != blank -%}
+                  {%- assign image_class = 'small-hide medium-hide' -%}
+                  {%- render 'image', image: block.settings.image_mobile, class: 'large-up-hide' -%}
+                {%- endif -%}
+
+                {%- render 'image', image: block.settings.image, class: image_class -%}
+              </div><!-- /.hero-features-carousel__media -->
+
+              <div class="hero-features-carousel__wrapper">
+                <div class="container">
+                  <div class="hero-features-carousel__aside small-hide medium-hide">
+                    {%- if section.settings.title != blank -%}
+                      <h2 class="hero-features-carousel__title">
+                        {{- section.settings.title | escape -}}
+                      </h2><!-- /.hero-features-carousel__title -->
+                    {%- endif -%}
+
+                    <nav class="hero-features-carousel__nav">
+                      <ul class="list-unstyled">
+                        {%- for block in section.blocks -%}
+                          <li>
+                            <button type="button" data-control="{{- forloop.index0 -}}" class="{%- if forloop.first -%}is-active{%- endif -%}">
+                              {{- block.settings.title | escape -}}
+                            </button>
+                          </li>
+                        {%- endfor -%}
+                      </ul><!-- /.list-unstyled -->
+                    </nav><!-- /.hero-features-carousel__nav -->
+                  </div><!-- /.hero-features-carousel__aside -->
+
+                  <div class="hero-features-carousel__content{% if block.settings.content_mobile != blank %} has-mobile-content{% endif %}">
+                    <h2 class="hero-features-carousel__title">
+                      {{- section.settings.title | escape -}}
+                    </h2><!-- /.hero-features-carousel__title -->
+
+                    <p class="hero-features-carousel__subtitle">
+                      {{- block.settings.title | escape -}}
+                    </p><!-- /.hero-features-carousel__subtitle -->
+
+                    <p class="hero-features-carousel__entry">
+                      {{- block.settings.content | escape | newline_to_br -}}
+                    </p><!-- /.hero-features-carousel__entry -->
+                    {% if block.settings.content_mobile != blank %}
+                      <p class="hero-features-carousel__entry mobile-content">
+                      {{- block.settings.content_mobile | escape | newline_to_br -}}
+                      </p><!-- /.hero-features-carousel__entry.mobile-content -->
+                    {% endif %}
+                  </div><!-- /.hero-features-carousel__content -->
+                </div><!-- /.container -->
+              </div><!-- /.hero-features-carousel__wrapper -->
+            </div><!-- /.hero-features-carousel__item -->
+          </div><!-- /.swiper-slide -->
+        {%- endfor -%}
+      </div><!-- /.swiper-wrapper -->
+
+      <div class="swiper-pagination"></div><!-- /.swiper-pagination large-up-hide -->
+
+      <div class="swiper-button-prev large-up-hide">
+        {%- render 'icon-chevron-left' -%}
+      </div>
+
+      <div class="swiper-button-next large-up-hide">
+        {%- render 'icon-chevron-right' -%}
+      </div>
+    </div><!-- /.swiper -->
+  </hero-features-carousel><!-- /.hero-features-carousel -->
+{%- endif -%}
+
+{% style %}
+  .hero-features-carousel__wrapper::before {
+    content: '';
+    background: {{ section.settings.overlay_gradient }};
+    width: {% if section.settings.overlay_width == 'fixed' %} 32rem {% else %} 100% {% endif %};
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+{% endstyle %}
+
+{% javascript %}
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Hero features carousel",
+    "class": "hero-features-carousel-js",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "select",
+        "id": "overlay_width",
+        "label": "Overlay width",
+        "info": "Desktop only",
+        "options": [
+          {
+            "value": "fixed",
+            "label": "Fixed"
+          },
+          {
+            "value": "fullwidth",
+            "label": "Full width"
+          }
+        ],
+        "default": "fixed"
+      },
+      {
+        "type": "color_background",
+        "id": "overlay_gradient",
+        "label": "Overlay color",
+        "info": "Desktop only",
+        "default": "linear-gradient(to right, rgba(0, 0, 0, 0.67), transparent)"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "textarea",
+            "id": "content_mobile",
+            "label": "Content Mobile",
+            "info": "Optional."
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image - Mobile"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Hero features carousel"
+      }
+    ]
+  }
+{% endschema %}

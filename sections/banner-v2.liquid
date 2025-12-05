@@ -1,0 +1,78 @@
+
+{{- 'section-banner-v2.css' | asset_url | stylesheet_tag -}}
+
+{%- assign _section = section.settings -%}
+
+<section
+  class="banner-v2"
+  style="color: {{ _section.text_color }};"
+>
+  <div class="container">
+    {%- if _section.image_desktop != blank -%}
+      <div class="media media--transparent banner-v2__background banner-v2__background--desktop">
+        {% render 'image', image: _section.image_desktop %}
+      </div>
+    {%- endif -%}
+
+    {%- if _section.image_mobile != blank -%}
+      <div class="media media--transparent banner-v2__background banner-v2__background--mobile">
+        {% render 'image', image: _section.image_mobile %}
+      </div>
+    {%- endif -%}
+
+    <div class="banner-v2__content">
+      {% if _section.heading != blank %}
+        <h2 class="h3 banner-v2__heading">
+          {{ _section.heading }}
+        </h2>
+      {% endif %}
+
+      {% if _section.subheading != blank %}
+        <p class="banner-v2__subheading">
+          {{ _section.subheading | newline_to_br }}
+        </p>
+      {% endif %}
+    </div>
+  </div><!-- /.container -->
+</section>
+
+{% schema %}
+{
+  "name": "Banner v2",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Oh, and did we mention weekly yoga classes on the house?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Because your wellness is our priority."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner v2"
+    }
+  ]
+}
+{% endschema %}

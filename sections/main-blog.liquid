@@ -1,154 +1,218 @@
-{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign featured_article = section.settings.featured_article
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}
-    px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}
-    px;
-  }
+  assign meta_description = blog.metafields.custom.description.value
+-%}
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}
-      px;
-      padding-bottom: {{ section.settings.padding_bottom }}
-      px;
-    }
-  }
-{%- endstyle -%}
+{{- 'section-blog.css' | asset_url | stylesheet_tag -}}
+{{- 'article.css' | asset_url | stylesheet_tag -}}
 
+<script src="{{- 'load-more.js' | asset_url -}}" defer></script>
 
-<div class="header-blog">
+<section class="blog blog--{{ blog.handle }}{%- if current_tags %} blog--filtered{%- endif -%}">
+  {%- if current_tags -%}
+    <header class="blog__head">
+      {%- if image != blank or image_mobile != blank -%}
+        <div class="blog__head-image">
+          {%- if image != blank -%}
+            {{- image | image_url: width: 1920 | image_tag -}}
+          {%- endif -%}
 
-  {% if current_tags.size > 0 %}
-    <div class="tag-header">
-      <p>Category</p>
-      <h1>{{ current_tags.first }}</h1>
-    </div>
-  {% else %}
-    <div class="tag-header-main">
-      <p>Brian Richards Presents:</p>
-      <h1>The Wavelength</h1>
-      <p class="blog-description">Our founder's blog. Ruminations about sauna, light, electromagnetism, wellness and the inner pharmacy of the human being.</p>
-    </div>
-  {% endif %}
+          {%- if image_mobile != blank -%}
+            {{- image_mobile | image_url: width: 1000 | image_tag -}}
+          {%- endif -%}
+        </div><!-- /.blog__head-image -->
+      {%- endif -%}
 
+      <div class="blog__banner">
+        <div class="container">
+          <h1 class="blog__title h1 center">
+            {{- current_tags[0] | replace: 'Category:', '' | escape -}}
+          </h1><!-- /.blog__title h1 center -->
+        </div><!-- /.container -->
+      </div><!-- /.blog__banner -->
+    </header><!-- /.blog__head -->
+  {%- else -%}
+    <header class="blog__head">
+      <div class="blog__banner">
+        <div class="container">
+          {% if blog.handle == "the-wavelength" %}
+          <div class="blog-wavelength-header">
+            <div class="header-col header-col-content">
+              <p class="subheading">{{ section.settings.header_subheading }}</p>
+              <h1 class="blog__title h1 center">{{- blog.title | escape -}}</h1>
+              <p class="header-content">{{ section.settings.header_content }}</p>
+            </div>
+            <div class="header-col header-col-image">
+              {% if section.settings.header_image != blank %}
+                {{- section.settings.header_image | image_url: width: 600 | image_tag -}}
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          <h1 class="blog__title h1 center">{{- blog.title | escape -}}</h1><!-- /.blog__title h1 center -->
 
-</div>
+          {%- if meta_description != blank -%}
+            <p class="blog__description">
+              {{- meta_description | escape | newline_to_br -}}
+            </p><!-- /.blog__description -->
+          {%- endif -%}
+          {% endif %}
+        </div><!-- /.container -->
+      </div><!-- /.blog__banner -->
 
-{%- paginate blog.articles by 7 -%}
-  <div class="main-blog page-width section-{{ section.id }}-padding">
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-      {%- for article in blog.articles -%}
-        <div class="blog-articles__article article">
-          {%- render 'article-card'
-            , article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true -%}
-        </div>
-      {%- endfor -%}
-    </div>
+      {%- if section.settings.show_filters and blog.all_tags.size > 0 -%}
+        <nav class="blog__nav caption center">
+          <div class="container container--narrow">
+            <ul class="blog__links list-unstyled">
+              <li class="blog__link small-hide medium-hide">
+                {%-
+                  liquid
+                  assign link_all_text = 'blog.categories.all.text' | t
+                  assign link_all_title = 'blog.categories.all.title' | t
+                  assign replace_with = 'class="full-unstyled-link" href'
+                  unless current_tags
+                    assign replace_with = 'class="full-unstyled-link is-active" href'
+                  endunless
+                  echo link_all_text | link_to: blog.url, title: link_all_title | replace: 'href', replace_with
+                -%}
+              </li><!-- /.blog__link -->
 
-    {%- if paginate.pages > 1 -%}
-      {%- render 'pagination', paginate: paginate -%}
+              <li class="blog__link large-up-hide">
+                {%-
+                  liquid
+                  assign link_all_text = 'blog.categories.all.text' | t | split: ' ' | first
+                  assign link_all_title = 'blog.categories.all.title' | t
+                  assign replace_with = 'class="full-unstyled-link" href'
+                  unless current_tags
+                    assign replace_with = 'class="full-unstyled-link is-active" href'
+                  endunless
+                  echo link_all_text | link_to: blog.url, title: link_all_title | replace: 'href', replace_with
+                -%}
+              </li><!-- /.blog__link -->
+
+              {%- for tag in blog.all_tags -%}
+                {%- unless tag contains 'Category' -%}
+                  {%- continue -%}
+                {%- endunless -%}
+
+                <li class="blog__link">
+                  {%- liquid
+                    assign replace_with = 'class="full-unstyled-link" href'
+                    if current_tags contains tag
+                      assign replace_with = 'class="full-unstyled-link is-active" href'
+                    endif
+                  -%}
+                  {{- tag | replace: 'Category:', '' | link_to_tag: tag | replace: 'href', replace_with -}}
+                </li><!-- /.blog__link -->
+              {%- endfor -%}
+            </ul><!-- /.blog__links list-unstyled -->
+          </div><!-- /.container -->
+        </nav><!-- /.blog__nav caption center -->
+      {%- endif -%}
+    </header><!-- /.blog__head -->
+  {%- endif -%}
+
+  {%- unless current_tags -%}
+    {%- if featured_article != blank -%}
+      <div class="blog__featured-article">
+        {% render 'article-hero', article_ref: featured_article, location: 'blog' %}
+      </div><!-- /.blog__featured-article -->
     {%- endif -%}
-  </div>
-{%- endpaginate -%}
+  {%- endunless -%}
+
+  {%- if current_tags -%}
+    <div class="blog__back">
+      <a href="{{- blog.url -}}" class="link-dot">
+        {{- 'blog.home' | t -}}
+      </a><!-- /.link-dot -->
+    </div><!-- /.blog__back -->
+  {%- endif -%}
+
+  {%- paginate blog.articles by 50 -%}{% comment %}<!-- TESTING HERE: WAS by 12 -->{% endcomment %}
+    <load-more>
+      <div class="blog__body">
+        <div class="container">
+          {%- if blog.articles_count > 0 -%}
+            <div class="blog__grid" js-blog-grid>
+              {%- for article_ref in blog.articles -%}
+                {%- render 'article', article_ref: article_ref, style: 'small' -%}
+              {%- endfor -%}
+
+              {%- if paginate.next -%}
+                <div class="blog__grid-actions">
+                  <a
+                    href="{{ paginate.next.url }}"
+                    class="blog__load-more"
+                    aria-label="{{- 'general.pagination.next' | t -}}"
+                    title="{{- 'general.pagination.next' | t -}}"
+                    js-load-more
+                  >
+                    {{- 'blog.load_more' | t -}}
+                  </a>
+                </div><!-- /.blog__grid-actions -->
+              {%- endif -%}
+            </div><!-- /.blog__grid grid -->
+          {%- else -%}
+            <h2 class="h5 regular center">{{- 'blog.empty' | t -}}</h2><!-- /.h5 regular center -->
+          {%- endif -%}
+        </div><!-- /.container -->
+      </div><!-- /.blog__body -->
+    </load-more>
+  {%- endpaginate -%}
+</section><!-- /.blog -->
 
 {% schema %}
   {
-    "name": "t:sections.main-blog.name",
-    "tag": "section",
-    "class": "section",
+    "name": "Main Blog",
     "settings": [
       {
+        "type": "article",
+        "id": "featured_article",
+        "label": "Featured Article"
+      },
+      {
         "type": "header",
-        "content": "t:sections.main-blog.settings.header.content"
+        "content": "Filtered view"
       },
       {
-        "type": "select",
-        "id": "layout",
-        "options": [
-          {
-            "value": "grid",
-            "label": "t:sections.main-blog.settings.layout.options__1.label"
-          }, {
-            "value": "collage",
-            "label": "t:sections.main-blog.settings.layout.options__2.label"
-          }
-        ],
-        "default": "collage",
-        "label": "t:sections.main-blog.settings.layout.label",
-        "info": "t:sections.main-blog.settings.layout.info"
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image (Desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (Mobile)"
       },
       {
         "type": "checkbox",
-        "id": "show_image",
-        "default": true,
-        "label": "t:sections.main-blog.settings.show_image.label"
+        "id": "show_filters",
+        "label": "Show Filters if available",
+        "default": true
       },
       {
-        "type": "select",
-        "id": "image_height",
-        "options": [
-          {
-            "value": "adapt",
-            "label": "t:sections.main-blog.settings.image_height.options__1.label"
-          }, {
-            "value": "small",
-            "label": "t:sections.main-blog.settings.image_height.options__2.label"
-          }, {
-            "value": "medium",
-            "label": "t:sections.main-blog.settings.image_height.options__3.label"
-          }, {
-            "value": "large",
-            "label": "t:sections.main-blog.settings.image_height.options__4.label"
-          }
-        ],
-        "default": "medium",
-        "label": "t:sections.main-blog.settings.image_height.label",
-        "info": "t:sections.main-blog.settings.image_height.info"
-      }, {
-        "type": "checkbox",
-        "id": "show_date",
-        "default": true,
-        "label": "t:sections.main-blog.settings.show_date.label"
-      }, {
-        "type": "checkbox",
-        "id": "show_author",
-        "default": false,
-        "label": "t:sections.main-blog.settings.show_author.label"
-      }, {
-        "type": "paragraph",
-        "content": "t:sections.main-blog.settings.paragraph.content"
-      }, {
         "type": "header",
-        "content": "t:sections.all.padding.section_padding_heading"
-      }, {
-        "type": "range",
-        "id": "padding_top",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "t:sections.all.padding.padding_top",
-        "default": 36
-      }, {
-        "type": "range",
-        "id": "padding_bottom",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "unit": "px",
-        "label": "t:sections.all.padding.padding_bottom",
-        "default": 36
+        "content": "Wavelength Blog"
+      },
+      {
+        "type": "text",
+        "id": "header_subheading",
+        "label": "Header Subheading",
+        "default": "Brian Richards Presents:"
+      },
+      {
+        "type": "text",
+        "id": "header_content",
+        "label": "Header Content",
+        "default": "Our founder's blog. Ruminations about sauna, light, electromagnetism, wellness and the inner pharmacy of the human being."
+      },
+      {
+        "type": "image_picker",
+        "id": "header_image",
+        "label": "Header Image"
       }
     ]
   }

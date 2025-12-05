@@ -1,0 +1,44 @@
+{% comment %}
+    Renders active facets
+    Accepts:
+    - filters: {Array} Array of facet filters
+    - class: {String} Class to add to the element
+    - results_url: {String} URL to redirect to when a facet is clicked,
+    - total_active_values: {Integer} Total number of active values
+    Usage:
+    {%- render 'facets-active', filters: results.filters -%}
+{% endcomment %}
+
+<div class="facets-active flex flex--center js-facets-active{% if total_active_values == 0 %} hidden{% endif %}">
+  {%-
+    liquid
+    for filter in filters
+      for value in filter.active_values
+        render 'facet-remove' url: value.url_to_remove, label: value.label, is_filter: true
+      endfor
+
+      if filter.type == 'price_range'
+        if filter.min_value.value != nil or filter.max_value.value != nil
+          capture filter_text
+            if filter.min_value.value
+              echo filter.min_value.value | money
+            else
+              echo 0 | money
+            endif
+            echo ' - '
+            if filter.max_value.value
+              echo filter.max_value.value | money
+            else
+              echo filter.range_max | money
+            endif
+          endcapture
+
+          render 'facet-remove' url: filter.url_to_remove, label: filter_text, is_filter: true
+        endif
+      endif
+    endfor
+
+    assign clear_text = 'collection.facets.clear_all' | t
+    render 'facet-remove' url: results_url, label: clear_text, is_filter: false
+  -%}
+</div><!-- /.facets-active.flex.flex--center -->

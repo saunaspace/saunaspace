@@ -1,0 +1,97 @@
+{%- if section.settings.heading != blank -%}
+  <link rel="stylesheet" href="{{ 'section-banner-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-banner-overlay.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --overlay-color: {{ section.settings.overlay }};
+      --overlay-opacity: {{ section.settings.overlay_opacity | times: 1.0 | divided_by: 100 }};
+    }
+  {% endstyle %}
+
+  <div class="container">
+    <div class="banner-overlay__inner">
+      <div class="banner-overlay__background media">
+        {%-
+          liquid
+          if section.settings.background_image != blank
+            assign image = section.settings.background_image
+            assign image_mobile = section.settings.background_image_mobile | default: image
+            assign image_src = image | image_url: width: 500
+            assign image_mobile_src = image_mobile | image_url: width: 375
+            capture image_srcset
+              render 'srcset', image: image
+            endcapture
+            capture image_mobile_srcset
+              render 'srcset', image: image_mobile
+            endcapture
+            assign image_alt = image.alt | escape
+            render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: image.width, height: image.height, class: 'small-hide', focal_point: image.presentation.focal_point
+            render 'image', src: image_mobile_src, srcset: image_mobile_srcset, sizes: 'auto', alt: image_alt, width: image_mobile.width, height: image_mobile.height, class: 'medium-hide large-up-hide', focal_point: image_mobile.presentation.focal_point
+          else
+            echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+          endif
+        -%}
+      </div><!-- /.banner-overlay__background -->
+
+      <div class="banner-overlay__content">
+        <h1 class="banner-overlay__heading h2">
+          {{- section.settings.heading | escape | newline_to_br-}}
+        </h1><!-- /.banner-overlay__heading -->
+      </div><!-- /.banner-overlay__content -->
+    </div><!-- /.banner-overlay__inner -->
+  </div><!-- /.container -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Banner - Overlay",
+  "class": "banner-overlay",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image - mobile"
+    },
+    {
+      "type": "color",
+      "id": "overlay",
+      "label": "Overlay color",
+      "default": "#000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 50
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Banner - Overlay"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Banner - Overlay"
+    }
+  ]
+}
+{% endschema %}

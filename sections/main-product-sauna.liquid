@@ -1,0 +1,549 @@
+{%- assign product_form_id = 'product-form-' | append: section.id -%}
+{% assign prod_title = product.metafields.custom.custom_title.value | default: product.title %}
+
+{{- 'tabs-content.css' | asset_url | stylesheet_tag -}}
+{% comment %}{{- 'modal-dialog.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+{{- 'section-product.css' | asset_url | stylesheet_tag -}}
+{{- 'section-product-sauna.css' | asset_url | stylesheet_tag -}}{% comment %}<!-- This replaces section-product-build-pay-now.css -->{% endcomment %}
+{{ 'modal-quickview.css' | asset_url | stylesheet_tag }}
+
+<script src="{{- 'tabs-content.js' | asset_url -}}" defer="defer"></script>
+<script src="{{- 'product-build-pay-now.js' | asset_url -}}" defer="defer"></script>
+<script src="{{- 'plug-type-options.js' | asset_url -}}" defer="defer"></script>
+<script src="{{- 'product-form.js' | asset_url -}}" defer="defer"></script>
+
+<product-build-pay class="product product-build" id="MainProduct-{{- section.id -}}" data-section="{{- section.id -}}" data-active-step="0">
+  <div class="product__cols js-st-trigger" data-st-options='{"toggleClass": "section-scrolled", "end": "10000px"}'>
+    {% comment %}<!-- Image Slider -->{% endcomment %}
+    <div class="mobile-pin-spacer js-mobile-pin-spacer" data-target=".product__col.col--prod-image-slider"></div>
+    {% render 'product-builder-media-slider', product: product, section: section %}
+
+
+    {% comment %}<!-- Product Builder -->{% endcomment %}
+    <div class="product__col col--prod-builder">
+      <div class="product-build__wrapper is-visible">
+        <div class="product__content">
+          <div class="product-build__tabs" data-active-tab="1">
+            {% comment %}<!-- Financing Tabs Nav -->{% endcomment %}
+            <nav class="product-build__tabs-nav tabs-nav-desktop">
+              <button class="product-build__tabs-nav-button is-active" data-tab-button data-tab-id="1">Pay Now</button>
+              <button class="product-build__tabs-nav-button" data-tab-button data-tab-id="2">
+                <span>Finance with</span>
+                <i>{%- render 'icon-split-it-simple' -%}</i>
+              </button>
+              <button class="product-build__tabs-nav-button" data-tab-button data-tab-id="3">
+                <span>Pay with</span>
+                <i>{%- render 'icon-truemed' -%}</i>
+              </button>
+            </nav>
+
+
+            {% comment %}<!-- Product Builder Content -->{% endcomment %}
+            <div class="product-build__tabs-content">
+              <div class="product-build-tabs-header">
+                {% comment %}<!-- Product Title -->{% endcomment %}
+                <h1 class="product__title">{{- prod_title | escape -}}</h1>
+
+                {% comment %}<!-- Star Rating App -->{% endcomment %}
+                {% for block in section.blocks %}
+                  {% if block.type == "@app" and block.id contains "okendo_star_rating" %}{% render block %}{% endif %}
+                {% endfor %}
+              </div>
+
+              {% comment %}<!-- MOBILE Pricing Tabs below product title -->{% endcomment %}
+              <div class="product__mobile-pricing large-up-hide" style="display:none;">
+                {% comment %}<!-- Regular Pay Now -->{% endcomment %}
+                <div class="product-build__price is-active" data-mobile-price="1" role="status">
+                  {%- render 'price', product_ref: product, use_variant: true, show_savings: true -%}
+                  {% render 'product-order-processing-disclaimer' %}
+                </div><!-- /.product__price -->
+
+                {% comment %}<!-- M - SplitIt -->{% endcomment %}
+                <div class="product-build__price splitit-build-price" role="status" data-mobile-price="2">
+                  <div class="price">
+                    <div class="price__sale">
+                      <span class="visually-hidden">{{- 'products.product.price.sale_price' | t -}}</span>
+                      <ins><span class="js-splitit" data-type="monthly">$100/mo</span></ins>
+                      <span class="visually-hidden">{{- 'products.product.price.regular_price' | t -}}</span>
+                      {% comment %}<del>$105/mo</del>{% endcomment %}
+                      {% comment %}<span class="price__discount">$5 Off</span><!-- /.price__discount -->{% endcomment %}
+                    </div>
+                  </div>
+
+                  <p>Buy now and pay over time with <i>{%- render 'icon-split-it-simple' -%}</i> <a href="#" class="link js-splitit-trigger">Learn more</a></p>
+                  <p>Starts as low as <span class="js-splitit" data-type="monthly">$100/mo</span>.</p>
+                </div><!-- /.product__price -->
+
+                {% comment %}<!-- M - TrueMed -->{% endcomment %}
+                <div class="product-build__price truemed-build-price" role="status" data-mobile-price="3">
+                  {%- render 'price', product_ref: product, use_variant: true -%}
+                  <p>HSA/FSA-eligible with <i>{%- render 'icon-truemed' -%}</i> <a href="#" class="link js-truemed-trigger">Learn more</a><!-- /.link --></p>
+                </div><!-- /.product__price -->
+              </div><!-- /.product__mobile-pricing -->
+
+              {% comment %}<!-- Product Options Selector Setup (updates with selected variant behind the scenes) -->{% endcomment %}
+              {% assign option_names = '' %}
+              <div class="product-build--hidden-inputs">
+                {% for option in product.options_with_values %}
+                  {% assign option_names = option_names | append: option.name %}
+                  {% unless forloop.last %}
+                    {% assign option_names = option_names | append: ' / ' %}
+                  {% endunless %}
+                {% endfor %}
+                <select class="Variant_with_values product-variant-selector" style="display:none;" data-options="{{ option_names }}">
+                  {% for variant in product.variants %}
+                  <option {% if forloop.index == 1 %}selected="selected" {% endif %}data-variant-id="{{ variant.id }}" data-image-url="{{ variant.image | img_url:'master' }}" data-price="{{ variant.price | money_without_currency }}" data-compare-price="{{ variant.compare_at_price | money_without_currency }}" value="{{ variant.title }}">{{ variant.title }}</option>
+                  {% endfor %}
+                </select>
+                {% comment %}<!-- Accessory Products - If selected inputs will populate with data -->{% endcomment %}
+                {% for block in section.blocks %}
+                 {% if block.type == "variant_accessories" %}
+                  {% assign accessories_products = block.settings.product_list_optional %}
+                  {% for _product in accessories_products %}
+                    <input type="hidden" class="accessory-product-data" data-product="{{ _product.title }}" data-product-handle="{{ _product.handle }}" data-selected-variant="" data-selected-qauntity="" data-price-single="" value="" />
+                  {% endfor %}
+                 {% endif %}
+                {% endfor %}
+                {% comment %}<!-- Sauna Products (the ones used for inventory that actually get added to the cart) -->{% endcomment %}
+                {% if section.settings.sauna_products != blank %}
+                <select id="sauna-product-variants-actual" class="sauna-product-variants-actual" style="display:none;">
+                  {% for sauna_prod in section.settings.sauna_products %}
+                    <!-- {{ sauna_prod.title }} -->
+                    {% for variant in sauna_prod.variants %}
+                    <option data-variant-id="{{ variant.id }}" data-image-url="{{ variant.image | img_url:'master' }}" data-price="{{ variant.price | money_without_currency }}" data-compare-price="{{ variant.compare_at_price | money_without_currency }}" data-sku="{{ variant.sku }}" data-lead-time="{{ variant.metafields.custom.lead_time }}" value="{{ variant.title }}">{{ variant.title }}</option>
+                    {% endfor %}
+                  {% endfor %}
+                </select>
+                {% endif %}
+              </div>
+
+
+              {% comment %}<!-- Section Blocks Start -->{% endcomment %}
+              {% render 'product-builder-blocks', product: product, section: section, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+
+            </div><!-- /.product-build__tabs-content -->
+            {% comment %}<!-- END OF Product Builder Content -->{% endcomment %}
+
+
+            {% comment %}<!-- Product Pricing Tabs at bottom of product builder -->{% endcomment %}
+            {% render 'product-builder-bottom-pricing-tabs', product: product, section: section, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+
+          </div><!-- /.product-build__tabs -->
+
+
+          {% comment %}<!-- Product Build Buttons -->{% endcomment %}
+          {% render 'product-builder-buttons' %}
+
+        </div><!-- /.product__content -->
+      </div><!-- /.product-build__wrapper -->
+    </div><!-- /.product__col.col--prod-builder -->
+
+  </div><!-- /.product__cols -->
+
+  {% render 'product-sticky-button', product: product %}
+</product-build-pay>
+<script src="{{- 'product-sauna.js' | asset_url -}}" defer="defer"></script>
+
+{%- liquid
+  if product.selected_or_first_available_variant.featured_media
+    assign seo_media = product.selected_or_first_available_variant.featured_media
+  else
+    assign seo_media = product.featured_media
+  endif
+-%}
+
+{% schema %}
+    {
+      "name": "Sauna Product",
+      "settings": [
+        {
+          "type": "product_list",
+          "id": "sauna_products",
+          "label": "Sauna Products"
+        }
+      ],
+      "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "variant_color",
+        "name": "Variant Option Color",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Set the Tone for Your Retreat",
+            "label": "Color block main description"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Set the Tone for Your Retreat",
+            "label": "Color block modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class='product-build__modal-title'>What`s Your Color of Calm?</h3><p class='product-build__modal-content'>Your FireLight Sauna is more than a retreat—it's an extension of your personal style...</p>",
+            "label": "Color block modal content"
+          }
+        ]
+      },
+      {
+        "type": "variant_plug",
+        "name": "Variant Option Plug",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_text",
+            "default": "Plug",
+            "label": "Plug block main heading"
+          },
+          {
+            "type": "checkbox",
+            "id": "is_product",
+            "default": false,
+            "label": "Need to add product! (make it checked)"
+          },
+          {
+            "type": "product",
+            "id": "plug_product",
+            "label": "Select the product."
+          },
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Where do you live",
+            "label": "Plug block main description"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Need help choosing a plug?",
+            "label": "Plug block modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class='product-build__modal-title'>What's Your Color of Calm?</h3><p class='product-build__modal-content'>Your FireLight Sauna is more than a retreat—it's an extension of your personal style...</p>",
+            "label": "Plug block modal content"
+          }
+        ]
+      },
+      {
+        "type": "products_plug",
+        "name": "Product Option Plug",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_text",
+            "default": "Plug",
+            "label": "Plug block main heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Where do you live",
+            "label": "Plug block main description"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Need help choosing a plug?",
+            "label": "Plug block modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class=\"product-build__modal-title\">Where do you live?</h3><p class=\"product-build__modal-content\">Copy for “pick plug type” will indicate that this selects a bulb voltage based on US vs International.</p>",
+            "label": "Plug block modal content"
+          },
+            {
+                "type": "image_picker",
+                "id": "mobile_image",
+                "label": "Mobile Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "usa_image",
+                "label": "USA Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "international_image",
+                "label": "International Image"
+            }
+        ]
+      },
+      {
+        "type": "required_products",
+        "name": "Required Suana Products",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_text",
+            "default": "SilverLining™",
+            "label": "Required products main heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Shield Your Sauna with SilverLining™",
+            "label": "Required block main description"
+          },
+          {
+            "type": "checkbox",
+            "id": "is_silver_lining",
+            "default": false,
+            "label": "Set checked for no Silverlining option"
+          },
+          {
+              "type": "product_list",
+              "id": "product_list_required",
+              "label": "Required products"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Why SilverLining™?",
+            "label": "Required block modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class=\"product-build__modal-title\">Enhance Your Sauna with SilverLining™ Protection</h3><p class=\"product-build__modal-content\">Crafted with 35% silver threads woven into organic cotton, SilverLining™ is designed to block up to 99.99% of harmful EMF frequencies, ranging from 40kHz to 40GHz. This advanced technology creates a tranquil, interference-free environment so you can enjoy your sauna in pure serenity. Third-party tested and proven, SilverLining™ is the ultimate upgrade for those seeking complete protection and peace of mind in their wellness routine.</p>",
+            "label": "Required block modal content"
+          },
+            {
+                "type": "image_picker",
+                "id": "mobile_image",
+                "label": "Mobile Image"
+            }
+        ]
+      },
+      {
+        "type": "variant_panel",
+        "name": "Variant Panel",
+        "settings": [
+            {
+              "type": "inline_richtext",
+              "id": "block_text",
+              "default": "SuperSauna",
+              "label": "Main heading"
+            },
+            {
+              "type": "inline_richtext",
+              "id": "block_description",
+              "default": "Supercharge Your Sauna Experience",
+              "label": "Variant main description"
+            },
+            {
+              "type": "inline_richtext",
+              "id": "modal_button_title",
+              "default": "Need help choosing your intensity level?",
+              "label": "Variant modal button"
+            },
+            {
+              "type": "html",
+              "id": "modal_content",
+              "default": "<h3 class=\"product-build__modal-title\">Go SuperSauna for Maximum Impact</h3><p class=\"product-build__modal-content\">The classic FireLight Sauna is a great starting point, but for experienced sauna enthusiasts seeking the fastest, most powerful sessions, SuperSauna is the ultimate upgrade. You'll enjoy deeper, faster heat and light coverage. Not ready yet? No worries—you can always easily upgrade later.</p>",
+              "label": "Variant modal content"
+            },
+            {
+              "type": "image_picker",
+              "id": "mobile_image",
+              "label": "Mobile Image"
+            },
+            {
+              "type": "image_picker",
+              "id": "ss_image",
+              "label": "SuperSauna Image"
+            },
+            {
+              "type": "image_picker",
+              "id": "classic_image",
+              "label": "Classic Image"
+            },
+            {
+              "type": "text",
+              "id": "ss_badge",
+              "label": "SuperSauna Badge",
+              "info": "Optional."
+            },
+            {
+              "type": "text",
+              "id": "classic_badge",
+              "label": "Classic Badge",
+              "info": "Optional."
+            }
+        ]
+      },
+      {
+        "type": "products_silverlining",
+        "name": "SilverLining",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_text",
+            "default": "SilverLining™",
+            "label": "SilverLining main heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Shield Your Sauna with SilverLining™",
+            "label": "SilverLining main description"
+          },
+          {
+            "type": "product",
+            "id": "silverlining_product",
+            "label": "SilverLining Product"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Why SilverLining™?",
+            "label": "SilverLining modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class=\"product-build__modal-title\">Enhance Your Sauna with SilverLining™ Protection</h3><p class=\"product-build__modal-content\">Crafted with 35% silver threads woven into organic cotton, SilverLining™ is designed to block up to 99.99% of harmful EMF frequencies, ranging from 40kHz to 40GHz. This advanced technology creates a tranquil, interference-free environment so you can enjoy your sauna in pure serenity. Third-party tested and proven, SilverLining™ is the ultimate upgrade for those seeking complete protection and peace of mind in their wellness routine.</p>",
+            "label": "SilverLining modal content"
+          },
+          {
+            "type": "image_picker",
+            "id": "silverlining_image",
+            "label": "Desktop Option Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "set_sl_default",
+            "label": "Set SilverLining option as default",
+            "info": "If un-selected then No SilverLining option will be default",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "silverlining_icon",
+            "label": "SilverLining Icon"
+          },
+          {
+            "type": "image_picker",
+            "id": "silverlining_icon_mobile",
+            "label": "SilverLining Icon Mobile"
+          },
+          {
+            "type": "text",
+            "id": "sl_badge",
+            "label": "SilverLining Badge",
+            "info": "Tag on top of SilverLining. Optional.",
+            "default": "Recommended"
+          },
+          {
+            "type": "text",
+            "id": "sl_option_name",
+            "label": "SilverLining Option Name",
+            "default": "SilverLining"
+          },
+          {
+            "type": "text",
+            "id": "sl_option_val",
+            "label": "SilverLining Option Value",
+            "info": "Enter the variant value for the SilverLining Option",
+            "default": "SilverLining"
+          },
+          {
+            "type": "text",
+            "id": "sl_decline_option_val",
+            "label": "SilverLining Decline Option Value",
+            "info": "Enter the variant value for the No SilverLining Option",
+            "default": "No SilverLining"
+          }
+        ]
+      },
+      {
+        "type": "optional_products",
+        "name": "Optional Suana Products",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_text",
+            "default": "Accessories",
+            "label": "Optional products main heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Optimize Your Sessions",
+            "label": "Optional block main description"
+          },
+          {
+              "type": "product_list",
+              "id": "product_list_optional",
+              "label": "Optional products"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Why should you upgrade?",
+            "label": "Optional block modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class='product-build__modal-title'>Optimize Your Sessions</h3><p class='product-build__modal-content'>Your FireLight Sauna is more than a retreat—it's an extension of your personal style...</p>",
+            "label": "Optional block modal content"
+          }
+        ]
+      },
+      {
+        "type": "variant_accessories",
+        "name": "Variant Accessories",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "block_text",
+            "default": "Accessories",
+            "label": " Accessories main heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "block_description",
+            "default": "Optimize Your Sessions",
+            "label": " Accessories main description"
+          },
+          {
+              "type": "product_list",
+              "id": "product_list_optional",
+              "label": "Optional products"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "modal_button_title",
+            "default": "Why should you upgrade?",
+            "label": " Accessories modal button"
+          },
+          {
+            "type": "html",
+            "id": "modal_content",
+            "default": "<h3 class=\"product-build__modal-title\">Optimize Your Sessions</h3><p class=\"product-build__modal-content\">We'll want body copy explaining why you will really want these. It explains that our floor and stool towels are essential for caring for sauna and are custom-made</p>",
+            "label": " Accessories modal content"
+          },
+            {
+                "type": "image_picker",
+                "id": "mobile_image",
+                "label": "Mobile Image"
+            }
+        ]
+      }
+    ]
+    }
+  {% endschema %}
+  

@@ -1,0 +1,361 @@
+{% comment %}
+    Renders line item
+    Accepts:
+    - line_item {Object} Liquid line_item object
+    - compact {Boolean} Should the line item be in compact mode - e.g. in the cart-drawer
+    Usage:
+    {%- render 'line-item', line_item: cart.items[0] -%}
+{% endcomment %}
+
+{%-
+  liquid
+  assign line_item_index = line_item.index | plus: 1
+  assign compact = compact | default: false
+
+  assign line_item_compare_price = line_item.variant.compare_at_price
+  if line_item_compare_price != blank
+    assign line_item_compare_price_total = line_item_compare_price | times: line_item.quantity
+  endif
+-%}
+
+<tr class="cart-item{% if compact %} cart-item--compact{% endif %}" id="CartItem-{{- line_item_index -}}">
+  <td class="cart-item__media">
+    {%- if line_item.image -%}
+      {% assign product_url = line_item.url | replace: "-supersauna", "-sauna" | replace: "-classic", "-sauna" | replace: "-testing", "" %}
+      <a href="{{- product_url -}}" class="cart-item__link">
+        <span class="visually-hidden">{{- line_item.title | escape -}}</span>
+
+        <div class="media media--1-1">
+          {%-
+            liquid
+            assign image_src = line_item.image | image_url: width: 400
+            render 'image', image: line_item.image, src: image_src, srcset: '', width: 200, height: 240
+          -%}
+        </div><!-- /.media -->
+      </a>
+    {%- endif -%}
+  </td><!-- /.cart-item__media -->
+
+  <td class="cart-item__details">
+    <h3 class="cart-item__title caption">
+      <a href="{{- product_url -}}" class="full-unstyled-link">
+        {{- line_item.product.metafields.custom.custom_title | default: line_item.product.title | escape -}}
+      </a>
+    </h3><!-- /.cart-item__title caption -->
+
+    <div class="cart-item__details-row caption{% unless compact %} large-up-hide{% endunless %}">
+      <div class="cart-item__details-wrapper">
+        <!-- compare: {{ line_item_compare_price_total }} || actual: {{ line_item.original_line_price }} -->
+        {% comment %}Note: this shows the total for this line item, not the item price (singular){% endcomment %}
+        {%- if line_item.original_line_price != line_item.final_line_price -%}
+          <div class="cart-item__discounted-prices">
+            <span class="visually-hidden">
+              {{- 'products.product.price.regular_price' | t -}}
+            </span>
+
+            <del>
+              {{- line_item.original_line_price | money -}}
+            </del>
+
+            <span class="visually-hidden">
+              {{- 'products.product.price.sale_price' | t -}}
+            </span>
+
+            <strong class="color-red">
+              {{- line_item.final_line_price | money -}}
+            </strong>
+          </div>
+        {%- elsif line_item_compare_price_total != blank and line_item_compare_price_total > line_item.original_line_price -%}
+          <div class="cart-item-with-compare-price">
+            <del>{{ line_item_compare_price_total | money }}</del>
+            <strong>{{- line_item.original_line_price | money -}}</strong>
+          </div>
+        {%- else -%}
+          <strong>
+            {{- line_item.original_line_price | money -}}
+          </strong>
+        {%- endif -%}
+
+        {%- if line_item.variant.available and line_item.unit_price_measurement -%}
+          <div>
+            <span class="visually-hidden">
+              {{- 'products.product.price.unit_price' | t -}}
+            </span>
+
+            {{- line_item.variant.unit_price | money -}}
+
+            <span aria-hidden="true">/</span>
+
+            {%- if line_item.variant.unit_price_measurement.reference_value != 1 -%}
+              {{- line_item.variant.unit_price_measurement.reference_value -}}
+            {%- endif -%}
+
+            {{ line_item.variant.unit_price_measurement.reference_unit }}
+          </div>
+        {%- endif -%}
+
+        {%- if compact -%}
+          <cart-remove-button
+            id="Remove-{{- line_item_index -}}"
+            data-index="{{- line_item_index -}}"
+          >
+            <a
+              href="{{- line_item.url_to_remove -}}"
+              class="link"
+            >
+              {%- render 'icon-bin' -%}
+            </a>
+          </cart-remove-button>
+        {%- endif -%}
+      </div><!-- /.cart-item__details-wrapper -->
+    </div><!-- /.cart-item__details-row -->
+
+    {% comment %}
+    Loop through item properties to see if there are any that do not start with an underscore "_" (these are the bundling/discount properties - they don't need to go in the cart item details)
+    {% endcomment %}
+    {% assign has_properties_to_render = false %}
+    {% if line_item.properties != blank %}
+    {%- for property in line_item.properties -%}
+      {%- assign property_first_char = property.first | slice: 0 -%}
+      {%- if property.last != blank and property_first_char != '_' -%}
+        {% assign has_properties_to_render = true %}
+      {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% comment %}<!-- always show because we added the SKU in the additional details and every product has a sku -->
+    {%- if line_item.product.has_only_default_variant == false or
+      has_properties_to_render != false or
+      line_item.selling_plan_allocation != nil
+    -%}
+    {% endcomment %}
+    <a href="{{ line_item.url }}" class="cart-item__details-link js-cart-item-details-toggle">
+      <span class="default">{{ 'products.product.show_details' | t }}</span>
+      <span class="active-text">Close Details</span>
+    </a><!-- /.cart-item__details-link -->
+    {% comment %}<!-- REMOVED 7.9.25 -->{% endif %}{% endcomment %}
+
+    <div class="cart-item-additional-details js-cart-item-details">
+      <dl>
+        {%- if line_item.product.has_only_default_variant == false or
+          line_item.properties != blank or
+          line_item.selling_plan_allocation != nil
+        -%}
+          <!-- variant: {{ line_item.variant.title }} | {{ line_item.variant.id }} -->
+            {%- if line_item.product.has_only_default_variant == false -%}
+              {%- for option in line_item.options_with_values -%}
+                <div>
+                  <dt>{{- option.name -}}: </dt>
+    
+                  <dd class=" bold">{{- option.value -}}</dd>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+    
+            {%- for property in line_item.properties -%}
+              {%- assign property_first_char = property.first | slice: 0 -%}
+              {%- if property.last != blank and property_first_char != '_' -%}
+                {%- liquid
+                  capture properties_first_placeholders
+                    echo 'recipient.form.email_property' | t
+                    echo 'recipient.form.name_property' | t
+                    echo 'recipient.form.message_property' | t
+                    echo 'recipient.form.send_on_property' | t
+                  endcapture
+    
+                  if properties_first_placeholders contains property.first
+                    capture prop_classes
+                      echo 'class="block"'
+                    endcapture
+                  endif
+                -%}
+                <div {{ prop_classes }}>
+                  <dt>{{ property.first }}: </dt>
+    
+                  <dd class=" bold">
+                    {%- if property.last contains '/uploads/' -%}
+                      <a href="{{- property.last -}}" class="link" target="_blank">
+                        {{- property.last | split: '/' | last -}}
+                      </a>
+                    {%- else -%}
+                      {{- property.last -}}
+                    {%- endif -%}
+                  </dd>
+                </div>
+              {% else %}
+              <!-- {{ property | json }} -->
+              {%- endif -%}
+            {%- endfor -%}
+    
+            {%- if line_item.selling_plan_allocation != nil -%}
+              <p>{{- line_item.selling_plan_allocation.selling_plan.name -}}</p>
+            {%- endif -%}
+
+        {%- endif -%}
+
+        <div>
+          <dt>SKU:</dt>
+          <dd class="bold">{{ line_item.sku }}</dd>
+        </div>
+
+      </dl>
+    </div>
+
+    {%- if line_item.discounts -%}
+      <ul class="cart-item__discounts list-unstyled caption caption--small" role="list" aria-label="{{- 'customer.order.discount' | t -}}">
+        {%- for discount in line_item.discounts -%}
+          <li>
+            {%- render 'icon-discount' -%}
+
+            <span>{{- discount.title | escape -}}</span>
+          </li>
+        {%- endfor -%}
+      </ul><!-- /.cart-item__discounts list-unstyled caption caption--small -->
+    {%- endif -%}
+
+    {% if line_item.variant.metafields.custom.lead_time != blank and template.name != "cart" %}
+    <div class="cart-item--lead-time-meta">
+      <p class="cart-item--lead-time"><span>Order Processing:</span> {{ line_item.variant.metafields.custom.lead_time }}</p>
+    </div>
+    {% endif %}
+
+    <div class="cart-item__details-content{% unless compact %} large-up-hide{% endunless %}">
+      <div class="cart-item__details-actions">
+        <div class="cart-item__quantity-wrapper">
+          {%- render 'quantity-input',
+            product_ref: line_item.product,
+            value: line_item.quantity,
+            name: 'updates[]',
+            min: 0,
+            index: line_item_index,
+            hide_label: true,
+            context: 'mobile'
+          -%}
+        </div><!-- /.cart-item__quantity-wrapper -->
+
+        {%- unless compact -%}
+          <cart-remove-button
+            id="Remove-{{- line_item_index -}}"
+            data-index="{{- line_item_index -}}"
+          >
+            <a
+              href="{{- line_item.url_to_remove -}}"
+              class="link"
+            >
+              {{- 'cart.remove' | t -}}
+            </a>
+          </cart-remove-button>
+        {%- endunless -%}
+
+        <p class="cart-item__error caption color-red" role="alert" data-line-item-error data-line="{{- line_item_index -}}"></p><!-- /.cart-item__error -->
+      </div><!-- /.cart-item__details-actions -->
+    </div><!-- /.cart-item__details-content -->
+
+    {% if template.name == "cart" %}
+      {% render 'product-order-processing-disclaimer', product: line_item.product %}
+    {% endif %}
+  </td><!-- /.cart-item__details -->
+
+  {%- unless compact -%}
+    <td class="cart-item__price medium-hide small-hide caption" data-heading="{{- 'cart.price' | t -}}">
+      {% comment %}NOTE: this displays the item price (singular) - only shown on desktop{% endcomment %}
+      {%- if line_item.original_price != line_item.final_price -%}
+        <div class="cart-item__discounted-prices">
+          <span class="visually-hidden">
+            {{- 'products.product.price.regular_price' | t -}}
+          </span>
+
+          <del>
+            {{- line_item.original_price | money -}}
+          </del>
+
+          <span class="visually-hidden">
+            {{- 'products.product.price.sale_price' | t -}}
+          </span>
+
+          <strong class="color-red">
+            {{- line_item.final_price | money -}}
+          </strong>
+        </div>
+      {%- else -%}
+        {%- if line_item_compare_price != blank and line_item_compare_price > line_item.original_price -%}
+        <del>{{ line_item_compare_price | money }}</del>
+        {%- endif -%}
+        <strong>
+          {{ line_item.original_price | money }}
+        </strong>
+      {%- endif -%}
+    </td><!-- /.cart-item__price -->
+
+    <td class="cart-item__quantity medium-hide small-hide" data-heading="{{- 'cart.quantity' | t -}}">
+      <div class="cart-item__quantity-wrapper">
+        {%- render 'quantity-input',
+          product_ref: line_item.product,
+          value: line_item.quantity,
+          min: 0,
+          index: line_item_index,
+          hide_label: true,
+          context: 'desktop'
+        -%}
+      </div><!-- /.cart-item__quantity-wrapper -->
+
+      <cart-remove-button
+        id="Remove-{{- line_item_index -}}"
+        data-index="{{- line_item_index -}}"
+      >
+        <a
+          href="{{- line_item.url_to_remove -}}"
+          class="link"
+        >
+          {{- 'cart.remove' | t -}}
+        </a>
+      </cart-remove-button>
+
+      <p class="cart-item__error caption color-red" role="alert" data-line-item-error data-line="{{- line_item_index -}}"></p><!-- /.cart-item__error -->
+    </td><!-- /.cart-item__quantity -->
+
+    <td class="cart-item__total medium-hide small-hide caption" data-heading="{{- 'cart.total' | t -}}">
+      {%- if line_item.original_line_price != line_item.final_line_price -%}
+        <div class="cart-item__discounted-prices">
+          <span class="visually-hidden">
+            {{- 'products.product.price.regular_price' | t -}}
+          </span>
+
+          <del>
+            {{- line_item.original_line_price | money -}}
+          </del>
+
+          <span class="visually-hidden">
+            {{- 'products.product.price.sale_price' | t -}}
+          </span>
+
+          <strong class="color-red">
+            {{- line_item.final_line_price | money -}}
+          </strong>
+        </div>
+      {%- else -%}
+        <strong>
+          {{- line_item.original_line_price | money -}}
+        </strong>
+      {%- endif -%}
+
+      {%- if line_item.variant.available and line_item.unit_price_measurement -%}
+        <div>
+          <span class="visually-hidden">
+            {{- 'products.product.price.unit_price' | t -}}
+          </span>
+
+          {{- line_item.variant.unit_price | money -}}
+
+          <span aria-hidden="true">/</span>
+
+          {%- if line_item.variant.unit_price_measurement.reference_value != 1 -%}
+            {{- line_item.variant.unit_price_measurement.reference_value -}}
+          {%- endif -%}
+
+          {{ line_item.variant.unit_price_measurement.reference_unit }}
+        </div>
+      {%- endif -%}
+    </td><!-- /.cart-item__total -->
+  {%- endunless -%}
+</tr><!-- /.cart-item -->

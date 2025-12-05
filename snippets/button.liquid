@@ -1,0 +1,59 @@
+{% comment %}
+  Renders button UI element
+  Accepts:
+  - type: {String} button type, default is 'button'
+  - name: {String} button name
+  - id: {String} button id
+  - value: {String} button value
+  - href: {String} button href, only if type is 'link'
+  - class: {String} button class
+  - style: {String} button style, accepts outlined/secondary
+  - fullwidth: {Boolean} button fullwidth, default is false
+  - disabled: {Boolean} button disabled, default is false
+  - attr: {String} button attributes, accepts any html attribute
+
+  Usage:
+  {%- render 'button', name: 'update', type: 'submit', value: 'Update' -%}
+{% endcomment %}
+
+{%-
+  liquid
+  assign type = type | default: 'button'
+  assign name = name | default: false
+  assign id = id | default: false
+  assign value = value | default: false
+  assign href = href | default: false
+  assign class = class | default: ''
+  assign style = style | default: ''
+  assign fullwidth = fullwidth | default: false
+  assign attr = attr | default: false
+  assign disabled = disabled | default: false
+  assign css = class | append: ' button'
+  if style
+    assign css = css | append: ' ' | append: 'button--' | append: style
+  endif
+  if fullwidth
+    assign css = css | append: ' ' | append: 'button--full'
+  endif
+-%}
+
+{%- if value -%}
+  {%- if type == 'link' -%}
+    <a
+      {% if id %}id="{{- id -}}"{% endif %}
+      {% if attr %}{{ attr }}{% endif %}
+      {% if disabled %}disabled{% endif %}
+      href="{{- href -}}"
+      class="{{- css -}}"
+    >{{- value -}}</a>
+  {%- else -%}
+    <button
+      type="{{- type -}}"
+      {% if id %}id="{{- id -}}"{% endif %}
+      {% if name %}name="{{- name -}}"{% endif %}
+      {% if attr %}{{ attr }}{% endif %}
+      {% if disabled %}disabled{% endif %}
+      class="{{- css -}}"
+    >{{- value -}}</button>
+  {%- endif -%}
+{%- endif -%}

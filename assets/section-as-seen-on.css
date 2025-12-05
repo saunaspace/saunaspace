@@ -1,0 +1,106 @@
+.as-seen-on {
+    --block-spacing: 120px;
+    text-align: center;
+}
+.as-seen-on.section-dark {
+    color: white;
+    background: black;
+}
+@media (min-width: 1200px) {
+    .as-seen-on.item-count--4 {
+        max-width: calc(100% - 14.5rem);
+    }
+    .as-seen-on.item-count--5 {
+        max-width: calc(100% - 11rem);
+    }
+}
+.as-seen-on .section-wrap {
+    margin-top: var(--block-spacing);
+    margin-bottom: var(--block-spacing);
+}
+.as-seen-on .sec-heading {
+    margin-bottom: 80px;
+}
+.as-seen-on .logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 100px;
+}
+.as-seen-on .logos .logo {
+    display: flex;
+    align-items: center;
+}
+.as-seen-on .logos.logo-count--4 {
+    flex-wrap: nowrap;
+    gap: 70px;
+    justify-content: space-between;
+}
+.as-seen-on .logos.logo-count--5 {
+    flex-wrap: nowrap;
+    gap: 50px;
+    justify-content: space-between;
+}
+@media (max-width: 1023px) {
+    .as-seen-on {
+        --block-spacing: 100px;
+    }
+    .as-seen-on .logos {
+        gap: 75px;
+    }
+    .as-seen-on .logos.logo-count--4 {
+        gap: 50px;
+    }
+    .as-seen-on .logos.logo-count--5 {
+        gap: 30px;
+    }
+}
+@media (max-width: 767px) {
+    .as-seen-on {
+        --block-spacing: 80px;
+    }
+    .as-seen-on .sec-heading {
+        margin-bottom: 50px;
+    }
+    .as-seen-on .logos {
+        gap: 50px;
+    }
+    .as-seen-on .logo {
+        max-width: 45vw;
+    }
+    .as-seen-on .logos.logo-count--4 {
+        gap: 25px;
+    }
+    .as-seen-on .logos.logo-count--4 .logo {
+        max-width: 35vw;
+    }
+    .as-seen-on .logos.logo-count--5 {
+        gap: 15px;
+    }
+    .as-seen-on .logos.logo-count--5 .logo {
+        max-width: 20vw;
+    }
+}
+@media (max-width: 550px) {
+    .as-seen-on {
+        --block-spacing: 60px;
+    }
+    .as-seen-on .logos {
+        gap: 30px;
+    }
+    .as-seen-on .logo {
+        max-width: 36vw;
+    }
+    .as-seen-on .logos.logo-count--4 {
+        gap: 15px;
+    }
+    .as-seen-on .logos.logo-count--4 .logo {
+        max-width: 20vw;
+    }
+    .as-seen-on .logos.logo-count--5 {
+        gap: 10px;
+    }
+    .as-seen-on .logos.logo-count--5 .logo {
+        max-width: 15vw;
+    }
+}

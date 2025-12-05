@@ -1,0 +1,157 @@
+{%- comment -%}
+  Accepts:
+
+  - menu {Linklist}
+{%- endcomment -%}
+
+<header-drawer class="header-drawer large-up-hide" data-breakpoint="990">
+  <details id="Details-menu-drawer-container" class="header-drawer__container">
+    <summary class="header-drawer__button focus-inset" aria-label="{{- 'accessibility.menu' | t -}}">
+      {%- render 'icon-hamburger' -%}
+      {%- render 'icon-close-alt' -%}
+    </summary><!-- /.header-drawer__button focus-inset -->
+
+    <div class="header-drawer__content" id="menu-drawer" tabindex="-1">
+      <div class="header-drawer__inner">
+        <nav class="header-drawer__nav">
+          {% if section.settings.mobile_featured_products != blank %}
+          <ul class="header-drawer-featured-menu-items">
+            {% for prod in section.settings.mobile_featured_products %}
+              {% liquid
+                assign prod_title = prod.metafields.custom.custom_title | default: prod.title
+                assign prod_description_handle = "mobile_featured_" | append: forloop.index | append: "_description"
+                assign prod_description = section.settings[prod_description_handle]
+              %}
+            <li class="header-drawer-featured-menu-item">
+              <div class="col col-thumbnail featured-menu-item-thumbnail">
+                <a href="{{ prod.url }}" class="featured-menu-item-link">
+                  {%- render 'image' with image: prod.featured_image -%}
+                </a>
+              </div>
+
+              <div class="col col-content featured-menu-item-content">
+                <a href="{{ prod.url }}" class="featured-menu-item-link">
+                  <span class="featured-menu-item-title">{{ prod_title }}</span>
+                  {% if prod_description != blank %}
+                  <span class="featured-menu-item-description">{{ prod_description }}</span>
+                  {% endif %}
+                  <span class="featured-menu-item-display-link link-dot">Shop Now</span>
+                </a>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          <ul class="header-drawer__menu list-unstyled" role="list">
+            {%- for link in menu.links -%}
+              {%- capture menu_cards_html -%}
+                {%- for block in section.blocks -%}
+                  {%- liquid
+                    if block.settings.link_title != link.title
+                      continue
+                    endif
+                  -%}
+
+                  {%- for i in (1..3) -%}
+                    {%- liquid
+                      assign hide_on_mobile_setting_handle = 'card_hide_on_mobile_' | append: i
+                      assign image_setting_handle = 'card_image_' | append: i
+                      assign title_setting_handle = 'card_title_' | append: i
+                      assign title_mobile_setting_handle = 'card_title_mobile_' | append: i
+                      assign button_first_url_setting_handle = 'card_button_first_url_' | append: i
+
+                      if block.settings[image_setting_handle] == blank or block.settings[hide_on_mobile_setting_handle]
+                        continue
+                      endif
+                    -%}
+
+                    <div class="header-drawer__card">
+                      <div class="card-feature card-feature--absolute">
+                        {%- capture media_html -%}
+                          <div class="media">
+                            {%- render 'image' with image: block.settings[image_setting_handle] -%}
+                          </div><!-- /.media -->
+                        {%- endcapture -%}
+
+                        {%- if block.settings[button_first_url_setting_handle] != blank -%}
+                          <a href="{{ block.settings[button_first_url_setting_handle] }}" class="card-feature__media full-unstyled-link">
+                            {{ media_html }}
+                          </a><!-- /.card-feature__media -->
+                        {%- else -%}
+                          <div class="card-feature__media">
+                            {{ media_html }}
+                          </div><!-- /.card-feature__media -->
+                        {%- endif -%}
+
+                        {%- if block.settings[title_setting_handle] != blank or block.settings[title_mobile_setting_handle] != blank -%}
+                          <p class="card-feature__title">
+                            {{- block.settings[title_mobile_setting_handle] | default: block.settings[title_setting_handle] | escape -}}
+                          </p><!-- /.card-feature__title -->
+                        {%- endif -%}
+                      </div><!-- /.card-feature -->
+                    </div><!-- /.header-drawer__card -->
+                  {%- endfor -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+              {%- assign menu_cards_html = menu_cards_html | strip -%}
+
+              <li class="header-drawer__menu-item">
+                {%- if link.links.size > 0 or menu_cards_html != '' -%}
+                  <details id="Details-menu-drawer-menu-item-{{- forloop.index -}}">
+                    <summary class="header-drawer__link focus-inset{% if link.child_active %} is-current{% endif %}">
+                      {{- link.title | escape -}}
+
+                      <span class="header-drawer__link-icon icon">
+                        {%- render 'icon-chevron-down' -%}
+
+                        {%- render 'icon-minus-alt' -%}
+                      </span><!-- /.header-drawer__link-icon -->
+                    </summary>
+
+                    <div class="header-drawer__submenu" id="link-{{- link.title | handle -}}" tabindex="-1">
+                      {%- if menu_cards_html != '' -%}
+                        <div class="header-drawer__cards">
+                          <div class="header-drawer__cards-inner flex flex--grid">
+                            {{ menu_cards_html }}
+                          </div><!-- /.header-drawer__cards-inner -->
+                        </div><!-- /.header-drawer__cards -->
+                      {%- endif -%}
+
+                      <ul class="header-drawer__menu list-unstyled" role="list" tabindex="-1">
+                        {%- for child_link in link.links -%}
+                          <li class="header-drawer__submenu-item{% if child_link.links.size > 0 %} has-child-links{% endif %}">
+                            <a href="{{- child_link.url -}}" class="header-drawer__sublink full-unstyled-link focus-inset{% if child_link.current %} is-current{% endif %}"{% if child_link.current %} aria-current="page"{% endif %}>
+                              {{- child_link.title | escape -}}
+                            </a>
+
+                            {%- if child_link.links.size > 0 -%}
+                              <ul class="header-drawer__menu list-unstyled" role="list" tabindex="-1">
+                                {%- for grand_child_link in child_link.links -%}
+                                  <li class="header-drawer__submenu-item">
+                                    <a href="{{- grand_child_link.url -}}" class="header-drawer__sublink-small full-unstyled-link focus-inset{% if grand_child_link.current %} is-current{% endif %}"{% if grand_child_link.current %} aria-current="page"{% endif %}>
+                                      {{- grand_child_link.title | escape -}}
+                                    </a>
+                                  </li><!-- /.header-drawer__submenu-item -->
+                                {%- endfor -%}
+                              </ul><!-- /.header-drawer__menu list-unstyled -->
+                            {%- endif -%}
+                          </li><!-- /.header-drawer__submenu-item -->
+                        {%- endfor -%}
+                      </ul><!-- /.header-drawer__menu list-unstyled -->
+                    </div><!-- /.header-drawer__submenu -->
+                  </details>
+                {%- else -%}
+                  <a
+                    href="{{- link.url -}}"
+                    class="header-drawer__link full-unstyled-link focus-inset{% if link.current %} is-current{% endif %}"
+                    {% if link.current %}aria-current="page"{% endif %}
+                  >{{- link.title | escape -}}</a>
+                {%- endif -%}
+              </li><!-- /.header-drawer__menu-item -->
+            {%- endfor -%}
+          </ul><!-- /.header-drawer__menu list-unstyled -->
+        </nav><!-- /.header-drawer__nav -->
+      </div><!-- /.header-drawer__inner -->
+    </div><!-- /#menu-drawer.header-drawer__content -->
+  </details><!-- /#Details-menu-drawer-container.header-drawer__container -->
+</header-drawer><!-- /.header-drawer large-up-hide -->

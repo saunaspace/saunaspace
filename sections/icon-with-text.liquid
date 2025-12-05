@@ -1,0 +1,61 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-icon-w-text-" | append: section.index
+  endif
+%}
+{%- if section.settings.icon != blank and section.settings.content != blank -%}
+  <link rel="stylesheet" href="{{ 'section-icon-with-text.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-icon-with-text.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <div class="container" id="{{ sec_id }}">
+    <div class="icon-with-text__grid">
+      <div class="icon-with-text__image-col">
+        <div class="icon-with-text__icon media">
+          {%- render 'image', image: section.settings.icon -%}
+        </div><!-- /.icon-with-text__icon -->
+      </div><!-- /.icon-with-text__image -->
+
+      <div class="icon-with-text__content-col">
+        {{- section.settings.content | escape | newline_to_br -}}
+      </div><!-- /.icon-with-text__content -->
+    </div><!-- /.icon-with-text__grid -->
+  </div><!-- /.container -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Icon with text",
+  "class": "icon-with-text",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon with text"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

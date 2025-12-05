@@ -1,0 +1,201 @@
+{% if product != blank and product.metafields.custom.faqs != blank %}
+    {{- 'section-faq.css' | asset_url | stylesheet_tag -}}
+
+    {% liquid
+      if section.settings.section_id != blank
+        assign sec_id = section.settings.section_id
+      else
+        assign sec_id = "section-product-faq-" | append: section.index
+      endif
+    %}
+  
+    <section
+      class="faq scheme-2 product-faqs-accordions"
+      data-id="{{- section.id -}}"
+      id="{{ sec_id }}"
+    >
+      <div class="container">
+  
+        <div class="faq__inner faq__inner--left">
+          {%- if section.settings.title != blank -%}
+            <div class="faq__head faq__head--{{- section.settings.title_alignment | default: "center" -}}">
+              <h2 class="faq__title h2-small-desktop">{{- section.settings.title | escape -}}</h2><!-- /.faq__title -->
+            </div><!-- /.faq__head -->
+          {%- endif -%}
+  
+          <div class="faq__body">
+            {%- if section.settings.content != blank -%}
+              <p class="faq__content {{ section.settings.content_alignment | default: "left" }}">
+                {{- section.settings.content | escape | newline_to_br -}}
+              </p><!-- /.faq__content -->
+            {%- endif -%}
+            {% liquid
+                assign faq_content = product.metafields.custom.faqs | metafield_tag
+                if faq_content contains '<div class="metafield-rich_text_field">'
+                    assign faq_content = faq_content | replace: '<div class="metafield-rich_text_field">', '' | replace_last: '</div>', ''
+                endif
+                assign accordion_separator = "<!-- ACCORDION ITEM -->"
+                if faq_content contains "<h1>"
+                    assign split_clone = faq_split
+                    assign faq_split = faq_content | replace: "<h1>","<h1>" | replace: "</h1>","</h1>[/h1]" | split: "[/h1]"
+                    assign split_size = faq_split.size | minus: 1
+                    assign split_start_title = faq_split.first
+                    assign split_end_content = faq_split.last
+                    echo "<!-- split size: "
+                    echo split_size
+                    echo " -->"
+                    assign faq_html = ''
+                    assign next_title = split_start_title
+                    for i in (1..split_size)
+                        if forloop.last
+                            assign next_content = split_end_content
+                        else
+                            assign next_item = faq_split[i]
+                            assign next_split = next_item | replace: "<h1>", "[h1]<h1>" | split: "[h1]"
+                            assign next_content = next_split.first
+                        endif
+                        unless faq_html == ""
+                            assign faq_html = faq_html | append: accordion_separator
+                        endunless
+                        assign faq_html = faq_html | append: next_title | append: "<!-- ACCORDION CONTENT -->" | append: next_content
+                        unless forloop.last
+                            assign next_title = next_split.last
+                        endunless
+                    endfor
+
+                    comment
+                    for split in faq_split
+                        echo "<!-- Split Start | "
+                        echo forloop.index0
+                        echo " -->"
+                        echo split
+                        echo "<!-- Split End -->"
+                    endfor
+                    endcomment
+                else
+                    echo "<div class='faq-content--no-accordion'>"
+                    echo faq_content
+                    echo '</div>'
+                endif
+
+                assign faq_accordions = faq_html | split: accordion_separator
+            %}
+            {% for accordion in faq_accordions %}
+                {% liquid
+                assign accordion_split = accordion | split: "<!-- ACCORDION CONTENT -->"
+                assign title = accordion_split.first
+                assign content = accordion_split.last
+                %}
+                <details class="faq__accordion faq__accordion--topic"{% if forloop.first and section.settings.keep_accordions_closed != true %} open{% endif %} {{ block.shopify_attributes }}>
+                    <summary>
+                        {{- title | strip_html -}}
+                        {%- render 'icon-chevron-down-thin' -%}
+                    </summary>
+                    <div class="accordion-content">
+                        {{ content }}
+                    </div>
+                </details>
+            {% endfor %}
+
+            {% comment %}
+            {%- for block in section.blocks -%}
+            {%- if block.settings.title == blank or block.settings.content == blank -%}
+            {%- continue -%}
+            {%- endif -%}
+
+            <details class="faq__accordion faq__accordion--topic"{% if forloop.first and section.settings.keep_accordions_closed != true %} open{% endif %} {{ block.shopify_attributes }}>
+                <summary>
+                    {{- block.settings.title | escape -}}
+
+                    {%- if block.settings.type == 'info' -%}
+                    {%- render 'icon-chevron-down-thin' -%}
+                    {%- else -%}
+                    {%- render 'icon-plus-large' -%}
+                    {%- endif -%}
+                </summary>
+
+                <div>
+                    {{- block.settings.content -}}
+                </div>
+            </details><!-- /.faq__accordion -->
+            {%- endfor -%}
+            {% endcomment %}
+          </div><!-- /.faq__body -->
+  
+          {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+            <div class="faq__actions faq__actions--{{ section.settings.button_alignment | default: "center" }}">
+              {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'orange-hover button--large-desktop' -%}
+            </div><!-- /.faq__actions -->
+          {%- endif -%}
+        </div><!-- /.faq__inner -->
+      </div><!-- /.container -->
+    </section><!-- /.faq -->
+  {%- endif -%}
+  
+  {% schema %}
+    {
+      "name": "Product FAQs Accordions",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product Details"
+        },
+        {
+          "type": "text_alignment",
+          "id": "title_alignment",
+          "label": "Title alignment",
+          "default": "center"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text_alignment",
+          "id": "content_alignment",
+          "label": "Content alignment",
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text_alignment",
+          "id": "button_alignment",
+          "label": "Button alignment",
+          "default": "center"
+        },
+        {
+            "type": "checkbox",
+            "id": "keep_accordions_closed",
+            "label": "Keep first accordion closed",
+            "default": false
+        },
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Section ID"
+        }
+      ],
+      "blocks": [],
+      "disabled_on": {
+        "groups": ["*"]
+      },
+      "presets": [
+        {
+          "name": "Product FAQs Accordions"
+        }
+      ]
+    }
+  {% endschema %}
+  

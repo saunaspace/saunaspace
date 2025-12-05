@@ -1,0 +1,150 @@
+{%-
+  liquid
+  assign image = section.settings.image
+  assign bg_image = section.settings.bg_image
+  assign subheading = section.settings.subheading
+  assign heading = section.settings.heading
+  assign content = section.settings.content
+  assign button_text = section.settings.button_text
+  assign button_url = section.settings.button_url
+  assign flip_content = section.settings.flip_content
+-%}
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-image-and-text-" | append: section.index
+  endif
+%}
+<link rel="stylesheet" href="{{ 'image-and-text.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'image-and-text.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+{%- if heading != blank
+    or content != blank
+    or button_text and button_url != blank -%}
+  <section class="image-and-text" id="{{ sec_id }}">
+    <div class="container container--fullwidth">
+      <div class="image-and-text__cols{% if flip_content %} image-and-text__cols--reversed{% endif %}">
+        <div class="image-and-text__image media">
+          {%-
+            liquid
+            if image != blank
+              render 'image', image: image
+            else
+              echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+            endif
+          -%}
+        </div><!-- /.image-and-text__image -->
+
+        <div class="image-and-text__inner">
+          <div class="image-and-text__text relative">
+            {%- if bg_image != blank -%}
+              <div class="image-and-text__text-bg media">
+                {%- render 'image', image: bg_image -%}
+              </div><!-- /.image-and-text__text-bg -->
+            {%- endif -%}
+
+            {%- if subheading != blank -%}
+              <div class="image-and-text__subheading">
+                {{- subheading | escape -}}
+              </div><!-- /.image-and-text__subheading -->
+            {%- endif -%}
+
+            {%- if heading != blank -%}
+              <h2 class="h3 image-and-text__heading">
+                {{- heading | escape -}}
+              </h2><!-- /.h3 -->
+            {%- endif -%}
+
+            {%- if content != blank -%}
+              <div class="image-and-text__content rte">
+                {{- content -}}
+              </div><!-- /.image-and-text__content rte -->
+            {%- endif -%}
+
+            {%- if button_text != blank
+              and button_url != blank -%}
+              {%- render 'button',
+                type: 'link',
+                value: button_text,
+                href: button_url,
+                style: 'orange-hover button--large-desktop',
+                class: 'image-and-text__button'
+              -%}
+            {%- endif -%}
+          </div><!-- /.container -->
+        </div><!-- /.flex -->
+      </div><!-- /.image-and-text__cols -->
+    </div><!-- /.container -->
+  </section><!-- /.section -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.image-and-text.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "flip_content",
+      "label": "t:sections.image-and-text.settings.flip_content.label",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background element"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-and-text.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:sections.image-and-text.settings.content.label",
+      "default": "<p>Content text goes here</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:sections.image-and-text.settings.button_text.label",
+      "default": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:sections.image-and-text.settings.button_url.label",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "t:sections.image-and-text.name"
+    }
+  ]
+}
+{% endschema %}

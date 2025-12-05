@@ -1,0 +1,30 @@
+{%- if product.media.size > 0 -%}
+{% liquid
+if template.suffix == 'sauna'
+    assign isSauna = true
+else
+    assign isSauna = false
+endif
+%}
+<div class="product__col col--prod-image-slider">
+    <div class="product-build__wrapper is-visible" data-intro-wrapper>
+        {%- render 'main-product__media-variants', product_ref: product, section_ref: section, display_custom_thumbnails: true -%}
+    </div><!-- /.product-build__wrapper -->
+
+    {%- render 'product-media-features', product: product -%}
+
+    {% if isSauna == true %}
+    <nav class="product-build__tabs-nav tabs-nav-mobile">
+      <button class="product-build__tabs-nav-button is-active" data-tab-button data-tab-id="1">Pay Now</button>
+      <button class="product-build__tabs-nav-button" data-tab-button data-tab-id="2">
+        <span>Finance with</span>
+        <i>{%- render 'icon-split-it-simple' -%}</i>
+      </button>
+      <button class="product-build__tabs-nav-button" data-tab-button data-tab-id="3">
+        <span>Pay with</span>
+        <i>{%- render 'icon-truemed' -%}</i>
+      </button>
+    </nav>
+    {% endif %}
+</div><!-- /.product__col.col--prod-image-slider -->
+{% endif %}

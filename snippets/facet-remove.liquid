@@ -1,0 +1,22 @@
+{% comment %}
+    Renders facet remove button
+    Accepts:
+    - url: {String} url to remove the facet
+    - label: {String} label to display on the button
+    - is_filter: {Boolean} if the facet is a filter or not
+    - class: {String} class to add to the button
+    Usage:
+    {%- render 'facet-remove' url: value.url_to_remove, label: value.label, is_filter: true -%}
+{% endcomment %}
+
+<facet-remove>
+  <a href="{{- url -}}" class="{% if is_filter %}facets-active__button link{{ class }}{% else %}link {{ class }}{% endif %} caption">
+    <span>{{- label | escape -}}</span>
+
+    {%- if is_filter -%}
+      {%- render 'icon-close' -%}
+
+      <span class="visually-hidden">{{- 'collection.facets.clear_filter' | t -}}</span>
+    {%- endif -%}
+  </a>
+</facet-remove>

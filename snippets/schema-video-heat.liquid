@@ -1,0 +1,71 @@
+{%- assign video_title = "Why the FireLight Sauna is Better Than Traditional Saunas" -%}
+{%- assign video_description = "Not all heat is created equal. This cinematic animation shows how SaunaSpace’s FireLight Sauna delivers gentle, deeply-penetrating radiant heat that supports detoxification, recovery, and nervous system balance—without the stifling experience of a traditional sauna." -%}
+{%- assign thumbnail_url = "https://i.ytimg.com/vi/ZyMwmkMMGmg/maxresdefault.jpg" -%}
+{%- assign embed_url = "https://www.youtube.com/embed/ZyMwmkMMGmg" -%}
+{%- assign upload_date = "2025-07-07T00:00:00+00:00" -%}
+{%- assign duration_iso = "PT1M35S" -%}
+{%- assign content_url = request.origin | append: page.url -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ video_title | json }},
+  "description": {{ video_description | json }},
+  "thumbnailUrl": [{{ thumbnail_url | json }}],
+  "uploadDate": "{{ upload_date }}",
+  "duration": "{{ duration_iso }}",
+  "contentUrl": {{ content_url | json }},
+  "embedUrl": {{ embed_url | json }},
+  "publisher": {
+    "@type": "Organization",
+    "name": "SaunaSpace",
+    "logo": {
+      "@type": "ImageObject",
+      "url":
+        {% if settings.logo != blank %}
+          {{ settings.logo | image_url: width: settings.logo.width | prepend: "https:" | json }}
+        {% else %}
+          "https://cdn.shopify.com/s/files/1/0026/7229/6025/files/SaunaSpace_Logo.png?v=1751250094"
+        {% endif %}
+    }
+  },
+  "hasPart": [
+    {
+      "@type": "Clip",
+      "name": "Introduction: The Power of Firelight Heat Therapy",
+      "startOffset": 0,
+      "endOffset": 30,
+      "url": {{ content_url | append: "#t=0" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Firelight vs. Traditional Saunas: Faster, Deeper Heat",
+      "startOffset": 30,
+      "endOffset": 47,
+      "url": {{ content_url | append: "#t=30" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Instant Warmup: No Long Preheat Needed",
+      "startOffset": 47,
+      "endOffset": 61,
+      "url": {{ content_url | append: "#t=47" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Quick Sweat and Optimal Temperatures",
+      "startOffset": 61,
+      "endOffset": 74,
+      "url": {{ content_url | append: "#t=61" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Synergy of Light and Heat Therapy",
+      "startOffset": 74,
+      "endOffset": 95,
+      "url": {{ content_url | append: "#t=74" | json }}
+    }
+  ]
+}
+</script>

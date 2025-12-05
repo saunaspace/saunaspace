@@ -1,0 +1,43 @@
+<nav class="footer__nav-mobile {{ class }}">
+  {%- for link in linklists[section.settings.menu].links -%}
+    <details class="footer__links-item">
+      <summary>
+        <span>{{- link.title | escape -}}</span>
+
+        {%- render 'icon-chevron-menu' -%}
+      </summary>
+
+      {%- if link.links.size > 0 -%}
+        <ul class="footer__sublinks list-unstyled">
+          {%- for sublink in link.links -%}
+            <li class="footer__sublinks-item">
+              <a href="{{- sublink.url -}}" class="full-unstyled-link focus-inset">{{- sublink.title | escape -}}</a>
+            </li><!-- /.footer__sublinks-item -->
+          {%- endfor -%}
+        </ul><!-- /.footer__sublinks list-unstyled -->
+      {%- endif -%}
+    </details>
+  {%- endfor -%}
+
+  {%- if section.settings.contact_heading != blank or section.settings.contact_info != blank or section.settings.hours != blank -%}
+    <div class="footer__links-item footer__links-item--contact">
+      {%- if section.settings.contact_info != blank or section.settings.hours != blank -%}
+        <ul class="footer__sublinks list-unstyled">
+          <li class="footer__sublinks-item">
+            <div class="footer__sublinks-item__column">
+              {%- if section.settings.hours != blank -%}
+                <p class="footer__hours">{{ section.settings.hours }}</p>
+              {%- endif -%}
+            </div>
+
+            {%- if section.settings.contact_info != blank -%}
+              <div class="footer__info">
+                {{ section.settings.contact_info }}
+              </div><!-- /.footer__info -->
+            {%- endif -%}
+          </li><!-- /.footer__sublinks-item -->
+        </ul><!-- /.footer__sublinks list-unstyled -->
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</nav><!-- /.footer__nav-mobile -->

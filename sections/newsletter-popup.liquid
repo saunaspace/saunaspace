@@ -1,0 +1,130 @@
+{{- 'section-newsletter-popup.css' | asset_url | stylesheet_tag -}}
+
+<script src="{{- 'newsletter-popup.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+{%- if section.settings.title != blank
+    or section.settings.entry != blank
+    or section.settings.image != blank
+  -%}
+  <newsletter-popup
+    id="NewsletterModal-{{- section.id -}}"
+    class="newsletter-popup flex flex--justify-center flex--center newsletter-popup--image-{{- section.settings.image_position -}}"
+    {% if request.design_mode %}
+      data-open-in-design-mode="true"
+    {% endif %}
+    data-delay="{{- section.settings.delay -}}"
+  >
+    <div class="newsletter-popup__wrapper"
+      aria-modal="true"
+      role="dialog"
+      tabindex="-1"
+    >
+      <button
+        id="ModalClose-{{- section.id -}}"
+        type="button"
+        class="newsletter-popup__close"
+        aria-label="{{- 'accessibility.close' | t -}}"
+      >{% render 'icon-close' %}</button>
+
+      <div class="grid grid--2 newsletter-popup__grid">
+        <div class="grid__item newsletter-popup__content flex flex--center flex--justify-center">
+          {%- if section.settings.title != blank -%}
+            <h6 class="newsletter-popup__title h3">
+              {{- section.settings.title -}}
+            </h6><!-- /.newsletter-popup__title -->
+          {%- endif -%}
+
+          {%- if section.settings.entry != blank -%}
+            <div class="newsletter-popup__entry">
+              {{- section.settings.entry | newline_to_br -}}
+            </div><!-- /.newsletter-popup__entry -->
+          {%- endif -%}
+
+          <div class="newsletter-popup__form">
+            {%- liquid
+              if section.settings.form_code != blank
+                echo section.settings.form_code
+              else
+                render 'newsletter-form', namespace: section.id, js_class: 'js-form'
+              endif
+            -%}
+          </div><!-- /.newsletter-popup__form -->
+        </div><!-- /.grid__item -->
+
+        <div class="grid__item newsletter-popup__image">
+          <div class="media media--portrait newsletter-popup__media">
+            {%- if section.settings.image != blank -%}
+              {%- render 'image', image: section.settings.image -%}
+            {%- else -%}
+              {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+            {%- endif -%}
+          </div><!-- /.media -->
+        </div><!-- /.grid__item -->
+      </div><!-- /.grid -->
+    </div><!-- /.newsletter-popup__wrapper -->
+  </newsletter-popup>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.newsletter-popup.name",
+  "settings": [
+    {
+      "type": "range",
+      "id": "delay",
+      "label": "t:sections.newsletter-popup.settings.delay.label",
+      "unit": "s",
+      "min": 4,
+      "max": 30,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.newsletter-popup.settings.title.label",
+      "default": "Subscribe to newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "entry",
+      "label": "t:sections.newsletter-popup.settings.entry.label",
+      "default": "Subscribe to our newsleeter so you don't miss anything good."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.newsletter-popup.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.newsletter-popup.settings.image-position.label",
+      "options": [
+        {
+          "value": "right",
+          "label": "t:sections.newsletter-popup.settings.image-position.options.right"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.newsletter-popup.settings.image-position.options.left"
+        },
+        {
+          "value": "top",
+          "label": "t:sections.newsletter-popup.settings.image-position.options.top"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "html",
+      "id": "form_code",
+      "label": "t:sections.newsletter-popup.settings.form_code.label",
+      "info": "t:sections.newsletter-popup.settings.form_code.info"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["aside"]
+  }
+}
+{% endschema %}

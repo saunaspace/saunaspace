@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product-default",
+      "settings": {}
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "main",
+    "zp-product-footer-content"
+  ]
+}

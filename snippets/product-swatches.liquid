@@ -1,0 +1,83 @@
+{% comment %}
+  Renders swatches for a specific product
+  Accepts:
+  - product_ref: {Object} product
+  - context: {String} 'desktop' or 'mobile'
+
+  Usage:
+  {%- render 'product-swatches', product_ref: product -%}
+{% endcomment %}
+
+{%-
+  liquid
+  assign context = context | default: 'desktop'
+-%}
+
+{%- for option in product_ref.options_with_values -%}
+  {%-
+    liquid
+    assign label = option.name | handle
+  -%}
+
+  {%- if label == 'color' or label == 'colour' -%}
+    {%- assign option_index = option.position | minus: 1 -%}
+
+    <ul class="list-unstyled">
+      {%- for color in option.values -%}
+        {%- capture swatch_id -%}
+          Filter-{{- label -}}-{{- product_ref.id -}}-{{- forloop.index -}}-{{- context -}}
+        {%- endcapture -%}
+
+        <li class="swatch-radio">
+          <input
+            id="{{- swatch_id -}}"
+            type="radio"
+            class="visually-hidden"
+            name="{{- label -}}-{{- section.id -}}-{{- product_ref.id -}}-{{- context -}}"
+            value="{{ color | handle }}"
+            {% if value.active or forloop.index == 1 %}checked{% endif %}
+            data-option-position="{{- option_index -}}"
+            data-swatch
+          >
+
+          <label
+            {% if color_image != blank -%}style="background-image: url({{- color_image -}});"{%- endif -%}
+            for="{{- swatch_id -}}"
+            class="swatch swatch--{{- color | handle -}}"
+          >
+          </label>
+
+          {% assign color_image = nil %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if product_ref == blank -%}
+  <ul class="list-unstyled">
+    {%- for item in (1..5) -%}
+      <li class="swatch-radio">
+        <input
+          id="{{- swatch_id -}}"
+          type="radio"
+          class="visually-hidden"
+          name="{{- label -}}-{{- section.id -}}-{{- product_ref.id -}}-{{- context -}}"
+          value="{{ color | handle }}"
+          {% if value.active or forloop.index == 1 %}checked{% endif %}
+          data-option-position="{{- option_index -}}"
+          data-swatch
+        >
+
+        <label
+          {% if color_image != blank -%}style="background-image: url({{- color_image -}});"{%- endif -%}
+          for="{{- swatch_id -}}"
+          class="swatch swatch--{{- color | handle -}}"
+        >
+        </label>
+
+        {% assign color_image = nil %}
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

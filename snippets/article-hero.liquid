@@ -1,0 +1,84 @@
+{{- 'article-hero.css' | asset_url | stylesheet_tag -}}
+
+{%- assign location = location | default: 'blog' -%}
+
+<div class="article-hero article-hero--{{ location }}">
+  <div class="article-hero__image">
+    {% if blog.handle == "events" or article_ref.image == blank %}
+    <img src="https://cdn.shopify.com/s/files/1/0026/7229/6025/files/Mask_Group_1914.png?v=1734419130" alt="hero background image" />
+    {% else %}
+    {{- article_ref.image | image_url: width: 1920 | image_tag -}}
+    {% if article_ref.metafields.custom.mobile_hero_image.value != blank %}
+      {%-
+        liquid
+        assign mobile_image = article_ref.metafields.custom.mobile_hero_image.value
+        assign mobile_image_src = mobile_image | image_url: width: 500
+        capture mobile_image_srcset
+          render 'srcset', image: mobile_image
+        endcapture
+        assign mobile_image_alt = mobile_image.alt | escape
+
+        render 'image', src: mobile_image_src, srcset: mobile_image_srcset, sizes: 'auto', alt: mobile_image_alt, class: "image-mobile"
+      -%}
+    {% endif %}
+    {% endif %}
+  </div><!-- /.article-hero__image -->
+
+  <div class="article-hero__content">
+    {%- liquid
+      assign non_category_tags_string = ''
+
+      for tag in article_ref.tags
+        if tag contains 'Category'
+          continue
+        endif
+
+        assign non_category_tags_string = non_category_tags_string | append: tag
+
+        unless forloop.last
+          assign non_category_tags_string = non_category_tags_string | append: ', '
+        endunless
+      endfor
+    -%}
+
+    {%- if non_category_tags_string != '' -%}
+      <p class="article-hero__tags">
+        {{ non_category_tags_string | escape }}
+      </p><!-- /.article-hero__tags -->
+    {%- endif -%}
+
+    {%- if location == 'article' -%}
+      <h1 class="h3 article-hero__title">
+        {{- article_ref.title | escape -}}
+      </h1>
+    {%- else -%}
+      <a class="h3 article-hero__title" href="{{ article_ref.url }}" title="{{- article_ref.title | escape -}}">
+        {{- article_ref.title | escape -}}
+      </a>
+    {%- endif -%}
+
+    {% if blog.handle != "events" %}
+    <div class="article-hero__actions">
+      {% if blog.handle == "jobs" %}
+        {% assign job_location = article_ref.metafields.custom.job_location %}
+        {% if job_location != blank %}
+        <p class="job-location"><span class="location-icon" style="background-image:url({{ 'location.svg' | asset_url }});"></span>{{ job_location }}</p>
+        {% endif %}
+      {% else %}
+        {%- if location == 'article' -%}
+          <div class="article-hero__meta">
+            <p>Last updated {{ article_ref.updated_at | date: '%B %d, %Y' }}</p>
+            <p>•</p>
+            <p>{{- article_ref.author | escape -}}</p>
+          </div><!-- /.article-hero__meta -->
+        {%- else -%}
+          <a href="{{- article_ref.url -}}" class="link-dot">
+            {{- 'blog.read_more' | t -}}
+          </a><!-- /.read-more -->
+        {%- endif -%}
+      {% endif %}
+    </div><!-- /.article-hero__actions -->
+    {% endif %}
+
+  </div><!-- /.article-hero__content -->
+</div><!-- /.article-hero -->

@@ -1,0 +1,237 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-text-and-media-" | append: section.index
+  endif
+
+  comment
+  NOTE: This is no longer a "hover media" section. Media will be shown at all times
+  endcomment
+%}
+{%- if section.settings.image != blank and section.settings.title != blank -%}
+  <section class="text-and-media" id="{{ sec_id }}">
+    <div class="text-and-media__media media media--transparent">
+      {%- render 'image', image: section.settings.image -%}
+    </div><!-- /.text-and-media__media media -->
+
+    <div class="text-and-media__content">
+      <div class="text-and-media__top">
+        <div class="text-and-media__head">
+          <div class="container">
+            {%- if section.settings.subtitle != blank -%}
+              <p class="text-and-media__subtitle">
+                {{- section.settings.subtitle | escape -}}
+              </p><!-- /.text-and-media__subtitle -->
+            {%- endif -%}
+    
+            <h2 class="text-and-media__title">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.text-and-media__title -->
+          </div><!-- /.container -->
+        </div><!-- /.text-and-media__head -->
+      </div><!-- /.text-and-media__top -->
+    
+      <div class="text-and-media__bottom">
+        {%- if section.settings.content != blank -%}
+          <div class="text-and-media__entry">
+            <div class="container">
+              {{- section.settings.content | escape | newline_to_br -}}
+            </div><!-- /.container -->
+          </div><!-- /.text-and-media__entry -->
+        {%- endif -%}
+    
+        {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+          <div class="text-and-media__actions">
+            <a href="{{ section.settings.button_url }}" class="text-and-media__link link-dot"{% if section.settings.button_url contains "http" %}{% unless section.settings.button_url contains "sauna.space" %} target="_blank"{% endunless %}{% endif %}>
+              {{ section.settings.button_text }}
+            </a>
+          </div><!-- /.text-and-media__actions -->
+        {%- endif -%}
+      </div><!-- /.text-and-media__bottom -->
+    </div><!-- /.text-and-media__content -->
+  </section><!-- /.text-and-media -->
+{%- endif -%}
+
+{% style %}
+  .text-and-media {
+    color: #f4f0e0;
+    background-color: #000;
+    text-align: center;
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+
+  .text-and-media__media {
+    position: absolute;
+    inset: 0;
+    /*opacity: 0;
+    visibility: hidden;*/
+    transition: all 800ms ease-out;
+  }
+
+  /*.text-and-media:hover .text-and-media__media {
+    opacity: 1;
+    visibility: visible;
+  }*/
+
+  .text-and-media__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15.4rem 0 17rem;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .text-and-media__content::before,
+  .text-and-media__content::after {
+    content: '';
+    width: 100%;
+    height: 40rem;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+  }
+
+  .text-and-media__content::before {
+    background: linear-gradient(to bottom, #000, transparent);
+    top: 0;
+  }
+
+  .text-and-media__content::after {
+    background: linear-gradient(to top, #000, transparent);
+    bottom: 0;
+  }
+
+  .text-and-media__entry,
+  .text-and-media__head {
+    max-width: 110rem;
+    margin: 0 auto;
+  }
+
+  .text-and-media__subtitle {
+    font-size: calc(var(--fsbase) * 1.6);
+    line-height: 1.375;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.16rem;
+    margin: 0 0 2rem;
+  }
+
+  .text-and-media__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.11;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .text-and-media__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 2;
+    margin-bottom: 2.9rem;
+  }
+
+  .text-and-media__link {
+    color: #f4f0e0;
+    font-weight: 800;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .text-and-media {
+      aspect-ratio: 393 / 665;
+    }
+
+    .text-and-media__media {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .text-and-media__subtitle {
+      font-size: calc(var(--fsbase) * 1.2);
+      line-height: 2;
+      letter-spacing: 0;
+      margin: 0 0 1rem;
+    }
+
+    .text-and-media__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      line-height: 1.5;
+    }
+
+    .text-and-media__entry {
+      font-size: calc(var(--fsbase) * 1.2);
+      line-height: 2;
+    }
+
+    .text-and-media__content {
+      padding: 14rem 4rem 6.7rem;
+    }
+
+    .text-and-media__content::before {
+      background: linear-gradient(to bottom, #000 50%, transparent);
+      opacity: .5;
+    }
+
+    .text-and-media__content::after {
+      background: linear-gradient(to top, #000 30%, transparent);
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .text-and-media__content {
+      position: relative;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Text and media",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+            {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Text and media"
+      }
+    ]
+  }
+{% endschema %}

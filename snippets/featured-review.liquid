@@ -1,0 +1,57 @@
+{%- comment -%}
+  Renders a featured review.
+
+  Accepts:
+    - featured_review {Metaobject} - Review metaobject with category, name, position, review, subtext, link_text, and link_url fields.
+    - compact? {Boolean} - Should the review be rendered in compact mode?
+
+  Usage:
+    {% render 'featured-review', featured_review: featured_review %}
+{%- endcomment -%}
+
+{%- if featured_review != blank -%}
+  <div
+    class="featured-review{% if compact == true %} featured-review--compact{% endif %}"
+  >
+    <div class="featured-review__image">
+      <div class="media media--1-1">
+        {%-
+          liquid
+          assign image = featured_review.image
+          assign image_width = 500
+          if compact == true
+            assign image_width = 375
+          endif
+          assign image_src = image | image_url: width: image_width
+          capture image_srcset
+            render 'srcset', image: image
+          endcapture
+          assign image_alt = image.alt | escape
+          render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: image.width, height: image.height, focal_point: image.presentation.focal_point
+        -%}
+      </div><!-- /.media media--1-1 -->
+    </div><!-- /.featured-review__image -->
+
+    <div class="featured-review__main">
+      <header class="featured-review__head">
+        <h4 class="featured-review__name">{{- featured_review.name | escape -}}</h4>
+
+        <div class="featured-review__position">{{- featured_review.position -}}</div>
+      </header><!-- /.featured-review__head -->
+
+      <div class="featured-review__review">
+        {{- featured_review.review -}}
+      </div><!-- /.featured-review__review -->
+
+      <p class="featured-review__subtext">
+        {{- featured_review.subtext | escape -}}
+      </p><!-- /.featured-review__subtext -->
+
+      {%- if featured_review.link_text != blank and featured_review.link_url != blank -%}
+        <a href="{{ featured_review.link_url }}" class="featured-review__link link-dot">
+          {{- featured_review.link_text -}}
+        </a>
+      {%- endif -%}
+    </div><!-- /.featured-review__main -->
+  </div><!-- /.featured-review -->
+{%- endif -%}

@@ -1,0 +1,116 @@
+{%-
+  liquid
+  assign blog = section.settings.blog
+  assign slides_markup = ''
+  assign articles_per_page = section.settings.articles_per_page | default: 10
+-%}
+
+<link rel="stylesheet" href="{{ 'articles.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'slider-articles.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'article.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'articles.css' | asset_url | stylesheet_tag -}}
+  {{- 'slider-articles.css' | asset_url | stylesheet_tag -}}
+  {{- 'article.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+<script src="{{ 'slider-articles.js' | asset_url }}" defer="defer"></script>
+
+{%- capture slides_markup -%}
+  {{- slides_markup -}}
+
+  {%- if blog.articles.size > 0 -%}
+    {%- for article_ref in blog.articles limit: articles_per_page -%}
+      <div class="slider-articles__slide swiper-slide" data-slide>
+        {% render 'article', article_ref: article_ref %}
+      </div><!-- /.slider-articles__slide -->
+    {%- endfor -%}
+  {%- else -%}
+  {%- for article in (1..10) -%}
+    <div class="slider-articles__slide swiper-slide" data-slide>
+      <div class="article">
+        <div class="article__image">
+          {{- 'image'| placeholder_svg_tag -}}
+        </div><!-- /.article__image -->
+
+        <div class="article__inner">
+          <div class="article__title">
+            Article Title
+          </div><!-- /.article__title -->
+
+          {%- if tags.size > 0 -%}
+            <div class="article__tags">
+              Article Tag, Article Tag
+            </div><!-- /.article__tags -->
+          {%- endif -%}
+
+          <div class="article__actions">
+            <a href="{{- url -}}" class="article__link link-dot">
+              Read More
+            </a><!-- /.article__link -->
+          </div><!-- /.article__actions -->
+        </div><!-- /.article__inner -->
+      </div><!-- /.article -->
+    </div><!-- /.slider-articles__slide -->
+  {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="articles" id="section-articles-{{ section.index }}">
+  <div class="container container--fullwidth">
+    {%- if slides_markup != blank -%}
+      <slider-articles class="slider-articles">
+        <div class="slider-articles__clip swiper" data-clip>
+          <div class="slider-articles__slides swiper-wrapper">
+            {{- slides_markup -}}
+          </div><!-- /.slider-articles__slides swiper-wrapper -->
+
+          <div class="slider-articles__buttons" data-buttons>
+            <div class="swiper-button-prev">
+              <i class="ico">
+                {%- render 'icon-arrow-left' -%}
+              </i><!-- /.ico -->
+            </div>
+
+            <div class="swiper-button-next">
+              <i class="ico">
+                {%- render 'icon-arrow-right' -%}
+              </i><!-- /.ico -->
+            </div>
+          </div><!-- /.slider-articles__buttons -->
+        </div><!-- /.slider-articles__clip swiper -->
+      </slider-articles><!-- /.slider-articles -->
+    {%- endif -%}
+  </div><!-- /.container container--fullwidth -->
+</section><!-- /.articles -->
+
+{% schema %}
+{
+  "name": "Articles",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "label": "Articles to show",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Articles"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

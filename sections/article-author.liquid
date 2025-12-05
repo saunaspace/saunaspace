@@ -1,0 +1,68 @@
+{%- liquid
+  assign heading = section.settings.heading
+
+  assign image = blank
+  assign content = blank
+
+  assign author_handle = article.author | handle
+
+  for meta_author in shop.metaobjects.author.values
+    assign meta_author_handle = meta_author.name | handle
+
+    if author_handle == meta_author_handle
+      assign image = meta_author.image
+      assign content = meta_author.content
+    endif
+  endfor
+-%}
+
+{%- if image != blank and content != blank -%}
+  {{- 'article-author.css' | asset_url | stylesheet_tag -}}
+
+  <section class="article-author">
+    <div class="article-author__inner">
+      <div class="article-author__image">
+        {{- image | image_url: width: 1100 | image_tag -}}
+      </div><!-- /.article-author__image -->
+
+      <div class="article-author__body">
+        {%- if heading != blank -%}
+          <h2 class="h3 article-author__heading">
+            {{- heading | escape | newline_to_br -}}
+          </h2><!-- /.article-author__heading -->
+        {%- endif -%}
+
+        <div class="article-author__content rte">
+          {{- content | metafield_tag -}}
+        </div><!-- /.article-author__content -->
+      </div><!-- /.article-author__body -->
+    </div><!-- /.article-author__inner -->
+  </section><!-- /.article-author -->
+  
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Article Author",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Author",
+      "info": "This section finds the article's author (by Name) from the 'Author' metaobjects"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "About the Author"
+    }
+  ],
+  "enabled_on": { "templates": ["article"] },
+  "presets": [
+    {
+      "name": "Article Author",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

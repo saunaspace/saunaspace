@@ -1,0 +1,150 @@
+{{- 'section-callout-v3.css' | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign _section = section.settings
+  assign _title = _section.title
+  assign content = _section.content
+  assign btn_label = _section.button_label
+  assign btn_url = _section.button_url
+
+  if request.visual_preview_mode
+    assign _title = 'Section title'
+    assign content = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et'
+    assign btn_label = 'Button label'
+    assign btn_url = '#'
+  endif
+-%}
+
+<div class="callout-v3" id="section-section-callout-{{ section.index }}">
+  <div
+    class="callout__background"
+    {% if _section.section_overlay != blank %}
+      style="--overlay-background: {{ _section.section_overlay }};"
+    {% endif %}
+  >
+    <div class="media callout__media">
+      {%-
+        liquid
+        if _section.image != blank
+          assign image_src = _section.image | image_url: width: _section.image.width
+          capture image_srcset
+            render 'srcset', image: _section.image, widths: '1024,1100,1500,1780,2000,3000,3840'
+          endcapture
+          assign image_alt = _section.image.alt | escape
+          render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: _section.image.width, height: _section.image.height
+        else
+          echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+        endif
+      -%}
+    </div><!-- /.media -->
+  </div><!-- /.callout__background -->
+
+  <div class="callout__inner">
+    <div class="callout__content">
+      <div class="container">
+        <div
+          class="callout__body center"
+          style="
+            {% if _section.background_color != blank %}
+              background: {{ _section.background_color }};
+            {% endif %}
+            {% if _section.text_color != blank %}
+              color: {{ _section.text_color }};
+            {% endif %};
+          "
+        >
+          <div class="callout__body-inner">
+            {%- if _title != blank -%}
+              <h2 class="callout__title h3">
+                {{ _title }}
+              </h2><!-- /.callout__title -->
+            {%- endif -%}
+
+            {%- if content != blank -%}
+              <div class="callout__content rte">
+                {{ content }}
+              </div><!-- /.callout__content -->
+            {%- endif -%}
+          </div>
+
+          {%- if btn_url != blank and btn_label != blank -%}
+            <div class="callout__actions">
+              <a href="{{- btn_url -}}" class="callout__link link-dot">
+                {{- btn_label -}}
+              </a>
+            </div>
+          {%- endif -%}
+        </div><!-- /.callout__body -->
+      </div>
+    </div><!-- /.callout__content -->
+  </div><!-- /.callout__inner -->
+</div><!-- /.callout-v3 -->
+
+{% schema %}
+{
+  "name": "Callout v3",
+  "settings": [
+    {
+      "type": "color_background",
+      "id": "section_overlay",
+      "label": "Image overlay",
+      "default": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 51%)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "image"
+    },
+    {
+      "type": "header",
+      "content": "Content card"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#C83647"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "title",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "content",
+      "label": "content",
+      "default": "Content text goes here"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "URL"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Callout v3"
+    }
+  ]
+}
+{% endschema %}

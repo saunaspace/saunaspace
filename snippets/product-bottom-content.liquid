@@ -1,0 +1,84 @@
+{% if testing != blank %}<!-- TO REMOVE THIS SECTION AFTER TESTING 8.5.25 -->
+<div class="product__bottom">
+    <div class="product__info">
+    {% assign product_lead_time = product.selected_or_first_available_variant.metafields.custom.lead_time | default: product.metafields.custom.order_processing_disclaimer %}
+    {% if product_lead_time != blank %}
+    <p class="product__info-title">
+        {% comment %}<!-- {{- 'products.product.payments.title' | t -}} -->{% endcomment %}
+        <span class="lt-header">Order Processing:</span> <span class="js-variant-leadtime">{{ product_lead_time }}</span>
+    </p><!-- /.product__info-title -->
+    {% endif %}
+    {% render 'product-page-po-options' %}
+    </div><!-- /.product__info -->
+
+    <product-form class="product__actions block">
+    {% liquid
+    assign form_classes = 'product__form'
+    unless product.selected_or_first_available_variant.available
+        assign form_classes = form_classes | append: " disabled-no-inventory"
+    endunless
+    %}
+    {%- form 'product', product, id: product_form_id, class: form_classes, novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{- product.selected_or_first_available_variant.id -}}">
+
+        {%-
+        liquid
+        assign value = 'products.product.sold_out' | t
+        assign disabled = true
+        if product.selected_or_first_available_variant.available
+            assign value = 'products.product.add_to_cart' | t
+            assign disabled = false
+        endif
+        render 'button', type: 'submit', name: 'add', value: value, class: 'product-selector__submit', disabled: disabled, fullwidth: true
+        assign value = nil
+        assign disabled = nil
+        -%}
+    {%- endform -%}
+    </product-form><!-- /.product__actions -->
+</div><!-- /.product__bottom -->
+{% else %}
+
+
+<div class="product__bottom">
+    {% comment %}<!-- Default Pricing -->{% endcomment %}
+    <div class="product-build__tabs-tab is-active" data-tab-id="1">
+        <div class="product-build__tabs-actions-wrapper">
+            <div class="product-build__summary">
+            {%- render 'price', product_ref: product, use_variant: true -%}
+            {% comment %}{% render 'product-order-processing-disclaimer' %}{% endcomment %}
+            {% render 'product-shipping-disclaimer' %}
+            </div>
+
+            <product-form class="product__actions block">
+            {% liquid
+            assign form_classes = 'product__form'
+            unless product.selected_or_first_available_variant.available
+                assign form_classes = form_classes | append: " disabled-no-inventory"
+            endunless
+            %}
+            {%- form 'product', product, id: product_form_id, class: form_classes, novalidate: 'novalidate' -%}
+                <input type="hidden" name="id" value="{{- product.selected_or_first_available_variant.id -}}">
+
+                {%-
+                liquid
+                assign value = 'products.product.sold_out' | t
+                assign disabled = true
+                if product.selected_or_first_available_variant.available
+                    assign value = 'products.product.add_to_cart' | t
+                    assign disabled = false
+                endif
+                render 'button', type: 'submit', name: 'add', value: value, class: 'product-selector__submit', disabled: disabled, fullwidth: true
+                assign value = nil
+                assign disabled = nil
+                -%}
+            {%- endform -%}
+            </product-form><!-- /.product__actions -->
+        </div>
+    </div>
+
+    {% render 'product-bottom-splitit', product: product %}
+
+    {% render 'product-bottom-truemed', product: product %}
+
+</div><!-- /.product__bottom -->
+{% endif %}

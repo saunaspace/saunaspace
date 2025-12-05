@@ -1,14 +1,1 @@
-{
-  "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    }
-  },
-  "order": [
-    "main"
-  ]
-}
+{"sections":{"banner":{"type":"page-banner","custom_css":[],"settings":{"heading":"","content":"","background_image":"shopify:\/\/shop_images\/Mask_Group_1914.png","section_id":""}},"main":{"type":"main-page","settings":{}}},"order":["banner","main"]}

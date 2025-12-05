@@ -1,0 +1,26 @@
+{% comment %}<!-- SplitIt -->{% endcomment %}
+<div class="product-build__tabs-tab" data-tab data-tab-id="2">
+    <div class="product-build__tabs-actions-wrapper">
+        <div class="product-build__summary splitit-price-summary">
+            <div class="product-build__price" role="status">
+                <div class="price">
+                    <div class="{% if product.compare_at_price > product.price %}price__sale{% else %}price__regular{% endif %}">
+                        <span class="visually-hidden">{{- 'products.product.price.sale_price' | t -}}</span>
+                        <ins><span class="js-splitit" data-type="monthly">{{ cart.currency.symbol }}{{ product.price | money_without_currency | divided_by: 12.00 | ceil }}/mo</span></ins>
+                        {% if product.compare_at_price > product.price %}
+                        <span class="visually-hidden">{{- 'products.product.price.regular_price' | t -}}</span>
+                        <del><span class="js-splitit" data-type="monthly-original">{{ cart.currency.symbol }}{{ product.compare_at_price | money_without_currency | divided_by: 12.00 | ceil }}/mo</span></del>
+                        {% endif %}
+                    </div>
+                </div>
+                <p>Buy now and pay over time with <i>{%- render 'icon-split-it-simple' -%}</i> <a href="#" class="link js-splitit-trigger">Learn more</a></p>
+                <p>Starts as low as <span class="js-splitit" data-type="monthly">{{ cart.currency.symbol }}{{ product.price | money_without_currency | divided_by: 12.00 | ceil }}/mo</span>.
+                {% comment %}&nbsp;<a href="#" class="link js-splitit-trigger">Learn More</a>{% endcomment %}</p>
+            </div>
+        </div>
+
+        <div class="product__actions">
+            {% render 'button', type: 'button', name: 'added', value: "Add to Cart", class: 'custom_add_to_cart', disabled: false, fullwidth: true %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,291 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-media-with-features-" | append: section.index
+  endif
+%}
+{%- if section.settings.title != blank -%}
+  <section class="media-with-features" id="{{ sec_id }}">
+    {%- if section.settings.video != blank -%}
+      <div class="media-with-features__media media media--transparent">
+        {{- section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false -}}
+      </div><!-- /.media-with-features__media -->
+    {%- elsif section.settings.image != blank -%}
+      <div class="media-with-features__media media media--transparent">
+        {%- render 'image', image: section.settings.image -%}
+      </div><!-- /.media-with-features__media -->
+    {%- endif -%}
+
+    <div class="media-with-features__content">
+      <div class="media-with-features__wrapper">
+        <h2 class="media-with-features__title">
+          {{- section.settings.title | escape | newline_to_br -}}
+        </h2><!-- /.media-with-features__title -->
+
+        {%- if section.settings.content != blank -%}
+          <p class="media-with-features__entry">
+            {{- section.settings.content | escape | newline_to_br -}}
+          </p><!-- /.media-with-features__entry -->
+        {%- endif -%}
+
+        <div class="media-with-features__items">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.title == blank -%}
+              {%- continue -%}
+            {%- endif -%}
+
+            <div class="media-with-features__item">
+              <h3 class="media-with-features__heading">
+                {{- block.settings.title | escape -}}
+
+                {%- if block.settings.subtitle != blank -%}
+                  <small>{{- block.settings.subtitle | escape -}}</small>
+                {%- endif -%}
+              </h3><!-- /.media-with-features__heading -->
+
+              {%- if block.settings.image != blank -%}
+                {{- block.settings.image | image_url: width: 150 | image_tag: width: nil -}}
+              {%- endif -%}
+            </div><!-- /.media-with-features__item -->
+          {%- endfor -%}
+        </div><!-- /.media-with-features__items -->
+
+        {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+          <div class="media-with-features__actions">
+            <a href="{{- section.settings.link_url -}}" class="link-dot">
+              {{- section.settings.link_text | escape -}}
+            </a>
+          </div><!-- /.media-with-features__actions -->
+        {%- endif -%}
+      </div><!-- /.media-with-features__wrapper -->
+    </div><!-- /.media-with-features__content -->
+  </section><!-- /.media-with-features -->
+{%- endif -%}
+
+{% style %}
+  .media-with-features {
+    background-color: #000;
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+
+  .media-with-features:has(.media-with-features__media) {
+    background-color: #f0e7da;
+  }
+
+  .media-with-features__media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .media-with-features__media::after {
+    content: '';
+    background: linear-gradient(to right, transparent, black);
+    opacity: 0.5;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .media-with-features__content {
+    color: #f4f0e0;
+    max-width: 63rem;
+    padding: 13rem 0 12rem;
+    margin-left: auto;
+    margin-right: 20rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .media-with-features__title {
+    text-align: center;
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.203704;
+    font-weight: 500;
+    max-width: 42.1rem;
+    margin: 0 auto 5.7rem;
+  }
+
+  .media-with-features__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 1.714286;
+    margin: 0 0 5rem;
+  }
+
+  .media-with-features__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+  }
+
+  .media-with-features__item:last-child {
+    border-bottom: 0.1rem solid var(--color-border);
+  }
+
+  .media-with-features__item + .media-with-features__item {
+    border-top: 0.1rem solid var(--color-border);
+  }
+
+  .media-with-features__heading {
+    font-family: var(--font-body-family);
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 1;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .media-with-features__heading small {
+    display: block;
+    font-size: calc(var(--fsbase) * 1.5);
+    line-height: 1;
+    font-weight: 500;
+    margin: 0.5rem 0 0;
+  }
+
+  .media-with-features__item img {
+    width: 5rem;
+  }
+
+  .media-with-features__actions {
+    text-align: center;
+    margin-top: 5rem;
+  }
+
+  .media-with-features__actions .link-dot {
+    color: currentColor;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .media-with-features__content {
+      padding: 8rem 4rem;
+      margin-right: auto;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .media-with-features {
+      aspect-ratio: initial;
+    }
+
+    .media-with-features__content {
+      padding: 4rem 5rem;
+    }
+
+    .media-with-features:has(.media-with-features__media) .media-with-features__content {
+      color: #2c2621;
+    }
+
+    .media-with-features__media {
+      aspect-ratio: 16 / 9;
+      position: relative;
+      inset: initial;
+    }
+
+    .media-with-features__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      line-height: 1.458333;
+      margin: 0 0 2rem;
+    }
+
+    .media-with-features__entry {
+      text-align: center;
+      font-size: calc(var(--fsbase) * 1.2);
+      line-height: 2;
+      margin: 0 0 4rem;
+    }
+
+    .media-with-features__heading {
+      padding-right: 15px;
+      font-size: calc(var(--fsbase) * 1.6);
+      font-weight: 700;
+    }
+
+    .media-with-features__heading small {
+      font-size: calc(var(--fsbase) * 1.2);
+      line-height: 1.5;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    .media-with-features__item {
+      border-color: #d5d5d5 !important;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Media with features",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Media with features"
+      }
+    ]
+  }
+{% endschema %}

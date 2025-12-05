@@ -1,0 +1,231 @@
+{{- 'section-text-and-icon-radial.css' | asset_url | stylesheet_tag -}}
+{% comment %}{{- 'modal-dialog.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+
+{%- liquid
+  assign _section = section.settings
+  assign title = _section.title
+  assign content = _section.content
+  assign popup_content = _section.popup_content_advanced | default: _section.popup_content
+
+  if request.visual_preview_mode
+    assign title = 'Title goes here'
+    assign content = 'Support your wellness goals with ease. The FireLight® spectrum increases heart rate and circulation, helping you burn calories more efficiently while you relax.'
+  endif
+-%}
+
+{%- if title != blank -%}
+  {%- capture modal_content -%}
+    {%- if _section.icon != blank -%}
+      <div
+        class="text-icon-radial__media"
+        style="--icon-max-width: {{ _section.icon_width }}px; --icon-max-width-mobile: {{ _section.icon_width_mobile }}px;"
+      >
+        <div class="container">
+          {%- render 'image', image: _section.icon -%}
+        </div><!-- /.container -->
+      </div><!-- /.text-icon-radial__media -->
+    {%- endif -%}
+
+    {%- if popup_content != blank -%}
+      <div class="text-icon-radial__content">
+        {%- if _section.popup_title != blank -%}
+          <h3 class="text-icon-radial__title">
+            {{- _section.popup_title | escape | newline_to_br -}}
+          </h3><!-- /.text-icon-radial__title -->
+        {%- endif -%}
+
+        <div class="text-icon-radial__paragraph">
+          {% if _section.popup_content_advanced == blank %}
+          {{- popup_content | escape | newline_to_br -}}
+          {% else %}
+          {{ popup_content | newline_to_br }}
+          {% endif %}
+        </div><!-- /.text-icon-radial-paragraph -->
+
+        {%- if _section.popup_btn_label != blank and _section.popup_btn_url != blank -%}
+          <div class="text-icon-radial__actions">
+            <a href="{{ _section.popup_btn_url }}" class="text-icon-radial__link link-dot">
+              {{ _section.popup_btn_label }}
+            </a>
+          </div><!-- /.text-icon-radial__actions -->
+        {%- endif -%}
+      </div><!-- /.text-icon-radial__content -->
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-text-icon-radial-" | append: section.index
+    endif
+  %}
+
+  <section
+    class="text-icon-radial{% if _section.content != blank or _section.title != blank or request.visual_preview_mode %} text-icon-radial--has-content{% endif %}{% if _section.reverse %} text-icon-radial--reverse{% endif %}"
+    id="{{ sec_id }}"
+    style="--icon-max-width: {{ _section.icon_width }}px; --icon-max-width-mobile: {{ _section.icon_width_mobile }}px;"
+  >
+    {%- if _section.icon != blank -%}
+      <div class="text-icon-radial__media">
+        <div class="container">
+          {%- render 'image', image: _section.icon -%}
+        </div><!-- /.container -->
+      </div><!-- /.text-icon-radial__media -->
+
+    {%- elsif request.visual_preview_mode -%}
+      <div class="text-icon-radial__media">
+        <div class="container">
+          {{ "image" | placeholder_svg_tag }}
+        </div><!-- /.container -->
+      </div><!-- /.text-icon-radial__media -->
+    {%- endif -%}
+
+    {%- if content != blank -%}
+      <div class="text-icon-radial__content">
+        <h2 class="text-icon-radial__title">
+          {{- title | escape | newline_to_br -}}
+        </h2><!-- /.text-icon-radial__title -->
+
+        <div class="text-icon-radial__paragraph">
+          {{- content | escape | newline_to_br -}}
+        </div><!-- /.text-icon-radial-paragraph -->
+
+        {%- if _section.has_popup or request.visual_preview_mode or _section.popup_btn_url != blank -%}
+          <div class="text-icon-radial__actions">
+            {% if _section.has_popup %}
+            {%- assign modal_id = 'section-modal-' | append: section.id -%}
+
+            <modal-opener class="text-icon-radial__modal-opener" data-modal="#{{- modal_id -}}">
+              <button class="link-dot text-icon-radial__link" type="button" aria-haspopup="dialog">
+                {{- _section.popup_trigger_label | default: 'Read more' -}}
+              </button>
+            </modal-opener><!-- /text-icon-radial__modal-opener -->
+
+            {%-
+              render 'modal-dialog',
+              id: modal_id,
+              title: _section.popup_title,
+              content: modal_content,
+              class: 'text-icon-radial__modal-dialog',
+              show_close_label: true,
+            -%}
+            {% comment %}<!-- If popup is disabled but there is still a popup_btn_url then show it as a regular link -->{% endcomment %}
+            {% elsif _section.popup_btn_url != blank %}
+              <a href="{{ _section.popup_btn_url }}" class="link-dot linkdot-currentcolor">
+                {{ _section.popup_btn_label | default: "Explore Within" }}
+              </a>
+            {% endif %}
+          </div><!-- /.text-icon-radial__actions -->
+        {%- endif -%}
+      </div><!-- /.text-icon-radial__content -->
+    {%- endif -%}
+  </section><!-- /.text-icon-radial -->
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Text and icon radial",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "reverse",
+        "label": "Change image position",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon",
+        "info": "SVG icon"
+      },
+      {
+        "type": "range",
+        "id": "icon_width",
+        "min": 200,
+        "max": 350,
+        "step": 2,
+        "unit": "px",
+        "label": "Icon max width",
+        "default": 300
+      },
+      {
+        "type": "range",
+        "id": "icon_width_mobile",
+        "min": 100,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Icon mobile max width",
+        "default": 130
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Popup"
+      },
+      {
+        "type": "checkbox",
+        "id": "has_popup",
+        "label": "Show popup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "popup_trigger_label",
+        "label": "Button label"
+      },
+      {
+        "type": "header",
+        "content": "Popup Content"
+      },
+      {
+        "type": "textarea",
+        "id": "popup_title",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "popup_content",
+        "label": "Content"
+      },
+      {
+        "type": "richtext",
+        "id": "popup_content_advanced",
+        "label": "Alternative Content"
+      },
+      {
+        "type": "text",
+        "id": "popup_btn_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "popup_btn_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Text and icon radial"
+      }
+    ]
+  }
+{% endschema %}

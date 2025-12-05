@@ -1,0 +1,137 @@
+{%- comment -%}
+  Renders a product's media gallery.
+
+  Accepts:
+   - product_ref {ShopifyProduct}
+   - section_ref {ShopifySection}
+
+  Usage:
+    {%- if product.media.size > 0 -%}
+      {%- render 'main-product__media', product_ref: product, section_ref: section -%}
+    {%- endif -%}
+
+  Requires:
+   - assets/swiper-bundle.min.css
+   - assets/section-product.css
+   - assets/product-media.js
+{%- endcomment -%}
+
+{% assign custom_thumbnails = product_ref.metafields.custom.thumbnail_slider_images %}
+{% assign selected_variant_media_id = null %}
+
+{% capture main_slides %}
+  {%- for media in product_ref.media -%}
+  <div
+    class="swiper-slide"
+    data-media-id="{{- media.id -}}"
+    data-index="{{- forloop.index0 -}}"
+    {% if media.id == product_ref.selected_variant.featured_media.id %}
+      {% assign selected_variant_media_id = media.id %}
+      data-selected
+    {% endif %}
+  >
+    {%- render 'product-media', media: media, modal_id: section_ref.id -%}
+  </div><!-- /.swiper-slide -->
+  {%- endfor -%}
+{% endcapture %}
+
+<product-media class="product__media product__media-wrapper">
+  {%- if product_ref.media.size > 1 -%}
+    <div class="product__media-slider">
+      <div class="swiper" data-slider>
+        <div class="swiper-wrapper">
+          {% if selected_variant_media_id == null %}
+            {% if custom_thumbnails != blank %}
+            {% for thumbnail in custom_thumbnails.value %}
+                <div class="swiper-slide" data-media-id="{{ thumbnail.id }}">
+                  {%- render 'product-media', media: thumbnail, modal_id: section_ref.id -%}
+                </div>
+            {% endfor %}
+            {% endif %}
+          {% endif %}
+          {{ main_slides }}
+        </div><!-- /.swiper-wrapper -->
+
+        {%- capture icons_html -%}
+          {%- for i in (1..3) -%}
+            {%-
+              liquid
+              assign icon_handle = 'media_badges_icon_' | append: forloop.index
+              assign text_handle = 'media_badges_text_' | append: forloop.index
+
+              if section.settings[text_handle] == blank
+                continue
+              endif
+            -%}
+
+            <li>
+              <div class="product-media__icon">
+                {%- render 'icon-get', icon: section.settings[icon_handle] -%}
+
+                <span>{{- section.settings[text_handle] | escape -}}</span>
+              </div><!-- /.product-media__icons -->
+            </li>
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- unless icons_html == blank -%}
+          <div class="product-media__icons">
+            <ul class="list-unstyled">
+              {{- icons_html -}}
+            </ul><!-- /.unstyled-list -->
+          </div><!-- /.product-media__icons -->
+        {%- endunless -%}
+
+        <div class="swiper-arrows large-up-hide">
+          <button class="swiper-arrow swiper-arrow--prev">
+            {% render 'icon-chevron-left' %}
+          </button><!-- /.swiper-arrow -->
+          <button class="swiper-arrow swiper-arrow--next">
+            {% render 'icon-chevron-right' %}
+          </button><!-- /.swiper-arrow -->
+        </div><!-- /.swiper-arrows -->
+
+        <div class="swiper-pagination large-up-hide"></div><!-- /.swiper-pagination -->
+      </div><!-- /.swiper -->
+    </div><!-- /.product__media-slider swiper -->
+
+    <div class="product__media-thumbs small-hide medium-hide">
+      <div class="swiper product-media-thumbs-slider" data-thumbs>
+        <div class="swiper-wrapper">
+          {% if selected_variant_media_id == null %}
+            {% if custom_thumbnails != blank %}
+            {% for thumbnail in custom_thumbnails.value %}
+                <div class="swiper-slide" data-custom-thumbnail="{{ thumbnail.id }}">
+                  {%- render 'product-thumbnail', media: thumbnail, modal_id: section_ref.id -%}
+                </div>
+            {% endfor %}
+            {% endif %}
+          {% endif %}
+          {%- for media in product_ref.media -%}
+            <div class="swiper-slide" data-media-id="{{ media.id }}"><!-- {{ product_ref.selected_variant.featured_media.id }} -->
+              {%- render 'product-thumbnail', media: media, modal_id: section_ref.id -%}
+            </div><!-- /.swiper-slide -->
+            {% if media.id == selected_variant_media_id %}
+              {% if custom_thumbnails != blank %}
+              {% for thumbnail in custom_thumbnails.value %}
+                <div class="swiper-slide" data-custom-thumbnail="{{ thumbnail.id }}">
+                  {%- render 'product-thumbnail', media: thumbnail, modal_id: section_ref.id -%}
+                </div>
+              {% endfor %}
+              {% endif %}
+            {% endif %}
+          {%- endfor -%}
+        </div><!-- /.swiper-wrapper -->
+      </div>
+
+      <button class="swiper-arrow swiper-arrow--prev">
+        {% render 'icon-chevron-left' %}
+      </button><!-- /.swiper-arrow -->
+      <button class="swiper-arrow swiper-arrow--next">
+        {% render 'icon-chevron-right' %}
+      </button><!-- /.swiper-arrow -->
+    </div><!-- /.product__media-thumbs swiper -->
+  {%- else -%}
+    {%- render 'product-media', media: product_ref.featured_media, modal_id: section_ref.id -%}
+  {%- endif -%}
+</product-media><!-- /.product__media -->

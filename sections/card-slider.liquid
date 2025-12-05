@@ -1,0 +1,139 @@
+{%- unless section.blocks.size == 0 -%}
+  <link rel="stylesheet" href="{{ 'section-cards.css' | asset_url }}" media="print" onload="this.media='all'">
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-card-slider-" | append: section.index
+    endif
+  %}
+  <noscript>
+    {{- 'section-cards.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <script src="{{- 'cards-slider.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+  <div class="container" id="{{ sec_id }}">
+    {%- if section.settings.background_image != blank -%}
+      <div class="cards__background">
+        {%- render 'image', image: section.settings.background_image -%}
+      </div><!-- /.cards__background -->
+    {%- endif -%}
+
+    <cards-slider
+      class="cards__inner"
+      {% if section.settings.autoplay %} data-autoplay-interval="{{- section.settings.autoplay_interval | times: 1000 -}}" {% endif %}
+    >
+      <div class="swiper" data-slider>
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="card__media-wrapper">
+                  <a{% if block.settings.url != blank %} href="{{ block.settings.url }}"{% endif %} class="card__media media">
+                    {%-
+                      liquid
+                      if block.settings.image != blank
+                        assign image = block.settings.image
+                        assign image_src = image | image_url: width: 375
+                        render 'image', src: image_src, sizes: 'auto', alt: image.alt, width: image.width, height: image.height, focal_point: image.presentation.focal_point
+                      else
+                        echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+                      endif
+                    -%}
+                  </a><!-- /.card__media -->
+                </div><!-- /.card__media-wrapper -->
+
+                <h3 class="h4 card__title">{{- block.settings.title -}}</h3><!-- /.h4 -->
+              </div><!-- /.card -->
+            </div><!-- /.swiper-slide -->
+          {%- endfor -%}
+        </div><!-- /.swiper-wrapper -->
+
+        <div class="swiper-pagination cards__pagination" data-pagination></div><!-- /.swiper-pagination -->
+      </div><!-- /.swiper -->
+    </cards-slider><!-- /.cards__inner -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Card slider",
+  "class": "cards",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay slider",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay interval",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Slide title"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Card slider",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

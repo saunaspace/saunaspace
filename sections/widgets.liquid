@@ -1,0 +1,107 @@
+{%- unless section.blocks.size == 0 -%}
+  <link rel="stylesheet" href="{{ 'component-widgets.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'component-widgets.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <div class="container">
+    <div class="widgets">
+      <ul class="list-unstyled">
+        {% for block in section.blocks %}
+          {%-
+            liquid
+            if block.settings.heading == blank
+              continue
+            endif
+          -%}
+          <li>
+            <div class="widget">
+              <h3 class="widget__heading h5">
+                {{- block.settings.heading | escape -}}
+              </h3><!-- /.widget__heading -->
+
+              {%- if block.settings.link_text != blank and block.settings.link_url != blank -%}
+                <a href="{{ block.settings.link_url }}" class="widget__link">
+                  {{- block.settings.link_text | escape -}}
+                </a><!-- /.widget__link -->
+              {%- endif -%}
+            </div><!-- /.widget -->
+          </li>
+        {% endfor %}
+      </ul><!-- /.list-unstyled -->
+    </div><!-- /.widgets -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Widgets",
+  "class": "widgets",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "widget",
+      "name": "Widget",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Widget Heading"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Widgets",
+      "blocks": [
+        {
+          "type": "widget",
+          "settings": {
+            "heading": "Widget 1",
+            "link_text": "Link",
+            "link_url": "#"
+          }
+        },
+        {
+          "type": "widget",
+          "settings": {
+            "heading": "Widget 2",
+            "link_text": "Link",
+            "link_url": "#"
+          }
+        },
+        {
+          "type": "widget",
+          "settings": {
+            "heading": "Widget 3",
+            "link_text": "Link",
+            "link_url": "#"
+          }
+        },
+        {
+          "type": "widget",
+          "settings": {
+            "heading": "Widget 4",
+            "link_text": "Link",
+            "link_url": "#"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

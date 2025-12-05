@@ -1,0 +1,356 @@
+{%- unless section.blocks.size == 0 -%}
+  {% comment %}{{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+  {{- 'section-hero-carousel-v2.css' | asset_url | stylesheet_tag -}}
+
+  {% comment %}<script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>{% endcomment %}
+  <script src="{{- 'hero-carousel-v2.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+{% liquid
+  assign slide_count = section.blocks.size
+  assign scroll_adjustment = "0.65"
+%}
+
+  <hero-carousel-alt
+    class="hero-carousel-alt__wrapper hero-carousel-alt__wrapper--height-{{ section.settings.height }}{% if slide_count > 1 %} scroll-animation-section{% endif %}"
+    {% if slide_count > 1 %} data-slide-count="{{ slide_count }}" style="--slideCount: {{ slide_count }};--scrollAdjustment: {{ scroll_adjustment }}"{% endif %}
+  >
+    <div class="swiper"{% if slide_count > 1 %} data-slider{% endif %}>
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {%-
+            liquid
+            assign has_button = false
+            if block.settings.button_text != blank and block.settings.button_url != blank
+              assign has_button = true
+            endif
+            if block.settings.heading == blank and block.settings.content == blank and has_button == false
+              continue
+            endif
+
+            assign container_sizing_class = ""
+            if block.settings.fullwidth
+              assign container_sizing_class = " container--fullwidth"
+            elsif block.settings.extra_wide_container
+              assign container_sizing_class = " container--extra-wide"
+            endif
+          -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="hero-carousel-alt__slide{% if block.settings.mobile_full_overlay %} mobile-overlay{% endif %}">
+              <div class="container{{ container_sizing_class }}">
+                <div class="hero-carousel-alt__background">
+                  <div class="media hero-carousel-alt__media {% if block.settings.video_mobile != blank or block.settings.image_mobile != blank %}small-hide{% endif %}">
+                    {%-
+                      liquid
+                      if block.settings.video != blank
+                        echo block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false
+                      elsif block.settings.image != blank
+                        render 'image', image: block.settings.image
+                      else
+                        echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+                      endif
+                    -%}
+                  </div><!-- /.media -->
+
+                  {%- if block.settings.video_mobile != blank or block.settings.image_mobile != blank -%}
+                    <div class="media hero-carousel-alt__media large-up-hide">
+                      {%-
+                        liquid
+                        if block.settings.video_mobile != blank
+                          echo block.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: true, controls: false
+                        elsif block.settings.image_mobile != blank
+                          render 'image', image: block.settings.image_mobile
+                        endif
+                      -%}
+                    </div><!-- /.media -->
+                  {%- endif -%}
+                </div><!-- /.hero-carousel-alt__background -->
+
+                {%-
+                  liquid
+                  capture content_styles
+                    echo ' hero-carousel-alt__content--' | append: block.settings.content_position
+                    echo ' hero-carousel-alt__content--width-' | append: block.settings.content_width
+                    echo ' hero-carousel-alt__content--text-' | append: block.settings.text_alignment
+                    echo ' hero-carousel-alt__content--text-mobile-' | append: block.settings.text_alignment_mobile
+                  endcapture
+                -%}
+                <div class="hero-carousel-alt__content {{ content_styles }}">
+                  <div class="hero-carousel-alt__content-wrapper">
+                    {%- if block.settings.heading != blank -%}
+                      <h2 class="hero-carousel-alt__heading hero-carousel-alt__heading--{{ block.settings.heading_size }}">
+                        {{- block.settings.heading | escape | newline_to_br -}}
+                      </h2><!-- /.hero-carousel-alt__heading -->
+                    {%- endif -%}
+
+                    {%- if block.settings.content != blank -%}
+                      <div class="hero-carousel-alt__body">
+                        {%- if block.settings.display_content_as_accordion -%}
+                          {%- assign accordions = block.settings.content | split: '<h6>' -%}
+                          {%- assign accordions_count = 0 -%}
+                          {%- for accordion in accordions -%}
+                            {%-
+                              liquid
+                              assign heading = accordion | split: '</h6>' | first
+                              assign content = accordion | split: '</h6>' | last
+                              if heading == blank or content == blank
+                                continue
+                              endif
+                              assign accordions_count = accordions_count | plus: 1
+                            -%}
+
+                            <details class="hero-carousel-alt__accordion"{% if accordions_count == 1 %} open{% endif %}>
+                              <summary><strong>{{ heading }}</strong></summary>
+
+                              <div class="hero-carousel-alt__accordion-content">
+                                {{ content }}
+                              </div><!-- /.hero-carousel-alt__accordion-content -->
+                            </details>
+                          {%- endfor -%}
+                        {%- else -%}
+                          {{- block.settings.content -}}
+                        {%- endif -%}
+                      </div><!-- /.hero-carousel-alt__body -->
+                    {%- endif -%}
+
+                    {%- if has_button -%}
+                      <div class="hero-carousel-alt__actions">
+                        <a href="{{ block.settings.button_url }}" class="hero-carousel-alt__link link-dot">
+                          {{ block.settings.button_text | escape }}
+                        </a>
+                      </div><!-- /.hero-carousel-alt__actions -->
+                    {%- endif -%}
+                  </div><!-- /.hero-carousel-alt__content-wrapper -->
+                </div><!-- /.hero-carousel-alt__content -->
+              </div><!-- /.container -->
+            </div><!-- /.hero-carousel-alt__slide -->
+          </div><!-- /.swiper-slide -->
+        {%- endfor -%}
+      </div><!-- /.swiper-wrapper -->
+
+      <div class="swiper-pagination hero-carousel-alt__pagination{% if section.settings.hide_pagination_on_desktop %} large-up-hide{% endif %}" data-pagination></div><!-- /.swiper-pagination -->
+    </div><!-- /.swiper -->
+  </hero-carousel-alt><!-- /.hero-carousel-alt__wrapper -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Hero Carousel v2",
+  "class": "hero-carousel-alt hero-carousel-alt-js",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "alt",
+          "label": "Alternative"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_pagination_on_desktop",
+      "label": "Hide pagination on desktop",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "fullwidth",
+          "label": "Fullwidth",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "extra_wide_container",
+          "label": "Extra wide container",
+          "info": "Note: Only applies when not set to Fullwidth",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "mobile_full_overlay",
+          "label": "Mobile - Show full overlay",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Overwrites image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Image Mobile"
+        },
+        {
+          "type": "video",
+          "id": "video_mobile",
+          "label": "Video Mobile",
+          "info": "Overwrites Mobile image"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "select",
+          "id": "content_width",
+          "label": "Content width",
+          "options": [
+            {
+              "value": "narrow",
+              "label": "Narrow"
+            },
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "wide",
+              "label": "Wide"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            {
+              "value": "left-top",
+              "label": "Left - Top"
+            },
+            {
+              "value": "left-center",
+              "label": "Left - center"
+            },
+            {
+              "value": "left-bottom",
+              "label": "Left - Bottom"
+            },
+            {
+              "value": "center-top",
+              "label": "Center - Top"
+            },
+            {
+              "value": "center-center",
+              "label": "Center - Center"
+            },
+            {
+              "value": "center-bottom",
+              "label": "Center - Bottom"
+            },
+            {
+              "value": "right-top",
+              "label": "Right - Top"
+            },
+            {
+              "value": "right-center",
+              "label": "Right - Center"
+            },
+            {
+              "value": "right-bottom",
+              "label": "Right - Bottom"
+            }
+          ],
+          "default": "center-center",
+          "info": "Applicable for desktop only."
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment",
+          "label": "Text align",
+          "default": "center"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment_mobile",
+          "label": "Text align - Mobile",
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Hero Carousel"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Hero carousel paragraph content with option to be displayed as accordions.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "display_content_as_accordion",
+          "label": "Display content as accordions.",
+          "info": "New accordions are added by adding a heading 6 followed by content",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Carousel v2"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

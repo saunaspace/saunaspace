@@ -1,0 +1,107 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "content-card-grid-" | append: section.index
+  endif
+%}
+{{- 'section-content-card-grid.css' | asset_url | stylesheet_tag -}}
+
+<div class="content-card-grid" id="{{ sec_id }}">
+    <div class="container">
+        <div class="card-grid__content">
+            {% if section.settings.heading != blank %}
+            <h2 class="card-grid-heading">
+            {{- section.settings.heading | replace: "[Truemed]", "<span class='tr-img'>Truemed</span>" -}}
+            </h2><!-- /.page-banner__heading -->
+            {% endif %}
+
+            {% if section.blocks.size > 0 %}
+            <div class="section-cards-content">
+                {% for block in section.blocks %}
+                    {% assign card = block.settings %}
+                    <div class="content-card">
+                        {% if card.title != blank %}
+                        <h3 class="card-title h5">{{ card.title | replace: "[Truemed]", "<span class='tr-img'>Truemed</span>" }}</h3>
+                        {% endif %}
+
+                        {% if card.content != blank %}
+                        <div class="card-content">{{ card.content }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="section-bottom-content">
+                {% if section.settings.button_text != blank and section.settings.button_url != blank %}
+                <a href="{{ section.settings.button_url }}" class="button button--secondary">{{ section.settings.button_text }}</a>
+                {% endif %}
+
+                {%- if section.settings.content != blank -%}
+                <div class="card-grid__text">
+                    {{ section.settings.content }}
+                </div><!-- /.page-banner__text -->
+                {%- endif -%}
+            </div>
+        </div><!-- /.page-banner__content -->
+    </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Content w/ card grid",
+  "class": "section-content-card-grid",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+    },
+    {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+        "name": "Card",
+        "type": "card",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "content",
+                "label": "Content"
+            }
+        ]
+    }
+  ],
+  "presets": [
+    {
+        "name": "Content w/ card grid"
+    }
+  ]
+}
+{% endschema %}

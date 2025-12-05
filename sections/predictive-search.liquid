@@ -1,59 +1,106 @@
-{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 {%- if predictive_search.performed -%}
-  <div id="predictive-search-results">
-    {%- if predictive_search.resources.products.size > 0 -%} 
-      <h2 id="predictive-search-products" class="predictive-search__heading text-body caption-with-letter-spacing">
-        {{ 'templates.search.products' | t }}
-
-        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-        </svg>
-      </h2>
-    {%- endif -%}
-    <ul id="predictive-search-results-list" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
-      {%- for product in predictive_search.resources.products -%}
-        <li id="predictive-search-option-{{ forloop.index }}" class="predictive-search__list-item" role="option" aria-selected="false">
-          <a href="{{ product.url }}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
-            {%- if product.featured_media != blank -%}
-              <img class="predictive-search__image"
-                src="{{ product.featured_media | image_url: width: 150 }}"
-                alt="{{ product.featured_media.alt }}"
-                width="50"
-                height="{{ 50 | divided_by: product.featured_media.preview_image.aspect_ratio }}"
-              >
-            {%- endif -%}
-            <div class="predictive-search__item-content{% unless settings.predictive_search_show_vendor or settings.predictive_search_show_price %} predictive-search__item-content--centered{% endunless %}">
-              {%- if settings.predictive_search_show_vendor -%} 
-                <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span><div class="predictive-search__item-vendor caption-with-letter-spacing">{{ product.vendor }}</div>
-              {%- endif -%}
-              <h3 class="predictive-search__item-heading h5">{{ product.title }}</h3> 
-              {%- if settings.predictive_search_show_price -%}
-                {% render 'price', product: product, use_variant: true, show_badges: false %} 
-              {%- endif -%}
-            </div>
-          </a>
-        </li>
-      {%- endfor -%}
-      <li id="predictive-search-option-search-keywords" class="predictive-search__list-item" role="option">
-        <button class="predictive-search__item predictive-search__item--term link link--text h5 animate-arrow" tabindex="-1">
-          {{ 'templates.search.search_for' | t: terms: predictive_search.terms }}
-          {% render 'icon-arrow' %}
-        </button>
-      </li> 
-    </ul>
-
-    <div class="predictive-search__loading-state" aria-hidden="true">
-      <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-      </svg>
+<div id="predictive-search-results motion-reduce">
+  <div class="container container--extra-large predictive-search-container">
+    {% assign total_count = predictive_search.resources.products.size | plus: predictive_search.resources.pages.size | plus: predictive_search.resources.articles.size %}
+    <div class="results-header">
+      <p>{{ total_count }} Result{% unless total_count == 1 %}s{% endunless %} Found For <span class="search-term">"{{ predictive_search.terms }}"</span></p>
     </div>
-  </div>
 
-  <span class="hidden" data-predictive-search-live-region-count-value>
-    {%- if search.results_count == 0 -%}
-      {{ 'templates.search.no_results' | t: terms: predictive_search.terms }}
+    {%- if predictive_search.resources.products.size > 0 -%}
+    <div class="ps-products-container">
+      <p class="header__search-results-title h6">
+        {{- 'predictive_search.title_products' | t -}}
+      </p><!-- /.header__search-results-title -->
+
+      <div class="predictive-search-items collection__grid predictive-search-items--products">
+        {%- for product_resource in predictive_search.resources.products -%}
+          {% if product_resource.metafields.custom.search_visible == false %}
+            {% continue %}
+          {% endif %}
+          {% render 'predictive-search-item',
+            class: 'predictive-search__item--product search-item--product',
+            heading_class: 'caption caption--small',
+            resource_item: product_resource,
+            image: product_resource.featured_image,
+            show_image: true,
+            is_product: true
+          %}
+        {%- endfor -%}
+      </div>
+
+      <div class="predictive-search__actions">
+        {%-
+          liquid
+          assign link_text = 'predictive_search.see_all_products' | t
+          assign link_url = routes.search_url | append: '?q=' | append: predictive_search.terms | append: '&type=product' | append: '&options[prefix]=last'
+          render 'button', type: 'link', href: link_url, value: link_text
+        -%}
+      </div><!-- /.predictive-search__actions -->
+    </div>
     {%- else -%}
-      {{ 'templates.search.results_with_count' | t: terms: predictive_search.terms, count: predictive_search.resources.products.size }}
+      <p class="header__search-results-empty p4 visually-hidden">{{ 'predictive_search.no_results' | t }}</p><!-- /.header__search-results-empty p4 -->
     {%- endif -%}
-  </span>
+
+
+    {%- if predictive_search.resources.articles.size > 0 or predictive_search.resources.pages.size > 0 -%}
+    <div class="ps-articles-container">
+      <p class="header__search-results-title h6">{{ 'predictive_search.title_articles_and_pages' | t }}</p><!-- /.header__search-results-title h5 -->
+
+      <div class="predictive-search--articles-pages">
+        <div class="predictive-search-items collection__grid predictive-search-items--articles-pages">
+          {%- for page_resource in predictive_search.resources.pages limit: 3 -%}
+            {% if page_resource.metafields.custom.search_visible == false %}
+              {% continue %}
+            {% endif %}
+            {% liquid 
+              assign image = 'image' | placeholder_svg_tag
+              if page_resource.metafields.page.featured_image != empty
+                assign image = page_resource.metafields.page.featured_image
+              endif
+            %}
+            {% render 'predictive-search-item',
+                class: 'predictive-search__item--page search-item--page',
+                heading_class: 'h6 caption',
+                resource_item: page_resource,
+                image: image,
+                show_image: true
+            %}
+          {%- endfor -%}
+
+          {%- for article_resource in predictive_search.resources.articles limit: 3 -%}
+            {% if article_resource.metafields.custom.search_visible == false %}
+              {% continue %}
+            {% endif %}
+            {% liquid 
+              assign image = 'image' | placeholder_svg_tag
+              if article_resource.image != blank
+                assign image = article_resource.image
+              endif
+            %}
+            {% render 'predictive-search-item',
+                class: 'predictive-search__item--article search-item--article',
+                heading_class: 'h6 caption',
+                resource_item: article_resource,
+                image: image,
+                show_image: true
+            %}
+          {%- endfor -%} 
+        </div>
+
+        <div class="predictive-search__actions">
+          {%-
+            liquid
+            assign link_text = 'predictive_search.see_all_results' | t
+            assign link_url = routes.search_url | append: '?q=' | append: predictive_search.terms | append: '&type=article,page' | append: '&options[prefix]=last'
+            render 'button', type: 'link', href: link_url, value: link_text
+          -%}
+        </div><!-- /.predictive-search__actions -->
+      </div>
+    </div>
+    {%- else -%}
+      <p class="header__search-results-empty p4 visually-hidden">No Results</p><!-- /.header__search-results-empty p4 -->
+    {%- endif -%}
+
+  </div>
+</div>
 {%- endif -%}

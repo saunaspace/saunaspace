@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="{{ 'section-as-seen-on.css' | asset_url }}" media="print" onload="this.media='all'">
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "as-seen-on--" | append: section.index
+  endif
+%}
+<div class="as-seen-on item-count--{{ section.blocks.size }} container{% if section.settings.section_style != "light" %} section-dark{% endif %}" id="{{ sec_id }}">
+  <div class="section-wrap">
+    {% if section.settings.heading != blank %}
+    <p class="h2 sec-heading">{{ section.settings.heading }}</p>
+    {% endif %}
+
+    <div class="logos logo-count--{{ section.blocks.size }}">
+      {% for block in section.blocks %}
+      <div class="logo">
+        {%-
+        liquid
+        if block.settings.logo != blank
+          assign image = block.settings.logo
+          assign image_src = image | image_url: width: 375
+          render 'image', src: image_src, sizes: 'auto', alt: image.alt, width: image.width, height: image.height, focal_point: image.presentation.focal_point
+        else
+          echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+        endif
+        -%}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "As seen on",
+    "class": "section--as-seen-on",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "As Seen In"
+      },
+      {
+        "type": "select",
+        "id": "section_style",
+        "label": "Section Style",
+        "options": [
+          {
+            "label": "Light",
+            "value": "light"
+          },
+          {
+            "label": "Dark",
+            "value": "dark"
+          }
+        ],
+        "default": "light"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logos",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "As seen on"
+      }
+    ]
+  }
+{% endschema %}

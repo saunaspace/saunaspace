@@ -1,0 +1,140 @@
+{% comment %}
+    Renders single facet
+    Accepts:
+    - index: {Int} facet index
+    - section_id: {String} section id
+    - filter: {Object} filter liquid object
+    - context: {Object} context (mobile/desktop)
+    Usage:
+    {%- render 'facet', index: forloop.index, section_id: section.id, filter: filter -%}
+{% endcomment %}
+
+{% liquid
+  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+  assign uses_comma_decimals = false
+  if currencies_using_comma_decimals contains cart.currency.iso_code
+    assign uses_comma_decimals = true
+  endif
+%}
+
+<details
+  id="Details-{{- index -}}-{{- context -}}-{{- section_id -}}"
+  class="facets__disclosure caption js-filter"
+  data-index="{{- context -}}-{{- index -}}"
+>
+  <summary class="facets__summary focus-offset">
+      <span>{{- filter.label | escape -}}</span>
+
+      {%- render 'icon-chevron-down' -%}
+  </summary><!-- /.facets__summary focus-offset -->
+
+  <div id="Facet-{{- index -}}-{{- context -}}-{{- section_id -}}" class="facets__display">
+    <div class="facets__header">
+      <div class="facets__selected {% if filter.type == 'price_range' %}facets__selected--price {% endif %}js-facets-selected">
+        {%- assign selected_facet_text = 'collection.facets.filters_selected' | t: count: filter.active_values.size -%}
+
+        {%- if filter.type == 'price_range' -%}
+          {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+          {%- assign selected_facet_text = 'collection.facets.max_price' | t: price: max_price_amount -%}
+        {%- endif -%}
+
+        {{- selected_facet_text -}}
+      </div><!-- /.facets__selected -->
+    </div><!-- /.facets__header -->
+
+    {%- case filter.type -%}
+      {%- when 'list' -%}
+        <ul class="facets__list list-unstyled" role="list">
+          {%- for value in filter.values -%}
+            {%- liquid
+              assign filter_handle = filter.label | handle
+              assign filter_id = 'Filter-' | append: filter_handle | append: '-' | append: context | append: '-' | append: forloop.index
+            -%}
+
+            <li class="facets__item{% if value.active %} facets__item--checked{% endif %}">
+              <div class="checkbox facet-checkbox {% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}">
+                <input
+                  type="checkbox"
+                  name="{{ value.param_name }}"
+                  value="{{ value.value }}"
+                  id="{{ filter_id }}"
+                  {% if value.active %}checked{% endif %}
+                  {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                >
+
+                <label
+                  for="{{ filter_id }}"
+                  class="facet-checkbox"
+                >
+                  {{- value.label | escape }} ({{- value.count -}})
+                </label>
+              </div><!-- /.checkbox -->
+            </li><!-- /.facets__item -->
+          {%- endfor -%}
+        </ul><!-- /.facets__list list-unstyled -->
+      {%- when 'price_range' -%}
+        <price-range class="facets__price">
+          <div class="facets__price-row">
+            {%-
+              liquid
+              assign label = 'collection.facets.from' | t
+              assign id = 'Filter-' | append: filter.label | escape | append: '-' | append: context | append: '-GTE'
+              if filter.min_value.value
+                if uses_comma_decimals
+                  assign value = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                else
+                  assign value = filter.min_value.value | money_without_currency | replace: ',', ''
+                endif
+              endif
+              if  uses_comma_decimals
+                assign max = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+              else
+                assign max = filter.range_max | money_without_currency | replace: ',', ''
+              endif
+
+              render 'text-input', type: 'number', name: filter.min_value.param_name, id: id, value: value, label: label, placeholder: 0, min: 0, max: max
+
+              assign label = nil
+              assign id = nil
+              assign value = nil
+              assign max = nil
+            -%}
+
+            <span>{{- cart.currency.symbol -}}</span>
+          </div><!-- /.facets__price-row -->
+
+          <div class="facets__price-row">
+            {%-
+              liquid
+              assign label = 'collection.facets.to' | t
+              assign id = 'Filter-' | append: filter.label | escape | append: '-' | append: context | append: '-LTE'
+              if filter.max_value.value
+                if uses_comma_decimals
+                  assign value = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                else
+                  assign value = filter.max_value.value | money_without_currency | replace: ',', ''
+                endif
+              endif
+              if  uses_comma_decimals
+                assign placeholder = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+                assign max = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+              else
+                assign placeholder = filter.range_max | money_without_currency | replace: ',', ''
+                assign max = filter.range_max | money_without_currency | replace: ',', ''
+              endif
+
+              render 'text-input', type: 'number', name: filter.max_value.param_name, id: id, value: value, label: label, placeholder: placeholder, min: 0, max: max
+
+              assign label = nil
+              assign id = nil
+              assign value = nil
+              assign max = nil
+              assign placeholder = nil
+            -%}
+
+            <span>{{- cart.currency.symbol -}}</span>
+          </div><!-- /.facets__price-row -->
+        </price-range><!-- /.facets__price -->
+    {%- endcase -%}
+  </div><!-- /.facets__display -->
+</details><!-- /.disclosure-has-popup.facets__disclosure.caption -->

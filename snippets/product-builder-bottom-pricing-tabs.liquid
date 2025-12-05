@@ -1,0 +1,62 @@
+{% comment %}<!-- Sauna Product bottom pricing -->{% endcomment %}
+<div class="product-build__tabs-body">
+    {% comment %}<!-- Default Pricing -->{% endcomment %}
+    <div class="product-build__tabs-tab is-active" data-tab data-tab-id="1">
+        <div class="product-build__tabs-actions-wrapper">
+
+            <div class="product-build__summary">
+                <div class="product-build__price" role="status">
+                    {%- render 'price', product_ref: product, use_variant: true -%}
+                    {% comment %}{% render 'product-order-processing-disclaimer' %}{% endcomment %}
+                    {% render 'product-shipping-disclaimer' %}
+                </div>
+            </div>
+
+            <product-form class="product__actions block" id="sauna-product-form">
+                {%- form 'product', product, id: product_form_id, class: 'product__form forCustomSubmitClass', novalidate: 'novalidate' -%}
+                    <input type="hidden" class="selected-variant" name="id" value="{{- product.selected_or_first_available_variant.id -}}" />
+                    <input type="hidden" class="qnt-input" name="quantity" value="1" />
+
+                    {% comment %}<!-- Additional Properties - Options and Pricing Info -->{% endcomment %}
+                    <input type="hidden" class="required-option" data-type="silverlining" name="properties[SilverLining™]" value='' />
+                    <input type="hidden" class="required-option" data-type="plug" name="properties[Plug]" value='' />
+                    <input type="hidden" class="prop-accessories" name="properties[Selected Accessories]" data-accessory-ids="" value="" />
+                    {%-
+                    liquid
+                    assign value = 'products.product.sold_out' | t
+                    assign disabled = true
+                    if product.selected_or_first_available_variant.available
+                        assign value = 'products.product.add_to_cart' | t
+                        assign disabled = false
+                    endif
+                    render 'button', type: 'submit', name: 'add', value: value, class: 'product-selector__submit ForaddHide', disabled: disabled, fullwidth: true
+                    assign value = nil
+                    assign disabled = nil
+                    -%}
+                    <!-- { % comment %} -->
+                    {% if template == "product.sauna" %}
+                        {%-
+                        liquid
+                        assign value = 'products.product.sold_out' | t
+                        assign disabled = false
+                        if product.selected_or_first_available_variant.available
+                            assign value = 'products.product.add_to_cart' | t
+                            assign disabled = false
+                        endif
+                        render 'button', type: 'button', name: 'added', value: value, class: 'custom_add_to_cart', disabled: false, fullwidth: true
+                        assign value = nil
+                        assign disabled = nil
+                        -%}
+                    {% endif %}
+                    <!-- { % endcomment %} -->
+                    
+                {%- endform -%}
+            </product-form>
+        </div><!-- /.product-build__tabs-actions-wrapper -->
+    </div><!-- /.product-build__tabs-tab -->
+
+    {% render 'product-bottom-splitit', product: product %}
+
+    {% render 'product-bottom-truemed', product: product %}
+
+</div><!-- /.product-build__tabs-body -->

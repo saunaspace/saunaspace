@@ -1,0 +1,111 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-team-" | append: section.index
+  endif
+%}
+{%- unless section.blocks.size == 0 -%}
+  <link rel="stylesheet" href="{{ 'section-team.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-team.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <div class="container" id="{{ sec_id }}">
+    {%- if section.settings.heading != blank or section.settings.entry != blank -%}
+      <div class="team__content">
+        <h3 class="team__heading">
+          {{- section.settings.heading | escape | newline_to_br -}}
+        </h3><!-- /.team__heading -->
+
+        <div class="team__entry">
+          {{- section.settings.entry | escape | newline_to_br -}}
+        </div><!-- /.team__entry -->
+      </div><!-- /.team__content -->
+    {%- endif -%}
+
+    <div class="team__grid">
+      {%- for block in section.blocks -%}
+        {%-
+          liquid
+          if block.settings.title == blank
+            continue
+          endif
+        -%}
+
+        <div class="team__grid-item">
+          <div class="team__member">
+            <div class="team__member-image media media--1-1">
+              {%- if block.settings.image != blank -%}
+                {%- render 'image', image: block.settings.image -%}
+              {%- else -%}
+                {{- 'image' | placeholder_svg_tag: 'placeholder-svg' -}}
+              {%- endif -%}
+            </div><!-- /.media -->
+
+            <h4 class="team__member-name">
+              {{- block.settings.title | escape -}}
+            </h4><!-- /.team__member-name -->
+
+            <p class="team__member-description">
+              {{- block.settings.description | escape -}}
+            </p><!-- /.team__member-description -->
+          </div><!-- /.team__member -->
+        </div><!-- /.team__grid-item -->
+      {%- endfor -%}
+    </div><!-- /.team__grid -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Team",
+  "class": "team",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "entry",
+      "label": "Entry"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "member",
+      "name": "Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team"
+    }
+  ]
+}
+{% endschema %}

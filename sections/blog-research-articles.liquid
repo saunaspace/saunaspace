@@ -1,0 +1,44 @@
+{%- paginate blog.articles by 50 -%}
+<div class="js-reseach-items" data-article-total="{{ paginate.items }}" data-page-count="{{ paginate.pages }}">
+    {% assign current_page = paginate.current_page %}
+    {%- for article in blog.articles -%}
+    {% assign tag = article.tags | first |  handleize %}
+    <div
+        class="research-items__item"
+        data-item
+        data-filter-tag="{{ tag }}"
+        data-author="{{ article.title | handleize }}"
+        data-index="{{ forloop.index | plus: paginate.current_offset }}"
+        js-research-item
+    >
+        <h5 class="research-items__item-heading">{{- article.title -}}</h5><!-- /.research-items__item-heading -->
+        <div class="research-items__item-body">{{- article.content | newline_to_br }}</div><!-- /.research-items__item-body -->
+    </div>        
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+        <div class="js-blog-pagination-container">
+            <a
+                href="{{ paginate.next.url }}"
+                class="blog__load-more"
+                aria-label="{{- 'general.pagination.next' | t -}}"
+                title="{{- 'general.pagination.next' | t -}}"
+                js-load-more
+            >
+                {{- 'blog.load_more' | t -}}
+            </a>
+        </div><!-- /.blog__grid-actions -->
+    {%- endif -%}
+</div>
+{%- endpaginate -%}
+
+
+{% schema %}
+{
+    "name": "Blog Research Articles",
+    "class": "blog-research-articles",
+    "tag": "div",
+    "settings": [
+    ]
+}
+{% endschema %}

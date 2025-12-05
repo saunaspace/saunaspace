@@ -1,14 +1,1 @@
-{
-  "sections": {
-    "main": {
-      "type": "events-page",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    }
-  },
-  "order": [
-    "main"
-  ]
-}
+{"sections":{"banner":{"type":"page-banner","custom_css":["#events-hero h1 {font-size: calc(var(--font-heading-scale) * 7.2rem);}","#events-hero h1 + div.medium-hide {font-size: 19px;}","@media (max-width: 767px) {#events-hero h1 {font-size: calc(var(--font-heading-scale) * 5.2rem); }}"],"settings":{"heading":"Events","content":"Find out where you can meet us and try SaunaSpace products in person.","background_image":"shopify:\/\/shop_images\/events-hero.jpg","section_id":"events-hero"}},"main":{"type":"main-page","disabled":true,"settings":{}},"events_alt_gz9JKP":{"type":"events-alt","settings":{"heading":"Upcoming events"}},"events_DmK6eP":{"type":"events","blocks":{"event_pqFRYQ":{"type":"event","settings":{"title":"Healing for the A.G.E.S 2024 Annual Fall Conference","location":"5805 Granite Parkway, Plano, TX 75024","link":"https:\/\/healingfortheages.com\/"}}},"block_order":["event_pqFRYQ"],"disabled":true,"settings":{"heading":"Upcoming Events"}}},"order":["banner","main","events_alt_gz9JKP","events_DmK6eP"]}

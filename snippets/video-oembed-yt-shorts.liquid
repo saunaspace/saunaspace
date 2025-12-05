@@ -1,0 +1,51 @@
+{%  liquid
+comment
+    Accepts:
+    - video_id {string}, youtube video id (ex: ZuprZey4QP0)
+    - class {string}, additional classnames
+    - autoplay {boolean}, default true
+    - controls {boolean}, default false
+    - loop {boolean}, default true
+    example: render 'video-oembed-yt-shorts', video: youtube_shorts_video_id, class: "section-oembed", autoplay: true, controls: false, loop: true
+endcomment
+if autoplay != false
+    assign autoplay = 1
+else
+    assign autoplay = 0 
+endif
+if controls == true
+    assign controls = 1
+else
+    assign controls = 0
+endif
+if loop == true or loop == blank
+    assign loop = 1
+else
+    assign loop = 0
+endif
+assign class = "oembed"
+if class != blank
+    assign classnames = classnames | append: " " | append: class
+endif
+
+assign params = "?autoplay=" | append: autoplay | append: "&mute=1&loop=" | append: loop | append: "&controls=" | append: controls | append: "&rel=0"
+if loop
+    assign params = params | append: "&playlist=" | append: video_id
+endif
+assign embed_url = 'https://www.youtube.com/embed/' | append: video_id | append: params
+
+assign aspect_ratio = aspect_ratio | default: '9/16'
+%}
+{% if container == true %}<div class="iframe-container">{% endif %}
+<iframe
+    src="{{ embed_url }}"
+    width="100%"
+    height="auto"
+    style="aspect-ratio:{{ aspect_ratio }}"
+    data-aspect-ratio="{{ aspect_ratio }}"
+    frameborder="0"
+    allowfullscreen
+    class="{{ classnames }}"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+></iframe>
+{% if container == true %}</div>{% endif %}

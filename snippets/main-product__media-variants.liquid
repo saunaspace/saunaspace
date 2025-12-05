@@ -1,0 +1,247 @@
+{%- comment -%}
+  Renders a product's media gallery.
+
+  Accepts:
+   - product_ref {ShopifyProduct}
+   - section_ref {ShopifySection}
+   - display_custom_thumbnails {boolean} : display thumbnails from product metafield: (custom.thumbnail_slider_images)
+
+  Usage:
+    {%- if product.media.size > 0 -%}
+      {%- render 'product-media', product_ref: product, section_ref: section -%}
+    {%- endif -%}
+
+  Requires:
+   - assets/swiper-bundle.min.css
+   - assets/section-product.css
+   - assets/product-media.js
+{%- endcomment -%}
+{% assign custom_thumbnails = product_ref.metafields.custom.thumbnail_slider_images %}
+
+<product-media class="product__media product__media-wrapper">
+  {%- if product_ref.variants.size > 1 -%}
+    <div class="product__media-slider">
+      <div class="swiper" data-slider>
+        <div class="swiper-wrapper">
+            {% liquid
+              # Keep track of image id's - only show unique images, no duplicates
+              assign media_list = ''
+              # List of all the media images and their corresponding variants
+              assign variant_images = ''
+              assign media_item_sep = '______'
+              assign media_var_sep = ':_'
+              for variant in product_ref.variants
+                # Check if the image has already been added to the media list - convert number to string with | append: ''
+                assign variant_image_id = variant.featured_media.id | append: ''
+                if media_list contains variant_image_id
+                  # Image is a duplicate - Sort through variant_images to find matching image
+                  assign current_var_ids = ''
+                  assign new_var_ids = ''
+                  assign variant_images_split = variant_images | split: media_item_sep
+                  # {{MEDIA_ID}}:_{{VAR_ID,VAR_ID,VAR_ID}}
+                  for var_image in variant_images_split
+                    assign media_var_split = var_image | split: media_var_sep
+                    assign media_id = media_var_split[0]
+                    assign current_var_ids = media_var_split[1]
+                    assign new_var_ids = current_var_ids | append: "," | append: variant.id
+                  endfor
+                  # Update variant ids to include current variant
+                  assign variant_images = variant_images | replace: current_var_ids, new_var_ids
+                else
+                  # {{MEDIA_ID}}:_{{VAR_ID,VAR_ID,VAR_ID}}______{{MEDIA_ID}}:_{{VAR_ID,VAR_ID,VAR_ID}}
+                  unless variant_images == ''
+                    assign variant_images = variant_images | append: media_item_sep
+                  endunless
+                  assign variant_images = variant_images | append: variant_image_id | append: media_var_sep | append: variant.id
+                  # Update media list with current image
+                  unless media_list == ''
+                    assign media_list = media_list | append: ","
+                  endunless
+                  assign media_list = media_list | append: variant_image_id
+                endif
+              endfor
+            %}
+            {% comment %}<!-- Testing: {{ variant_images }} -->{% endcomment %}
+            {% assign variant_images_split = variant_images | split: media_item_sep %}
+            {% assign assign counter = 0 %}
+            {% for var_image in variant_images_split %}
+              {% liquid
+              assign media_var_split = var_image | split: media_var_sep
+              assign media_id = media_var_split[0]
+              assign var_ids = media_var_split[1]
+              assign var_ids_split = var_ids | split: ","
+              assign variant_id = var_ids_split[0]
+              assign variant = null
+              for _variant in product_ref.variants
+                if variant_id contains _variant.id
+                  assign variant = _variant
+                endif
+              endfor
+              %}
+              {% if variant %}
+              <div
+                class="swiper-slide"
+                data-variant-id="{{- var_ids -}}"
+                data-variant-name="{{ variant.title }}"
+                data-index="{{- forloop.index0 -}}"
+                data-counter="{{ counter }}"
+                data-var-id="{{ variant.id }}"
+                {% if variant.id == product_ref.selected_or_first_available_variant.id %}
+                  data-selected
+                {% endif %}
+              >
+                {%- render 'product-media', media: variant.image, modal_id: section_ref.id -%}
+              </div>
+              {% assign counter = counter | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+            {% comment %}<!-- Custom Thumbnails -->{% endcomment %}
+            {% if display_custom_thumbnails == true %}
+              {% if custom_thumbnails != blank %}
+              {% for thumbnail in custom_thumbnails.value %}
+                <div class="swiper-slide" data-variant-id="" data-variant-name="" data-index="{{ counter }}" data-custom-thumbnail-main="{{ thumbnail.id }}">
+                  {%- render 'product-media', media: thumbnail, modal_id: section_ref.id -%}
+                </div>
+              {% assign counter = counter | plus: 1 %}
+              {% endfor %}
+              {% endif %}
+            {% endif %}
+            {% comment %}<!-- Add additional product media -->{% endcomment %}
+            {% assign additional_media_items = '' %}
+            {% comment %}{% if product_ref.metafields.custom.product_media_slider_show_variant_images == true and product_ref.media.size > 1 %}{% endcomment %}
+            {% if product_ref.media.size > 1 %}
+              {%- for media in product_ref.media -%}
+              {% liquid
+                assign image_id = media.id | append: ''
+                if media_list contains image_id
+                  # Image is a duplicate - Skip slide
+                  continue
+                else
+                  # Update media list with current image
+                  unless media_list == ''
+                    assign media_list = media_list | append: ","
+                  endunless
+                  assign media_list = media_list | append: image_id
+                endif
+                unless additional_media_items == ''
+                  assign additional_media_items = additional_media_items | append: ','
+                endunless
+                assign additional_media_items = additional_media_items | append: media.id
+              %}
+              <div
+                class="swiper-slide"
+                data-media-id="{{- media.id -}}"
+                data-index="{{- counter -}}"
+                {% if media.id == product_ref.selected_variant.featured_media.id %}
+                  {% assign selected_variant_media_id = media.id %}
+                  data-selected
+                {% endif %}
+              >
+                {%- render 'product-media', media: media, modal_id: section_ref.id -%}
+              </div><!-- /.swiper-slide -->
+              {% assign counter = counter | plus: 1 %}
+              {%- endfor -%}
+            {% endif %}
+            {% comment %} {% endcomment %}
+
+            {% comment %}
+            {% for variant in product_ref.variants %}
+            <div
+              class="swiper-slide"
+              data-variant-id="{{- variant.id -}}"
+              data-variant-name="{{ variant.title }}"
+              data-index="{{- forloop.index0 -}}"
+              data-var-id="{{ variant.id }}"
+              {% if variant.id == product_ref.selected_or_first_available_variant.id %}
+                data-selected
+              {% endif %}
+            >
+              {%- render 'product-media', media: variant.image, modal_id: section_ref.id -%}
+            </div><!-- /.swiper-slide -->
+          {% assign counter = counter | plus: 1 %}
+          {%- endfor -%}
+          {% endcomment %}
+        </div><!-- /.swiper-wrapper -->
+
+        <div class="swiper-arrows large-up-hide">
+          <button class="swiper-arrow swiper-arrow--prev">
+            {% render 'icon-chevron-left' %}
+          </button><!-- /.swiper-arrow -->
+          <button class="swiper-arrow swiper-arrow--next">
+            {% render 'icon-chevron-right' %}
+          </button><!-- /.swiper-arrow -->
+        </div><!-- /.swiper-arrows -->
+
+        <div class="swiper-pagination large-up-hide"></div><!-- /.swiper-pagination -->
+      </div><!-- /.swiper -->
+    </div><!-- /.product__media-slider swiper -->
+
+    {% capture custom_thumbnail_slides %}
+      {% if custom_thumbnails != blank %}
+      {% for thumbnail in custom_thumbnails.value %}
+        <div class="swiper-slide" data-custom-thumbnail="{{ thumbnail.id }}">
+          {%- render 'product-thumbnail', media: thumbnail, modal_id: section_ref.id -%}
+        </div>
+      {% endfor %}
+      {% endif %}
+    {% endcapture %}
+    <div class="product__media-thumbs small-hide medium-hide">
+      <div class="swiper product-media-thumbs-slider" data-thumbs>
+        <div class="swiper-wrapper">
+          {% comment %}{% for variant in product_ref.variants %}{% endcomment %}
+          {% assign assign counter = 0 %}
+          {% assign custom_thumbs_displayed = false %}
+          {% for var_image in variant_images_split %}
+            {% liquid
+            assign media_var_split = var_image | split: media_var_sep
+            assign media_id = media_var_split[0]
+            assign var_ids = media_var_split[1]
+            assign var_ids_split = var_ids | split: ","
+            assign variant_id = var_ids_split[0]
+            assign variant = null
+            for _variant in product_ref.variants
+              if variant_id contains _variant.id
+                assign variant = _variant
+              endif
+            endfor
+            %}
+            {% if variant %}
+            <div class="swiper-slide{% if variant.id == product_ref.selected_or_first_available_variant.id %} swiper-slide-thumb-active{% endif %}" data-var-id="{{ variant.id }}">
+              {%- render 'product-thumbnail', media: variant.image, modal_id: section_ref.id -%}
+            </div><!-- /.swiper-slide -->
+              {% if variant.id == product_ref.selected_or_first_available_variant.id and display_custom_thumbnails == true %}
+                {{ custom_thumbnail_slides }}
+                {% assign custom_thumbs_displayed = true %}
+              {% endif %}
+            {% endif %}
+          {%- endfor -%}
+          {% unless custom_thumbs_displayed %}
+            {{ custom_thumbnail_slides }}
+          {% endunless %}
+          {% comment %}<!-- Add additional product media -->{% endcomment %}
+          {% if product_ref.metafields.custom.product_media_slider_show_variant_images == true and product_ref.media.size > 1 %}
+            {%- for media in product_ref.media -%}
+            {% assign media_id = media.id | append: '' %}
+            {% if additional_media_items contains media_id %}
+            <div class="swiper-slide{% if media.id == product_ref.selected_variant.featured_media.id %} swiper-slide-thumb-active{% endif %}" data-media-id="{{ media.id }}">
+              {%- render 'product-thumbnail', media: media, modal_id: section_ref.id -%}
+            </div><!-- /.swiper-slide -->
+            {% else %}
+              {% comment %}<!-- This image was not part of media items -->{% endcomment %}
+            {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div><!-- /.swiper-wrapper -->
+      </div>
+
+      <button class="swiper-arrow swiper-arrow--prev">
+        {% render 'icon-chevron-left' %}
+      </button><!-- /.swiper-arrow -->
+      <button class="swiper-arrow swiper-arrow--next">
+        {% render 'icon-chevron-right' %}
+      </button><!-- /.swiper-arrow -->
+    </div><!-- /.product__media-thumbs swiper -->
+  {%- else -%}
+    {%- render 'product-media', media: product_ref.featured_media, modal_id: section_ref.id -%}
+  {%- endif -%}
+</product-media><!-- /.product__media -->

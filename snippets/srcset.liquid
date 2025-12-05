@@ -1,0 +1,37 @@
+{%- comment -%}
+  Accepts:
+
+  - image: {Image Object} The image object
+  - widths: {String} A comma-seperated string of widths
+
+  Usage:
+  {%- render 'srcset',
+    image: product.featured_media,
+    widths: '750,1200,1440,1920' -%}
+{%- endcomment -%}
+
+{%-
+  liquid
+  capture output
+    assign widths = widths | default: '375,550,750,1024,1100,1500,1780,2000,3000,3840'
+    assign widths_array = widths | split: ','
+    if image != nil
+      for width in widths_array
+        assign width_value = width | plus: 0
+        assign next_loop_value = widths_array[forloop.index] | plus: 0
+        assign last_loop = false
+        if forloop.last or image.width < next_loop_value
+          assign last_loop = true
+        endif
+
+        if image.width >= width_value
+          echo image | image_url: width: width_value | append: ' ' | append: width | append: 'w'
+          unless last_loop
+            echo ','
+          endunless
+        endif
+      endfor
+    endif
+  endcapture
+  echo output
+-%}

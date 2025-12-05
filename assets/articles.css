@@ -1,0 +1,28 @@
+/* ==========================================================================
+   .articles
+   ========================================================================== */
+
+.articles {
+  overflow: hidden;
+  padding-bottom: 5rem;
+}
+.shopify-section:has(section.reviews) + .shopify-section .articles {
+  /* padding-bottom: 12.5rem; */
+  padding-bottom: 10rem;
+}
+@media (max-width: 1023px) {
+  .shopify-section:has(section.reviews) + .shopify-section .articles {
+    /* padding-bottom: 10rem; */
+    padding-bottom: 8.5rem;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 749px) {
+  .articles {
+    padding: 2rem 0 4.5rem;
+  }
+  .shopify-section:has(section.reviews) + .shopify-section .articles {
+    padding-bottom: 5rem;
+  }
+}

@@ -1,0 +1,273 @@
+/* ------------------------------------------------------------ *\
+  Text and icon radial
+\* ------------------------------------------------------------ */
+
+.text-icon-radial {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11rem 0;
+  color: #f4f0e0;
+  background: #000;
+}
+
+@media screen and (max-width: 749px) {
+  .text-icon-radial {
+    aspect-ratio: initial;
+  }
+}
+
+.text-icon-radial--reverse {
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 749px) {
+  .text-icon-radial--reverse {
+    flex-direction: column;
+  }
+}
+
+.text-icon-radial--has-content {
+  justify-content: flex-start;
+  padding: 0 6.6rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial--has-content {
+    display: block;
+    padding: 0;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+  Media
+\* ------------------------------------------------------------ */
+
+.text-icon-radial__modal-dialog .text-icon-radial__media,
+.text-icon-radial .text-icon-radial__media {
+  position: relative;
+  width: 96rem;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+}
+
+.text-icon-radial__modal-dialog .text-icon-radial__media {
+  flex: 0 0 43.4%;
+}
+
+.text-icon-radial__modal-dialog .text-icon-radial__media:after,
+.text-icon-radial .text-icon-radial__media:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(closest-side, #ff3a00, transparent);
+  z-index: -1;
+}
+
+.text-icon-radial .text-icon-radial__media img,
+.text-icon-radial__modal-dialog .text-icon-radial__media img {
+  max-width: var(--icon-max-width);
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+}
+
+.text-icon-radial:hover .text-icon-radial__media img,
+.text-icon-radial:hover .text-icon-radial__media:after,
+.shopify-design-mode .text-icon-radial .text-icon-radial__media img,
+.shopify-design-mode .text-icon-radial .text-icon-radial__media:after,
+.text-icon-radial__modal-dialog .text-icon-radial__media img,
+.text-icon-radial__modal-dialog .text-icon-radial__media:after {
+  opacity: 1;
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial .text-icon-radial__media img,
+  .text-icon-radial .text-icon-radial__media:after {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .text-icon-radial .text-icon-radial__media img,
+  .text-icon-radial__modal-dialog .text-icon-radial__media img {
+    max-width: var(--icon-max-width-mobile);
+  }
+}
+
+.text-icon-radial--has-content .text-icon-radial__media {
+  margin: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial--has-content .text-icon-radial__media {
+    max-width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+    Content
+\* ------------------------------------------------------------ */
+
+.text-icon-radial .text-icon-radial__title {
+  font-size: calc(var(--fsbase) * 5.4);
+  max-width: 55rem;
+  margin: 0 auto;
+}
+
+.text-icon-radial--has-content .text-icon-radial__title {
+  /* font-size: calc(var(--fsbase) * 4.8); */
+  line-height: 1.625;
+}
+
+@media screen and (max-width: 1359px) {
+  .text-icon-radial .text-icon-radial__title,
+  .text-icon-radial--has-content .text-icon-radial__title {
+    font-size: calc(var(--fsbase) * 2.4);
+    line-height: 1.5;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .text-icon-radial .text-icon-radial__title {
+    font-size: calc(var(--fsbase) * 2.4);
+  }
+}
+
+.text-icon-radial__content {
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 2;
+  text-align: center;
+  max-width: 69rem;
+}
+
+@media screen and (max-width: 1439px) {
+  .text-icon-radial__content {
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 1359px) {
+  .text-icon-radial__content {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial__content {
+    padding: 4rem 4rem 3rem;
+    max-width: 100%;
+  }
+}
+
+.text-icon-radial .text-icon-radial__actions {
+  color: #fff;
+  padding-top: 3rem;
+}
+
+.text-icon-radial .text-icon-radial__link {
+  color: inherit;
+}
+
+/* ------------------------------------------------------------ *\
+  Modal styles
+\* ------------------------------------------------------------ */
+
+.text-icon-radial__modal-dialog .modal-dialog__wrapper {
+  background-color: #F0E7DA;
+  border-radius: 2rem;
+  max-width: 128rem;
+  height: 80vh;
+  max-height: 72rem;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial__modal-dialog .modal-dialog__wrapper {
+    height: auto;
+    max-height: 90vh;
+    justify-content: flex-start;
+    padding-inline: 2.1rem;
+  }
+}
+
+.text-icon-radial__modal-dialog .modal-dialog__close {
+  right: unset;
+  left: 4rem;
+  top: 1.5rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial__modal-dialog .modal-dialog__close {
+    left: 1.8rem;
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}
+
+.text-icon-radial__modal-dialog .modal-dialog__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6.6rem;
+}
+
+@media screen and (max-width: 749px) {
+  .text-icon-radial__modal-dialog .modal-dialog__content {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial__modal-dialog .text-icon-radial__media {
+    max-width: 100%;
+  }
+}
+
+.text-icon-radial__modal-dialog .text-icon-radial__content {
+  text-align: left;
+  font-size: calc(var(--fsbase) * 1.8);
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial__modal-dialog .text-icon-radial__content {
+    padding-inline: 0;
+    font-size: calc(var(--fsbase) * 1.2);
+    padding-bottom: 0;
+  }
+}
+
+.text-icon-radial__modal-dialog .text-icon-radial__actions {
+  margin-top: 6rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .text-icon-radial__modal-dialog .text-icon-radial__actions {
+    margin-top: 3rem;
+  }
+}
+
+
+
+/* Spiritual Benefits Page/Section */
+#spiritual-benefits .text-icon-radial__media::after,
+.template--spiritual-benefits-sauna .text-icon-radial__modal-dialog .text-icon-radial__media::after,
+.template--spiritual-benefits-sauna .text-icon-radial .text-icon-radial__media::after,
+.template--spiritual-benefits-sauna .banner-radial .banner__head {
+  background: radial-gradient(closest-side,#6d22b3,transparent);
+}

@@ -1,0 +1,67 @@
+{%- comment -%}
+  Renders cart summary
+
+  Accepts:
+  - show_cart_link {Boolean} Show the view cart link
+
+  Usage:
+  {%- render 'cart-summary' -%}
+{%- endcomment -%}
+
+<div class="cart-summary" id="cart-summary">
+  {% if template.name == "cart" %}
+  <div class="cart-discount-code-wrap">
+    <div class="docapp-cart-with-shipping-summary"></div>
+  </div>
+  {% endif %}
+
+  {% if template.name == "cart" %}<div class="cart-summary-wrap">{% endif %}
+
+      <div class="cart-summary__total">
+        {% liquid
+        assign compare_subtotal = 0
+        for line_item in cart.items
+          assign item_compare_sub = line_item.variant.compare_at_price | default: line_item.original_line_price
+          assign item_compare_sub = item_compare_sub | times: line_item.quantity
+          assign compare_subtotal = compare_subtotal | plus: item_compare_sub
+        endfor
+        %}
+        <!-- Compare Subtotal: {{ compare_subtotal | money }} -->
+        <span>{{- 'cart.subtotal' | t -}}</span>
+        <div class="cart-subtotal-pricing-wrap{% if compare_subtotal > cart.total_price %} has-compare-at{% endif %}">
+          {% if compare_subtotal > cart.total_price %}
+          <del class="subtotal-compare-at">{{ compare_subtotal | money }}</del>
+          {% endif %}
+          <span class="st-actual">{{ cart.total_price | money_with_currency }}</span>
+        </div>
+      </div><!-- /.cart-summary__total -->
+
+      {%- if cart.cart_level_discount_applications.size > 0 -%}
+        <ul class="list-unstyled caption" role="list" aria-label="{{- 'customer.order.discount' | t -}}">
+          {%- for discount in cart.cart_level_discount_applications -%}
+            <li>
+              {{ discount.title }}
+              (-{{ discount.total_allocated_amount | money }})
+            </li>
+          {%- endfor -%}
+        </ul><!-- /.list-unstyled caption -->
+      {%- endif -%}
+
+      <div class="cart-summary__actions">
+        {%-
+          liquid
+          assign value = 'cart.checkout' | t
+          render 'button', type: 'submit', name: 'checkout', value: value, class: 'cart-summary__button'
+        -%}
+
+        {% if template.name == "cart" %}<div class="tax-disclaimer">Final tax, duties & shipping calculated at checkout.</div>{% endif %}
+
+        {% comment %}<!-- REMOVED 5.21.25
+        <a href="{{ routes.all_products_collection_url }}" class="cart-summary__actions-link">
+          {{ 'cart.continue_shopping' | t }}
+        </a><!-- /.cart-summary__actions-link -->
+        -->{% endcomment %}
+      </div><!-- /.cart-summary__actions -->
+
+  {% if template.name == "cart" %}</div>{% endif %}
+</div><!-- /.cart-summary -->

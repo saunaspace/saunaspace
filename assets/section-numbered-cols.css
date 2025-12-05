@@ -1,0 +1,66 @@
+/* ------------------------------------------------------------ *\
+  Section numbered cols
+\* ------------------------------------------------------------ */
+
+.numbered-cols {
+  border-top: 1px solid #C4C4C4;
+  border-bottom: 1px solid #C4C4C4;
+  padding: 10.1rem 0 13rem;
+}
+
+@media (max-width: 1023px) {
+  .numbered-cols {
+    border-top: none;
+    border-bottom: none;
+    padding: 6rem 0 7rem;
+  }
+}
+
+@media (max-width: 749px) {
+  .numbered-cols {
+    padding: 4rem 0;
+  }
+}
+
+.numbered-cols .container {
+  max-width: 162rem;
+}
+
+.numbered-cols__cols {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1023px) {
+  .numbered-cols__cols {
+    display: block;
+  }
+}
+
+.numbered-cols__title {
+  text-align: center;
+  margin-bottom: 5.6rem;
+}
+
+@media (max-width: 1023px) {
+  .numbered-cols__title {
+    margin-bottom: 3rem;
+  }
+}
+
+.numbered-cols__cols li {
+  flex: 1 0 33.33%;
+  max-width: 70%;
+}
+
+.numbered-cols__cols li:not(:first-child) {
+  border-left: 1px solid #C4C4C4;
+}
+
+@media (max-width: 1023px) {
+  .numbered-cols__cols li:not(:first-child) {
+    border-left: none;
+    border-top: 1px solid #C4C4C4;
+    max-width: 100%;
+  }
+}

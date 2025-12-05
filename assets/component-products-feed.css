@@ -1,0 +1,46 @@
+.products-feed {
+  padding-top: 3rem;
+}
+
+.products-feed__pre-title,
+.products-feed__title {
+  margin-top: 0;
+}
+
+.products-feed__pre-title {
+  line-height: 1;
+}
+
+.products-feed__head {
+  padding-right: 8em;
+}
+
+/* Slider arrows */
+
+.products-feed .swiper-arrows {
+  top: -4.3rem;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.products-feed .swiper-arrow--next {
+  margin-left: 1rem;
+}
+
+/* Recommendations slider */
+
+.products-feed--recommendations .products-feed__head {
+  padding: 0 10rem;
+  text-align: center;
+}
+
+.products-feed--recommendations .swiper-arrows {
+  justify-content: space-between;
+  top: -3.1rem;
+  padding: 0 2rem;
+}
+
+.products-feed--recommendations .swiper-arrow[disabled] {
+  opacity: 0;
+  pointer-events: none;
+}

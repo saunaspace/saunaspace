@@ -1,0 +1,42 @@
+{% comment %}<!-- Product Options Selector Setup (updates with selected variant behind the scenes) -->{% endcomment %}
+{% assign option_names = '' %}
+<div class="product-build--hidden-inputs" style="display:none;">
+    {% for option in product.options_with_values %}
+    {% assign option_names = option_names | append: option.name %}
+    {% unless forloop.last %}
+        {% assign option_names = option_names | append: ' / ' %}
+    {% endunless %}
+    {% endfor %}
+    <select id="product-var-selector" class="product-variant-selector" style="display:none;" data-options="{{ option_names }}">
+    {% for variant in product.variants %}
+    {% liquid
+        if variant.inventory_management
+        assign variant_inventory = variant.inventory_quantity
+        if variant.inventory_quantity < 1 and variant.inventory_policy == "continue"
+            assign variant_inventory = 999
+        endif
+        else
+        assign variant_inventory = 9999
+        endif
+    %}
+    <option {% if variant.selected == true %}selected="selected" {% endif %}data-variant-id="{{ variant.id }}" data-image-url="{{ variant.image | img_url:'master' }}" data-price="{{ variant.price | money_without_currency }}" data-compare-price="{{ variant.compare_at_price | money_without_currency }}" data-sku="{{ variant.sku }}" data-lead-time="{{ variant.metafields.custom.lead_time }}" data-inventory="{{ variant_inventory }}" value="{{ variant.title }}">{{ variant.title }}</option>
+    {% endfor %}
+    </select>
+</div>
+
+
+{% comment %}<!-- Accessory Products - If selected inputs will populate with data -->{% endcomment %}
+{% capture addon_inputs %}
+    {% for block in section.blocks %}
+        {% if block.type == "addon-products" %}
+        {% assign accessories_products = block.settings.addon_products %}
+            {% for _product in accessories_products %}
+            <input type="hidden" class="accessory-product-data" data-product="{{ _product.title }}" data-product-handle="{{ _product.handle }}" data-selected-variant="" data-selected-qauntity="" data-price-single="" value="" />
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endcapture %}
+
+{% if addon_inputs != blank %}
+<div class="product-build--hidden-inputs hidden-inputs--addons" style="display:none;">{{ addon_inputs }}</div>
+{% endif %}

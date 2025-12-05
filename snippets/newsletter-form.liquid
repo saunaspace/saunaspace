@@ -1,0 +1,68 @@
+{%- comment -%}
+  Accepts:
+  - namespace {String} - an unique id for the form fields.
+  - js_class? {String} - JS selector class
+  Usage:
+  {% render 'newsletter-form' %}
+
+{%- endcomment -%}
+
+{%-
+  liquid
+  assign class = 'contact-form ' | append: js_class
+  assign namespace = namespace | default: ''
+  assign form_id = 'contact-form-' | append: namespace
+-%}
+
+{%- form 'customer', class: class, id: form_id -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+
+  <div class="contact-form__inner">
+    {%- capture button_markup -%}
+      {%-
+        liquid
+        assign value = 'newsletter-form.submit' | t
+        assign id = 'Subscribe-' | append: section.id
+      -%}
+
+      <button
+        type="submit"
+        id="{{- id -}}"
+        name="commit"
+        class="newsletter__button"
+      >
+        <i class="ico">
+          {%- render 'icon-chevron-circle' -%}
+        </i><!-- /.ico -->
+      </button>
+
+      {%-
+        liquid
+        assign value = nil
+        assign id = nil
+      -%}
+    {%- endcapture -%}
+
+    {%-
+      liquid
+      assign label = 'newsletter-form.email.label' | t
+      assign placeholder = 'newsletter-form.email.placeholder' | t
+      capture attr
+        echo 'aria-required="true" '
+        echo 'autocapitalize="off" '
+        echo 'autocomplete="email" '
+        if form.errors
+          echo 'autofocus '
+        endif
+      endcapture
+      if form.errors
+        assign message = form.errors.translated_fields['email'] | capitalize | append: ' ' | append: form.errors.messages['email']
+        assign has_error = true
+      elsif form.posted_successfully?
+        assign message = 'newsletter-form.success' | t
+      endif
+      assign id = 'NewsletterForm--' | append: section.id
+      render 'text-input', id: id, label: label, hide_label: true, type: 'email', name: 'contact[email]', placeholder: placeholder, attr: attr, message: message, has_error: has_error, required: true, value: form.email, button_markup: button_markup
+    -%}
+  </div><!-- /.form-row -->
+{%- endform -%}

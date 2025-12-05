@@ -1,0 +1,341 @@
+.hero-features-carousel {
+  color: #f4f0e0;
+  background: transparent;
+  transition: .25s background;
+  display: block;
+}
+.hero-features-carousel.scrolling-active {
+  background: #232323;
+}
+
+.hero-features-carousel__item {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.hero-features-carousel__media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-features-carousel__wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.hero-features-carousel__wrapper .container {
+  max-width: calc(100% - 11rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 30px;
+}
+
+.hero-features-carousel__aside {
+  width: 34rem;
+}
+
+.hero-features-carousel__content {
+  flex: 1;
+}
+
+.hero-features-carousel__title {
+  font-size: calc(var(--fsbase) * 4.9);
+  line-height: 1.44898;
+  font-weight: 500;
+  margin: 0 0 6rem;
+}
+
+.hero-features-carousel__nav button {
+  color: currentColor;
+  background: none;
+  text-align: left;
+  font-size: calc(var(--fsbase) * 2.4);
+  line-height: 1.375;
+  font-weight: 600;
+  display: block;
+  padding-left: 2rem;
+  border: none;
+  border-radius: 0;
+  opacity: 0.3;
+  transition: opacity 200ms;
+  pointer-events: none;
+}
+
+.swiper-slide-active .hero-features-carousel__nav button {
+  pointer-events: initial;
+}
+
+.swiper-slide-active .hero-features-carousel__nav button.is-active {
+  pointer-events: none;
+}
+
+.hero-features-carousel__nav button.is-active {
+  opacity: 1;
+  position: relative;
+}
+
+.hero-features-carousel__nav button.is-active::before {
+  content: '';
+  vertical-align: middle;
+  background: #ff3a00;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 1.1rem;
+  left: 0;
+}
+
+.hero-features-carousel__nav li:not(:last-child) {
+  margin-bottom: 2.4rem;
+}
+
+.hero-features-carousel__entry {
+  font-size: calc(var(--fsbase) * 2.4);
+  line-height: 2;
+  font-weight: 500;
+  max-width: 76.8rem;
+  padding-right: 5rem;
+  margin-left: auto;
+}
+.hero-features-carousel__entry.mobile-content {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  /*.hero-features-carousel__wrapper {
+    padding: 0 3.2rem;
+  }*/
+  .hero-features-carousel__wrapper .container {
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 899.2px) and (max-width: 1023px) {
+  .hero-features-carousel__aside {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero-features-carousel__content .hero-features-carousel__title,
+  .hero-features-carousel__subtitle,
+  .hero-features-carousel .swiper-pagination {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .hero-features-carousel__item {
+    background: #000;
+    aspect-ratio: initial;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .hero-features-carousel__wrapper {
+    text-align: center;
+    padding: 5rem 2rem 9.5rem;
+    position: relative;
+    inset: initial;
+  }
+
+  .hero-features-carousel__wrapper .container {
+    display: block;
+    max-width: 100%;
+    gap: 0;
+  }
+
+  .hero-features-carousel__media {
+    aspect-ratio: 393 / 346;
+    position: relative;
+    inset: initial;
+  }
+
+  .hero-features-carousel__entry {
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 2;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .hero-features-carousel__title {
+    font-size: calc(var(--fsbase) * 2.4);
+    line-height: 1.5;
+    margin: 0 0 2.5rem;
+  }
+
+  .hero-features-carousel__subtitle {
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.571429;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0.14rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .hero-features-carousel__wrapper::before {
+    background: transparent linear-gradient(180deg, #000000 0%, #00000000 100%) 0% 0% no-repeat padding-box;
+    width: 100%;
+    height: 14.1rem;
+    top: 100%;
+  }
+
+  .hero-features-carousel .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    position: absolute !important;
+    bottom: auto;
+    top: 45%;
+  }
+
+  .hero-features-carousel .swiper-button-prev,
+  .hero-features-carousel .swiper-button-next {
+    background: #f4f0e0;
+    display: flex !important;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+  }
+
+  .hero-features-carousel .swiper-button-prev::after,
+  .hero-features-carousel .swiper-button-next::after {
+    content: none;
+  }
+
+  .hero-features-carousel .swiper-pagination-bullet {
+    background: #fff !important;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    margin: 0 0.5rem !important;
+    opacity: 0.5;
+  }
+
+  .hero-features-carousel .swiper-pagination-bullet-active {
+    background: #ff3a00 !important;
+    opacity: 1;
+  }
+
+  .hero-features-carousel .swiper-button-disabled {
+    background: #f0e7da !important;
+    opacity: 1;
+  }
+
+  .hero-features-carousel .swiper-button-prev,
+  .hero-features-carousel .swiper-button-next {
+    margin: 0;
+    top: 43.4%;
+  }
+
+  .hero-features-carousel .swiper-button-prev {
+    left: 4rem;
+  }
+
+  .hero-features-carousel .swiper-button-next {
+    right: 4rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-features-carousel__content.has-mobile-content .hero-features-carousel__entry:not(.mobile-content) {
+    display: none;
+  }
+  .hero-features-carousel__content {
+    text-align: left;
+  }
+  .hero-features-carousel__entry.mobile-content {
+    display: block;
+  }
+}
+
+/* Scroll Animation (center section vertically in the screen) */
+.shopify-section.hero-features-carousel-js .hero-features-carousel {
+  --sliderHeight: max(70vh, 700px);
+  --stickyOffset: calc((100vh - var(--sliderHeight)) / 2);
+  --containerHeight: calc( ((100vh * var(--slideCount, 1)) - (var(--stickyOffset, 0) * var(--slideCount, 1))) * var(--scrollAdjustment, 0.65));
+  height: var(--containerHeight, "auto");
+}
+@media (max-width: 1024px) {
+  .shopify-section.hero-features-carousel-js .hero-features-carousel {
+    --sliderHeight: min(100vh, 1000px);
+  }
+}
+.shopify-section.hero-features-carousel-js .hero-features-carousel .swiper {
+  position: sticky;
+  top: var(--stickyOffset, 140px);
+}
+.shopify-section.hero-features-carousel-js .hero-features-carousel__item {
+  height: var(--sliderHeight);
+  aspect-ratio: initial;
+}
+.shopify-section.hero-features-carousel-js .swiper-pagination-bullet {
+  pointer-events: none;
+}
+.shopify-section.hero-features-carousel-js .hero-features-carousel .swiper-button-prev,
+.shopify-section.hero-features-carousel-js .hero-features-carousel .swiper-button-next {
+  visibility: hidden;
+  opacity: 0;
+}
+body.scroll-carousel-animations .header {
+  transition: background-color .3s var(--timing-default),color .3s var(--timing-default), opacity .5s, visibility .5s;
+}
+body.scroll-carousel-animations .sticky-product,
+body.scroll-carousel-animations .promo-bar {
+  transition: opacity .5s, visibility .5s;
+}
+body.sticky-carousel-active .header,
+/*body.sticky-carousel-active .sticky-product,*/
+body.sticky-carousel-active .promo-bar/*,
+body.sticky-carousel-active:has(.header.is-scrolled) .page-nav*/ {
+  opacity: 0;
+  visibility: hidden;
+}
+@media screen and (max-width: 1023px) {
+  .shopify-section.hero-features-carousel-js .hero-features-carousel__wrapper {
+    flex: 1 0 50%;
+  }
+  .shopify-section.hero-features-carousel-js .hero-features-carousel__media {
+    aspect-ratio: initial;
+    flex: 1 0 50%;
+  }
+  .shopify-section.hero-features-carousel-js .hero-features-carousel .swiper-pagination {
+    top: 45%;
+  }
+}
+@media screen and (max-width: 1023px) and (min-width: 700px) {
+  .hero-features-carousel-js .hero-features-carousel__title {
+    font-size: 45px;
+  }
+  .hero-features-carousel-js .hero-features-carousel__subtitle {
+    font-size: 16px;
+  }
+  .hero-features-carousel-js .hero-features-carousel__entry {
+    margin-top: 20px;
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .shopify-section.hero-features-carousel-js .hero-features-carousel__wrapper {
+    flex: 1 0 70%;
+  }
+  .shopify-section.hero-features-carousel-js .hero-features-carousel__media {
+    aspect-ratio: initial;
+    flex: 1 0 30%;
+  }
+  .shopify-section.hero-features-carousel-js .hero-features-carousel .swiper-pagination {
+    top: 64%;
+  }
+}
+@media screen and (max-width: 575px) {
+  .shopify-section.hero-features-carousel-js .hero-features-carousel__wrapper {
+    padding-bottom: 60px;
+  }
+}

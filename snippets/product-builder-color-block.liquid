@@ -1,0 +1,62 @@
+{% for option in product.options_with_values %}
+  {% if option.name == "Color" %}
+  <div class="product-build__variant-content">
+    <h3 class="product-build__variant-info product-build__variant-title">
+      <span>{{ option.name }}</span>
+    </h3>
+    {% if block.settings.block_description != blank %}
+    <div class="product-build__variant-detail product-build__variant-description">
+      <p>{{ block.settings.block_description }}</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <ul class="product-build__variant-pills product-build__variant-pills--color colorOption js-variant-options" data-variant="Color">
+    {% for opt in option.values %}
+    {%- liquid
+      assign swatch_value = null
+      if opt.swatch.image
+        assign image_url = opt.swatch.image | image_url: width: 100
+        assign swatch_value = 'url(' | append: image_url | append: ')'
+      elsif opt.swatch.color
+        assign swatch_value = 'rgb(' | append: opt.swatch.color.rgb | append: ')'
+      endif
+    -%}
+    <li>
+      <input type="radio" class="color-option product-option-radio option--color"{% if option.selected_value == opt %} checked="true"{% endif %} name="color" value="{{ opt }}" id="color_option_{{ opt | handleize }}" />
+      <label class="product-build__variant-pill" data-option-name="{{ option.name }}" data-option-value="{{ opt }}" for="color_option_{{ opt | handleize }}">
+        <span class="option-img" style="background:{{ swatch_value }};"></span>
+        <span class="product-build__variant-pill-text">
+          <em>{{ opt }}</em>
+        </span>
+      </label><!-- /.product-build__variant-pill -->
+    </li>
+    {% endfor %}
+  </ul><!-- /.product-build__variant-pills -->
+  {% endif %}
+{% endfor %}
+
+
+{% comment %}<!-- Color Modal -->{% endcomment %}
+{% if block.settings.modal_content != blank %}
+<modal-opener class="product-build__modal-opener" data-modal="#color-panel-modal">
+  <button class="link product-build__modal-opener-button" type="button" aria-haspopup="dialog">
+    <span>{{ block.settings.modal_button_title | default: "Need help choosing a color's!?" }}</span>
+    <i> {%- render 'icon-plus' -%}</i>
+  </button>
+</modal-opener>
+
+{%- capture modal_content -%}
+  {{ block.settings.modal_content }}
+{%- endcapture -%}
+
+{% assign modal_title = block.settings.modal_button_title | default: "Need help choosing a color's!?" %}
+{%-
+  render 'modal-dialog',
+  id: 'color-panel-modal',
+  title: modal_title,
+  content: modal_content,
+  class: 'product-build__modal-dialog',
+  show_close_label: true,
+-%}
+{% endif %}

@@ -1,0 +1,20 @@
+{% liquid
+assign shipping_disclaimer = null
+if product.metafields.custom.shipping_disclaimer != blank
+    assign shipping_disclaimer = product.metafields.custom.shipping_disclaimer.value.message
+else
+    assign shipping_disclaimers = shop.metaobjects.product_shipping_disclaimer
+    for entry in shipping_disclaimers.values
+        if entry.default == true
+            assign shipping_disclaimer = entry.message
+        endif
+    endfor
+endif
+%}
+{% if shipping_disclaimer != blank %}
+    {% if is_sticky_product %}
+    <small class="product-sticky-button-order-processing product-shipping-disclaimer-sticky-button">{{ shipping_disclaimer }}</small>
+    {% else %}
+    <p class="product-order-processing-disclaimer product-shipping-disclaimer">{{ shipping_disclaimer }}</p>
+    {% endif %}
+{% endif %}

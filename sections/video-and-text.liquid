@@ -1,0 +1,133 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-video-and-text-" | append: section.index
+  endif
+%}
+{%- if section.settings.video != blank and section.settings.title != blank -%}
+  <section class="video-and-text" id="{{ sec_id }}">
+    <div class="video-and-text__media media">
+      {{- section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false -}}
+    </div><!-- /.video-and-text__media -->
+
+    <div class="video-and-text__content">
+      <div class="video-and-text__wrapper">
+        <div class="container">
+          <h2 class="video-and-text__title">
+            {{- section.settings.title | escape | newline_to_br -}}
+          </h2><!-- /.video-and-text__title -->
+
+          {%- if section.settings.content != blank -%}
+            <p class="video-and-text__entry">
+              {{- section.settings.content | escape | newline_to_br -}}
+            </p><!-- /.video-and-text__entry -->
+          {%- endif -%}
+        </div><!-- /.container -->
+      </div><!-- /.video-and-text__wrapper -->
+    </div><!-- /.video-and-text__content -->
+  </section><!-- /.video-and-text -->
+{%- endif -%}
+
+{% style %}
+  .video-and-text {
+    color: #f4f0e0;
+    text-align: center;
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+
+  .video-and-text__media,
+  .video-and-text__content {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .video-and-text__content {
+    background: transparent radial-gradient(closest-side at 50% 50%, #00000000 0%, #000000 100%) 0% 0% no-repeat padding-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .video-and-text__wrapper {
+    max-width: 75rem;
+  }
+
+  .video-and-text__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.33;
+    margin: 0 0 3.5rem;
+  }
+
+  .video-and-text__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 2;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .video-and-text {
+      aspect-ratio: 393 / 543;
+    }
+
+    .video-and-text__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      margin: 0 0 2rem;
+    }
+
+    .video-and-text__entry {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+
+    .video-and-text__wrapper {
+      padding: 0 4rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Video and text",
+    "settings": [
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video"
+      },
+      {
+        "type": "video_url",
+        "id": "oembed",
+        "label": "Oembed video",
+        "accept": [
+          "vimeo",
+          "youtube"
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Video and text"
+      }
+    ]
+  }
+{% endschema %}

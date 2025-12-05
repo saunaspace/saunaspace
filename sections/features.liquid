@@ -1,0 +1,191 @@
+{%- unless section.blocks.size == 0 and section.settings.title == blank and section.settings.link_text == blank -%}
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-features-" | append: section.index
+    endif
+  %}
+  <link rel="stylesheet" href="{{ 'section-features.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-features.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <section class="features" id="{{- sec_id -}}">
+    <div class="container">
+      <div class="features__inner{% if section.settings.flip_content %} features__inner--flipped{% endif %}">
+        {%- if section.settings.image != blank -%}
+          <div class="features__image">
+            <div
+              class="media media--aspect-ration media--transparent"
+              style="padding-bottom: {% render 'aspect-ratio', aspect_ratio: section.settings.image.aspect_ratio %}%;"
+            >
+              {%- render 'image', image: section.settings.image -%}
+            </div><!-- /.media -->
+          </div><!-- /.features__image -->
+        {%- endif -%}
+
+        <aside class="features__content">
+          {%- if section.settings.title != blank -%}
+            <h2 class="features__title">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.features__title -->
+          {%- endif -%}
+
+          {%- if section.settings.content != blank -%}
+            <p class="features__entry {{ section.settings.content_visibility }}">
+              {{- section.settings.content | escape | newline_to_br -}}
+            </p><!-- /.features__entry -->
+          {%- endif -%}
+
+          {%- if section.settings.link_text != blank -%}
+            <a{% if section.settings.link_url %} href="{{- section.settings.link_url -}}"{% endif %} class="features__action link-dot">
+              {{- section.settings.link_text | escape -}}
+            </a>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <ul class="features__list list-unstyled">
+              {%- for block in section.blocks -%}
+                {%-
+                  liquid
+                  if block.settings.icon == blank and block.settings.text == blank
+                    continue
+                  endif
+                -%}
+                {% capture cta_link %}
+                  {% if block.settings.link_url != blank %}
+                  <a href="{{ block.settings.link_url }}" class="feature-cta-link">{{ block.settings.text }}</a>
+                  {% endif %}
+                {% endcapture %}
+                <li class="features__feature feature">
+                  {%- if block.settings.icon != blank -%}
+                    <div class="feature__icon">
+                      {%- render 'image', image: block.settings.icon -%}
+                      {{ cta_link }}
+                    </div><!-- /.feature__icon -->
+                  {%- endif -%}
+
+                  <p class="feature__text">
+                    {{- block.settings.text | escape -}}
+                    {{ cta_link }}
+                  </p><!-- /.feature__text -->
+                </li><!-- /.features__feature -->
+              {%- endfor -%}
+            </ul><!-- /.features__list -->
+          {%- endif -%}
+        </aside><!-- /.features__content -->
+      </div><!-- /.features__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.features -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Features",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "flip_content",
+      "label": "Flip image and content positions",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Features title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_visibility",
+      "label": "Content visibility",
+      "options": [
+        {
+          "value": "small-hide",
+          "label": "Desktop"
+        },
+        {
+          "value": "medium-hide large-up-hide",
+          "label": "Mobile"
+        },
+        {
+          "value": "",
+          "label": "Both"
+        }
+      ],
+      "default": "medium-hide large-up-hide"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

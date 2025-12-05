@@ -2,8 +2,7 @@
   "sections": {
     "content": {
       "type": "blog-content-zipifypages",
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [

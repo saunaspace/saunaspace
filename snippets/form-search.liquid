@@ -1,0 +1,50 @@
+{% comment %}
+  Renders text input form element
+  Accepts:
+  - class {String} Form class
+  - namespace {String} Namespace for input element
+  - form_attr {String} Data attributes to be added to the form element
+  - input_attr {String} Data attributes to be added to the input element
+
+  Usage:
+  {% render 'search-form', namespace: 'Main-Search' %}
+{% endcomment %}
+{%-
+  liquid
+  assign class = class | default: 'form-search'
+  assign namespace = namespace | default: 'Search-'
+  assign form_attr = form_attr | default: false
+  assign input_attr = input_attr | default: false
+-%}
+
+<form
+  action="{{- routes.search_url -}}"
+  class="{{ class }}"
+  {% if form_attr %} {{ form_attr }} {% endif %}
+>
+  <div class="form-row row--form-input">
+    {%-
+      liquid
+      assign placeholder = 'search.placeholder' | t
+      assign id = namespace | append: '-Input'
+      render 'text-input', type: 'search', value: search.terms, id: id, name: 'q', placeholder: placeholder, attr: input_attr
+      assign placeholder = nil
+    -%}
+
+    <button type="submit" class="search-form-trigger">
+		  <span class="sr-only">Search</span>
+      {%- render 'icon-search' -%}
+	  </button>
+  </div><!-- /.form-row form-row--double -->
+
+  <div class="form-row row--form-submit visually-hidden">
+    <div>
+      {%-
+        liquid
+        assign value = 'search.submit' | t
+        render 'button', type: 'submit', value: value
+        assign value = nil
+      -%}
+    </div>
+  </div><!-- /.form-row -->
+</form>

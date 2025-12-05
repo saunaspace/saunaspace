@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="{{ 'section-page-content.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'section-page-content.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+<div class="container">
+  <div class="page-content__body">
+    {{- page.content -}}
+  </div><!-- /.page-content__body -->
+</div><!-- /.container -->
+
+{% schema %}
+{
+  "name": "Page Content",
+  "class": "page-content",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "Page Content"
+    }
+  ]
+}
+{% endschema %}

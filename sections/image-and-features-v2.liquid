@@ -1,0 +1,282 @@
+{%- if section.settings.image != blank and section.blocks.size > 0 -%}
+  <section class="image-and-features-v2">
+    <div class="container">
+      <div class="image-and-features-v2__inner">
+        <div class="image-and-features-v2__media">
+          <div class="media">
+            {%- render 'image', image: section.settings.image -%}
+          </div><!-- /.media -->
+
+          {%- if section.settings.title != blank -%}
+            <h2 class="image-and-features-v2__title medium-hide large-up-hide">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.image-and-features-v2__title -->
+          {%- endif -%}
+        </div><!-- /.image-and-features-v2__media -->
+
+        <div class="image-and-features-v2__content">
+          {%- if section.settings.title != blank -%}
+            <h2 class="image-and-features-v2__title small-hide">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.image-and-features-v2__title -->
+          {%- endif -%}
+
+          <ul class="image-and-features-v2__list list-unstyled">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.title == blank or block.settings.svg_code == blank -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              <li class="image-and-features-v2__item">
+                {{- block.settings.svg_code -}}
+                <span>{{- block.settings.title | escape -}}</span>
+                {% if block.settings.link_url != blank %}
+                <a href="{{ block.settings.link_url }}" class="cta-link">{{ block.settings.title | default: "learn more" }}</a>
+                {% endif %}
+              </li><!-- /.image-and-features-v2__item -->
+            {%- endfor -%}
+          </ul><!-- /.image-and-features-v2__list list-unstyled -->
+
+          {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+            <div class="image-and-features-v2__actions{% if section.settings.button_text_mobile %} small-hide{% endif %}">
+              {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'outlined button--orange-hover' -%}
+            </div><!-- /.image-and-features-v2__actions -->
+
+            {%- if section.settings.button_text_mobile != blank -%}
+              <div class="image-and-features-v2__actions medium-hide large-up-hide">
+                {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text_mobile, style: 'outlined button--orange-hover' -%}
+              </div><!-- /.image-and-features-v2__actions -->
+            {%- endif -%}
+          {%- endif -%}
+        </div><!-- /.image-and-features-v2__content -->
+      </div><!-- /.image-and-features-v2__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.image-and-features-v2 -->
+{%- endif -%}
+
+{% style %}
+  .image-and-features-v2 {
+    --color-outline-button: #f4f0e0;
+    --color-outline-button-border: #f4f0e0;
+    --color-outline-button-hover: #2c2621;
+    color: #faf8f2;
+    text-align: center;
+    padding: 14rem 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .image-and-features-v2__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.444444;
+    font-weight: 500;
+    margin: 0 0 11.2rem;
+  }
+
+  .image-and-features-v2__media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .image-and-features-v2 .media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .image-and-features-v2__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .image-and-features-v2__item span {
+    font-size: calc(var(--fsbase) * 1.6);
+    line-height: 1.375;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+
+  .image-and-features-v2__item svg {
+    display: block;
+    width: 9.5rem;
+    height: 9.5rem;
+    margin-bottom: 2.1rem;
+  }
+
+  .image-and-features-v2__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .image-and-features-v2__item .cta-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    text-decoration: none;
+  }
+
+  .image-and-features-v2__list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8.8rem 1.7rem;
+  }
+
+  .image-and-features-v2__actions {
+    margin-top: 10rem;
+  }
+
+  @media screen and (max-width: 1280px) {
+    .image-and-features-v2__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .image-and-features-v2 {
+      --color-outline-button: #2c2621;
+      --color-outline-button-border: #2c2621;
+      --color-outline-button-hover: #f4f0e0;
+      color: #2c2621;
+      padding: 4.2rem 0 4rem;
+    }
+
+    .image-and-features-v2__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-and-features-v2__media {
+      margin: 0 -2rem 1rem;
+      position: relative;
+      inset: initial;
+    }
+
+    .image-and-features-v2__media .media {
+      aspect-ratio: 393 / 221;
+      position: relative;
+    }
+
+    .image-and-features-v2__media .image-and-features-v2__title {
+      color: #f4f0e0;
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .image-and-features-v2__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      line-height: 1.458333;
+      width: 100%;
+      margin: 0;
+    }
+
+    .image-and-features-v2__content {
+      padding: 0 2.6rem;
+    }
+
+    .image-and-features-v2__list {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .image-and-features-v2__item {
+      flex-flow: row wrap;
+      gap: 1.7rem;
+      padding: 2rem 0;
+    }
+
+    .image-and-features-v2__item:not(:first-child) {
+      border-top: 0.1rem solid #c1baaf;
+    }
+
+    .image-and-features-v2__item:last-child {
+      border-bottom: 0.1rem solid #c1baaf;
+    }
+
+    .image-and-features-v2__item span {
+      text-align-last: left;
+      flex: 1;
+      margin: 0;
+    }
+
+    .image-and-features-v2__item svg {
+      width: 3.5rem;
+      height: 3.5rem;
+      margin: 0;
+    }
+
+    .image-and-features-v2__actions {
+      margin-top: 2.9rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Image and features - V2",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "text",
+        "id": "button_text_mobile",
+        "label": "Button text - Mobile"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "html",
+            "id": "svg_code",
+            "label": "SVG Code"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link URL"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image and features - V2"
+      }
+    ]
+  }
+{% endschema %}

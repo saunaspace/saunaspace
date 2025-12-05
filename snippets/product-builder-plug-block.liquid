@@ -1,0 +1,101 @@
+{% if block.settings.mobile_image != blank %}
+<div class="product-build__variant-media media media--3-4 large-up-hide">
+    <img src="{{ block.settings.mobile_image | image_url: width: 400 }}" alt="panel option image" />
+</div>
+{% endif %}
+
+<div class="product-build__variant-content">
+    <h3 class="product-build__variant-title">{{ block.settings.block_text }}</h3>
+    <div class="product-build__variant-description">
+        <p>{{ block.settings.block_description }}</p>
+    </div>
+</div>
+
+<plug-type-options>
+    <ul class="product-build__variant-pills product-build__variant-pills--landscape pulgOption">
+        <li data-nosub>
+            <input class="product-option-radio option--plug plug--usa" type="radio" class="product-option-radio option--plug Plug" checked="true" name="Plug" value="USA" id="plug_option_usa" />
+            <label class="product-build__variant-pill product-build__variant-pill--landscape" data-option-name="Plug" data-option-value="USA" for="plug_option_usa">
+                {% if block.settings.usa_image != blank %}
+                <span
+                    class="option-img"
+                    style="
+                    background-image: url({{ block.settings.usa_image | image_url: width: 60 }});
+                    --secondary-image: url({{ 'icon--120v.svg' | asset_url }});
+                    "
+                ></span>
+                {% endif %}
+                <span class="product-build__variant-pill-text">USA</span>
+            </label><!-- /.product-build__variant-pill -->
+        </li>
+
+        <li class="international-plugs">
+            <button class="plug-type-options__submenu-trigger" data-action>
+                <div class="product-build__variant-pill product-build__variant-pill--landscape">
+                    {% if block.settings.international_image != blank %}
+                    <span
+                        class="option-img"
+                        style="
+                        background-image: url({{ block.settings.international_image | image_url: width: 60 }});
+                        --secondary-image: url({{ 'icon--240v.svg' | asset_url }});
+                        "
+                    ></span>
+                    {% endif %}
+
+                    <span class="product-build__variant-pill-text">International</span>
+                </div><!-- /.product-build__variant-pill -->
+            </button><!-- /.plug-type-options__submenu -->
+        </li>
+    </ul><!-- /.product-build__variant-pills -->
+
+    <div class="plug-type-options__submenu" data-submenu>
+        <ul class="product-build__variant-pills product-build__variant-pills--landscape">
+            {% for plug_type in shop.metaobjects.plug_types.values %}
+                {% assign opt = plug_type.label %}
+                {% if opt == "USA" %}{% continue %}{% endif %}
+                <li class="plug-item--international" data-plug-option="{{ opt }}" data-plug-type-label="{{  opt }}" data-icon="{{ plug_type.icon | image_url: width: 55 }}">
+                    <input type="radio" class="product-option-radio option--plug Plug" name="Plug"{% if opt == "UK" %} default-international-plug=""{% endif %} value="{{ opt }}" id="plug_option_{{ product.handle }}--{{ opt | handleize | default: forloop.index }}" />
+                    <label class="product-build__variant-pill" data-option-name="Plug" data-option-value="{{ opt }}" for="plug_option_{{ product.handle }}--{{ opt | handleize | default: forloop.index }}">
+                        <span class="product-build__variant-pill-text option-box">{{ opt }}</span>
+                    </label>
+                </li>
+            {% endfor %}
+            {% comment %}<!-- REMOVED: Replaced with plug metaobjects 5.27.25 -->
+            {% assign adapters = block.settings.international_options | split: "," %}
+            {% for option in adapters %}
+            {% assign opt = option | strip %}
+            <li class="plug-item--international">
+                <input type="radio" class="product-option-radio option--plug Plug" name="Plug" value="{{ opt }}" id="plug_option_{{ opt | handleize }}">
+                <label class="product-build__variant-pill" data-option-name="Plug" data-option-value="{{ opt }}" for="plug_option_{{ opt | handleize }}">
+                    <span class="product-build__variant-pill-text option-box">{{ opt }}</span>
+                </label>
+            </li>
+            {% endfor %}
+            {% endcomment %}
+        </ul><!-- /.plug-type-options__submenu -->
+    </div><!-- /.plug-type-options__submenu -->
+</plug-type-options>
+
+{% comment %}<!-- Plugs Modal -->{% endcomment %}
+{% if block.settings.modal_content != blank %}
+<modal-opener class="product-build__modal-opener" data-modal="#plug-panel-modal">
+    <button class="link product-build__modal-opener-button" type="button" aria-haspopup="dialog">
+        <span>{{ block.settings.modal_button_title | default: "Need help choosing a plug?" }}</span>
+        <i>{%- render 'icon-plus' -%}</i>
+    </button>
+</modal-opener>
+
+{%- capture modal_content -%}
+    {{ block.settings.modal_content }}
+{%- endcapture -%}
+
+{% assign modal_title = block.settings.modal_button_title | default: "Need help choosing a plug?" %}
+{%-
+    render 'modal-dialog',
+    id: 'plug-panel-modal',
+    title: modal_title,
+    content: modal_content,
+    class: 'product-build__modal-dialog',
+    show_close_label: true,
+-%}
+{% endif %}

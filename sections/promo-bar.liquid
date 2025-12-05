@@ -1,0 +1,36 @@
+{{- 'promo-bar.css' | asset_url | stylesheet_tag -}}
+
+{%-
+  liquid
+  assign content = section.settings.content
+-%}
+
+<section class="promo-bar js-promo-bar">
+  <div class="container container--fluid">
+    {{- content -}}
+  </div><!-- /.container container--fluid -->
+
+  <button class="js-promo-close promo-bar-close" aria-label="close promo">✕</button>
+</section>
+
+{% schema %}
+{
+  "name": "Promo bar",
+  "class": "js-sticky-header-item",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo bar"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

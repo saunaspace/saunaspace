@@ -1,0 +1,32 @@
+{% comment %}
+  Renders autoplay video iframe
+  Accepts:
+  - video: {Ojbect} Shopify video object
+  - title: {String} Video title
+  - class?: {String} Video class
+  - params?: {String} Video parameters
+
+  Usage:
+  {%- render 'external-video', video: _video, title: 'Autoplay video' -%}
+{% endcomment %}
+
+{%- liquid
+  assign title = title | default: ''
+  assign class = class | default: 'video'
+
+  if video.type == 'youtube'
+    assign params = params | default: 'enablejsapi=1&autoplay=1&controls=0&fs=0&loop=1&modestbranding=1&playsinline=1&mute=1&playlist=' | append: video.id
+    assign video_url = 'https://www.youtube.com/embed/' | append: video.id | append: '?' | append: params
+  else
+    assign params = params | default: 'autopause=0&autoplay=1&background=1&byline=0&controls=0&loop=1&muted=1&playsinline=1&title=0&transparent=1'
+    assign video_url = 'https://player.vimeo.com/video/' | append: video.id | append: '?' | append: params
+  endif
+-%}
+
+<iframe
+  src="{{- video_url -}}"
+  allow="autoplay; encrypted-media"
+  title="{{- title -}}"
+  class="{{- class -}}"
+  loading="lazy"
+></iframe>

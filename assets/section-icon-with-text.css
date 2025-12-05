@@ -1,0 +1,65 @@
+/* ------------------------------------------------------------ *\
+  Icon with text
+\* ------------------------------------------------------------ */
+
+.icon-with-text {
+  padding-block: 21rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .icon-with-text {
+    padding-block: 5rem;
+  }
+}
+
+.icon-with-text .container {
+  max-width: 179rem;
+}
+
+.icon-with-text__grid {
+  display: grid;
+  grid-template-columns: 45% 45.4%;
+  gap: 6rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-with-text__icon {
+  background-color: transparent;
+  padding-bottom: 47%;
+}
+
+.icon-with-text__content-col {
+  padding-right: 6%;
+  font-size: calc(var(--fsbase) * 2.1);
+  font-weight: 500;
+  line-height: 2;
+}
+
+@media screen and (max-width: 1599px) {
+  .icon-with-text__content-col {
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .icon-with-text__grid {
+    display: block;
+  }
+
+  .icon-with-text__image-col {
+    margin-bottom: 2.3rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .icon-with-text__grid {
+    padding-inline: 2rem;
+  }
+
+  .icon-with-text__content-col {
+    text-align: center;
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 2;
+  }
+}

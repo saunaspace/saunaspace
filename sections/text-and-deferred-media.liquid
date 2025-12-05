@@ -1,0 +1,373 @@
+{%- if section.settings.video != blank or section.settings.oembed != blank or section.settings.yt_short_id != blank -%}
+{%  liquid 
+  assign video_url = section.settings.oembed | default: section.settings.video.sources[1].url
+  assign video_id = null
+  assign video_type = null
+  if section.settings.oembed != blank
+    assign video_id = section.settings.oembed.id
+    assign video_type = section.settings.oembed.type
+  endif
+  if section.settings.yt_short_id != blank
+    assign video_url = "https://www.youtube.com/embed/" | append: section.settings.yt_short_id
+    assign video_id = section.settings.yt_short_id
+    assign video_type = "youtube"
+  endif
+
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-text-and-deferred-media-" | append: section.index
+  endif
+
+  if section.settings.section_id == "sl-animation"
+    echo 'section-sl-animation.css' | asset_url | stylesheet_tag
+  endif
+%}
+  <section class="text-and-deferred-media sec-{{ section.settings.section_layout }}" id="{{ sec_id }}">
+    {%- if section.settings.image_accent != blank -%}
+      <div class="text-and-deferred-media__image media media--transparent {{ section.settings.img_bg_position }}">
+        {%- render 'image', image: section.settings.image_accent -%}
+      </div><!-- /.text-and-deferred-media__image -->
+    {%- endif -%}
+
+    {% if section.settings.section_layout == "layout-cols" %}
+    <div class="sec-inner-wrap container"{% if section.settings.section_id == "sl-animation" %} style="position:relative;z-index:2;"{% endif %}>
+    {% endif %}
+
+    <div class="text-and-deferred-media__content">
+      {% if section.settings.section_layout != "layout-cols" %}<div class="container">{% endif %}
+        {%- if section.settings.subtitle -%}
+          <p class="text-and-deferred-media__subtitle">
+            {{- section.settings.subtitle | escape -}}
+          </p><!-- /.text-and-deferred-media__subtitle -->
+        {%- endif -%}
+
+        {% if section.settings.title != blank %}
+        <h2 class="text-and-deferred-media__title">
+          {{- section.settings.title | escape -}}
+        </h2><!-- /.text-and-deferred-media__title -->
+        {% endif %}
+
+        {%- if section.settings.content != blank -%}
+          <p class="text-and-deferred-media__entry">
+            {{- section.settings.content | escape | newline_to_br -}}
+          </p><!-- /.text-and-deferred-media__entry -->
+        {%- endif -%}
+      {% if section.settings.section_layout != "layout-cols" %}</div><!-- /.container -->{% endif %}
+    </div><!-- /.text-and-deferred-media__content -->
+
+    <div class="text-and-deferred-media__video">
+      {% if section.settings.section_layout != "layout-cols" %}<div class="container">{% endif %}
+        <deferred-media class="deferred-media{% if section.settings.oembed != blank and section.settings.yt_short_id == blank %} js-open-in-modal{% endif %}" data-video="{{ video_url }}"{% if video_id != blank%} data-video-id="{{ video_id }}" data-oembed-type="{{ video_type }}"{% endif %}>
+          <button class="deferred-media__button" id="Deferred-Poster-Modal-{{- section.id -}}" type="button">
+            <span class="media media--transparent">
+              {%- if section.settings.image_poster != blank -%}
+                {%- render 'image', image: section.settings.image_poster -%}
+              {%- else -%}
+                {%- render 'image', image: section.settings.video.preview_image -%}
+              {%- endif -%}
+            </span>
+
+            {%- render 'icon-play' -%}
+          </button>
+
+          <template>
+            <div class="deferred-media__wrapper">
+              {% if section.settings.yt_short_id != blank %}
+                {% render 'video-oembed-yt-shorts', video_id: video_id, autoplay: true, controls: true, aspect_ratio: section.settings.animation_oembed_aspect_ratio %}
+              {% elsif section.settings.oembed != blank %}
+                {% render 'video-oembed', video: section.settings.oembed, autoplay: true, controls: true, aspect_ratio: section.settings.animation_oembed_aspect_ratio %}
+              {% else %}
+                {{- section.settings.video | media_tag: autoplay: true, muted: false, loop: true, controls: true -}}
+              {% endif %}
+            </div><!-- /.deferred-media__wrapper -->
+          </template>
+        </deferred-media><!-- /.deferred-media -->
+        
+      {% if section.settings.section_layout != "layout-cols" %}</div><!-- /.container -->{% endif %}
+    </div><!-- /.text-and-deferred-media__video -->
+
+    {% if section.settings.section_layout == "layout-cols" %}</div><!-- /.sec-inner-wrap -->{% endif %}
+  </section><!-- /.text-and-deferred-media -->
+{%- endif -%}
+
+{% style %}
+  .text-and-deferred-media {
+    color: #f4f0e0;
+    background-color: #000;
+    padding: 53.7rem 0 19.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width:1023.2px) {
+    .text-and-deferred-media.sec-layout-cols {
+      padding-top: 45rem;
+    }
+  }
+
+  .text-and-deferred-media::after {
+    content: '';
+    background: radial-gradient(closest-side, #ff3a00, transparent);
+    width: 120%;
+    aspect-ratio: 1;
+    position: absolute;
+    bottom: -70%;
+    left: -10%;
+  }
+  .text-and-deferred-media.sec-layout-cols::after {
+    bottom: -100%;
+  }
+
+  .text-and-deferred-media.sec-layout-cols .sec-inner-wrap {
+    display: grid;
+    grid-template-columns: auto 425px;
+    gap: 40px;
+    max-width: 1468px;
+  }
+  @media (max-width: 989px) {
+    .sec-layout-cols deferred-media {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .text-and-deferred-media.sec-layout-cols .sec-inner-wrap {
+      grid-template-columns: auto;
+    }
+  }
+  .text-and-deferred-media.sec-layout-cols .deferred-media .media {
+    aspect-ratio: 425/760;
+  }
+
+  .text-and-deferred-media__image {
+    width: 100%;
+    aspect-ratio: 1920 / 950;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+
+  .text-and-deferred-media__content {
+    text-align: center;
+    max-width: 84rem;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .sec-layout-cols .text-and-deferred-media__content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .text-and-deferred-media .container {
+    max-width: 162rem;
+  }
+
+  .text-and-deferred-media__video {
+    margin-top: 14.3rem;
+    position: relative;
+    z-index: 1;
+  }
+  .sec-layout-cols .text-and-deferred-media__video {
+    margin-top: 0;
+  }
+
+  .text-and-deferred-media .deferred-media__wrapper:has(iframe) {
+    aspect-ratio: initial;
+  }
+  .text-and-deferred-media .deferred-media__wrapper iframe {
+    position: static;
+  }
+
+  .text-and-deferred-media__subtitle {
+    font-size: calc(var(--fsbase) * 1.6);
+    line-height: 1.333333;
+    font-weight: 900;
+    letter-spacing: 0.18rem;
+    text-transform: uppercase;
+    margin: 0 0 2.8rem;
+  }
+
+  .text-and-deferred-media__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.42;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .text-and-deferred-media__entry {
+    font-size: calc(var(--fsbase) * 2.2);
+    line-height: 2;
+    margin: 3.5rem 0 0;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .text-and-deferred-media {
+      padding: 15rem 0 8.3rem;
+    }
+
+    .text-and-deferred-media__subtitle {
+      font-size: calc(var(--fsbase) * 1.42);
+      letter-spacing: 0;
+      margin: 0 0 1rem;
+    }
+
+    .text-and-deferred-media__title {
+      font-size: calc(var(--fsbase) * 3.85);
+      line-height: 1.5;
+    }
+
+    .text-and-deferred-media__entry {
+      font-size: calc(var(--fsbase) * 1.82);
+      margin: 2.9rem 0 0;
+    }
+
+    .text-and-deferred-media__content {
+      max-width: 35rem;
+    }
+
+    .text-and-deferred-media__image {
+      aspect-ratio: 393 / 195;
+    }
+
+    .text-and-deferred-media__video {
+      padding: 0 2rem;
+      margin-top: 5.5rem;
+    }
+
+    .text-and-deferred-media::after {
+      width: 140%;
+      bottom: -55%;
+      left: -20%;
+    }
+    .text-and-deferred-media.sec-layout-cols::after {
+      bottom: -85%;
+    }
+  }
+  @media screen and (max-width: 575px) {
+    .text-and-deferred-media.sec-layout-cols::after {
+      bottom: -15%;
+    }
+    .text-and-deferred-media__subtitle {
+      font-size: calc(var(--fsbase) * 1.12);
+    }
+
+    .text-and-deferred-media__title {
+      font-size: calc(var(--fsbase) * 2.85);
+    }
+
+    .text-and-deferred-media__entry {
+      font-size: calc(var(--fsbase) * 1.42);
+    }
+  }
+
+  .text-and-deferred-media__image.bg-cover {
+    height: 100%;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Text and deferred media",
+    "settings": [
+      {
+        "type": "select",
+        "id": "section_layout",
+        "label": "Section Layout",
+        "options": [
+          {
+            "label": "Stacked",
+            "value": "layout-row"
+          },
+          {
+            "label": "Side by Side",
+            "value": "layout-cols"
+          }
+        ],
+        "default": "layout-row"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_accent",
+        "label": "Image Background"
+      },
+      {
+        "type": "select",
+        "id": "img_bg_position",
+        "label": "Background Image Position",
+        "options": [
+          {
+            "label": "Top",
+            "value": "bg-pos-top"
+          },
+          {
+            "label": "Full width and height",
+            "value": "bg-cover"
+          }
+        ],
+        "default": "bg-pos-top"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_poster",
+        "label": "Image poster"
+      },
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video"
+      },
+      {
+        "type": "video_url",
+        "id": "oembed",
+        "label": "Oembed video",
+        "info": "Overrides video above",
+        "accept": [
+          "vimeo",
+          "youtube"
+        ]
+      },
+      {
+        "type": "text",
+        "id": "yt_short_id",
+        "label": "YouTube Shorts video - ID",
+        "info": "If the url is 'https://www.youtube.com/shorts/umqAhC-RH34' then the id is 'umqAhC-RH34'"
+      },
+      {
+        "type": "text",
+        "id": "animation_oembed_aspect_ratio",
+        "label": "Oembed aspect ratio",
+        "default": "16/9",
+        "info": "[WIDTH]/[HEIGHT] ex: 16/9"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Text and deferred media"
+      }
+    ]
+  }
+{% endschema %}

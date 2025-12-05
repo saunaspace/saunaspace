@@ -1,0 +1,138 @@
+{%- if section.blocks.size > 0 -%}
+  <link rel="stylesheet" href="{{ 'section-review-images.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-review-images.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <script src="{{- 'review-images.js' | asset_url -}}" defer="defer" ></script>
+
+  <div class="container">
+    <review-images class="review-images__wrapper">
+      {%- if section.settings.heading != blank -%}
+        <h3 class="review-images__heading h2">
+          {{- section.settings.heading | escape | newline_to_br -}}
+        </h3><!-- /.review-images__heading -->
+      {%- endif -%}
+
+      <div class="review-images__grid">
+        {%- for block in section.blocks -%}
+          <div class="review-images__image" data-image>
+            <div class="media media--1-1">
+              {%-
+                liquid
+                if block.settings.image != blank
+                  assign image = block.settings.image
+                  assign image_src = image | image_url: width: 500
+                  capture image_srcset
+                    render 'srcset', image: image
+                  endcapture
+                  assign image_alt = image.alt | escape
+                  render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: image.width, height: image.height, focal_point: image.presentation.focal_point
+                else
+                  echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+                endif
+              -%}
+            </div><!-- /.media media--1-1 -->
+          </div><!-- /.review-images__image -->
+        {%- endfor -%}
+      </div><!-- /.review-images__grid -->
+
+      <button data-show-next class="review-images__reveal-button">
+        {%- render 'icon-chevron-down' -%}
+      </button>
+    </review-images><!-- /.review-images__wrapper -->
+   </div><!-- /.container -->
+      
+{%- elsif section.settings.heading != blank -%}
+<h3 class="review-media-grid__heading h2">
+  {{- section.settings.heading | escape | newline_to_br -}}
+</h3><!-- /.review-images__heading -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Review images",
+  "class": "review-images",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Review images"
+    }
+  ],
+  "max_blocks": 21,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review images",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

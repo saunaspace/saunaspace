@@ -1,0 +1,165 @@
+.modal-trigger-wrap {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+}
+.modal-trigger-wrap button.link {
+    font-weight: 800;
+}
+.product-build__modal-dialog.accessories-quickview-modal .modal-dialog__wrapper {
+    width: min(100%,1080px);
+    max-height: 90vh;
+    justify-content: flex-start;
+    padding: 40px;
+    background: var(--color-background-body);
+    overflow: hidden auto;
+}
+.product-build__modal-dialog.accessories-quickview-modal .modal-dialog__close {
+    right: 17px;
+    left: auto;
+    top: 20px;
+    min-width: auto;
+    min-height: auto;
+    gap: 0;
+    font-size: 0;
+}
+.product-build__modal-dialog.accessories-quickview-modal .modal-dialog__close::after {
+    display: none;
+}
+.accessory-product-quickview {
+    display: flex;
+    gap: 60px;
+}
+.accessory-product-quickview .modal-col {
+    flex: 50% 0 1;
+}
+.accessory-product-quickview .product__media,
+.accessory-product-quickview .product__media-slider,
+.accessory-product-quickview .product__media-slider .swiper,
+.accessory-product-quickview .product__media-slider .swiper-wrapper,
+.accessory-product-quickview .product__image,
+.accessory-product-quickview .product__image .media {
+    height: auto;
+}
+  .accessory-product-quickview .product__media-wrapper::before,
+  .accessory-product-quickview .product__media-wrapper::after {
+    display: none;
+}
+.accessory-product-quickview .product__media-slider .product__image .media {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+.accessory-product-quickview .product__media-thumbs {
+    position: static!important;
+    height: auto;
+    width: 100%;
+    margin-top: 10px;
+}
+.accessory-product-quickview .product__media-thumbs .swiper-slide {
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+}
+.accessory-product-quickview .product__media-thumbs .media {
+    width: 80px;
+    height: 80px;
+}
+.accessory-product-quickview .col--product {
+    display: flex;
+    flex-direction: column;
+}
+.accessory-product-quickview .accessory-product-title {
+    margin: 0;
+}
+.accessory-product-price span {
+    font-size: calc(var(--fsbase) * 2.8);
+}
+.accessory-product-description {
+    max-height: 500px;
+    margin-bottom: 30px;
+    overflow: auto;
+}
+.accessory-product-description button.readmore-trigger {
+    font-size: calc(var(--fsbase) * 1.9);
+}
+.accessory-product-form {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-grow: 1;
+}
+.accessory-qty-cnt {
+    min-width: 140px;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 5px;
+    border: 2px solid #2C2621;
+    border-radius: 38px;
+}
+.accessory-qty-cnt .qty-btn,
+.accessory-qty-cnt .qty-input {
+    font-weight: 800;
+}
+@media (max-width: 1023px) {
+    .accessory-product-quickview {
+      flex-direction: column;
+      gap: 30px;
+    }
+    .accessory-product-quickview .product__media-slider .product__image .media {
+      aspect-ratio: 9/6;
+    }
+  }
+  @media (max-width: 767px) {
+    .accessory-product-quickview {
+      gap: 25px;
+    }
+    .product-build__modal-dialog.accessories-quickview-modal .modal-dialog__wrapper {
+      padding: 30px;
+    }
+    .accessory-product-quickview .product__media-slider .product__image .media {
+      aspect-ratio: 9/6;
+    }
+}
+@media (max-width: 575px) {
+    .accessory-product-quickview {
+      gap: 20px;
+    }
+    .product-build__modal-dialog.accessories-quickview-modal .modal-dialog__wrapper {
+      padding: 20px;
+    }
+    .product-build__modal-dialog.accessories-quickview-modal .modal-dialog__close {
+      top: 5px;
+      right: 9px;
+    }
+    .product-build__modal-dialog.accessories-quickview-modal .modal-dialog__close svg {
+      width: 10px;
+    }
+    .accessory-product-form {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .accessory-qty-cnt {
+      width: 100%;
+    }
+    .accessory-qty-cnt .qty-btn,
+    .accessory-qty-cnt .qty-input {
+      font-size: 14px;
+      line-height: 1;
+    }
+    button.accessory-atc-trigger {
+      font-size: calc(var(--fsbase) * 1.4);
+    }
+}
+  
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,129 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-section-richtext-" | append: section.index
+  endif
+%}
+{%- if section.settings.subtitle != blank
+    or section.settings.title != blank
+    or section.settings.content != blank
+    or section.settings.button_text != blank and section.settings.button_url != blank -%}
+
+  {{- 'section-richtext.css' | asset_url | stylesheet_tag -}}
+
+  <section class="section section-richtext {{ section.settings.text_align }}" id="{{ sec_id }}">
+    <div class="container container--full-{{ section.settings.text_align }}">
+      {%- if section.settings.subtitle != blank
+        or section.settings.title != blank -%}
+        <header class="section__head">
+          <div class="container container--full-{{ section.settings.text_align }}">
+            {%- if section.settings.subtitle -%}
+              <p class="section__pre-title uppercase">
+                {{- section.settings.subtitle | escape -}}
+              </p><!-- /.section__pre-title -->
+            {%- endif -%}
+
+            {%- if section.settings.title -%}
+              <h2 class="section__title h3">
+                {{- section.settings.title | escape -}}
+              </h2><!-- /.section__title -->
+            {%- endif -%}
+          </div><!-- /.container -->
+        </header><!-- /.section__head -->
+      {%- endif -%}
+
+      <div class="section__content">
+        <div class="container container--full-{{ section.settings.text_align }}">
+          {%- if section.settings.content != blank -%}
+            <div class="section__body">
+              {{- section.settings.content -}}
+            </div><!-- /.section__body -->
+          {%- endif -%}
+
+          {%- if section.settings.button_text != blank
+              and section.settings.button_url != blank -%}
+            <div class="section__actions">
+              {%- render 'button',
+                type: 'link',
+                style: 'outlined',
+                value: section.settings.button_text,
+                href: section.settings.button_url -%}
+            </div><!-- /.section__actions -->
+          {%- endif -%}
+        </div><!-- /.container -->
+      </div><!-- /.section__content -->
+    </div><!-- /.container -->
+  </section><!-- /.section -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.richtext.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:sections.richtext.settings.text_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.richtext.settings.text_align.options.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.richtext.settings.text_align.options.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.richtext.settings.text_align.options.right.label"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:sections.richtext.settings.subtitle.label",
+      "default": "Subtitle goes here"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.richtext.settings.title.label",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:sections.richtext.settings.content.label",
+      "default": "<p>Content text goes here</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:sections.richtext.settings.button_text.label",
+      "default": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "t:sections.richtext.settings.button_url.label",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "t:sections.richtext.name"
+    }
+  ]
+}
+{% endschema %}

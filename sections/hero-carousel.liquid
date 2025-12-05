@@ -1,0 +1,183 @@
+{%- if section.blocks.size > 0 -%}
+  {% comment %}<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">{% endcomment %}
+  <link rel="stylesheet" href="{{ 'section-hero-carousel.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {% comment %}
+  <noscript>
+    {{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}
+    {{- 'section-hero-carousel.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>
+  {% endcomment %}
+  <script src="{{- 'hero-carousel.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-hero-carousel-" | append: section.index
+    endif
+
+    assign slide_count = section.blocks.size
+    assign scroll_adjustment = "0.5"
+  %}
+
+  <hero-carousel class="hero-carousel{% unless slide_count < 2 %} scroll-animation-section{% endunless %}" id="{{ sec_id }}" data-slide-count="{{ slide_count }}" style="--slideCount: {{ slide_count }};--scrollAdjustment: {{ scroll_adjustment }}">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title == blank and block.settings.image == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          <div class="swiper-slide">
+            <div
+              class="hero-carousel__item hero-carousel__item--{{ block.settings.text_alignment }} hero-carousel__item--{{ block.settings.layout }}"
+              style="color: {{ block.settings.color }}; background-color: {{ block.settings.background_color }};"
+            >
+              {%- if block.settings.image != blank -%}
+                <div class="hero-carousel__media media">
+                  {%- assign image_class = '' -%}
+
+                  {%- if block.settings.image_mobile != blank -%}
+                    {%- assign image_class = 'small-hide' -%}
+                    {%- render 'image', image: block.settings.image_mobile, class: 'medium-hide large-up-hide' -%}
+                  {%- endif -%}
+
+                  {%- render 'image', image: block.settings.image, class: image_class -%}
+                </div><!-- /.hero-carousel__media -->
+              {%- endif -%}
+
+              <div class="hero-carousel__wrapper">
+                <div class="container">
+                  {%- if block.settings.title != blank -%}
+                    <h2 class="hero-carousel__title">
+                      {{- block.settings.title | escape | newline_to_br -}}
+                    </h2><!-- /.hero-carousel__title -->
+                  {%- endif -%}
+
+                  {%- if block.settings.content != blank -%}
+                    <p class="hero-carousel__content">
+                      {{- block.settings.content | escape | newline_to_br -}}
+                    </p><!-- /.hero-carousel__content -->
+                  {%- endif -%}
+
+                  {%- if block.settings.link_text != blank and block.settings.link_url != blank -%}
+                    <a href="{{- block.settings.link_url -}}" class="link-dot">
+                      {{- block.settings.link_text | escape -}}
+                    </a>
+                  {%- endif -%}
+                </div><!-- /.container -->
+              </div><!-- /.hero-carousel__wrapper -->
+            </div><!-- /.hero-carousel__item -->
+          </div><!-- /.swiper-slide -->
+        {%- endfor -%}
+      </div><!-- /.swiper-wrapper -->
+
+      <div class="swiper-pagination"></div><!-- /.swiper-pagination -->
+    </div><!-- /.swiper -->
+  </hero-carousel><!-- /.hero-carousel -->
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Hero carousel",
+    "class": "hero-carousel-js",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "select",
+            "id": "layout",
+            "label": "Layout",
+            "options": [
+              {
+                "value": "fullwidth",
+                "label": "Full width"
+              },
+              {
+                "value": "fullwidth-alt",
+                "label": "Full width - alt"
+              },
+              {
+                "value": "50-50",
+                "label": "Halfs"
+              },
+              {
+                "value": "50-50-reverse",
+                "label": "Halfs - reverse"
+              }
+            ],
+            "default": "fullwidth"
+          },
+          {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color",
+            "default": "#000"
+          },
+          {
+            "type": "color",
+            "id": "color",
+            "label": "Color",
+            "default": "#f4efdf"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image - Mobile"
+          },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link text"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link URL"
+          },
+          {
+            "type": "text_alignment",
+            "id": "text_alignment",
+            "label": "Text alignment",
+            "default": "left"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Hero carousel"
+      }
+    ]
+  }
+{% endschema %}

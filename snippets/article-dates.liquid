@@ -1,0 +1,9 @@
+{% if blog.handle == 'the-wavelength' %}
+  <div class="article-dates-wrapper">
+    <hr class="article-dates-divider">
+    <div class="article-dates">
+      <p><strong>Last Updated:</strong> {{ article.updated_at | date: "%B %d, %Y" }}</p>
+      <p><strong>Originally Published:</strong> {{ article.published_at | date: "%B %d, %Y" }}</p>
+    </div>
+  </div>
+{% endif %}

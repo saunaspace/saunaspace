@@ -1,0 +1,148 @@
+{%- if section.blocks.size > 0 -%}
+  {% comment %}
+  <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>
+  {% endcomment %}
+  {{- 'section-images-feed.css' | asset_url | stylesheet_tag -}}
+
+  <images-feed class="images-feed block overflow-hidden">
+    <div class="images-feed__head center">
+      <div class="container container--gutter-mobile">
+        <div class="images-feed__head-content">
+          {%- if section.settings.title != blank -%}
+            <h2 class="images-feed__title h2-small-desktop">
+              {{- section.settings.title | escape -}}
+            </h2><!-- /.images-feed__title -->
+          {%- endif -%}
+
+          {%- if section.settings.content != blank -%}
+            <p class="images-feed__entry">
+              {{- section.settings.content | escape | newline_to_br -}}
+            </p><!-- /.images-feed__entry -->
+          {%- endif -%}
+
+          {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+            {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'outlined button--orange-hover button--large-desktop' -%}
+          {%- endif -%}
+        </div><!-- /.images-feed__head-content -->
+      </div><!-- /.container -->
+    </div><!-- /.images-feed__head -->
+
+    <div class="images-feed__body">
+      <div class="swiper images-feed__slider">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image == blank -%}
+              {%- continue -%}
+            {%- endif -%}
+
+            <div class="swiper-slide swiper-slide--{{ block.settings.media_size }}">
+              <div class="media media--transparent images-feed__media">
+                {%- render 'image', image: block.settings.image -%}
+              </div><!-- /.media media--transparent -->
+            </div><!-- /.swiper-slide -->
+          {%- endfor -%}
+        </div><!-- /.swiper-wrapper -->
+      </div><!-- /.swiper -->
+    </div><!-- /.images-feed__body -->
+  </images-feed><!-- /.images-feed -->
+{%- endif -%}
+
+{% javascript %}
+  class ImagesFeed extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.initSlider();
+    }
+
+    initSlider() {
+      if (!this.querySelector('.swiper')) return;
+
+      this.options = {
+        slidesPerView: 'auto',
+        spaceBetween: 13,
+        loop: true,
+        breakpoints: {
+          750: {
+            spaceBetween: 31
+          }
+        }
+      };
+      this.slider = new Swiper(
+        this.querySelector('.swiper'),
+        this.options,
+      );
+    }
+  }
+
+  customElements.define('images-feed', ImagesFeed);
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Images feed",
+    "class": "shopify-section--images-feed",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "media",
+        "name": "Media",
+        "settings": [
+          {
+            "type": "select",
+            "id": "media_size",
+            "label": "Size",
+            "options": [
+              {
+                "value": "small",
+                "label": "Small"
+              },
+              {
+                "value": "medium",
+                "label": "Medium"
+              }
+            ],
+            "default": "medium"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Images feed"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,59 @@
+{%- comment -%}
+  Renders a predictive search item
+  Accepts:
+   resource_item {Object}: Search item object - Product/Page/Article
+   image {Object}: Image object
+   show_image {Bool}: Show image, if no image is given a fallback will be shown, unless this is false
+   is_product {Bool}: Is the reource a product, used to render product price
+   heading_class {String}: Heading classes. Default is .h6
+   class {String}: Addtional classes for styling
+  Requires:
+   section-header.css
+{%- endcomment -%}
+
+{%-
+  liquid
+  assign resource_item = resource_item | default: false
+  assign image = image | default: false
+  assign heading_class = heading_class | default: 'h6'
+  assign class = class
+-%}
+
+{%- if resource_item -%}
+  <div class="predictive-search__item {{ class }}">
+    {%- if image or show_image -%}
+      {%- if show_image -%}
+
+        <a href="{{- resource_item.url -}}" class="media media--1-1 media--portrait card-product__media">
+          <span class="visually-hidden">{{- resource_item.title | escape -}}</span><!-- /.visually-hidden -->
+
+          {%-
+            liquid
+            if image
+              assign image_src = image | image_url: width: 540
+              render 'image', image: image, src: image_src, srcset: '', width: 540
+            else
+              echo 'image' | placeholder_svg_tag
+            endif
+          -%}
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="card-product__content">
+      <div class="card-product__content-head">
+        <h6 class="{{ heading_class }} card-product__title">
+          <a href="{{- resource_item.url -}}" class="inline-unstyled-link link-hover">{{- resource_item.title -}}</a>
+        </h6>
+
+        {%- if is_product -%}
+        <div class="card-product__price">
+          {% render 'price', product_ref: resource_item, use_variant: true, price_class: 'card-product__price' %}
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+  </div><!-- /.predictive-search__item -->
+{%- endif -%}

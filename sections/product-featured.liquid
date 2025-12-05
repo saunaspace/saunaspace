@@ -1,0 +1,189 @@
+{%-
+  liquid
+  assign product = section.settings.product
+  assign title = section.settings.title | default: product.title
+  assign content = section.settings.content
+  assign button_text = section.settings.button_text | escape
+  assign button_text_mobile = section.settings.button_text_mobile | escape | default: button_text
+  assign image = product.featured_image
+  assign color_option_variations = 'color, colour' | split: ','
+
+  for color_option_variation in color_option_variations
+    if product.options_by_name[color_option_variation].position == nil
+      continue
+    endif
+
+    assign color_option_position = product.options_by_name[color_option_variation].position
+    assign color_option_index = color_option_position | minus: 1
+  endfor
+
+  assign initial_color = nil
+
+  if color_option_position != nil
+    assign initial_color = product.selected_or_first_available_variant.options[color_option_index]
+  endif
+
+  assign color_option_key = 'option' | append: color_option_position
+  assign initial_product_array = product.variants | where: color_option_key, initial_color
+  assign initial_product_image = initial_product_array[0].metafields.custom.alternate_image | default: initial_product_array[0].image
+
+  if initial_product_image != blank
+    assign image_ref = initial_product_image
+  else
+    assign image_ref = product.featured_image
+  endif
+
+  if product and product != empty
+    assign button_url = product.url
+  endif
+-%}
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-product-featured-" | append: section.index
+  endif
+%}
+
+<link rel="stylesheet" href="{{ 'product-featured.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'product-featured.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+<script src="{{ 'product-featured.js' | asset_url }}" defer="defer"></script>
+
+<product-featured class="product-featured" id="{{ sec_id }}">
+  <div class="container container--extra-large">
+    <div class="product-featured__cols">
+      <main class="product-featured__main">
+        {%- if title != blank -%}
+          <h2 class="product-featured__title h3">
+            {{- title | escape -}}
+          </h2><!-- /.product-featured__title h3 -->
+        {%- endif -%}
+
+        {%- if content != blank -%}
+          <div class="product-featured__content rte">
+            {{- content -}}
+          </div><!-- /.product-featured__content rte -->
+        {%- endif -%}
+
+        {%- if color_option_position != blank -%}
+          <div class="product-featured__swatches small-hide medium-hide">
+            {%- render 'product-swatches', product_ref: product -%}
+          </div><!-- /.product-featured__swatches -->
+        {%- endif -%}
+
+        {%- if button_text != blank -%}
+          <div class="product-featured__actions">
+            {%- render 'button',
+              type: 'link',
+              value: button_text,
+              href: button_url,
+              attr: 'data-product-link',
+              class: 'small-hide medium-hide',
+              style: 'orange-hover button--large-desktop'
+            -%}
+
+            <a href="{{- button_url -}}" class="link-dot large-up-hide" data-product-link>
+              {{- button_text_mobile -}}
+            </a><!-- /.link-dot -->
+          </div><!-- /.product-featured__actions -->
+        {%- endif -%}
+      </main><!-- /.product-featured__main -->
+
+      <aside class="product-featured__aside">
+        <div class="product-featured__image" data-product-media>
+          {%- if image != blank -%}
+            <a href="{{- button_url -}}" class="product-featured__image-link" data-product-link></a><!-- /.product-featured__image-link -->
+
+            {%- render 'image', image: image_ref, attr: 'data-product-image' -%}
+          {%- else -%}
+            {{- 'image' | placeholder_svg_tag -}}
+          {%- endif -%}
+        </div><!-- /.product-featured__image -->
+
+        {%- if color_option_position != blank -%}
+          <div class="product-featured__swatches large-up-hide">
+            {%- render 'product-swatches', product_ref: product, context: 'mobile' -%}
+          </div><!-- /.product-featured__swatches large-up-hide -->
+        {%- endif -%}
+      </aside><!-- /.product-featured__aside -->
+    </div><!-- /.product-featured__cols -->
+  </div><!-- /.container container--fullwidth -->
+
+  <script type="application/json" data-variants>
+    {{- product.variants | json -}}
+  </script>
+
+  <script type="application/json" data-variants-images>
+    [
+      {%- for variant in product.variants -%}
+        {%- unless forloop.first -%},{%- endunless -%}
+        {%- assign variant_image = variant.metafields.custom.alternate_image | default: variant.image | default: product.featured_image -%}
+        {
+          "id": {{ variant.id | json }},
+          "image": {
+            "src": "{{ variant_image | image_url: width: 500 }}",
+            "srcset": "{%- render 'srcset', image: variant_image -%}"
+          }
+        }
+      {%- endfor -%}
+    ]
+  </script>
+</product-featured><!-- /.product-featured -->
+
+{% schema %}
+  {
+    "name": "Featured product",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "info": "Leave blank to use the product title."
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content",
+        "info": "Leave blank to use the product description."
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "text",
+        "id": "button_text_mobile",
+        "label": "Button mobile text"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured product",
+        "settings": {
+          "title": "Heading Goes Here",
+          "content": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.</p>",
+          "button_text": "Button text",
+          "button_text_mobile": "Button mobile text"
+        }
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    }
+  }
+{% endschema %}

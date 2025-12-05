@@ -1,0 +1,40 @@
+{%- liquid
+  assign pub_date = '2025-06-17T00:00:00Z'
+  assign mod_date = '2025-07-21T00:00:00Z'
+  assign headline = 'How the Hearth Heals: Light, Heat & the Power of Portable Infrared Therapy'
+  assign description = 'Explore the radiant power of the Hearth Infrared Sauna Panel: a full-spectrum light therapy tool designed to support detox, skin health, mood, and cellular vitality through near infrared light and gentle, grounded heat.'
+  assign img = page.metafields.page.featured_image | image_url: width: 1200
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ canonical_url | json }}
+  },
+  "headline": {{ headline | json }},
+  "description": {{ description | json }},
+  "image": {
+    "@type": "ImageObject",
+    "url": {{ img | json }},
+    "width": 1200,
+    "height": 630
+  },
+  "author": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | append: '/' | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ settings.logo | image_url: width: 600 | absolute_url | json }}
+    }
+  },
+  "datePublished": "{{ pub_date }}",
+  "dateModified": "{{ mod_date }}"
+}
+</script>

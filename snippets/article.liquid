@@ -1,0 +1,48 @@
+{%-
+  liquid
+  assign title = article_ref.title
+  assign image = article_ref.image
+  assign tags = article_ref.tags
+  assign url = article_ref.url
+-%}
+
+<div class="article article--{{ style }}">
+  <a href="{{- url -}}" class="article__image">
+    {%- if image != blank -%}
+      {%- render 'image', image: image -%}
+    {%- else -%}
+      {{- 'image'| placeholder_svg_tag -}}
+    {%- endif -%}
+  </a><!-- /.article__image -->
+
+  <div class="article__inner">
+    <a href="{{- url -}}" class="article__title">
+      {{- title | escape -}}
+    </a><!-- /.article__title -->
+
+    {%- if tags.size > 0 -%}
+      <div class="article__tags">
+        {%- liquid
+          assign tags_string = ''
+
+          for tag in tags
+            assign tag_mod = tag | replace: 'Category:' | strip
+            assign tags_string = tags_string | append: tag_mod
+
+            unless forloop.last
+              assign tags_string = tags_string | append: ','
+            endunless
+          endfor
+
+          echo tags_string | split: ',' | uniq | join: ', '
+        -%}
+      </div><!-- /.article__tags -->
+    {%- endif -%}
+
+    <div class="article__actions">
+      <a href="{{- url -}}" class="article__link link-dot">
+        {{- 'article.read_more' | t -}}
+      </a><!-- /.article__link -->
+    </div><!-- /.article__actions -->
+  </div><!-- /.article__inner -->
+</div><!-- /.article -->

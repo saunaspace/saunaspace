@@ -1,0 +1,60 @@
+/* ------------------------------------------------------------ *\
+  Section columns icons
+\* ------------------------------------------------------------ */
+
+.columns-icons {
+  padding: 10.1rem 0 13rem;
+}
+
+@media (max-width: 1023px) {
+  .columns-icons {
+    padding: 6rem 0 7rem;
+  }
+}
+
+@media (max-width: 749px) {
+  .columns-icons {
+    padding: 4rem 0;
+  }
+}
+
+.columns-icons .container {
+  max-width: 162rem;
+}
+
+.columns-icons__cols {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1023px) {
+  .columns-icons__cols {
+    display: block;
+  }
+}
+
+.columns-icons__title {
+  text-align: center;
+  margin-bottom: 5.6rem;
+}
+
+@media (max-width: 1023px) {
+  .columns-icons__title {
+    margin-bottom: 3rem;
+  }
+}
+
+.columns-icons__cols li {
+  flex: 0 0 33.33%;
+}
+
+.columns-icons__cols li:not(:first-child) {
+  border-left: 1px solid #C4C4C4;
+}
+
+@media (max-width: 1023px) {
+  .columns-icons__cols li:not(:first-child) {
+    border-left: none;
+    border-top: 1px solid #C4C4C4;
+  }
+}

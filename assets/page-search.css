@@ -1,0 +1,31 @@
+.main-search-banner:has(.empty-search) {
+    min-height: 50vh;
+}
+.main-search-banner h1 {
+    text-align: center;
+}
+.search-results-header {
+    margin-bottom: 60px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.search-results-header .search-term {
+    color: #CBA378;
+}
+@media (max-width: 767px) {
+    .search-results-header {
+        margin-bottom: 50px;
+        font-size: 16px;
+    }
+}
+@media (max-width: 550px) {
+    .search-results-header {
+        margin-bottom: 40px;
+        font-size: 15px;
+    }
+}
+.main-search-results nav li {
+    font-weight: bold;
+}

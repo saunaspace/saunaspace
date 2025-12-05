@@ -1,0 +1,73 @@
+{% liquid
+  assign tag = section.settings.tag | escape
+  assign tag_label = tag
+  assign tag_articles = blog.articles | where: "tags", tag
+%}
+
+{%- if tag_articles.size > 0 -%}
+  <div class="blog__category-section" id="carousel-{{ section.id }}">
+    <div class="container">
+      <h2 class="h2">{{ tag_label }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle small">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      <div class="blog__carousel swiper-container">
+        <div class="swiper-wrapper">
+          {%- for article_ref in tag_articles limit: section.settings.limit -%}
+            <div class="swiper-slide">
+              {% render 'article', article_ref: article_ref, style: 'small' %}
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blog Tag Carousel",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tag",
+      "label": "Article Tag",
+      "options": [
+        { "value": "Foundations", "label": "Foundations" },
+        { "value": "Benefits", "label": "Benefits" },
+        { "value": "Hot Detox Summer", "label": "Hot Detox Summer" }
+      ],
+      "default": "Foundations"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle (SEO-Optimized)",
+      "default": "Write a short description here."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Max number of articles",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tag Carousel: Foundations",
+      "category": "Blog",
+      "settings": {
+        "tag": "Foundations",
+        "subtitle": "Discover the core principles of infrared healing and bioharmonizing.",
+        "limit": 8
+      }
+    }
+  ]
+}
+{% endschema %}

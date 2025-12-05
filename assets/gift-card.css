@@ -1,0 +1,12 @@
+.template--giftcard {
+  padding: 10rem 0;
+}
+
+.gift-card__image {
+  width: 40rem;
+  margin: 0 auto;
+}
+
+.gift-card__qr-code img {
+  margin: 4rem auto;
+}

@@ -1,24 +1,47 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
+<section class="container center page-404-content">
+  {%- if section.settings.heading != blank -%}
+    <p class="h3 regular">{{- section.settings.heading -}}</p><!-- /.regular -->
+  {%- endif -%}
 
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
+  {%- if section.settings.title != blank -%}
+    <h1 class="h2">{{- section.settings.title -}}</h1><!-- /.h2 -->
+  {%- endif -%}
+
+  {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+    {%- assign value = section.settings.link_text -%}
+    {%- render 'button', type: 'link', value: value, href: section.settings.link_url -%}
+    {%- assign value = nil -%}
+  {%- endif -%}
+</section><!-- /.container center -->
+
+{% schema %}
+{
+  "name": "t:sections.main-404.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.main-404.settings.title.label",
+      "default": "404"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.main-404.settings.title.label",
+      "default": "Page not found"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "t:sections.main-404.settings.link_text.label",
+      "default": "Continue shopping"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "t:sections.main-404.settings.link_url.label",
+      "default": "/collections/all"
     }
-  }
-</style>
-
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
-</div>
-<script id="esc-redirects-404-script" src="https://redirects.eastsideco.io/js/app.js"></script><script id="esc-redirects-404-script" src="https://easyredirects.esc-apps-cdn.com/app.js"></script>
+  ]
+}
+{% endschema %}

@@ -1,0 +1,80 @@
+{% comment %}
+  Enhanced Share Links (includes Facebook, Twitter, Pinterest, Email, Copy Link, Mobile Share, IG/TT CTA)
+{% endcomment %}
+
+{% liquid
+  assign share_url = shop.url | append: request.path
+  assign share_url_encoded = share_url | url_encode
+  assign share_title = object.title | default: product.title | default: page.title | default: collection.title
+  assign share_title_encoded = share_title | url_encode
+  assign share_image = object.image | image_url: width: 800 | url_encode
+  assign mailto_title_prefix = 'See our page: '
+  capture mailto_body
+    echo share_title | append: '--' | append: share_url
+    echo object.content | default: object.description | truncatewords: 20 | strip_html
+  endcapture
+%}
+
+<div class="share-icons">
+  <ul class="list-unstyled center">
+    <li class="share__item">
+      <a href="https://facebook.com/sharer/sharer.php?u={{ share_url_encoded }}" target="_blank" title="Share on Facebook" class="full-unstyled-link">Facebook</a>
+    </li>
+    <li class="share__item">
+      <a href="https://twitter.com/intent/tweet/?text={{ share_title_encoded }}&amp;url={{ share_url_encoded }}" target="_blank" title="Share on Twitter" class="full-unstyled-link">Tweet</a>
+    </li>
+    <li class="share__item">
+      <a href="https://pinterest.com/pin/create/button/?url={{ share_url_encoded }}&amp;media={{ share_image }}&amp;description={{ share_title_encoded }}" target="_blank" title="Share on Pinterest" class="full-unstyled-link">Pin it</a>
+    </li>
+    <li class="share__item">
+      <a href="mailto:?subject={{ mailto_title_prefix | append: share_title_encoded }}&amp;body={{ mailto_body | url_encode }}" target="_blank" title="Share by Email" class="full-unstyled-link">Email</a>
+    </li>
+    <li class="share__item">
+      <a href="#" onclick="copyArticleLink(event)" class="full-unstyled-link">Copy Link</a>
+    </li>
+    <li class="share__item mobile-only">
+      <a href="#" onclick="shareViaPhone(event)" class="full-unstyled-link">Share via Phone</a>
+    </li>
+  </ul>
+
+  <div class="share-cta center">
+    ✨ Want to share on <strong>Instagram</strong> or <strong>TikTok</strong>? Copy the link and tag @saunaspace!
+  </div>
+</div>
+
+<script>
+  function copyArticleLink(e) {
+    e.preventDefault();
+    const dummy = document.createElement("input");
+    dummy.value = window.location.href;
+    document.body.appendChild(dummy);
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    alert("Link copied to clipboard!");
+  }
+
+  function shareViaPhone(e) {
+    e.preventDefault();
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        url: window.location.href
+      }).catch(console.error);
+    } else {
+      alert("Sharing not supported on this device.");
+    }
+  }
+</script>
+
+<style>
+  .mobile-only {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .mobile-only {
+      display: inline-block;
+    }
+  }
+</style>

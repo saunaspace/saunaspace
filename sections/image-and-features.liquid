@@ -1,0 +1,150 @@
+<link rel="stylesheet" href="{{ 'section-image-and-features.css' | asset_url }}" media="print" onload="this.media='all'">
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-image-and-features-" | append: section.index
+    endif
+  %}
+<noscript>
+  {{- 'section-image-and-features.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-image-and-faq-" | append: section.index
+  endif
+%}
+
+<section class="image-and-features relative image-and-features--{{ section.settings.layout }}" id="{{- sec_id -}}">
+  {%- if section.settings.image != blank -%}
+    <div class="image-and-features__col image-and-features__col--media">
+      <div class="image-and-features__media media">
+        {%- assign image_class = '' -%}
+
+        {%- if section.settings.image_mobile != blank -%}
+          {%- assign image_class = 'small-hide' -%}
+          {%- render 'image', image: section.settings.image_mobile, class: 'medium-hide large-up-hide' -%}
+        {%- endif -%}
+
+        {%- render 'image', image: section.settings.image, class: image_class -%}
+      </div><!-- /.image-and-features__media media -->
+    </div><!-- /.image-and-features__col -->
+  {%- endif -%}
+
+  <div class="image-and-features__col relative">
+    <div class="image-and-features__content {{ section.settings.content_align }}">
+      <div class="image-and-features__wrapper">
+        {%- if section.settings.title != blank -%}
+          <h2 class="image-and-features__title">
+            {{- section.settings.title | escape -}}
+          </h2><!-- /.image-and-features__title -->
+        {%- endif -%}
+
+        <div class="image-and-features__columns">
+          {%- for i in (1..2) -%}
+            {%- assign column_key = 'column_' | append: i -%}
+
+            {%- if section.settings[column_key] != blank -%}
+              {%- assign values = section.settings[column_key] | escape | newline_to_br | split: '<br />' -%}
+
+              <ul class="image-and-features__list list-unstyled">
+                {%- for value in values -%}
+                  <li class="image-and-features__item">
+                    {{- value | escape -}}
+                  </li><!-- /.image-and-features__item -->
+                {%- endfor -%}
+              </ul><!-- /.image-and-features__list list-unstyled -->
+            {%- endif -%}
+          {%- endfor -%}
+        </div><!-- /.image-and-features__columns -->
+      </div><!-- /.image-and-features__wrapper -->
+    </div><!-- /.image-and-features__content -->
+  </div><!-- /.image-and-features__col -->
+</section><!-- /.image-and-features -->
+
+{% schema %}
+  {
+    "name": "Image and features",
+    "settings": [
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "fullwidth",
+            "label": "Fullwidth"
+          },
+          {
+            "value": "50-50",
+            "label": "Halfs"
+          }
+        ],
+        "default": "50-50"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image - Mobile"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "column_1",
+        "label": "Column 1",
+        "info": "Enter values separated by new line"
+      },
+      {
+        "type": "textarea",
+        "id": "column_2",
+        "label": "Column 2",
+        "info": "Enter values separated by new line"
+      },
+      {
+        "type": "select",
+        "id": "content_align",
+        "label": "Content Alignment",
+        "options": [
+          {
+            "label": "Left",
+            "value": "align-left"
+          },
+          {
+            "label": "Right",
+            "value": "align-right"
+          },
+          {
+            "label": "Center",
+            "value": "align-center"
+          }
+        ],
+        "default": "align-right"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image and features"
+      }
+    ]
+  }
+{% endschema %}

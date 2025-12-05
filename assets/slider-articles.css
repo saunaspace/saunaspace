@@ -1,0 +1,120 @@
+/* ==========================================================================
+   .slider-articles
+   ========================================================================== */
+
+.slider-articles {
+}
+
+/*
+     .slider-articles__clip
+     ========================================================================== */
+
+.slider-articles__clip {
+  overflow: visible;
+}
+
+/*
+     .slider-articles__slide
+     ========================================================================== */
+
+.slider-articles__slide {
+  max-width: calc(25% + 25px);
+}
+
+/*
+     .slider-articles__buttons
+     ========================================================================== */
+
+.slider-articles__buttons .swiper-button-prev,
+.slider-articles__buttons .swiper-button-next {
+  top: 8.4vw;
+  width: 6.2rem;
+  height: 6.2rem;
+  background: var(--color-beige);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  transition: opacity var(--duration-default) var(--timing-default);
+}
+
+@media (hover: hover) AND (pointer: fine) {
+  .slider-articles__buttons .swiper-button-prev:hover,
+  .slider-articles__buttons .swiper-button-next:hover {
+    opacity: 0.6;
+  }
+}
+
+.slider-articles__buttons .swiper-button-prev:after,
+.slider-articles__buttons .swiper-button-next:after {
+  content: '';
+  display: none;
+}
+
+.slider-articles__buttons .swiper-button-prev {
+  left: 3.6vw;
+}
+
+.slider-articles__buttons .swiper-button-next {
+  right: 3.6vw;
+}
+
+/*
+     Media queries
+     ========================================================================== */
+
+/* Large desktop */
+@media (max-width: 1439px) {
+}
+
+/* Small desktop */
+@media (max-width: 1279px) {
+  .slider-articles__slide {
+    max-width: calc(33% + 25px);
+  }
+}
+
+/* Tablet */
+@media screen and (max-width: 989px) {
+  .slider-articles__slide {
+    max-width: 50%;
+  }
+
+  .slider-articles__buttons .swiper-button-prev,
+  .slider-articles__buttons .swiper-button-next {
+    top: 13.4vw;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 749px) {
+  .slider-articles__slide {
+    max-width: initial;
+    max-width: 88.7%;
+  }
+
+  .slider-articles__buttons .swiper-button-prev,
+  .slider-articles__buttons .swiper-button-next {
+    top: 25vw;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .slider-articles__buttons .swiper-button-prev {
+    left: 0.6vw;
+  }
+
+  .slider-articles__buttons .swiper-button-next {
+    right: 0.6vw;
+  }
+}
+
+/*
+   shopify-design-mode
+   ========================================================================== */
+
+.shopify-design-mode .slider-articles__buttons .swiper-button-prev,
+.shopify-design-mode .slider-articles__buttons .swiper-button-next {
+  top: 50%;
+}

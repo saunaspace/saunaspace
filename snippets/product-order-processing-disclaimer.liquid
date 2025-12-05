@@ -1,0 +1,25 @@
+{% liquid
+if selected_variant != blank and selected_variant.metafields.custom.lead_time != blank
+    assign order_processing_disclaimer = selected_variant.metafields.custom.lead_time
+elsif product.selected_or_first_available_variant.metafields.custom.lead_time != blank
+    assign order_processing_disclaimer = product.selected_or_first_available_variant.metafields.custom.lead_time
+else
+    assign order_processing_disclaimer = product.metafields.custom.order_processing_disclaimer
+endif
+%}
+{% if order_processing_disclaimer != blank %}
+    {% if template.name == "cart" %}
+    <div class="cart-item-order-processing-disc">
+        <div class="order-processing-timeline">
+            <strong>Order Processing: <span>{{ order_processing_disclaimer }}</span></strong>
+        </div>
+        <div class="order-processing-disclaimer">
+            <p>Processing time is an estimate of time between your order being placed and your product being shipped.</p>
+        </div>
+    </div>
+    {% elsif is_sticky_product %}
+    <small class="product-sticky-button-order-processing">Order Processing: <span class="js-variant-leadtime">{{ order_processing_disclaimer }}</span></small>
+    {% else %}
+    <p class="product-order-processing-disclaimer">Order Processing:  <span class="js-variant-leadtime">{{ order_processing_disclaimer }}</span></p>
+    {% endif %}
+{% endif %}

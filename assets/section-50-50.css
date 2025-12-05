@@ -1,0 +1,110 @@
+/* ------------------------------------------------------------ *\
+  Section 50-50
+\* ------------------------------------------------------------ */
+
+.section-50-50 {
+  padding-block: 8rem 10rem;
+}
+
+@media screen and (max-width: 767px) {
+  .section-50-50 {
+    padding-block: 2.5rem 1.7rem;
+  }
+}
+
+.section-50-50 .container {
+  max-width: 162rem;
+}
+
+.section-50-50 .section__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+@media screen and (max-width: 767px) {
+  .section-50-50 .section__grid {
+    gap: 0;
+  }
+}
+
+.section-50-50 .section__grid-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.8rem 2rem 2rem;
+  border: 0.1rem solid #C4C4C4;
+  border-radius: 1rem;
+  min-height: 35.5rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .section-50-50 .section__grid-item {
+    flex: 0 0 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-50-50 .section__grid-item {
+    padding: 2.5rem 2rem;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .section-50-50 .section__grid-item + .section__grid-item {
+    border-top: 0.1rem solid #C4C4C4;
+  }
+}
+
+.section-50-50 .section__item-content {
+  max-width: 46rem;
+}
+
+.section-50-50 .section__item-heading {
+  margin-block: 0 2rem;
+  font-family: var(--font-body-family);
+  font-weight: 600;
+}
+
+@media (min-width: 1280px) {
+  .section-50-50 .section__item-heading {
+    font-size: calc(var(--fsbase) * 2.4);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-50-50 .section__item-heading {
+    font-size: calc(var(--fsbase) * 1.6);
+    margin-bottom: 0.7rem;
+  }
+}
+
+.section-50-50 .section__item-body {
+  margin-bottom: 2rem;
+  font-size: calc(var(--fsbase) * 1.8);
+  font-weight: 500;
+  line-height: 2;
+}
+
+@media screen and (max-width: 767px) {
+  .section-50-50 .section__item-body {
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 1.75;
+    margin-bottom: 1.8rem;
+  }
+}
+
+.section-50-50 .section__item-link {
+  font-size: calc(var(--fsbase) * 2.1);
+  font-weight: 600;
+  color: #CBA378;
+}
+
+@media screen and (max-width: 767px) {
+  .section-50-50 .section__item-link {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}

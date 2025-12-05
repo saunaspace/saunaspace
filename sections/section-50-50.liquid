@@ -1,0 +1,101 @@
+{%- unless section.block.size == 0 -%}
+  <link rel="stylesheet" href="{{ 'section-50-50.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-50-50.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <div class="container">
+    <div class="section__grid">
+      {%- for block in section.blocks -%}
+        {%-
+          liquid
+          assign has_link = true
+          if block.settings.link_text == blank or block.settings.link_url == blank
+            assign has_link = false
+          endif
+          if block.settings.heading == blank and block.settings.body_text == blank and has_link == false
+            continue
+          endif
+        -%}
+
+        <div class="section__grid-item">
+          <div class="section__item-content">
+            {%- if block.settings.heading != blank -%}
+              <h3 class="section__item-heading h5">
+                {{- block.settings.heading -}}
+              </h3><!-- /.section__item-heading -->
+            {%- endif -%}
+
+            {%- if block.settings.body_text != blank -%}
+              <div class="section__item-body">
+                {{- block.settings.body_text | escape | newline_to_br -}}
+              </div><!-- /.section__item-body -->
+            {%- endif -%}
+
+            {%- if has_link -%}
+              <a href="{{ block.settings.link_url }}" class="section__item-link link-underline">
+                {{- block.settings.link_text | escape -}}
+              </a><!-- /.section__item-link -->
+            {%- endif -%}
+          </div><!-- /.section__item-content -->
+        </div><!-- /.section__grid-item -->
+      {%- endfor -%}
+    </div><!-- /.section__grid -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "50-50 Section",
+  "class": "section-50-50",
+  "tag": "section",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "body_text",
+          "label": "Body text",
+          "default": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, architecto?"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "50-50 Section",
+      "blocks": [
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,171 @@
+{{- 'section-callout.css' | asset_url | stylesheet_tag -}}
+{%- if section.blocks.size > 0 -%}
+  {% comment %}
+  {{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}
+  <script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer"></script>
+  {% endcomment %}
+  <script src="{{- 'text-slider.js' | asset_url -}}" defer="defer"></script>
+{%- endif -%}
+
+<section class="section callout sec-co" id="section-section-callout-{{ section.index }}">
+  <div class="container container--extra-large">
+    <div class="callout__inner">
+      <div class="callout__background">
+        <div class="media media--16-9 callout__media">
+          {%-
+            liquid
+            if section.settings.image != blank
+              assign image_src = section.settings.image | image_url: width: section.settings.image.width
+              capture image_srcset
+                render 'srcset', image: section.settings.image, widths: '1024,1100,1500,1780,2000,3000,3840'
+              endcapture
+              assign image_alt = section.settings.image.alt | escape
+              render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: section.settings.image.width, height: section.settings.image.height
+            else
+              echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+            endif
+          -%}
+        </div><!-- /.media -->
+      </div><!-- /.callout__background -->
+
+      <div class="callout__wrapper">
+        <div class="callout__body center">
+          {%- if section.settings.title != blank -%}
+            <h2 class="callout__title h2">
+              {{ section.settings.title }}
+            </h2><!-- /.callout__title -->
+          {%- endif -%}
+
+          {%- if section.settings.content != blank -%}
+            <div class="callout__content rte">
+              {{ section.settings.content }}
+            </div><!-- /.callout__content -->
+          {%- endif -%}
+
+          <div class="callout__actions">
+            {%- if section.settings.button_1_text != blank and section.settings.button_1_url != blank -%}
+              {%- render 'button',
+                type: 'link',
+                style: 'secondary button--orange-hover button--large-desktop',
+                value: section.settings.button_1_text,
+                href: section.settings.button_1_url -%}
+            {%- endif -%}
+
+            {%- if section.settings.button_2_text != blank and section.settings.button_2_url != blank -%}
+              {%- render 'button',
+                type: 'link',
+                style: 'secondary-outlined button--orange-hover button--large-desktop',
+                value: section.settings.button_2_text,
+                href: section.settings.button_2_url -%}
+            {%- endif -%}
+          </div><!-- /.callout__actions -->
+        </div><!-- /.callout__body -->
+
+        {%- if section.blocks.size > 0 -%}
+          <text-slider class="callout__menu">
+            <div class="callout__menu-items small-hide">
+              {%- for block in section.blocks -%}
+                {%- if block.settings.text != blank -%}
+                  <span data-text-item class="callout__menu-item{% if forloop.first %} current{% endif %}">{{ block.settings.text }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+            </div><!-- /.callout__menu -->
+
+            <div class="callout__menu-slider large-up-hide medium-hide">
+              <div class="swiper" data-slider>
+                <div class="swiper-wrapper">
+                  {%- for block in section.blocks -%}
+                    <div
+                      class="swiper-slide"
+                      data-index="{{- forloop.index0 -}}"
+                      {% if forloop.first %}
+                        data-selected
+                      {% endif %}
+                    >
+                      <span class="callout__slider-item{% if forloop.first %} current{% endif %}">{{ block.settings.text }}</span>
+                    </div><!-- /.swiper-slide -->
+                  {%- endfor -%}
+                </div><!-- /.swiper-wrapper -->
+              </div><!-- /.swiper -->
+            </div><!-- /.callout__slider -->
+          </text-slider><!-- /.callout__slider -->
+        {%- endif -%}
+      </div><!-- /.callout__wrapper -->
+    </div><!-- /.callout__inner -->
+  </div><!-- /.container -->
+</section><!-- /.callout -->
+
+{% schema %}
+{
+  "name": "t:sections.callout.name",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.callout.settings.image.desktop.label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.callout.settings.title.label",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:sections.callout.settings.content.label",
+      "default": "<p>Content text goes here</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button one"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "button_1_url",
+      "label": "URL"
+    },
+    {
+      "type": "header",
+      "content": "Button two"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "URL"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "t:sections.callout.blocks.menu_item.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.callout.blocks.menu_item.settings.text.label"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "t:sections.callout.name"
+    }
+  ]
+}
+{% endschema %}

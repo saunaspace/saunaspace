@@ -1,0 +1,61 @@
+/* ------------------------------------------------------------ *\
+  Contact
+\* ------------------------------------------------------------ */
+
+.contact {
+  padding-block: 13.5rem 13.2rem;
+  border-bottom: 0.1rem solid #C4C4C4;
+}
+
+@media screen and (max-width: 767px) {
+  .contact {
+    padding-block: 4.5rem 4rem;
+  }
+}
+
+.contact .container {
+  max-width: 100rem;
+}
+
+.contact__heading {
+  margin-block: 0 7rem;
+}
+
+@media screen and (max-width: 767px) {
+  .contact__heading {
+    margin-bottom: 5.3rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact form {
+    margin-inline: 1.8rem;
+  }
+}
+
+.contact button[type="submit"] {
+  text-transform: none;
+  font-weight: 500;
+  font-size: calc(var(--fsbase) * 2.1);
+  border-radius: 3.8rem;
+  min-height: 7.5rem;
+}
+
+@media screen and (max-width: 1199px) {
+  .contact button[type="submit"] {
+    min-height: 6.5rem;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .contact button[type="submit"] {
+    min-height: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact button[type="submit"] {
+    min-height: 5rem;
+    font-size: calc(var(--fsbase) * 1.6);
+  }
+}

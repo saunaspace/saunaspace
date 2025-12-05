@@ -1,0 +1,3 @@
+{%- render 'icon-cart' -%}
+<span class="cart-count-badge caption caption--small{% if cart.item_count == 0 %} hidden{% endif %}">{{- cart.item_count -}}</span>
+<span class="visually-hidden">{{- 'accessibility.cart' | t -}}</span>

@@ -1,0 +1,121 @@
+
+{{- 'section-events.css' | asset_url | stylesheet_tag -}}
+
+<div class="events" id="events">
+  <div class="container">
+    {% if section.settings.heading != blank %}
+      <div
+        class="events__header"
+        {% if section.settings.background_image != blank %}
+          style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}');"
+        {% endif %}
+      >
+        <h2 class="events__heading">
+          {{ section.settings.heading }}
+        </h2>
+      </div><!-- /.events__header -->
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <ul class="events__list">
+        {%- for block in section.blocks -%}
+          {%- assign _block = block.settings -%}
+
+          {%- if _block.title != blank -%}
+            <li
+              class="events__item"
+              {{ block.shopify_attributes }}
+            >
+              <div class="item-event">
+                {%- if _block.link != blank -%}
+                  <a href="{{ _block.link }}" class="item-event__link" target="_blank">
+                    <span class="visually-hidden">{{ _block.title }}</span><!-- /.visually-hidden -->
+                  </a><!-- /.item-event__link -->
+                {%- endif -%}
+
+                <div class="item-event__content">
+                  <h5 class="item-event__title">
+                    {{- block.settings.title | escape -}}
+                  </h5><!-- /.item-event__title -->
+
+                  {%- if _block.location != blank -%}
+                    <div class="item-event__location">
+                      <i>
+                        {%- render 'icon-pin', -%}
+                      </i>
+
+                      <span>
+                        {{- _block.location -}}
+                      </span>
+                    </div><!-- /.item-event__location -->
+                  {%- endif -%}
+                </div><!-- /.item-event__content -->
+
+                <span class="item-event__arrow">
+                  {%- render 'icon-chevron-down-thin' -%}
+                </span><!-- /.item-event__arrow -->
+              </div><!-- /.item-event -->
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Events",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Current events"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Event",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Location"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Events",
+      "blocks": [
+        {
+          "type": "event"
+        },
+        {
+          "type": "event"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

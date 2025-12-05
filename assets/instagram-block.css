@@ -1,0 +1,110 @@
+/* ==========================================================================
+   .instagram-block
+   ========================================================================== */
+
+.instagram-block {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-bg);
+}
+
+.instagram-block__link {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block !important;
+}
+
+.instagram-block__link:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.instagram-block__link .ico {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (hover: hover) AND (pointer: fine) {
+  .instagram-block__link:hover:after,
+  .instagram-block__link:hover .ico {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+/*
+   .instagram-block__bg-image
+   ========================================================================== */
+
+.instagram-block__bg-image {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #dfc8ab;
+}
+
+.instagram-block__bg-image img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+/*
+   .instagram-block__title
+   ========================================================================== */
+
+.instagram-block__title {
+  position: relative;
+  z-index: 2;
+  font-size: calc(var(--fsbase) * 2.8);
+  font-weight: 600;
+  color: var(--color-pinkish);
+}
+
+/* Tablet */
+@media screen and (max-width: 989px) {
+  .instagram-block__title {
+    font-size: calc(var(--fsbase) * 2.1);
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 749px) {
+  .instagram-block {
+    aspect-ratio: 1 / 0.3817;
+  }
+}

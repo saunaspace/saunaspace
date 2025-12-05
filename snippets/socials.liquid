@@ -1,0 +1,54 @@
+{%-
+  liquid
+  capture socials
+  echo 'instagram,'
+  echo 'facebook,'
+  echo 'twitter,'
+  echo 'youtube'
+  endcapture
+  assign socials = socials | strip_newlines | split: ','
+-%}
+
+{%- capture socials_html -%}
+  {%- for social in socials -%}
+    {%-
+      liquid
+      assign social_link = 'social_' | append: social | append: '_link'
+      assign social_text = 'general.social.links.' | append: social
+
+      if settings[social_link] == blank
+        continue
+      endif
+    -%}
+
+    <li>
+      <a href="{{- settings[social_link] -}}" class="inline-unstyled-link" target="_blank">
+        {%-
+          liquid
+          case social
+            when 'instagram'
+              render 'icon-instagram'
+            when 'facebook'
+              render 'icon-facebook'
+            when 'twitter'
+              render 'icon-twitter'
+            when 'youtube'
+              render 'icon-youtube'
+          endcase
+        -%}
+
+        <span class="visually-hidden">
+          {{- social_text | t -}}
+        </span>
+      </a>
+    </li><!-- /.mb-s -->
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if socials_html -%}
+  <div class="{{ class }}">
+    <ul class="list-unstyled list-socials">
+      {{- socials_html -}}
+    </ul>
+  </div><!-- /.{{ class }} -->
+{%- endif -%}

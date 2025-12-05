@@ -1,0 +1,143 @@
+{%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+{{- 'section-product.css' | asset_url | stylesheet_tag -}}
+{% comment %}{{- 'modal-dialog.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+{{ 'modal-quickview.css' | asset_url | stylesheet_tag }}
+<script src="{{- 'product-form.js' | asset_url -}}" defer="defer"></script>
+
+<section class="product product-main--{{ product.handle }}" id="MainProduct-{{- section.id -}}" data-section="{{- section.id -}}">
+  <div class="product__cols">
+    {% comment %}<div class="mobile-pin-spacer js-mobile-pin-spacer" data-target=".product__col.col--prod-image-slider"></div>{% endcomment %}
+    {% render 'product-image-slider-col', product: product %}
+
+    <div class="product__col col--prod-builder">
+      <div class="product__content">
+        {% render 'product-tabs-nav' %}
+        
+        <div class="product-main-content-wrap">
+          {% render 'product-top-content', product: product, section: section %}
+
+          {% comment %}<!-- Product Variants/Options Builder -->{% endcomment %}
+          {% render 'product-main-options-builder', product: product, section: section %}
+        </div>
+
+        {% render 'product-bottom-content' %}
+
+        {% render 'product-hidden-inputs', product: product, section: section %}
+
+      </div><!-- /.product__content -->
+    </div><!-- /.product__col -->
+  </div><!-- /.product__cols -->
+  
+  {% render 'product-sticky-button', product: product %}
+
+
+  {% comment %}<!-- Product Options Selector Setup (updates with selected variant behind the scenes) - TO REMOVE 8.5.25 -->
+  {% assign option_names = '' %}
+  <div class="product-build--hidden-inputs" style="display:none;">
+    {% XXXXcomment %}<!-- Accessory Products - If selected inputs will populate with data -->{% XXXXendcomment %}
+    {% for block in section.blocks %}
+     {% if block.type == "addon-products" %}
+      {% assign accessories_products = block.settings.addon_products %}
+      {% for _product in accessories_products %}
+        <input type="hidden" class="accessory-product-data" data-product="{{ _product.title }}" data-product-handle="{{ _product.handle }}" data-selected-variant="" data-selected-qauntity="" data-price-single="" value="" />
+      {% endfor %}
+     {% endif %}
+    {% endfor %}
+  </div>
+  {% endcomment %}
+</section><!-- /.product -->
+
+{% comment %}{%- render 'product-mobile-atc', product_ref: product -%}{% endcomment %}
+
+{%- liquid
+  if product.selected_or_first_available_variant.featured_media
+    assign seo_media = product.selected_or_first_available_variant.featured_media
+  else
+    assign seo_media = product.featured_media
+  endif
+-%}
+
+<script src="{{- 'product-main-default.js' | asset_url -}}" defer="defer"></script>
+
+{% schema %}
+{
+    "name": "Hearth Product Main",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+        {
+            "name": "Bulb Variant",
+            "type": "bulb-variant",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "variant_name",
+                    "label": "Variant Name",
+                    "default": "Model"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "quartet_image",
+                    "label": "Quartet Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "trio_image",
+                    "label": "Trio Image"
+                },
+                {
+                    "type": "text",
+                    "id": "price_difference",
+                    "label": "Price Difference Text",
+                    "default": "+$450"
+                },
+                {
+                    "type": "text",
+                    "id": "panel_title",
+                    "label": "Panel Title",
+                    "default": "Bulb Count"
+                }
+            ]
+        },
+        {
+            "name": "Plug Variant",
+            "type": "plug-variant",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "variant_name",
+                    "label": "Variant Name",
+                    "default": "Plug"
+                },
+                {
+                    "type": "text",
+                    "id": "panel_title",
+                    "label": "Panel Title",
+                    "default": "Plug Type"
+                }
+            ]
+        },
+        {
+            "name": "Addon Products",
+            "type": "addon-products",
+            "settings": [
+                {
+                    "type": "product_list",
+                    "id": "addon_products",
+                    "label": "Add-on Products"
+                },
+                {
+                    "type": "text",
+                    "id": "panel_title",
+                    "label": "Panel Title",
+                    "default": "Add-Ons"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

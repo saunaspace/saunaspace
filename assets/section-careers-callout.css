@@ -1,0 +1,70 @@
+.careers-callout {
+    background: linear-gradient(90deg,rgba(223, 125, 78, 1) 0%, rgba(253, 69, 15, 1) 14%, rgba(239, 159, 124, 1) 62%, rgba(224, 161, 123, 1) 82%, rgba(204, 164, 121, 1) 100%);
+}
+.careers-callout > .container {
+    max-width: 1590px;
+    min-height: min(85vh,760px);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.careers-callout .bg-img-cnt {
+    width: 45%;
+    max-width: 760px;
+    position: absolute;
+    top: 50%;
+    right: var(--page-gutter);
+    transform: translateY(-50%);
+    mix-blend-mode: lighten;
+}
+.careers-callout .sec-content-cnt {
+    max-width: 500px;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    color: white;
+}
+.careers-callout .sec-heading {
+    margin-bottom: 30px;
+}
+.careers-callout .sec-content {
+    font-size: calc(var(--fsbase) * 1.8);
+}
+.careers-callout .sec-cta {
+    margin-top: 30px;
+}
+.careers-callout .careers-callout-cta {
+    color: white;
+}
+.careers-callout .link-dot::before {
+    background-color: white;
+    background-image: url('icon-chevron-right--red.svg');
+}
+@media (max-width: 1250px) {
+    .careers-callout > .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .careers-callout .bg-img-cnt {
+        width: 100%;
+        max-width: 550px;
+        margin: 100px auto 0;
+        position: static;
+        transform: none;
+    }
+    .careers-callout .sec-content-cnt {
+        margin: 0 auto;
+        padding-top: 75px;
+        padding-bottom: 100px;
+        text-align: center;
+    }
+}
+@media (max-width: 767px) {
+    .careers-callout .bg-img-cnt {
+        width: 60%;
+        margin-top: 50px;
+    }
+    .careers-callout .sec-content-cnt {
+        padding-top: 40px;
+        padding-bottom: 65px;
+    }
+}

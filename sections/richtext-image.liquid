@@ -1,0 +1,108 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-richtext-image-" | append: section.index
+  endif
+%}
+{%- unless section.settings.title == blank and section.settings.content == blank and section.settings.image == blank -%}
+  <link rel="stylesheet" href="{{ 'section-richtext-image.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-richtext-image.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <div class="richtext-image richtext-image--text-{{ section.settings.text_size }} richtext-image--spacing-{{ section.settings.spacing }} relative overflow-hidden" id="{{ sec_id }}">
+    <div class="container container--gutter-mobile">
+      <div class="richtext-image__content relative">
+        {%- if section.settings.title != blank -%}
+          <h3 class="richtext-image__title">
+            {{- section.settings.title | escape -}}
+          </h3><!-- /.richtext-image__title -->
+        {%- endif -%}
+
+        {%- if section.settings.content != blank -%}
+          <p class="richtext-image__body">
+            {{- section.settings.content | escape | newline_to_br -}}
+          </p><!-- /.richtext-image__body -->
+        {%- endif -%}
+      </div><!-- /.richtext-image__content -->
+
+      {%- if section.settings.image != blank -%}
+        <div class="richtext-image__image media media--transparent">
+          {%- render 'image', image: section.settings.image -%}
+        </div><!-- /.richtext-image__image -->
+      {%- endif -%}
+    </div><!-- /.container -->
+  </div><!-- /.richtext-image -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Richtext with image",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Richtext with image"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, tempore."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Richtext with image"
+    }
+  ]
+}
+{% endschema %}

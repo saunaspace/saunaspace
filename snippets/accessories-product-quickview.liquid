@@ -1,0 +1,161 @@
+<div class="accessory-product-quickview" data-product="{{ product.title }}">
+    {% liquid
+      assign has_var_images = false
+      unless product.has_only_default_variant
+        for var in product.variants
+          if var.image != blank
+            assign has_var_images = true
+          endif
+        endfor
+      endunless
+    %}
+    {%- if product.media.size > 0 or has_var_images == true -%}
+    <div class="modal-col col--slider">
+        {% comment %}{% if has_var_images == true and product.metafields.custom.product_media_slider_show_variant_images == true %}{% endcomment %}
+        {% if has_var_images == true %}
+          {%- render 'main-product__media-variants', product_ref: product, section_ref: section, display_custom_thumbnails: false -%}
+        {% else %}
+          {%- render 'main-product__media', product_ref: product, section_ref: section -%}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="modal-col col--product">
+        <h4 class="accessory-product-title">{{ item_title }}</h4>
+        {% assign item_price = product.selected_or_first_available_variant.price %}
+        <div class="accessory-product-price">
+            <div class="price__regular">
+                <span>{{ item_price | money }}</span>
+                {% if product.compare_at_price > item_price and product.price_varies == false %}
+                <del>{{ product.compare_at_price | money }}</del>
+                {% endif %}
+            </div>
+        </div>
+        {% assign quickview_description = product.metafields.custom.quickview_description %}
+        {% assign product_description = quickview_description | default: product.description %}
+        {% if product_description != blank %}
+        <div class="accessory-product-description{% unless quickview_description != blank %} js-readmore-content{% endunless %}">
+            <p>{{ product_description | strip_html | newline_to_br }}</p>
+        </div>
+        {% endif %}
+
+        {% unless product.has_only_default_variant %}
+        <div class="accessories-product__variants">
+            {% for option in product.options_with_values %}
+                {% liquid
+                assign swatch_count = option.values | map: 'swatch' | compact | size
+                assign variant_container_classes = "access-product__variants-row"
+                if swatch_count < 1
+                    assign variant_container_classes = variant_container_classes | append: " access-product__variants-row--dropdown access-variant-option-with-dropdown"
+                else
+                    assign variant_container_classes = variant_container_classes | append: " access-product__variants-row--swatches"
+                endif
+                %}
+            <div class="{{ variant_container_classes }}" data-variant="{{ option.name }}">
+                {% liquid
+                assign label_intro = "Select a "
+                assign option_first_letter = option.name | slice: 0 | downcase
+                if option_first_letter == "a" or option_first_letter == "o" or option_first_letter == "e" or option_first_letter == "i" or option_first_letter == "u"
+                    assign label_intro = "Select an "
+                endif
+                %}
+                <div class="product__variants-label">
+                    {{ label_intro | append: option.name }}
+                </div><!-- /.product__variants-label -->
+
+                {% if swatch_count < 1 %}
+                <div class="product__variants-content">
+                    <details>
+                        <summary><span data-current-selected-option>{{ option.selected_value }}</span> {% render 'icon-chevron-dropdown' %}</summary>
+                        <div>
+                            <ul class="list-unstyled product-variant-dropdown-options">
+                                {% for opt in option.values %}
+                                <li class="access-product__variants-option" data-option="{{ opt }}">
+                                    <input type="radio" class="access-variant-option-radio access-dropdown-option-radio" name="accessory-prod--{{ option.name }}"{% if option.selected_value == opt %} checked="true"{% endif %} value="{{ opt }}" id="dropdown-option--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}" />
+                                    <label class="variant-option-label" for="dropdown-option--{{ product.handle }}--{{ opt | handleize | default: forloop.index }}">
+                                        {{ opt }}
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul><!-- /.list-unstyled -->
+                        </div>
+                    </details>
+                </div>
+                {% else %}
+
+                {% comment %}<!-- Color Variants with swatches -->{% endcomment %}
+                <ul class="product-build__variant-pills product-build__variant-pills--color product-variant-swatch-options" data-variant="Color">
+                    {% for opt in option.values %}
+                    {%- liquid
+                    assign swatch_value = null
+                    if opt.swatch.image
+                        assign image_url = opt.swatch.image | image_url: width: 100
+                        assign swatch_value = 'url(' | append: image_url | append: ')'
+                    elsif opt.swatch.color
+                        assign swatch_value = 'rgb(' | append: opt.swatch.color.rgb | append: ')'
+                    endif
+                    # echo "<!-- swatch color: "
+                    # echo opt | json
+                    # echo " -->"
+                    -%}
+                    <li>
+                        <input type="radio" class="color-option product-option-radio option--color access-dropdown-option-radio"{% if option.selected_value == opt %} checked="true"{% endif %} name="{{ product.handle }}_color-qv" value="{{ opt }}" id="access_qv-{{ product.handle }}_color_option-{{ opt | handleize }}" />
+                        <label class="product-build__variant-pill" data-option-name="{{ option.name }}" data-option-value="{{ opt }}" for="access_qv-{{ product.handle }}_color_option-{{ opt | handleize }}">
+                            <span class="option-img" style="background:{{ swatch_value }};"></span>
+                            <span class="product-build__variant-pill-text">
+                            <em>{{ opt }}</em>
+                            </span>
+                        </label><!-- /.product-build__variant-pill -->
+                    </li>
+                    {% endfor %}
+                </ul><!-- /.product-build__variant-pills -->
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+        {% endunless %}
+
+        <div class="accessory-product-form">
+            <div class="accessory-qty-cnt">
+                <button class="qty-btn" data-action="decrease">−</button>
+                <input type="text" class="qty-input" min="1" value="1" readonly>
+                <button class="qty-btn" data-action="increase">+</button>
+            </div>
+
+            <button class="accessory-atc-trigger button button--full">Add to Order</button>
+
+            {% for option in product.options_with_values %}
+                {% assign option_names = option_names | append: option.name %}
+                {% unless forloop.last %}
+                  {% assign option_names = option_names | append: ' / ' %}
+                {% endunless %}
+            {% endfor %}
+            <select class="accessory-product-variant-selector" style="display:none;" data-product="{{ product.title }}" data-product-handle="{{ product.handle }}" data-options="{{ option_names }}" data-qty="1">
+                {% for variant in product.variants %}
+                <option {% if forloop.index == 1 %}selected="selected" {% endif %} data-image-url="{{ variant.image | img_url:'master' }}" data-price="{{ variant.price | money_without_currency }}" data-compare-price="{{ variant.compare_at_price | money_without_currency }}" data-variant="{{ variant.title }}" value="{{ variant.id }}">{{ variant.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div><!-- /.modal-col.col--product -->
+
+    {% comment %}
+    {% liquid
+    assign option_names = ''
+    unless product.has_only_default_variant
+        for option in product.options_with_values
+            assign option_names = option_names | append: option.name
+            unless forloop.last
+            assign option_names = option_names | append: ' / '
+            endunless
+        endfor
+    endunless
+    %}
+    <select class="accessory-product-variant-selector" style="display:none;"{% unless product.has_only_default_variant %} data-options="{{ option_names }}"{% endunless %}>
+        {% for variant in product.variants %}
+        <option {% if forloop.index == 1 %}selected="selected" {% endif %}data-variant-id="{{ variant.id }}" data-image-url="{{ variant.image | img_url:'master' }}" data-price="{{ variant.price | money_without_currency }}" data-compare-price="{{ variant.compare_at_price | money_without_currency }}" value="{{ variant.title }}">{{ variant.title }}</option>
+        {% endfor %}
+    </select>
+    {% endcomment %}
+
+</div><!-- /.accessory-product-quickview -->

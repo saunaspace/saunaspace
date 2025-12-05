@@ -1,0 +1,117 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-contact-" | append: section.index
+  endif
+%}
+<section class="contact" id="{{ sec_id }}">
+  <link rel="stylesheet" href="{{ 'section-contact.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-contact.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <div class="container">
+    <h2 class="h2 center contact__heading">{{- 'contact.heading' | t -}}</h2><!-- /.h3 center -->
+
+    <div class="contact__body">
+      {%- form 'contact', id: 'ContactForm' -%}
+        {%- if form.posted_successfully? -%}
+          <h3 class="h4" tabindex="-1" autofocus>{{- 'contact.form.success' | t -}}</h3><!-- /.h4 -->
+        {%- elsif form.errors -%}
+          <div class="color-red">
+            {{- form.errors | default_errors -}}
+          </div><!-- /.color-red -->
+        {%- endif -%}
+
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'contact.form.name' | t
+            assign placeholder = ''
+            capture attr
+              echo 'autocomplete="name" '
+              echo 'aria-required="true"'
+            endcapture
+            if form.name
+              assign value = form.name
+            elsif customer
+              assign value = customer.name
+            else
+              assign value = ''
+            endif
+            render 'text-input', id: 'ContactForm-name', label: label, name: 'contact[Name]', placeholder: placeholder, attr: attr, value: value, required: true
+          -%}
+        </div><!-- /.form-row -->
+
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'contact.form.email' | t
+            assign placeholder = ''
+            capture attr
+              echo 'autocomplete="email"'
+              echo 'spellcheck="false"'
+              echo 'autocapitalize="off"'
+              echo 'aria-required="true"'
+            endcapture
+            if form.email
+              assign value = form.email
+            elsif customer
+              assign value = customer.email
+            else
+              assign value = ''
+            endif
+            if form.errors contains 'email'
+              assign error = form.errors.translated_fields['email'] | capitalize | append: ' ' | append: form.errors.messages['email']
+              assign has_error = true
+            endif
+            render 'text-input', id: 'ContactForm-email', type: 'email', label: label, name: 'contact[email]', placeholder: placeholder, attr: attr, value: value, has_error: has_error, message: error, required: true
+          -%}
+        </div><!-- /.form-row -->
+
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'contact.form.subject' | t
+            assign placeholder = ''
+            assign value = ''
+            render 'text-input', id: 'ContactForm-subject', label: label, name: 'contact[Subject]', placeholder: placeholder, value: value, required: true, attr: 'aria-required="true"'
+          -%}
+        </div><!-- /.form-row -->
+
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'contact.form.message' | t
+            assign placeholder = 'contact.form.message_placeholder' | t
+            assign name = 'contact[' | append: label | append: ']'
+            render 'textarea-input', id: 'ContactForm-body', label: label, name: name, placeholder: placeholder, body: form.body, required: true, attr: 'aria-required="true"'
+          -%}
+        </div><!-- /.form-row -->
+
+        <div class="form-row form-row--actions">
+          {%- assign value = 'contact.form.submit' | t -%}
+          {%- render 'button', type: 'submit', value: value -%}
+          {%- assign value = nil -%}
+        </div><!-- /.form-row -->
+      {%- endform -%}
+    </div><!-- /.contact__body -->
+  </div><!-- /.container -->
+</section><!-- /.container--narrow -->
+
+
+{% schema %}
+  {
+    "name": "Contact",
+    "class": "contact-form-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ]
+  }
+  {% endschema %}

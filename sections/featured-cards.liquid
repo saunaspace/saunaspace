@@ -1,0 +1,124 @@
+{%- unless section.blocks.size == 0 -%}
+  {% comment %}<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">{% endcomment %}
+  <link rel="stylesheet" href="{{ 'section-featured-cards.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {% comment %}{{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+    {{- 'section-featured-cards.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  {% comment %}<script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer" data-theme-script></script>{% endcomment %}
+  <script src="{{- 'featured-cards.js' | asset_url -}}" defer="defer" data-theme-script></script>
+
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h3 class="featured-cards__heading">
+        {{- section.settings.heading | escape | newline_to_br -}}
+      </h3><!-- /.featured-cards__heading -->
+    {%- endif -%}
+
+    <featured-cards class="featured-cards__body swiper" {% if section.blocks.size > 1 %}data-slider{% endif %}>
+      <div class="featured-cards__wrapper swiper-wrapper">
+        {%- for block in section.blocks -%}
+          {%-
+            liquid
+            if block.settings.image == blank and block.settings.heading == blank
+              continue
+            endif
+          -%}
+          <div class="swiper-slide">
+            <div class="featured-cards__card">
+              <a {%- if block.settings.url != blank -%}href="{{ block.settings.url }}"{% endif %} class="featured-cards__card-media media">
+                <span class="visually-hidden">{{- block.settings.heading | escape -}}</span><!-- /.visually-hidden -->
+
+                {%-
+                  liquid
+                  if block.settings.image
+                    render 'image', image: block.settings.image
+                  else
+                    echo 'image' | placeholder_svg_tag
+                  endif
+                -%}
+              </a><!-- /.featured-cards__card-media -->
+
+              <div class="featured-cards__card-content">
+                {%- if block.settings.heading != blank -%}
+                  <h4 class="featured-cards__card-heading">
+                    {%- if block.settings.url -%}
+                      <a href="{{ block.settings.url }}">
+                    {%- endif -%}
+                      {{- block.settings.heading | escape -}}
+                    {%- if block.settings.url -%}
+                      </a>
+                    {%- endif -%}
+                  </h4><!-- /.featured-cards__card-heading -->
+                {%- endif -%}
+
+                {%- if block.settings.entry != blank -%}
+                  <p class="featured-cards__card-entry">
+                    {{- block.settings.entry | escape -}}
+                  </p><!-- /.featured-cards__card-entry -->
+                {%- endif -%}
+              </div><!-- /.featured-cards__card-content -->
+            </div><!-- /.featured-cards__card -->
+          </div><!-- /.swiper-slide -->
+        {%- endfor -%}
+      </div><!-- /.featured-cards__wrapper -->
+    </featured-cards><!-- /.featured-cards__body -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Featured Cards",
+  "class": "featured-cards",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured cards heading"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "heading",
+          "default": "Card heading"
+        },
+        {
+          "type": "text",
+          "id": "entry",
+          "label": "Entry",
+          "default": "Card entry where more description can be added."
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Featured Cards"
+    }
+  ]
+}
+{% endschema %}

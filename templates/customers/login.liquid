@@ -1,147 +1,149 @@
-{{ 'customer.css' | asset_url | stylesheet_tag }}
+{{- 'customer.css' | asset_url | stylesheet_tag -}}
 
-<div class="customer login">
-  <h1 id="recover" tabindex="-1">
-    {{ 'customer.recover_password.title' | t }}
-  </h1>
-  <div>
-    <p>
-      {{ 'customer.recover_password.subtext' | t }}
-    </p>
+<div class="form-customer form-customer--recover" id="recover">
+  <div class="container container--narrow">
+    <div class="form__head center">
+      <h1 class="h3 form__title">
+        {{- 'customer.recover_password.title' | t -}}
+      </h1><!-- /.h3 form__title -->
 
-    {%- form 'recover_customer_password' -%}
-      {% assign recover_success = form.posted_successfully? %}
-      <div class="field">
-        <input type="email"
-          value=""
-          name="email"
-          id="RecoverEmail"
-          autocorrect="off"
-          autocapitalize="off"
-          autocomplete="email"
-          {% if form.errors %}
-            aria-invalid="true"
-            aria-describedby="RecoverEmail-email-error"
-            autofocus
-          {% endif %}
-          placeholder="{{ 'customer.login_page.email' | t }}"
-        >
-        <label for="RecoverEmail">
-          {{ 'customer.login_page.email' | t }}
-        </label>
-      </div>
-      {%- if form.errors -%}
-        <small id="RecoverEmail-email-error" class="form__message">
-          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13">
-            <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
-            <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
-            <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
-            <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
-          </svg>
-          {{ form.errors.messages['form'] }}
-        </small>
-      {%- endif -%}
+      <p class="form__subtitle color-subdued">
+        {{- 'customer.recover_password.subtitle' | t -}}
+      </p><!-- /.form__subtitle color-subdued -->
+    </div><!-- /.form__head center -->
 
-      <button>
-        {{ 'customer.login_page.submit' | t }}
-      </button>
+    <div class="form__body">
+      {%- form 'recover_customer_password' -%}
+        {%- assign recover_success = form.posted_successfully? -%}
 
-      <a href="#login">
-        {{ 'customer.login_page.cancel' | t }}
-      </a>
-    {%- endform -%}
-  </div>
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'customer.recover_password.email' | t
+            assign placeholder = 'customer.recover_password.email_placeholder' | t
+            assign error = ''
+            assign has_error = false
+            capture attr
+              echo 'autocorrect="off"'
+              echo 'autocapitalize="off"'
+              echo 'autocomplete="email"'
+              if form.errors
+                assign error = form.errors.messages['form']
+                assign has_error = true
+                echo 'autofocus'
+              endif
+            endcapture
+            render 'text-input', id: 'RecoverEmail', label: label, type: 'email', name: 'email', placeholder: placeholder, attr: attr, message: error, has_error: has_error
+            assign label = nil
+            assign placeholder = nil
+            assign attr = nil
+            assign error = nil
+            assign has_error = nil
+          -%}
+        </div><!-- /.form-row -->
 
-  <h1 id="login" tabindex="-1">
-    {{ 'customer.login_page.title' | t }}
-  </h1>
-  <div>
-    {%- if recover_success == true -%}
-      <h3 class="form__message" tabindex="-1" autofocus>
-        <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13">
-          <path d="M6.5 12.35C9.73087 12.35 12.35 9.73086 12.35 6.5C12.35 3.26913 9.73087 0.65 6.5 0.65C3.26913 0.65 0.65 3.26913 0.65 6.5C0.65 9.73086 3.26913 12.35 6.5 12.35Z" fill="#428445" stroke="white" stroke-width="0.7"/>
-          <path d="M5.53271 8.66357L9.25213 4.68197" stroke="white"/>
-          <path d="M4.10645 6.7688L6.13766 8.62553" stroke="white">
-        </svg>
-        {{ 'customer.recover_password.success' | t }}
-      </h3>
-    {%- endif -%}
-    {%- form 'customer_login', novalidate: 'novalidate' -%}
-      {%- if form.errors -%}
-        <h2 class="form__message" tabindex="-1" autofocus>
-          <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
-          <svg aria-hidden="true" focusable="false" role="presentation" viewBox="0 0 13 13">
-            <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
-            <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
-            <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
-            <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
-          </svg>
-          {{ 'templates.contact.form.error_heading' | t }}
-        </h2>
-        {{ form.errors | default_errors }}
-      {%- endif -%}
+        <div class="form-row center">
+          <div>
+            {%- assign value = 'customer.recover_password.submit' | t -%}
+            {%- render 'button', type: 'submit', value: value -%}
+            {%- assign value = nil -%}
+          </div>
+        </div><!-- /.form-row center -->
 
-      <div class="field">        
-        <input
-          type="email"
-          name="customer[email]"
-          id="CustomerEmail"
-          autocomplete="email"
-          autocorrect="off"
-          autocapitalize="off"
-          {% if form.errors contains 'form' %}
-            aria-invalid="true"
-          {% endif %}
-          placeholder="{{ 'customer.login_page.email' | t }}"
-        >
-        <label for="CustomerEmail">
-          {{ 'customer.login_page.email' | t }}
-        </label>
-      </div>
-
-      {%- if form.password_needed -%}
-        <div class="field">          
-          <input
-            type="password"
-            value=""
-            name="customer[password]"
-            id="CustomerPassword"
-            autocomplete="current-password"
-            {% if form.errors contains 'form' %}
-              aria-invalid="true"
-            {% endif %}
-            placeholder="{{ 'customer.login_page.password' | t }}"
-          >
-          <label for="CustomerPassword">
-            {{ 'customer.login_page.password' | t }}
-          </label>
-        </div>
-
-        <a href="#recover">
-          {{ 'customer.login_page.forgot_password' | t }}
-        </a>
-      {%- endif -%}
-
-      <button>
-        {{ 'customer.login_page.sign_in' | t }}
-      </button>
-      <div>
-      <p>Don't have an account? For speedy checkout and to lookup your order history and saved addresses, <a href="{{ routes.account_register_url }}" class="login-create">create one </a>. </p>
-    </div>
-      
-    {%- endform -%}
-  </div>
-  
-  {%- if shop.checkout.guest_login -%}
-    <div>
-      <hr>
-      <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
-
-      {%- form 'guest_login' -%}
-        <button>
-          {{ 'customer.login_page.guest_continue' | t }}
-        </button>
+        <div class="form-row center">
+          <div>
+            <a href="#login" class="link">{{- 'customer.recover_password.cancel' | t -}}</a>
+          </div>
+        </div><!-- /.form-row center -->
       {%- endform -%}
-    </div>
-  {%- endif -%}
-</div>
+    </div><!-- /.form__body -->
+  </div><!-- /.container container--narrow -->
+</div><!-- /#recover.form-customer form-customer--recover -->
+
+<div class="form-customer form-customer--login" id="login">
+  <div class="container container--narrow">
+    <div class="form__head center">
+      <h1 class="h3 form__title">
+        {{- 'customer.login.title' | t -}}
+      </h1><!-- /.h3 form__title -->
+
+      {%- if recover_success == true -%}
+        <p class="form__subtitle color-subdued" tabindex="-1" autofocus>
+          {{- 'customer.recover_password.success' | t -}}
+        </p><!-- /.form__subtitle color-subdued -->
+      {%- endif -%}
+    </div><!-- /.form__head center -->
+
+    <div class="form__body">
+      {%- form 'customer_login', novalidate: 'novalidate' -%}
+        {%- if form.errors -%}
+          <div class="color-red">
+            {{- form.errors | default_errors -}}
+          </div><!-- /.color-red -->
+        {%- endif -%}
+
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'customer.login.email' | t
+            assign placeholder = 'customer.login.email_placeholder' | t
+            assign has_error = false
+            capture attr
+              echo 'autocorrect="off"'
+              echo 'autocapitalize="off"'
+              echo 'autocomplete="email"'
+              if form.errors contains 'form'
+                assign has_error = true
+              endif
+            endcapture
+            render 'text-input', id: 'CustomerEmail', label: label, type: 'email', name: 'customer[email]', placeholder: placeholder, attr: attr, message: error, has_error: has_error
+            assign label = nil
+            assign placeholder = nil
+            assign attr = nil
+            assign has_error = nil
+          -%}
+        </div><!-- /.form-row -->
+
+        <div class="form-row">
+          {%-
+            liquid
+            assign label = 'customer.login.password' | t
+            assign placeholder = 'customer.login.password_placeholder' | t
+            assign has_error = false
+            capture attr
+              echo 'autocomplete="current-password"'
+              if form.errors contains 'form'
+                assign has_error = true
+              endif
+            endcapture
+            render 'text-input', id: 'CustomerPassword', label: label, type: 'password', name: 'customer[password]', placeholder: placeholder, attr: attr, message: error, has_error: has_error
+            assign label = nil
+            assign placeholder = nil
+            assign attr = nil
+            assign has_error = nil
+          -%}
+        </div><!-- /.form-row -->
+
+        <div class="form-row">
+          <div>
+            <a href="#recover" class="link">{{- 'customer.login.forgot_password' | t -}}</a>
+          </div>
+        </div><!-- /.form-row -->
+
+        <div class="form-row center">
+          <div>
+            {%- assign value = 'customer.login.submit' | t -%}
+            {%- render 'button', type: 'submit', value: value -%}
+            {%- assign value = nil -%}
+          </div>
+        </div><!-- /.form-row center -->
+
+        <div class="form-row center">
+          <div>
+            <a href="{{- routes.account_register_url -}}" class="link">{{- 'customer.login.create_account' | t -}}</a>
+          </div>
+        </div><!-- /.form-row center -->
+      {%- endform -%}
+    </div><!-- /.form__body -->
+  </div><!-- /.container container--narrow -->
+</div><!-- /#login.form-customer form-customer--login -->

@@ -1,11 +1,36 @@
-<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+{% render 'archive-pages-custom-styling' %}
 
-<noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<link href="//sauna.space/cdn/shop/t/54/assets/section-page-banner.css?v=38213916461105923231745692204" rel="stylesheet" type="text/css" media="all">
+<div class="page-banner__main" id="page-banner-1">
+    <div class="container">
+        <div class="page-banner__inner page-banner__inner--has-background">
+            <div class="page-banner__background media"><noscript>
+                <img
+                    srcset="//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=375 375w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=550 550w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=750 750w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1024 1024w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1100 1100w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1500 1500w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1780 1780w"
+                    sizes="auto"
+                    src="//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=375"
+                    loading="eager"
+                    class=""
+                    width="1920"
+                    height="540"
+                    
+                    
+                    style="object-position: 50.0% 50.0%;"
+                >
+                </noscript>
+                <img srcset="//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=375 375w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=550 550w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=750 750w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1024 1024w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1100 1100w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1500 1500w,//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=1780 1780w" data-sizes="auto" data-src="//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=375" class="no-js-hidden lazyautosizes ls-is-cached lazyloaded" width="1920" height="540" style="object-position: 50.0% 50.0%;" sizes="1850px" src="//sauna.space/cdn/shop/files/Mask_Group_1914.png?v=1734419130&width=375">
+            </div><!-- /.page-banner__background -->
+            <div class="page-banner__content">
+                <h1 class="page-banner__heading h2">Sauna Shopping Guide</h1><!-- /.page-banner__heading -->
+                <div class="page-banner__text small-hide medium-hide">
+                    We want you to find the perfect sauna—even if it’s not from SaunaSpace. Here’s what you should consider before you buy.
+                </div><!-- /.page-banner__text -->
+            </div><!-- /.page-banner__content -->
+        </div><!-- /.page-banner__inner -->
+    </div><!-- /.container -->
+</div><!-- /.page-banner__main -->
 
-
-
+<!--
 <div class="photo-headerBG" style="background-image:url({{ 'choosing-the-right-sauna-hero.jpg' | asset_url }}); background-position: 50% 0; ">
     <div class="ph-width">
         <div class="ph-text">
@@ -16,55 +41,57 @@
         </div>
     </div>
 </div>
+-->
 
-
-<div class="two-cols two-cols-wide tc-reverse tc-top">
-    <div class="col">
-        <img src="{{ 'choose-accordion-hero.jpg' | asset_url }}" alt="Faraday Sauna" loading="lazy" />
-    </div>
-    <div class="col">
-        <div class="tcw-text tcw-text-100">
-            <cms id='cms1'>
-            <h2 class="alignLeft">What should I look for in a Sauna?</h2>
-            <p>Not all saunas are created equal, and not all of them are right for your specific needs. Sorting through your options can be difficult, so keep these ideas in mind to help focus your search.</p>
-            </cms cms1>
-            <cms id='cms2'>
-            <div class="acc">
-                <a href="javascript:void(0)" class="acc-term">Size</a>
-                <div class="acc-def hideMe">
-                    <p>Measure the space you have to dedicate to a sauna precisely—every inch counts! The options can change dramatically based on the area you choose, whether it’s the corner of a room or a dedicated section of the basement.</p>
-                    <p>Are you limited on space? How many people would you like to fit in the sauna? Do you prefer to sit or lay down? Answering these questions will help you accurately select a sauna that suits your space and preferences perfectly.</p>
+<div class="container sec top-sec">
+    <div class="two-cols two-cols-wide tc-reverse tc-top">
+        <div class="col">
+            <img src="{{ 'choose-accordion-hero.jpg' | asset_url }}" alt="FireLight Sauna" loading="lazy" />
+        </div>
+        <div class="col">
+            <div class="tcw-text tcw-text-100">
+                <cms id='cms1'>
+                <h2 class="alignLeft">What should I look for in a Sauna?</h2>
+                <p>Not all saunas are created equal, and not all of them are right for your specific needs. Sorting through your options can be difficult, so keep these ideas in mind to help focus your search.</p>
+                </cms cms1>
+                <cms id='cms2'>
+                <div class="acc">
+                    <a href="javascript:void(0)" class="acc-term">Size</a>
+                    <div class="acc-def hideMe">
+                        <p>Measure the space you have to dedicate to a sauna precisely—every inch counts! The options can change dramatically based on the area you choose, whether it’s the corner of a room or a dedicated section of the basement.</p>
+                        <p>Are you limited on space? How many people would you like to fit in the sauna? Do you prefer to sit or lay down? Answering these questions will help you accurately select a sauna that suits your space and preferences perfectly.</p>
+                    </div>
+                    <a href="javascript:void(0)" class="acc-term">Indoor/outdoor use</a>
+                    <div class="acc-def hideMe">
+                        <p>Although installing a sauna outdoors usually gives you more flexibility on size, it can come with extra requirements. You’ll likely need to build a foundation, insulate, and create access points for power and water—which can add a sizable amount of labor and cost to the project.</p>
+                        <p>Even indoor saunas can come with requirements. Check the specifications to find out if the sauna you are considering requires access to the water line, a special power supply, or a draining system. In the case of SaunaSpace, all you need is a regular grounded outlet.</p>
+                    </div>
+                    <a href="javascript:void(0)" class="acc-term">Property restrictions</a>
+                    <div class="acc-def hideMe">
+                        <p>If you don’t own your property, your options for getting a sauna can be more limited. Condos and apartments, for example, often prohibit residents from making major alterations. Fortunately, there are portable saunas (like our FireLight® Sauna) that work well in these spaces.</p>
+                        <p>Even if you do own a home and the property it sits on, you should refer to your area’s building and electrical codes to learn about any permits or restrictions that apply.</p>
+                    </div>
+                    <a href="javascript:void(0)" class="acc-term">Materials</a>
+                    <div class="acc-def hideMe">
+                        <p>What your sauna is made of matters. If you choose poor quality wood, your investment may not hold up to regular use. If your sauna includes other unnatural materials like synthetic fabrics or glues, it may offgas, releasing gasses and chemicals into the air. </p>
+                        <p>Trust us, it won’t feel like you’re detoxing if you’re breathing in poor quality air. Take extra care to ensure that your sauna is built with your safety and long-term satisfaction in mind. </p>
+                    </div>
+                    <a href="javascript:void(0)" class="acc-term">Warranty</a>
+                    <div class="acc-def hideMe">
+                        <p>Purchasing your sauna is just the beginning. If something goes wrong, you’ll want to know that you have the support of a company that stands behind their products. A solid return policy may be useful if your sauna arrives damaged or if there’s trouble during installation, but a warranty is the only way to be sure you’ll be covered past the honeymoon phase.</p>
+                        <p>Read the fine print and, if you still have questions, contact the company. You should feel confident that your warranty will cover common problems for a reasonable amount of time. It can also offer peace of mind to know if a company has quality customer service before you buy.</p>
+                    </div>
+                    <a href="javascript:void(0)" class="acc-term">Cost to operate</a>
+                    <div class="acc-def hideMe">
+                        <p>Operating your sauna can feel like a hidden cost that’s hard to calculate, but most companies have estimates they can share. If your sauna takes a while to warm up, or includes a lot of electrical features (lighting, sound systems, etc.), this can add up to higher utility bills.</p>
+                    </div>
+                    <a href="javascript:void(0)" class="acc-term">Extra features</a>
+                    <div class="acc-def hideMe">
+                        <p>It may sound luxurious to have a LED light show and immersive speakers in your sauna, but it may be doing more harm than good. In fact, all of these electronic extras contribute electromagnetic fields, or <a href="/pages/what-are-electromagnetic-fields-emfs">EMFs, that act as an environmental stressor</a>. To experience the ultimate escape and rejuvenation, consider minimizing distractions and EMFs. </p>
+                    </div>
                 </div>
-                <a href="javascript:void(0)" class="acc-term">Indoor/outdoor use</a>
-                <div class="acc-def hideMe">
-                    <p>Although installing a sauna outdoors usually gives you more flexibility on size, it can come with extra requirements. You’ll likely need to build a foundation, insulate, and create access points for power and water—which can add a sizable amount of labor and cost to the project.</p>
-                    <p>Even indoor saunas can come with requirements. Check the specifications to find out if the sauna you are considering requires access to the water line, a special power supply, or a draining system. In the case of SaunaSpace, all you need is a regular grounded outlet.</p>
-                </div>
-                <a href="javascript:void(0)" class="acc-term">Property restrictions</a>
-                <div class="acc-def hideMe">
-                    <p>If you don’t own your property, your options for getting a sauna can be more limited. Condos and apartments, for example, often prohibit residents from making major alterations. Fortunately, there are portable saunas (like the Luminati and Faraday) that work well in these spaces.</p>
-                    <p>Even if you do own a home and the property it sits on, you should refer to your area’s building and electrical codes to learn about any permits or restrictions that apply.</p>
-                </div>
-                <a href="javascript:void(0)" class="acc-term">Materials</a>
-                <div class="acc-def hideMe">
-                    <p>What your sauna is made of matters. If you choose poor quality wood, your investment may not hold up to regular use. If your sauna includes other unnatural materials like synthetic fabrics or glues, it may offgas, releasing gasses and chemicals into the air. </p>
-                    <p>Trust us, it won’t feel like you’re detoxing if you’re breathing in poor quality air. Take extra care to ensure that your sauna is built with your safety and long-term satisfaction in mind. </p>
-                </div>
-                <a href="javascript:void(0)" class="acc-term">Warranty</a>
-                <div class="acc-def hideMe">
-                    <p>Purchasing your sauna is just the beginning. If something goes wrong, you’ll want to know that you have the support of a company that stands behind their products. A solid return policy may be useful if your sauna arrives damaged or if there’s trouble during installation, but a warranty is the only way to be sure you’ll be covered past the honeymoon phase.</p>
-                    <p>Read the fine print and, if you still have questions, contact the company. You should feel confident that your warranty will cover common problems for a reasonable amount of time. It can also offer peace of mind to know if a company has quality customer service before you buy.</p>
-                </div>
-                <a href="javascript:void(0)" class="acc-term">Cost to operate</a>
-                <div class="acc-def hideMe">
-                    <p>Operating your sauna can feel like a hidden cost that’s hard to calculate, but most companies have estimates they can share. If your sauna takes a while to warm up, or includes a lot of electrical features (lighting, sound systems, etc.), this can add up to higher utility bills.</p>
-                </div>
-                <a href="javascript:void(0)" class="acc-term">Extra features</a>
-                <div class="acc-def hideMe">
-                    <p>It may sound luxurious to have a LED light show and immersive speakers in your sauna, but it may be doing more harm than good. In fact, all of these electronic extras contribute electromagnetic fields, or <a href="/pages/what-are-electromagnetic-fields-emfs">EMFs, that act as an environmental stressor</a>. To experience the ultimate escape and rejuvenation, consider minimizing distractions and EMFs. </p>
-                </div>
+                </cms2 cms2>
             </div>
-            </cms2 cms2>
         </div>
     </div>
 </div>
@@ -72,125 +99,131 @@
 <div class="divider"></div>
 
 <section>
-
-<h2>Types of Saunas</h2>
-<cms id='cmsT'>
-
-<table class="sauna-types">
-<thead>
-<tr>
-<th>Sauna Type</th> <th>Traditional/Finnish Sauna</th> <th>Far Infrared Sauna</th> <th>Full-Spectrum Infrared Sauna</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>Light Therapy</th> <td data-label="Traditional/Finnish Sauna">None</td> <td data-label="Far Infrared Sauna">Varies by model. Requires added LED panels.</td> <td data-label="Full-Spectrum Infrared Sauna">Built in</td>
-</tr>
-<tr>
-<th>Footprint</th> <td data-label="Traditional/Finnish Sauna">Typically Larger</td> <td data-label="Far Infrared Sauna">Small to large</td> <td data-label="Full-Spectrum Infrared Sauna">Small to large</td>
-</tr>
-<tr>
-<th>Portability</th> <td data-label="Traditional/Finnish Sauna">Permanent structures</td> <td data-label="Far Infrared Sauna">Permanent and portable options</td> <td data-label="Full-Spectrum Infrared Sauna">Permanent and portable options</td>
-</tr>
-<tr>
-<th>Session Length</th> <td data-label="Traditional/Finnish Sauna">Longer</td> <td data-label="Far Infrared Sauna">Longer</td> <td data-label="Full-Spectrum Infrared Sauna">Shorter</td>
-</tr>
-<tr>
-<th>Operating Costs</th> <td data-label="Traditional/Finnish Sauna">High</td> <td data-label="Far Infrared Sauna">Medium</td> <td data-label="Full-Spectrum Infrared Sauna">Low</td>
-</tr>
-<tr>
-<th>Heating Component</th> <td data-label="Traditional/Finnish Sauna">Electric heater <strong>or</strong> wood burning stove with hot stones</td> <td data-label="Far Infrared Sauna">Ceramic FIR emitter <strong>or</strong> carbon-panel FIR emitter</td> <td data-label="Full-Spectrum Infrared Sauna">Incandescent light panel</td>
-</tr>
-<tr>
-<th>Heating Mechanism</th> <td data-label="Traditional/Finnish Sauna">Heats the air to high temperatures</td> <td data-label="Far Infrared Sauna">Heats only the surface layers of the body</td> <td data-label="Full-Spectrum Infrared Sauna">Heats the body directly and deeply</td>
-</tr>
-<tr>
-<th>Air Temperature</th> <td data-label="Traditional/Finnish Sauna">176 to 194 °F (80 to 90 °C)</td> <td data-label="Far Infrared Sauna">110 to 130 °F (43 to 54 °C)</td> <td data-label="Full-Spectrum Infrared Sauna">110 to 130 °F (43 to 54 °C)</td>
-</tr>
-<tr>
-<th>Humidity</th> <td data-label="Traditional/Finnish Sauna">Dry or humid</td> <td data-label="Far Infrared Sauna">Dry</td> <td data-label="Full-Spectrum Infrared Sauna">Dry</td>
-</tr>
-<tr>
-<th>Warm-up Time</th> <td data-label="Traditional/Finnish Sauna">Longer</td> <td data-label="Far Infrared Sauna">Shorter</td> <td data-label="Full-Spectrum Infrared Sauna">Shorter</td>
-</tr>
-</tbody>
-</table>
-</cms cmsT>
-
+    <div class="container">
+        <h2>Types of Saunas</h2>
+        <cms id='cmsT'>
+            <table class="sauna-types">
+                <thead>
+                    <tr>
+                        <th>Sauna Type</th> <th>Traditional/Finnish Sauna</th> <th>Far Infrared Sauna</th> <th>FireLight® Full-Spectrum Infrared Sauna</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr>
+                    <th>Light Therapy</th> <td data-label="Traditional/Finnish Sauna">None</td> <td data-label="Far Infrared Sauna">Varies by model. Requires added LED panels.</td> <td data-label="Full-Spectrum Infrared Sauna">Built in</td>
+                </tr>
+                <tr>
+                    <th>Footprint</th> <td data-label="Traditional/Finnish Sauna">Typically Larger</td> <td data-label="Far Infrared Sauna">Small to large</td> <td data-label="Full-Spectrum Infrared Sauna">Small</td>
+                </tr>
+                <tr>
+                    <th>Portability</th> <td data-label="Traditional/Finnish Sauna">Permanent structures</td> <td data-label="Far Infrared Sauna">Permanent and portable options</td> <td data-label="Full-Spectrum Infrared Sauna">Portable options</td>
+                </tr>
+                <tr>
+                    <th>Session Length</th> <td data-label="Traditional/Finnish Sauna">Longer</td> <td data-label="Far Infrared Sauna">Longer</td> <td data-label="Full-Spectrum Infrared Sauna">Shorter</td>
+                </tr>
+                <tr>
+                    <th>Operating Costs</th> <td data-label="Traditional/Finnish Sauna">High</td> <td data-label="Far Infrared Sauna">Medium</td> <td data-label="Full-Spectrum Infrared Sauna">Low</td>
+                </tr>
+                <tr>
+                    <th>Heating Component</th> <td data-label="Traditional/Finnish Sauna">Electric heater <strong>or</strong> wood burning stove with hot stones</td> <td data-label="Far Infrared Sauna">Ceramic FIR emitter <strong>or</strong> carbon-panel FIR emitter</td> <td data-label="Full-Spectrum Infrared Sauna">Incandescent light panel</td>
+                </tr>
+                <tr>
+                    <th>Heating Mechanism</th> <td data-label="Traditional/Finnish Sauna">Heats the air to high temperatures</td> <td data-label="Far Infrared Sauna">Heats only the surface layers of the body</td> <td data-label="Full-Spectrum Infrared Sauna">Heats the body directly and deeply</td>
+                </tr>
+                <tr>
+                    <th>Air Temperature</th> <td data-label="Traditional/Finnish Sauna">176 to 194 °F (80 to 90 °C)</td> <td data-label="Far Infrared Sauna">110 to 130 °F (43 to 54 °C)</td> <td data-label="Full-Spectrum Infrared Sauna">110 to 130 °F (43 to 54 °C)</td>
+                </tr>
+                <tr>
+                    <th>Humidity</th> <td data-label="Traditional/Finnish Sauna">Dry or humid</td> <td data-label="Far Infrared Sauna">Dry</td> <td data-label="Full-Spectrum Infrared Sauna">Dry</td>
+                </tr>
+                <tr>
+                    <th>Warm-up Time</th> <td data-label="Traditional/Finnish Sauna">Longer</td> <td data-label="Far Infrared Sauna">Shorter</td> <td data-label="Full-Spectrum Infrared Sauna">Shorter</td>
+                </tr>
+            </tbody>
+            </table>
+        </cms>
+    </div>
 </section>
 
-<div class="two-cols two-cols-wide tc-reverse">
-    <div class="col">
-        <img src="{{ 'choose-why-choose.jpg' | asset_url }}" alt="Woman on Couch with Photon" />
-    </div>
-    <div class="col">
-        <div class="tcw-text">
-            <cms id='cms3'>
-
-
-<h2 class="alignLeft">Why Choose SaunaSpace?</h2>
-<p>Our saunas combine science, nature, and simple luxury in a compact design that can go almost anywhere. You’ll love getting all the benefits of heat and light therapy in less time with our sun-centric spectrum. Discover what makes our products one of a kind.</p>
-<div class="btnBox"><a href="/pages/infrared-saunas" class="btn">Shop Saunas</a></div>
-</cms cms3>
+<div class="container sec">
+    <div class="two-cols two-cols-wide tc-reverse">
+        <div class="col">
+            <img src="{{ 'choose-why-choose.jpg' | asset_url }}" alt="Woman on Couch with Photon" />
+        </div>
+        <div class="col">
+            <div class="tcw-text">
+                <cms id='cms3'>
+                    <h2 class="alignLeft">Why Choose SaunaSpace?</h2>
+                    <p>Our saunas combine science, nature, and simple luxury in a compact design that can go almost anywhere. You’ll love getting all the benefits of heat and light therapy in less time with our sun-centric spectrum. Discover what makes our products one of a kind.</p>
+                    <div class="btnBox"><a href="/pages/infrared-saunas" class="btnXXX button">Shop Saunas</a></div>
+                </cms cms3>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="two-cols two-cols-wide">
-    <div class="col">
-        <img src="{{ 'health-benefits-thermalight.jpg' | asset_url }}" alt="Thermalight bulb" />
-    </div>
-    <div class="col">
-        <div class="tcw-text">
-            <cms id='cms4'>
-
-<h2 class="alignLeft">Technology Meets Nature</h2>
-<p>We’ve spent years perfecting our spectrum for an infrared sauna that’s unlike anything you’ve tried before..</p>
-<a href="/pages/how-do-infrared-saunas-work" class="bold-link arrow-link">Learn How It Works</a>
-</cms cms4>
+<div class="container sec">
+    <div class="two-cols two-cols-wide">
+        <div class="col">
+            <img src="{{ 'health-benefits-thermalight.jpg' | asset_url }}" alt="Firelight bulb" />
+        </div>
+        <div class="col">
+            <div class="tcw-text">
+                <cms id='cms4'>
+                    <h2 class="alignLeft">Technology Meets Nature</h2>
+                    <p>We’ve spent years perfecting our spectrum for an infrared sauna that’s unlike anything you’ve tried before..</p>
+                    <a href="/pages/how-do-infrared-saunas-work" class="bold-linkXXX arrow-linkXXX link-dot">Learn How It Works</a>
+                </cms cms4>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="orangeBG">
-    <section>
-        <div class="discover-benefits">
-            <div class="db-text">
-                <h2>Discover the Benefits of Full-Spectrum Infrared Therapy</h2>
-                <a href="/pages/full-spectrum-infrared-sauna-health-benefits" class="bold-link bold-link-white  arrow-link">See All Benefits</a>
+    <div class="container">
+        <section>
+            <div class="discover-benefits">
+                <div class="db-text">
+                    <h2>Discover the Benefits of FireLight® Full-Spectrum Infrared Therapy</h2>
+                    <a href="/pages/full-spectrum-infrared-sauna-health-benefits" class="bold-linkXXX bold-link-whiteXXX arrow-linkXXX link-dot">See All Benefits</a>
+                </div>
+                <div class="db-icons">
+                    <div class="db-icon etica">
+                        <img src="{{ 'detoxification-white-v3.svg' | asset_url }}" alt="" />
+                        Detoxification
+                    </div>
+                    <div class="db-icon etica">
+                        <img src="{{ 'immunity-boosting-white-v2.svg' | asset_url }}" alt="" />
+                        Immunity Boosting
+                    </div>
+                    <div class="db-icon etica">
+                        <img src="{{ 'stress-reduction-white-v2.svg' | asset_url }}" alt="" />
+                        Stress Reduction
+                    </div>
+                    <div class="db-icon etica">
+                        <img src="{{ 'mental-performance-white-v2.svg' | asset_url }}" alt="" />
+                        Mental Performance
+                    </div>
+                </div>
             </div>
-            <div class="db-icons">
-                <div class="db-icon etica">
-                    <img src="{{ 'detoxification-white.svg' | asset_url }}" alt="" />
-                    Detoxification
-                </div>
-                <div class="db-icon etica">
-                    <img src="{{ 'immunity-boosting-white.svg' | asset_url }}" alt="" />
-                    Immunity Boosting
-                </div>
-                <div class="db-icon etica">
-                    <img src="{{ 'stress-reduction-white.svg' | asset_url }}" alt="" />
-                    Stress Reduction
-                </div>
-                <div class="db-icon etica">
-                    <img src="{{ 'mental-performance-white.svg' | asset_url }}" alt="" />
-                    Mental Performance
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </div>
 
 
 <section>
-    <div class="centered-text">
-        <cms id='cms5'>
-        <h2>What Are EMFs, and Why Should You Care?</h2>
-        <p>Electromagnetic fields (EMFs) are an invisible part of our environment that impact our experience of calm and relief. Find out how they work, and how our products help you block them out while you sauna.</p>
-        <p style="margin-top: 2em;"><a href="/pages/what-are-electromagnetic-fields-emfs" class="bold-link arrow-link">Learn More</a></p>
-        </cms cms5>
+    <div class="container">
+        <div class="centered-text">
+            <cms id='cms5'>
+            <h2>What Are EMFs, and Why Should You Care?</h2>
+            <p>Electromagnetic fields (EMFs) are an invisible part of our environment that impact our experience of calm and relief. Find out how they work, and how our products help you block them out while you sauna.</p>
+            <p style="margin-top: 2em;"><a href="/pages/what-are-electromagnetic-fields-emfs" class="bold-linkXXX arrow-linkXXX link-dot">Learn More</a></p>
+            </cms cms5>
+        </div>
     </div>
 </section>
+
+
 <script>
 	$(".acc-term").on("click",function() {
 		$(".acc-def").addClass("hideMe");
@@ -199,6 +232,21 @@
 		$(this).next().removeClass("hideMe");
 	});
 </script>
+
+
+<style>
+.sec.top-sec {
+    margin-top: var(--sectionBottom);
+}
+@media (max-width:800px) {
+    .sec.top-sec {
+        margin-top: 0;
+    }
+    .container.sec {
+        padding: 0;
+    }
+}
+</style>
 
 
 

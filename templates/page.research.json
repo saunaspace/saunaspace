@@ -1,15 +1,1 @@
-{
-    "sections": {
-      "main": {
-        "type": "research-page",
-        "settings": {
-          "padding_top": 36,
-          "padding_bottom": 36
-        }
-      }
-      },
-    "order": [
-      "main"
-    ]
-  }
-  
+{"sections":{"main":{"type":"page-banner","settings":{"heading":"Infrared Sauna & Light Therapy Research Archive","content":"","background_image":"shopify:\/\/shop_images\/saunaspace-logo-faded-red-glow-transparent.png","section_id":""}},"richtext_content_pcp6tM":{"type":"richtext-content","blocks":{"content_7dYJp6":{"type":"content","settings":{"spacing_top":45,"spacing_bottom":40,"spacing_top_mobile":20,"spacing_bottom_mobile":20,"font_size":16,"font_size_mobile":14,"alt_bullets":false,"text_align":"left","content":"<h4>Our saunas are about the transformative experience first and foremost, but science is at our foundation. <\/h4><p>We love to geek out on science here at SaunaSpace, there are so many amazing studies coming out all the time of the benefits of NIR, red light therapy, and sauna therapy. We’ve got a TON of stuff for you to read, which we’ve organized below. We know this is a lot, if you want to get started with a more digestible deeper dive, check out our <a href=\"\/blogs\/the-wavelength\" title=\"The Wavelength\">founder's blog<\/a>.<\/p>"}},"content_iVDnUe":{"type":"content","settings":{"spacing_top":0,"spacing_bottom":0,"spacing_top_mobile":0,"spacing_bottom_mobile":0,"font_size":21,"font_size_mobile":14,"alt_bullets":false,"text_align":"left","content":""}}},"block_order":["content_7dYJp6","content_iVDnUe"],"name":"Rich text content","settings":{}},"items":{"type":"research-items","settings":{"mataobject_key":"research_items"}}},"order":["main","richtext_content_pcp6tM","items"]}

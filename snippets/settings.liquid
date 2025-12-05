@@ -1,0 +1,219 @@
+{%- style -%}
+  @font-face {
+    font-family: 'Romie Trial';
+    src: url({{ 'RomieTrial-Medium.woff2' | asset_url }}) format('woff2'),
+        url({{ 'RomieTrial-Medium.woff' | asset_url }}) format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Downloaded from: https://en.bestfonts.pro/font/download/638bd9acfdf378ec605d7b88 */
+  @font-face {
+    font-family: 'RM Neue';
+    src: url({{ 'RMNeue-Regular.woff2' | asset_url }}) format('woff2'),
+        url({{ 'RMNeue-Regular.woff' | asset_url }}) format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Manrope';
+    src: url({{ 'Manrope-Medium.woff2' | asset_url }}) format('woff2'),
+        url({{ 'Manrope-Medium.woff' | asset_url }}) format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Manrope';
+    src: url({{ 'Manrope-Light.woff2' | asset_url }}) format('woff2'),
+        url({{ 'Manrope-Light.woff' | asset_url }}) format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Manrope';
+    src: url({{ 'Manrope-Bold.woff2' | asset_url }}) format('woff2'),
+        url({{ 'Manrope-Bold.woff' | asset_url }}) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Manrope';
+    src: url({{ 'Manrope-ExtraBold.woff2' | asset_url }}) format('woff2'),
+        url({{ 'Manrope-ExtraBold.woff' | asset_url }}) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Manrope';
+    src: url({{ 'Manrope-Regular.woff2' | asset_url }}) format('woff2'),
+        url({{ 'Manrope-Regular.woff' | asset_url }}) format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Manrope';
+    src: url({{ 'Manrope-SemiBold.woff2' | asset_url }}) format('woff2'),
+        url({{ 'Manrope-SemiBold.woff' | asset_url }}) format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  {%- liquid
+    assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+    assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+    assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+    assign colors_codes = settings.swatches_hex_codes | newline_to_br | strip_newlines | split: '<br />'
+  %}
+
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {{ body_font_bold | font_face: font_display: 'swap' }}
+  {{ body_font_italic | font_face: font_display: 'swap' }}
+  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+  {{ settings.type_header_font | font_face: font_display: 'swap' }}
+
+  [data-oke-widget] .okeReviews::before {
+    content: '{{ 'apps.okendo.title' | t }}';
+  }
+
+  :root {
+    --font-body-family: 'Manrope', {{ settings.type_body_font.fallback_families }};
+    --font-body-style: {{ settings.type_body_font.style }};
+    --font-body-weight: {{ settings.type_body_font.weight }};
+
+    --font-buttons-family: 'Manrope', {{ settings.type_body_font.fallback_families }};
+    --font-buttons-style: normal;
+    --font-buttons-weight: 700;
+
+    --font-heading-family: 'Romie Trial', {{ settings.type_header_font.fallback_families }};
+    --font-heading-style: {{ settings.type_header_font.style }};
+    --font-heading-weight: {{ settings.type_header_font.weight }};
+
+    --font-secondary: 'RM Nueu', sans-serif;
+
+    --font-body-scale: 1;
+    --font-heading-scale: 1;
+
+    --color-background-body: {{ settings.body_background_color }};
+    --color-background-media: {{ settings.media_background_color }};
+
+    --color-headings: {{ settings.headings_color }};
+    --color-paragraphs: {{ settings.paragraphs_color }};
+
+    --color-solid-button: {{ settings.buttons_solid_color }};
+    --color-solid-button-background: {{ settings.buttons_solid_background }};
+
+    --color-solid-button-alt: {{ settings.buttons_solid_color_alt }};
+    --color-solid-button-background-alt: {{ settings.buttons_solid_background_alt }};
+
+    --color-outline-button: {{ settings.buttons_outline_color }};
+    --color-outline-button-hover: {{ settings.buttons_outline_color_hover }};
+    --color-outline-button-border: {{ settings.buttons_outline_border }};
+
+    --color-red: {{ settings.red_color }};
+    --color-background-primary: {{ settings.background_primary }};
+    --color-background-secondary: {{ settings.background_secondary }};
+    --color-background-accent: {{ settings.background_accent }};
+    --color-subdued: {{ settings.subdued_color }};
+    --color-border: {{ settings.border }};
+    --color-light: #FAF8F2;
+    --color-beige: #F4F0E0;
+    --color-pinkish: #F0E7DA;
+    --color-dark: #152114;
+    --color-red: #FF3A00;
+
+    {%- for color_code in colors_codes -%}
+      {%- liquid
+        assign color_code_value = color_code | split: '|' | last
+        capture color_value
+          if color_code_value contains '.'
+            assign color_image = color_code_value | strip | file_img_url: '36x'
+            echo 'url(' | append: color_image | append: ')'
+          else
+            echo color_code_value
+          endif
+        endcapture
+      -%}
+      --color-swatch-{{ color_code | split: '|' | first | handle }}: {{ color_value }};
+    {%- endfor -%}
+
+    --page-width: 1440px;
+    --page-gutter: 5rem;
+
+    --spacing-grid-col: 3.2rem;
+    --spacing-grid-row: 7.2rem;
+    --spacing-grid-col-mobile: 2.4rem;
+    --spacing-grid-row-mobile: 3.8rem;
+
+    --duration-short: 100ms;
+    --duration-default: 200ms;
+    --duration-long: 500ms;
+
+    --timing-default: ease;
+
+    --z-header: 400;
+    --z-modals: 800;
+
+    --promo-bar-height: 40px;
+
+    --fsbase: {{ settings.body_fs_base | default: "8.5" }}px;
+    --font-heading-scale: {{ settings.headings_fs_scale | default: ".85" }};
+  }
+
+  @media screen and (max-width: 1279px) {
+    :root {
+      --page-gutter: 2.4rem;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    :root {
+      --fsbase: {{ settings.body_fs_base_tablet | default: "9.5" }}px;
+      --font-heading-scale: {{ settings.headings_fs_scale_tablet | default: ".92" }};
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    :root {
+      --page-gutter: 2.4rem;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    :root {
+      --fsbase: {{ settings.body_fs_base_mobile | default: "11" }}px;
+      --font-heading-scale: {{ settings.headings_fs_scale_mobile | default: "1" }};    
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    :root {
+      --page-gutter: 2rem;
+    }
+  }
+
+  {%- for color_code in colors_codes -%}
+    {%- assign swatch_name = color_code | split: '|' | first | handle -%}
+    {%- assign swatch_value = color_code | split: '|' | last -%}
+    .swatch--{{ swatch_name }} {
+      {%- if swatch_value contains '.' -%}
+        background-image: var(--color-swatch-{{ swatch_name }});
+      {%- else -%}
+        color: var(--color-swatch-{{ swatch_name }});
+      {%- endif -%}
+    }
+  {%- endfor -%}
+{%- endstyle -%}

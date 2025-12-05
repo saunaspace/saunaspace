@@ -1,0 +1,121 @@
+.callout-v3 {
+  position: relative;
+  overflow: hidden;
+  padding: 20.2rem 0;
+}
+
+.callout-v3 .container {
+  --page-width: 162rem;
+}
+
+.callout-v3 .callout__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.callout-v3 .callout__background:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-background);
+  z-index: 2;
+}
+
+.callout-v3 .callout__media {
+  height: 100%;
+}
+
+.callout-v3 .callout__inner {
+  position: relative;
+  z-index: 5;
+}
+
+.callout-v3 .callout__body {
+  max-width: 64rem;
+  padding: 11.9rem 0 0;
+  margin-left: auto;
+  border-radius: 2.9rem;
+  backdrop-filter: blur(3rem);
+  -webkit-backdrop-filter: blur(3rem);
+  color: #fff;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(4rem);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.callout-v3:focus .callout__body,
+.callout-v3:focus-within .callout__body,
+.callout-v3:hover .callout__body {
+  opacity: 1;
+  transform: translate(0);
+}
+
+html.shopify-design-mode .callout-v3 .callout__body,
+html.shopify-design-mode .callout-v3 .callout__body,
+html.shopify-design-mode .callout-v3 .callout__body {
+  opacity: 1;
+  transform: translate(0);
+}
+
+.callout-v3 .callout__body-inner {
+  margin-bottom: 11.9rem;
+  padding: 0 8rem;
+}
+
+.callout-v3 .callout__title {
+  margin: 0 0 5rem;
+  color: #faf8f2;
+}
+
+.callout-v3 .callout__content {
+  line-height: 2.05;
+}
+
+.callout-v3 .callout__actions {
+  background-color: #f0e7da;
+}
+
+.callout-v3 .callout__link {
+  display: flex;
+  justify-content: center;
+  padding: 3.43rem 1rem;
+}
+
+@media screen and (max-width: 749px) {
+  .callout-v3 {
+    padding: 15.4rem 0;
+  }
+
+  .callout-v3 .callout__title {
+    margin: 0 0 1.7rem;
+    font-size: calc(var(--fsbase) * 2.8);
+  }
+
+  .callout-v3 .callout__content {
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 1.73;
+  }
+
+  .callout-v3 .callout__body {
+    max-width: 100%;
+    padding: 4rem 0 0;
+    border-radius: 1rem;
+  }
+
+  .callout-v3 .callout__body-inner {
+    padding: 0 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .callout-v3 .callout__link {
+    padding: 1.8rem 1rem;
+  }
+}

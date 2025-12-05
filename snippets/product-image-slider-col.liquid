@@ -1,0 +1,21 @@
+{% liquid
+    assign has_var_images = false
+    unless product.has_only_default_variant
+    for var in product.variants
+        if var.image != blank
+        assign has_var_images = true
+        endif
+    endfor
+    endunless
+%}
+{%- if product.media.size > 0 or has_var_images == true -%}
+<div class="product__col col--prod-image-slider">
+    {% if has_var_images == true %}{% comment %}and product.metafields.custom.product_media_slider_show_variant_images == true{% endcomment %}
+        {%- render 'main-product__media-variants', product_ref: product, section_ref: section, display_custom_thumbnails: true -%}
+    {% else %}
+        {%- render 'main-product__media', product_ref: product, section_ref: section -%}
+    {% endif %}
+
+    {%- render 'product-media-features', product: product -%}
+</div><!-- /.product__col -->
+{%- endif -%}

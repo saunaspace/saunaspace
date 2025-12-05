@@ -1,0 +1,136 @@
+/* ==========================================================================
+   .video
+   ========================================================================== */
+
+.video {
+  padding: 5rem 0 0;
+  position: relative;
+  color: var(--color-beige);
+}
+
+/*
+   .video .container
+   ========================================================================== */
+
+.video .container {
+  position: relative;
+  min-height: 100vh;
+}
+
+/*
+   .video__video
+   ========================================================================== */
+
+.video__image,
+.video__video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video__image {
+  pointer-events: none;
+  opacity: var(--opacity);
+}
+
+.video__video:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, var(--opacity));
+}
+
+.video__video video,
+.video__video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*
+   .video__inner
+   ========================================================================== */
+
+.video__inner {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 970px;
+  margin: 0 auto;
+  padding-top: 18.3rem;
+  padding-bottom: 18.3rem;
+}
+
+.video__heading {
+  margin-bottom: 4.4rem;
+  font-size: calc(var(--fsbase) * 7.2);
+}
+
+.video__content {
+  margin-bottom: 4.7rem;
+}
+
+.video__content p {
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 1.7;
+}
+
+.video__actions {
+}
+
+/* Small desktop */
+@media (max-width: 1279px) {
+  .video .container,
+  .video__inner {
+    min-height: initial;
+  }
+
+  .video__inner {
+    padding-block: 4.8rem 4rem;
+  }
+}
+
+/* Mobile */
+@media only screen and (max-width: 749px) {
+  .video {
+    padding: 2.8rem 0 0;
+  }
+
+  .video .container {
+    min-height: 491px;
+  }
+
+  .video__inner {
+    max-width: 320px;
+    min-height: 491px;
+  }
+
+  .video__heading {
+    font-size: calc(var(--fsbase) * 2.8);
+    margin-bottom: 1.1rem;
+  }
+
+  .video__content {
+    margin-bottom: 1.6rem;
+  }
+
+  .video__content p {
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.714;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .video__heading {
+    max-width: 24rem;
+  }
+}

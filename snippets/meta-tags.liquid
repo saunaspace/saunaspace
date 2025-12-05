@@ -3,37 +3,91 @@
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
   assign og_description = page_description | default: shop.description | default: shop.name
+  assign og_image = null
+  assign og_image_alt = null
 
-  if request.page_type == 'product'
+  if request.page_type == 'page'
+    assign og_type = 'website'
+    assign featured_image_ref = page.metafields.page.featured_image
+    if featured_image_ref
+      assign og_image = featured_image_ref | image_url: width: 1200
+      assign og_image_alt = page.metafields.page.featured_image_alt
+    endif
+
+  elsif request.page_type == 'product'
     assign og_type = 'product'
+    assign og_title = product.title
+    assign og_description = product.description | strip_html | truncate: 200
+    assign og_image = product.featured_image | image_url: width: 1200
+    assign og_image_alt = product.featured_image.alt
+
   elsif request.page_type == 'article'
     assign og_type = 'article'
-  elsif request.page_type == 'password'
-    assign og_url = request.origin
-  endif
-%}
+    assign og_title = article.title
+    assign og_description = article.excerpt_or_content | strip_html | truncate: 200
+    assign og_image = article.image | image_url: width: 1200
+    assign og_image_alt = article.image.alt
 
+  elsif request.page_type == 'index'
+    assign og_type = 'website'
+    assign og_title = page_title
+    assign og_description = page_description
+    assign og_image = '//cdn.shopify.com/s/files/1/0026/7229/6025/files/sauna-learn-this-isnt-just-a-sauna.jpg?v=1752364094'
+    assign og_image_alt = "Woman relaxing in FireLight Infrared Sauna in bright, modern room with warm lighting"
+  endif
+
+  unless og_image
+    assign og_image = settings.default_social_share_image | image_url: width: 1200
+  endunless
+-%}
+
+<!-- Open Graph Tags -->
 <meta property="og:site_name" content="{{ shop.name }}">
 <meta property="og:url" content="{{ og_url }}">
 <meta property="og:title" content="{{ og_title | escape }}">
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
+<meta property="fb:app_id" content="372033192897621">
 
-{%- if page_image -%}
-  <meta property="og:image" content="http:{{ page_image | image_url }}">
-  <meta property="og:image:secure_url" content="https:{{ page_image | image_url }}">
-  <meta property="og:image:width" content="{{ page_image.width }}">
-  <meta property="og:image:height" content="{{ page_image.height }}">
+{%- if og_image -%}
+  <meta property="og:image" content="https:{{ og_image }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  {%- if og_image_alt != blank -%}
+    <meta property="og:image:alt" content="{{ og_image_alt | escape }}">
+    <meta name="twitter:image:alt" content="{{ og_image_alt | escape }}">
+  {%- endif -%}
+  <meta name="twitter:image" content="https:{{ og_image }}">
 {%- endif -%}
 
+<!-- Twitter Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+
+<!-- Product Price (Products Only) -->
 {%- if request.page_type == 'product' -%}
   <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {%- endif -%}
 
-{%- if settings.social_twitter_link != blank -%}
-  <meta name="twitter:site" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
-{%- endif -%}
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ og_title | escape }}">
-<meta name="twitter:description" content="{{ og_description | escape }}">
+<!-- Search Engine Visibility Control -->
+{%- case request.page_type -%}
+  {%- when 'product' -%}
+    {% if product.metafields.custom.search_engine_visible == false %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+  {%- when 'article' -%}
+    {% if article.metafields.custom.search_engine_visible == false %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+  {%- when 'blog' -%}
+    {% if blog.metafields.custom.search_engine_visible == false %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+  {%- when 'page' -%}
+    {% if page.metafields.custom.search_engine_visible == false %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+{%- endcase -%}

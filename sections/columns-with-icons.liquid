@@ -1,0 +1,139 @@
+{{- 'section-columns-icons.css' | asset_url | stylesheet_tag -}}
+{{- 'component-column-icon-card.css' | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign _section = section.settings
+  assign _blocks = section.blocks
+  assign title = _section.title
+
+  if request.visual_preview_mode
+    assign title = 'Title goes here'
+  endif
+-%}
+
+<div class="columns-icons relative overflow-hidden">
+  <div class="container">
+    {%- if title != blank -%}
+      <h2 class="columns-icons__title">
+        {{- title | escape -}}
+      </h2><!-- /.columns-icons__title -->
+    {%- endif -%}
+
+    {%- if _blocks.size > 0 -%}
+      <ul class="columns-icons__cols list-unstyled">
+        {%- for block in _blocks -%}
+          {%- assign _block = block.settings -%}
+
+          {%- if _block.title != blank or _block.content != blank -%}
+            <li>
+              <div
+                class="column-icon-card"
+                {{ block.shopify_attributes }}
+                style="--max-width: {{ _block.icon_width }}px; --max-width-mobile: {{ _block.icon_width_mobile }}px;"
+              >
+                {%- if _block.icon != blank -%}
+                  <div class="column-icon-card__media media media--transparent media--aspect-ratio">
+                    {%- render 'image', image: _block.icon -%}
+                  </div><!-- /.column-icon-card__media -->
+                {%- endif -%}
+
+                <div class="column-icon-card__body">
+                  {%- if _block.title != blank -%}
+                    <h4 class="column-icon-card__title h5">
+                      {{- _block.title -}}
+                    </h4><!-- /.column-icon-card -->
+                  {%- endif -%}
+
+                  {%- if _block.content != blank -%}
+                    <div class="column-icon-card__content">
+                      {{- _block.content | escape | newline_to_br -}}
+                    </div><!-- /.column-icon-card -->
+                  {%- endif -%}
+                </div><!-- /.column-icon-card__body -->
+              </div><!-- /.column-icon-card -->
+            </li><!-- /.columns-icons__col -->
+          {%- endif -%}
+        {%- endfor -%}
+      </ul><!-- /.columns-icons__cols -->
+    {%- endif -%}
+  </div><!-- /.container -->
+</div><!-- /.columns-icons -->
+
+{% schema %}
+{
+  "name": "Columns with icons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Title goes here"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "name": "Block",
+      "type": "block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "min": 20,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon max-width",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "icon_width_mobile",
+          "min": 20,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon max width mobile",
+          "default": 40
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Title goes here"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora, fuga!"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Columns with icons",
+      "blocks": [
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        },
+        {
+          "type": "block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

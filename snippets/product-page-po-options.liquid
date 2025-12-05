@@ -1,0 +1,45 @@
+{% comment %}
+<ul class="product__info-list list-unstyled">
+    <li>
+        <a href="https://sauna.space/pages/financing" class="po-link">
+            {%- render 'icon-split-it' -%}
+
+            {{- 'products.product.payments.split_it.text' | t -}}
+
+            <span title="{{- 'products.product.payments.split_it.tooltip' | t -}}">
+            {%- render 'icon-info-solid' -%}
+            </span>
+        </a>
+    </li>
+    <li>
+        <a href="https://sauna.space/pages/truemed-hsa-fsa-payment" class="po-link">
+            {%- render 'icon-shop-pay' -%}
+
+            {{- 'products.product.payments.shop_pay.text' | t -}}
+
+            <span title="{{- 'products.product.payments.shop_pay.tooltip' | t -}}">
+            {%- render 'icon-info-solid' -%}
+            </span>
+        </a>
+    </li>
+</ul>
+{% endcomment %}
+
+<div class="product-financing-options">
+    <details>
+        <summary>Financing Available in Checkout</summary>
+        <div class="content-cnt">
+        <div class="row splitit-row">
+            <p>{%- render 'icon-split-it' -%} <span>Monthly payments using your credit card. 0% APR interest. <a href="#" class="link js-splitit-trigger">Learn more</a></span></p>
+        </div>
+        <div class="row truemed-row">
+            {% comment %}
+            <a href="https://sauna.space/pages/truemed-hsa-fsa-payment" class="po-link js-truemed-trigger">
+            {%- render 'icon-truemed' -%} <span>Pay with HSA/FSA Save an average of 30%</span>
+            </a>
+            {% endcomment %}
+            <p>HSA/FSA-eligible with <i>{%- render 'icon-truemed' -%}</i> <a href="#" class="link js-truemed-trigger">Learn more</a></p>
+        </div>
+        </div>
+    </details>
+</div>

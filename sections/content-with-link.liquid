@@ -1,0 +1,102 @@
+{{- 'section-content-with-link.css' | asset_url | stylesheet_tag -}}
+
+{%- assign _section = section.settings -%}
+
+<section class="content-link">
+  <div class="container">
+    {%- if _section.top_link_label != blank and _section.top_link_url -%}
+      <div class="content-link__top-link">
+        <a href="{{ _section.top_link_url }}" class="content-link__link link-dot">
+          {{ _section.top_link_label }}
+        </a>
+      </div><!-- /.content-link__top-link -->
+    {%- endif -%}
+
+    {%- if _section.title != blank -%}
+      <h2 class="content-link__title">
+        {{- _section.title -}}
+      </h2><!-- /.content-link__title -->
+    {%- endif -%}
+
+    {%- if _section.content != blank -%}
+      <div class="content-link__text rte">
+        {{- _section.content -}}
+      </div><!-- /.content-link__text -->
+    {%- endif -%}
+
+    {%- if _section.sticky_btn_label != blank and _section.sticky_btn_url != blank -%}
+      <div class="content-link__sticky-btn">
+        <a href="{{ _section.sticky_btn_url }}" class="content-link__btn button">
+          <span>
+            {{ _section.sticky_btn_label }}
+          </span>
+
+          <i>
+            {%- render 'icon-email' -%}
+          </i>
+        </a>
+      </div><!-- /.content-link__top-link -->
+    {%- endif -%}
+  </div><!-- /.container -->
+</section><!-- /.content-link -->
+
+{% schema %}
+  {
+    "name": "Content with link",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Top link"
+      },
+      {
+        "type": "text",
+        "id": "top_link_label",
+        "label": "Label",
+        "default": "Back to Current Openings"
+      },
+      {
+        "type": "url",
+        "id": "top_link_url",
+        "label": "Link",
+        "default": "/"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Looking for a job you can feel good about?"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content",
+        "default": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias ex voluptas optio velit in obcaecati cupiditate ad atque sed earum.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Sticky button"
+      },
+      {
+        "type": "text",
+        "id": "sticky_btn_label",
+        "label": "Label"
+      },
+      {
+        "type": "url",
+        "id": "sticky_btn_url",
+        "label": "Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Content with link",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

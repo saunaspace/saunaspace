@@ -1,0 +1,87 @@
+.section-content-card-grid {
+    background: white;
+}
+.content-card-grid > .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.card-grid__content {
+    padding: 60px 0;
+}
+h2.card-grid-heading {
+    margin-bottom: 60px;
+}
+.content-card-grid span.tr-img {
+  display: inline-block;
+  width: 230px;
+  height: 40px;
+  background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/truemed-navy.svg?v=1729783501);
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  pointer-events: none;
+  font-size: 0;
+}
+@media (max-width: 1270px) {
+    .content-card-grid span.tr-img {
+        width: 200px;
+        height: 36px;
+    }
+}
+@media (max-width: 749px) {
+    .content-card-grid span.tr-img {
+        width: 165px;
+        height: 30px;
+    }
+}
+.section-cards-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+@media (max-width: 1023px) {
+    .section-cards-content {
+        grid-template-columns: 1fr;
+    }
+}
+.section-cards-content .content-card {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 21px;
+    background: #F0E7DA;
+}
+.section-cards-content .card-title {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.section-cards-content .content-card .card-content {
+    font-size: 1.3em;
+    line-height: 1.5;
+}
+@media (max-width: 749px) {
+    .section-cards-content .content-card .card-content {
+        font-size: 1.2em;
+    }
+}
+.section-bottom-content .button {
+    margin-top: 60px;
+    margin-bottom: 25px;
+    color: #42392C;
+}
+.section-bottom-content .button:hover {
+    color: #f0e7da;
+}
+.section-bottom-content .card-grid__text a[href="#truemed"] {
+  display: inline-block;
+  width: 80px;
+  height: 14px;
+  background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/truemed-navy.svg?v=1729783501);
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  text-decoration: none;
+  pointer-events: none;
+  font-size: 0;
+}

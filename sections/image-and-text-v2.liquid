@@ -1,0 +1,180 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-image-and-text-v2-" | append: section.index
+  endif
+%}
+{%- if section.settings.content != blank -%}
+  <section class="image-and-text-v2 relative" id="{{ sec_id }}">
+    <div class="image-and-text-v2__inner{% if section.settings.flip_content %} is-reversed{% endif %}{% if section.settings.set_image_edge %} is-image-absolute{% endif %}">
+      {%- if section.settings.image != blank -%}
+        <div class="image-and-text-v2__image">
+          <div class="media media--aspect-ratio media--transparent">
+            {%- render 'image', image: section.settings.image -%}
+          </div><!-- /.media -->
+        </div><!-- /.image-and-text-v2__image -->
+      {%- endif -%}
+
+      <div class="image-and-text-v2__content">
+        <p>{{- section.settings.content -}}</p>
+      </div><!-- /.image-and-text-v2__content -->
+    </div><!-- /.image-and-text-v2__inner -->
+  </section><!-- /.image-and-text-v2 -->
+{%- endif -%}
+
+{% style %}
+  .image-and-text-v2 {
+    font-family: var(--font-heading-family);
+    aspect-ratio: 1920 / 1080;
+    display: flex;
+    align-items: center;
+    padding: 10rem 0;
+    background: #000;
+    color: #f4f0e0;
+    font-size: calc(var(--fsbase) * 4.8);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .image-and-text-v2__inner {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    max-width: 160rem;
+    width: 100%;
+    padding: 0 4rem;
+    margin: 0 auto;
+  }
+
+  .image-and-text-v2__inner.is-reversed {
+    flex-flow: row-reverse wrap;
+  }
+
+  .image-and-text-v2__image {
+    max-width: 70rem;
+  }
+
+  .image-and-text-v2__content {
+    position: relative;
+    flex: 1;
+    padding-left: 16rem;
+  }
+
+  .image-and-text-v2__inner.is-reversed .image-and-text-v2__content {
+    padding-left: 0;
+    padding-right: 16rem;
+  }
+
+  @media screen and (max-width: 1440px) {
+    .image-and-text-v2__image {
+      max-width: 50%;
+    }
+
+    .image-and-text-v2__content {
+      padding-left: 6rem;
+    }
+
+    .image-and-text-v2__inner.is-reversed .image-and-text-v2__content {
+      padding-right: 6rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .image-and-text-v2__inner.is-image-absolute .image-and-text-v2__image {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      max-width: none;
+      width: 57.06%;
+    }
+
+    .image-and-text-v2__inner.is-image-absolute .image-and-text-v2__image img {
+      width: 100%;
+    }
+
+    .image-and-text-v2__inner.is-image-absolute.is-reversed .image-and-text-v2__image {
+      right: 0;
+      left: auto;
+    }
+
+    .image-and-text-v2__inner.is-image-absolute .image-and-text-v2__content {
+      max-width: 43.3%;
+      margin: 0 0 0 auto;
+      padding: 0;
+    }
+
+    .image-and-text-v2__inner.is-image-absolute.is-reversed .image-and-text-v2__content {
+      margin: 0 auto 0 0;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .image-and-text-v2 {
+      display: block;
+      aspect-ratio: initial;
+      font-size: calc(var(--fsbase) * 2.4);
+    }
+
+    .image-and-text-v2__image {
+      max-width: 100%;
+      margin-bottom: 2.4rem;
+    }
+
+    .image-and-text-v2__content {
+      padding-left: 0;
+    }
+
+    .image-and-text-v2__inner.is-reversed .image-and-text-v2__content {
+      padding-right: 0;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .image-and-text-v2 {
+      font-size: calc(var(--fsbase) * 1.6);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Image and text V2",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "flip_content",
+      "label": "t:sections.image-and-text.settings.flip_content.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "set_image_edge",
+      "label": "Set image to edge"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-and-text.settings.image.label"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "t:sections.image-and-text.settings.content.label"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Image and text V2"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,33 @@
+.hero-oembed.oembed-active .hero-banner__background {
+    pointer-events: all;
+}
+.hero-oembed.oembed-active .hero-banner__inner,
+.hero-oembed.oembed-active .hero-banner__media,
+.hero-oembed.oembed-active .hero-banner__background::after {
+    display: none;
+}
+.hero-oembed .oembed-video {
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.hero-oembed.oembed-active .oembed-video {
+    display: block;
+}
+.hero-oembed .oembed-video iframe {
+    display: block;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    max-width: none;
+    min-height: 100%;
+    max-height: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    min-height: auto;
+}

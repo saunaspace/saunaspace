@@ -1,0 +1,52 @@
+/* ------------------------------------------------------------ *\
+  component column logo card
+\* ------------------------------------------------------------ */
+
+.column-logo-card {
+  border: 1px solid #C4C4C4;
+  border-radius: 1rem;
+  padding: 8rem 7.15rem 9rem;
+}
+
+@media (max-width: 1023px) {
+  .column-logo-card {
+    padding: 6rem 4rem;
+  }
+}
+
+@media (max-width: 749px) {
+  .column-logo-card {
+    padding: 4rem 2rem 2.6rem;
+  }
+}
+
+.column-logo-card__logo {
+  margin: 0 auto 5.8rem;
+  max-width: var(--max-width);
+}
+
+@media (max-width: 749px) {
+  .column-logo-card__logo {
+    margin-bottom: 3.2rem;
+    max-width: var(--max-width-mobile);
+  }
+}
+
+.column-logo-card__content {
+  text-align: left;
+  font-size: calc(var(--fsbase) * 2.1);
+  font-weight: 500;
+  border-top: 1px solid #CFCDCA;
+  padding-top: 1.2rem;
+}
+
+@media (max-width: 749px) {
+  .column-logo-card__content {
+    font-size: calc(var(--fsbase) * 1.4);
+  }
+}
+
+.column-logo-card__content hr {
+  margin: 1.1rem 0;
+  color: #CFCDCA;
+}

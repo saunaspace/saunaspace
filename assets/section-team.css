@@ -1,0 +1,107 @@
+/* ------------------------------------------------------------ *\
+  Team
+\* ------------------------------------------------------------ */
+
+.team {
+  padding-block: 13.8rem 13.3rem;
+}
+
+@media screen and (max-width: 767px) {
+  .team {
+    padding-block: 5.6rem 5.1rem;
+  }
+}
+
+.team .container {
+  max-width: 159rem;
+}
+
+.team__content {
+  max-width: 96rem;
+  text-align: center;
+  margin: 0 auto 8.5rem;
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 2;
+}
+
+@media screen and (max-width: 767px) {
+  .team__content {
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 1.66;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.team__heading {
+  line-height: 1;
+  margin-block: 0 2.8rem;
+  font-size: calc(var(--fsbase) * 5.4);
+}
+
+@media screen and (max-width: 767px) {
+  .team__heading {
+    font-size: calc(var(--fsbase) * 2.4);
+    margin-bottom: 2.5rem;
+  }
+}
+
+.team__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5.1rem 3.1rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .team__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .team__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.1rem 1.5rem;
+  }
+
+  .team__content,
+  .team__grid {
+    padding-inline: 2rem;
+  }
+}
+
+/*
+   Team member
+   ========================================================================== */
+
+.team__member-image {
+  border-radius: 1rem;
+  margin-bottom: 2.8rem;
+}
+
+.team__member-name {
+  margin-block: 0 0.8rem;
+  font-family: var(--font-body-family);
+  font-family: 600;
+  font-size: calc(var(--fsbase) * 2.4);
+  line-height: 1;
+}
+
+.team__member-description {
+  font-size: calc(var(--fsbase) * 1.8);
+  line-height: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .team__member-image {
+    margin-bottom: 1.5rem;
+  }
+
+  .team__member-name {
+    font-size: calc(var(--fsbase) * 1.8);
+    margin-bottom: 1rem;
+  }
+
+  .team__member-description {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}

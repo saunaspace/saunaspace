@@ -1,0 +1,127 @@
+{{- 'section-richtext-content-columns.css' | asset_url | stylesheet_tag -}}
+{%- liquid
+  assign _blocks = section.blocks
+  assign _section = section.settings
+
+  capture styles
+    echo '--spacing-top: '
+    echo _section.spacing_top | append: 'px;'
+    echo '--spacing-bottom: '
+    echo _section.spacing_bottom | append: 'px;'
+
+    echo '--spacing-top-mobile: '
+    echo _section.spacing_top_mobile | append: 'px;'
+    echo '--spacing-bottom-mobile: '
+    echo _section.spacing_bottom_mobile | append: 'px;'
+  endcapture
+-%}
+
+<section
+  class="richtext-content-columns"
+  style="{{ styles }}"
+>
+  <div class="container">
+    {%- if _section.title != blank -%}
+      <h2 class="richtext-content-columns__title">
+        {{- _section.title -}}
+      </h2><!-- /.richtext-content__title -->
+    {%- endif -%}
+
+    {%- if _blocks.size > 0 -%}
+      <div class="richtext-content-columns__body rte">
+        {%- for block in _blocks -%}
+          {%- assign _block = block.settings -%}
+
+          {%- if _block.content != blank -%}
+            <div
+              class="richtext-content-columns__block rte"
+              {{ block.shopify_attributes }}
+            >
+              {{- _block.content -}}
+            </div><!-- /.richtext-content-columns__block -->
+          {%- endif -%}
+        {%- endfor -%}
+      </div><!-- /.richtext-content-columns__body -->
+    {%- endif -%}
+
+    {%- if _section.footnote != blank -%}
+      <div class="richtext-content-columns__footnote">
+        {{- _section.footnote -}}
+      </div><!-- /.richtext-content-columns__footnote -->
+    {%- endif -%}
+  </div><!-- /.container -->
+</section><!-- /.richtext-content -->
+
+{% schema %}
+  {
+    "name": "Rich text content columns",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "number",
+        "id": "spacing_top",
+        "label": "Spacing top",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "spacing_bottom",
+        "label": "Spacing bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Mobile Spacing"
+      },
+      {
+        "type": "number",
+        "id": "spacing_top_mobile",
+        "label": "spacing top",
+        "default": 0
+      },
+      {
+        "type": "number",
+        "id": "spacing_bottom_mobile",
+        "label": "Spacing bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "footnote",
+        "label": "Footnote"
+      },
+    ],
+    "blocks": [
+      {
+        "name": "Column",
+        "type": "column",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Rich text content columns",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}

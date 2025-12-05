@@ -1,0 +1,48 @@
+<div class="product__top">
+    <h1 class="product__title">{{- product.title | escape -}}</h1>
+
+    {% comment %}
+    <div class="product__price" role="status">
+        {%- render 'price', product_ref: product, use_variant: true -%}
+    </div>
+    {% endcomment %}
+</div><!-- /.product__top -->
+
+{% comment %}<!-- Star Rating App -->{% endcomment %}
+<div class="product-star-rating">
+    {% for block in section.blocks %}
+    {% if block.type == "@app" and block.id contains "okendo_star_rating" %}{% render block %}{% endif %}
+    {% endfor %}
+</div>
+
+{% comment %}<!-- Product Description -->{% endcomment %}
+{%- if product.description != blank -%}
+{%- assign content_split = product.description | split: '</p>' -%}
+<div class="product__description rte">
+    {% if product.description.size < 350 or product.metafields.custom.disable_product_description_read_more %}
+        {{ product.description }}
+    {%- elsif content_split.size > 1 or product.description contains "<!-- READMORE -->" -%}
+        {% if product.description contains "<!-- READMORE -->" %}
+        {% assign content_split = product.description | split: "<!-- READMORE -->" %}
+        {{ content_split[0] }}
+        {% else %}
+        {{- product.description | split: '</p>' | first | append: '</p>' -}}
+        {% endif %}
+        <details>
+            <summary>
+                <span>{{- 'products.product.description_read_more' | t -}}</span>
+
+                <span>{{- 'products.product.description_read_less' | t -}}</span>
+            </summary>
+
+            <div>
+                {%- for entry in content_split offset: 1 -%}
+                {{- entry -}}
+                {%- endfor -%}
+            </div>
+        </details>
+    {%- else -%}
+        {{- product.description -}}
+    {%- endif -%}
+</div><!-- /.product__description rte -->
+{%- endif -%}

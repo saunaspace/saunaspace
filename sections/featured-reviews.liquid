@@ -1,0 +1,211 @@
+{%- assign metaobject_key = section.settings.mataobject_key | default: '' -%}
+{% comment %}{%- unless shop.metaobjects[metaobject_key].values.size == 0 -%}{% endcomment %}
+{%- unless section.blocks.size < 0 and shop.metaobjects[metaobject_key].values.size == 0 -%}
+  <link rel="stylesheet" href="{{ 'section-featured-reviews.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-featured-review.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  <noscript>
+    {{- 'section-featured-reviews.css' | asset_url | stylesheet_tag -}}
+    {{- 'component-featured-review.css' | asset_url | stylesheet_tag -}}
+  </noscript>
+
+  <script src="{{- 'featured-reviews.js' | asset_url -}}" defer="defer" ></script>
+
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h3 class="featured-reviews__heading">
+        {{- section.settings.heading | escape -}}
+      </h3><!-- /.featured-reviews__heading -->
+    {%- endif -%}
+
+    {% comment %}
+    {%- assign featured_reviews = shop.metaobjects[metaobject_key].values -%}
+    {%- assign categories = featured_reviews | map: 'category' | uniq -%}
+    {%- assign featured_review = section.settings.featured_review -%}
+    {% endcomment %}
+
+    {% liquid
+      assign featured_reviews = section.blocks
+      assign categories = "Lifestyle,Athletic,Medical" | split: ","
+      assign featured_review = featured_reviews[0]
+    %}
+
+    <featured-reviews
+      class="featured-reviews__inner"
+      {% if section.settings.autoplay_carousel %}
+        data-autoplay="{{ section.settings.autoplay_speed | times: 1000 }}"
+      {% endif %}
+    >
+      <nav class="featured-reviews__nav" data-review-filters>
+        <ul>
+          <li>
+            <button data-category="all" class="featured-reviews__nav-link is-active">
+              All
+            </button><!-- /.featured-reviews__nav-link -->
+          </li>
+
+          {%- for category in categories -%}
+            <li>
+              <button data-category="{{ category | handle }}" class="featured-reviews__nav-link">
+                {{- category | escape -}}
+              </button><!-- /.featured-reviews__nav-link -->
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav><!-- /.featured-reviews__nav -->
+
+      {%- if featured_review != blank and featured_reviews.size > 1 -%}
+        <div class="featured-reviews__showcase">
+          {%- render 'featured-review', featured_review: featured_review.settings -%}
+        </div><!-- /.featured-reviews__showcase -->
+      {%- endif -%}
+
+      <div class="featured-reviews__slider" data-reviews>
+        <div class="swiper" data-slider>
+          <div class="swiper-wrapper">
+            {%- for review in featured_reviews -%}
+              {%-
+                liquid
+                if forloop.first == true and featured_reviews.size > 1
+                  continue
+                endif
+              -%}
+
+              <div
+                class="swiper-slide featured-reviews__slide"
+                data-review
+                data-category="{{ review.settings.category | handle }}"
+              >
+                {% render 'featured-review', featured_review: review.settings, compact: true %}
+              </div><!-- /.swiper-slide -->
+            {%- endfor -%}
+          </div><!-- /.swiper-wrapper -->
+        </div><!-- /.swiper -->
+
+        <div class="featured-reviews__slider-arrows">
+          <button class="featured-reviews__slider-arrow featured-reviews__slider-arrow--prev" data-arrow-prev>
+            {%- render 'icon-slider-chevron-left' -%}
+          </button>
+
+          <button class="featured-reviews__slider-arrow featured-reviews__slider-arrow--next" data-arrow-next>
+            {%- render 'icon-slider-chevron-right' -%}
+          </button>
+        </div><!-- /.featured-reviews__slider-arrows -->
+      </div><!-- /.featured-reviews__slider -->
+    </featured-reviews><!-- /.featured-reviews__inner -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Featured reviews",
+  "class": "featured-reviews",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured reviews"
+    },
+    {
+      "type": "metaobject",
+      "id": "featured_review",
+      "label": "Featured review",
+      "metaobject_type": "featured_review"
+    },
+    {
+      "type": "text",
+      "id": "mataobject_key",
+      "label": "Metaobject key",
+      "info": "These will show in a carousel and will be filtered",
+      "default": "featured_review"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_carousel",
+      "label": "Autoplay carousel",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 5,
+      "max": 15,
+      "step": 1,
+      "unit": "sec",
+      "label": "Autoplay speed",
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "position",
+          "label": "Position"
+        },
+        {
+          "type": "richtext",
+          "id": "review",
+          "label": "Review"
+        },
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "label": "Subtext"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            {
+              "value": "medical",
+              "label": "Medical"
+            },
+            {
+              "value": "athletic",
+              "label": "Athletic"
+            },
+            {
+              "value": "lifestyle",
+              "label": "Lifestyle"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Featured reviews"
+    }
+  ]
+}
+{% endschema %}

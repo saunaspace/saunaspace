@@ -1,0 +1,191 @@
+{%- unless section.blocks.size == 0 -%}
+  {%- if section.index < 2 -%}
+    {{- 'section-contact-blocks.css' | asset_url | stylesheet_tag -}}
+  {%- else -%}
+    <link rel="stylesheet" href="{{ 'section-contact-blocks.css' | asset_url }}" media="print" onload="this.media='all'">
+
+    <noscript>
+      {{- 'section-contact-blocks.css' | asset_url | stylesheet_tag -}}
+    </noscript>
+  {%- endif -%}
+
+  <div class="container">
+    {%- if section.settings.body_text != blank -%}
+      <p class="contact-blocks__body-text">
+        {{- section.settings.body_text | escape | newline_to_br -}}
+      </p><!-- /.contact-blocks__body-text -->
+    {%- endif -%}
+
+    <div class="contact-blocks__grid">
+      {%- for block in section.blocks -%}
+        {%-
+          liquid
+          if block.settings.heading == blank
+            continue
+          endif
+        -%}
+
+        <div class="contact-blocks__grid-item contact-block">
+          {%- if block.settings.icon != 'none' -%}
+            <div class="contact-block__icon">
+              {%- render 'icon-get', icon: block.settings.icon %}
+            </div><!-- /.contact-block__icon -->
+          {%- endif -%}
+
+          <h3 class="contact-block__heading h5">
+            {{- block.settings.heading | escape -}}
+          </h3><!-- /.contact-block__heading -->
+
+          {%- if block.settings.link_text != blank and block.settings.link_url != blank -%}
+            <a
+              class="contact-block__link link-underline"
+              {% if block.settings.link_url != '#chat' %}
+                href="{{ block.settings.link_url }}"
+              {% else %}
+                href="#"
+                data-chat-link
+              {% endif %}
+            >
+              {{- block.settings.link_text | escape -}}
+            </a><!-- /.contact-block__link -->
+          {%- endif -%}
+        </div><!-- /.contact-blocks__grid-item -->
+      {%- endfor -%}
+    </div><!-- /.contact-blocks__grid -->
+  </div><!-- /.container -->
+{%- endunless -%}
+
+{% javascript %}
+  /**
+   * Init Chat Link.
+   */
+  const initChatLink = () => {
+    const chatLink = document.querySelector('[data-chat-link]');
+
+    if (!chatLink) {
+      return;
+    }
+
+    chatLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      window?.GorgiasChat?.open();
+    })
+  };
+
+  initChatLink();
+
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Contact Blocks",
+  "class": "contact-blocks",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "contact-block",
+      "name": "Contact Block",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "calendar-alt",
+              "label": "Calendar - Alt"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "phone",
+              "label": "Phone"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Block heading"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Blocks",
+      "blocks": [
+        {
+          "type": "contact-block",
+          "settings": {
+            "icon": "email",
+            "heading": "Contact us",
+            "link_text": "Contact us",
+            "link_url": "/contact"
+          }
+        },
+        {
+          "type": "contact-block",
+          "settings": {
+            "icon": "phone",
+            "heading": "Call us",
+            "link_text": "Call us",
+            "link_url": "tel:+1234567890"
+          }
+        },
+        {
+          "type": "contact-block",
+          "settings": {
+            "icon": "chat",
+            "heading": "Chat with us",
+            "link_text": "Chat with us",
+            "link_url": "#chat"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

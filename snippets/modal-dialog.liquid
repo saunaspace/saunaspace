@@ -1,0 +1,70 @@
+{%- comment -%}
+  Renders modal dialog
+  Accepts:
+  - title {String} - title of the modal dialog
+  - content {HTML} - content of the modal dialog
+  - class {String} - additional class for the modal dialog
+  - id {String} The ID of the modal
+  - modifiers {String} Modifiers. E.g.: 'large,size-guide', outputs: 'modal-dialog--large, modal-dialog--size-guide'
+  - remove {Boolean} Remove modal-dialog from HTML on close
+  - show_close_label: {Boolean} Show close button label
+{%- endcomment -%}
+
+{%-
+  liquid
+  assign title = title | default: false
+  assign content = content | default: false
+  assign class = class | default: ''
+  assign id = id | default: false
+  assign modifiers = modifiers | split: ',' | join: ' modal-dialog--' | prepend: 'modal-dialog--'
+  assign remove = remove | default: false
+-%}
+
+{%- if content and title and id -%}
+  <modal-dialog
+    id="{{- id -}}"
+    class="modal-dialog {{ modifiers }} {{ class }} motion-reduce"
+    {% if remove %}
+      data-remove
+    {% endif %}
+  >
+    <button
+      id="ModalClose-Overlay-{{- id -}}"
+      type="button"
+      class="modal-dialog__overlay"
+      aria-label="{{- 'accessibility.close' | t -}}"
+      tabindex="-1"
+    ></button>
+
+    <div
+      role="dialog"
+      aria-label="{{- title | escape -}}"
+      aria-modal="true"
+      class="modal-dialog__wrapper motion-reduce"
+      tabindex="-1"
+    >
+      <div class="modal-dialog__inner">
+        <button
+          id="ModalClose-{{- id -}}"
+          type="button"
+          class="modal-dialog__close"
+          aria-label="{{- 'accessibility.close' | t -}}"
+        >
+          {%- render 'icon-close' -%}
+
+          <span
+            {%- unless show_close_label -%}
+              class="visually-hidden"
+            {%- endunless -%}
+          >
+            {{- 'accessibility.close' | t -}}
+          </span>
+        </button>
+
+        <div class="modal-dialog__content rte">
+          {{- content -}}
+        </div><!-- /.modal-dialog__content -->
+      </div><!-- /.modal-dialog__inner -->
+    </div><!-- /.modal-dialog__wrapper -->
+  </modal-dialog><!-- /.modal-dialog -->
+{%- endif -%}

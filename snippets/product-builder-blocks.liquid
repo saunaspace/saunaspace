@@ -1,0 +1,23 @@
+{% for block in section.blocks %}
+<div class="product-build__tabs-step" id="step-{{ forloop.index }}" data-step-index="{{ forloop.index }}">
+
+    {%- case block.type -%}
+        {%- when "variant_color" -%}
+            {% render 'product-builder-color-block', product: product, section: section, block: block, forloop: forloop, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+
+        {%- when "variant_panel" -%}
+            {% render 'product-builder-panel-block', product: product, section: section, block: block, forloop: forloop, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+    
+        {%- when "products_silverlining" -%}
+            {% render 'product-builder-silverlining-block', product: product, section: section, block: block, forloop: forloop, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+
+        {%- when "products_plug" -%}
+            {% render 'product-builder-plug-block', product: product, section: section, block: block, forloop: forloop, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+            
+        {%- when "variant_accessories" -%}
+            {% render 'product-builder-accessories-block', product: product, section: section, block: block, forloop: forloop, value: value, prod_title: prod_title, product_form_id: product_form_id %}
+    
+    {%- endcase -%}
+
+</div>
+{% endfor %}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="32.5" viewBox="0 0 36 32.5">
+  <g id="Group_3712" data-name="Group 3712" transform="translate(-1335 -793.5)">
+    <g id="Rectangle_1984" data-name="Rectangle 1984" transform="translate(1335 798)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="36" height="28" stroke="none"/>
+      <rect x="1" y="1" width="34" height="26" fill="none"/>
+    </g>
+    <g id="Rectangle_1985" data-name="Rectangle 1985" transform="translate(1340 808)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="8" height="6" stroke="none"/>
+      <rect x="1" y="1" width="6" height="4" fill="none"/>
+    </g>
+    <g id="Rectangle_1989" data-name="Rectangle 1989" transform="translate(1340 815)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="8" height="6" stroke="none"/>
+      <rect x="1" y="1" width="6" height="4" fill="none"/>
+    </g>
+    <g id="Rectangle_1986" data-name="Rectangle 1986" transform="translate(1349 808)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="8" height="6" stroke="none"/>
+      <rect x="1" y="1" width="6" height="4" fill="none"/>
+    </g>
+    <g id="Rectangle_1988" data-name="Rectangle 1988" transform="translate(1349 815)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="8" height="6" stroke="none"/>
+      <rect x="1" y="1" width="6" height="4" fill="none"/>
+    </g>
+    <g id="Rectangle_1987" data-name="Rectangle 1987" transform="translate(1358 808)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="8" height="6" stroke="none"/>
+      <rect x="1" y="1" width="6" height="4" fill="none"/>
+    </g>
+    <line id="Line_1921" data-name="Line 1921" x2="34.748" transform="translate(1335.5 804.5)" fill="none" stroke="#fff" stroke-width="2"/>
+    <line id="Line_1922" data-name="Line 1922" y2="5" transform="translate(1344.154 793.5)" fill="none" stroke="#fff" stroke-width="2"/>
+    <line id="Line_1923" data-name="Line 1923" y2="5" transform="translate(1361.594 793.5)" fill="none" stroke="#fff" stroke-width="2"/>
+  </g>
+</svg>

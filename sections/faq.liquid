@@ -1,0 +1,553 @@
+{%- if section.blocks.size > 0 -%}
+
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+
+  {{- 'section-faq.css' | asset_url | stylesheet_tag -}}
+
+  {%-
+    liquid
+    capture styles
+      if section.settings.video != blank or section.settings.background_image != blank
+        echo ' faq--has-background '
+      endif
+
+      if section.settings.overlay_background_mobile
+        echo ' faq--overlay-background-on-mobile '
+      endif
+
+      echo color_scheme
+    endcapture
+  -%}
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-faq-" | append: section.index
+    endif
+  %}
+
+  <section
+    class="faq {{ styles }}"
+    data-id="{{- section.id -}}"
+    id="{{ sec_id }}"
+  >
+    <div class="container">
+      <div class="faq__background{% if section.settings.background_video_mobile != blank or section.settings.background_image_mobile != blank %} small-hide{% endif %}">
+        {%- if section.settings.video != blank -%}
+          {{- section.settings.video | media_tag: autoplay: true, muted: true, loop: true, controls: false -}}
+        {%- elsif section.settings.background_image != blank -%}
+          {%- render 'image', image: section.settings.background_image -%}
+        {%- endif -%}
+      </div><!-- /.faq__background -->
+
+      {%- if section.settings.background_video_mobile != blank or section.settings.background_image_mobile -%}
+        <div class="faq__background large-up-hide">
+          {%- if section.settings.background_video_mobile != blank -%}
+            {{- section.settings.background_video_mobile | media_tag: autoplay: true, muted: true, loop: true, controls: false -}}
+          {%- elsif section.settings.background_image_mobile != blank -%}
+            {%- render 'image', image: section.settings.background_image_mobile -%}
+          {%- endif -%}
+        </div><!-- /.faq__background -->
+      {%- endif -%}
+
+      <div class="faq__inner faq__inner--{{ section.settings.container_alignment }}{% if section.settings.content_width != 'fullwidth' %} faq__inner--narrow{% endif %}">
+        {%- if section.settings.title != blank -%}
+          <div class="faq__head faq__head--{{- section.settings.title_alignment -}}">
+            <h2 class="faq__title h2-small-desktop">{{- section.settings.title | escape -}}</h2><!-- /.faq__title -->
+          </div><!-- /.faq__head -->
+        {%- endif -%}
+
+        <div class="faq__body">
+          {%- if section.settings.content != blank -%}
+            <p class="faq__content {{ section.settings.content_alignment }}">
+              {{- section.settings.content | escape | newline_to_br -}}
+            </p><!-- /.faq__content -->
+          {%- endif -%}
+
+          {%- assign gallery_blocks = section.blocks | where: 'type', 'gallery-media' -%}
+
+          {%- if gallery_blocks.size > 0 -%}
+            {% comment %}<script src="{{- 'swiper-bundle.min.js' | asset_url -}}" defer="defer"></script>{% endcomment %}
+            <script src="{{- 'slider-default.js' | asset_url -}}" defer="defer"></script>
+            <script src="{{- 'gallery-opener.js' | asset_url -}}" defer="defer"></script>
+
+            {% comment %}{{- 'swiper-bundle.min.css' | asset_url | stylesheet_tag -}}{% endcomment %}
+            {{- 'component-gallery-modal.css' | asset_url | stylesheet_tag -}}
+            {{- 'component-gallery-item.css' | asset_url | stylesheet_tag -}}
+
+            <div class="faq__gallery">
+              {%- for block in gallery_blocks -%}
+                <gallery-opener
+                  class="faq__gallery-media overflow-hidden relative"
+                  data-modal="#Gallery-Modal-{{- section.id -}}"
+                  data-index="{{ forloop.index0 }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <button
+                    type="button"
+                    class="faq__gallery-media-button"
+                    aria-label="{{- block.settings.hover_text -}}"
+                    aria-haspopup="dialog"
+                  ></button><!-- /.faq__gallery-media-button -->
+
+                  <div class="media media--rounded">
+                    {%- if block.settings.image != blank -%}
+                      {%- render 'image' with image: block.settings.image -%}
+                    {%- else -%}
+                      {{- 'image' | placeholder_svg_tag -}}
+                    {%- endif -%}
+                  </div><!-- /.media -->
+
+                  <div class="faq__gallery-media-overlay">
+                    <div class="faq__gallery-media-overlay-inner flex flex--justify flex--center">
+                      {%- if block.settings.hover_text != blank -%}
+                        <p class="faq__gallery-media-text medium-hide small-hide">
+                          {{- block.settings.hover_text | escape -}}
+                        </p><!-- /.faq__gallery-media-text -->
+                      {%- endif -%}
+
+                      <span class="faq__gallery-media-icon icon">
+                        {%- render 'icon-plus-large' -%}
+                      </span><!-- /.faq__gallery-media-icon -->
+                    </div><!-- /.faq__gallery-media-overlay-inner -->
+                  </div><!-- /.faq__gallery-media-overlay -->
+                </gallery-opener><!-- /.faq__gallery-media -->
+              {%- endfor -%}
+            </div><!-- /.faq__gallery -->
+
+            <modal-dialog
+              id="Gallery-Modal-{{- section.id -}}"
+              class="gallery-modal motion-reduce"
+            >
+              <div
+                role="dialog"
+                aria-label="{{- 'accessibility.gallery' | t -}}"
+                aria-modal="true"
+                class="gallery-modal__wrapper motion-reduce"
+                tabindex="-1"
+              >
+                <div class="gallery-modal__inner">
+                  <div class="gallery-modal__head">
+                    <button
+                      id="ModalClose-Gallery-Modal-{{- section.id -}}"
+                      type="button"
+                      class="gallery-modal__close"
+                    >
+                      <span class="gallery-modal__close-icon icon">
+                        {%- render 'icon-close-alt' -%}
+                      </span><!-- /.gallery-modal__close-icon -->
+
+                      <span class="gallery-modal__close-text">
+                        {{- 'accessibility.close' | t -}}
+                      </span>
+                    </button>
+                  </div><!-- /.gallery-modal__head -->
+
+                  <slider-default
+                    class="gallery-modal__body block"
+                    data-effect="fade"
+                    data-rewind
+                  >
+                    <div class="gallery-modal__slider">
+                      <div class="swiper" data-slider>
+                        <div class="swiper-wrapper">
+                          {%- for block in gallery_blocks -%}
+                            <div class="swiper-slide">
+                              <div class="gallery-item">
+                                <div class="gallery-item__media">
+                                  <div class="media media--rounded-large">
+                                    {%- if block.settings.image != blank -%}
+                                      {%- render 'image' with image: block.settings.image -%}
+                                    {%- else -%}
+                                      {{- 'image' | placeholder_svg_tag -}}
+                                    {%- endif -%}
+                                  </div><!-- /.media -->
+                                </div><!-- /.gallery-item__media -->
+
+                                <div class="gallery-item__content">
+                                  {%- if block.settings.title != blank -%}
+                                    <h4 class="gallery-item__title">
+                                      {{- block.settings.title | escape -}}
+                                    </h4><!-- /.gallery-item__title -->
+                                  {%- endif -%}
+
+                                  {%- if block.settings.content != blank -%}
+                                    <div class="gallery-item__entry">
+                                      <p>{{- block.settings.content | escape | newline_to_br -}}</p>
+                                    </div><!-- /.gallery-item__entry -->
+                                  {%- endif -%}
+                                </div><!-- /.gallery-item__content -->
+                              </div><!-- /.gallery-item -->
+                            </div><!-- /.swiper-slide -->
+                          {%- endfor -%}
+                        </div><!-- /.swiper-wrapper -->
+                      </div><!-- /.swiper -->
+                    </div><!-- /.gallery-modal__slider -->
+
+                    {%- if gallery_blocks.size > 1 -%}
+                      <div class="gallery-modal__thumbs overflow-hidden relative" data-thumbs>
+                        <div class="swiper swiper--spacing" data-thumbs-slider>
+                          <div class="swiper-wrapper">
+                            {%- for block in gallery_blocks -%}
+                              <div class="swiper-slide">
+                                <div class="media media--rounded-small">
+                                  {%- if block.settings.image != blank -%}
+                                    {%- render 'image' with image: block.settings.image -%}
+                                  {%- else -%}
+                                    {{- 'image' | placeholder_svg_tag -}}
+                                  {%- endif -%}
+                                </div><!-- /.media -->
+                              </div><!-- /.swiper-slide -->
+                            {%- endfor -%}
+                          </div><!-- /.swiper-wrapper -->
+                        </div><!-- /.swiper -->
+
+                        <div class="gallery-modal__thumbs-arrows small-hide">
+                          {% comment %}<!-- Removed [data-thumbs-prev && data-thumbs-next]: They are needed to navigate the main slider, not the thumbs slider -->{% endcomment %}
+                          <div class="gallery-modal__thumbs-arrow"{% comment %} data-thumbs-prev{% endcomment %} data-prev>
+                            {%- render 'icon-arrow-left-alt' -%}
+                          </div><!-- /.gallery-modal__thumbs-arrow -->
+
+                          <div class="gallery-modal__thumbs-arrow"{% comment %} data-thumbs-next{% endcomment %} data-next>
+                            {%- render 'icon-arrow-right-alt' -%}
+                          </div><!-- /.gallery-modal__thumbs-arrow -->
+                        </div><!-- /.gallery-modal__thumbs-arrows -->
+                      </div><!-- /.gallery-modal__thumbs -->
+                    {%- endif -%}
+                  </slider-default><!-- /.gallery-modal__body -->
+                </div><!-- /.gallery-modal__inner -->
+              </div><!-- /.gallery-modal__wrapper -->
+            </modal-dialog><!-- /.gallery-modal -->
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'separator' -%}
+                {%- if block.settings.title != blank -%}
+                  <h4 class="faq__separator-title">
+                    {{- block.settings.title -}}
+                  </h4><!-- /.faq__separator-title -->
+                {%- endif -%}
+              {%- when 'topic' -%}
+                {%- if block.settings.title == blank or block.settings.content == blank -%}
+                  {%- continue -%}
+                {%- endif -%}
+
+                <details class="faq__accordion faq__accordion--{{- block.settings.type -}}"{% if forloop.first and section.settings.keep_accordions_closed != true %} open{% endif %} {{ block.shopify_attributes }}>
+                  <summary>
+                    {{- block.settings.title | escape -}}
+
+                    {%- if block.settings.type == 'info' -%}
+                      {%- render 'icon-chevron-down-thin' -%}
+                    {%- else -%}
+                      {%- render 'icon-plus-large' -%}
+                    {%- endif -%}
+                  </summary>
+
+                  <div>
+                    {{- block.settings.content | newline_to_br -}}
+                  </div>
+                </details><!-- /.faq__accordion -->
+            {%- endcase -%}
+          {%- endfor -%}
+        </div><!-- /.faq__body -->
+
+        {%- assign link_blocks = section.blocks | where: 'type', 'link' -%}
+
+        {%- if link_blocks.size > 0 -%}
+          <ul class="faq__links list-unstyled{% if section.settings.alt_links_view %} faq__links--alt{% endif %}">
+            {%- for block in link_blocks -%}
+              {%- if block.settings.title == blank or block.settings.url == blank -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              <li {{ block.shopify_attributes }}>
+                <a href="{{- block.settings.url -}}">
+                  {%- if block.settings.type == 'download' -%}
+                    {%- render 'icon-download' -%}
+                  {%- elsif block.settings.type == 'question' -%}
+                    {%- render 'icon-question' -%}
+                  {%- else -%}
+                    {%- render 'icon-redirect' -%}
+                  {%- endif -%}
+
+                  <span>
+                    {{- block.settings.title | escape -}}
+
+                    {%- if block.settings.subtext != blank -%}
+                      <small>{{- block.settings.subtext | escape -}}</small>
+                    {%- endif -%}
+                  </span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul><!-- /.faq__links -->
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+          <div class="faq__actions faq__actions--{{ section.settings.button_alignment }}">
+            {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text, style: 'orange-hover button--large-desktop' -%}
+          </div><!-- /.faq__actions -->
+        {%- endif -%}
+      </div><!-- /.faq__inner -->
+    </div><!-- /.container -->
+  </section><!-- /.faq -->
+
+  {% style %}
+    [data-id="{{- section.id -}}"] {
+      --color-background: {{ color_scheme_settings.background }};
+      --color-text: {{ color_scheme_settings.text }};
+      --color-button_primary_bg: {{ color_scheme_settings.button_primary_bg }};
+      --color-button_primary_text: {{ color_scheme_settings.button_primary_text }};
+      --color-button_secondary_bg: {{ color_scheme_settings.button_secondary_bg }};
+      --color-button_secondary_text: {{ color_scheme_settings.button_secondary_text }};
+    }
+  {% endstyle %}
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "What's in the box - FAQ",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image"
+      },
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Video"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image_mobile",
+        "label": "Background image - Mobile"
+      },
+      {
+        "type": "video",
+        "id": "background_video_mobile",
+        "label": "Background video - Mobile",
+        "info": "Overwrites Mobile image"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlay_background_mobile",
+        "label": "Overlay background on mobile",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "content_width",
+        "label": "Content width",
+        "options": [
+          {
+            "value": "narrow",
+            "label": "Narrow"
+          },
+          {
+            "value": "fullwidth",
+            "label": "Full width"
+          }
+        ],
+        "default": "fullwidth"
+      },
+      {
+        "type": "text_alignment",
+        "id": "container_alignment",
+        "label": "Container alignment",
+        "default": "left"
+      },
+      {
+        "type": "checkbox",
+        "id": "keep_accordions_closed",
+        "label": "Keep first accordion closed",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "alt_links_view",
+        "label": "Alternative links view",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text_alignment",
+        "id": "title_alignment",
+        "label": "Title alignment",
+        "default": "center"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text_alignment",
+        "id": "content_alignment",
+        "label": "Content alignment",
+        "default": "left"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "text_alignment",
+        "id": "button_alignment",
+        "label": "Button alignment",
+        "default": "center"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "separator",
+        "name": "Separator title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }
+        ]
+      },
+      {
+        "type": "topic",
+        "name": "Topic",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "options": [
+              {
+                "value": "info",
+                "label": "Info"
+              },
+              {
+                "value": "resource",
+                "label": "Resource"
+              }
+            ],
+            "default": "info"
+          }
+        ]
+      },
+      {
+        "type": "link",
+        "name": "Resource link",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtext",
+            "label": "Subtext"
+          },
+          {
+            "type": "select",
+            "id": "type",
+            "label": "Type",
+            "options": [
+              {
+                "value": "download",
+                "label": "Download"
+              },
+              {
+                "value": "redirect",
+                "label": "Redirect"
+              },
+              {
+                "value": "question",
+                "label": "Question"
+              }
+            ],
+            "default": "redirect"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      },
+      {
+        "type": "gallery-media",
+        "name": "Gallery media",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "hover_text",
+            "label": "Hover text"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading goes here"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "default": "Content goes here"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "What's in the box - FAQ"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog-wavelength",
+      "blocks": {
+        "tag_carousel_pmyNQi": {
+          "type": "tag_carousel",
+          "settings": {
+            "tag": "Foundations",
+            "subtitle": "Begin your journey at the roots—where warmth becomes wisdom, and the light itself teaches. Explore the healing science behind near infrared, cellular detox, and radiant renewal.",
+            "limit": 8
+          }
+        },
+        "tag_carousel_t4WmGm": {
+          "type": "tag_carousel",
+          "settings": {
+            "tag": "Benefits",
+            "subtitle": "Illuminate the many ways infrared light restores body and spirit—from deep detox and pain relief to spiritual renewal and radiant vitality. Each benefit is a doorway to wholeness.",
+            "limit": 8
+          }
+        },
+        "tag_carousel_rbRpca": {
+          "type": "tag_carousel",
+          "settings": {
+            "tag": "Hot Detox Summer",
+            "subtitle": "Turn up the heat on your healing. This summer series explores how near infrared light supports real detox—clearing EMFs, rebooting overwhelmed organs, and igniting cellular release.",
+            "limit": 8
+          }
+        },
+        "untagged_carousel_TdM8kK": {
+          "type": "untagged_carousel",
+          "settings": {
+            "enable_block": true,
+            "title": "All Blog Articles",
+            "subtitle": "Wander the glowing edges of The Wavelength—where reflections, revelations, and radiant insights come together in integrated rhythm.",
+            "limit": 10
+          }
+        }
+      },
+      "block_order": [
+        "tag_carousel_pmyNQi",
+        "tag_carousel_t4WmGm",
+        "tag_carousel_rbRpca",
+        "untagged_carousel_TdM8kK"
+      ],
+      "settings": {
+        "featured_article": "the-wavelength/saunaspace-101",
+        "image": "shopify://shop_images/saunaspace-logo-faded-red-glow.png",
+        "image_mobile": "shopify://shop_images/saunaspace-logo-faded-red-glow-mobile.png",
+        "show_filters": false,
+        "header_subheading": "Brian Richards Presents:",
+        "header_content": "Our founder's blog. Ruminations about sauna, light, electromagnetism, wellness and the inner pharmacy of the human being.",
+        "header_image": "shopify://shop_images/Brian-tall.jpg"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

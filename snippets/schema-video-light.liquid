@@ -1,0 +1,99 @@
+{%- assign video_title = "What Makes FireLight Red Light Therapy Different?" -%}
+{%- assign video_description = "Discover the science behind SaunaSpace’s FireLight Spectrum and why it outperforms traditional red light therapy. This video explores how our full-spectrum incandescent light mimics sunlight to activate cellular energy, reduce inflammation, and promote whole-body wellness." -%}
+{%- assign thumbnail_url = "https://i.ytimg.com/vi/llLeST6c4vM/maxresdefault.jpg" -%}
+{%- assign embed_url = "https://www.youtube.com/embed/llLeST6c4vM" -%}
+{%- assign upload_date = "2025-07-07T00:00:00+00:00" -%}
+{%- assign duration_iso = "PT3M51S" -%}
+{%- assign content_url = request.origin | append: page.url -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ video_title | json }},
+  "description": {{ video_description | json }},
+  "thumbnailUrl": [{{ thumbnail_url | json }}],
+  "uploadDate": "{{ upload_date }}",
+  "duration": "{{ duration_iso }}",
+  "contentUrl": {{ content_url | json }},
+  "embedUrl": {{ embed_url | json }},
+  "publisher": {
+    "@type": "Organization",
+    "name": "SaunaSpace",
+    "logo": {
+      "@type": "ImageObject",
+      "url":
+        {% if settings.logo != blank %}
+          {{ settings.logo | image_url: width: settings.logo.width | prepend: "https:" | json }}
+        {% else %}
+          "https://cdn.shopify.com/s/files/1/0026/7229/6025/files/SaunaSpace_Logo.png?v=1751250094"
+        {% endif %}
+    }
+  },
+  "hasPart": [
+    {
+      "@type": "Clip",
+      "name": "Light Is Life",
+      "startOffset": 0,
+      "endOffset": 17,
+      "url": {{ content_url | append: "#t=0" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Sunlight’s Secret Power",
+      "startOffset": 17,
+      "endOffset": 32,
+      "url": {{ content_url | append: "#t=17" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Modern Life & Artificial Light",
+      "startOffset": 32,
+      "endOffset": 54,
+      "url": {{ content_url | append: "#t=32" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "The Vision for Safer Light",
+      "startOffset": 54,
+      "endOffset": 67,
+      "url": {{ content_url | append: "#t=54" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Introducing the FireLight Spectrum",
+      "startOffset": 67,
+      "endOffset": 106,
+      "url": {{ content_url | append: "#t=67" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Limitations of LED & Far Infrared Saunas",
+      "startOffset": 106,
+      "endOffset": 156,
+      "url": {{ content_url | append: "#t=106" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "FireLight: The Sweet Spot of Light & Heat Therapy",
+      "startOffset": 156,
+      "endOffset": 180,
+      "url": {{ content_url | append: "#t=156" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "Benefits of Optimal Light and Heat Therapy",
+      "startOffset": 180,
+      "endOffset": 198,
+      "url": {{ content_url | append: "#t=180" | json }}
+    },
+    {
+      "@type": "Clip",
+      "name": "FireLight: Sanctuary for Body, Mind, and Spirit",
+      "startOffset": 198,
+      "endOffset": 231,
+      "url": {{ content_url | append: "#t=198" | json }}
+    }
+  ]
+}
+</script>

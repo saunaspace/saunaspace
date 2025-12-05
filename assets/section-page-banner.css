@@ -1,0 +1,113 @@
+/* ------------------------------------------------------------ *\
+  Page Banner
+\* ------------------------------------------------------------ */
+
+.page-banner__main {
+  position: relative;
+  background-color: #CBA378;
+}
+
+@media (max-width: 767px) {
+  .page-banner .container {
+    --page-gutter: 4rem;
+  }
+}
+
+.page-banner__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.page-banner__inner {
+  min-height: 56.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-block: 12rem 2rem;
+}
+
+.template--reviews .page-banner__inner {
+  min-height: 54rem;
+  padding-block: 17rem 2rem;
+}
+
+.page-banner__inner--has-background {
+  color: #fff;
+}
+
+@media screen and (max-width: 1023px) {
+  .template--reviews .page-banner__inner,
+  .page-banner__inner {
+    padding-top: 10rem;
+    min-height: 42rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .template--reviews .page-banner__inner,
+  .page-banner__inner {
+    min-height: 33rem;
+  }
+
+  .template--reviews .page-banner__inner {
+    padding-top: 12rem;
+  }
+}
+
+.page-banner__content {
+  position: relative;
+  z-index: 2;
+}
+
+.page-banner__entry {
+  font-weight: 500;
+  max-width: 68rem;
+  margin: 2.5rem auto 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .page-banner__entry {
+    font-size: calc(var(--fsbase) * 2.1);
+    line-height: 2;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page-banner__entry {
+    padding-inline: 2rem;
+    margin-top: 1rem;
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 1.66;
+  }
+}
+
+.container.mobile-section-content {
+  padding-top: 20px;
+}
+
+
+/* V2 - 8.19.25 */
+.page-banner__content .button {
+  margin: 20px 0;
+}
+.page-banner-v2 .page-banner__text {
+  margin-top: 20px;
+}
+.page-banner-v2 .page-banner__text a[href="#truemed"] {
+  display: inline-block;
+  width: 80px;
+  height: 14px;
+  background-image: url(https://cdn.shopify.com/s/files/1/0026/7229/6025/files/truemed-beige.svg?v=1755698111);
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  text-decoration: none;
+  pointer-events: none;
+  font-size: 0;
+}

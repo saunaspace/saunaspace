@@ -1,0 +1,214 @@
+{%-
+  liquid
+  assign blocks = section.blocks | where: 'type', 'tab'
+  assign autoplay_delay = section.settings.autoplay_delay | default: 5
+  assign autoplay_delay = autoplay_delay | times: 1000
+  assign content_markup = ''
+  assign thumbs_markup = ''
+-%}
+
+{%- if blocks.size > 0 -%}
+  {%- for block in blocks -%}
+    {%-
+      liquid
+      assign link_handle = block.settings.link_handle
+      assign heading = block.settings.heading
+      assign content = block.settings.content
+      assign link_text = block.settings.link_text
+      assign link_url = block.settings.link_url
+      assign image = block.settings.image
+    -%}
+
+    {%- capture content_markup -%}
+      {{- content_markup -}}
+
+      <div class="swiper-slide" data-liquid-index="{{- forloop.index0 -}}">
+        <div class="slider-tabs-thumbs__inner">
+          <div class="slider-tabs-thumbs__main">
+            {%- if heading != blank -%}
+              <h3 class="slider-tabs-thumbs__heading">
+                {{ heading | escape }}
+              </h3><!-- /.slider-tabs-thumbs__heading -->
+            {%- endif -%}
+
+            {%- if content != blank -%}
+              <div class="slider-tabs-thumbs__content rte">
+                {{ content }}
+              </div><!-- /.slider-tabs-thumbs__content rte -->
+            {%- endif -%}
+
+            {%- if link_text != blank and link_url != blank -%}
+              <a class="link-dot" href="{{- link_url -}}">
+                {{- link_text | escape -}}
+              </a>
+            {%- endif -%}
+          </div><!-- /.slider-tabs-thumbs__main -->
+
+          <div class="slider-tabs-thumbs__image">
+            {%- if image != blank -%}
+              {%- render 'image', image: image -%}
+            {%- else -%}
+              {{- 'image' | placeholder_svg_tag -}}
+            {%- endif -%}
+          </div><!-- /.slider-tabs-thumbs__image -->
+        </div><!-- /.slider-tabs-thumbs__inner -->
+      </div><!-- /.swiper-slide -->
+    {%- endcapture -%}
+
+    {%- capture thumbs_markup -%}
+      {{- thumbs_markup -}}
+
+      <div class="slider-tabs-thumbs__slide swiper-slide" data-slide data-liquid-index="{{- forloop.index0 -}}">
+        <button class="slider-tabs-thumbs__button" data-handle="{{- link_handle | handle -}}">
+          <span>{{ link_handle }}</span>
+        </button>
+        {% comment %}
+        <a href="{{ link_url }}" class="slider-tabs-thumbs__button">{{ link_handle }}</a>
+        {% endcomment %}
+      </div><!-- /.slider-tabs-thumbs__slide swiper-slide -->
+    {%- endcapture -%}
+  {%- endfor -%}
+{%- endif -%}
+
+<link rel="stylesheet" href="{{ 'services.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'slider-tabs-thumbs.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>
+  {{- 'services.css' | asset_url | stylesheet_tag -}}
+  {{- 'slider-tabs-thumbs.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+<script src="{{- 'tabs-services.js' | asset_url -}}" defer="defer"></script>
+<script src="{{- 'slider-tabs-nav.js' | asset_url -}}" defer="defer"></script>
+<script src="{{- 'slider-tabs-thumbs.js' | asset_url -}}" defer="defer"></script>
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-services-" | append: section.index
+  endif
+%}
+<section class="services{% if section.settings.image != blank %} services--has-media{% endif %}" id="{{ sec_id }}">
+  {%- if section.settings.image != blank -%}
+    <div class="services__background media">
+      {%- render 'image', image: section.settings.image -%}
+    </div><!-- /.services__background media -->
+  {%- endif -%}
+
+  <div class="container{% if section.settings.image == blank %} container--fullwidth{% endif %}">
+    {% if section.settings.heading != blank %}
+    <div class="sec-header">
+      <h3 class="h2">{{ section.settings.heading }}</h3>
+    </div>
+    {% endif %}
+    <slider-tabs-thumbs class="slider-tabs-thumbs" data-autoplay-delay="{{- autoplay_delay -}}">
+      <div class="slider-tabs-thumbs__cols">
+        <div class="slider-tabs-thumbs__col">
+          <div class="swiper" data-slider>
+            <div class="swiper-wrapper">
+              {{- content_markup -}}
+            </div><!-- /.swiper-wrapper -->
+          </div><!-- /.swiper -->
+        </div><!-- /.slider-tabs-thumbs__col -->
+
+        <div class="slider-tabs-thumbs__col">
+          <div class="swiper" data-thumbs>
+            <div class="swiper-wrapper">
+              {{- thumbs_markup -}}
+            </div><!-- /.swiper-wrapper -->
+          </div><!-- /.swiper -->
+        </div><!-- /.slider-tabs-thumbs__col -->
+      </div><!-- /.slider-tabs-thumbs__cols -->
+    </slider-tabs-thumbs><!-- /.slider-tabs-thumbs -->
+  </div><!-- /.container container--fullwidth -->
+</section><!-- /.services -->
+
+{% schema %}
+{
+  "name": "Services",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "number",
+      "id": "autoplay_delay",
+      "label": "Slider autoplay delay (seconds)",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "t:sections.services.blocks.tab.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_handle",
+          "label": "t:sections.services.blocks.tab.settings.link_handle.label",
+          "info": "t:sections.services.blocks.tab.settings.link_handle.info"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.services.blocks.tab.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.services.blocks.tab.settings.content.label"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "t:sections.services.blocks.tab.settings.link_text.label"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "t:sections.services.blocks.tab.settings.link_url.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.services.blocks.tab.settings.image.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "link_handle": "Nav link",
+            "heading": "Heading Goes Here",
+            "content": "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.</p>",
+            "link_text": "Link text",
+            "link_url": "/"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  }
+}
+{% endschema %}

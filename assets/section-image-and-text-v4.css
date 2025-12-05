@@ -1,0 +1,235 @@
+/* ------------------------------------------------------------ *\
+  Image and text - v4
+\* ------------------------------------------------------------ */
+
+.image-and-text-v4 {
+  color: var(--color-text);
+  background-color: var(--color-background);
+  padding: 12rem 0 14rem;
+}
+
+.template--contact .image-and-text-v4 {
+  padding-bottom: 12.5rem;
+}
+
+.image-and-text-v4 .container {
+  max-width: 162rem;
+}
+
+.image-and-text-v4__inner {
+  display: grid;
+  grid-template-columns: 62.5rem auto;
+  gap: 2.6rem;
+}
+
+.image-and-text-v4__media {
+  border-radius: 1rem;
+}
+
+.image-and-text-v4__content {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.2rem;
+  border: 0.1rem solid #c4c4c4;
+  border-radius: 1rem;
+  min-height: 69.5rem;
+}
+
+.template--contact .image-and-text-v4__content {
+  padding-top: 7rem;
+  min-height: 54rem;
+}
+
+.image-and-text-v4__content--icon {
+  min-height: 89.9rem;
+}
+
+.image-and-text-v4__wrapper {
+  max-width: 60rem;
+}
+
+.image-and-text-v4__content--icon .image-and-text-v4__wrapper {
+  max-width: 65rem
+}
+
+.image-and-text-v4__icon {
+  width: 7.5rem;
+  margin: 0 auto 4.1rem;
+}
+
+.image-and-text-v4__icon img {
+  width: 100%;
+}
+
+.image-and-text-v4__title {
+  line-height: 1.3334;
+  font-weight: 500;
+  max-width: 46.8rem;
+  margin: 0 auto 3.5rem;
+}
+
+@media (min-width: 1280px) {
+  .template--contact .image-and-text-v4__title {
+    font-size: calc(var(--fsbase) * 6);
+    max-width: 50rem;
+  }
+}
+
+.image-and-text-v4__entry {
+  font-size: calc(var(--fsbase) * 1.8);
+  line-height: 2;
+  margin: 0;
+}
+
+.template--contact .image-and-text-v4__entry {
+  font-size: calc(var(--fsbase) * 2.1);
+}
+
+.image-with-text-v4__address {
+  margin-top: 5rem;
+}
+
+.image-with-text-v4__address a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: calc(var(--fsbase) * 1.8);
+  font-weight: 500;
+  transition: opacity var(--duration-default);
+}
+
+.image-with-text-v4__address a:hover {
+  opacity: 0.8;
+}
+
+.image-and-text-v4 .button {
+  margin-top: 5.2rem;
+}
+
+@media screen and (max-width: 1360px) {
+  .image-and-text-v4__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .image-and-text-v4__media {
+    aspect-ratio: initial;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .image-and-text-v4--flip-desktop .image-and-text-v4__media {
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .image-and-text-v4--flip-mobile .image-and-text-v4__media {
+    order: 1;
+  }
+
+  .image-and-text-v4__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .image-and-text-v4__media {
+    aspect-ratio: 393 / 221;
+  }
+
+  .template--contact .image-and-text-v4__media {
+    aspect-ratio: 393 / 271;
+  }
+
+  .image-and-text-v4__media--icon {
+    aspect-ratio: 393 / 299;
+  }
+
+  .template--contact .image-and-text-v4__content {
+    min-height: 0;
+  }
+
+  .image-and-text-v4__content {
+    min-height: auto;
+  }
+
+  .image-and-text-v4__title {
+    font-size: calc(var(--fsbase) * 3.2);
+    max-width: 28rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+
+  .image-and-text-v4 {
+    padding: 0 0 3.8rem;
+  }
+
+  .template--contact .image-and-text-v4 {
+    padding: 0 0 1.5rem;
+  }
+
+  .image-and-text-v4__media {
+    border-radius: 0;
+    margin: 0 calc(var(--page-gutter) * -1);
+  }
+
+  .image-and-text-v4__content {
+    padding: 2.8rem 2rem 3rem;
+  }
+
+  .template--contact .image-and-text-v4__content {
+    padding: 2rem;
+  }
+
+  .template--contact .image-and-text-v4__content {
+    border: 0;
+    padding-inline: 0;
+  }
+
+  .image-and-text-v4__content--icon {
+    padding-top: 4.2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .image-and-text-v4__inner {
+    gap: 2rem;
+  }
+
+  .image-and-text-v4__icon {
+    width: 6rem;
+    margin-bottom: 3.8rem;
+  }
+
+  .image-and-text-v4__title {
+    font-size: calc(var(--fsbase) * 2.4);
+    max-width: none;
+    margin: 0 0 1.5rem;
+  }
+
+  .template--contact .image-and-text-v4__title {
+    font-size: calc(var(--fsbase) * 2.8);
+    margin-bottom: 1.5rem;
+  }
+
+  .template--contact .image-and-text-v4__entry,
+  .image-and-text-v4__entry {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+
+  .template--contact .image-and-text-v4__entry {
+    line-height: 1.66;
+  }
+
+  .image-with-text-v4__address {
+    margin-top: 2.5rem;
+  }
+
+  .image-with-text-v4__address a {
+    font-size: calc(var(--fsbase) * 1.4);
+  }
+
+  .image-and-text-v4 .button {
+    margin-top: 2.4rem;
+  }
+}

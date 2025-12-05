@@ -1,0 +1,201 @@
+{{- 'section-hero-banner.css' | asset_url | stylesheet_tag -}}
+{{- 'section-hero-oembed.css' | asset_url | stylesheet_tag -}}
+
+{%- if section.settings.oembed != blank -%}
+  {%-
+    liquid
+    capture style_classes
+      echo 'flex'
+      if section.settings.content_position == 'bottom'
+        echo ' flex--justify-end center'
+      else
+        echo ' flex--justify-center left'
+      endif
+
+      if section.settings.show_overlay == false
+        echo ' hero-banner--no-overlay'
+      endif
+
+      if section.settings.mobile_full_overlay
+        echo ' mobile-overlay'
+      endif
+
+      if section.settings.small_height
+        echo ' hero-banner--small'
+      endif
+    endcapture
+  -%}
+
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "hero-oembed-" | append: section.index
+    endif
+  %}
+
+  <section class="hero-oembed js-hero-oembed hero-banner {{ style_classes }}" id="{{- sec_id -}}">
+    <div class="container">
+      <div class="hero-banner__background">
+        <div class="oembed-video">
+            {% capture video_oembed %}
+            {% render 'video-oembed', video: section.settings.oembed %}
+            {% endcapture %}
+            {{ video_oembed | replace: "mute=1", "mute=0" | replace: "controls=0", "controls=1" | replace: "autoplay=0", "autoplay=1" | replace: "src", "data-src" }}
+        </div>
+        <div class="media media--16-9 hero-banner__media">
+          {%-
+            liquid
+            if section.settings.video != blank
+              echo section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false
+            elsif section.settings.image != blank
+              render 'image', image: section.settings.image
+            else
+              echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+            endif
+          -%}
+        </div><!-- /.media -->
+      </div><!-- /.hero-banner__background -->
+
+      <div class="hero-banner__inner" style="color: {{ section.settings.text_color }};">
+        {%- comment -%} Content {%- endcomment -%}
+        {%- if section.settings.title != blank
+            or section.settings.content != blank
+            or section.settings.button_text != blank and section.settings.button_url != blank -%}
+          {%- if section.settings.subtitle != blank -%}
+            <p class="hero-banner__subtitle">
+              {{- section.settings.subtitle | escape -}}
+            </p><!-- /.hero-banner__subtitle -->
+          {%- endif -%}
+
+          {%- if section.settings.title != blank -%}
+            <h1 class="hero-banner__title h2" style="color: {{ section.settings.text_color }};">
+              {{- section.settings.title | escape | newline_to_br -}}
+            </h1><!-- /.hero-banner__title -->
+          {%- endif -%}
+
+          {%- if section.settings.content != blank -%}
+            <div class="hero-banner__body">
+              <p>{{- section.settings.content | escape | newline_to_br -}}</p>
+            </div><!-- /.hero-banner__body -->
+          {%- endif -%}
+
+            <div class="hero-banner__actions">
+                <a href="#" class="hero-banner__link link-dot"{% if section.settings.button_url contains "http" %}{% unless _block.link contains "sauna.space" %} target="_blank"{% endunless %}{% endif %}>
+                {{ section.settings.button_text | default: "Play Video" }}
+                </a>
+            </div><!-- /.hero-banner__actions -->
+        {%- endif -%}
+      </div><!-- /.hero-banner__inner -->
+    </div><!-- /.container -->
+  </section>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero Oembed Video",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.hero-banner.settings.background_paragraph.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.hero-banner.settings.image.desktop.label"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Overrides image. Loops in background."
+    },
+    {
+      "type": "video_url",
+      "id": "oembed",
+      "label": "Oembed video",
+      "info": "Plays when user hits play button",
+      "accept": [
+        "youtube"
+      ]
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.hero-banner.settings.text_color.label",
+      "default": "#f4f0e0"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show bottom gradient",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_full_overlay",
+      "label": "Mobile - Show full overlay",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "small_height",
+      "label": "Reduce height",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "t:sections.hero-banner.settings.title.label",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "t:sections.hero-banner.settings.content.label",
+      "default": "Content text goes here"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:sections.hero-banner.settings.button_text.label",
+      "default": "Play Video"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Hero Oembed Video"
+    }
+  ]
+}
+{% endschema %}

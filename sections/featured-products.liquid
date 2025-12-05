@@ -1,0 +1,223 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-featured-products-" | append: section.index
+  endif
+%}
+{%- if section.settings.product_list != blank -%}
+  <section class="featured-products" id="{{ sec_id }}">
+    <div class="container">
+      {%- if section.settings.title != blank -%}
+        <h2 class="featured-products__title">
+          {{- section.settings.title | escape -}}
+        </h2><!-- /.featured-products__title -->
+      {%- endif -%}
+
+      <ul class="featured-products__list list-unstyled">
+        {%- for product_ref in section.settings.product_list -%}
+          {%- if product_ref == empty -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          <li class="featured-products__item">
+            <div class="featured-products__image media">
+              {%- render 'image', image: product_ref.featured_image -%}
+            </div><!-- /.featured-products__image media -->
+
+            {%- if product_ref.metafields.custom.tagline != blank -%}
+              <p class="featured-products__tagline">
+                {{- product_ref.metafields.custom.tagline | escape -}}
+              </p><!-- /.featured-products__tagline -->
+            {%- endif -%}
+
+            <h3 class="featured-products__heading">
+              <a href="{{- product_ref.url -}}" class="full-unstyled-link">{{- product_ref.title | escape -}}</a>
+            </h3><!-- /.featured-products__heading -->
+
+            <div class="featured-products__price">
+              {% render 'price', product_ref: product_ref %}
+            </div><!-- /.featured-products__price -->
+          </li><!-- /.featured-products__item -->
+        {%- endfor -%}
+      </ul><!-- /.featured-products__list list-unstyled -->
+
+      {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+        <div class="featured-products__actions">
+          {%- render 'button', type: 'link', href: section.settings.button_url, value: section.settings.button_text -%}
+        </div><!-- /.featured-products__actions -->
+      {%- endif -%}
+    </div><!-- /.container -->
+  </section><!-- /.featured-products -->
+{%- endif -%}
+
+{% style %}
+  .featured-products {
+    color: #2c2621;
+    background-color: #f0e7da;
+    text-align: center;
+    padding: 16.7rem 0 5rem;
+  }
+
+  .featured-products .container {
+    max-width: 162.1rem;
+  }
+
+  .featured-products__tagline {
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.214286;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 1.8rem;
+  }
+
+  .featured-products__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.2;
+    font-weight: 500;
+    margin: 0 0 10.4rem;
+  }
+
+  .featured-products__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.2rem;
+  }
+
+  .featured-products__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .featured-products__list:has(.featured-products__item:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured-products__list:has(.featured-products__item:nth-child(1):last-child) {
+    grid-template-columns: 70%;
+    justify-content: center;
+  }
+
+  .featured-products__actions {
+    margin: 8rem 0 0;
+  }
+
+  .featured-products__image {
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    margin-bottom: 4.4rem;
+  }
+
+  .featured-products__heading {
+    font-size: calc(var(--fsbase) * 3.6);
+    line-height: 1.166667;
+    font-weight: 500;
+    margin: 0 0 1.8rem;
+  }
+
+  .featured-products__price {
+    font-size: calc(var(--fsbase) * 2.4);
+    line-height: 1.2;
+    font-weight: 600;
+    margin-top: auto;
+  }
+
+  .featured-products__price small {
+    font-size: calc(var(--fsbase) * 1.8);
+    line-height: 1.22;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .featured-products {
+      padding: 4.5rem 2rem 4rem;
+    }
+
+    .featured-products__title {
+      font-size: 24px;
+      line-height: 1.20;
+      margin: 0 0 3.7rem;
+    }
+
+    .featured-products__tagline {
+      font-size: calc(var(--fsbase) * 1.2);
+      line-height: 1.166667;
+      margin: 0 0 1.1rem;
+    }
+
+    .featured-products__list {
+      grid-template-columns: 1fr;
+      gap: 3.1rem;
+    }
+
+    .featured-products__list:has(.featured-products__item:nth-child(2):last-child),
+    .featured-products__list:has(.featured-products__item:nth-child(1):last-child) {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-products__image {
+      aspect-ratio: 313 / 209;
+      margin-bottom: 1.9rem;
+    }
+
+    .featured-products__heading {
+      font-size: calc(var(--fsbase) * 2.1);
+      line-height: 1.5;
+      margin-bottom: 0.9rem;
+    }
+
+    .featured-products__price {
+      font-size: calc(var(--fsbase) * 1.8);
+      line-height: 1.22;
+    }
+
+    .featured-products__price small {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+
+    .featured-products__actions {
+      margin: 4rem 0 0;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 3
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+.gallery-item__media .media {
+  padding-bottom: 56.25%;
+}
+
+.gallery-item__content {
+  margin-top: 2.9rem;
+  max-width: 71rem;
+}
+
+.gallery-item__title {
+  font-family: inherit;
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 1.334;
+  margin-bottom: 1.1rem;
+}
+
+.gallery-item__entry {
+  font-weight: 500;
+  line-height: 2;
+}
+
+@media screen and (max-width: 749px) {
+  .gallery-item__content {
+    margin-top: 2rem;
+    max-width: 55rem;
+  }
+
+  .gallery-item__title {
+    font-size: calc(var(--fsbase) * 1.9);
+    margin-bottom: 0.8rem;
+  }
+}

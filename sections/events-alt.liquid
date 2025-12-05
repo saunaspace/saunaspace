@@ -1,0 +1,130 @@
+
+{{- 'section-events-alt.css' | asset_url | stylesheet_tag -}}
+{% assign events = blogs.events.articles %}
+
+<div class="events-alt" id="events-alt">
+  <div class="container container--narrow">
+    {% if section.settings.heading != blank %}
+    <div
+    class="events-alt__header{% if section.settings.background_image != blank %} has-bg-image{% endif %}"
+    {% if section.settings.background_image != blank %}
+    style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}');"
+    {% endif %}
+    >
+        <h2 class="events-alt__heading{% unless section.settings.background_image != blank %} h4{% endunless %}">
+          {{ section.settings.heading }}
+        </h2>
+    </div><!-- /.events-alt__header -->
+    {% endif %}
+    
+
+    {% if events.size > 0 %}
+    <div class="events-alt-list">
+        {%- for event in events -%}{% assign _event = event.metafields.event %}
+        <div class="events-alt__item event-box">
+            {% if event.image != blank %}
+            <div class="event-image">
+                <a href="{{ event.url }}" aria-label="view event">
+                    {%- render 'image', image: event.image -%}
+                </a>
+            </div>
+            {% endif %}
+            
+            <div class="event-text">
+                <h5 class="event-title">
+                    <a href="{{ event.url }}" aria-label="view event">{{ event.title }}</a>
+                </h5>
+                <p class="event-dates"><strong>Dates: </strong>{{ _event.startdate | date: '%B %d, %Y' }}
+                    {% unless _event.enddate == blank %}
+                    - {{ _event.enddate | date: '%B %d, %Y' }}
+                    {% endunless %}
+                </p>
+                
+                {% if _event.locationaddr %}
+                <div class="event-location">
+                    <p>{{ _event.locationaddr |  newline_to_br }}</p>
+                </div>
+                {% endif %}
+
+                {% if _event.description != blank %}
+                <div class="event-description">{{ _event.description | metafield_tag }}</div>
+                {% endif %}
+
+                {% if _event.registrationlink != blank %}
+                <div class="event-link-div">
+                    <a
+                    href="{{ _event.registrationlink }}"
+                    target="_blank"
+                    class="event-link button">Register</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="no-events-available">
+        <h5 class="item-event__title">No upcoming events.</h5>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Events Alt",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Current events"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Event",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Location"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Events Alt",
+      "blocks": [
+        {
+          "type": "event"
+        },
+        {
+          "type": "event"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

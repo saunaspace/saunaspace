@@ -1,0 +1,152 @@
+.product-featured {
+  color: #232323;
+  background-color: #f0e7da;
+  display: block;
+  padding: 15.7rem 0 8.8rem;
+}
+.shopify-section:has(section.hero-banner) + .shopify-section .product-featured {
+  padding-top: 8.8rem;
+}
+
+.product-featured__content {
+  color: #2c2621;
+}
+
+.product-featured__cols {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-featured__aside {
+  width: 43.489%;
+}
+
+.product-featured__main {
+  text-align: center;
+  padding: 5rem 4rem;
+  flex: 1;
+}
+@media (min-width: 1023.2px) {
+  .product-featured__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.product-featured__title {
+  max-width: 44.4rem;
+  margin: 0 auto 4.3rem;
+  line-height: 1.5;
+}
+
+.product-featured__content {
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 1.714286;
+  max-width: 72.8rem;
+  margin: 0 auto;
+}
+
+.product-featured__image {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.product-featured__image img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-featured__image [data-product-image] {
+  transition-property: opacity, visibility;
+  transition-duration: var(--duration-default);
+  transition-timing-function: var(--timing-default);
+}
+
+.product-featured__image.is-loading [data-product-image] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.product-featured__image.is-loaded:not(.is-loading) [data-product-image] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.product-featured__swatches {
+  padding: 2.3rem;
+  margin-top: 3.2rem;
+}
+
+.product-featured__swatches ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.7rem;
+}
+
+.product-featured__actions {
+  margin-top: 4.1rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .product-featured {
+    padding: 6rem 0 2.9rem;
+  }
+  .shopify-section:has(section.hero-banner) + .shopify-section .product-featured {
+    padding-top: 2.9rem;
+  }
+
+  .product-featured__cols {
+    flex-direction: column-reverse;
+  }
+
+  .product-featured__aside {
+    width: 100%;
+    padding: 0 3.35rem;
+  }
+
+  .product-featured__main {
+    padding: 0;
+  }
+
+  .product-featured__title {
+    font-size: calc(var(--fsbase) * 2.8);
+    max-width: 86%;
+    line-height: 1.321;
+    margin: 0 auto 2.5rem;
+  }
+
+  .product-featured__swatches {
+    padding: 1.6rem;
+    margin: 2.5rem 0 2.8rem;
+  }
+
+  .product-featured__content {
+    font-size: calc(var(--fsbase) * 1.4);
+    line-height: 1.714286;
+    max-width: 88.6%;
+  }
+
+  .product-featured__swatches ul {
+    gap: 2rem;
+  }
+
+  .product-featured__actions {
+    margin-top: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .product-featured__aside {
+    width: 100%;
+    padding: 0 1.3rem;
+  }
+}

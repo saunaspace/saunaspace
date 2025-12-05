@@ -1,0 +1,250 @@
+{%- liquid
+  assign featured_article = section.settings.featured_article
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile
+  assign meta_description = blog.metafields.custom.description.value
+  assign block_count = section.blocks.size
+-%}
+
+{{ 'section-blog.css' | asset_url | stylesheet_tag }}
+{{ 'article.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'load-more.js' | asset_url }}" defer></script>
+
+<section class="blog blog--{{ blog.handle }}{%- if current_tags %} blog--filtered{%- endif -%}">
+  {%- if current_tags -%}
+    <header class="blog__head">
+      {%- if image or image_mobile -%}
+        <div class="blog__head-image">
+          {% if image %}{{ image | image_url: width: 1920 | image_tag }}{% endif %}
+          {% if image_mobile %}{{ image_mobile | image_url: width: 1000 | image_tag }}{% endif %}
+        </div>
+      {%- endif -%}
+      <div class="blog__banner">
+        <div class="container">
+          <h1 class="blog__title h1 center">
+            {{ current_tags[0] | replace: 'Category:', '' | escape }}
+          </h1>
+        </div>
+      </div>
+    </header>
+  {%- else -%}
+    <header class="blog__head">
+      <div class="blog__banner">
+        <div class="container">
+          {% if blog.handle == "the-wavelength" %}
+            <div class="blog-wavelength-header">
+              <div class="header-col header-col-content">
+                <p class="subheading">{{ section.settings.header_subheading }}</p>
+                <h1 class="blog__title h1 center">{{ blog.title }}</h1>
+                <p class="header-content">{{ section.settings.header_content }}</p>
+              </div>
+              <div class="header-col header-col-image">
+                {% if section.settings.header_image %}
+                  {{ section.settings.header_image | image_url: width: 600 | image_tag }}
+                {% endif %}
+              </div>
+            </div>
+          {% else %}
+            <h1 class="blog__title h1 center">{{ blog.title }}</h1>
+            {% if meta_description %}
+              <p class="blog__description">{{ meta_description | escape | newline_to_br }}</p>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      {% if section.settings.show_filters and blog.all_tags.size > 0 %}
+        <nav class="blog__nav caption center">
+          <div class="container container--narrow">
+            <ul class="blog__links list-unstyled">
+              <li class="blog__link small-hide medium-hide">
+                {{ 'All' | link_to: blog.url, title: 'All Posts' | replace: 'href', 'class="full-unstyled-link is-active" href' }}
+              </li>
+              {% for tag in blog.all_tags %}
+                {% unless tag contains 'Category' %}
+                  {% continue %}
+                {% endunless %}
+                <li class="blog__link">
+                  {% assign replace_with = 'class="full-unstyled-link" href' %}
+                  {% if current_tags contains tag %}
+                    {% assign replace_with = 'class="full-unstyled-link is-active" href' %}
+                  {% endif %}
+                  {{ tag | replace: 'Category:', '' | link_to_tag: tag | replace: 'href', replace_with }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </nav>
+      {% endif %}
+    </header>
+  {%- endif -%}
+
+  {% unless current_tags %}
+    {% if featured_article %}
+      <div class="blog__featured-article">
+        {% render 'article-hero', article_ref: featured_article, location: 'blog' %}
+      </div>
+    {% endif %}
+  {% endunless %}
+
+  {% if current_tags %}
+    <div class="blog__back">
+      <a href="{{ blog.url }}" class="link-dot">{{ 'blog.home' | t }}</a>
+    </div>
+  {% endif %}
+
+  {% if block_count > 0 %}
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'tag_carousel' %}
+          {% assign block_tag = block.settings.tag %}
+          {% assign tag_articles = '' | split: ',' %}
+          {% for article in blog.articles %}
+            {% for tag in article.tags %}
+              {% if tag == block_tag %}
+                {% assign tag_articles = tag_articles | push: article %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          <p style="color:red">Found {{ tag_articles.size }} articles for tag "{{ block_tag }}"</p>
+          {% if tag_articles.size > 0 %}
+            <div class="blog__category-section" id="carousel-{{ block.id }}">
+              <div class="container">
+                <h2 class="h2">{{ block_tag }}</h2>
+                {% if block.settings.subtitle != blank %}
+                  <p class="subtitle small">{{ block.settings.subtitle }}</p>
+                {% endif %}
+                <div class="blog__carousel swiper-container">
+                  <div class="swiper-wrapper">
+                    {% for article_ref in tag_articles limit: block.settings.limit %}
+                      <div class="swiper-slide">
+                        {% render 'article', article_ref: article_ref, style: 'small' %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+        {% when 'untagged_carousel' %}
+          {% assign untagged_articles = '' | split: ',' %}
+          {% for article in blog.articles %}
+            {% if article.tags.size == 0 %}
+              {% assign untagged_articles = untagged_articles | push: article %}
+            {% endif %}
+          {% endfor %}
+          {% assign articles_to_render = untagged_articles %}
+          {% if block.settings.enable_block and articles_to_render.size > 0 %}
+            <div class="blog__category-section" id="untagged-carousel-{{ block.id }}">
+              <div class="container">
+                <h2 class="h2">{{ block.settings.title }}</h2>
+                {% if block.settings.subtitle != blank %}
+                  <p class="subtitle small">{{ block.settings.subtitle }}</p>
+                {% endif %}
+                <div class="blog__carousel swiper-container">
+                  <div class="swiper-wrapper">
+                    {% for article_ref in articles_to_render limit: block.settings.limit %}
+                      <div class="swiper-slide">
+                        {% render 'article', article_ref: article_ref, style: 'small' %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+  {% else %}
+    {%- paginate blog.articles by 12 -%}
+      <load-more>
+        <div class="blog__body">
+          <div class="container">
+            {% if blog.articles_count > 0 %}
+              <div class="blog__grid" js-blog-grid>
+                {% for article_ref in blog.articles %}
+                  {% render 'article', article_ref: article_ref, style: 'small' %}
+                {% endfor %}
+                {% if paginate.next %}
+                  <div class="blog__grid-actions">
+                    <a
+                      href="{{ paginate.next.url }}"
+                      class="blog__load-more"
+                      aria-label="{{ 'general.pagination.next' | t }}"
+                      title="{{ 'general.pagination.next' | t }}"
+                      js-load-more
+                    >
+                      {{ 'blog.load_more' | t }}
+                    </a>
+                  </div>
+                {% endif %}
+              </div>
+            {% else %}
+              <h2 class="h5 regular center">{{ 'blog.empty' | t }}</h2>
+            {% endif %}
+          </div>
+        </div>
+      </load-more>
+    {%- endpaginate -%}
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Main Blog - Wavelength",
+  "settings": [
+    { "type": "article", "id": "featured_article", "label": "Featured Article" },
+    { "type": "image_picker", "id": "image", "label": "Image (Desktop)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image (Mobile)" },
+    { "type": "checkbox", "id": "show_filters", "label": "Show Filters if available", "default": true },
+    { "type": "header", "content": "Wavelength Blog" },
+    { "type": "text", "id": "header_subheading", "label": "Header Subheading", "default": "Brian Richards Presents:" },
+    { "type": "text", "id": "header_content", "label": "Header Content", "default": "Our founder's blog. Ruminations about sauna, light, electromagnetism, wellness and the inner pharmacy of the human being." },
+    { "type": "image_picker", "id": "header_image", "label": "Header Image" }
+  ],
+  "blocks": [
+    {
+      "type": "tag_carousel",
+      "name": "Tag-Based Carousel",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tag",
+          "label": "Tag (Category)",
+          "options": [
+            { "value": "Foundations", "label": "Foundations" },
+            { "value": "Benefits", "label": "Benefits" },
+            { "value": "Hot Detox Summer", "label": "Hot Detox Summer" }
+          ],
+          "default": "Foundations"
+        },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Write a short SEO description here." },
+        { "type": "range", "id": "limit", "label": "Max Articles", "min": 3, "max": 20, "step": 1, "default": 8 }
+      ]
+    },
+    {
+      "type": "untagged_carousel",
+      "name": "Untagged Article Carousel",
+      "settings": [
+        { "type": "checkbox", "id": "enable_block", "label": "Show this section?", "default": true },
+        { "type": "text", "id": "title", "label": "Section Title", "default": "All Blog Articles" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Fresh insights, timeless reflections, and radiant wellness wisdom." },
+        { "type": "range", "id": "limit", "label": "Max Articles", "min": 3, "max": 20, "step": 1, "default": 10 }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Wavelength Blog Default",
+      "category": "Blog",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

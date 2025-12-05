@@ -1,0 +1,65 @@
+/* ------------------------------------------------------------ *\
+  Component column numbered card
+\* ------------------------------------------------------------ */
+
+.column-numbered-card {
+  padding: 3.7rem 4.4rem;
+  text-align: center;
+}
+
+@media (max-width: 1023px) {
+  .column-numbered-card {
+    display: flex;
+    width: 100%;
+    text-align: left;
+    gap: 2.8rem;
+    padding: 2.7rem 2rem;
+  }
+}
+
+.column-numbered-card__number {
+  font-size: calc(var(--fsbase) * 6);
+  line-height: 1;
+  color: #CBA378;
+  font-family: var(--font-heading-family);
+  margin-bottom: 4.1rem;
+}
+
+@media (max-width: 1023px) {
+  .column-numbered-card__number {
+    flex: 0 0 fit-content;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .column-numbered-card__body {
+    flex: 1;
+  }
+}
+
+.column-numbered-card__title {
+  font-family: var(--font-body-family);
+  margin-bottom: 1.4rem;
+  font-weight: 600;
+}
+
+@media (max-width: 749px) {
+  .column-numbered-card__title {
+    font-size: calc(var(--fsbase) * 1.6);
+    margin-bottom: 0.8rem;
+  }
+}
+
+.column-numbered-card__content {
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 2;
+  font-weight: 500;
+}
+
+@media (max-width: 749px) {
+  .column-numbered-card__content {
+    font-size: calc(var(--fsbase) * 1.2);
+  }
+}

@@ -1,0 +1,124 @@
+{{- 'section-banner.css' | asset_url | stylesheet_tag -}}
+
+{%- if section.settings.title != blank
+    or section.settings.content != blank
+    or section.settings.button_text != blank and section.settings.button_url != blank
+-%}
+  <section class="banner flex flex--justify-center center" id="banner-{{- section.index -}}">
+    <div class="banner__background">
+      <div class="media banner__media {% if section.settings.video_mobile != blank or section.settings.image_mobile != blank %}small-hide{% endif %}">
+        {%-
+          liquid
+          if section.settings.video != blank
+            echo section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false
+          elsif section.settings.image != blank
+            render 'image', image: section.settings.image
+          else
+            echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+          endif
+        -%}
+      </div><!-- /.media -->
+
+      {%- if section.settings.video_mobile != blank or section.settings.image_mobile != blank -%}
+        <div class="media banner__media large-up-hide">
+          {%-
+            liquid
+            if section.settings.video_mobile != blank
+              echo section.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: true, controls: false
+            elsif section.settings.image_mobile != blank
+              render 'image', image: section.settings.image_mobile
+            endif
+          -%}
+        </div><!-- /.media -->
+      {%- endif -%}
+    </div><!-- /.banner__background -->
+
+    <div class="banner__inner">
+      {%- if section.settings.title != blank
+          or section.settings.content != blank
+          or section.settings.button_text != blank and section.settings.button_url != blank -%}
+        {%- if section.settings.title != blank -%}
+          <h3 class="banner__title">
+            {{- section.settings.title | escape -}}
+          </h3><!-- /.banner__title -->
+        {%- endif -%}
+
+        {%- if section.settings.content != blank -%}
+          <div class="banner__body">
+            <p>{{- section.settings.content | escape | newline_to_br -}}</p>
+          </div><!-- /.banner__body -->
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank and section.settings.button_url != blank -%}
+          <div class="banner__actions">
+            <a href="{{ section.settings.button_url }}" class="banner__link link-dot">
+              {{ section.settings.button_text }}
+            </a>
+          </div><!-- /.banner__actions -->
+        {%- endif -%}
+      {%- endif -%}
+    </div><!-- /.banner__inner -->
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Overwrites image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "video",
+      "id": "video_mobile",
+      "label": "Video Mobile",
+      "info": "Overwrites Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Content text goes here"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Link Label",
+      "default": "Link text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link URL",
+      "default": "/"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name": "Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+.styleguide__badge {
+  background-color: var(--color-background-accent);
+  padding: 0.4rem 1rem;
+  border: 0.1rem solid var(--color-border);
+  border-radius: 0.4rem;
+}
+
+.styleguide__title {
+  color: blue;
+}
+
+.styleguide__card-holder {
+  max-width: 30rem;
+}

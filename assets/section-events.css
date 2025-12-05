@@ -1,0 +1,116 @@
+/* ------------------------------------------------------------ *\
+  Section events
+\* ------------------------------------------------------------ */
+
+.events {
+    padding: 5rem 0 15rem;
+  }
+  
+  @media (max-width: 749px) {
+    .events {
+      padding: 3rem 0 5rem;
+    }
+  }
+  
+  .events .container {
+    max-width: 161rem;
+  }
+  
+  .events__header {
+    min-height: 36rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  @media (max-width: 749px) {
+    .events__header {
+      min-height: 16.7rem;
+    }
+  }
+  
+  .events__heading {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .events__list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .events__item {
+    margin-bottom: 1rem;
+  }
+  
+  .item-event {
+    display: flex;
+    position: relative;
+    padding: 2rem 0 1.8rem;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #C4C4C4;
+    transition: border-color 0.3s ease;
+  }
+  
+  .events__item:last-child .item-event {
+    border-bottom: 1px solid #C4C4C4;
+  }
+  
+  .item-event.item-event:hover:has(.item-event__link) {
+    border-bottom-color: #000;
+    border-top-color: #000;
+  }
+  
+  .item-event__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .item-event__title {
+    font-family: var(--font-body-family);
+    font-size: calc(var(--fsbase) * 2.4);
+    font-weight: 600;
+  }
+  
+  @media (max-width: 749px) {
+    .item-event__title {
+      font-size: calc(var(--fsbase) * 1.4);
+    }
+  }
+  
+  .item-event__location {
+    gap: 1.4rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  @media (max-width: 749px) {
+    .item-event__location {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+  }
+  
+  .item-event__location i {
+    line-height: 0;
+  }
+  
+  .item-event__arrow {
+    transform: rotate(-90deg);
+  }
+  
+  @media (max-width: 749px) {
+    .item-event__arrow {
+      transform: rotate(0);
+    }
+  }
+  

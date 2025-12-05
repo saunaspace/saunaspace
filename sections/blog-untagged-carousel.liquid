@@ -1,0 +1,86 @@
+{% liquid
+  assign manual_articles = section.settings.manual_articles
+  assign untagged_articles = '' | split: ','
+
+  assign show_manual = false
+  if manual_articles != blank
+    if manual_articles.size > 0
+      assign show_manual = true
+    endif
+  endif
+
+  if show_manual
+    assign articles_to_render = manual_articles
+  else
+    for article in blog.articles
+      if article.tags.size == 0
+        assign untagged_articles = untagged_articles | push: article
+      endif
+    endfor
+    assign articles_to_render = untagged_articles
+  endif
+%}
+
+{%- if articles_to_render.size > 0 and section.settings.enable_block -%}
+  <div class="blog__untagged-carousel" id="untagged-carousel-{{ section.id }}">
+    <div class="container">
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle small">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      <div class="blog__carousel swiper-container">
+        <div class="swiper-wrapper">
+          {%- for article_ref in articles_to_render limit: section.settings.limit -%}
+            <div class="swiper-slide">
+              {% render 'article', article_ref: article_ref, style: 'small' %}
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Untagged Article Carousel",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_block",
+      "label": "Show this section?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "All Blog Articles"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Fresh insights, timeless reflections, and radiant wellness wisdom."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Max number of articles",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Untagged Article Carousel",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}

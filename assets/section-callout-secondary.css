@@ -1,0 +1,157 @@
+.callout-secondary {
+  position: relative;
+  overflow: hidden;
+  padding: 20.2rem 0;
+}
+
+.callout-secondary .container {
+  --page-width: 162rem;
+}
+
+.callout-secondary .callout__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.callout-secondary .callout__media {
+  height: 100%;
+}
+
+.callout-secondary .callout__inner {
+  position: relative;
+  z-index: 5;
+}
+
+.callout-secondary .callout__body {
+  max-width: 64rem;
+  padding: 11.9rem 0 0;
+  margin-left: auto;
+  border-radius: 2.9rem;
+  backdrop-filter: blur(3rem) brightness(115%);
+  -webkit-backdrop-filter: blur(3rem) brightness(115%);
+  color: #fff;
+  overflow: hidden;
+}
+.callout-secondary .callout__body.no-radio-content {
+  padding-bottom: 11rem;
+}
+
+.callout-secondary .callout__body-inner {
+  padding: 0 8rem;
+}
+
+.callout-secondary .callout__title {
+  margin: 0 0 5rem;
+  color: #faf8f2;
+}
+
+.callout-secondary .callout__content {
+  line-height: 2.05;
+}
+
+.callout-secondary .callout__actions {
+  background-color: #f0e7da;
+}
+
+.callout-secondary .callout__radio-buttons {
+  display: flex;
+  margin: 7.7rem 0 7.4rem;
+  border: 0.1rem solid #faf8f2;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.callout-secondary .callout__radio {
+  flex: 1 0;
+}
+
+.callout-secondary .callout__radio input {
+  display: none;
+}
+
+.callout-secondary .callout__radio label {
+  display: block;
+  border-radius: 1rem;
+  padding: 2.1rem 0;
+  font-weight: 600;
+  font-size: calc(var(--fsbase) * 1.8);
+  color: #f0e7da;
+}
+
+.callout-secondary .callout__radio input:checked ~ label {
+  background-color: #f0e7da;
+  color: #2c2621;
+}
+
+.callout-secondary .callout__link {
+  display: none;
+  justify-content: center;
+  padding: 3.43rem 1rem;
+}
+
+.callout-secondary:has(input[type='radio'][id='callout-button-1']:checked)
+  .callout__actions
+  .callout__link:nth-child(1) {
+  display: flex;
+}
+
+.callout-secondary:has(input[type='radio'][id='callout-button-2']:checked)
+  .callout__actions
+  .callout__link:nth-child(2) {
+  display: flex;
+}
+
+@media screen and (max-width: 749px) {
+  .callout-secondary {
+    padding: 15.4rem 0;
+  }
+
+  .callout-secondary .callout__title {
+    margin: 0 0 1.7rem;
+    font-size: calc(var(--fsbase) * 2.8);
+  }
+
+  .callout-secondary .callout__content {
+    font-size: calc(var(--fsbase) * 1.2);
+    line-height: 1.73;
+  }
+
+  .callout-secondary .callout__body {
+    max-width: 100%;
+    padding: 4rem 0 0;
+    border-radius: 1rem;
+  }
+  .callout-secondary .callout__body.no-radio-content {
+    padding-bottom: 5rem;
+  }  
+
+  .callout-secondary .callout__body-inner {
+    padding: 0 2rem;
+  }
+
+  .callout-secondary .callout__radio label {
+    padding: 1rem 0;
+    font-size: calc(var(--fsbase) * 1.4);
+  }
+
+  .callout-secondary .callout__radio-buttons {
+    margin: 4rem 0;
+  }
+
+  .callout-secondary .callout__link {
+    padding: 1.8rem 1rem;
+  }
+}
+
+.callout-secondary .callout__link.co-link--no-radios {
+  display: flex;
+  margin-top: 60px;
+}
+@media (max-width: 767px) {
+  .callout-secondary .callout__link.co-link--no-radios {
+    margin-top: 40px;
+  }
+}

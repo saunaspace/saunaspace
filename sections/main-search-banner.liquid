@@ -1,0 +1,14 @@
+{{- 'component-collection-hero.css' | asset_url | stylesheet_tag -}}
+{{- 'page-search.css' | asset_url | stylesheet_tag -}}
+
+<div class="main-search-banner">
+  <div class="collection-hero{% unless search.performed %} empty-search{% endunless %}">
+    <div class="container">
+      <h1 class="collection-hero__title h2">
+        {{- 'search.title' | t -}}
+      </h1><!-- /.collection-hero__title h2 -->
+
+      {% render 'form-search', namespace: 'Main-Search' %}
+    </div><!-- /.container -->
+  </div><!-- /.collection-hero -->
+</div>

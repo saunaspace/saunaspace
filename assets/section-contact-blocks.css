@@ -1,0 +1,130 @@
+/* ------------------------------------------------------------ *\
+  Contact blocks
+\* ------------------------------------------------------------ */
+
+.contact-blocks {
+  padding-block: 7.5rem 10.5rem;
+}
+
+.contact-blocks .container {
+  max-width: 162rem;
+}
+
+.contact-blocks__body-text {
+  max-width: 58rem;
+  margin: 0 auto 6.8rem;
+  text-align: center;
+  font-size: calc(var(--fsbase) * 2.1);
+  line-height: 2;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 767px) {
+  .contact-blocks {
+    padding-block: 3.4rem 2.4rem;
+  }
+
+  .contact-blocks__body-text {
+    padding-inline: 1rem;
+    margin-bottom: 3.8rem;
+    font-size: calc(var(--fsbase) * 1.4);
+  }
+}
+
+.contact-blocks__grid {
+  display: flex;
+}
+
+.contact-blocks__grid-item {
+  flex: 1;
+}
+
+.contact-blocks__grid-item + .contact-blocks__grid-item {
+  border-left: 0.1rem solid #C4C4C4;
+}
+
+@media screen and (max-width: 767px) {
+  .contact-blocks__grid {
+    flex-wrap: wrap;
+    margin-inline: 2rem;
+  }
+
+  .contact-blocks__grid-item {
+    flex: 0 0 100%;
+  }
+
+  .contact-blocks__grid-item + .contact-blocks__grid-item {
+    border-left: none;
+    border-top: 0.1rem solid #C4C4C4;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+  Contact block
+\* ------------------------------------------------------------ */
+
+.contact-block {
+  padding: 2rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .contact-block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    text-align: left;
+  }
+}
+
+.contact-block__icon {
+  max-width: 4.4rem;
+  min-height: 4rem;
+  margin: 0 auto 3rem;
+  line-height: 1;
+}
+
+.contact-block__icon svg {
+  display: inline-block;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .contact-block__icon {
+    max-width: 3rem;
+    margin: 0;
+  }
+}
+
+.contact-block__heading {
+  margin-block: 0 1.8rem;
+  font-family: var(--font-body-family);
+}
+
+@media (min-width: 1280px) {
+  .contact-block__heading {
+    font-size: calc(var(--fsbase) * 3);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact-block__heading {
+    margin: 0;
+    font-size: calc(var(--fsbase) * 1.6);
+  }
+}
+
+.contact-block__link {
+  font-size: calc(var(--fsbase) * 2.1);
+  color: #CBA378;
+}
+
+@media screen and (max-width: 767px) {
+  .contact-block__link {
+    font-size: calc(var(--fsbase) * 1.2);
+    margin-left: auto;
+    font-weight: 700;
+  }
+}

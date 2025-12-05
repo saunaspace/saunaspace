@@ -1,0 +1,207 @@
+{%- if section.settings.title != blank -%}
+  {{- 'section-chart.css' | asset_url | stylesheet_tag -}}
+
+  {%-
+    liquid
+    assign color_scheme = section.settings.color_scheme
+    assign color_scheme_settings = settings.color_schemes[color_scheme.id].settings
+  -%}
+  {% liquid
+    if section.settings.section_id != blank
+      assign sec_id = section.settings.section_id
+    else
+      assign sec_id = "section-chart-" | append: section.index
+    endif
+  %}
+
+  <section class="chart" data-id="{{- section.id -}}" id="{{ sec_id }}">
+    {%- if section.settings.video != blank -%}
+      <div class="chart__background media media--transparent">
+        {{- section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false -}}
+      </div><!-- /.chart__background media media--transparent -->
+    {%- endif -%}
+
+    <div class="chart__inner">
+      {%- if section.settings.pre_title != blank -%}
+        <p class="chart__subtitle">
+          {{- section.settings.pre_title | escape -}}
+        </p><!-- /.chart__subtitle -->
+      {%- endif -%}
+
+      <h2 class="chart__title">
+        {{- section.settings.title | escape -}}
+      </h2><!-- /.chart__title -->
+
+      {%- if section.settings.content != blank -%}
+        <div class="chart__entry">
+          {{ section.settings.content }}
+        </div><!-- /.chart__entry -->
+      {%- endif -%}
+
+      {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+        <a href="{{- section.settings.link_url -}}" class="link-dot">
+          {{- section.settings.link_text | escape -}}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.image != blank or section.settings.animation_video != blank or section.settings.animation_oembed != blank -%}
+        <div class="chart__image chart__image--{{ section.settings.image_width }}">
+          {% if section.settings.animation_oembed != blank %}
+            {% render 'video-oembed', video: section.settings.animation_oembed, container: true, aspect_ratio: section.settings.animation_oembed_aspect_ratio, controls: true %}
+          {% elsif section.settings.animation_video != blank %}
+            {{- section.settings.animation_video | video_tag: autoplay: false, loop: true, muted: true, controls: true -}}
+          {% else %}
+            {%- render 'image', image: section.settings.image -%}
+            {% if section.settings.image_mobile != blank %}
+              {%- render 'image', image: section.settings.image_mobile, class: 'mobile-image' -%}
+            {% endif %}
+          {% endif %}
+        </div><!-- /.chart__image -->
+      {%- endif -%}
+
+      {%- if section.settings.column_1 != blank or section.settings.column_2 != blank -%}
+        <div class="chart__columns">
+          {%- if section.settings.column_1 != blank -%}
+            <div class="chart__column">
+              <p>{{- section.settings.column_1 | escape | newline_to_br -}}</p>
+            </div><!-- /.chart__column -->
+          {%- endif -%}
+
+          {%- if section.settings.column_2 != blank -%}
+            <div class="chart__column">
+              <p>{{- section.settings.column_2 | escape | newline_to_br -}}</p>
+            </div><!-- /.chart__column -->
+          {%- endif -%}
+        </div><!-- /.chart__columns -->
+      {%- endif -%}
+    </div><!-- /.chart__inner -->
+  </section><!-- /.chart -->
+{%- endif -%}
+
+{% style %}
+  [data-id="{{- section.id -}}"] {
+    --color-background: {{ color_scheme_settings.background }};
+    --color-text: {{ color_scheme_settings.text }};
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Chart",
+    "class": "sec-chart",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "video",
+        "id": "video",
+        "label": "Background video"
+      },
+      {
+        "type": "text",
+        "id": "pre_title",
+        "label": "Pre heading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Mobile Image"
+      },
+      {
+        "type": "select",
+        "id": "image_width",
+        "label": "Image width",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "narrow",
+            "label": "Narrow"
+          },
+          {
+            "value": "compact",
+            "label": "Compact"
+          }
+        ],
+        "default": "normal"
+      },
+      {
+        "type": "video",
+        "id": "animation_video",
+        "label": "Animation Video",
+        "info": "Replaces image above"
+      },
+      {
+        "type": "video_url",
+        "id": "animation_oembed",
+        "label": "Animation Oembed video",
+        "info": "Overrides video above",
+        "accept": [
+          "vimeo",
+          "youtube"
+        ]
+      },
+      {
+        "type": "text",
+        "id": "animation_oembed_aspect_ratio",
+        "label": "Oembed aspect ratio",
+        "default": "16/9",
+        "info": "[WIDTH]/[HEIGHT] ex: 16/9"
+      },
+      {
+        "type": "textarea",
+        "id": "column_1",
+        "label": "Column 1"
+      },
+      {
+        "type": "textarea",
+        "id": "column_2",
+        "label": "Column 2"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Chart"
+      }
+    ]
+  }
+{% endschema %}

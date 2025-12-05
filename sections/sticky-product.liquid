@@ -1,0 +1,67 @@
+{%- for block in section.blocks -%}
+  {% assign path = request.path | replace: "%C2%AE", "®" %}
+  {%- unless path contains block.settings.url  -%}
+    {%- continue -%}
+  {%- endunless -%}
+
+  {%- if block.settings.product == blank -%}
+    {%- continue -%}
+  {%- endif -%}
+
+  {% assign product_ref = block.settings.product %}
+
+  <div class="sticky-product medium-hide small-hide">
+    <div class="sticky-product__image">
+      <a href="{{- product_ref.url -}}" class="media">
+        {%- render 'image', image: product_ref.featured_image -%}
+      </a><!-- /.media -->
+    </div><!-- /.sticky-product__image -->
+
+    <a href="{{- product_ref.url -}}" class="sticky-product__content block full-unstyled-link">
+      <span class="sticky-product__title">
+        {{- product_ref.metafields.custom.custom_title | default: product_ref.title | escape -}}
+      </span>
+
+      <span class="sticky-product__price">
+        {% liquid
+        assign sticky_product_price = product_ref.first_available_variant.price | money
+        assign price_html = 'products.product.price.priced_at_html' | t: price_min: sticky_product_price
+        if product_ref.first_available_variant.compare_at_price != blank and product_ref.first_available_variant.price < product_ref.first_available_variant.compare_at_price
+          assign compare_price = product_ref.first_available_variant.compare_at_price | money
+          assign price_html = price_html | replace: "<strong>", "<ins class='sale-price'>" | replace: "</strong>", "</ins>"
+          assign price_html = price_html | append: "<del>${compare_price}</del>" | replace: "${compare_price}", compare_price
+        endif
+        %}
+        {{ price_html }}
+      </span>
+
+      <span class="sticky-product--cta link-dot">Buy Now</span>
+    </a><!-- /.sticky-product__content -->
+  </div><!-- /.sticky-product -->
+{%- endfor -%}
+
+{% schema %}
+  {
+    "name": "Sticky product",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "page",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

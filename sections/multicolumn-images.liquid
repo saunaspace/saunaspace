@@ -1,0 +1,146 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-section-multicolumn-images-" | append: section.index
+  endif
+%}
+{%- if section.blocks.size > 0 -%}
+  <section class="section section-multicolumn-images" id="{{ sec_id }}">
+    <div class="container">
+      {%- if section.settings.title != blank
+          or section.settings.subtitle != blank -%}
+        <div class="section__head center">
+          {%- if section.settings.subtitle != blank -%}
+            <p class="section__pre-title">
+              {{- section.settings.subtitle | escape -}}
+            </p><!-- /.section__pre-title -->
+          {%- endif -%}
+
+          {%- if section.settings.title != blank -%}
+            <h3 class="section__title h2">
+              {{- section.settings.title | escape -}}
+            </h3><!-- /.section__title -->
+          {%- endif -%}
+        </div><!-- /.section__head -->
+      {%- endif -%}
+
+      <div class="section__body">
+        <div class="flex-grid section__grid flex-grid--2{% if section.blocks.size > 1 %} flex--justify-center{% else %} flex-grid--auto-grow{% endif %}">
+          {% for block in section.blocks %}
+            <div class="flex__item" {{ block.shopify_attributes }}>
+              {%- liquid
+                if block.settings.link_url != blank
+                  echo '<a href="' | append: block.settings.link_url | append: '" class="media media--3-4">'
+                else
+                  echo '<div class="media media--3-4">'
+                endif
+
+                if block.settings.image != blank
+                  render 'image', image: block.settings.image
+                else
+                  echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+                endif
+
+                if block.settings.link_url != blank
+                  echo '</a>'
+                else
+                  echo '</div>'
+                endif
+              -%}
+
+              {%- if block.settings.title != blank -%}
+                {%- assign block_title = block.settings.title | escape -%}
+                <h4 class="h4 center">
+                  {%- if block.settings.link_url != blank -%}
+                    <a href="{{ block.settings.link_url }}" class="full-unstyled-link">{{- block_title -}}</a>
+                  {%- else -%}
+                    {{ block_title }}
+                  {%- endif -%}
+                </h4><!-- /.h4 -->
+              {%- endif -%}
+
+              {%- if block.settings.subtitle != blank -%}
+                <p class="center">
+                  {{- block.settings.subtitle | escape -}}
+                </p><!-- /.center-->
+              {%- endif -%}
+            </div><!-- /.card-image -->
+          {% endfor %}
+        </div><!-- /.grid -->
+      </div><!-- /.section__body -->
+    </div><!-- /.container -->
+  </section><!-- /.section -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.multicolumn-images.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:sections.multicolumn-images.settings.subtitle.label",
+      "default": "Subtitle goes here"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.multicolumn-images.settings.title.label",
+      "default": "Heading goes here"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image-with-text",
+      "name": "t:sections.multicolumn-images.blocks.image-with-text.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn-images.blocks.image-with-text.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.multicolumn-images.blocks.image-with-text.settings.title.label",
+          "default": "Block title goes here"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "t:sections.multicolumn-images.blocks.image-with-text.settings.subtitle.label",
+          "default": "Block subtitle goes here"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "t:sections.multicolumn-images.blocks.image-with-text.settings.link_url.label",
+          "default": "/"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["*"]
+  },
+  "presets": [
+    {
+      "name":"t:sections.multicolumn-images.name",
+      "blocks": [
+        {
+          "type": "image-with-text"
+        },
+        {
+          "type": "image-with-text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

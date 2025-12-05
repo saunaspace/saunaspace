@@ -1,0 +1,48 @@
+{% comment %}
+    Renders an article card
+    Accepts:
+    - article_ref: {Object} Article Liquid object
+    - block: {Object} Section Block object
+    Usage:
+    {%- render 'card-article', article_ref: blog.articles[0] -%}
+{% endcomment %}
+
+{%-
+  liquid
+  assign article_ref = article_ref
+
+  if block.settings.article != blank
+    assign article_ref = block.settings.article
+  endif
+
+  assign article_image = block.settings.image | default: article_ref.image
+  assign article_title = block.settings.title | default: article_ref.title
+  assign article_link = block.settings.url | default: article_ref.url
+-%}
+
+<div class="card-article card-article--simple featured-articles__grid-item">
+  <a href="{{- article_link -}}" class="card-article__media-wrapper card-article__link">
+    <div class="card-article__media media">
+      {%-
+        liquid
+        if article_image != blank
+          render 'image', image: article_image
+        else
+          echo 'image' | placeholder_svg_tag: 'placeholder-svg'
+        endif
+      -%}
+    </div>
+  </a>
+
+  {%- if article_title != blank -%}
+    <h4 class="card-article__title">
+      <a href="{{- article_link -}}" class="card-article__link">{{- article_title -}}</a>
+    </h4>
+  {%- endif -%}
+
+  <div class="article__actions">
+    <a href="{{- url -}}" class="article__link link-dot">
+      {{- 'article.read_more' | t -}}
+    </a><!-- /.article__link -->
+  </div><!-- /.article__actions -->
+</div>

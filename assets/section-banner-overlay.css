@@ -1,0 +1,69 @@
+/* ------------------------------------------------------------ *\
+  Banner Overlay
+\* ------------------------------------------------------------ */
+
+.banner-overlay {
+  position: relative;
+}
+
+.banner-overlay__background,
+.banner-overlay__background::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.banner-overlay__background::after {
+  content: '';
+  background-color: var(--overlay-color);
+  opacity: var(--overlay-opacity);
+  z-index: 2;
+}
+
+.banner-overlay__inner {
+  min-height: 28vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-block: 2rem;
+  color: #fff;
+}
+
+@media screen and (max-width: 1023px) {
+  .banner-overlay__inner {
+    min-height: 43vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banner-overlay__inner {
+    min-height: 25rem;
+  }
+}
+
+.banner-overlay__content {
+  position: relative;
+  z-index: 3;
+}
+
+@media screen and (max-width: 499px) {
+  .banner-overlay__content {
+    max-width: 23rem;
+  }
+}
+
+.banner-overlay__heading {
+  font-size: calc(var(--fsbase) * 5.4);
+}
+
+@media screen and (max-width: 767px) {
+  .banner-overlay__heading {
+    font-size: calc(var(--fsbase) * 2.8);
+  }
+}

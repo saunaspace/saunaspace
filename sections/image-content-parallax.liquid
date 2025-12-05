@@ -1,0 +1,238 @@
+{% liquid
+  if section.settings.section_id != blank
+    assign sec_id = section.settings.section_id
+  else
+    assign sec_id = "section-image-content-parallax-" | append: section.index
+  endif
+%}
+{%- if section.settings.image != blank and section.blocks.size > 0 -%}
+  <image-content-parallax class="image-content-parallax" id="{{ sec_id }}">
+    <div class="image-content-parallax__image">
+      {{- section.settings.image | image_url: width: 1280 | image_tag: width: nil -}}
+    </div><!-- /.image-content-parallax__image -->
+
+    {%- for block in section.blocks -%}
+      {%- if block.settings.title == blank or block.settings.content == blank -%}
+        {%- continue -%}
+      {%- endif -%}
+
+      <div class="image-content-parallax__block">
+        <div class="container">
+          <div class="image-content-parallax__wrapper image-content-parallax__wrapper--{{- block.settings.content_align -}}">
+            <div class="image-content-parallax__content">
+              <h2 class="image-content-parallax__title">
+                {{- block.settings.title | escape -}}
+              </h2><!-- /.image-content-parallax__title -->
+
+              <p class="image-content-parallax__entry">
+                {{- block.settings.content | escape | newline_to_br -}}
+              </p><!-- /.image-content-parallax__entry -->
+            </div><!-- /.image-content-parallax__content -->
+          </div><!-- /.image-content-parallax__wrapper -->
+        </div><!-- /.container -->
+      </div><!-- /.image-content-parallax__block -->
+    {%- endfor -%}
+  </image-content-parallax><!-- /.image-content-parallax -->
+{%- endif -%}
+
+{% style %}
+  .image-content-parallax {
+    color: #f4f0e0;
+    background-color: #000;
+    display: block;
+    position: relative;
+  }
+
+  .image-content-parallax__image {
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .image-content-parallax__image::before {
+    content: '';
+    background: linear-gradient(to bottom, black, transparent);
+    width: 100%;
+    height: 19rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .image-content-parallax__image::after {
+    content: '';
+    background: linear-gradient(to top, black, transparent);
+    width: 100%;
+    height: 72rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .image-content-parallax__image img {
+    display: block;
+    max-width: min(100%,64rem);
+    margin: 0 auto;
+    position: sticky;
+    top: 0;
+  }
+
+  .image-content-parallax__block {
+    position: relative;
+    z-index: 1;
+  }
+
+  .image-content-parallax__block .container {
+    max-width: 145.7rem;
+  }
+
+  .image-content-parallax__wrapper {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .image-content-parallax__wrapper--right {
+    justify-content: flex-end;
+  }
+
+  .image-content-parallax__content {
+    text-align: center;
+    max-width: 66.5rem;
+  }
+
+  .image-content-parallax__title {
+    font-size: calc(var(--fsbase) * 5.4);
+    line-height: 1.33;
+    font-weight: 500;
+    margin: 0 0 4rem;
+  }
+
+  .image-content-parallax__entry {
+    font-size: calc(var(--fsbase) * 1.8);
+    line-height: 2;
+    max-width: 50.8rem;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .image-content-parallax__wrapper {
+      aspect-ratio: initial;
+      height: 100vh;
+      justify-content: center;
+    }
+
+    .image-content-parallax__wrapper--right {
+      justify-content: center;
+    }
+
+    .image-content-parallax__image img {
+      top: 20vh;
+    }
+
+    .image-content-parallax__title {
+      font-size: calc(var(--fsbase) * 2.4);
+      margin: 0 0 1.5rem;
+    }
+
+    .image-content-parallax__entry {
+      font-size: calc(var(--fsbase) * 1.2);
+    }
+
+    .image-content-parallax__content {
+      max-width: 30rem;
+    }
+  }
+{% endstyle %}
+
+{% comment %} {% javascript %}
+  class ImageContentParallax extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.init();
+    }
+
+    init() {
+      this.controller = new ScrollMagic.Controller();
+      this.scene = new ScrollMagic.Scene({
+        triggerElement: this,
+        duration: this.offsetHeight,
+        triggerHook: 1
+      })
+        .setPin(".image-content-parallax__image")
+        .addIndicators({name: "1 (duration: 300)"}) // add indicators (requires plugin)
+        .addTo(this.controller);
+    }
+  }
+
+  customElements.define('image-content-parallax', ImageContentParallax);
+{% endjavascript %} {% endcomment %}
+
+{% schema %}
+  {
+    "name": "Image / content parallax",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "section_id",
+        "label": "Section ID"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "select",
+            "id": "content_align",
+            "label": "Content align",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ],
+            "default": "left"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+    "groups": ["*"]
+    },
+    "presets": [
+      {
+        "name": "Image / content parallax"
+      }
+    ]
+  }
+{% endschema %}

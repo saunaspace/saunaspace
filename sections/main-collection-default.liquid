@@ -1,0 +1,87 @@
+{{- 'component-card-product.css' | asset_url | stylesheet_tag -}}
+{{- 'collection.css' | asset_url | stylesheet_tag -}}
+<!-- Collection: {{ collection.title }} -->
+
+<div class="collection">
+  <div class="collection__head">
+    <div class="container container--extra-large">
+      <div class="collection__content center">
+        <h1 class="collection__title h2">
+          {{- section.settings.title | default: collection.title | escape -}}
+        </h1><!-- /.collection__title h2 -->
+
+        {%- if collection.description != blank -%}
+          <div class="collection__entry rte">
+            {{- collection.description -}}
+          </div><!-- /.collection__entry -->
+        {%- endif -%}
+      </div><!-- /.collection__content -->
+    </div><!-- /.container -->
+  </div><!-- /.collection__head -->
+
+  <div class="collection__body">
+    <div class="container container--extra-large">
+
+        <div class="collection__body-inner">
+          {%- paginate collection.products by section.settings.products_per_page -%}
+            <div class="collection-grid-container" id="ProductGridContainer">
+              {%- if collection.products_count == 0 -%}
+                <div class="center">
+                  <h2 class="h3 regular">
+                    {{- 'collection.empty' | t -}}<br>
+                    {{- 'collection.use_fewer_filters_html' | t: link: collection.url, class: "link" -}}
+                  </h2><!-- /.h3 regular -->
+                </div><!-- /.center -->
+              {%- else -%}
+                <div class="collection__grid list-unstyled grid grid--3" role="list" id="product-grid" data-id="{{- section.id -}}">
+                  {%- for product_ref in collection.products -%}
+                    {%- render 'card-product', product_ref: product_ref, collection_ref: collection -%}
+                  {%- endfor -%}
+                </div><!-- /#product-grid.collection__grid list-unstyled grid grid--3 -->
+
+                {%- if paginate.pages > 1 -%}
+                  {%- render 'pagination', paginate: paginate, anchor: '' -%}
+                {%- endif -%}
+              {%- endif -%}
+            </div><!-- /.collection-grid-container -->
+          {%- endpaginate -%}
+        </div><!-- /.collection__body-inner -->
+        
+    </div><!-- /.container -->
+  </div><!-- /.collection__body -->
+</div><!-- /.collection -->
+
+{% schema %}
+  {
+    "name": "Main Collection Default",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "info": "Overwrites collection heading"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.main-collection.settings.header.filters_and_sorting.content"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.main-collection.settings.header.products_grid.content"
+      },
+      {
+        "type": "range",
+        "id": "products_per_page",
+        "min": 9,
+        "max": 48,
+        "step": 3,
+        "label": "t:sections.main-collection.settings.products_per_page.label",
+        "default": 24
+      }
+    ]
+  }
+{% endschema %}

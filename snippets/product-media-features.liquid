@@ -1,0 +1,42 @@
+{% assign feature_items = product.metafields.custom.product_guarantees %}
+{% if feature_items != blank %}
+<div class="product-build__media-features">
+    <ul>
+        {% for item in feature_items.value %}
+        <li>
+            <div class="product-build__media-feature">
+                {% if item.icon_code != blank %}
+                <i>{{ item.icon_code }}</i>
+                {% endif %}
+                
+                {% if item.label != blank %}
+                <span>{{ item.label }}
+                {% endif %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% comment %}
+    <ul>
+        <li>
+            <div class="product-build__media-feature">
+                <i>{%- render 'icon-calendar' -%}</i>
+                <span>100-Day Home Trial</span>
+            </div><!-- /.product-build__media-feature -->
+        </li>
+        <li>
+            <div class="product-build__media-feature">
+                <i>{%- render 'icon-shield' -%}</i>
+                <span>10-Year Warranty</span>
+            </div><!-- /.product-build__media-feature -->
+        </li>
+        <li>
+            <div class="product-build__media-feature">
+                <i>{%- render 'icon-returns' -%}</i>
+                <span>Free Returns</span>
+            </div><!-- /.product-build__media-feature -->
+        </li>
+    </ul>
+    {% endcomment %}
+</div><!-- /.product-build__media-features --> 
+{% endif %}

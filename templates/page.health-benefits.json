@@ -1,0 +1,313 @@
+{
+  "sections": {
+    "hero_banner_TanQbg": {
+      "type": "hero-banner",
+      "settings": {
+        "video": "shopify:\/\/files\/videos\/Untitled design (1)_962b0ac2-4e08-4a74-8bc7-a0990f28cb22.mp4",
+        "oembed": "",
+        "text_color": "#f4f0e0",
+        "content_position": "bottom",
+        "show_overlay": true,
+        "mobile_full_overlay": false,
+        "small_height": false,
+        "subtitle": "",
+        "title": "The Science of Sauna Benefits",
+        "content": "At SaunaSpace, we believe in the power of nature to nurture a healthful, fulfilling life. Our FireLight® Sauna harnesses the power of light and heat therapy, offering full-body benefits that enhance your wellness journey.",
+        "button_text": "",
+        "button_url": "",
+        "section_id": ""
+      }
+    },
+    "text_and_icon_radial_XMQtxc": {
+      "type": "text-and-icon-radial",
+      "name": "Detoxification",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-detoxification-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 160,
+        "title": "Detoxification",
+        "content": "Awaken your body's natural ability to expel impurities. Our FireLight® spectrum penetrates deeply, helping you detoxify at the cellular level, so you feel refreshed and revitalized",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Detoxification",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Reset your body and mind by awakening your natural ability to expel impurities. Regular sauna sessions can help you counteract exposure to the environmental toxins in your everyday life. Our proprietary FireLight® Spectrum optimizes light and heat therapy, penetrating to the cellular level for a deeper detox.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>The heat therapy from your sauna or targeted therapy device helps you sweat and increases blood flow. Together, these processes allow your body to get rid of harmful substances that have built up over time. Although your liver and kidneys already work hard to remove toxins from your system, research has shown that some heavy metals are released more effectively through sauna sessions. Using your SaunaSpace devices can help enhance your body’s natural detoxification response so you feel your best every day.<\/p>",
+        "popup_btn_label": "Read more about the detox science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefits-detoxification-near-infrared-sauna",
+        "section_id": "detoxification"
+      }
+    },
+    "text_and_icon_radial_YCDNEG": {
+      "type": "text-and-icon-radial",
+      "name": "Healing & Recovery",
+      "settings": {
+        "reverse": true,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-healing-recovery-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Healing & Recovery",
+        "content": "Harness your body’s innate power to heal. The FireLight® spectrum penetrates deep into muscles and tissues, accelerating recovery and reducing soreness, so you stay strong and resilient.",
+        "has_popup": true,
+        "popup_trigger_label": "Read More",
+        "popup_title": "Healing & Recovery",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Support your body’s natural ability to heal and recover with the restorative power of the FireLight® Spectrum. Red and near-infrared light penetrate deep into muscle and tissue, helping to reduce soreness, accelerate repair, and keep you feeling strong and resilient.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Red and near-infrared light promote cellular repair and reduce inflammation through photobiomodulation and heat-shock therapy. Photobiomodulation enhances mitochondrial function, increasing ATP production—the energy your cells need to heal. Heat-shock therapy enhances cellular detox and rejuvenation. By incorporating regular sessions into your routine, you can support faster recovery, reduced discomfort, and long-term physical resilience.<br\/><\/p>",
+        "popup_btn_label": "Read more about the regeneration science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefits-healing-and-recovery",
+        "section_id": "healing-recovery"
+      }
+    },
+    "text_and_icon_radial_h66EPw": {
+      "type": "text-and-icon-radial",
+      "name": "Immune Support",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-immune-support-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Immune Support",
+        "content": "Strengthen your body's defenses. The heat and light therapy from our saunas activate your immune response, helping you stay healthy and strong.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Immune Support",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Enjoy more healthy days by strengthening your body’s defenses. Each time you use your sauna, the FireLight® Spectrum activates your immune response and helps you protect your health during cold season and beyond.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>The heat of the sauna raises your body temperature, encouraging the production of white blood cells and antibodies to strengthen the immune system. It also improves circulation, ensuring that immune cells are better distributed throughout the body. Lastly, many people experience stress reduction that can also contribute to improved resistance to illness.<\/p>",
+        "popup_btn_label": "Read more about the immunity science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefits-immune-support",
+        "section_id": "immune-support"
+      }
+    },
+    "text_and_icon_radial_Tw6Nqn": {
+      "type": "text-and-icon-radial",
+      "name": "Skin Rejuvenation",
+      "settings": {
+        "reverse": true,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-skin-rejuvenation-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Skin Rejuvenation",
+        "content": "Boost your skin's natural glow. Regular exposure to our red and near-infrared light enhances collagen production, leaving your skin firmer, plumper, and radiantly healthy.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Skin Rejuvenation",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Enhance your natural beauty with the power of red and near-infrared light. Our unique FireLight® Spectrum awakens your skin’s innate ability to rejuvenate and can improve the effectiveness of your skincare routine. You’ll glow from the inside out with a complexion that reflects your inner radiance.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Regular near infrared light exposure has been shown to boost collagen and elastin, which make skin look firmer, feel plumper, and heal better. From cellulite to wound healing, near infrared sauna therapy can help restore a healthful glow.<\/p>",
+        "popup_btn_label": "Read more about the skin science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-radiant-skin-infrared-sauna",
+        "section_id": "skin-rejuvenation"
+      }
+    },
+    "text_and_icon_radial_jpqprh": {
+      "type": "text-and-icon-radial",
+      "name": "Stress Reduction",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-stress-reduction-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Stress Reduction",
+        "content": "Melt away tension and restore balance. The FireLight® spectrum calms the nervous system, helping you unwind, regulate stress, and feel more at ease—mind and body.",
+        "has_popup": true,
+        "popup_trigger_label": "Read More",
+        "popup_title": "Stress Reduction",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Unwind and reset with the calming effects of the FireLight® Spectrum. Red and near-infrared light help regulate stress hormones, promote relaxation, and bring your body back into balance—so you can feel more at ease, both physically and mentally.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Photobiomodulation influences the autonomic nervous system, helping to shift your body from a state of stress (sympathetic activation) to deep relaxation (parasympathetic activation). It also supports the production of mood-balancing neurotransmitters like serotonin. Heat shock therapy helps de-stress our tissues through detoxification and protein repair. With regular use, you may notice reduced tension, deeper relaxation, and a greater sense of overall well-being.<\/p>",
+        "popup_btn_label": "Read more about the de-stress science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-stress-relief-infrared-sauna",
+        "section_id": "stress-reduction"
+      }
+    },
+    "text_and_icon_radial_6RDHbD": {
+      "type": "text-and-icon-radial",
+      "name": "Better Sleep",
+      "settings": {
+        "reverse": true,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-better-sleep-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Better Sleep",
+        "content": "Rest deeply and wake refreshed. Regular use of the FireLight® Spectrum can improve sleep quality by promoting relaxation and regulating your body's natural sleep cycles.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Better Sleep",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Start each day feeling more energized and well rested. When used before bed, our FireLight® Spectrum can help you relax and reconnect with your natural sleep cycles. Light and heat therapy combine to release tension and boost sleep hormones so you can rest easy.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>During sauna sessions, your body temperature goes up by a couple degrees. Afterward, it will drop back down to normal levels. In the evening, this cool-down period mimics your body’s natural temperature drop when preparing to sleep. Near infrared therapy can also support the production of melatonin, the sleep hormone, as well as endorphins and serotonin for a boost of calm.<\/p>",
+        "popup_btn_label": "Read more about the sleep science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/why-i-couldn-t-sleep-and-what-finally-fixed-it",
+        "section_id": "better-sleep"
+      }
+    },
+    "text_and_icon_radial_U6YArF": {
+      "type": "text-and-icon-radial",
+      "name": "Emotional Balance",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-emotional-balance-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Emotional Balance",
+        "content": "Elevate your spirits naturally. The FireLight® spectrum increases the production of endorphins and serotonin, boosting your mood and helping you feel more balanced.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Emotional Balance",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Bring a little more balance into your daily life by making time to recharge mind, body, and spirit. Our FireLight® Spectrum boosts feel-good chemicals so you have happier days–perfect for when winter weather keeps you indoors. Build your inner calm and resilience with regular sessions so you can take on anything that comes your way.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Saunas create relaxation and reduce stress through multiple pathways. Warmth relaxes muscles, near infrared light releases endorphins, and activates a restful state through the parasympathetic nervous system. All of this contributes to reduced cortisol (stress hormone) levels and a better mood.<\/p>",
+        "popup_btn_label": "Read more about the emotions science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-emotional-balance-infrared-sauna",
+        "section_id": "emotional-balance"
+      }
+    },
+    "text_and_icon_radial_tpLNwr": {
+      "type": "text-and-icon-radial",
+      "name": "Pain Relief",
+      "settings": {
+        "reverse": true,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-pain-relief-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Pain Relief",
+        "content": "Melt away tension and discomfort. The FireLight® spectrum improves circulation and reduces inflammation, providing natural relief from aches and pains.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Pain Relief",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Feel tension and discomfort melt away with the help of light and heat therapy. The FireLight® Spectrum helps you find natural relief from the inside out. Regular sessions with your sauna or targeted therapy device can improve circulation and reduce inflammation so you feel like yourself every day.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Near infrared light is used in physical therapy and pain management offices across the world. It stimulates mitochondria at the cellular level to improve circulation, oxygenation, and healing responses that help joint and muscle pain sufferers.<\/p>",
+        "popup_btn_label": "Read more about the pain relief science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-pain-relief-infrared-sauna",
+        "section_id": "pain-relief"
+      }
+    },
+    "text_and_icon_radial_6YnPa4": {
+      "type": "text-and-icon-radial",
+      "name": "Enhanced Cognition",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-benefits-enhanced-cognition-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Enhanced Cognition",
+        "content": "Sharpen your focus and clarity. Red and near-infrared light stimulate brain function, enhancing cognitive performance and reducing mental fog.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Enhanced Cognition",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Bring more focus and clarity to your day with the mental benefits of the FireLight® Spectrum. Red and near-infrared light stimulate your brain’s natural protections and cognitive processes so you can rise above the mental fog.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Red and near-infrared light can protect, stimulate, and heal your brain through a process called photobiomodulation. Photobiomodulation increases cerebral blood flow and activates protective pathways in the brain. By using your sauna or targeted therapy devices regularly, you may notice more focus and clarity when tackling your most important tasks.<\/p>",
+        "popup_btn_label": "read more about the science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-enhanced-cognition-infrared-sauna",
+        "section_id": "enhanced-cognition"
+      }
+    },
+    "text_and_icon_radial_aymUfr": {
+      "type": "text-and-icon-radial",
+      "name": "Athletic Performance",
+      "settings": {
+        "reverse": true,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-athletic-perfomance-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Athletic Performance",
+        "content": "Train smarter, recover faster. The FireLight® spectrum speeds up muscle recovery, helping you achieve your athletic goals with less downtime.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Athletic Performance",
+        "popup_content": "",
+        "popup_content_advanced": "<p>When it comes to building strength, endurance, speed, and flexibility, recovery is just as important as training. The FireLight® Spectrum penetrates deeply into muscles to speed up healing so you can unlock more of your body’s potential. Train smarter with a sauna that reduces your downtime and elevates the results of your hard work.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Near infrared light and heat therapy increase circulation to your muscles so you can recover better, faster. Over time, your sauna or targeted therapy device helps your body release natural growth hormones that help you keep performing your best.<\/p>",
+        "popup_btn_label": "Read more about the performance science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-athletic-performance-infrared-sauna",
+        "section_id": "athletic-performance"
+      }
+    },
+    "text_and_icon_radial_ckBrKp": {
+      "type": "text-and-icon-radial",
+      "name": "Weight Loss",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-weight-loss-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Weight Loss",
+        "content": "Support your wellness goals with ease. The FireLight® spectrum increases heart rate and circulation, helping you burn calories more efficiently while you relax.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Weight Loss",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Support your weight loss goals, even while you relax in your sauna. The FireLight® Spectrum gets your heart pumping and body sweating so you can see results faster while treating yourself well.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>Infrared sauna alone won’t replace exercise, but studies show that just sitting in the sauna has been shown to help obese people lose body weight and mass. While sweating in the sauna, the body spends more calories to cool down–and by simultaneously raising the metabolic rate, the body burns those calories more efficiently. Increased heart rate and circulation can also contribute to weight loss.<\/p>",
+        "popup_btn_label": "Read more about the weight-loss science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-weight-loss-infrared-sauna",
+        "section_id": "weight-loss"
+      }
+    },
+    "text_and_icon_radial_cXf3DE": {
+      "type": "text-and-icon-radial",
+      "name": "Longevity",
+      "settings": {
+        "reverse": true,
+        "icon": "shopify:\/\/shop_images\/icon-benefit-longevity-large.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Longevity",
+        "content": "Invest in your future health. Regular sauna sessions can improve cardiovascular health, reduce inflammation, and support cellular rejuvenation, contributing to a longer, healthier life.",
+        "has_popup": true,
+        "popup_trigger_label": "Read more",
+        "popup_title": "Longevity",
+        "popup_content": "",
+        "popup_content_advanced": "<p>Support your body, mind, and spirit with the many benefits of red and infrared therapy included in the FireLight® Spectrum.<\/p><p><\/p><p><strong>How it works<\/strong><\/p><p>A recent landmark study shows that people who used a sauna were at a reduced risk of fatal heart attacks and other serious cardiovascular diseases. With regular use, saunas can improve cardiovascular health, lower blood pressure, reduce inflammation, reduce stress, improve detoxification, improve sleep quality, and enhance cellular rejuvenation—benefits that all contribute to a longer, healthier life.<\/p>",
+        "popup_btn_label": "Read more about the longevity science",
+        "popup_btn_url": "shopify:\/\/blogs\/the-wavelength\/benefit-longevity-infrared-sauna",
+        "section_id": "longevity"
+      }
+    },
+    "text_and_icon_radial_zJBF3h": {
+      "type": "text-and-icon-radial",
+      "name": "Spiritual Benefits",
+      "settings": {
+        "reverse": false,
+        "icon": "shopify:\/\/shop_images\/icon-spiritual-benefit-ecstasy.svg",
+        "icon_width": 300,
+        "icon_width_mobile": 130,
+        "title": "Spiritual Benefits",
+        "content": "Step inside, and the journey begins. At first, it’s just warmth, just light. But stay a little longer, and something stirs—something ancient, something infinite. Where will it lead you?",
+        "has_popup": false,
+        "popup_trigger_label": "Explore Within",
+        "popup_title": "",
+        "popup_content": "",
+        "popup_content_advanced": "",
+        "popup_btn_label": "Explore Within",
+        "popup_btn_url": "shopify:\/\/pages\/firelight-spiritual-benefits",
+        "section_id": "spiritual-benefits"
+      }
+    },
+    "callout_v3_T6npEy": {
+      "type": "callout-v3",
+      "name": "Expert Research",
+      "settings": {
+        "section_overlay": "linear-gradient(180deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 51%)",
+        "image": "shopify:\/\/shop_images\/health-benefits-research.jpg",
+        "text_color": "#ffffff",
+        "background_color": "#C83647",
+        "title": "Expert Research",
+        "content": "Explore the science behind FireLight. Our curated research library brings together peer-reviewed studies on red and near-infrared light, as well as sauna therapy—spanning decades of clinical insight and emerging discoveries. Whether you're a wellness practitioner, a deep diver, or just someone who wants to understand the why behind the benefits, the research is here for you.",
+        "button_label": "View Research Articles",
+        "button_url": "shopify:\/\/pages\/infrared-sauna-light-therapy-research"
+      }
+    }
+  },
+  "order": [
+    "hero_banner_TanQbg",
+    "text_and_icon_radial_XMQtxc",
+    "text_and_icon_radial_YCDNEG",
+    "text_and_icon_radial_h66EPw",
+    "text_and_icon_radial_Tw6Nqn",
+    "text_and_icon_radial_jpqprh",
+    "text_and_icon_radial_6RDHbD",
+    "text_and_icon_radial_U6YArF",
+    "text_and_icon_radial_tpLNwr",
+    "text_and_icon_radial_6YnPa4",
+    "text_and_icon_radial_aymUfr",
+    "text_and_icon_radial_ckBrKp",
+    "text_and_icon_radial_cXf3DE",
+    "text_and_icon_radial_zJBF3h",
+    "callout_v3_T6npEy"
+  ]
+}

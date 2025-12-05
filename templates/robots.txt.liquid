@@ -1,0 +1,29 @@
+# we use Shopify as our ecommerce platform
+{%- comment -%}
+# Caution! Please read https://help.shopify.com/en/manual/promoting-marketing/seo/editing-robots-txt before proceeding to make changes to this file.
+{% endcomment %}
+
+# Allow OpenAI to crawl the site
+User-agent: OAI-SearchBot
+Allow: /
+
+{% for group in robots.default_groups %}
+  {{- group.user_agent -}}
+
+  {% for rule in group.rules %}
+    {{- rule -}}
+  {% endfor %}
+
+  {% if group.user_agent == '*' %}
+    Disallow: /products/firelight-infrared-sauna-old
+    Disallow: /products/firelight-infrared-classic
+    Disallow: /products/firelight-infrared-supersauna
+    Disallow: /products/shower-sauna-components-kit-and-curtain-rods
+    Disallow: /blogs/events
+    Disallow: /blogs/jobs
+  {% endif %}
+
+  {%- if group.sitemap != blank -%}
+    {{ group.sitemap }}
+  {%- endif -%}
+{% endfor %}

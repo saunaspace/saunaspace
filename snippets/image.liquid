@@ -1,0 +1,118 @@
+{%- comment -%}
+  Info:
+  Should be always wrapped in .media container.
+  Example:
+
+  <div class="media media--3-4">
+    {%- render 'image' -%}
+  </div>
+
+  Or:
+
+  <div class="media" style="padding-top:{%- render 'aspect-ratio', aspect_ratio: image.aspect_ratio -%}%;">
+    {%- render 'image' -%}
+  </div>
+
+  Accepts:
+  - src {String} An image initial src
+  - srcset {String} An image srcset (use srcset snippet). Use srcset: '' to omit srcset
+  - sizes {String} Sizes
+  - alt {String} Image alt text (should be always escaped)
+  - width {String} Image width (defaults to 'auto')
+  - height {String} Image height (defaults to 'auto')
+  - attr {String} Additional image attributes
+  - class {String} Image class
+  - focal_point {String} object-position value from image liquid object
+  - loading {String} image tag attribute. Accepts: 'eager', 'lazy'. Applies when image animation is turned off.
+    For more details: https://performance.shopify.com/blogs/blog/announcing-new-liquid-features-for-better-web-performance?utm_source=emailoctopus&utm_medium=email&utm_campaign=Issue%20113%20-%2012%2F4%2F2023#new-default-lazy-loading-for-liquid-image_tag
+
+  Usage:
+
+  {%-
+    liquid
+    assign image_src = product.featured_media | image_url: width: 500
+    capture image_srcset
+      render 'srcset', image: product.featured_media
+    endcapture
+    assign image_alt = product.featured_media.alt | escape
+
+    render 'image', src: image_src, srcset: image_srcset, sizes: 'auto', alt: image_alt, width: product.featured_media.width, height: product.featured_media.height
+  -%}
+
+  OR using the image object values:
+
+  {%- render 'image', image: section.settings.image -%}
+{%- endcomment -%}
+
+{%-
+  liquid
+  assign image = image | default: nil
+  assign src = src | default: nil
+  if src == nil
+    assign src = image | image_url: width: 500
+  endif
+  capture srcset
+    if srcset or srcset == ''
+      echo srcset
+    else
+      render 'srcset', image: image
+    endif
+  endcapture
+  assign alt = alt | default: image.alt
+  assign width = width | default: image.width
+  assign height = height | default: image.height
+  assign sizes = sizes | default: 'auto'
+  assign attr = attr | default: false
+  assign loading = loading
+  if loading == nil
+    if section.index > 2
+      assign loading = "lazy"
+    else
+      assign loading = "eager"
+    endif
+  endif
+  assign image_position = ''
+  assign focal_point = focal_point | default: image.presentation.focal_point
+  if focal_point
+    capture image_position
+      echo 'style="object-position: ' | append: focal_point | append: ';"'
+    endcapture
+  endif
+  assign class = class | default: nil
+-%}
+
+{%- capture noscript_html -%}
+  <img
+    {% if srcset and srcset != '' %}srcset="{{ srcset }}"{% endif %}
+    sizes="{{ sizes }}"
+    src="{{ src }}"
+    loading="{{ loading }}"
+    class="{% if class %}{{ class }}{% endif %}"
+    width="{{- width -}}"
+    height="{{- height -}}"
+    {% if alt %}alt="{{ alt | escape }}"{% endif %}
+    {% if attr %}{{ attr }}{% endif %}
+    {{ image_position }}
+  >
+{%- endcapture -%}
+
+{%- if settings.image_animations -%}
+  <noscript>
+    {{ noscript_html }}
+  </noscript>
+
+  <img
+    {% if srcset and srcset != '' %}srcset="{{ srcset }}"{% endif %}
+    data-sizes="{{ sizes }}"
+    data-src="{{ src }}"
+    class="lazyload no-js-hidden {% if class %}{{ class }}{% endif %}"
+    width="{{- width -}}"
+    height="{{- height -}}"
+    {% if alt %}alt="{{ alt | escape }}"{% endif %}
+    {% if attr %}{{ attr }}{% endif %}
+    {{ image_position }}
+  >
+
+{%- else -%}
+  {{ noscript_html }}
+{%- endif -%}
